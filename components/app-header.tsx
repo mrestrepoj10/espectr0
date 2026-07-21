@@ -5,7 +5,7 @@ import { AppBreadcrumbs } from "@/components/app-breadcrumbs";
 import { navLinks } from "@/components/app-shared";
 import { CustomSidebarTrigger } from "@/components/custom-sidebar-trigger";
 import { NavUser } from "@/components/nav-user";
-import { Badge } from "@/components/ui/badge";
+import { ThemeSwitch } from "@/components/theme-switch";
 import { Separator } from "@/components/ui/separator";
 
 export function AppHeader() {
@@ -25,9 +25,7 @@ export function AppHeader() {
         <AppBreadcrumbs module={moduleName} />
       </div>
       <div className="flex items-center gap-3">
-        <Badge className="font-mono" variant="outline">
-          NSR-10
-        </Badge>
+        <ThemeSwitch />
         <Separator
           className="h-4 data-[orientation=vertical]:self-center"
           orientation="vertical"

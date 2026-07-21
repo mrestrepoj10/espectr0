@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CodeXmlIcon } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { NavGroup } from "@/components/nav-group";
 import { footerNavLinks, navGroups } from "@/components/app-shared";
@@ -40,6 +41,23 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              className="bg-sidebar-accent/50"
+              render={
+                <a
+                  href="https://github.com/mrestrepoj10/espectr0"
+                  rel="noreferrer"
+                  target="_blank"
+                />
+              }
+              size="sm"
+              tooltip="Proudly Open Source"
+            >
+              <CodeXmlIcon />
+              <span>Proudly Open Source</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
           {footerNavLinks.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton
