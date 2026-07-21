@@ -1,10 +1,10 @@
 import { AppShell } from "@/components/app-shell";
 import { CalculatorPage } from "@/components/calculator-page";
 
-export default function Home() {
-  return (
-    <AppShell>
-      <CalculatorPage />
-    </AppShell>
-  );
+export default function CalculadoraRoute() {
+	return (
+		<AppShell>
+			<CalculatorPage />
+		</AppShell>
+	);
 }

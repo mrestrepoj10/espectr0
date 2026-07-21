@@ -5,7 +5,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 export function AppShell({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="overflow-hidden">
-			<SidebarProvider className="relative h-svh">
+			<SidebarProvider className="relative h-svh" defaultOpen={false}>
 				<AppSidebar />
 				<SidebarInset className="md:peer-data-[variant=inset]:ml-0">
 					<AppHeader />
