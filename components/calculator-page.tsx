@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import {
 	Area,
 	AreaChart,
@@ -8,7 +9,14 @@ import {
 	XAxis,
 	YAxis,
 } from "recharts";
+import {
+	ClipboardIcon,
+	DownloadIcon,
+	FileTextIcon,
+	TriangleAlertIcon,
+} from "lucide-react";
 
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +33,22 @@ import {
 	ChartTooltip,
 	ChartTooltipContent,
 } from "@/components/ui/chart";
+import {
+	Combobox,
+	ComboboxContent,
+	ComboboxEmpty,
+	ComboboxInput,
+	ComboboxItem,
+	ComboboxList,
+} from "@/components/ui/combobox";
+import {
+	Field,
+	FieldDescription,
+	FieldGroup,
+	FieldLegend,
+	FieldSet,
+	FieldTitle,
+} from "@/components/ui/field";
 import {
 	Select,
 	SelectContent,
@@ -43,34 +67,69 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import {
+	computeSpectrum,
+	lookupMunicipio,
+	municipios,
+	normalizeSearchText,
+} from "@/lib/nsr10";
 
-const locations = [
-	{ label: "Cali, Valle del Cauca", value: "cali" },
-	{ label: "Bogotá, D. C.", value: "bogota" },
-	{ label: "Medellín, Antioquia", value: "medellin" },
+import type {
+	ImportanceGroup,
+	Municipio,
+	SoilProfile,
+	SpectrumBranch,
+	SpectrumOk,
+} from "@/lib/nsr10";
+
+const standards = [
+	{ label: "NSR-10", value: "nsr10", disabled: false },
+	{ label: "CCP-14 · próximamente", value: "ccp14", disabled: true },
 ] as const;
 
 const hazardLevels = [
-	{ label: "Diseño · Tᴿ 475 años", value: "475" },
-	{ label: "Servicio · Tᴿ 43 años", value: "43" },
-	{ label: "Máximo considerado · Tᴿ 2.475 años", value: "2475" },
+	{ label: "Diseño · TR 475 años", value: "475", disabled: false },
+	{ label: "Servicio · TR 43 años · próximamente", value: "43", disabled: true },
+	{
+		label: "Máximo considerado · TR 2.475 años · próximamente",
+		value: "2475",
+		disabled: true,
+	},
 ] as const;
 
-const spectrumData = [
-	{ period: 0, sa: 0.325 },
-	{ period: 0.073, sa: 0.569 },
-	{ period: 0.146, sa: 0.813 },
-	{ period: 0.4, sa: 0.813 },
-	{ period: 0.702, sa: 0.813 },
-	{ period: 1, sa: 0.57 },
-	{ period: 1.5, sa: 0.38 },
-	{ period: 2, sa: 0.285 },
-	{ period: 3, sa: 0.19 },
-	{ period: 4, sa: 0.143 },
-	{ period: 4.56, sa: 0.125 },
-	{ period: 6, sa: 0.072 },
-	{ period: 8, sa: 0.041 },
-] as const;
+const soilProfiles = ["A", "B", "C", "D", "E", "F"] as const;
+const importanceGroups = ["I", "II", "III", "IV"] as const;
+
+const soilDescriptions: Record<SoilProfile, string> = {
+	A: "Roca competente",
+	B: "Roca de rigidez media",
+	C: "Suelo muy denso o roca blanda",
+	D: "Suelo rígido",
+	E: "Suelo blando",
+	F: "Requiere estudio específico",
+};
+
+const importanceDescriptions: Record<ImportanceGroup, string> = {
+	I: "Ocupación normal",
+	II: "Atención a la comunidad",
+	III: "Edificación indispensable",
+	IV: "Edificación esencial",
+};
+
+const importanceValues: Record<ImportanceGroup, string> = {
+	I: "1.00",
+	II: "1.10",
+	III: "1.25",
+	IV: "1.50",
+};
+
+const branchLabels: Record<SpectrumBranch, string> = {
+	"rising-A.2.6-7": "Ascendente · A.2.6-7",
+	"plateau-A.2.6-3": "Meseta · A.2.6-3",
+	"inverse-T-A.2.6-1": "1/T · A.2.6-1",
+	"inverse-T2-A.2.6-5": "1/T² · A.2.6-5",
+};
 
 const chartConfig = {
 	sa: {
@@ -79,152 +138,236 @@ const chartConfig = {
 	},
 } satisfies ChartConfig;
 
-const parameters = [
-	{ label: "Aa", value: "0.25" },
-	{ label: "Av", value: "0.25" },
-	{ label: "Fa", value: "1.30" },
-	{ label: "Fv", value: "1.90" },
-	{ label: "I", value: "1.00" },
-	{ label: "T₀", value: "0.146 s" },
-	{ label: "Tc", value: "0.702 s" },
-	{ label: "TL", value: "4.56 s" },
-	{ label: "Sa máx", value: "0.813 g" },
-	{ label: "PGA", value: "0.325 g" },
-] as const;
+const defaultMunicipio = lookupMunicipio("Cali", "Valle del Cauca")[0];
 
-const previewRows = [
-	{ branch: "T₀", period: "0.146", sa: "0.813" },
-	{ branch: "Meseta", period: "0.400", sa: "0.813" },
-	{ branch: "Tc", period: "0.702", sa: "0.813" },
-	{ branch: "Descendente", period: "1.000", sa: "0.570" },
-] as const;
+if (!defaultMunicipio) {
+	throw new Error("El conjunto NSR-10 no contiene el municipio predeterminado de Cali");
+}
 
-function SegmentedOptions({
-	active,
-	ariaLabel,
-	options,
+function municipioLabel(municipio: Municipio) {
+	return `${municipio.municipio}, ${municipio.departamento}`;
+}
+
+function formatDecimal(value: number, digits: number) {
+	const factor = 10 ** digits;
+	const rounded = Math.round((value + Number.EPSILON) * factor) / factor;
+	return rounded.toFixed(digits);
+}
+
+function municipioMatches(municipio: Municipio, query: string) {
+	const normalizedQuery = normalizeSearchText(query);
+	if (!normalizedQuery) return true;
+
+	return normalizeSearchText(municipioLabel(municipio)).includes(normalizedQuery);
+}
+
+function MunicipalityCombobox({
+	value,
+	onValueChange,
 }: {
-	active: string;
-	ariaLabel: string;
-	options: readonly string[];
+	value: Municipio;
+	onValueChange: (municipio: Municipio) => void;
 }) {
 	return (
-		<div aria-label={ariaLabel} className="flex flex-wrap gap-1" role="group">
-			{options.map((option) => (
-				<Button
-					aria-pressed={option === active}
-					className="min-w-8 flex-1"
-					key={option}
-					size="sm"
-					type="button"
-					variant={option === active ? "default" : "outline"}
-				>
-					{option}
-				</Button>
-			))}
-		</div>
+		<Combobox
+			autoHighlight
+			filter={municipioMatches}
+			isItemEqualToValue={(item, selected) =>
+				item.departamento === selected.departamento &&
+				item.municipio === selected.municipio
+			}
+			items={municipios}
+			itemToStringLabel={municipioLabel}
+			itemToStringValue={municipioLabel}
+			onValueChange={(municipio) => {
+				if (municipio) onValueChange(municipio);
+			}}
+			value={value}
+		>
+			<ComboboxInput
+				aria-label="Buscar municipio"
+				className="w-full"
+				placeholder="Buscar municipio…"
+			/>
+			<ComboboxContent>
+				<ComboboxEmpty>No se encontraron municipios.</ComboboxEmpty>
+				<ComboboxList>
+					{(municipio: Municipio) => (
+						<ComboboxItem
+							key={`${municipio.departamento}-${municipio.municipio}`}
+							value={municipio}
+						>
+							<span className="flex min-w-0 flex-col">
+								<span className="truncate">{municipio.municipio}</span>
+								<span className="truncate font-normal text-muted-foreground text-xs">
+									{municipio.departamento} · Aa {municipio.aa.toFixed(2)} · Av{" "}
+									{municipio.av.toFixed(2)}
+								</span>
+							</span>
+						</ComboboxItem>
+					)}
+				</ComboboxList>
+			</ComboboxContent>
+		</Combobox>
 	);
 }
 
-function ParameterRail() {
+function SingleToggleGroup<T extends string>({
+	ariaLabel,
+	options,
+	value,
+	onValueChange,
+}: {
+	ariaLabel: string;
+	options: readonly T[];
+	value: T;
+	onValueChange: (value: T) => void;
+}) {
+	return (
+		<ToggleGroup
+			aria-label={ariaLabel}
+			className="w-full flex-wrap"
+			onValueChange={(values) => {
+				const nextValue = values[0] as T | undefined;
+				if (nextValue) onValueChange(nextValue);
+			}}
+			size="sm"
+			value={[value]}
+			variant="outline"
+		>
+			{options.map((option) => (
+				<ToggleGroupItem className="min-w-8 flex-1" key={option} value={option}>
+					{option}
+				</ToggleGroupItem>
+			))}
+		</ToggleGroup>
+	);
+}
+
+function ParameterRail({
+	municipio,
+	soilProfile,
+	importanceGroup,
+	onMunicipioChange,
+	onSoilProfileChange,
+	onImportanceGroupChange,
+}: {
+	municipio: Municipio;
+	soilProfile: SoilProfile;
+	importanceGroup: ImportanceGroup;
+	onMunicipioChange: (municipio: Municipio) => void;
+	onSoilProfileChange: (profile: SoilProfile) => void;
+	onImportanceGroupChange: (group: ImportanceGroup) => void;
+}) {
 	return (
 		<Card className="self-start shadow-none dark:ring-0" size="sm">
 			<CardHeader>
 				<CardTitle>Parámetros del sitio</CardTitle>
 				<CardDescription>
-					Entradas de referencia para esta vista preliminar.
+					Entradas normativas para el espectro calculado en tiempo real.
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
-				<form className="flex flex-col gap-5">
-					<fieldset className="flex flex-col gap-2">
-						<legend className="mb-2 text-sm font-medium">Norma</legend>
-						<SegmentedOptions
-							active="NSR-10"
-							ariaLabel="Norma de diseño"
-							options={["NSR-10", "CCP-14"]}
-						/>
-					</fieldset>
-
-					<label className="flex flex-col gap-2 text-sm font-medium">
-						Ubicación
-						<Select defaultValue="cali" items={locations}>
-							<SelectTrigger className="w-full">
+				<FieldGroup className="gap-5">
+					<Field>
+						<FieldTitle>Norma</FieldTitle>
+						<Select defaultValue="nsr10" items={standards}>
+							<SelectTrigger className="w-full" aria-label="Norma de diseño">
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent>
 								<SelectGroup>
-									<SelectLabel>Municipio</SelectLabel>
-									{locations.map((location) => (
-										<SelectItem key={location.value} value={location.value}>
-											{location.label}
+									<SelectLabel>Norma de diseño</SelectLabel>
+									{standards.map((standard) => (
+										<SelectItem
+											disabled={standard.disabled}
+											key={standard.value}
+											value={standard.value}
+										>
+											{standard.label}
 										</SelectItem>
 									))}
 								</SelectGroup>
 							</SelectContent>
 						</Select>
-						<span className="font-normal text-muted-foreground text-xs">
-							Zona de amenaza sísmica alta
-						</span>
-					</label>
+					</Field>
 
-					<fieldset className="flex flex-col gap-2">
-						<legend className="mb-2 text-sm font-medium">
-							Perfil de suelo
-						</legend>
-						<SegmentedOptions
-							active="D"
+					<Field>
+						<FieldTitle>Municipio</FieldTitle>
+						<MunicipalityCombobox
+							onValueChange={onMunicipioChange}
+							value={municipio}
+						/>
+						<FieldDescription>
+							Aa {municipio.aa.toFixed(2)} · Av {municipio.av.toFixed(2)} · Apéndice A-4
+						</FieldDescription>
+					</Field>
+
+					<FieldSet className="gap-2">
+						<FieldLegend variant="label">Perfil de suelo</FieldLegend>
+						<SingleToggleGroup
 							ariaLabel="Perfil de suelo"
-							options={["A", "B", "C", "D", "E", "F"]}
+							onValueChange={onSoilProfileChange}
+							options={soilProfiles}
+							value={soilProfile}
 						/>
-						<p className="text-muted-foreground text-xs">
-							D — Perfil de suelo rígido
-						</p>
-					</fieldset>
+						<FieldDescription>
+							{soilProfile} — {soilDescriptions[soilProfile]}
+						</FieldDescription>
+					</FieldSet>
 
-					<fieldset className="flex flex-col gap-2">
-						<legend className="mb-2 text-sm font-medium">Grupo de uso</legend>
-						<SegmentedOptions
-							active="I"
+					<FieldSet className="gap-2">
+						<FieldLegend variant="label">Grupo de uso</FieldLegend>
+						<SingleToggleGroup
 							ariaLabel="Grupo de uso"
-							options={["I", "II", "III", "IV"]}
+							onValueChange={onImportanceGroupChange}
+							options={importanceGroups}
+							value={importanceGroup}
 						/>
-						<p className="text-muted-foreground text-xs">
-							I — Coeficiente de importancia I = 1.00
-						</p>
-					</fieldset>
+						<FieldDescription>
+							{importanceGroup} — {importanceDescriptions[importanceGroup]} · I ={" "}
+							{importanceValues[importanceGroup]}
+						</FieldDescription>
+					</FieldSet>
 
-					<label className="flex flex-col gap-2 text-sm font-medium">
-						Nivel de amenaza
+					<Field>
+						<FieldTitle>Nivel de amenaza</FieldTitle>
 						<Select defaultValue="475" items={hazardLevels}>
-							<SelectTrigger className="w-full">
+							<SelectTrigger className="w-full" aria-label="Nivel de amenaza">
 								<SelectValue />
 							</SelectTrigger>
 							<SelectContent>
 								<SelectGroup>
 									<SelectLabel>Periodo de retorno</SelectLabel>
 									{hazardLevels.map((level) => (
-										<SelectItem key={level.value} value={level.value}>
+										<SelectItem
+											disabled={level.disabled}
+											key={level.value}
+											value={level.value}
+										>
 											{level.label}
 										</SelectItem>
 									))}
 								</SelectGroup>
 							</SelectContent>
 						</Select>
-					</label>
-				</form>
+					</Field>
+				</FieldGroup>
 			</CardContent>
 			<CardFooter className="flex-col items-stretch gap-3">
 				<Separator />
 				<p className="text-muted-foreground text-xs">
-					Controles ilustrativos; no ejecutan cálculos en este prototipo.
+					Cálculo elástico NSR-10 con amortiguamiento crítico del 5 %.
 				</p>
 			</CardFooter>
 		</Card>
 	);
 }
 
-function SpectrumChart() {
+function SpectrumChart({ spectrum }: { spectrum: SpectrumOk }) {
+	const { coefficients } = spectrum;
+	const plotEnd = Math.max(4, coefficients.tl);
+
 	return (
 		<Card className="shadow-none dark:ring-0">
 			<CardHeader>
@@ -232,23 +375,25 @@ function SpectrumChart() {
 					<div className="flex flex-col gap-1.5">
 						<CardTitle>Espectro elástico de diseño (Sa vs. T)</CardTitle>
 						<CardDescription>
-							Forma estática de referencia: ascenso, meseta y ramas
-							decrecientes.
+							NSR-10 general: meseta desde T = 0 hasta TC, seguida por ramas 1/T y
+							1/T².
 						</CardDescription>
 					</div>
-					<Badge variant="secondary">Sa máx 0.813 g</Badge>
+					<Badge variant="secondary">
+						Sa máx {formatDecimal(coefficients.saMax, 3)} g
+					</Badge>
 				</div>
 			</CardHeader>
 			<CardContent>
 				<ChartContainer
-					aria-label="Espectro elástico de diseño NSR-10 ilustrativo"
+					aria-label="Espectro elástico de diseño NSR-10 calculado"
 					className="h-80 w-full md:h-96"
 					config={chartConfig}
 					initialDimension={{ width: 960, height: 384 }}
 				>
 					<AreaChart
 						accessibilityLayer
-						data={spectrumData}
+						data={spectrum.points}
 						margin={{ top: 12, right: 16, bottom: 24, left: 4 }}
 					>
 						<defs>
@@ -268,43 +413,42 @@ function SpectrumChart() {
 						<CartesianGrid className="stroke-border" vertical={false} />
 						<XAxis
 							axisLine={false}
-							dataKey="period"
-							domain={[0, 8]}
+							dataKey="t"
+							domain={[0, plotEnd]}
 							label={{ value: "Periodo T (s)", position: "insideBottom", offset: -16 }}
 							tickLine={false}
 							tickMargin={8}
-							ticks={[0, 1, 2, 3, 4, 6, 8]}
 							type="number"
 						/>
 						<YAxis
 							axisLine={false}
-							domain={[0, 0.9]}
+							domain={[0, "auto"]}
 							label={{ value: "Sa (g)", angle: -90, position: "insideLeft" }}
-							tickFormatter={(value) => Number(value).toFixed(1)}
+							tickFormatter={(value) => Number(value).toFixed(2)}
 							tickLine={false}
 							tickMargin={8}
-							ticks={[0, 0.2, 0.4, 0.6, 0.8]}
 						/>
 						<ReferenceLine
-							label={{ value: "T₀", position: "insideTopRight" }}
+							label={{ value: "TC", position: "insideTopRight" }}
 							stroke="var(--muted-foreground)"
 							strokeDasharray="3 3"
-							x={0.146}
-						/>
-						<ReferenceLine
-							label={{ value: "Tc", position: "insideTopRight" }}
-							stroke="var(--muted-foreground)"
-							strokeDasharray="3 3"
-							x={0.702}
+							x={coefficients.tc}
 						/>
 						<ReferenceLine
 							label={{ value: "TL", position: "insideTopRight" }}
 							stroke="var(--muted-foreground)"
 							strokeDasharray="3 3"
-							x={4.56}
+							x={coefficients.tl}
 						/>
 						<ChartTooltip
-							content={<ChartTooltipContent indicator="line" />}
+							content={
+								<ChartTooltipContent
+									indicator="line"
+									labelFormatter={(_, payload) =>
+										`T = ${Number(payload[0]?.payload?.t ?? 0).toFixed(3)} s`
+									}
+								/>
+							}
 							cursor={false}
 						/>
 						<Area
@@ -322,21 +466,35 @@ function SpectrumChart() {
 			</CardContent>
 			<CardFooter>
 				<p className="text-muted-foreground text-xs">
-					Valores estáticos e ilustrativos; no aptos para diseño estructural.
+					Aceleraciones expresadas como fracción de g; periodos en segundos.
 				</p>
 			</CardFooter>
 		</Card>
 	);
 }
 
-function ParameterTiles() {
+function ParameterTiles({ spectrum }: { spectrum: SpectrumOk }) {
+	const { coefficients } = spectrum;
+	const parameters = [
+		{ label: "Aa", value: formatDecimal(coefficients.aa, 2) },
+		{ label: "Av", value: formatDecimal(coefficients.av, 2) },
+		{ label: "Fa", value: formatDecimal(coefficients.fa, 2) },
+		{ label: "Fv", value: formatDecimal(coefficients.fv, 2) },
+		{ label: "I", value: formatDecimal(coefficients.i, 2) },
+		{ label: "T₀", value: `${formatDecimal(coefficients.t0, 3)} s` },
+		{ label: "TC", value: `${formatDecimal(coefficients.tc, 3)} s` },
+		{ label: "TL", value: `${formatDecimal(coefficients.tl, 2)} s` },
+		{ label: "Sa máx", value: `${formatDecimal(coefficients.saMax, 3)} g` },
+		{ label: "PGA", value: `${formatDecimal(coefficients.pga, 3)} g` },
+	] as const;
+
 	return (
 		<section aria-labelledby="derived-parameters" className="flex flex-col gap-3">
 			<div className="flex flex-wrap items-center justify-between gap-2">
 				<h2 className="font-heading font-medium" id="derived-parameters">
-					Parámetros de referencia
+					Parámetros calculados
 				</h2>
-				<Badge variant="outline">Valores ilustrativos</Badge>
+				<Badge variant="outline">NSR-10 · resultado en vivo</Badge>
 			</div>
 			<div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
 				{parameters.map((parameter) => (
@@ -358,44 +516,164 @@ function ParameterTiles() {
 	);
 }
 
-function SpectrumPreview() {
+function SpectrumTable({ spectrum }: { spectrum: SpectrumOk }) {
 	return (
 		<Card className="shadow-none dark:ring-0">
 			<CardHeader>
-				<CardTitle>Vista previa de datos</CardTitle>
+				<CardTitle>Datos del espectro</CardTitle>
 				<CardDescription>
-					Puntos representativos de cada tramo del espectro ilustrativo.
+					{spectrum.points.length} puntos calculados; TC y TL se incluyen exactamente.
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
-				<Table>
-					<TableHeader>
-						<TableRow>
-							<TableHead>Tramo</TableHead>
-							<TableHead className="text-right">T (s)</TableHead>
-							<TableHead className="text-right">Sa (g)</TableHead>
-						</TableRow>
-					</TableHeader>
-					<TableBody>
-						{previewRows.map((row) => (
-							<TableRow key={row.branch}>
-								<TableCell className="font-medium">{row.branch}</TableCell>
-								<TableCell className="text-right font-mono tabular-nums">
-									{row.period}
-								</TableCell>
-								<TableCell className="text-right font-mono tabular-nums">
-									{row.sa}
-								</TableCell>
+				<div className="max-h-80 overflow-auto">
+					<Table>
+						<TableHeader className="sticky top-0 bg-card">
+							<TableRow>
+								<TableHead>Tramo</TableHead>
+								<TableHead className="text-right">T (s)</TableHead>
+								<TableHead className="text-right">Sa (g)</TableHead>
 							</TableRow>
-						))}
-					</TableBody>
-				</Table>
+						</TableHeader>
+						<TableBody>
+							{spectrum.points.map((point) => (
+								<TableRow key={point.t}>
+									<TableCell className="font-medium">
+										{branchLabels[point.branch]}
+									</TableCell>
+									<TableCell className="text-right font-mono tabular-nums">
+										{point.t.toFixed(3)}
+									</TableCell>
+									<TableCell className="text-right font-mono tabular-nums">
+										{point.sa.toFixed(6)}
+									</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
+				</div>
 			</CardContent>
 		</Card>
 	);
 }
 
+function SiteSpecificStudyNotice() {
+	return (
+		<Card className="shadow-none dark:ring-0">
+			<CardHeader>
+				<CardTitle>Perfil F: análisis específico requerido</CardTitle>
+				<CardDescription>
+					La NSR-10 no define coeficientes tabulados Fa y Fv para este perfil.
+				</CardDescription>
+			</CardHeader>
+			<CardContent>
+				<Alert>
+					<TriangleAlertIcon />
+					<AlertTitle>Estudio de respuesta sísmica del sitio</AlertTitle>
+					<AlertDescription>
+						La sección A.2.10 exige una investigación geotécnica y un análisis de
+						amplificación de ondas específicos. No se genera un espectro hasta contar con
+						esos resultados.
+					</AlertDescription>
+				</Alert>
+			</CardContent>
+			<CardFooter>
+				<p className="text-muted-foreground text-xs">
+					Resultado tipado del motor: estudio específico requerido · A.2.10.
+				</p>
+			</CardFooter>
+		</Card>
+	);
+}
+
+function spectrumCsv(spectrum: SpectrumOk) {
+	const rows = spectrum.points.map((point) => `${point.t},${point.sa}`);
+	return ["T (s),Sa (g)", ...rows].join("\n");
+}
+
+function downloadCsv(spectrum: SpectrumOk, municipio: Municipio) {
+	const blob = new Blob([`\uFEFF${spectrumCsv(spectrum)}`], {
+		type: "text/csv;charset=utf-8",
+	});
+	const url = URL.createObjectURL(blob);
+	const anchor = document.createElement("a");
+	const slug = normalizeSearchText(municipio.municipio).replace(/\s+/g, "-");
+
+	anchor.href = url;
+	anchor.download = `espectr0-${slug}.csv`;
+	anchor.click();
+	URL.revokeObjectURL(url);
+}
+
+function ExportActions({
+	spectrum,
+	municipio,
+}: {
+	spectrum: SpectrumOk | null;
+	municipio: Municipio;
+}) {
+	const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">("idle");
+
+	async function copyJson() {
+		if (!spectrum) return;
+
+		try {
+			await navigator.clipboard.writeText(JSON.stringify(spectrum, null, 2));
+			setCopyStatus("copied");
+		} catch {
+			setCopyStatus("error");
+		}
+	}
+
+	return (
+		<div className="flex flex-wrap items-center gap-2">
+			<Button disabled={!spectrum} onClick={copyJson} size="sm" type="button" variant="outline">
+				<ClipboardIcon data-icon="inline-start" />
+				Copiar JSON
+			</Button>
+			<Button
+				disabled={!spectrum}
+				onClick={() => {
+					if (spectrum) downloadCsv(spectrum, municipio);
+				}}
+				size="sm"
+				type="button"
+				variant="outline"
+			>
+				<DownloadIcon data-icon="inline-start" />
+				CSV (T, Sa)
+			</Button>
+			<Button disabled size="sm" type="button" variant="outline">
+				<FileTextIcon data-icon="inline-start" />
+				PDF · próximamente
+			</Button>
+			<p aria-live="polite" className="text-muted-foreground text-xs">
+				{copyStatus === "copied" ? "JSON copiado al portapapeles." : null}
+				{copyStatus === "error" ? "No fue posible copiar el JSON." : null}
+			</p>
+		</div>
+	);
+}
+
 export function CalculatorPage() {
+	const [municipio, setMunicipio] = useState<Municipio>(defaultMunicipio);
+	const [soilProfile, setSoilProfile] = useState<SoilProfile>("D");
+	const [importanceGroup, setImportanceGroup] = useState<ImportanceGroup>("I");
+
+	const result = useMemo(
+		() =>
+			computeSpectrum({
+				aa: municipio.aa,
+				av: municipio.av,
+				soilProfile,
+				importanceGroup,
+				mode: "general",
+			}),
+		[importanceGroup, municipio.aa, municipio.av, soilProfile],
+	);
+
+	const spectrum = result.status === "ok" ? result : null;
+
 	return (
 		<div className="flex flex-col gap-5">
 			<header className="flex flex-wrap items-end justify-between gap-3">
@@ -404,18 +682,34 @@ export function CalculatorPage() {
 						Calculadora de espectro
 					</h1>
 					<p className="text-muted-foreground text-sm">
-						Prototipo visual para espectros de diseño NSR-10 / CCP-14.
+						Espectro elástico NSR-10 calculado localmente, sin envío de datos.
 					</p>
 				</div>
-				<Badge variant="outline">Prototipo · datos estáticos</Badge>
+				<div className="flex flex-col items-start gap-2 sm:items-end">
+					<Badge variant="outline">Motor NSR-10 · cálculo en vivo</Badge>
+					<ExportActions municipio={municipio} spectrum={spectrum} />
+				</div>
 			</header>
 
 			<div className="grid items-start gap-4 xl:grid-cols-[18rem_minmax(0,1fr)]">
-				<ParameterRail />
+				<ParameterRail
+					importanceGroup={importanceGroup}
+					municipio={municipio}
+					onImportanceGroupChange={setImportanceGroup}
+					onMunicipioChange={setMunicipio}
+					onSoilProfileChange={setSoilProfile}
+					soilProfile={soilProfile}
+				/>
 				<div className="flex min-w-0 flex-col gap-4">
-					<SpectrumChart />
-					<ParameterTiles />
-					<SpectrumPreview />
+					{spectrum ? (
+						<>
+							<SpectrumChart spectrum={spectrum} />
+							<ParameterTiles spectrum={spectrum} />
+							<SpectrumTable spectrum={spectrum} />
+						</>
+					) : (
+						<SiteSpecificStudyNotice />
+					)}
 				</div>
 			</div>
 		</div>

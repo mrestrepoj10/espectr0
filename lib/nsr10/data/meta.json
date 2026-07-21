@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "title": "Datos regulatorios para espectros elásticos NSR-10",
+  "legal_basis": "NSR-10 Título A, versión consolidada 2017",
+  "provenance": {
+    "source_project": "sism0",
+    "source_path": "sism0/data",
+    "method": "Extracción del Apéndice A-4 y transcripción de las tablas A.2.4-3, A.2.4-4 y A.2.5-1",
+    "verification": "Los 1.121 códigos compartidos con la capa municipal del SGC fueron verificados de forma independiente; las tablas regulatorias pequeñas fueron comprobadas celda por celda. El oráculo fue generado con Python Decimal a 50 dígitos antes e independientemente del motor."
+  },
+  "sources": [
+    {
+      "title": "Datos Abiertos — Zonas de Amenaza Sísmica",
+      "url": "https://www.datos.gov.co/dataset/Zonas-de-Amenaza-Sismica/2ie9-7xta"
+    },
+    {
+      "title": "Minvivienda — Decreto 0926 de 2010",
+      "url": "https://minvivienda.gov.co/normativa/decreto-0926-2010"
+    },
+    {
+      "title": "Minvivienda — Decreto 0092 de 2011",
+      "url": "https://minvivienda.gov.co/normativa/0092-2011"
+    },
+    {
+      "title": "Minvivienda — anexo técnico de modificaciones",
+      "url": "https://minvivienda.gov.co/sites/default/files/consultasp/Anexo%20t%C3%A9cnico_4.pdf"
+    },
+    {
+      "title": "NSR-10 Título A, versión consolidada 2017",
+      "url": "https://iisee.kenken.go.jp/worldlist/11_Colombia/Colombia%20Titulo%20A-NSR-10-Ver-2017.pdf"
+    }
+  ]
+}

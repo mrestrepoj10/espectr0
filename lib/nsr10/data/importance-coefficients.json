@@ -1,0 +1,13 @@
+{
+  "source": {
+    "document": "NSR-10 Título A, versión 2017",
+    "section": "A.2.5.2",
+    "table": "A.2.5-1"
+  },
+  "groups": {
+    "I": 1.0,
+    "II": 1.1,
+    "III": 1.25,
+    "IV": 1.5
+  }
+}

@@ -1,0 +1,1797 @@
+{
+  "schema_version": 1,
+  "description": "Independent high-precision Stage 1 calculation oracle for NSR-10 spectra.",
+  "numeric_contract": {
+    "calculation": "Python Decimal, 50 significant digits",
+    "json_numbers": "shortest round-trip binary64-compatible numbers",
+    "decimal_witnesses": "exact high-precision decimal strings retained beside calculated values",
+    "recommended_f64_absolute_tolerance": 1e-12
+  },
+  "legal_qualification": "The Stage 1 default uses equation A.2.6-3's plateau from zero through TC. Equation A.2.6-7's rising branch below T0 is reserved for a possible future advanced/modal-analysis option: NSR-10 A.2.6.1.3 makes it conditional for dynamic analysis and modes other than the fundamental.",
+  "sampling_note": "low/intermediate/high coefficient labels are oracle coverage strata based on selected Aa/Av magnitudes, not NSR-10 hazard-zone classifications.",
+  "sources": {
+    "municipios": {
+      "path": "data/municipios.json",
+      "sha256": "2cb6d2fab2992896b07440bd9b584afaf44a98cbd5ed5ae57dc2e374b3eb8bb4"
+    },
+    "site_coefficients": {
+      "path": "data/site-coefficients.json",
+      "sha256": "2c22ab2cf3a49db81f18be486aec4b96aa3dbb3517aaeedad4b8a6c0e1f161c4"
+    },
+    "importance_coefficients": {
+      "path": "data/importance-coefficients.json",
+      "sha256": "a54ba4b218120482e47544223bae52b7c7e0e959d5b661944699bde011b08cb0"
+    },
+    "spectrum_formulas": {
+      "path": "data/spectrum-formulas.md",
+      "sha256": "c076282b90d3dde7881d5ba976ffff65524e6cc7433e2088a9647c129dd63a02"
+    }
+  },
+  "coverage": {
+    "case_count": 12,
+    "soil_profiles": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "importance_groups": [
+      "I",
+      "II",
+      "III",
+      "IV"
+    ],
+    "sampling_bands": [
+      "high-coefficient",
+      "intermediate-coefficient",
+      "low-coefficient"
+    ],
+    "fixed_periods": [
+      0.0,
+      0.1,
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0
+    ],
+    "case_periods": "fixed periods plus exact T0, TC, and TL, deduplicated and sorted"
+  },
+  "cases": [
+    {
+      "id": "leticia-e-i",
+      "sampling_band": "low-coefficient",
+      "municipio": "Leticia",
+      "departamento": "Amazonas",
+      "aa": 0.05,
+      "av": 0.05,
+      "soil_profile": "E",
+      "importance_group": "I",
+      "importance_coefficient": 1.0,
+      "expected": {
+        "fa": 2.5,
+        "fv": 3.5,
+        "t0": 0.14,
+        "tc": 0.672,
+        "tl": 8.4,
+        "sa_max": 0.3125
+      },
+      "expected_decimal": {
+        "fa": "2.5",
+        "fv": "3.5",
+        "t0": "0.14",
+        "tc": "0.672",
+        "tl": "8.4",
+        "sa_max": "0.3125"
+      },
+      "arithmetic": {
+        "fa": "Fa(E, Aa=0.05): clamp(0.05) at 0.1 -> 2.5",
+        "fv": "Fv(E, Av=0.05): clamp(0.05) at 0.1 -> 3.5",
+        "t0": "0.1*0.05*3.5/(0.05*2.5) = 0.14",
+        "tc": "0.48*0.05*3.5/(0.05*2.5) = 0.672",
+        "tl": "2.4*3.5 = 8.4",
+        "sa_max": "2.5*0.05*2.5*1 = 0.3125"
+      },
+      "expected_sa_points": [
+        {
+          "period": 0.0,
+          "period_decimal": "0",
+          "anchors": [
+            "fixed-0"
+          ],
+          "sa": 0.3125,
+          "sa_decimal": "0.3125",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.05*2.5*1 = 0.3125"
+        },
+        {
+          "period": 0.1,
+          "period_decimal": "0.1",
+          "anchors": [
+            "fixed-0.1"
+          ],
+          "sa": 0.3125,
+          "sa_decimal": "0.3125",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.05*2.5*1 = 0.3125"
+        },
+        {
+          "period": 0.14,
+          "period_decimal": "0.14",
+          "anchors": [
+            "T0"
+          ],
+          "sa": 0.3125,
+          "sa_decimal": "0.3125",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.05*2.5*1 = 0.3125"
+        },
+        {
+          "period": 0.5,
+          "period_decimal": "0.5",
+          "anchors": [
+            "fixed-0.5"
+          ],
+          "sa": 0.3125,
+          "sa_decimal": "0.3125",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.05*2.5*1 = 0.3125"
+        },
+        {
+          "period": 0.672,
+          "period_decimal": "0.672",
+          "anchors": [
+            "TC"
+          ],
+          "sa": 0.3125,
+          "sa_decimal": "0.3125",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.05*2.5*1 = 0.3125"
+        },
+        {
+          "period": 1.0,
+          "period_decimal": "1",
+          "anchors": [
+            "fixed-1"
+          ],
+          "sa": 0.21,
+          "sa_decimal": "0.21",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.05*3.5*1/1 = 0.21"
+        },
+        {
+          "period": 2.0,
+          "period_decimal": "2",
+          "anchors": [
+            "fixed-2"
+          ],
+          "sa": 0.105,
+          "sa_decimal": "0.105",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.05*3.5*1/2 = 0.105"
+        },
+        {
+          "period": 5.0,
+          "period_decimal": "5",
+          "anchors": [
+            "fixed-5"
+          ],
+          "sa": 0.042,
+          "sa_decimal": "0.042",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.05*3.5*1/5 = 0.042"
+        },
+        {
+          "period": 8.4,
+          "period_decimal": "8.4",
+          "anchors": [
+            "TL"
+          ],
+          "sa": 0.025,
+          "sa_decimal": "0.025",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.05*3.5*1/8.4 = 0.025"
+        },
+        {
+          "period": 10.0,
+          "period_decimal": "10",
+          "anchors": [
+            "fixed-10"
+          ],
+          "sa": 0.01764,
+          "sa_decimal": "0.01764",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.05*3.5*8.4*1/10^2 = 0.01764"
+        }
+      ]
+    },
+    {
+      "id": "puerto-carreno-a-ii",
+      "sampling_band": "low-coefficient",
+      "municipio": "Puerto Carreño",
+      "departamento": "Vichada",
+      "aa": 0.05,
+      "av": 0.05,
+      "soil_profile": "A",
+      "importance_group": "II",
+      "importance_coefficient": 1.1,
+      "expected": {
+        "fa": 0.8,
+        "fv": 0.8,
+        "t0": 0.1,
+        "tc": 0.48,
+        "tl": 1.92,
+        "sa_max": 0.11
+      },
+      "expected_decimal": {
+        "fa": "0.8",
+        "fv": "0.8",
+        "t0": "0.1",
+        "tc": "0.48",
+        "tl": "1.92",
+        "sa_max": "0.11"
+      },
+      "arithmetic": {
+        "fa": "Fa(A, Aa=0.05): clamp(0.05) at 0.1 -> 0.8",
+        "fv": "Fv(A, Av=0.05): clamp(0.05) at 0.1 -> 0.8",
+        "t0": "0.1*0.05*0.8/(0.05*0.8) = 0.1",
+        "tc": "0.48*0.05*0.8/(0.05*0.8) = 0.48",
+        "tl": "2.4*0.8 = 1.92",
+        "sa_max": "2.5*0.05*0.8*1.1 = 0.11"
+      },
+      "expected_sa_points": [
+        {
+          "period": 0.0,
+          "period_decimal": "0",
+          "anchors": [
+            "fixed-0"
+          ],
+          "sa": 0.11,
+          "sa_decimal": "0.11",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.05*0.8*1.1 = 0.11"
+        },
+        {
+          "period": 0.1,
+          "period_decimal": "0.1",
+          "anchors": [
+            "fixed-0.1",
+            "T0"
+          ],
+          "sa": 0.11,
+          "sa_decimal": "0.11",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.05*0.8*1.1 = 0.11"
+        },
+        {
+          "period": 0.48,
+          "period_decimal": "0.48",
+          "anchors": [
+            "TC"
+          ],
+          "sa": 0.11,
+          "sa_decimal": "0.11",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.05*0.8*1.1 = 0.11"
+        },
+        {
+          "period": 0.5,
+          "period_decimal": "0.5",
+          "anchors": [
+            "fixed-0.5"
+          ],
+          "sa": 0.1056,
+          "sa_decimal": "0.1056",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.05*0.8*1.1/0.5 = 0.1056"
+        },
+        {
+          "period": 1.0,
+          "period_decimal": "1",
+          "anchors": [
+            "fixed-1"
+          ],
+          "sa": 0.0528,
+          "sa_decimal": "0.0528",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.05*0.8*1.1/1 = 0.0528"
+        },
+        {
+          "period": 1.92,
+          "period_decimal": "1.92",
+          "anchors": [
+            "TL"
+          ],
+          "sa": 0.0275,
+          "sa_decimal": "0.0275",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.05*0.8*1.1/1.92 = 0.0275"
+        },
+        {
+          "period": 2.0,
+          "period_decimal": "2",
+          "anchors": [
+            "fixed-2"
+          ],
+          "sa": 0.025344,
+          "sa_decimal": "0.025344",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.05*0.8*1.92*1.1/2^2 = 0.025344"
+        },
+        {
+          "period": 5.0,
+          "period_decimal": "5",
+          "anchors": [
+            "fixed-5"
+          ],
+          "sa": 0.00405504,
+          "sa_decimal": "0.00405504",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.05*0.8*1.92*1.1/5^2 = 0.00405504"
+        },
+        {
+          "period": 10.0,
+          "period_decimal": "10",
+          "anchors": [
+            "fixed-10"
+          ],
+          "sa": 0.00101376,
+          "sa_decimal": "0.00101376",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.05*0.8*1.92*1.1/10^2 = 0.00101376"
+        }
+      ]
+    },
+    {
+      "id": "san-andres-b-iii",
+      "sampling_band": "low-coefficient",
+      "municipio": "San Andrés",
+      "departamento": "Archipiélago de San Andrés",
+      "aa": 0.1,
+      "av": 0.1,
+      "soil_profile": "B",
+      "importance_group": "III",
+      "importance_coefficient": 1.25,
+      "expected": {
+        "fa": 1.0,
+        "fv": 1.0,
+        "t0": 0.1,
+        "tc": 0.48,
+        "tl": 2.4,
+        "sa_max": 0.3125
+      },
+      "expected_decimal": {
+        "fa": "1",
+        "fv": "1",
+        "t0": "0.1",
+        "tc": "0.48",
+        "tl": "2.4",
+        "sa_max": "0.3125"
+      },
+      "arithmetic": {
+        "fa": "Fa(B, Aa=0.1): clamp(0.1) at 0.1 -> 1",
+        "fv": "Fv(B, Av=0.1): clamp(0.1) at 0.1 -> 1",
+        "t0": "0.1*0.1*1/(0.1*1) = 0.1",
+        "tc": "0.48*0.1*1/(0.1*1) = 0.48",
+        "tl": "2.4*1 = 2.4",
+        "sa_max": "2.5*0.1*1*1.25 = 0.3125"
+      },
+      "expected_sa_points": [
+        {
+          "period": 0.0,
+          "period_decimal": "0",
+          "anchors": [
+            "fixed-0"
+          ],
+          "sa": 0.3125,
+          "sa_decimal": "0.3125",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.1*1*1.25 = 0.3125"
+        },
+        {
+          "period": 0.1,
+          "period_decimal": "0.1",
+          "anchors": [
+            "fixed-0.1",
+            "T0"
+          ],
+          "sa": 0.3125,
+          "sa_decimal": "0.3125",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.1*1*1.25 = 0.3125"
+        },
+        {
+          "period": 0.48,
+          "period_decimal": "0.48",
+          "anchors": [
+            "TC"
+          ],
+          "sa": 0.3125,
+          "sa_decimal": "0.3125",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.1*1*1.25 = 0.3125"
+        },
+        {
+          "period": 0.5,
+          "period_decimal": "0.5",
+          "anchors": [
+            "fixed-0.5"
+          ],
+          "sa": 0.3,
+          "sa_decimal": "0.3",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.1*1*1.25/0.5 = 0.3"
+        },
+        {
+          "period": 1.0,
+          "period_decimal": "1",
+          "anchors": [
+            "fixed-1"
+          ],
+          "sa": 0.15,
+          "sa_decimal": "0.15",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.1*1*1.25/1 = 0.15"
+        },
+        {
+          "period": 2.0,
+          "period_decimal": "2",
+          "anchors": [
+            "fixed-2"
+          ],
+          "sa": 0.075,
+          "sa_decimal": "0.075",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.1*1*1.25/2 = 0.075"
+        },
+        {
+          "period": 2.4,
+          "period_decimal": "2.4",
+          "anchors": [
+            "TL"
+          ],
+          "sa": 0.0625,
+          "sa_decimal": "0.0625",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.1*1*1.25/2.4 = 0.0625"
+        },
+        {
+          "period": 5.0,
+          "period_decimal": "5",
+          "anchors": [
+            "fixed-5"
+          ],
+          "sa": 0.0144,
+          "sa_decimal": "0.0144",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.1*1*2.4*1.25/5^2 = 0.0144"
+        },
+        {
+          "period": 10.0,
+          "period_decimal": "10",
+          "anchors": [
+            "fixed-10"
+          ],
+          "sa": 0.0036,
+          "sa_decimal": "0.0036",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.1*1*2.4*1.25/10^2 = 0.0036"
+        }
+      ]
+    },
+    {
+      "id": "bogota-c-iv",
+      "sampling_band": "intermediate-coefficient",
+      "municipio": "Bogotá D. C.",
+      "departamento": "Distrito Capital",
+      "aa": 0.15,
+      "av": 0.2,
+      "soil_profile": "C",
+      "importance_group": "IV",
+      "importance_coefficient": 1.5,
+      "expected": {
+        "fa": 1.2,
+        "fv": 1.6,
+        "t0": 0.17777777777777778,
+        "tc": 0.8533333333333334,
+        "tl": 3.84,
+        "sa_max": 0.675
+      },
+      "expected_decimal": {
+        "fa": "1.2",
+        "fv": "1.6",
+        "t0": "0.17777777777777777777777777777777777777777777777778",
+        "tc": "0.85333333333333333333333333333333333333333333333333",
+        "tl": "3.84",
+        "sa_max": "0.675"
+      },
+      "arithmetic": {
+        "fa": "Fa(C, Aa=0.15): 1.2 + (0.15 - 0.1) * (1.2 - 1.2) / (0.2 - 0.1) = 1.2",
+        "fv": "Fv(C, Av=0.2): 1.7 + (0.2 - 0.1) * (1.6 - 1.7) / (0.2 - 0.1) = 1.6",
+        "t0": "0.1*0.2*1.6/(0.15*1.2) = 0.17777777777777777777777777777777777777777777777778",
+        "tc": "0.48*0.2*1.6/(0.15*1.2) = 0.85333333333333333333333333333333333333333333333333",
+        "tl": "2.4*1.6 = 3.84",
+        "sa_max": "2.5*0.15*1.2*1.5 = 0.675"
+      },
+      "expected_sa_points": [
+        {
+          "period": 0.0,
+          "period_decimal": "0",
+          "anchors": [
+            "fixed-0"
+          ],
+          "sa": 0.675,
+          "sa_decimal": "0.675",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.15*1.2*1.5 = 0.675"
+        },
+        {
+          "period": 0.1,
+          "period_decimal": "0.1",
+          "anchors": [
+            "fixed-0.1"
+          ],
+          "sa": 0.675,
+          "sa_decimal": "0.675",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.15*1.2*1.5 = 0.675"
+        },
+        {
+          "period": 0.17777777777777778,
+          "period_decimal": "0.17777777777777777777777777777777777777777777777778",
+          "anchors": [
+            "T0"
+          ],
+          "sa": 0.675,
+          "sa_decimal": "0.675",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.15*1.2*1.5 = 0.675"
+        },
+        {
+          "period": 0.5,
+          "period_decimal": "0.5",
+          "anchors": [
+            "fixed-0.5"
+          ],
+          "sa": 0.675,
+          "sa_decimal": "0.675",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.15*1.2*1.5 = 0.675"
+        },
+        {
+          "period": 0.8533333333333334,
+          "period_decimal": "0.85333333333333333333333333333333333333333333333333",
+          "anchors": [
+            "TC"
+          ],
+          "sa": 0.675,
+          "sa_decimal": "0.675",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.15*1.2*1.5 = 0.675"
+        },
+        {
+          "period": 1.0,
+          "period_decimal": "1",
+          "anchors": [
+            "fixed-1"
+          ],
+          "sa": 0.576,
+          "sa_decimal": "0.576",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.2*1.6*1.5/1 = 0.576"
+        },
+        {
+          "period": 2.0,
+          "period_decimal": "2",
+          "anchors": [
+            "fixed-2"
+          ],
+          "sa": 0.288,
+          "sa_decimal": "0.288",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.2*1.6*1.5/2 = 0.288"
+        },
+        {
+          "period": 3.84,
+          "period_decimal": "3.84",
+          "anchors": [
+            "TL"
+          ],
+          "sa": 0.15,
+          "sa_decimal": "0.15",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.2*1.6*1.5/3.84 = 0.15"
+        },
+        {
+          "period": 5.0,
+          "period_decimal": "5",
+          "anchors": [
+            "fixed-5"
+          ],
+          "sa": 0.0884736,
+          "sa_decimal": "0.0884736",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.2*1.6*3.84*1.5/5^2 = 0.0884736"
+        },
+        {
+          "period": 10.0,
+          "period_decimal": "10",
+          "anchors": [
+            "fixed-10"
+          ],
+          "sa": 0.0221184,
+          "sa_decimal": "0.0221184",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.2*1.6*3.84*1.5/10^2 = 0.0221184"
+        }
+      ]
+    },
+    {
+      "id": "medellin-d-i",
+      "sampling_band": "intermediate-coefficient",
+      "municipio": "Medellín",
+      "departamento": "Antioquia",
+      "aa": 0.15,
+      "av": 0.2,
+      "soil_profile": "D",
+      "importance_group": "I",
+      "importance_coefficient": 1.0,
+      "expected": {
+        "fa": 1.5,
+        "fv": 2.0,
+        "t0": 0.17777777777777778,
+        "tc": 0.8533333333333334,
+        "tl": 4.8,
+        "sa_max": 0.5625
+      },
+      "expected_decimal": {
+        "fa": "1.5",
+        "fv": "2",
+        "t0": "0.17777777777777777777777777777777777777777777777778",
+        "tc": "0.85333333333333333333333333333333333333333333333333",
+        "tl": "4.8",
+        "sa_max": "0.5625"
+      },
+      "arithmetic": {
+        "fa": "Fa(D, Aa=0.15): 1.6 + (0.15 - 0.1) * (1.4 - 1.6) / (0.2 - 0.1) = 1.5",
+        "fv": "Fv(D, Av=0.2): 2.4 + (0.2 - 0.1) * (2 - 2.4) / (0.2 - 0.1) = 2",
+        "t0": "0.1*0.2*2/(0.15*1.5) = 0.17777777777777777777777777777777777777777777777778",
+        "tc": "0.48*0.2*2/(0.15*1.5) = 0.85333333333333333333333333333333333333333333333333",
+        "tl": "2.4*2 = 4.8",
+        "sa_max": "2.5*0.15*1.5*1 = 0.5625"
+      },
+      "expected_sa_points": [
+        {
+          "period": 0.0,
+          "period_decimal": "0",
+          "anchors": [
+            "fixed-0"
+          ],
+          "sa": 0.5625,
+          "sa_decimal": "0.5625",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.15*1.5*1 = 0.5625"
+        },
+        {
+          "period": 0.1,
+          "period_decimal": "0.1",
+          "anchors": [
+            "fixed-0.1"
+          ],
+          "sa": 0.5625,
+          "sa_decimal": "0.5625",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.15*1.5*1 = 0.5625"
+        },
+        {
+          "period": 0.17777777777777778,
+          "period_decimal": "0.17777777777777777777777777777777777777777777777778",
+          "anchors": [
+            "T0"
+          ],
+          "sa": 0.5625,
+          "sa_decimal": "0.5625",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.15*1.5*1 = 0.5625"
+        },
+        {
+          "period": 0.5,
+          "period_decimal": "0.5",
+          "anchors": [
+            "fixed-0.5"
+          ],
+          "sa": 0.5625,
+          "sa_decimal": "0.5625",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.15*1.5*1 = 0.5625"
+        },
+        {
+          "period": 0.8533333333333334,
+          "period_decimal": "0.85333333333333333333333333333333333333333333333333",
+          "anchors": [
+            "TC"
+          ],
+          "sa": 0.5625,
+          "sa_decimal": "0.5625",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.15*1.5*1 = 0.5625"
+        },
+        {
+          "period": 1.0,
+          "period_decimal": "1",
+          "anchors": [
+            "fixed-1"
+          ],
+          "sa": 0.48,
+          "sa_decimal": "0.48",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.2*2*1/1 = 0.48"
+        },
+        {
+          "period": 2.0,
+          "period_decimal": "2",
+          "anchors": [
+            "fixed-2"
+          ],
+          "sa": 0.24,
+          "sa_decimal": "0.24",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.2*2*1/2 = 0.24"
+        },
+        {
+          "period": 4.8,
+          "period_decimal": "4.8",
+          "anchors": [
+            "TL"
+          ],
+          "sa": 0.1,
+          "sa_decimal": "0.1",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.2*2*1/4.8 = 0.1"
+        },
+        {
+          "period": 5.0,
+          "period_decimal": "5",
+          "anchors": [
+            "fixed-5"
+          ],
+          "sa": 0.09216,
+          "sa_decimal": "0.09216",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.2*2*4.8*1/5^2 = 0.09216"
+        },
+        {
+          "period": 10.0,
+          "period_decimal": "10",
+          "anchors": [
+            "fixed-10"
+          ],
+          "sa": 0.02304,
+          "sa_decimal": "0.02304",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.2*2*4.8*1/10^2 = 0.02304"
+        }
+      ]
+    },
+    {
+      "id": "bucaramanga-b-ii",
+      "sampling_band": "intermediate-coefficient",
+      "municipio": "Bucaramanga",
+      "departamento": "Santander",
+      "aa": 0.25,
+      "av": 0.25,
+      "soil_profile": "B",
+      "importance_group": "II",
+      "importance_coefficient": 1.1,
+      "expected": {
+        "fa": 1.0,
+        "fv": 1.0,
+        "t0": 0.1,
+        "tc": 0.48,
+        "tl": 2.4,
+        "sa_max": 0.6875
+      },
+      "expected_decimal": {
+        "fa": "1",
+        "fv": "1",
+        "t0": "0.1",
+        "tc": "0.48",
+        "tl": "2.4",
+        "sa_max": "0.6875"
+      },
+      "arithmetic": {
+        "fa": "Fa(B, Aa=0.25): 1 + (0.25 - 0.2) * (1 - 1) / (0.3 - 0.2) = 1",
+        "fv": "Fv(B, Av=0.25): 1 + (0.25 - 0.2) * (1 - 1) / (0.3 - 0.2) = 1",
+        "t0": "0.1*0.25*1/(0.25*1) = 0.1",
+        "tc": "0.48*0.25*1/(0.25*1) = 0.48",
+        "tl": "2.4*1 = 2.4",
+        "sa_max": "2.5*0.25*1*1.1 = 0.6875"
+      },
+      "expected_sa_points": [
+        {
+          "period": 0.0,
+          "period_decimal": "0",
+          "anchors": [
+            "fixed-0"
+          ],
+          "sa": 0.6875,
+          "sa_decimal": "0.6875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.25*1*1.1 = 0.6875"
+        },
+        {
+          "period": 0.1,
+          "period_decimal": "0.1",
+          "anchors": [
+            "fixed-0.1",
+            "T0"
+          ],
+          "sa": 0.6875,
+          "sa_decimal": "0.6875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.25*1*1.1 = 0.6875"
+        },
+        {
+          "period": 0.48,
+          "period_decimal": "0.48",
+          "anchors": [
+            "TC"
+          ],
+          "sa": 0.6875,
+          "sa_decimal": "0.6875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.25*1*1.1 = 0.6875"
+        },
+        {
+          "period": 0.5,
+          "period_decimal": "0.5",
+          "anchors": [
+            "fixed-0.5"
+          ],
+          "sa": 0.66,
+          "sa_decimal": "0.66",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.25*1*1.1/0.5 = 0.66"
+        },
+        {
+          "period": 1.0,
+          "period_decimal": "1",
+          "anchors": [
+            "fixed-1"
+          ],
+          "sa": 0.33,
+          "sa_decimal": "0.33",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.25*1*1.1/1 = 0.33"
+        },
+        {
+          "period": 2.0,
+          "period_decimal": "2",
+          "anchors": [
+            "fixed-2"
+          ],
+          "sa": 0.165,
+          "sa_decimal": "0.165",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.25*1*1.1/2 = 0.165"
+        },
+        {
+          "period": 2.4,
+          "period_decimal": "2.4",
+          "anchors": [
+            "TL"
+          ],
+          "sa": 0.1375,
+          "sa_decimal": "0.1375",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.25*1*1.1/2.4 = 0.1375"
+        },
+        {
+          "period": 5.0,
+          "period_decimal": "5",
+          "anchors": [
+            "fixed-5"
+          ],
+          "sa": 0.03168,
+          "sa_decimal": "0.03168",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.25*1*2.4*1.1/5^2 = 0.03168"
+        },
+        {
+          "period": 10.0,
+          "period_decimal": "10",
+          "anchors": [
+            "fixed-10"
+          ],
+          "sa": 0.00792,
+          "sa_decimal": "0.00792",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.25*1*2.4*1.1/10^2 = 0.00792"
+        }
+      ]
+    },
+    {
+      "id": "popayan-e-iii",
+      "sampling_band": "intermediate-coefficient",
+      "municipio": "Popayán",
+      "departamento": "Cauca",
+      "aa": 0.25,
+      "av": 0.2,
+      "soil_profile": "E",
+      "importance_group": "III",
+      "importance_coefficient": 1.25,
+      "expected": {
+        "fa": 1.45,
+        "fv": 3.2,
+        "t0": 0.17655172413793102,
+        "tc": 0.847448275862069,
+        "tl": 7.68,
+        "sa_max": 1.1328125
+      },
+      "expected_decimal": {
+        "fa": "1.45",
+        "fv": "3.2",
+        "t0": "0.17655172413793103448275862068965517241379310344828",
+        "tc": "0.84744827586206896551724137931034482758620689655172",
+        "tl": "7.68",
+        "sa_max": "1.1328125"
+      },
+      "arithmetic": {
+        "fa": "Fa(E, Aa=0.25): 1.7 + (0.25 - 0.2) * (1.2 - 1.7) / (0.3 - 0.2) = 1.45",
+        "fv": "Fv(E, Av=0.2): 3.5 + (0.2 - 0.1) * (3.2 - 3.5) / (0.2 - 0.1) = 3.2",
+        "t0": "0.1*0.2*3.2/(0.25*1.45) = 0.17655172413793103448275862068965517241379310344828",
+        "tc": "0.48*0.2*3.2/(0.25*1.45) = 0.84744827586206896551724137931034482758620689655172",
+        "tl": "2.4*3.2 = 7.68",
+        "sa_max": "2.5*0.25*1.45*1.25 = 1.1328125"
+      },
+      "expected_sa_points": [
+        {
+          "period": 0.0,
+          "period_decimal": "0",
+          "anchors": [
+            "fixed-0"
+          ],
+          "sa": 1.1328125,
+          "sa_decimal": "1.1328125",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.25*1.45*1.25 = 1.1328125"
+        },
+        {
+          "period": 0.1,
+          "period_decimal": "0.1",
+          "anchors": [
+            "fixed-0.1"
+          ],
+          "sa": 1.1328125,
+          "sa_decimal": "1.1328125",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.25*1.45*1.25 = 1.1328125"
+        },
+        {
+          "period": 0.17655172413793102,
+          "period_decimal": "0.17655172413793103448275862068965517241379310344828",
+          "anchors": [
+            "T0"
+          ],
+          "sa": 1.1328125,
+          "sa_decimal": "1.1328125",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.25*1.45*1.25 = 1.1328125"
+        },
+        {
+          "period": 0.5,
+          "period_decimal": "0.5",
+          "anchors": [
+            "fixed-0.5"
+          ],
+          "sa": 1.1328125,
+          "sa_decimal": "1.1328125",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.25*1.45*1.25 = 1.1328125"
+        },
+        {
+          "period": 0.847448275862069,
+          "period_decimal": "0.84744827586206896551724137931034482758620689655172",
+          "anchors": [
+            "TC"
+          ],
+          "sa": 1.1328125,
+          "sa_decimal": "1.1328125",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.25*1.45*1.25 = 1.1328125"
+        },
+        {
+          "period": 1.0,
+          "period_decimal": "1",
+          "anchors": [
+            "fixed-1"
+          ],
+          "sa": 0.96,
+          "sa_decimal": "0.96",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.2*3.2*1.25/1 = 0.96"
+        },
+        {
+          "period": 2.0,
+          "period_decimal": "2",
+          "anchors": [
+            "fixed-2"
+          ],
+          "sa": 0.48,
+          "sa_decimal": "0.48",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.2*3.2*1.25/2 = 0.48"
+        },
+        {
+          "period": 5.0,
+          "period_decimal": "5",
+          "anchors": [
+            "fixed-5"
+          ],
+          "sa": 0.192,
+          "sa_decimal": "0.192",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.2*3.2*1.25/5 = 0.192"
+        },
+        {
+          "period": 7.68,
+          "period_decimal": "7.68",
+          "anchors": [
+            "TL"
+          ],
+          "sa": 0.125,
+          "sa_decimal": "0.125",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.2*3.2*1.25/7.68 = 0.125"
+        },
+        {
+          "period": 10.0,
+          "period_decimal": "10",
+          "anchors": [
+            "fixed-10"
+          ],
+          "sa": 0.073728,
+          "sa_decimal": "0.073728",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.2*3.2*7.68*1.25/10^2 = 0.073728"
+        }
+      ]
+    },
+    {
+      "id": "pitalito-a-iv",
+      "sampling_band": "intermediate-coefficient",
+      "municipio": "Pitalito",
+      "departamento": "Huila",
+      "aa": 0.3,
+      "av": 0.15,
+      "soil_profile": "A",
+      "importance_group": "IV",
+      "importance_coefficient": 1.5,
+      "expected": {
+        "fa": 0.8,
+        "fv": 0.8,
+        "t0": 0.05,
+        "tc": 0.24,
+        "tl": 1.92,
+        "sa_max": 0.9
+      },
+      "expected_decimal": {
+        "fa": "0.8",
+        "fv": "0.8",
+        "t0": "0.05",
+        "tc": "0.24",
+        "tl": "1.92",
+        "sa_max": "0.9"
+      },
+      "arithmetic": {
+        "fa": "Fa(A, Aa=0.3): 0.8 + (0.3 - 0.2) * (0.8 - 0.8) / (0.3 - 0.2) = 0.8",
+        "fv": "Fv(A, Av=0.15): 0.8 + (0.15 - 0.1) * (0.8 - 0.8) / (0.2 - 0.1) = 0.8",
+        "t0": "0.1*0.15*0.8/(0.3*0.8) = 0.05",
+        "tc": "0.48*0.15*0.8/(0.3*0.8) = 0.24",
+        "tl": "2.4*0.8 = 1.92",
+        "sa_max": "2.5*0.3*0.8*1.5 = 0.9"
+      },
+      "expected_sa_points": [
+        {
+          "period": 0.0,
+          "period_decimal": "0",
+          "anchors": [
+            "fixed-0"
+          ],
+          "sa": 0.9,
+          "sa_decimal": "0.9",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.3*0.8*1.5 = 0.9"
+        },
+        {
+          "period": 0.05,
+          "period_decimal": "0.05",
+          "anchors": [
+            "T0"
+          ],
+          "sa": 0.9,
+          "sa_decimal": "0.9",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.3*0.8*1.5 = 0.9"
+        },
+        {
+          "period": 0.1,
+          "period_decimal": "0.1",
+          "anchors": [
+            "fixed-0.1"
+          ],
+          "sa": 0.9,
+          "sa_decimal": "0.9",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.3*0.8*1.5 = 0.9"
+        },
+        {
+          "period": 0.24,
+          "period_decimal": "0.24",
+          "anchors": [
+            "TC"
+          ],
+          "sa": 0.9,
+          "sa_decimal": "0.9",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.3*0.8*1.5 = 0.9"
+        },
+        {
+          "period": 0.5,
+          "period_decimal": "0.5",
+          "anchors": [
+            "fixed-0.5"
+          ],
+          "sa": 0.432,
+          "sa_decimal": "0.432",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.15*0.8*1.5/0.5 = 0.432"
+        },
+        {
+          "period": 1.0,
+          "period_decimal": "1",
+          "anchors": [
+            "fixed-1"
+          ],
+          "sa": 0.216,
+          "sa_decimal": "0.216",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.15*0.8*1.5/1 = 0.216"
+        },
+        {
+          "period": 1.92,
+          "period_decimal": "1.92",
+          "anchors": [
+            "TL"
+          ],
+          "sa": 0.1125,
+          "sa_decimal": "0.1125",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.15*0.8*1.5/1.92 = 0.1125"
+        },
+        {
+          "period": 2.0,
+          "period_decimal": "2",
+          "anchors": [
+            "fixed-2"
+          ],
+          "sa": 0.10368,
+          "sa_decimal": "0.10368",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.15*0.8*1.92*1.5/2^2 = 0.10368"
+        },
+        {
+          "period": 5.0,
+          "period_decimal": "5",
+          "anchors": [
+            "fixed-5"
+          ],
+          "sa": 0.0165888,
+          "sa_decimal": "0.0165888",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.15*0.8*1.92*1.5/5^2 = 0.0165888"
+        },
+        {
+          "period": 10.0,
+          "period_decimal": "10",
+          "anchors": [
+            "fixed-10"
+          ],
+          "sa": 0.0041472,
+          "sa_decimal": "0.0041472",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.15*0.8*1.92*1.5/10^2 = 0.0041472"
+        }
+      ]
+    },
+    {
+      "id": "quibdo-c-i",
+      "sampling_band": "high-coefficient",
+      "municipio": "Quibdó",
+      "departamento": "Chocó",
+      "aa": 0.35,
+      "av": 0.35,
+      "soil_profile": "C",
+      "importance_group": "I",
+      "importance_coefficient": 1.0,
+      "expected": {
+        "fa": 1.05,
+        "fv": 1.45,
+        "t0": 0.1380952380952381,
+        "tc": 0.6628571428571428,
+        "tl": 3.48,
+        "sa_max": 0.91875
+      },
+      "expected_decimal": {
+        "fa": "1.05",
+        "fv": "1.45",
+        "t0": "0.13809523809523809523809523809523809523809523809524",
+        "tc": "0.66285714285714285714285714285714285714285714285714",
+        "tl": "3.48",
+        "sa_max": "0.91875"
+      },
+      "arithmetic": {
+        "fa": "Fa(C, Aa=0.35): 1.1 + (0.35 - 0.3) * (1 - 1.1) / (0.4 - 0.3) = 1.05",
+        "fv": "Fv(C, Av=0.35): 1.5 + (0.35 - 0.3) * (1.4 - 1.5) / (0.4 - 0.3) = 1.45",
+        "t0": "0.1*0.35*1.45/(0.35*1.05) = 0.13809523809523809523809523809523809523809523809524",
+        "tc": "0.48*0.35*1.45/(0.35*1.05) = 0.66285714285714285714285714285714285714285714285714",
+        "tl": "2.4*1.45 = 3.48",
+        "sa_max": "2.5*0.35*1.05*1 = 0.91875"
+      },
+      "expected_sa_points": [
+        {
+          "period": 0.0,
+          "period_decimal": "0",
+          "anchors": [
+            "fixed-0"
+          ],
+          "sa": 0.91875,
+          "sa_decimal": "0.91875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.35*1.05*1 = 0.91875"
+        },
+        {
+          "period": 0.1,
+          "period_decimal": "0.1",
+          "anchors": [
+            "fixed-0.1"
+          ],
+          "sa": 0.91875,
+          "sa_decimal": "0.91875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.35*1.05*1 = 0.91875"
+        },
+        {
+          "period": 0.1380952380952381,
+          "period_decimal": "0.13809523809523809523809523809523809523809523809524",
+          "anchors": [
+            "T0"
+          ],
+          "sa": 0.91875,
+          "sa_decimal": "0.91875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.35*1.05*1 = 0.91875"
+        },
+        {
+          "period": 0.5,
+          "period_decimal": "0.5",
+          "anchors": [
+            "fixed-0.5"
+          ],
+          "sa": 0.91875,
+          "sa_decimal": "0.91875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.35*1.05*1 = 0.91875"
+        },
+        {
+          "period": 0.6628571428571428,
+          "period_decimal": "0.66285714285714285714285714285714285714285714285714",
+          "anchors": [
+            "TC"
+          ],
+          "sa": 0.91875,
+          "sa_decimal": "0.91875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.35*1.05*1 = 0.91875"
+        },
+        {
+          "period": 1.0,
+          "period_decimal": "1",
+          "anchors": [
+            "fixed-1"
+          ],
+          "sa": 0.609,
+          "sa_decimal": "0.609",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.35*1.45*1/1 = 0.609"
+        },
+        {
+          "period": 2.0,
+          "period_decimal": "2",
+          "anchors": [
+            "fixed-2"
+          ],
+          "sa": 0.3045,
+          "sa_decimal": "0.3045",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.35*1.45*1/2 = 0.3045"
+        },
+        {
+          "period": 3.48,
+          "period_decimal": "3.48",
+          "anchors": [
+            "TL"
+          ],
+          "sa": 0.175,
+          "sa_decimal": "0.175",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.35*1.45*1/3.48 = 0.175"
+        },
+        {
+          "period": 5.0,
+          "period_decimal": "5",
+          "anchors": [
+            "fixed-5"
+          ],
+          "sa": 0.0847728,
+          "sa_decimal": "0.0847728",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.35*1.45*3.48*1/5^2 = 0.0847728"
+        },
+        {
+          "period": 10.0,
+          "period_decimal": "10",
+          "anchors": [
+            "fixed-10"
+          ],
+          "sa": 0.0211932,
+          "sa_decimal": "0.0211932",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.35*1.45*3.48*1/10^2 = 0.0211932"
+        }
+      ]
+    },
+    {
+      "id": "cucuta-d-ii",
+      "sampling_band": "high-coefficient",
+      "municipio": "Cúcuta",
+      "departamento": "Norte de Santander",
+      "aa": 0.35,
+      "av": 0.3,
+      "soil_profile": "D",
+      "importance_group": "II",
+      "importance_coefficient": 1.1,
+      "expected": {
+        "fa": 1.15,
+        "fv": 1.8,
+        "t0": 0.1341614906832298,
+        "tc": 0.6439751552795031,
+        "tl": 4.32,
+        "sa_max": 1.106875
+      },
+      "expected_decimal": {
+        "fa": "1.15",
+        "fv": "1.8",
+        "t0": "0.13416149068322981366459627329192546583850931677019",
+        "tc": "0.64397515527950310559006211180124223602484472049689",
+        "tl": "4.32",
+        "sa_max": "1.106875"
+      },
+      "arithmetic": {
+        "fa": "Fa(D, Aa=0.35): 1.2 + (0.35 - 0.3) * (1.1 - 1.2) / (0.4 - 0.3) = 1.15",
+        "fv": "Fv(D, Av=0.3): 2 + (0.3 - 0.2) * (1.8 - 2) / (0.3 - 0.2) = 1.8",
+        "t0": "0.1*0.3*1.8/(0.35*1.15) = 0.13416149068322981366459627329192546583850931677019",
+        "tc": "0.48*0.3*1.8/(0.35*1.15) = 0.64397515527950310559006211180124223602484472049689",
+        "tl": "2.4*1.8 = 4.32",
+        "sa_max": "2.5*0.35*1.15*1.1 = 1.106875"
+      },
+      "expected_sa_points": [
+        {
+          "period": 0.0,
+          "period_decimal": "0",
+          "anchors": [
+            "fixed-0"
+          ],
+          "sa": 1.106875,
+          "sa_decimal": "1.106875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.35*1.15*1.1 = 1.106875"
+        },
+        {
+          "period": 0.1,
+          "period_decimal": "0.1",
+          "anchors": [
+            "fixed-0.1"
+          ],
+          "sa": 1.106875,
+          "sa_decimal": "1.106875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.35*1.15*1.1 = 1.106875"
+        },
+        {
+          "period": 0.1341614906832298,
+          "period_decimal": "0.13416149068322981366459627329192546583850931677019",
+          "anchors": [
+            "T0"
+          ],
+          "sa": 1.106875,
+          "sa_decimal": "1.106875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.35*1.15*1.1 = 1.106875"
+        },
+        {
+          "period": 0.5,
+          "period_decimal": "0.5",
+          "anchors": [
+            "fixed-0.5"
+          ],
+          "sa": 1.106875,
+          "sa_decimal": "1.106875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.35*1.15*1.1 = 1.106875"
+        },
+        {
+          "period": 0.6439751552795031,
+          "period_decimal": "0.64397515527950310559006211180124223602484472049689",
+          "anchors": [
+            "TC"
+          ],
+          "sa": 1.106875,
+          "sa_decimal": "1.106875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.35*1.15*1.1 = 1.106875"
+        },
+        {
+          "period": 1.0,
+          "period_decimal": "1",
+          "anchors": [
+            "fixed-1"
+          ],
+          "sa": 0.7128,
+          "sa_decimal": "0.7128",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.3*1.8*1.1/1 = 0.7128"
+        },
+        {
+          "period": 2.0,
+          "period_decimal": "2",
+          "anchors": [
+            "fixed-2"
+          ],
+          "sa": 0.3564,
+          "sa_decimal": "0.3564",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.3*1.8*1.1/2 = 0.3564"
+        },
+        {
+          "period": 4.32,
+          "period_decimal": "4.32",
+          "anchors": [
+            "TL"
+          ],
+          "sa": 0.165,
+          "sa_decimal": "0.165",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.3*1.8*1.1/4.32 = 0.165"
+        },
+        {
+          "period": 5.0,
+          "period_decimal": "5",
+          "anchors": [
+            "fixed-5"
+          ],
+          "sa": 0.12317184,
+          "sa_decimal": "0.12317184",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.3*1.8*4.32*1.1/5^2 = 0.12317184"
+        },
+        {
+          "period": 10.0,
+          "period_decimal": "10",
+          "anchors": [
+            "fixed-10"
+          ],
+          "sa": 0.03079296,
+          "sa_decimal": "0.03079296",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.3*1.8*4.32*1.1/10^2 = 0.03079296"
+        }
+      ]
+    },
+    {
+      "id": "tumaco-e-iii",
+      "sampling_band": "high-coefficient",
+      "municipio": "Tumaco",
+      "departamento": "Nariño",
+      "aa": 0.45,
+      "av": 0.4,
+      "soil_profile": "E",
+      "importance_group": "III",
+      "importance_coefficient": 1.25,
+      "expected": {
+        "fa": 0.9,
+        "fv": 2.4,
+        "t0": 0.23703703703703705,
+        "tc": 1.1377777777777778,
+        "tl": 5.76,
+        "sa_max": 1.265625
+      },
+      "expected_decimal": {
+        "fa": "0.9",
+        "fv": "2.4",
+        "t0": "0.23703703703703703703703703703703703703703703703704",
+        "tc": "1.1377777777777777777777777777777777777777777777778",
+        "tl": "5.76",
+        "sa_max": "1.265625"
+      },
+      "arithmetic": {
+        "fa": "Fa(E, Aa=0.45): 0.9 + (0.45 - 0.4) * (0.9 - 0.9) / (0.5 - 0.4) = 0.9",
+        "fv": "Fv(E, Av=0.4): 2.8 + (0.4 - 0.3) * (2.4 - 2.8) / (0.4 - 0.3) = 2.4",
+        "t0": "0.1*0.4*2.4/(0.45*0.9) = 0.23703703703703703703703703703703703703703703703704",
+        "tc": "0.48*0.4*2.4/(0.45*0.9) = 1.1377777777777777777777777777777777777777777777778",
+        "tl": "2.4*2.4 = 5.76",
+        "sa_max": "2.5*0.45*0.9*1.25 = 1.265625"
+      },
+      "expected_sa_points": [
+        {
+          "period": 0.0,
+          "period_decimal": "0",
+          "anchors": [
+            "fixed-0"
+          ],
+          "sa": 1.265625,
+          "sa_decimal": "1.265625",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.45*0.9*1.25 = 1.265625"
+        },
+        {
+          "period": 0.1,
+          "period_decimal": "0.1",
+          "anchors": [
+            "fixed-0.1"
+          ],
+          "sa": 1.265625,
+          "sa_decimal": "1.265625",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.45*0.9*1.25 = 1.265625"
+        },
+        {
+          "period": 0.23703703703703705,
+          "period_decimal": "0.23703703703703703703703703703703703703703703703704",
+          "anchors": [
+            "T0"
+          ],
+          "sa": 1.265625,
+          "sa_decimal": "1.265625",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.45*0.9*1.25 = 1.265625"
+        },
+        {
+          "period": 0.5,
+          "period_decimal": "0.5",
+          "anchors": [
+            "fixed-0.5"
+          ],
+          "sa": 1.265625,
+          "sa_decimal": "1.265625",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.45*0.9*1.25 = 1.265625"
+        },
+        {
+          "period": 1.0,
+          "period_decimal": "1",
+          "anchors": [
+            "fixed-1"
+          ],
+          "sa": 1.265625,
+          "sa_decimal": "1.265625",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.45*0.9*1.25 = 1.265625"
+        },
+        {
+          "period": 1.1377777777777778,
+          "period_decimal": "1.1377777777777777777777777777777777777777777777778",
+          "anchors": [
+            "TC"
+          ],
+          "sa": 1.265625,
+          "sa_decimal": "1.265625",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.45*0.9*1.25 = 1.265625"
+        },
+        {
+          "period": 2.0,
+          "period_decimal": "2",
+          "anchors": [
+            "fixed-2"
+          ],
+          "sa": 0.72,
+          "sa_decimal": "0.72",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.4*2.4*1.25/2 = 0.72"
+        },
+        {
+          "period": 5.0,
+          "period_decimal": "5",
+          "anchors": [
+            "fixed-5"
+          ],
+          "sa": 0.288,
+          "sa_decimal": "0.288",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.4*2.4*1.25/5 = 0.288"
+        },
+        {
+          "period": 5.76,
+          "period_decimal": "5.76",
+          "anchors": [
+            "TL"
+          ],
+          "sa": 0.25,
+          "sa_decimal": "0.25",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.4*2.4*1.25/5.76 = 0.25"
+        },
+        {
+          "period": 10.0,
+          "period_decimal": "10",
+          "anchors": [
+            "fixed-10"
+          ],
+          "sa": 0.082944,
+          "sa_decimal": "0.082944",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.4*2.4*5.76*1.25/10^2 = 0.082944"
+        }
+      ]
+    },
+    {
+      "id": "la-tola-b-iv",
+      "sampling_band": "high-coefficient",
+      "municipio": "La Tola",
+      "departamento": "Nariño",
+      "aa": 0.5,
+      "av": 0.4,
+      "soil_profile": "B",
+      "importance_group": "IV",
+      "importance_coefficient": 1.5,
+      "expected": {
+        "fa": 1.0,
+        "fv": 1.0,
+        "t0": 0.08,
+        "tc": 0.384,
+        "tl": 2.4,
+        "sa_max": 1.875
+      },
+      "expected_decimal": {
+        "fa": "1",
+        "fv": "1",
+        "t0": "0.08",
+        "tc": "0.384",
+        "tl": "2.4",
+        "sa_max": "1.875"
+      },
+      "arithmetic": {
+        "fa": "Fa(B, Aa=0.5): clamp(0.5) at 0.5 -> 1",
+        "fv": "Fv(B, Av=0.4): 1 + (0.4 - 0.3) * (1 - 1) / (0.4 - 0.3) = 1",
+        "t0": "0.1*0.4*1/(0.5*1) = 0.08",
+        "tc": "0.48*0.4*1/(0.5*1) = 0.384",
+        "tl": "2.4*1 = 2.4",
+        "sa_max": "2.5*0.5*1*1.5 = 1.875"
+      },
+      "expected_sa_points": [
+        {
+          "period": 0.0,
+          "period_decimal": "0",
+          "anchors": [
+            "fixed-0"
+          ],
+          "sa": 1.875,
+          "sa_decimal": "1.875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.5*1*1.5 = 1.875"
+        },
+        {
+          "period": 0.08,
+          "period_decimal": "0.08",
+          "anchors": [
+            "T0"
+          ],
+          "sa": 1.875,
+          "sa_decimal": "1.875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.5*1*1.5 = 1.875"
+        },
+        {
+          "period": 0.1,
+          "period_decimal": "0.1",
+          "anchors": [
+            "fixed-0.1"
+          ],
+          "sa": 1.875,
+          "sa_decimal": "1.875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.5*1*1.5 = 1.875"
+        },
+        {
+          "period": 0.384,
+          "period_decimal": "0.384",
+          "anchors": [
+            "TC"
+          ],
+          "sa": 1.875,
+          "sa_decimal": "1.875",
+          "branch": "plateau-A.2.6-3",
+          "arithmetic": "2.5*0.5*1*1.5 = 1.875"
+        },
+        {
+          "period": 0.5,
+          "period_decimal": "0.5",
+          "anchors": [
+            "fixed-0.5"
+          ],
+          "sa": 1.44,
+          "sa_decimal": "1.44",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.4*1*1.5/0.5 = 1.44"
+        },
+        {
+          "period": 1.0,
+          "period_decimal": "1",
+          "anchors": [
+            "fixed-1"
+          ],
+          "sa": 0.72,
+          "sa_decimal": "0.72",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.4*1*1.5/1 = 0.72"
+        },
+        {
+          "period": 2.0,
+          "period_decimal": "2",
+          "anchors": [
+            "fixed-2"
+          ],
+          "sa": 0.36,
+          "sa_decimal": "0.36",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.4*1*1.5/2 = 0.36"
+        },
+        {
+          "period": 2.4,
+          "period_decimal": "2.4",
+          "anchors": [
+            "TL"
+          ],
+          "sa": 0.3,
+          "sa_decimal": "0.3",
+          "branch": "inverse-T-A.2.6-1",
+          "arithmetic": "1.2*0.4*1*1.5/2.4 = 0.3"
+        },
+        {
+          "period": 5.0,
+          "period_decimal": "5",
+          "anchors": [
+            "fixed-5"
+          ],
+          "sa": 0.06912,
+          "sa_decimal": "0.06912",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.4*1*2.4*1.5/5^2 = 0.06912"
+        },
+        {
+          "period": 10.0,
+          "period_decimal": "10",
+          "anchors": [
+            "fixed-10"
+          ],
+          "sa": 0.01728,
+          "sa_decimal": "0.01728",
+          "branch": "inverse-T2-A.2.6-5",
+          "arithmetic": "1.2*0.4*1*2.4*1.5/10^2 = 0.01728"
+        }
+      ]
+    }
+  ]
+}
