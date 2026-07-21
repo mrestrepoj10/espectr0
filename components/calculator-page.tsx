@@ -15,6 +15,7 @@ import {
 	FileTextIcon,
 	TriangleAlertIcon,
 } from "lucide-react";
+import { toast } from "sonner";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
@@ -612,16 +613,14 @@ function ExportActions({
 	spectrum: SpectrumOk | null;
 	municipio: Municipio;
 }) {
-	const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">("idle");
-
 	async function copyJson() {
 		if (!spectrum) return;
 
 		try {
 			await navigator.clipboard.writeText(JSON.stringify(spectrum, null, 2));
-			setCopyStatus("copied");
+			toast.success("JSON copiado al portapapeles.");
 		} catch {
-			setCopyStatus("error");
+			toast.error("No fue posible copiar el JSON.");
 		}
 	}
 
@@ -647,10 +646,6 @@ function ExportActions({
 				<FileTextIcon data-icon="inline-start" />
 				PDF · próximamente
 			</Button>
-			<p aria-live="polite" className="text-muted-foreground text-xs">
-				{copyStatus === "copied" ? "JSON copiado al portapapeles." : null}
-				{copyStatus === "error" ? "No fue posible copiar el JSON." : null}
-			</p>
 		</div>
 	);
 }
