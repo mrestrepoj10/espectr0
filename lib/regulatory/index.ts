@@ -1,4 +1,13 @@
-export { checkEvidenceStudy, type EvidenceCheckReport } from "./check";
+export {
+	aggregateEvidenceReportSchema,
+	checkEvidenceStudy,
+	evidenceCheckReportSchema,
+	runInstalledDescriptors,
+	studyDescriptorSchema,
+	validateInstalledDescriptors,
+	validateStudyCheckResult,
+	type EvidenceCheckReport,
+} from "./check";
 export { deterministicJson } from "./deterministic";
 export {
 	citationRegionKindSchema,
@@ -10,6 +19,7 @@ export {
 	sourceDocumentSchema,
 	valueProvenanceSchema,
 	type EvidenceCitation,
+	type EvidenceOverride,
 	type EvidenceValue,
 	type RegulatoryEvidenceStudy,
 	type SourceDocument,

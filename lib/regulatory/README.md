@@ -5,26 +5,33 @@ coverage, and deterministic-report contracts shared by regulatory studies.
 
 Studies are installed by convention, not through a central manifest. A study owns
 `lib/<study-id>/evidence/study.mjs` and exports a stable `studyId` plus an async
-`check({ repositoryRoot })` function. `scripts/regulatory/check-evidence.mjs`
-discovers these descriptors in sorted order and fails on duplicate IDs. Adding a
-study therefore changes only that study's directory.
+`check({ repositoryRoot })` function. Plain Node descriptors import the committed
+`lib/regulatory/runtime.mjs` boundary; no TypeScript loader or build output is
+required. `scripts/regulatory/check-evidence.mjs` discovers descriptors in sorted
+order, strictly validates descriptor/results and their matching IDs, and fails on
+duplicate IDs. Adding a study therefore changes only that study's directory.
 
 ## Evidence rules
 
-- Every bundled source is SHA-256 locked. PDF checks must also supply a page-count
-  reader. External-only or restricted sources keep an official URL and an explicit
-  redistribution rationale but no local path.
+- The top-level checker always reads and SHA-256 locks every bundled source; this
+  cannot be omitted by a caller. PDF and text page counts are computed from source
+  bytes; other media types require a reader and cannot fall back to declared
+  metadata. External-only or restricted sources keep an official URL and
+  redistribution rationale and are required to be pathless.
 - Citation rectangles use normalized page coordinates and identify the physical
   page separately from the printed page label. Parent citation IDs prove that
-  cells fit inside their rows or tables; page crop and printed-label metadata are
-  checked when declared.
-- Direct values cite their source, interpolation cites at least two inputs and its
-  transformation, and derived values record dependencies, cited inputs, formula,
-  substitution, result, and unit. User inputs are classified explicitly.
-- Coverage is the exact Cartesian product of declared option, hazard, and field
-  IDs. Missing, duplicate, or out-of-domain values fail closed.
+  cells fit inside rows and rows inside tables. Every cited physical page requires
+  rotation, crop, and an explicit printed label or explicit `null`.
+- Every direct scalar has exactly one cell citation whose normalized value, unit,
+  and transformation match. Interpolation cites at least two cell inputs. Derived
+  lineage separates a clause/equation formula citation from per-dependency input
+  citations and rejects unrelated evidence. User inputs are classified explicitly.
+- Values and raw/canonical rows cover the exact option × hazard × field product.
+  Rows have exact keys/field sets, every raw occurrence is consumed, and canonical
+  fields must equal both the selected source occurrence and canonical values.
 - Duplicate source rows require reviewed overrides naming every competing
-  occurrence and the chosen occurrence. Unused overrides and citations fail.
+  occurrence and the chosen occurrence. Canonicalization must use that selection;
+  occurrence regions must be distinct. Unused overrides and citations fail.
 - Deterministic JSON uses sorted object keys, preserves semantic array order, and
   always ends with LF.
 
@@ -34,3 +41,8 @@ the result, asserting 1,124 raw rows, 1,123 canonical rows, 4,492 field regions,
 eight normative citations, source hashes, artifact sizes, and the declared Bogotá
 duplicate. The compatibility layer does not change source extraction or numerical
 data.
+
+`lib/regulatory/evidence/study.mjs` is an installed two-document contract sentinel.
+It imports and executes the same generic runtime through the production aggregate
+path, proving bundled and pathless-external sources, exact cell evidence, role-based
+lineage, locks, coverage, and strict report validation on every `evidence:check`.
