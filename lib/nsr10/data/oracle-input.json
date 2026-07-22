@@ -3,7 +3,7 @@
   "description": "Independent NSR-10 design-spectrum oracle inputs, transcribed separately from the production TypeScript engine.",
   "generator": {
     "path": "scripts/generate-nsr10-oracle.py",
-    "sha256": "eb51fed622b99df480972508da0c4f64cfe8c2339875c25a6a46a414678130fe"
+    "sha256": "8029906b9484f7703a8cdacf3369c7524b27c98df11da73cebd79cd2fb0e8199"
   },
   "units": {
     "aa": "fraction-of-g",
@@ -20,8 +20,12 @@
     "tl": "s",
     "sa_max": "fraction-of-g",
     "sa": "fraction-of-g",
-    "sa_decimal": "fraction-of-g",
-    "recommended_f64_absolute_tolerance": "fraction-of-g"
+    "sa_decimal": "fraction-of-g"
+  },
+  "absolute_tolerances": {
+    "acceleration": { "value": 1e-12, "unit": "fraction-of-g" },
+    "period": { "value": 1e-12, "unit": "s" },
+    "coefficient": { "value": 1e-12, "unit": "dimensionless" }
   },
   "source": {
     "document": "NSR-10 Título A, versión consolidada 2017",

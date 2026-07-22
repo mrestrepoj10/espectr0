@@ -34,6 +34,8 @@ byte-for-byte reproduction of `oracle.json`.
 
 The units contract classifies T/fixed periods, emitted period values and their
 decimal witnesses, and T0/TC/TL as seconds; Aa, Av, Sa/Sa-max and their decimal
-witnesses, and the absolute binary64 tolerance as fractions of g; and Fa, Fv,
-and I as dimensionless. The same contract and formula inventory are emitted in
-the generated oracle and validated by the runtime Zod schema.
+witnesses as fractions of g; and Fa, Fv, and I as dimensionless. Absolute
+binary64 tolerances are separately declared and unit-tagged for acceleration,
+period, and coefficient comparisons. The same contracts and formula inventory
+are emitted in the generated oracle and validated by the runtime Zod schema;
+the golden tests consume those declared tolerances directly.

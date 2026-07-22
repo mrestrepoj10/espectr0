@@ -164,7 +164,7 @@ def build_oracle() -> dict[str, Any]:
             "calculation": "Python Decimal, 50 significant digits",
             "json_numbers": "shortest round-trip binary64-compatible numbers",
             "decimal_witnesses": "exact high-precision decimal strings retained beside calculated values",
-            "recommended_f64_absolute_tolerance": 1e-12,
+            "absolute_tolerances": inputs["absolute_tolerances"],
         },
         "legal_qualification": "The default uses equation A.2.6-3's plateau from zero through TC. Equation A.2.6-7's rising branch below T0 is reserved for modal analysis under A.2.6.1.3.",
         "sampling_note": "low/intermediate/high coefficient labels are oracle coverage strata, not NSR-10 hazard-zone classifications.",

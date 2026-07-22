@@ -150,7 +150,26 @@ export const oracleUnitsSchema = z
     sa_max: z.literal("fraction-of-g"),
     sa: z.literal("fraction-of-g"),
     sa_decimal: z.literal("fraction-of-g"),
-    recommended_f64_absolute_tolerance: z.literal("fraction-of-g"),
+  })
+  .strict()
+
+export const oracleAbsoluteTolerancesSchema = z
+  .object({
+    acceleration: z
+      .object({
+        value: z.number().finite().positive(),
+        unit: z.literal("fraction-of-g"),
+      })
+      .strict(),
+    period: z
+      .object({ value: z.number().finite().positive(), unit: z.literal("s") })
+      .strict(),
+    coefficient: z
+      .object({
+        value: z.number().finite().positive(),
+        unit: z.literal("dimensionless"),
+      })
+      .strict(),
   })
   .strict()
 
@@ -250,7 +269,7 @@ export const oracleSchema = z
         calculation: z.string().min(1),
         json_numbers: z.string().min(1),
         decimal_witnesses: z.string().min(1),
-        recommended_f64_absolute_tolerance: z.number().finite().positive(),
+        absolute_tolerances: oracleAbsoluteTolerancesSchema,
       })
       .strict(),
     legal_qualification: z.string().min(1),

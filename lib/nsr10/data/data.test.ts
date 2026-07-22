@@ -8,6 +8,7 @@ import siteCoefficientsData from "./site-coefficients.json"
 import {
   importanceCoefficientsSchema,
   municipiosSchema,
+  oracleAbsoluteTolerancesSchema,
   oracleSchema,
   oracleUnitsSchema,
   siteCoefficientsSchema,
@@ -22,6 +23,9 @@ describe("NSR-10 checked-in datasets", () => {
     expect(() => importanceCoefficientsSchema.parse(importanceCoefficientsData)).not.toThrow()
     expect(() => oracleSchema.parse(oracleData)).not.toThrow()
     expect(() => oracleUnitsSchema.parse(oracleInputData.units)).not.toThrow()
+    expect(() =>
+      oracleAbsoluteTolerancesSchema.parse(oracleInputData.absolute_tolerances),
+    ).not.toThrow()
   })
 
   it("declares every generated formula and unit in the independent oracle", () => {
@@ -37,6 +41,9 @@ describe("NSR-10 checked-in datasets", () => {
     expect(oracleInputData.source.spectrum_equations).toEqual(spectrumEquations)
     expect(oracleData.formula_inventory).toEqual(spectrumEquations)
     expect(oracleData.units).toEqual(oracleInputData.units)
+    expect(oracleData.numeric_contract.absolute_tolerances).toEqual(
+      oracleInputData.absolute_tolerances,
+    )
     expect(oracleData.units).toMatchObject({
       t: "s",
       fixed_periods: "s",
@@ -53,6 +60,11 @@ describe("NSR-10 checked-in datasets", () => {
       fa: "dimensionless",
       fv: "dimensionless",
       importance_coefficient: "dimensionless",
+    })
+    expect(oracleData.numeric_contract.absolute_tolerances).toEqual({
+      acceleration: { value: 1e-12, unit: "fraction-of-g" },
+      period: { value: 1e-12, unit: "s" },
+      coefficient: { value: 1e-12, unit: "dimensionless" },
     })
   })
 
