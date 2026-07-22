@@ -11,6 +11,8 @@ export const municipioSchema = z
     municipio: z.string().trim().min(1),
     aa: z.number().finite().min(0.05).max(0.5),
     av: z.number().finite().min(0.05).max(0.5),
+    ae: z.number().finite().min(0.02).max(0.36),
+    ad: z.number().finite().min(0.02).max(0.14),
   })
   .strict()
 

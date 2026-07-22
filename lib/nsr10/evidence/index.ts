@@ -56,6 +56,14 @@ function composeTraceability(
 				value: municipality.av,
 				rect: composeValueRect(rowTop, layout.values.av),
 			},
+			ae: {
+				value: municipality.ae,
+				rect: composeValueRect(rowTop, layout.values.ae),
+			},
+			ad: {
+				value: municipality.ad,
+				rect: composeValueRect(rowTop, layout.values.ad),
+			},
 		},
 	};
 }

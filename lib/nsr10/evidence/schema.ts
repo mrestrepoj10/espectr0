@@ -54,6 +54,8 @@ const appendixLayoutSchema = z
 			.object({
 				aa: valueLayoutSchema,
 				av: valueLayoutSchema,
+				ae: valueLayoutSchema,
+				ad: valueLayoutSchema,
 			})
 			.strict(),
 	})
@@ -84,7 +86,7 @@ export const compactMunicipalityCitationSchema = z.tuple([
 
 export const sourceEvidenceManifestSchema = z
 	.object({
-		schemaVersion: z.literal(2),
+		schemaVersion: z.literal(3),
 		source: sourceSchema,
 		layout: appendixLayoutSchema,
 		citations: z.array(compactMunicipalityCitationSchema),
@@ -130,5 +132,7 @@ export type MunicipalityTraceability = {
 	values: {
 		aa: { value: number; rect: NormalizedPdfRect };
 		av: { value: number; rect: NormalizedPdfRect };
+		ae: { value: number; rect: NormalizedPdfRect };
+		ad: { value: number; rect: NormalizedPdfRect };
 	};
 };

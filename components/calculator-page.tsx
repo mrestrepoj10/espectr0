@@ -12,7 +12,6 @@ import {
 import {
 	ClipboardIcon,
 	DownloadIcon,
-	FileTextIcon,
 	LandmarkIcon,
 	TriangleAlertIcon,
 } from "lucide-react";
@@ -73,6 +72,7 @@ import {
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
 	computeSpectrum,
+	hazardLevelDetails,
 	lookupMunicipio,
 	municipios,
 	normalizeSearchText,
@@ -80,6 +80,7 @@ import {
 
 import type {
 	ImportanceGroup,
+	HazardLevel,
 	Municipio,
 	SoilProfile,
 	SpectrumBranch,
@@ -92,14 +93,16 @@ const standards = [
 ] as const;
 
 const hazardLevels = [
-	{ label: "Diseño · TR 475 años", value: "475", disabled: false },
-	{ label: "Servicio · TR 43 años · próximamente", value: "43", disabled: true },
+	{ label: "Diseño · TR 475 años", value: "design" },
 	{
-		label: "Máximo considerado · TR 2.475 años · próximamente",
-		value: "2475",
-		disabled: true,
+		label: "Seguridad limitada · TR 225 años",
+		value: "limited-safety",
 	},
-] as const;
+	{
+		label: "Umbral de daño · TR 31 años",
+		value: "damage-threshold",
+	},
+] as const satisfies ReadonlyArray<{ label: string; value: HazardLevel }>;
 
 const soilProfiles = ["A", "B", "C", "D", "E", "F"] as const;
 const importanceGroups = ["I", "II", "III", "IV"] as const;
@@ -115,9 +118,9 @@ const soilDescriptions: Record<SoilProfile, string> = {
 
 const importanceDescriptions: Record<ImportanceGroup, string> = {
 	I: "Ocupación normal",
-	II: "Atención a la comunidad",
-	III: "Edificación indispensable",
-	IV: "Edificación esencial",
+	II: "Ocupación especial",
+	III: "Atención a la comunidad",
+	IV: "Edificación indispensable",
 };
 
 const importanceValues: Record<ImportanceGroup, string> = {
@@ -132,6 +135,10 @@ const branchLabels: Record<SpectrumBranch, string> = {
 	"plateau-A.2.6-3": "Meseta · A.2.6-3",
 	"inverse-T-A.2.6-1": "1/T · A.2.6-1",
 	"inverse-T2-A.2.6-5": "1/T² · A.2.6-5",
+	"rising-A.12.3-2": "Ascendente · A.12.3-2",
+	"plateau-A.12.3-4": "Meseta · A.12.3-4",
+	"inverse-T-A.12.3-1": "1/T · A.12.3-1",
+	"inverse-T2-A.12.3-6": "1/T² · A.12.3-6",
 };
 
 const chartConfig = {
@@ -234,9 +241,9 @@ function SingleToggleGroup<T extends string>({
 				const nextValue = values[0] as T | undefined;
 				if (nextValue) onValueChange(nextValue);
 			}}
-			size="sm"
+			size="default"
 			value={[value]}
-			variant="outline"
+			variant="contrast"
 		>
 			{options.map((option) => (
 				<ToggleGroupItem className="min-w-8 flex-1" key={option} value={option}>
@@ -251,21 +258,45 @@ function ParameterRail({
 	municipio,
 	soilProfile,
 	importanceGroup,
+	hazardLevel,
 	onTraceabilityOpen,
 	onMunicipioChange,
 	onSoilProfileChange,
 	onImportanceGroupChange,
+	onHazardLevelChange,
 }: {
 	municipio: Municipio;
 	soilProfile: SoilProfile;
 	importanceGroup: ImportanceGroup;
+	hazardLevel: HazardLevel;
 	onTraceabilityOpen: () => void;
 	onMunicipioChange: (municipio: Municipio) => void;
 	onSoilProfileChange: (profile: SoilProfile) => void;
 	onImportanceGroupChange: (group: ImportanceGroup) => void;
+	onHazardLevelChange: (level: HazardLevel) => void;
 }) {
+	const hazardDetails = hazardLevelDetails[hazardLevel];
+	const municipalityCoefficients =
+		hazardLevel === "design"
+			? `Aa ${municipio.aa.toFixed(2)} · Av ${municipio.av.toFixed(2)}`
+			: hazardLevel === "limited-safety"
+				? `Ae ${municipio.ae.toFixed(2)}`
+				: `Ad ${municipio.ad.toFixed(2)}`;
+	const importanceDescription =
+		hazardLevel === "damage-threshold"
+			? `${importanceGroup} — ${importanceDescriptions[importanceGroup]} · I no modifica A.12.3`
+			: `${importanceGroup} — ${importanceDescriptions[importanceGroup]} · I = ${importanceValues[importanceGroup]}`;
+	const hazardNotice =
+		hazardLevel === "limited-safety"
+			? "Uso restringido a las edificaciones existentes permitidas por A.10.9."
+			: hazardLevel === "damage-threshold"
+				? importanceGroup === "III" || importanceGroup === "IV"
+					? "Verificación especial de operatividad para las edificaciones cubiertas por A.12."
+					: "A.12 aplica a las edificaciones cubiertas de los grupos III y IV; revisa el grupo de uso."
+				: "Movimientos sísmicos de diseño para edificaciones nuevas y existentes.";
+
 	return (
-		<Card className="self-start shadow-none dark:ring-0" size="sm">
+		<Card className="self-start" size="sm">
 			<CardHeader>
 				<CardTitle>Parámetros del sitio</CardTitle>
 				<CardDescription>
@@ -304,11 +335,11 @@ function ParameterRail({
 							value={municipio}
 						/>
 						<FieldDescription>
-							Aa {municipio.aa.toFixed(2)} · Av {municipio.av.toFixed(2)} · Apéndice A-4
+							{municipalityCoefficients} · Apéndice A-4
 						</FieldDescription>
 						<Button
 							onClick={onTraceabilityOpen}
-							size="sm"
+							size="lg"
 							type="button"
 							variant="outline"
 						>
@@ -339,14 +370,19 @@ function ParameterRail({
 							value={importanceGroup}
 						/>
 						<FieldDescription>
-							{importanceGroup} — {importanceDescriptions[importanceGroup]} · I ={" "}
-							{importanceValues[importanceGroup]}
+							{importanceDescription}
 						</FieldDescription>
 					</FieldSet>
 
 					<Field>
 						<FieldTitle>Nivel de amenaza</FieldTitle>
-						<Select defaultValue="475" items={hazardLevels}>
+						<Select
+							items={hazardLevels}
+							onValueChange={(value) => {
+								if (value) onHazardLevelChange(value as HazardLevel);
+							}}
+							value={hazardLevel}
+						>
 							<SelectTrigger className="w-full" aria-label="Nivel de amenaza">
 								<SelectValue />
 							</SelectTrigger>
@@ -354,11 +390,7 @@ function ParameterRail({
 								<SelectGroup>
 									<SelectLabel>Periodo de retorno</SelectLabel>
 									{hazardLevels.map((level) => (
-										<SelectItem
-											disabled={level.disabled}
-											key={level.value}
-											value={level.value}
-										>
+										<SelectItem key={level.value} value={level.value}>
 											{level.label}
 										</SelectItem>
 									))}
@@ -371,7 +403,8 @@ function ParameterRail({
 			<CardFooter className="flex-col items-stretch gap-3">
 				<Separator />
 				<p className="text-muted-foreground text-xs">
-					Cálculo elástico NSR-10 con amortiguamiento crítico del 5 %.
+					{hazardDetails.section} · amortiguamiento crítico del{" "}
+					{hazardDetails.dampingRatio * 100} %. {hazardNotice}
 				</p>
 			</CardFooter>
 		</Card>
@@ -386,30 +419,38 @@ function SpectrumChart({
 	municipio: Municipio;
 }) {
 	const { coefficients } = spectrum;
-	const plotEnd = Math.max(4, coefficients.tl);
+	const details = hazardLevelDetails[spectrum.hazardLevel];
+	const plotEnd = spectrum.points.at(-1)?.t ?? Math.max(4, coefficients.tl);
+	const transitionLabels =
+		spectrum.hazardLevel === "damage-threshold"
+			? { tc: "TCd", tl: "TLd" }
+			: { tc: "TC", tl: "TL" };
+	const description =
+		spectrum.hazardLevel === "damage-threshold"
+			? "A.12.3: rama ascendente hasta 0,25 s, meseta y ramas 1/T y 1/T²."
+			: spectrum.hazardLevel === "limited-safety"
+				? "A.10.3: forma A.2.6 calculada con Ae en reemplazo de Aa y Av."
+				: "A.2.6 general: meseta desde T = 0 hasta TC, seguida por ramas 1/T y 1/T².";
 
 	return (
-		<Card className="shadow-none dark:ring-0">
+		<Card variant="elevated">
 			<CardHeader>
 				<div className="flex flex-wrap items-start justify-between gap-3">
-					<div className="flex flex-col gap-1.5">
-						<CardTitle>Espectro elástico de diseño (Sa vs. T)</CardTitle>
-						<CardDescription>
-							NSR-10 general: meseta desde T = 0 hasta TC, seguida por ramas 1/T y
-							1/T².
-						</CardDescription>
+					<div className="flex min-w-0 flex-col gap-1.5">
+						<div className="flex flex-wrap items-center gap-2">
+							<CardTitle>Espectro elástico · {details.label} (Sa vs. T)</CardTitle>
+							<Badge variant="secondary">
+								Sa máx {formatDecimal(coefficients.saMax, 3)} g
+							</Badge>
+						</div>
+						<CardDescription>{description}</CardDescription>
 					</div>
-					<div className="flex flex-col items-start gap-2 sm:items-end">
-						<Badge variant="secondary">
-							Sa máx {formatDecimal(coefficients.saMax, 3)} g
-						</Badge>
-						<ExportActions municipio={municipio} spectrum={spectrum} />
-					</div>
+					<ExportActions municipio={municipio} spectrum={spectrum} />
 				</div>
 			</CardHeader>
 			<CardContent>
 				<ChartContainer
-					aria-label="Espectro elástico de diseño NSR-10 calculado"
+					aria-label={`Espectro elástico de ${details.label.toLocaleLowerCase("es-CO")} NSR-10 calculado`}
 					className="h-80 w-full md:h-96"
 					config={chartConfig}
 					initialDimension={{ width: 960, height: 384 }}
@@ -439,6 +480,7 @@ function SpectrumChart({
 							dataKey="t"
 							domain={[0, plotEnd]}
 							label={{ value: "Periodo T (s)", position: "insideBottom", offset: -16 }}
+							tickFormatter={(value) => formatDecimal(Number(value), 2)}
 							tickLine={false}
 							tickMargin={8}
 							type="number"
@@ -452,13 +494,13 @@ function SpectrumChart({
 							tickMargin={8}
 						/>
 						<ReferenceLine
-							label={{ value: "TC", position: "insideTopRight" }}
+							label={{ value: transitionLabels.tc, position: "insideTopRight" }}
 							stroke="var(--muted-foreground)"
 							strokeDasharray="3 3"
 							x={coefficients.tc}
 						/>
 						<ReferenceLine
-							label={{ value: "TL", position: "insideTopRight" }}
+							label={{ value: transitionLabels.tl, position: "insideTopRight" }}
 							stroke="var(--muted-foreground)"
 							strokeDasharray="3 3"
 							x={coefficients.tl}
@@ -489,7 +531,8 @@ function SpectrumChart({
 			</CardContent>
 			<CardFooter>
 				<p className="text-muted-foreground text-xs">
-					Aceleraciones expresadas como fracción de g; periodos en segundos.
+					TR {spectrum.returnPeriodYears} años · amortiguamiento crítico del{" "}
+					{spectrum.dampingRatio * 100} % · aceleraciones como fracción de g.
 				</p>
 			</CardFooter>
 		</Card>
@@ -498,18 +541,47 @@ function SpectrumChart({
 
 function ParameterTiles({ spectrum }: { spectrum: SpectrumOk }) {
 	const { coefficients } = spectrum;
-	const parameters = [
-		{ label: "Aa", value: formatDecimal(coefficients.aa, 2) },
-		{ label: "Av", value: formatDecimal(coefficients.av, 2) },
-		{ label: "Fa", value: formatDecimal(coefficients.fa, 2) },
-		{ label: "Fv", value: formatDecimal(coefficients.fv, 2) },
-		{ label: "I", value: formatDecimal(coefficients.i, 2) },
-		{ label: "T₀", value: `${formatDecimal(coefficients.t0, 3)} s` },
-		{ label: "TC", value: `${formatDecimal(coefficients.tc, 3)} s` },
-		{ label: "TL", value: `${formatDecimal(coefficients.tl, 2)} s` },
+	const commonParameters = [
+		{
+			label: coefficients.hazardLevel === "damage-threshold" ? "TCd" : "TC",
+			value: `${formatDecimal(coefficients.tc, 3)} s`,
+		},
+		{
+			label: coefficients.hazardLevel === "damage-threshold" ? "TLd" : "TL",
+			value: `${formatDecimal(coefficients.tl, 2)} s`,
+		},
 		{ label: "Sa máx", value: `${formatDecimal(coefficients.saMax, 3)} g` },
-		{ label: "PGA", value: `${formatDecimal(coefficients.pga, 3)} g` },
-	] as const;
+		{
+			label: coefficients.hazardLevel === "damage-threshold" ? "Sad(0)" : "PGA",
+			value: `${formatDecimal(coefficients.pga, 3)} g`,
+		},
+	];
+	const parameters =
+		coefficients.hazardLevel === "design"
+			? [
+					{ label: "Aa", value: formatDecimal(coefficients.aa, 2) },
+					{ label: "Av", value: formatDecimal(coefficients.av, 2) },
+					{ label: "Fa", value: formatDecimal(coefficients.fa, 2) },
+					{ label: "Fv", value: formatDecimal(coefficients.fv, 2) },
+					{ label: "I", value: formatDecimal(coefficients.i, 2) },
+					{ label: "T₀", value: `${formatDecimal(coefficients.t0, 3)} s` },
+					...commonParameters,
+				]
+			: coefficients.hazardLevel === "limited-safety"
+				? [
+						{ label: "Ae", value: formatDecimal(coefficients.ae, 2) },
+						{ label: "Fa", value: formatDecimal(coefficients.fa, 2) },
+						{ label: "Fv", value: formatDecimal(coefficients.fv, 2) },
+						{ label: "I", value: formatDecimal(coefficients.i, 2) },
+						{ label: "T₀", value: `${formatDecimal(coefficients.t0, 3)} s` },
+						...commonParameters,
+					]
+				: [
+						{ label: "Ad", value: formatDecimal(coefficients.ad, 2) },
+						{ label: "Fv", value: formatDecimal(coefficients.fv, 2) },
+						{ label: "S", value: formatDecimal(coefficients.s, 2) },
+						...commonParameters,
+					];
 
 	return (
 		<section aria-labelledby="derived-parameters" className="flex flex-col gap-3">
@@ -521,7 +593,7 @@ function ParameterTiles({ spectrum }: { spectrum: SpectrumOk }) {
 			</div>
 			<div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
 				{parameters.map((parameter) => (
-					<Card className="shadow-none dark:ring-0" key={parameter.label} size="sm">
+					<Card key={parameter.label} size="sm" variant="metric">
 						<CardHeader>
 							<CardTitle className="font-normal text-muted-foreground text-xs">
 								{parameter.label}
@@ -540,12 +612,16 @@ function ParameterTiles({ spectrum }: { spectrum: SpectrumOk }) {
 }
 
 function SpectrumTable({ spectrum }: { spectrum: SpectrumOk }) {
+	const transitionNames =
+		spectrum.hazardLevel === "damage-threshold" ? "TCd y TLd" : "TC y TL";
+
 	return (
-		<Card className="shadow-none dark:ring-0">
+		<Card>
 			<CardHeader>
 				<CardTitle>Datos del espectro</CardTitle>
 				<CardDescription>
-					{spectrum.points.length} puntos calculados; TC y TL se incluyen exactamente.
+					{spectrum.points.length} puntos calculados; {transitionNames} se incluyen
+					exactamente.
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
@@ -580,13 +656,16 @@ function SpectrumTable({ spectrum }: { spectrum: SpectrumOk }) {
 	);
 }
 
-function SiteSpecificStudyNotice() {
+function SiteSpecificStudyNotice({ hazardLevel }: { hazardLevel: HazardLevel }) {
+	const coefficientNames =
+		hazardLevel === "damage-threshold" ? "Fv" : "Fa y Fv";
+
 	return (
-		<Card className="shadow-none dark:ring-0">
+		<Card>
 			<CardHeader>
 				<CardTitle>Perfil F: análisis específico requerido</CardTitle>
 				<CardDescription>
-					La NSR-10 no define coeficientes tabulados Fa y Fv para este perfil.
+					La NSR-10 no define {coefficientNames} tabulados para este perfil.
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
@@ -623,7 +702,7 @@ function downloadCsv(spectrum: SpectrumOk, municipio: Municipio) {
 	const slug = normalizeSearchText(municipio.municipio).replace(/\s+/g, "-");
 
 	anchor.href = url;
-	anchor.download = `espectr0-${slug}.csv`;
+	anchor.download = `espectr0-${slug}-${spectrum.hazardLevel}.csv`;
 	anchor.click();
 	URL.revokeObjectURL(url);
 }
@@ -649,7 +728,7 @@ function ExportActions({
 	return (
 		<div aria-label="Exportar resultados" className="flex flex-wrap items-center gap-2">
 			<Button
-				className="h-10 transition-transform active:scale-[0.96]"
+				className="h-10"
 				disabled={!spectrum}
 				onClick={copyJson}
 				type="button"
@@ -663,16 +742,12 @@ function ExportActions({
 				onClick={() => {
 					if (spectrum) downloadCsv(spectrum, municipio);
 				}}
-				className="h-10 transition-transform active:scale-[0.96]"
+				className="h-10"
 				type="button"
 				variant="outline"
 			>
 				<DownloadIcon data-icon="inline-start" />
 				CSV (T, Sa)
-			</Button>
-			<Button disabled className="h-10" type="button" variant="outline">
-				<FileTextIcon data-icon="inline-start" />
-				PDF · próximamente
 			</Button>
 		</div>
 	);
@@ -682,6 +757,7 @@ export function CalculatorPage() {
 	const [municipio, setMunicipio] = useState<Municipio>(defaultMunicipio);
 	const [soilProfile, setSoilProfile] = useState<SoilProfile>("D");
 	const [importanceGroup, setImportanceGroup] = useState<ImportanceGroup>("I");
+	const [hazardLevel, setHazardLevel] = useState<HazardLevel>("design");
 	const [traceabilityOpen, setTraceabilityOpen] = useState(false);
 
 	const result = useMemo(
@@ -689,11 +765,22 @@ export function CalculatorPage() {
 			computeSpectrum({
 				aa: municipio.aa,
 				av: municipio.av,
+				ae: municipio.ae,
+				ad: municipio.ad,
+				hazardLevel,
 				soilProfile,
 				importanceGroup,
 				mode: "general",
 			}),
-		[importanceGroup, municipio.aa, municipio.av, soilProfile],
+		[
+			hazardLevel,
+			importanceGroup,
+			municipio.aa,
+			municipio.ad,
+			municipio.ae,
+			municipio.av,
+			soilProfile,
+		],
 	);
 
 	const spectrum = result.status === "ok" ? result : null;
@@ -711,9 +798,11 @@ export function CalculatorPage() {
 
 			<div className="grid items-start gap-4 xl:grid-cols-[18rem_minmax(0,1fr)]">
 				<ParameterRail
+					hazardLevel={hazardLevel}
 					importanceGroup={importanceGroup}
 					municipio={municipio}
 					onImportanceGroupChange={setImportanceGroup}
+					onHazardLevelChange={setHazardLevel}
 					onMunicipioChange={setMunicipio}
 					onSoilProfileChange={setSoilProfile}
 					onTraceabilityOpen={() => setTraceabilityOpen(true)}
@@ -727,7 +816,7 @@ export function CalculatorPage() {
 							<SpectrumTable spectrum={spectrum} />
 						</>
 					) : (
-						<SiteSpecificStudyNotice />
+						<SiteSpecificStudyNotice hazardLevel={hazardLevel} />
 					)}
 				</div>
 			</div>

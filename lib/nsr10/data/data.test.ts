@@ -45,6 +45,22 @@ describe("NSR-10 checked-in datasets", () => {
     }
   })
 
+  it("keeps Ae and Ad in their published ranges and on 0.01 increments", () => {
+    const municipios = municipiosSchema.parse(municipiosData)
+
+    for (const { ae, ad } of municipios) {
+      expect(ae).toBeGreaterThanOrEqual(0.02)
+      expect(ae).toBeLessThanOrEqual(0.36)
+      expect(ad).toBeGreaterThanOrEqual(0.02)
+      expect(ad).toBeLessThanOrEqual(0.14)
+      for (const coefficient of [ae, ad]) {
+        expect(Math.abs(coefficient * 100 - Math.round(coefficient * 100))).toBeLessThan(
+          1e-12,
+        )
+      }
+    }
+  })
+
   it("has ascending breakpoints and one Fa/Fv value per breakpoint", () => {
     const tables = siteCoefficientsSchema.parse(siteCoefficientsData)
 

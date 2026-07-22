@@ -49,6 +49,18 @@ describe("NSR-10 municipality traceability", () => {
 					topOffset: 0.0003787878,
 					height: 0.0133838385,
 				},
+				ae: {
+					left: 0.7427622549,
+					width: 0.0328303922,
+					topOffset: 0.0003787878,
+					height: 0.0133838385,
+				},
+				ad: {
+					left: 0.8109357843,
+					width: 0.0341406863,
+					topOffset: 0.0003787878,
+					height: 0.0133838385,
+				},
 			},
 		});
 	});
@@ -94,9 +106,13 @@ describe("NSR-10 municipality traceability", () => {
 			municipio: "Cali",
 			aa: 0.25,
 			av: 0.25,
+			ae: 0.15,
+			ad: 0.09,
 		});
 		expect(traceability?.values.aa.value).toBe(traceability?.municipality.aa);
 		expect(traceability?.values.av.value).toBe(traceability?.municipality.av);
+		expect(traceability?.values.ae.value).toBe(traceability?.municipality.ae);
+		expect(traceability?.values.ad.value).toBe(traceability?.municipality.ad);
 	});
 
 	it("documents only the earned duplicated Bogotá source row", () => {

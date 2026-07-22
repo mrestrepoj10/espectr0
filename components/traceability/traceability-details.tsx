@@ -78,6 +78,8 @@ function SourceValues({
 						<TableHead>Código DANE</TableHead>
 						<TableHead className="text-right">Aa</TableHead>
 						<TableHead className="text-right">Av</TableHead>
+						<TableHead className="text-right">Ae</TableHead>
+						<TableHead className="text-right">Ad</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
@@ -91,6 +93,12 @@ function SourceValues({
 						</TableCell>
 						<TableCell className="text-right font-mono tabular-nums">
 							<HighlightedValue value={values.av.value} />
+						</TableCell>
+						<TableCell className="text-right font-mono tabular-nums">
+							<HighlightedValue value={values.ae.value} />
+						</TableCell>
+						<TableCell className="text-right font-mono tabular-nums">
+							<HighlightedValue value={values.ad.value} />
 						</TableCell>
 					</TableRow>
 				</TableBody>
@@ -109,9 +117,9 @@ function CalculationUse() {
 				</h2>
 			</div>
 			<p className="text-muted-foreground text-sm">
-				Aa y Av entran al motor como valores directos. Fa, Fv, T₀, TC, TL y las
-				ordenadas Sa son resultados derivados según las ecuaciones y tablas del
-				Título A.
+				Aa y Av alimentan el espectro de diseño, Ae el de seguridad limitada y Ad
+				el del umbral de daño. Los factores de sitio, periodos de control y
+				ordenadas Sa se derivan según el nivel seleccionado.
 			</p>
 		</section>
 	);
@@ -168,15 +176,16 @@ function EvidenceDocument({
 						aria-hidden="true"
 						className="size-3 rounded-[3px] bg-yellow-300/70 ring-1 ring-inset ring-yellow-600/50"
 					/>
-					Valores Aa y Av usados
+					Valores Aa, Av, Ae y Ad
 				</span>
 			</div>
 
 			<p className="text-muted-foreground text-xs">
 				Extracto accesible: {municipality.municipio}, {municipality.departamento},
-				código DANE {municipality.code}: Aa {values.aa.value.toFixed(2)} y Av{" "}
-				{values.av.value.toFixed(2)}, resaltados en la página impresa {printedPage}
-				de {source.appendix}.
+				código DANE {municipality.code}: Aa {values.aa.value.toFixed(2)}, Av{" "}
+				{values.av.value.toFixed(2)}, Ae {values.ae.value.toFixed(2)} y Ad{" "}
+				{values.ad.value.toFixed(2)}, resaltados en la página impresa {printedPage} de{" "}
+				{source.appendix}.
 			</p>
 		</section>
 	);

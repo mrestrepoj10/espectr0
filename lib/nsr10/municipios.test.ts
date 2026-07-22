@@ -29,6 +29,8 @@ describe("NSR-10 municipality helpers", () => {
       municipio: "Medellín",
       aa: 0.15,
       av: 0.2,
+      ae: 0.13,
+      ad: 0.07,
     })
   })
 

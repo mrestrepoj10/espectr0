@@ -4,23 +4,66 @@ import { fa, fv } from "./site-coefficients"
 
 import type { ImportanceGroup, SoilProfile, SupportedSoilProfile } from "./schema"
 
+export type HazardLevel = "design" | "limited-safety" | "damage-threshold"
 export type SpectrumMode = "general" | "modal"
+
+export const hazardLevelDetails = {
+  design: {
+    label: "Diseño",
+    returnPeriodYears: 475,
+    dampingRatio: 0.05,
+    section: "A.2.6",
+  },
+  "limited-safety": {
+    label: "Seguridad limitada",
+    returnPeriodYears: 225,
+    dampingRatio: 0.05,
+    section: "A.10.3",
+  },
+  "damage-threshold": {
+    label: "Umbral de daño",
+    returnPeriodYears: 31,
+    dampingRatio: 0.02,
+    section: "A.12.3",
+  },
+} as const satisfies Record<
+  HazardLevel,
+  {
+    label: string
+    returnPeriodYears: number
+    dampingRatio: number
+    section: string
+  }
+>
 
 export type SpectrumParams = {
   /** Effective peak acceleration Aa, expressed as a fraction of g. */
   aa: number
   /** One-second effective peak acceleration Av, expressed as a fraction of g. */
   av: number
+  /** Reduced effective peak acceleration Ae for limited safety. */
+  ae?: number
+  /** Effective peak acceleration Ad for the damage threshold. */
+  ad?: number
+  hazardLevel?: HazardLevel
   soilProfile: SoilProfile
   importanceGroup: ImportanceGroup
   mode?: SpectrumMode
 }
 
-export type SpectrumBranch =
+export type DesignSpectrumBranch =
   | "rising-A.2.6-7"
   | "plateau-A.2.6-3"
   | "inverse-T-A.2.6-1"
   | "inverse-T2-A.2.6-5"
+
+export type DamageThresholdSpectrumBranch =
+  | "rising-A.12.3-2"
+  | "plateau-A.12.3-4"
+  | "inverse-T-A.12.3-1"
+  | "inverse-T2-A.12.3-6"
+
+export type SpectrumBranch = DesignSpectrumBranch | DamageThresholdSpectrumBranch
 
 export type SpectrumPoint = {
   /** Period in seconds. */
@@ -30,9 +73,7 @@ export type SpectrumPoint = {
   branch: SpectrumBranch
 }
 
-export type SpectrumCoefficients = {
-  aa: number
-  av: number
+type DesignLikeSpectrumCoefficients = {
   fa: number
   fv: number
   i: number
@@ -44,19 +85,51 @@ export type SpectrumCoefficients = {
   tl: number
   /** Maximum spectral acceleration as a fraction of g. */
   saMax: number
-  /** Peak ground acceleration Aa·Fa·I, as a fraction of g. */
+  /** Peak ground acceleration, as a fraction of g. */
   pga: number
 }
+
+export type DesignSpectrumCoefficients = DesignLikeSpectrumCoefficients & {
+  hazardLevel: "design"
+  aa: number
+  av: number
+}
+
+export type LimitedSafetySpectrumCoefficients = DesignLikeSpectrumCoefficients & {
+  hazardLevel: "limited-safety"
+  ae: number
+}
+
+export type DamageThresholdSpectrumCoefficients = {
+  hazardLevel: "damage-threshold"
+  ad: number
+  fv: number
+  /** Site coefficient S = 1.25 Fv, per A.12.3.1. */
+  s: number
+  tc: number
+  tl: number
+  saMax: number
+  pga: number
+}
+
+export type SpectrumCoefficients =
+  | DesignSpectrumCoefficients
+  | LimitedSafetySpectrumCoefficients
+  | DamageThresholdSpectrumCoefficients
 
 export type SiteSpecificStudyRequired = {
   status: "site-specific-study-required"
   section: "A.2.10"
   notice: string
   soilProfile: "F"
+  hazardLevel: HazardLevel
 }
 
 export type SpectrumOk = {
   status: "ok"
+  hazardLevel: HazardLevel
+  returnPeriodYears: number
+  dampingRatio: number
   mode: SpectrumMode
   coefficients: SpectrumCoefficients
   points: SpectrumPoint[]
@@ -78,42 +151,54 @@ export type SpectralAccelerationResult =
   | SpectralAccelerationOk
   | SiteSpecificStudyRequired
 
-const GENERAL_BRANCHES = [
+const GENERAL_DESIGN_BRANCHES = [
   "plateau-A.2.6-3",
   "inverse-T-A.2.6-1",
   "inverse-T2-A.2.6-5",
 ] as const
 
-const MODAL_BRANCHES = ["rising-A.2.6-7", ...GENERAL_BRANCHES] as const
+const MODAL_DESIGN_BRANCHES = ["rising-A.2.6-7", ...GENERAL_DESIGN_BRANCHES] as const
 
-function siteSpecificStudyRequired(): SiteSpecificStudyRequired {
+const DAMAGE_THRESHOLD_BRANCHES = [
+  "rising-A.12.3-2",
+  "plateau-A.12.3-4",
+  "inverse-T-A.12.3-1",
+  "inverse-T2-A.12.3-6",
+] as const
+
+function siteSpecificStudyRequired(hazardLevel: HazardLevel): SiteSpecificStudyRequired {
   return {
     status: "site-specific-study-required",
     section: "A.2.10",
     notice: siteCoefficientsData.profile_f.notice,
     soilProfile: "F",
+    hazardLevel,
   }
 }
 
-function assertHazardCoefficient(value: number, name: "Aa" | "Av") {
-  if (!Number.isFinite(value) || value <= 0) {
+function assertHazardCoefficient(
+  value: number | undefined,
+  name: "Aa" | "Av" | "Ae" | "Ad",
+): asserts value is number {
+  if (!Number.isFinite(value) || value === undefined || value <= 0) {
     throw new RangeError(`${name} must be a finite number greater than zero`)
   }
 }
 
-function coefficientsFor(params: SpectrumParams): SpectrumCoefficients | SiteSpecificStudyRequired {
-  if (params.soilProfile === "F") return siteSpecificStudyRequired()
-
+function designCoefficients(
+  params: SpectrumParams,
+  profile: SupportedSoilProfile,
+): DesignSpectrumCoefficients {
   assertHazardCoefficient(params.aa, "Aa")
   assertHazardCoefficient(params.av, "Av")
 
-  const profile: SupportedSoilProfile = params.soilProfile
   const faValue = fa(params.aa, profile)
   const fvValue = fv(params.av, profile)
   const importance = importanceCoefficientsData.groups[params.importanceGroup]
   const denominator = params.aa * faValue
 
   return {
+    hazardLevel: "design",
     aa: params.aa,
     av: params.av,
     fa: faValue,
@@ -127,16 +212,81 @@ function coefficientsFor(params: SpectrumParams): SpectrumCoefficients | SiteSpe
   }
 }
 
-function accelerationAt(
-  t: number,
-  coefficients: SpectrumCoefficients,
-  mode: SpectrumMode,
-): SpectralAccelerationOk {
-  const { av, fv: fvValue, i, t0, tc, tl, saMax } = coefficients
-  const isAtOrBelow = (value: number, boundary: number) =>
+function limitedSafetyCoefficients(
+  params: SpectrumParams,
+  profile: SupportedSoilProfile,
+): LimitedSafetySpectrumCoefficients {
+  assertHazardCoefficient(params.ae, "Ae")
+
+  const faValue = fa(params.ae, profile)
+  const fvValue = fv(params.ae, profile)
+  const importance = importanceCoefficientsData.groups[params.importanceGroup]
+
+  return {
+    hazardLevel: "limited-safety",
+    ae: params.ae,
+    fa: faValue,
+    fv: fvValue,
+    i: importance,
+    t0: (0.1 * fvValue) / faValue,
+    tc: (0.48 * fvValue) / faValue,
+    tl: 2.4 * fvValue,
+    saMax: 2.5 * params.ae * faValue * importance,
+    pga: params.ae * faValue * importance,
+  }
+}
+
+function damageThresholdCoefficients(
+  params: SpectrumParams,
+  profile: SupportedSoilProfile,
+): DamageThresholdSpectrumCoefficients {
+  assertHazardCoefficient(params.ad, "Ad")
+
+  const fvValue = fv(params.ad, profile)
+  const siteCoefficient = 1.25 * fvValue
+
+  return {
+    hazardLevel: "damage-threshold",
+    ad: params.ad,
+    fv: fvValue,
+    s: siteCoefficient,
+    tc: 0.5 * siteCoefficient,
+    tl: 2.4 * siteCoefficient,
+    saMax: 3 * params.ad,
+    pga: params.ad,
+  }
+}
+
+function coefficientsFor(params: SpectrumParams): SpectrumCoefficients | SiteSpecificStudyRequired {
+  const hazardLevel = params.hazardLevel ?? "design"
+  if (params.soilProfile === "F") return siteSpecificStudyRequired(hazardLevel)
+
+  const profile: SupportedSoilProfile = params.soilProfile
+  if (hazardLevel === "limited-safety") {
+    return limitedSafetyCoefficients(params, profile)
+  }
+  if (hazardLevel === "damage-threshold") {
+    return damageThresholdCoefficients(params, profile)
+  }
+  return designCoefficients(params, profile)
+}
+
+function isAtOrBelow(value: number, boundary: number) {
+  return (
     value <= boundary ||
     Math.abs(value - boundary) <=
       Number.EPSILON * 8 * Math.max(1, Math.abs(value), Math.abs(boundary))
+  )
+}
+
+function designAccelerationAt(
+  t: number,
+  coefficients: DesignSpectrumCoefficients | LimitedSafetySpectrumCoefficients,
+  mode: SpectrumMode,
+): SpectralAccelerationOk {
+  const { fv: fvValue, i, t0, tc, tl, saMax } = coefficients
+  const longPeriodCoefficient =
+    coefficients.hazardLevel === "design" ? coefficients.av : coefficients.ae
 
   if (mode === "modal" && !isAtOrBelow(t0, t)) {
     return {
@@ -155,7 +305,7 @@ function accelerationAt(
     return {
       status: "ok",
       t,
-      sa: (1.2 * av * fvValue * i) / t,
+      sa: (1.2 * longPeriodCoefficient * fvValue * i) / t,
       branch: "inverse-T-A.2.6-1",
     }
   }
@@ -163,17 +313,58 @@ function accelerationAt(
   return {
     status: "ok",
     t,
-    sa: (1.2 * av * fvValue * tl * i) / t ** 2,
+    sa: (1.2 * longPeriodCoefficient * fvValue * tl * i) / t ** 2,
     branch: "inverse-T2-A.2.6-5",
   }
 }
 
-/**
- * Evaluates the NSR-10 elastic design spectrum at period `t` seconds.
- * Returned acceleration is a fraction of g. General mode (the default) uses
- * the A.2.6-3 plateau from zero through TC. Modal mode opts into conditional
- * equation A.2.6-7 below T0 for dynamic analysis/higher modes.
- */
+function damageThresholdAccelerationAt(
+  t: number,
+  coefficients: DamageThresholdSpectrumCoefficients,
+): SpectralAccelerationOk {
+  const { ad, s, tc, tl, saMax } = coefficients
+
+  if (!isAtOrBelow(0.25, t)) {
+    return {
+      status: "ok",
+      t,
+      sa: ad * (1 + 8 * t),
+      branch: "rising-A.12.3-2",
+    }
+  }
+
+  if (isAtOrBelow(t, tc)) {
+    return { status: "ok", t, sa: saMax, branch: "plateau-A.12.3-4" }
+  }
+
+  if (isAtOrBelow(t, tl)) {
+    return {
+      status: "ok",
+      t,
+      sa: (1.5 * ad * s) / t,
+      branch: "inverse-T-A.12.3-1",
+    }
+  }
+
+  return {
+    status: "ok",
+    t,
+    sa: (1.5 * ad * s * tl) / t ** 2,
+    branch: "inverse-T2-A.12.3-6",
+  }
+}
+
+function accelerationAt(
+  t: number,
+  coefficients: SpectrumCoefficients,
+  mode: SpectrumMode,
+): SpectralAccelerationOk {
+  return coefficients.hazardLevel === "damage-threshold"
+    ? damageThresholdAccelerationAt(t, coefficients)
+    : designAccelerationAt(t, coefficients, mode)
+}
+
+/** Evaluates the selected NSR-10 elastic spectrum at period `t` seconds. */
 export function saAt(t: number, params: SpectrumParams): SpectralAccelerationResult {
   if (!Number.isFinite(t) || t < 0) {
     throw new RangeError("T must be a finite period greater than or equal to zero")
@@ -186,7 +377,7 @@ export function saAt(t: number, params: SpectrumParams): SpectralAccelerationRes
 }
 
 function sampledPeriods(coefficients: SpectrumCoefficients, mode: SpectrumMode) {
-  const plotEnd = 4
+  const plotEnd = Math.ceil(Math.max(4, coefficients.tl * 1.25) * 2) / 2
   const sampleCount = Math.ceil(plotEnd / 0.025)
   const periods = new Set<number>()
 
@@ -196,30 +387,42 @@ function sampledPeriods(coefficients: SpectrumCoefficients, mode: SpectrumMode) 
 
   periods.add(coefficients.tc)
   periods.add(coefficients.tl)
-  if (mode === "modal") periods.add(coefficients.t0)
+  if (coefficients.hazardLevel === "damage-threshold") periods.add(0.25)
+  else if (mode === "modal") periods.add(coefficients.t0)
 
   return [...periods].sort((left, right) => left - right)
 }
 
 /**
- * Computes an NSR-10 elastic design spectrum. Periods are seconds and every
+ * Computes the selected NSR-10 elastic spectrum. Periods are seconds and every
  * acceleration value is expressed as a fraction of gravitational acceleration g.
  */
 export function computeSpectrum(params: SpectrumParams): SpectrumResult {
   const coefficients = coefficientsFor(params)
   if ("status" in coefficients) return coefficients
 
+  const hazardLevel = coefficients.hazardLevel
+  const details = hazardLevelDetails[hazardLevel]
   const mode = params.mode ?? "general"
   const points = sampledPeriods(coefficients, mode).map((t) => {
     const point = accelerationAt(t, coefficients, mode)
     return { t: point.t, sa: point.sa, branch: point.branch }
   })
+  const branches =
+    hazardLevel === "damage-threshold"
+      ? DAMAGE_THRESHOLD_BRANCHES
+      : mode === "modal"
+        ? MODAL_DESIGN_BRANCHES
+        : GENERAL_DESIGN_BRANCHES
 
   return {
     status: "ok",
+    hazardLevel,
+    returnPeriodYears: details.returnPeriodYears,
+    dampingRatio: details.dampingRatio,
     mode,
     coefficients,
     points,
-    branches: mode === "modal" ? MODAL_BRANCHES : GENERAL_BRANCHES,
+    branches,
   }
 }

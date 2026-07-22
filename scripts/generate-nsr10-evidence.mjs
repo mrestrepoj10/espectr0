@@ -138,6 +138,8 @@ async function extractSourceRows(pdfBytes) {
         rowGlyph,
         aa: coefficientAtBaseline(items, baseline, 280, 330, "Aa"),
         av: coefficientAtBaseline(items, baseline, 330, 380, "Av"),
+        ae: coefficientAtBaseline(items, baseline, 440, 490, "Ae"),
+        ad: coefficientAtBaseline(items, baseline, 490, 530, "Ad"),
       });
     }
   }
@@ -227,6 +229,26 @@ function assertExactCodeCoverage(canonicalByCode, sourceByCode) {
   );
 }
 
+function buildCanonicalMunicipalities(municipalities, sourceByCode) {
+  return municipalities.map((municipality) => {
+    const sourceRow = sourceByCode.get(municipality.code);
+    invariant(sourceRow, `Missing source row for DANE ${municipality.code}`);
+    invariant(
+      municipality.aa === sourceRow.aa.value &&
+        municipality.av === sourceRow.av.value,
+      `Coefficient mismatch for ${municipality.code}: data=${municipality.aa}/${municipality.av}, source=${sourceRow.aa.value}/${sourceRow.av.value}`,
+    );
+
+    return {
+      ...municipality,
+      aa: sourceRow.aa.value,
+      av: sourceRow.av.value,
+      ae: sourceRow.ae.value,
+      ad: sourceRow.ad.value,
+    };
+  });
+}
+
 function deriveValueLayout(rawRows, key) {
   const horizontalPadding =
     VALUE_HORIZONTAL_PADDING_POINTS / PDF_PAGE_WIDTH;
@@ -269,6 +291,8 @@ function deriveAppendixLayout(rawRows) {
     values: {
       aa: deriveValueLayout(rawRows, "aa"),
       av: deriveValueLayout(rawRows, "av"),
+      ae: deriveValueLayout(rawRows, "ae"),
+      ad: deriveValueLayout(rawRows, "ad"),
     },
   };
 }
@@ -279,8 +303,10 @@ function buildCompactCitations(municipalities, sourceByCode, appendixLayout) {
     invariant(sourceRow, `Missing source row for DANE ${municipality.code}`);
     invariant(
       municipality.aa === sourceRow.aa.value &&
-        municipality.av === sourceRow.av.value,
-      `Coefficient mismatch for ${municipality.code}: data=${municipality.aa}/${municipality.av}, source=${sourceRow.aa.value}/${sourceRow.av.value}`,
+        municipality.av === sourceRow.av.value &&
+        municipality.ae === sourceRow.ae.value &&
+        municipality.ad === sourceRow.ad.value,
+      `Coefficient mismatch for ${municipality.code}: data=${municipality.aa}/${municipality.av}/${municipality.ae}/${municipality.ad}, source=${sourceRow.aa.value}/${sourceRow.av.value}/${sourceRow.ae.value}/${sourceRow.ad.value}`,
     );
     invariant(
       sourceRow.rowTop >= 0 &&
@@ -325,7 +351,7 @@ function assertLayoutIntegrity(appendixLayout, rawRows) {
       `Derived row layout does not contain all glyphs for ${row.code} on page ${row.pageNumber}`,
     );
 
-    for (const key of ["aa", "av"]) {
+    for (const key of ["aa", "av", "ae", "ad"]) {
       const valueLayout = appendixLayout.values[key];
       const valueRect = {
         left: valueLayout.left,
@@ -381,7 +407,11 @@ async function main() {
   const appendixLayout = deriveAppendixLayout(rawRows);
   assertLayoutIntegrity(appendixLayout, rawRows);
   const sourceByCode = selectCanonicalSourceRows(rawRows, overrides);
-  const canonicalByCode = indexCanonicalMunicipalities(municipalities);
+  const canonicalMunicipalities = buildCanonicalMunicipalities(
+    municipalities,
+    sourceByCode,
+  );
+  const canonicalByCode = indexCanonicalMunicipalities(canonicalMunicipalities);
   invariant(
     sourceByCode.size === EXPECTED_MUNICIPALITY_COUNT &&
       canonicalByCode.size === EXPECTED_MUNICIPALITY_COUNT,
@@ -389,13 +419,13 @@ async function main() {
   );
   assertExactCodeCoverage(canonicalByCode, sourceByCode);
   const citations = buildCompactCitations(
-    municipalities,
+    canonicalMunicipalities,
     sourceByCode,
     appendixLayout,
   );
 
   const manifestOutput = JSON.stringify({
-    schemaVersion: 2,
+    schemaVersion: 3,
     source: {
       document: "NSR-10 Título A, versión consolidada 2017",
       appendix: "Apéndice A-4",
@@ -408,6 +438,8 @@ async function main() {
     citations,
   });
 
+  const municipalitiesOutput = `${JSON.stringify(canonicalMunicipalities, null, 2)}\n`;
+  await verifyOrWrite(municipalitiesFile, municipalitiesOutput);
   await verifyOrWrite(manifestFile, manifestOutput);
   if (reportJson) {
     console.log(

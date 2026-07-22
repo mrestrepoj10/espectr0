@@ -6,7 +6,7 @@ export {
   searchMunicipios,
 } from "./municipios"
 export { fa, fv } from "./site-coefficients"
-export { computeSpectrum, saAt } from "./spectrum"
+export { computeSpectrum, hazardLevelDetails, saAt } from "./spectrum"
 
 export type {
   ImportanceGroup,
@@ -15,6 +15,12 @@ export type {
   SupportedSoilProfile,
 } from "./schema"
 export type {
+  DamageThresholdSpectrumBranch,
+  DamageThresholdSpectrumCoefficients,
+  DesignSpectrumBranch,
+  DesignSpectrumCoefficients,
+  HazardLevel,
+  LimitedSafetySpectrumCoefficients,
   SiteSpecificStudyRequired,
   SpectralAccelerationOk,
   SpectralAccelerationResult,
