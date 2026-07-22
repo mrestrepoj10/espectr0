@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "description": "Independent NSR-10 design-spectrum oracle inputs, transcribed separately from the production TypeScript engine.",
+  "generator": {
+    "path": "scripts/generate-nsr10-oracle.py",
+    "sha256": "07084f1cd7687cb4223f2d549bd05f76446792c09977b6dbf9ec2464916f6820"
+  },
+  "source": {
+    "document": "NSR-10 Título A, versión consolidada 2017",
+    "pdf_path": "public/nsr10-titulo-a-2017.pdf",
+    "pdf_sha256": "47207abe1e832f5feb5fb8448af884b8d539fddaf89b6b21ab466765dd8524b0",
+    "pdf_page_count": 206,
+    "site_coefficients": "Tablas A.2.4-3 y A.2.4-4",
+    "importance_coefficients": "Tabla A.2.5-1",
+    "spectrum_equations": ["A.2.6-1", "A.2.6-3", "A.2.6-4", "A.2.6-5", "A.2.6-6"]
+  },
+  "fixed_periods": ["0", "0.1", "0.5", "1", "2", "5", "10"],
+  "site_coefficients": {
+    "interpolation": "linear within a soil-profile row; clamp at the end columns",
+    "fa": {
+      "breakpoints": ["0.1", "0.2", "0.3", "0.4", "0.5"],
+      "profiles": {
+        "A": ["0.8", "0.8", "0.8", "0.8", "0.8"],
+        "B": ["1.0", "1.0", "1.0", "1.0", "1.0"],
+        "C": ["1.2", "1.2", "1.1", "1.0", "1.0"],
+        "D": ["1.6", "1.4", "1.2", "1.1", "1.0"],
+        "E": ["2.5", "1.7", "1.2", "0.9", "0.9"]
+      }
+    },
+    "fv": {
+      "breakpoints": ["0.1", "0.2", "0.3", "0.4", "0.5"],
+      "profiles": {
+        "A": ["0.8", "0.8", "0.8", "0.8", "0.8"],
+        "B": ["1.0", "1.0", "1.0", "1.0", "1.0"],
+        "C": ["1.7", "1.6", "1.5", "1.4", "1.3"],
+        "D": ["2.4", "2.0", "1.8", "1.6", "1.5"],
+        "E": ["3.5", "3.2", "2.8", "2.4", "2.4"]
+      }
+    }
+  },
+  "importance_coefficients": {
+    "I": "1.0",
+    "II": "1.1",
+    "III": "1.25",
+    "IV": "1.5"
+  },
+  "cases": [
+    { "id": "leticia-e-i", "sampling_band": "low-coefficient", "municipio": "Leticia", "departamento": "Amazonas", "aa": "0.05", "av": "0.05", "soil_profile": "E", "importance_group": "I" },
+    { "id": "puerto-carreno-a-ii", "sampling_band": "low-coefficient", "municipio": "Puerto Carreño", "departamento": "Vichada", "aa": "0.05", "av": "0.05", "soil_profile": "A", "importance_group": "II" },
+    { "id": "san-andres-b-iii", "sampling_band": "low-coefficient", "municipio": "San Andrés", "departamento": "Archipiélago de San Andrés", "aa": "0.1", "av": "0.1", "soil_profile": "B", "importance_group": "III" },
+    { "id": "bogota-c-iv", "sampling_band": "intermediate-coefficient", "municipio": "Bogotá D. C.", "departamento": "Distrito Capital", "aa": "0.15", "av": "0.2", "soil_profile": "C", "importance_group": "IV" },
+    { "id": "medellin-d-i", "sampling_band": "intermediate-coefficient", "municipio": "Medellín", "departamento": "Antioquia", "aa": "0.15", "av": "0.2", "soil_profile": "D", "importance_group": "I" },
+    { "id": "bucaramanga-b-ii", "sampling_band": "intermediate-coefficient", "municipio": "Bucaramanga", "departamento": "Santander", "aa": "0.25", "av": "0.25", "soil_profile": "B", "importance_group": "II" },
+    { "id": "popayan-e-iii", "sampling_band": "intermediate-coefficient", "municipio": "Popayán", "departamento": "Cauca", "aa": "0.25", "av": "0.2", "soil_profile": "E", "importance_group": "III" },
+    { "id": "pitalito-a-iv", "sampling_band": "intermediate-coefficient", "municipio": "Pitalito", "departamento": "Huila", "aa": "0.3", "av": "0.15", "soil_profile": "A", "importance_group": "IV" },
+    { "id": "quibdo-c-i", "sampling_band": "high-coefficient", "municipio": "Quibdó", "departamento": "Chocó", "aa": "0.35", "av": "0.35", "soil_profile": "C", "importance_group": "I" },
+    { "id": "cucuta-d-ii", "sampling_band": "high-coefficient", "municipio": "Cúcuta", "departamento": "Norte de Santander", "aa": "0.35", "av": "0.3", "soil_profile": "D", "importance_group": "II" },
+    { "id": "tumaco-e-iii", "sampling_band": "high-coefficient", "municipio": "Tumaco", "departamento": "Nariño", "aa": "0.45", "av": "0.4", "soil_profile": "E", "importance_group": "III" },
+    { "id": "la-tola-b-iv", "sampling_band": "high-coefficient", "municipio": "La Tola", "departamento": "Nariño", "aa": "0.5", "av": "0.4", "soil_profile": "B", "importance_group": "IV" }
+  ]
+}

@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -9,6 +10,9 @@ const EXPECTED_MUNICIPALITY_COUNT = 1_123;
 const EXPECTED_RAW_ROW_COUNT = 1_124;
 const EXPECTED_PDF_SHA256 =
   "47207abe1e832f5feb5fb8448af884b8d539fddaf89b6b21ab466765dd8524b0";
+const EXPECTED_PDF_PAGE_COUNT = 206;
+const EXPECTED_AA_AV_PROJECTION_SHA256 =
+  "34a9b7e54703037884eb44baf36c4626891b50f80ea9a50bce6b2e95fc331f14";
 const APPENDIX_FIRST_PAGE = 171;
 const APPENDIX_LAST_PAGE = 192;
 const PDF_PAGE_WIDTH = 612;
@@ -108,11 +112,92 @@ const manifestFile = resolve(
   "lib/nsr10/evidence/manifest.json",
 );
 const overridesFile = resolve(scriptDirectory, "nsr10-evidence-overrides.json");
+const oracleFile = resolve(repositoryRoot, "lib/nsr10/data/oracle.json");
+const oracleInputFile = resolve(
+  repositoryRoot,
+  "lib/nsr10/data/oracle-input.json",
+);
 const checkOnly = process.argv.includes("--check");
 const reportJson = process.argv.includes("--report-json");
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
+}
+
+function sha256(bytes) {
+  return createHash("sha256").update(bytes).digest("hex");
+}
+
+function runOracleGenerator() {
+  const candidates =
+    process.platform === "win32"
+      ? [["py", "-3"], ["python"], ["python3"]]
+      : [["python3"], ["python"]];
+  let lastError;
+
+  for (const [command, ...prefix] of candidates) {
+    try {
+      execFileSync(
+        command,
+        [
+          ...prefix,
+          resolve(scriptDirectory, "generate-nsr10-oracle.py"),
+          ...(checkOnly ? ["--check"] : []),
+        ],
+        { cwd: repositoryRoot, stdio: "pipe" },
+      );
+      return;
+    } catch (error) {
+      if (error?.code !== "ENOENT") throw error;
+      lastError = error;
+    }
+  }
+
+  throw lastError ?? new Error("Python 3 is required for the NSR-10 oracle");
+}
+
+function assertOracleCaseInputs(municipalities, oracleInput) {
+  const byLocation = new Map(
+    municipalities.map((municipality) => [
+      `${municipality.departamento}\u0000${municipality.municipio}`,
+      municipality,
+    ]),
+  );
+  for (const oracleCase of oracleInput.cases) {
+    const municipality = byLocation.get(
+      `${oracleCase.departamento}\u0000${oracleCase.municipio}`,
+    );
+    invariant(municipality, `Unknown oracle location ${oracleCase.id}`);
+    invariant(
+      municipality.aa === Number(oracleCase.aa) &&
+        municipality.av === Number(oracleCase.av),
+      `Oracle Aa/Av input changed for ${oracleCase.id}`,
+    );
+  }
+}
+
+async function assertOracleSourceLocks(oracle) {
+  const sourceHashes = {};
+  for (const [id, source] of Object.entries(oracle.sources)) {
+    const bytes = await readFile(resolve(repositoryRoot, source.path));
+    const actual = sha256(bytes);
+    invariant(
+      actual === source.sha256,
+      `Oracle source ${id} changed: expected ${source.sha256}, found ${actual}`,
+    );
+    sourceHashes[id] = actual;
+  }
+  return sourceHashes;
+}
+
+async function assertOracleProgramLock(oracleInput) {
+  const program = oracleInput.generator;
+  const actual = sha256(await readFile(resolve(repositoryRoot, program.path)));
+  invariant(
+    actual === program.sha256,
+    `Oracle program changed: expected ${program.sha256}, found ${actual}`,
+  );
+  return actual;
 }
 
 function glyphBounds(item) {
@@ -234,6 +319,10 @@ async function extractSourceRows(pdfBytes) {
     disableWorker: true,
     verbosity: 0,
   }).promise;
+  invariant(
+    pdf.numPages === EXPECTED_PDF_PAGE_COUNT,
+    `Expected ${EXPECTED_PDF_PAGE_COUNT} PDF pages, found ${pdf.numPages}`,
+  );
   const rows = [];
 
   for (
@@ -525,12 +614,21 @@ async function verifyOrWrite(file, expectedContents) {
 }
 
 async function main() {
-  const [pdfBytes, municipalitiesText, overridesText] = await Promise.all([
+  runOracleGenerator();
+  const [
+    pdfBytes,
+    municipalitiesText,
+    overridesText,
+    oracleText,
+    oracleInputText,
+  ] = await Promise.all([
     readFile(pdfFile),
     readFile(municipalitiesFile, "utf8"),
     readFile(overridesFile, "utf8"),
+    readFile(oracleFile, "utf8"),
+    readFile(oracleInputFile, "utf8"),
   ]);
-  const pdfSha256 = createHash("sha256").update(pdfBytes).digest("hex");
+  const pdfSha256 = sha256(pdfBytes);
   invariant(
     pdfSha256 === EXPECTED_PDF_SHA256,
     `PDF SHA-256 changed: expected ${EXPECTED_PDF_SHA256}, found ${pdfSha256}`,
@@ -538,11 +636,30 @@ async function main() {
 
   const municipalities = JSON.parse(municipalitiesText);
   const overrides = JSON.parse(overridesText);
+  const oracle = JSON.parse(oracleText);
+  const oracleInput = JSON.parse(oracleInputText);
   invariant(overrides.schemaVersion === 1, "Unsupported evidence override schema");
   invariant(
     municipalities.length === EXPECTED_MUNICIPALITY_COUNT,
     `Expected ${EXPECTED_MUNICIPALITY_COUNT} canonical municipalities`,
   );
+  const aaAvProjectionSha256 = sha256(
+    JSON.stringify(
+      municipalities.map(({ departamento, municipio, aa, av }) => ({
+        departamento,
+        municipio,
+        aa,
+        av,
+      })),
+    ),
+  );
+  invariant(
+    aaAvProjectionSha256 === EXPECTED_AA_AV_PROJECTION_SHA256,
+    "The 1,123-row Aa/Av projection no longer matches the historical oracle input",
+  );
+  assertOracleCaseInputs(municipalities, oracleInput);
+  const oracleSourceHashes = await assertOracleSourceLocks(oracle);
+  oracleSourceHashes.oracle_program = await assertOracleProgramLock(oracleInput);
 
   const [rawRows, normativeCitations] = await Promise.all([
     extractSourceRows(pdfBytes),
@@ -598,8 +715,15 @@ async function main() {
         duplicateCodes: overrides.sourceDuplicates.map(({ code }) => code).sort(),
         geometryRowsValidated: rawRows.length,
         normativeCitations: normativeCitations.length,
-        manifestBytes: Buffer.byteLength(manifestOutput),
-        pdfSha256,
+        sourceHashes: { pdf: pdfSha256, ...oracleSourceHashes },
+        sourcePageCounts: { pdf: EXPECTED_PDF_PAGE_COUNT },
+        historicalAaAvProjectionSha256: aaAvProjectionSha256,
+        oracleCases: oracle.cases.length,
+        artifactSizes: {
+          manifest: Buffer.byteLength(manifestOutput),
+          municipalities: Buffer.byteLength(municipalitiesOutput),
+          oracle: Buffer.byteLength(oracleText),
+        },
       }),
     );
   } else {

@@ -4,6 +4,7 @@ import {
 	copyTextToClipboard,
 	formatEtabsTxt,
 	serializeChartSvg,
+	svgToPngBlob,
 } from "./chart-export";
 
 class FakeStyle {
@@ -127,5 +128,62 @@ describe("chart export formatting", () => {
 		expect(serialized).toContain("stroke:rgb(10, 20, 30)");
 		expect(serialized).toContain("stroke-width:2.5px");
 		expect(serialized).toContain('font-family:"Geist"');
+	});
+
+	it("rasterizes a representative SVG to a PNG blob at the requested scale", async () => {
+		const revokeObjectURL = vi.fn();
+		vi.stubGlobal("URL", {
+			createObjectURL: vi.fn(() => "blob:chart"),
+			revokeObjectURL,
+		});
+		vi.stubGlobal(
+			"DOMParser",
+			class {
+				parseFromString() {
+					return {
+						documentElement: {
+							getAttribute: (name: string) =>
+								name === "width" ? "320" : name === "height" ? "160" : null,
+						},
+					};
+				}
+			},
+		);
+		vi.stubGlobal(
+			"Image",
+			class {
+				decoding = "";
+				src = "";
+				decode = vi.fn().mockResolvedValue(undefined);
+			},
+		);
+
+		const context = {
+			scale: vi.fn(),
+			fillRect: vi.fn(),
+			drawImage: vi.fn(),
+			clearRect: vi.fn(),
+			getImageData: () => ({ data: [255, 255, 255, 255] }),
+			fillStyle: "",
+		};
+		const canvas = {
+			width: 0,
+			height: 0,
+			getContext: () => context,
+			toBlob: (callback: (blob: Blob) => void) =>
+				callback(new Blob(["png-golden"], { type: "image/png" })),
+		};
+		vi.stubGlobal("document", { createElement: () => canvas });
+
+		const blob = await svgToPngBlob(
+			'<svg width="320" height="160"><path d="M0 0" /></svg>',
+			2,
+		);
+
+		expect(blob).toMatchObject({ type: "image/png", size: 10 });
+		expect(canvas).toMatchObject({ width: 640, height: 320 });
+		expect(context.scale).toHaveBeenCalledWith(2, 2);
+		expect(context.drawImage).toHaveBeenCalledWith(expect.anything(), 0, 0, 320, 160);
+		expect(revokeObjectURL).toHaveBeenCalledWith("blob:chart");
 	});
 });

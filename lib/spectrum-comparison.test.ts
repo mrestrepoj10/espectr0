@@ -59,6 +59,11 @@ describe("spectrum comparison helpers", () => {
 
 		expect(csv.split("\n")[0]).toContain("Cali, Valle del Cauca · Suelo C");
 		expect(csv).not.toContain("Suelo F");
+		expect(csv.split("\n").slice(0, 3)).toEqual([
+			expect.stringContaining("Cali, Valle del Cauca · Suelo C"),
+			"0,0.71875",
+			"0.025,0.71875",
+		]);
 		expect(JSON.parse(JSON.stringify(json))).toMatchObject({
 			schemaVersion: 1,
 			scenarios: [
