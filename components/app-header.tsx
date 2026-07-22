@@ -34,7 +34,7 @@ export function AppHeader() {
         <a
           aria-label="Abrir repositorio de espectr0 en GitHub"
           className={buttonVariants({
-            className: "size-10 transition-transform active:scale-[0.96]",
+            className: "size-10",
             size: "icon-lg",
             variant: "ghost",
           })}
