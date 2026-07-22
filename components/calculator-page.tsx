@@ -464,10 +464,14 @@ function TraceabilitySheet({
 										<TableCell className="font-medium">{municipio.municipio}</TableCell>
 										<TableCell className="font-mono">76001</TableCell>
 										<TableCell className="text-right font-mono tabular-nums">
-											{municipio.aa.toFixed(2)}
+											<span className="inline-flex rounded-md bg-yellow-300/45 px-1.5 py-0.5 text-yellow-950 ring-1 ring-inset ring-yellow-600/40 dark:bg-yellow-300/80">
+												{municipio.aa.toFixed(2)}
+											</span>
 										</TableCell>
 										<TableCell className="text-right font-mono tabular-nums">
-											{municipio.av.toFixed(2)}
+											<span className="inline-flex rounded-md bg-yellow-300/45 px-1.5 py-0.5 text-yellow-950 ring-1 ring-inset ring-yellow-600/40 dark:bg-yellow-300/80">
+												{municipio.av.toFixed(2)}
+											</span>
 										</TableCell>
 									</TableRow>
 								</TableBody>
@@ -515,9 +519,17 @@ function TraceabilitySheet({
 
 							{open && <CaliSourcePdf />}
 
+							<div className="flex items-center gap-2 text-muted-foreground text-xs">
+								<span
+									aria-hidden="true"
+									className="size-3 rounded-[3px] bg-yellow-300/70 ring-1 ring-inset ring-yellow-600/50"
+								/>
+								<span>Resaltado amarillo: valores usados en este cálculo.</span>
+							</div>
+
 							<p className="text-muted-foreground text-xs">
-								Extracto accesible: “Cali · código 76001 · Aa 0.25 · Av 0.25 · zona de
-								amenaza sísmica alta”.
+								Extracto accesible: Cali, código 76001: Aa 0.25 y Av 0.25, resaltados
+								en la página A-177 del Apéndice A-4; zona de amenaza sísmica alta.
 							</p>
 						</section>
 					</div>
