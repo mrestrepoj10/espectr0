@@ -89,6 +89,19 @@ describe("valid generic runtime", () => {
 		expect(deterministicJson(report)).toBe(deterministicJson(report));
 	});
 
+	it("accepts a field cell or its row ancestry as exact row support", async () => {
+		await expect(checkEvidenceStudy(fixture(), { repositoryRoot })).resolves.toMatchObject({
+			studyId: "framework-fixture",
+		});
+
+		const rowAncestry = fixture();
+		rowAncestry.rawRows[0].citationIds = ["fixture-row"];
+		rowAncestry.canonicalRows[0].citationIds = ["fixture-row"];
+		await expect(checkEvidenceStudy(rowAncestry, { repositoryRoot })).resolves.toMatchObject({
+			studyId: "framework-fixture",
+		});
+	});
+
 	it("accepts a duplicate only when canonicalization uses its reviewed selection", async () => {
 		const study = fixture();
 		addDuplicate(study);
@@ -375,6 +388,34 @@ describe("exact rows and values", () => {
 		canonicalMismatch.canonicalRows[0].sourceDocumentId = "fixture-external";
 		await expect(checkEvidenceStudy(canonicalMismatch, { repositoryRoot })).rejects.toThrow(
 			/Canonical row fixture-canonical citation fixture-cell-base has source ancestry outside fixture-external/,
+		);
+	});
+
+	it("rejects applicability evidence substituted for raw or canonical field-row support", async () => {
+		const exactReproduction = fixture();
+		for (const row of [
+			...exactReproduction.rawRows,
+			...exactReproduction.canonicalRows,
+		]) {
+			row.sourceDocumentId = "fixture-external";
+			row.citationIds = ["fixture-applicability"];
+		}
+		await expect(checkEvidenceStudy(exactReproduction, { repositoryRoot })).rejects.toThrow(
+			/Raw row fixture-raw citation fixture-applicability is not row\/cell evidence for its direct\/interpolated fields/,
+		);
+
+		const rawApplicability = fixture();
+		rawApplicability.rawRows[0].sourceDocumentId = "fixture-external";
+		rawApplicability.rawRows[0].citationIds = ["fixture-applicability"];
+		await expect(checkEvidenceStudy(rawApplicability, { repositoryRoot })).rejects.toThrow(
+			/Raw row fixture-raw citation fixture-applicability is not row\/cell evidence for its direct\/interpolated fields/,
+		);
+
+		const canonicalApplicability = fixture();
+		canonicalApplicability.canonicalRows[0].sourceDocumentId = "fixture-external";
+		canonicalApplicability.canonicalRows[0].citationIds = ["fixture-applicability"];
+		await expect(checkEvidenceStudy(canonicalApplicability, { repositoryRoot })).rejects.toThrow(
+			/Canonical row fixture-canonical citation fixture-applicability is not row\/cell evidence for its direct\/interpolated fields/,
 		);
 	});
 
