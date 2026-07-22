@@ -21,13 +21,15 @@ describe("NSR-10 checked-in datasets", () => {
     expect(() => oracleSchema.parse(oracleData)).not.toThrow()
   })
 
-  it("contains exactly 1,123 unique departamento and municipio pairs", () => {
+  it("contains exactly 1,123 unique DANE codes and location pairs", () => {
     const municipios = municipiosSchema.parse(municipiosData)
+    const codes = new Set(municipios.map(({ code }) => code))
     const pairs = new Set(
       municipios.map(({ departamento, municipio }) => `${departamento}\u0000${municipio}`),
     )
 
     expect(municipios).toHaveLength(1_123)
+    expect(codes.size).toBe(1_123)
     expect(pairs.size).toBe(1_123)
   })
 

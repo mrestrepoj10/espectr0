@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "sourceDuplicates": [
+    {
+      "code": "11001",
+      "reason": "Appendix A-4 prints Bogotá D. C. once inside the Cundinamarca block and again in its own Distrito Capital block. The Distrito Capital row is the canonical citation.",
+      "occurrencePageNumbers": [181, 183],
+      "chosenPageNumber": 183
+    }
+  ]
+}
