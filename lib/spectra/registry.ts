@@ -1,3 +1,9 @@
+import {
+  assertEngineResultIdentity,
+  spectrumEngineMetadataSchema,
+} from "./engine"
+import { spectrumScenarioSchema } from "./types"
+
 import type { SpectrumEngine } from "./engine"
 import type { SpectrumScenario } from "./types"
 
@@ -6,10 +12,11 @@ export class SpectrumEngineRegistry {
   readonly #engines = new Map<string, SpectrumEngine>()
 
   register(engine: SpectrumEngine): void {
-    if (this.#engines.has(engine.metadata.id)) {
-      throw new Error(`Spectrum engine already registered: ${engine.metadata.id}`)
+    const metadata = spectrumEngineMetadataSchema.parse(engine.metadata)
+    if (this.#engines.has(metadata.id)) {
+      throw new Error(`Spectrum engine already registered: ${metadata.id}`)
     }
-    this.#engines.set(engine.metadata.id, engine)
+    this.#engines.set(metadata.id, engine)
   }
 
   get(engineId: string): SpectrumEngine | undefined {
@@ -17,7 +24,21 @@ export class SpectrumEngineRegistry {
   }
 
   findForScenario(scenario: SpectrumScenario): SpectrumEngine | undefined {
-    return [...this.#engines.values()].find((engine) => engine.accepts(scenario))
+    const parsed = spectrumScenarioSchema.parse(scenario)
+    return [...this.#engines.values()].find((engine) => engine.accepts(parsed))
+  }
+
+  compute(engineId: string, scenario: SpectrumScenario) {
+    const engine = this.#engines.get(engineId)
+    if (!engine) throw new Error(`Unknown spectrum engine: ${engineId}`)
+    const parsed = spectrumScenarioSchema.parse(scenario)
+    const scenarioType = parsed.type
+    if (!engine.accepts(parsed)) {
+      throw new Error(`Engine ${engineId} does not accept ${scenarioType} scenarios`)
+    }
+    const result = engine.compute(parsed)
+    assertEngineResultIdentity(engine.metadata, result)
+    return result
   }
 
   list(): readonly SpectrumEngine[] {

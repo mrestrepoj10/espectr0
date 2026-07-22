@@ -4,18 +4,48 @@ import {
   SPECTRUM_CAPABILITIES_SCHEMA_VERSION,
   SPECTRUM_CONTRACT_SCHEMA_VERSION,
   SPECTRUM_EXPORT_SCHEMA_VERSION,
+  adaptNsr10Spectrum,
   ccp14ScenarioSchema,
   createSpectrumExport,
   municipalStudyScenarioSchema,
+  normalizedSpectrumOrdinateSchema,
   normalizedSpectrumResultDataSchema,
   nsr10Capabilities,
   spectrumCapabilitiesSchema,
   spectrumCapabilityKeys,
+  spectrumResultData,
   spectrumScenarioSchema,
 } from "."
 
+import type { NormalizedSpectrumResultData } from "."
+
+type SuccessfulData = Extract<NormalizedSpectrumResultData, { status: "ok" }>
+
+function successfulData(): SuccessfulData {
+  const result = adaptNsr10Spectrum({
+    aa: 0.25,
+    av: 0.25,
+    ae: 0.15,
+    ad: 0.09,
+    soilProfile: "D",
+    importanceGroup: "II",
+  })
+  if (result.status !== "ok") throw new Error("Expected successful test fixture")
+  const data = spectrumResultData(result)
+  if (data.status !== "ok") throw new Error("Expected successful data fixture")
+  return structuredClone(data) as SuccessfulData
+}
+
+function expectContradiction(
+  mutate: (data: ReturnType<typeof successfulData>) => void,
+) {
+  const data = successfulData()
+  mutate(data)
+  expect(normalizedSpectrumResultDataSchema.safeParse(data).success).toBe(false)
+}
+
 describe("engine-neutral spectrum contract", () => {
-  it("runtime-validates every discriminated scenario family", () => {
+  it("runtime-validates every discriminated scenario family and reserved identity", () => {
     const scenarios = [
       {
         type: "nsr10-national",
@@ -42,6 +72,12 @@ describe("engine-neutral spectrum contract", () => {
     }
     expect(ccp14ScenarioSchema.safeParse(scenarios[2]).success).toBe(false)
     expect(municipalStudyScenarioSchema.safeParse(scenarios[1]).success).toBe(false)
+    expect(
+      municipalStudyScenarioSchema.safeParse({
+        ...scenarios[2],
+        studyId: "nsr10-national",
+      }).success,
+    ).toBe(false)
   })
 
   it("requires an explicit decision for every declared capability", () => {
@@ -63,43 +99,130 @@ describe("engine-neutral spectrum contract", () => {
     expect(spectrumCapabilitiesSchema.safeParse(incomplete).success).toBe(false)
   })
 
-  it("enforces matching status and applicability states", () => {
-    const minimal = {
-      schemaVersion: SPECTRUM_CONTRACT_SCHEMA_VERSION,
-      status: "ok",
-      engine: { id: "test", version: "1" },
-      study: { id: "test", version: "1" },
-      scenarioType: "municipal-study",
-      normalizedInputs: {},
-      points: [],
-      metrics: [],
-      formulaIds: [],
-      branches: [],
-      hazard: {
-        id: "test",
-        label: "Test",
-        returnPeriodYears: 475,
-        dampingRatio: 0.05,
-      },
-      warnings: [],
-      applicability: {
-        status: "unsupported",
-        reasonCode: "test",
-        message: "Not supported",
+  it("models all typed non-success result and ordinate outcomes", () => {
+    const siteSpecific = adaptNsr10Spectrum({
+      aa: 0.25,
+      av: 0.25,
+      soilProfile: "F",
+      importanceGroup: "I",
+    })
+    if (siteSpecific.status !== "site-specific-study-required") {
+      throw new Error("Expected site-specific fixture")
+    }
+    const base = spectrumResultData(siteSpecific)
+
+    for (const status of [
+      "invalid-input",
+      "unsupported",
+      "not-applicable",
+      "site-specific-study-required",
+    ] as const) {
+      const applicability = {
+        status,
+        reasonCode: `${status}-reason`,
+        message: `${status} message`,
         citationIds: [],
-      },
-      sourceIds: ["test-source"],
-      citationIds: ["test-citation"],
-      traceSchemaVersion: 1,
-      trace: null,
-      capabilities: nsr10Capabilities,
+      }
+      expect(
+        normalizedSpectrumResultDataSchema.safeParse({
+          ...base,
+          status,
+          applicability,
+        }).success,
+      ).toBe(true)
+      expect(
+        normalizedSpectrumOrdinateSchema.safeParse({ status, applicability }).success,
+      ).toBe(true)
     }
 
-    expect(normalizedSpectrumResultDataSchema.safeParse(minimal).success).toBe(false)
+    expect(
+      normalizedSpectrumOrdinateSchema.safeParse({
+        status: "unavailable",
+        applicability: { status: "applicable" },
+      }).success,
+    ).toBe(false)
   })
 
-  it("emits a versioned JSON-safe projection without the evaluator function", async () => {
-    const { adaptNsr10Spectrum } = await import(".")
+  it("rejects empty success and scenario/study identity contradictions", () => {
+    expectContradiction((data) => {
+      data.points = []
+    })
+    expectContradiction((data) => {
+      data.branches = []
+    })
+    expectContradiction((data) => {
+      data.formulaIds = []
+    })
+    expectContradiction((data) => {
+      data.scenarioType = "ccp14"
+    })
+    expectContradiction((data) => {
+      data.scenarioType = "municipal-study"
+    })
+    expectContradiction((data) => {
+      data.scenarioType = "ccp14"
+      data.study = { id: "ccp14", version: "2014" }
+    })
+  })
+
+  it("rejects trace version and shape contradictions", () => {
+    expectContradiction((data) => {
+      data.traceSchemaVersion = 999
+    })
+    expectContradiction((data) => {
+      data.trace.schemaVersion = 999
+    })
+    expectContradiction((data) => {
+      data.trace.data.schemaVersion = 999
+    })
+
+    const result = adaptNsr10Spectrum({
+      aa: 0.25,
+      av: 0.25,
+      soilProfile: "D",
+      importanceGroup: "II",
+    })
+    if (result.status !== "ok") throw new Error("Expected successful fixture")
+    const invalidTrace = structuredClone(spectrumResultData(result))
+    if (!invalidTrace.trace) throw new Error("Expected trace fixture")
+    Reflect.deleteProperty(invalidTrace.trace.data, "context")
+    const altered = { ...result, trace: invalidTrace.trace }
+    expect(() => createSpectrumExport(altered)).toThrow()
+  })
+
+  it("rejects impossible point, branch, formula, dependency, and citation lineage", () => {
+    expectContradiction((data) => {
+      data.points[0].branchId = "missing-branch"
+    })
+    expectContradiction((data) => {
+      data.branches[0].id = "missing-trace-branch"
+    })
+    expectContradiction((data) => {
+      data.points[0].formulaId = "missing-formula"
+    })
+    expectContradiction((data) => {
+      data.branches[0].formulaId = "missing-formula"
+    })
+    expectContradiction((data) => {
+      data.formulaIds[0] = "missing-formula"
+    })
+    expectContradiction((data) => {
+      data.metrics.find(({ formulaId }) => formulaId !== null)!.dependencyIds = [
+        "missing-dependency",
+      ]
+    })
+    expectContradiction((data) => {
+      data.points[0].citationIds = ["undeclared-citation"]
+    })
+    expectContradiction((data) => {
+      data.sourceIds.push(data.sourceIds[0])
+    })
+    expectContradiction((data) => {
+      data.formulaIds.push(data.formulaIds[0])
+    })
+  })
+
+  it("emits a versioned JSON-safe projection without the evaluator function", () => {
     const result = adaptNsr10Spectrum({
       aa: 0.25,
       av: 0.25,

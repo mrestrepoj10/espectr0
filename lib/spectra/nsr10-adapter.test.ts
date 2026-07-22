@@ -7,9 +7,15 @@ import {
 } from "../nsr10"
 import {
   SpectrumEngineRegistry,
+  NSR10_SOURCE_ID,
   adaptNsr10Spectrum,
   createNsr10AdapterScenario,
   nsr10SpectrumEngine,
+  parseNsr10TraceEnvelope,
+  resolveNsr10CitationId,
+  resolveNsr10DependencyId,
+  resolveNsr10FormulaId,
+  resolveNsr10SourceId,
 } from "."
 
 import type {
@@ -82,6 +88,13 @@ function expectTrace(
   if ("status" in result) throw new Error("Expected parent calculation trace")
 }
 
+function expectAdapterOk(
+  result: ReturnType<typeof adaptNsr10Spectrum>,
+): asserts result is Extract<ReturnType<typeof adaptNsr10Spectrum>, { status: "ok" }> {
+  expect(result.status).toBe("ok")
+  if (result.status !== "ok") throw new Error("Expected adapted spectrum")
+}
+
 function traceModes(trace: CalculationTrace) {
   return [trace.siteCoefficients.fa?.mode, trace.siteCoefficients.fv.mode].filter(
     (mode): mode is "exact" | "fraction" | "clamped" => mode !== undefined,
@@ -98,13 +111,13 @@ describe("NSR-10 adapter numerical equivalence", () => {
       const adapted = adaptNsr10Spectrum(testCase.params)
 
       expect(traceModes(parentTrace)).toContain(testCase.interpolationMode)
-      expect(adapted.status).toBe("ok")
+      expectAdapterOk(adapted)
       expect(adapted.points.map(({ tSeconds, saG, branchId }) => ({
         t: tSeconds,
         sa: saG,
         branch: branchId,
       }))).toEqual(parent.points)
-      expect(adapted.trace).toEqual(parentTrace)
+      expect(adapted.trace.data).toEqual(parentTrace)
       expect(adapted.hazard).toMatchObject({
         id: parent.hazardLevel,
         returnPeriodYears: parent.returnPeriodYears,
@@ -168,14 +181,13 @@ describe("NSR-10 adapter numerical equivalence", () => {
       expect(parent.status).toBe("site-specific-study-required")
       expect(adapted).toMatchObject({
         status: "site-specific-study-required",
-        points: [],
         applicability: { status: "site-specific-study-required" },
         hazard: { id: hazardLevel },
       })
       const parentOrdinate = saAt(1, params)
       const adaptedOrdinate = adapted.saAt(1)
       expect(adaptedOrdinate).toMatchObject({
-        status: "unavailable",
+        status: "site-specific-study-required",
         applicability: { status: "site-specific-study-required" },
       })
       expect((parent as SiteSpecificStudyRequired).notice).toBe(
@@ -223,6 +235,90 @@ describe("NSR-10 adapter numerical equivalence", () => {
       expect((adaptedError as Error).message).toBe((parentError as Error).message)
     }
   })
+
+  it("snapshots successful parent inputs before closing over saAt", () => {
+    const mutable: SpectrumParams = { ...base }
+    const adapted = adaptNsr10Spectrum(mutable)
+    expectAdapterOk(adapted)
+    const before = adapted.saAt(0)
+    const sampledAtZero = adapted.points.find(({ tSeconds }) => tSeconds === 0)
+
+    mutable.aa = 0.5
+    mutable.av = 0.5
+    mutable.soilProfile = "A"
+
+    expect(adapted.saAt(0)).toEqual(before)
+    expect(before.status).toBe("ok")
+    if (before.status === "ok") expect(before.point).toEqual(sampledAtZero)
+  })
+
+  it("snapshots soil-F parent inputs before closing over saAt", () => {
+    const mutable: SpectrumParams = { ...base, soilProfile: "F" }
+    const adapted = adaptNsr10Spectrum(mutable)
+    expect(adapted.status).toBe("site-specific-study-required")
+    const before = adapted.saAt(1)
+
+    mutable.soilProfile = "D"
+    mutable.aa = 0.5
+
+    expect(adapted.saAt(1)).toEqual(before)
+    expect(before.status).toBe("site-specific-study-required")
+  })
+
+  it("holds exact delegation across a deterministic 250-scenario fuzz matrix", () => {
+    const hazards = ["design", "limited-safety", "damage-threshold"] as const
+    const modes = ["general", "modal"] as const
+    const soils = ["A", "B", "C", "D", "E"] as const
+    const groups = ["I", "II", "III", "IV"] as const
+    const values = [0.01, 0.05, 0.15, 0.2, 0.25, 0.35, 0.5, 0.6]
+    let checked = 0
+
+    outer: for (const hazardLevel of hazards) {
+      for (const mode of modes) {
+        for (const soilProfile of soils) {
+          for (const importanceGroup of groups) {
+            for (let index = 0; index < values.length; index += 1) {
+              const params: SpectrumParams = {
+                aa: values[index],
+                av: values[(index + 3) % values.length],
+                ae: values[(index + 5) % values.length],
+                ad: values[(index + 7) % values.length],
+                hazardLevel,
+                mode,
+                soilProfile,
+                importanceGroup,
+              }
+              const parent = computeSpectrum(params)
+              expectParentOk(parent)
+              const adapted = adaptNsr10Spectrum(params)
+              expectAdapterOk(adapted)
+              expect(
+                adapted.points.map(({ tSeconds, saG, branchId }) => ({
+                  t: tSeconds,
+                  sa: saG,
+                  branch: branchId,
+                })),
+              ).toEqual(parent.points)
+              const parentTrace = computeCalculationTrace(params)
+              expectTrace(parentTrace)
+              expect(adapted.trace.data).toEqual(parentTrace)
+              for (const point of parent.points) {
+                const direct = adapted.saAt(point.t)
+                expect(direct.status).toBe("ok")
+                if (direct.status === "ok") {
+                  expect(direct.point.saG).toBe(point.sa)
+                  expect(direct.point.branchId).toBe(point.branch)
+                }
+              }
+              checked += 1
+              if (checked === 250) break outer
+            }
+          }
+        }
+      }
+    }
+    expect(checked).toBe(250)
+  })
 })
 
 describe("NSR-10 adapter engine surface", () => {
@@ -244,9 +340,66 @@ describe("NSR-10 adapter engine surface", () => {
       },
     })
     const throughEngine = nsr10SpectrumEngine.compute(scenario)
+    expectAdapterOk(throughEngine)
+    expectAdapterOk(direct)
     expect(throughEngine.points).toEqual(direct.points)
     expect(throughEngine.trace).toEqual(direct.trace)
     expect(throughEngine.normalizedInputs).toEqual(direct.normalizedInputs)
+  })
+
+  it("emits only compatibility-resolvable source, citation, formula, and dependency IDs", () => {
+    const adapted = adaptNsr10Spectrum(base, {
+      municipality: {
+        code: "76001",
+        municipio: "Cali",
+        departamento: "Valle del Cauca",
+      },
+    })
+    expectAdapterOk(adapted)
+    const trace = parseNsr10TraceEnvelope(adapted.trace)
+
+    expect(adapted.sourceIds).toEqual([NSR10_SOURCE_ID])
+    for (const id of adapted.sourceIds) expect(resolveNsr10SourceId(id)).toBeDefined()
+    for (const id of adapted.citationIds) {
+      expect(resolveNsr10CitationId(id)).toBeDefined()
+    }
+    for (const id of adapted.formulaIds) {
+      expect(resolveNsr10FormulaId(trace, id)).toBeDefined()
+    }
+    for (const metric of adapted.metrics) {
+      for (const id of metric.dependencyIds) {
+        expect(resolveNsr10DependencyId(trace, id)).toBeDefined()
+      }
+    }
+    expect(adapted.evidenceAvailability.status).toBe("partial")
+  })
+
+  it("refuses to attach municipality evidence to mismatched context or coefficients", () => {
+    const validContext = {
+      municipality: {
+        code: "76001",
+        municipio: "Cali",
+        departamento: "Valle del Cauca",
+      },
+    } as const
+    expect(() => adaptNsr10Spectrum(base, validContext)).not.toThrow()
+    expect(() =>
+      adaptNsr10Spectrum(base, {
+        municipality: { ...validContext.municipality, municipio: "Not Cali" },
+      }),
+    ).toThrow(/does not match approved/)
+    expect(() =>
+      adaptNsr10Spectrum({ ...base, aa: 0.3 }, validContext),
+    ).toThrow(/Aa does not match/)
+    expect(() =>
+      adaptNsr10Spectrum(base, {
+        municipality: {
+          code: "00000",
+          municipio: "Unknown",
+          departamento: "Unknown",
+        },
+      }),
+    ).toThrow(/No approved/)
   })
 
   it("registers engines without inferring capabilities from engine IDs", () => {
@@ -256,9 +409,31 @@ describe("NSR-10 adapter engine surface", () => {
 
     expect(registry.get(nsr10SpectrumEngine.metadata.id)).toBe(nsr10SpectrumEngine)
     expect(registry.findForScenario(scenario)).toBe(nsr10SpectrumEngine)
+    expect(registry.compute(nsr10SpectrumEngine.metadata.id, scenario).status).toBe(
+      "ok",
+    )
     expect(registry.list()).toEqual([nsr10SpectrumEngine])
     expect(() => registry.register(nsr10SpectrumEngine)).toThrow(
       /already registered/,
+    )
+  })
+
+  it("rejects contradictory registered metadata and computed result identity", () => {
+    const scenario = createNsr10AdapterScenario(base)
+    const invalidMetadataEngine = {
+      ...nsr10SpectrumEngine,
+      metadata: { ...nsr10SpectrumEngine.metadata, studyId: "ccp14" },
+    }
+    expect(() => new SpectrumEngineRegistry().register(invalidMetadataEngine)).toThrow()
+
+    const dishonestEngine = {
+      ...nsr10SpectrumEngine,
+      metadata: { ...nsr10SpectrumEngine.metadata, id: "dishonest-engine" },
+    }
+    const registry = new SpectrumEngineRegistry()
+    registry.register(dishonestEngine)
+    expect(() => registry.compute("dishonest-engine", scenario)).toThrow(
+      /identity does not match/,
     )
   })
 })

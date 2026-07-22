@@ -6,11 +6,10 @@ export {
   supportedCapability,
   unsupportedCapability,
 } from "./capabilities"
-export { spectrumEngineMetadataSchema } from "./engine"
+export { assertEngineResultIdentity, spectrumEngineMetadataSchema } from "./engine"
 export { createSpectrumExport, spectrumResultData } from "./export"
 export { SpectrumEngineRegistry } from "./registry"
 export {
-  NSR10_ENGINE_ID,
   NSR10_ENGINE_VERSION,
   NSR10_STUDY_ID,
   NSR10_STUDY_VERSION,
@@ -22,9 +21,25 @@ export {
   nsr10SpectrumEngine,
 } from "./nsr10-adapter"
 export {
+  NSR10_EVIDENCE_COMPATIBILITY_SCHEMA_VERSION,
+  NSR10_ENGINE_ID,
+  NSR10_SOURCE_ID,
+  NSR10_TRACE_SCHEMA_ID,
+  assertNsr10LineageResolves,
+  nsr10EvidenceCompatibility,
+  nsr10MunicipalityCitationId,
+  parseNsr10TraceEnvelope,
+  resolveNsr10CitationId,
+  resolveNsr10DependencyId,
+  resolveNsr10FormulaId,
+  resolveNsr10SourceId,
+  validateNsr10MunicipalityContext,
+} from "./nsr10-evidence"
+export {
   SPECTRUM_CONTRACT_SCHEMA_VERSION,
   SPECTRUM_EXPORT_SCHEMA_VERSION,
   applicabilitySchema,
+  evidenceAvailabilitySchema,
   ccp14ScenarioSchema,
   municipalStudyScenarioSchema,
   normalizedInputsSchema,
@@ -32,12 +47,14 @@ export {
   normalizedSpectrumOrdinateSchema,
   normalizedSpectrumPointSchema,
   normalizedSpectrumResultDataSchema,
+  nonApplicableSchema,
   nsr10NationalScenarioSchema,
   spectrumBranchMetadataSchema,
   spectrumExportSchema,
   spectrumMetricSchema,
   spectrumScenarioSchema,
   spectrumScenarioTypeSchema,
+  spectrumTraceEnvelopeSchema,
   spectrumUnitSchema,
   spectrumWarningSchema,
 } from "./types"
@@ -59,12 +76,14 @@ export type {
   NormalizedSpectrumPoint,
   NormalizedSpectrumResult,
   NormalizedSpectrumResultData,
+  NonApplicable,
   Nsr10NationalScenario,
   SpectrumBranchMetadata,
   SpectrumExport,
   SpectrumMetric,
   SpectrumScenario,
   SpectrumScenarioType,
+  SpectrumTraceEnvelope,
   SpectrumUnit,
   SpectrumWarning,
 } from "./types"

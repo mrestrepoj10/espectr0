@@ -1,6 +1,7 @@
 import { z } from "zod"
 
 import {
+  calculationTraceSchema,
   computeCalculationTrace,
   computeSpectrum,
   hazardLevelDetails,
@@ -16,18 +17,28 @@ import {
   unsupportedCapability,
   spectrumCapabilitiesSchema,
 } from "./capabilities"
+import { spectrumEngineMetadataSchema } from "./engine"
+import {
+  NSR10_ENGINE_ID,
+  NSR10_SOURCE_ID,
+  NSR10_TRACE_SCHEMA_ID,
+  assertNsr10LineageResolves,
+  validateNsr10MunicipalityContext,
+} from "./nsr10-evidence"
 import {
   SPECTRUM_CONTRACT_SCHEMA_VERSION,
   normalizedSpectrumOrdinateSchema,
   normalizedSpectrumResultDataSchema,
   nsr10NationalScenarioSchema,
 } from "./types"
-import { spectrumEngineMetadataSchema } from "./engine"
 
-import type { CalculationTraceContext, SpectrumParams } from "../nsr10"
+import type {
+  CalculationTrace,
+  CalculationTraceContext,
+  SpectrumParams,
+} from "../nsr10"
 import type { SpectrumEngine } from "./engine"
 import type {
-  Applicability,
   NormalizedInputs,
   NormalizedSpectrumPoint,
   NormalizedSpectrumResult,
@@ -35,7 +46,6 @@ import type {
   SpectrumMetric,
 } from "./types"
 
-export const NSR10_ENGINE_ID = "nsr10-existing-adapter" as const
 export const NSR10_ENGINE_VERSION = "1" as const
 export const NSR10_STUDY_ID = "nsr10-national" as const
 export const NSR10_STUDY_VERSION = "NSR-10-2010" as const
@@ -55,6 +65,19 @@ export const nsr10Capabilities = spectrumCapabilitiesSchema.parse({
   ),
   traceabilityViewer: supportedCapability(),
 })
+
+const parentSpectrumParamsSchema = z
+  .object({
+    aa: z.number(),
+    av: z.number(),
+    ae: z.number().optional(),
+    ad: z.number().optional(),
+    hazardLevel: z.enum(["design", "limited-safety", "damage-threshold"]).optional(),
+    soilProfile: soilProfileSchema,
+    importanceGroup: importanceGroupSchema,
+    mode: z.enum(["general", "modal"]).optional(),
+  })
+  .strict()
 
 const normalizedNsr10InputsSchema = z
   .object({
@@ -84,28 +107,32 @@ export const nsr10AdapterScenarioSchema = nsr10NationalScenarioSchema.extend({
 
 export type Nsr10AdapterScenario = z.infer<typeof nsr10AdapterScenarioSchema>
 
-const branchFormulaId = (branchId: string) => {
-  const clauseStart = branchId.indexOf("A.")
-  if (clauseStart < 0) throw new Error(`NSR-10 branch has no formula ID: ${branchId}`)
-  return `nsr10:formula:${branchId.slice(clauseStart)}`
+function snapshotInputs(params: SpectrumParams) {
+  const snapshot = Object.freeze({
+    aa: params.aa,
+    av: params.av,
+    ...(params.ae === undefined ? {} : { ae: params.ae }),
+    ...(params.ad === undefined ? {} : { ad: params.ad }),
+    ...(params.hazardLevel === undefined ? {} : { hazardLevel: params.hazardLevel }),
+    soilProfile: params.soilProfile,
+    importanceGroup: params.importanceGroup,
+    ...(params.mode === undefined ? {} : { mode: params.mode }),
+  })
+  return Object.freeze(parentSpectrumParamsSchema.parse(snapshot)) as SpectrumParams
 }
 
-const formulaCitationId = (formulaId: string) =>
-  formulaId.replace("nsr10:formula:", "nsr10:citation:")
-
-function normalizedPoint(point: {
-  t: number
-  sa: number
-  branch: string
-}): NormalizedSpectrumPoint {
-  const formulaId = branchFormulaId(point.branch)
-  return {
-    tSeconds: point.t,
-    saG: point.sa,
-    branchId: point.branch,
-    formulaId,
-    citationIds: [formulaCitationId(formulaId)],
-  }
+function snapshotContext(context: CalculationTraceContext): CalculationTraceContext {
+  return Object.freeze(
+    context.municipality
+      ? {
+          municipality: Object.freeze({
+            code: context.municipality.code,
+            municipio: context.municipality.municipio,
+            departamento: context.municipality.departamento,
+          }),
+        }
+      : {},
+  )
 }
 
 function normalizedInputs(
@@ -131,102 +158,140 @@ function normalizedInputs(
   }
 }
 
+function normalizedPoint(point: {
+  t: number
+  sa: number
+  branch: string
+}): NormalizedSpectrumPoint {
+  return {
+    tSeconds: point.t,
+    saG: point.sa,
+    branchId: point.branch,
+    formulaId: point.branch,
+    citationIds: [],
+  }
+}
+
 const metricMetadata = {
-  aa: { label: "Aa", unit: "g", citationIds: ["nsr10:citation:municipality-aa"] },
-  av: { label: "Av", unit: "g", citationIds: ["nsr10:citation:municipality-av"] },
-  ae: { label: "Ae", unit: "g", citationIds: ["nsr10:citation:municipality-ae"] },
-  ad: { label: "Ad", unit: "g", citationIds: ["nsr10:citation:municipality-ad"] },
-  fa: { label: "Fa", unit: "dimensionless", citationIds: ["nsr10:citation:A.2.4-3"] },
-  fv: { label: "Fv", unit: "dimensionless", citationIds: ["nsr10:citation:A.2.4-4"] },
-  i: { label: "I", unit: "dimensionless", citationIds: ["nsr10:citation:A.2.5-1"] },
-  s: { label: "S", unit: "dimensionless", citationIds: ["nsr10:citation:A.12.3.1"] },
-  t0: { label: "T0", unit: "s", citationIds: ["nsr10:citation:A.2.6-6"] },
-  tc: { label: "TC", unit: "s", citationIds: ["nsr10:citation:spectrum-control-period"] },
-  tl: { label: "TL", unit: "s", citationIds: ["nsr10:citation:spectrum-long-period"] },
-  saMax: { label: "Sa max", unit: "g", citationIds: ["nsr10:citation:spectrum-plateau"] },
-  pga: { label: "PGA", unit: "g", citationIds: ["nsr10:citation:spectrum-pga"] },
+  aa: { label: "Aa", unit: "g", formulaId: null },
+  av: { label: "Av", unit: "g", formulaId: null },
+  ae: { label: "Ae", unit: "g", formulaId: null },
+  ad: { label: "Ad", unit: "g", formulaId: null },
+  fa: { label: "Fa", unit: "dimensionless", formulaId: "fa" },
+  fv: { label: "Fv", unit: "dimensionless", formulaId: "fv" },
+  i: { label: "I", unit: "dimensionless", formulaId: "importance" },
+  s: { label: "S", unit: "dimensionless", formulaId: "s" },
+  t0: { label: "T0", unit: "s", formulaId: "t0" },
+  tc: { label: "TC", unit: "s", formulaId: "tc" },
+  tl: { label: "TL", unit: "s", formulaId: "tl" },
+  saMax: { label: "Sa max", unit: "g", formulaId: "sa-max" },
+  pga: { label: "PGA", unit: "g", formulaId: "pga" },
 } as const
 
-function metricsFromCoefficients(coefficients: Record<string, unknown>): SpectrumMetric[] {
+function metricsFromCoefficients(
+  coefficients: Record<string, unknown>,
+  trace: CalculationTrace,
+  municipalityCitationId: string | null,
+): SpectrumMetric[] {
+  const stepById = new Map(trace.steps.map((step) => [step.id, step]))
   return Object.entries(metricMetadata).flatMap(([id, metadata]) => {
     const value = coefficients[id]
     if (typeof value !== "number") return []
+    const step = metadata.formulaId ? stepById.get(metadata.formulaId) : undefined
+    if (metadata.formulaId && !step) {
+      throw new Error(`NSR-10 metric formula is absent from trace: ${metadata.formulaId}`)
+    }
     return [
       {
         id,
         label: metadata.label,
         value,
         unit: metadata.unit,
-        formulaId: null,
-        citationIds: [...metadata.citationIds],
+        formulaId: metadata.formulaId,
+        dependencyIds: step ? [...step.dependencies] : [],
+        citationIds:
+          municipalityCitationId && ["aa", "av", "ae", "ad"].includes(id)
+            ? [municipalityCitationId]
+            : [],
       },
     ] satisfies SpectrumMetric[]
   })
 }
 
 function branchMetadata(branchIds: readonly string[]): SpectrumBranchMetadata[] {
-  return branchIds.map((id) => {
-    const formulaId = branchFormulaId(id)
-    return { id, formulaId, citationIds: [formulaCitationId(formulaId)] }
-  })
+  return branchIds.map((id) => ({ id, formulaId: id, citationIds: [] }))
 }
 
-function citationIds(
-  branches: readonly SpectrumBranchMetadata[],
-  context: CalculationTraceContext,
-  applicability: Applicability,
+function evidenceAvailability(
+  municipalityCitationId: string | null,
+  siteSpecific = false,
 ) {
-  const ids = new Set<string>([
-    "nsr10:citation:hazard-metadata",
-    "nsr10:citation:A.2.4-3",
-    "nsr10:citation:A.2.4-4",
-  ])
-  for (const branch of branches) {
-    for (const citationId of branch.citationIds) ids.add(citationId)
+  const unavailableClaims = [
+    {
+      id: "spectrum-clause-regions",
+      reason:
+        "The F0 manifest has no A.2/A.12 normative clause regions; formula lineage resolves through the versioned calculation trace only.",
+    },
+  ]
+  if (!municipalityCitationId) {
+    unavailableClaims.push({
+      id: "municipality-hazard-row",
+      reason: "No validated municipality context was supplied for the hazard inputs.",
+    })
   }
-  if (context.municipality) {
-    ids.add(`nsr10:citation:municipality:${context.municipality.code}`)
+  if (siteSpecific) {
+    unavailableClaims.push({
+      id: "site-specific-clause-region",
+      reason: "The F0 manifest has no A.2.10 normative clause region.",
+    })
   }
-  if (applicability.status !== "applicable") {
-    for (const citationId of applicability.citationIds) ids.add(citationId)
-  }
-  return [...ids]
+  return { status: "partial" as const, unavailableClaims }
 }
 
-function siteSpecificApplicability(message: string): Applicability {
+function siteSpecificApplicability(message: string) {
   return {
-    status: "site-specific-study-required",
+    status: "site-specific-study-required" as const,
     reasonCode: "soil-profile-f",
     message,
-    citationIds: ["nsr10:citation:A.2.10"],
+    citationIds: [],
   }
 }
 
 /**
- * Wraps the current NSR-10 spectrum and trace APIs. No spectrum equation is
- * evaluated in this adapter; all ordinates and metrics project parent results.
+ * Wraps the current NSR-10 APIs. Parent inputs are snapshotted once and every
+ * calculation, trace, and later ordinate delegates through that same snapshot.
  */
 export function adaptNsr10Spectrum(
   params: SpectrumParams,
   context: CalculationTraceContext = {},
 ): NormalizedSpectrumResult {
-  const parent = computeSpectrum(params)
+  const paramsSnapshot = snapshotInputs(params)
+  const contextSnapshot = snapshotContext(context)
+  const parent = computeSpectrum(paramsSnapshot)
+  const municipalityEvidence = validateNsr10MunicipalityContext(
+    paramsSnapshot,
+    contextSnapshot,
+  )
+  const municipalityCitationId = municipalityEvidence?.citationId ?? null
+  const citations = municipalityCitationId ? [municipalityCitationId] : []
   const details = hazardLevelDetails[parent.hazardLevel]
-  const inputs = normalizedInputs(params, context)
+  const inputs = normalizedInputs(paramsSnapshot, contextSnapshot)
 
   if (parent.status !== "ok") {
     const applicability = siteSpecificApplicability(parent.notice)
     const data = normalizedSpectrumResultDataSchema.parse({
       schemaVersion: SPECTRUM_CONTRACT_SCHEMA_VERSION,
       status: "site-specific-study-required",
-      engine: { id: NSR10_ENGINE_ID, version: NSR10_ENGINE_VERSION },
+      engine: {
+        id: NSR10_ENGINE_ID,
+        version: NSR10_ENGINE_VERSION,
+        studyId: NSR10_STUDY_ID,
+        studyVersion: NSR10_STUDY_VERSION,
+        scenarioType: "nsr10-national",
+      },
       study: { id: NSR10_STUDY_ID, version: NSR10_STUDY_VERSION },
       scenarioType: "nsr10-national",
       normalizedInputs: inputs,
-      points: [],
-      metrics: [],
-      formulaIds: [],
-      branches: [],
       hazard: {
         id: parent.hazardLevel,
         label: details.label,
@@ -238,46 +303,67 @@ export function adaptNsr10Spectrum(
           severity: "warning",
           code: "site-specific-study-required",
           message: parent.notice,
-          citationIds: ["nsr10:citation:A.2.10"],
+          citationIds: [],
         },
       ],
       applicability,
-      sourceIds: ["nsr10:title-a:2017"],
-      citationIds: citationIds([], context, applicability),
+      sourceIds: [NSR10_SOURCE_ID],
+      citationIds: citations,
+      evidenceAvailability: evidenceAvailability(municipalityCitationId, true),
       traceSchemaVersion: NSR10_TRACE_SCHEMA_VERSION,
       trace: null,
       capabilities: nsr10Capabilities,
     })
+    assertNsr10LineageResolves(data)
 
     return {
       ...data,
       saAt(tSeconds) {
-        const ordinate = saAt(tSeconds, params)
+        const ordinate = saAt(tSeconds, paramsSnapshot)
         if (ordinate.status === "ok") {
           throw new Error("Soil F unexpectedly produced an NSR-10 ordinate")
         }
         return normalizedSpectrumOrdinateSchema.parse({
-          status: "unavailable",
+          status: "site-specific-study-required",
           applicability: siteSpecificApplicability(ordinate.notice),
         })
       },
     }
   }
 
+  const rawTrace = computeCalculationTrace(paramsSnapshot, contextSnapshot)
+  if ("status" in rawTrace) {
+    throw new Error("Successful spectrum returned no calculation trace")
+  }
+  const trace = calculationTraceSchema.parse(rawTrace)
   const branches = branchMetadata(parent.branches)
-  const applicability = { status: "applicable" as const }
-  const trace = computeCalculationTrace(params, context)
-  if ("status" in trace) throw new Error("Successful spectrum returned no calculation trace")
+  const metrics = metricsFromCoefficients(
+    parent.coefficients,
+    trace,
+    municipalityCitationId,
+  )
+  const formulaIds = [
+    ...new Set([
+      ...branches.map(({ formulaId }) => formulaId),
+      ...metrics.flatMap(({ formulaId }) => (formulaId ? [formulaId] : [])),
+    ]),
+  ]
   const data = normalizedSpectrumResultDataSchema.parse({
     schemaVersion: SPECTRUM_CONTRACT_SCHEMA_VERSION,
     status: "ok",
-    engine: { id: NSR10_ENGINE_ID, version: NSR10_ENGINE_VERSION },
+    engine: {
+      id: NSR10_ENGINE_ID,
+      version: NSR10_ENGINE_VERSION,
+      studyId: NSR10_STUDY_ID,
+      studyVersion: NSR10_STUDY_VERSION,
+      scenarioType: "nsr10-national",
+    },
     study: { id: NSR10_STUDY_ID, version: NSR10_STUDY_VERSION },
     scenarioType: "nsr10-national",
     normalizedInputs: inputs,
     points: parent.points.map(normalizedPoint),
-    metrics: metricsFromCoefficients(parent.coefficients),
-    formulaIds: branches.map(({ formulaId }) => formulaId),
+    metrics,
+    formulaIds,
     branches,
     hazard: {
       id: parent.hazardLevel,
@@ -286,21 +372,27 @@ export function adaptNsr10Spectrum(
       dampingRatio: parent.dampingRatio,
     },
     warnings: [],
-    applicability,
-    sourceIds: ["nsr10:title-a:2017"],
-    citationIds: citationIds(branches, context, applicability),
+    applicability: { status: "applicable" },
+    sourceIds: [NSR10_SOURCE_ID],
+    citationIds: citations,
+    evidenceAvailability: evidenceAvailability(municipalityCitationId),
     traceSchemaVersion: NSR10_TRACE_SCHEMA_VERSION,
-    trace,
+    trace: {
+      schemaId: NSR10_TRACE_SCHEMA_ID,
+      schemaVersion: NSR10_TRACE_SCHEMA_VERSION,
+      data: trace,
+    },
     capabilities: nsr10Capabilities,
   })
+  assertNsr10LineageResolves(data)
 
   return {
     ...data,
     saAt(tSeconds) {
-      const ordinate = saAt(tSeconds, params)
+      const ordinate = saAt(tSeconds, paramsSnapshot)
       if (ordinate.status !== "ok") {
         return normalizedSpectrumOrdinateSchema.parse({
-          status: "unavailable",
+          status: "site-specific-study-required",
           applicability: siteSpecificApplicability(ordinate.notice),
         })
       }
@@ -316,11 +408,13 @@ export function createNsr10AdapterScenario(
   params: SpectrumParams,
   context: CalculationTraceContext = {},
 ): Nsr10AdapterScenario {
+  const paramsSnapshot = snapshotInputs(params)
+  const contextSnapshot = snapshotContext(context)
   return nsr10AdapterScenarioSchema.parse({
     type: "nsr10-national",
     studyId: NSR10_STUDY_ID,
     studyVersion: NSR10_STUDY_VERSION,
-    inputs: normalizedInputs(params, context),
+    inputs: normalizedInputs(paramsSnapshot, contextSnapshot),
   })
 }
 
