@@ -10,6 +10,7 @@ import {
   selectRepresentativeBoundaryPoints,
   slugifyPdfPart,
 } from "./memoria-pdf"
+import { renderCalculationMemoriaPdf } from "./memoria-pdf-renderer"
 
 function caliTrace() {
   const municipality = lookupMunicipioByCode("76001")
@@ -80,4 +81,15 @@ describe("calculation memoria PDF helpers", () => {
       "0 <= T - T² - prueba",
     )
   })
+
+  it("renders the representative trace as a five-page PDF", async () => {
+    const blob = await renderCalculationMemoriaPdf(caliTrace())
+    const bytes = Buffer.from(await blob.arrayBuffer())
+    const source = bytes.toString("latin1")
+
+    expect(blob.type).toBe("application/pdf")
+    expect(source.startsWith("%PDF-")).toBe(true)
+    expect(source.match(/\/Type \/Page\b/g)).toHaveLength(5)
+    expect(bytes.byteLength).toBeGreaterThan(20_000)
+  }, 30_000)
 })

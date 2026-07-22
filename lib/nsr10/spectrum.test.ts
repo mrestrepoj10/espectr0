@@ -6,11 +6,16 @@ import { computeSpectrum, saAt } from "./spectrum"
 
 import type { SpectrumParams } from "./spectrum"
 
-const ABSOLUTE_TOLERANCE = 1e-12
 const oracle = oracleSchema.parse(oracleData)
+type ToleranceDimension = keyof typeof oracle.numeric_contract.absolute_tolerances
 
-function expectWithinTolerance(actual: number, expected: number) {
-  expect(Math.abs(actual - expected)).toBeLessThanOrEqual(ABSOLUTE_TOLERANCE)
+function expectWithinTolerance(
+  actual: number,
+  expected: number,
+  dimension: ToleranceDimension,
+) {
+  const tolerance = oracle.numeric_contract.absolute_tolerances[dimension].value
+  expect(Math.abs(actual - expected)).toBeLessThanOrEqual(tolerance)
 }
 
 describe(`NSR-10 golden oracle (${oracle.cases.length} scenarios)`, () => {
@@ -32,20 +37,20 @@ describe(`NSR-10 golden oracle (${oracle.cases.length} scenarios)`, () => {
         throw new Error("The design oracle returned another hazard level")
       }
 
-      expectWithinTolerance(coefficients.fa, scenario.expected.fa)
-      expectWithinTolerance(coefficients.fv, scenario.expected.fv)
-      expectWithinTolerance(coefficients.i, scenario.importance_coefficient)
-      expectWithinTolerance(coefficients.t0, scenario.expected.t0)
-      expectWithinTolerance(coefficients.tc, scenario.expected.tc)
-      expectWithinTolerance(coefficients.tl, scenario.expected.tl)
-      expectWithinTolerance(coefficients.saMax, scenario.expected.sa_max)
+      expectWithinTolerance(coefficients.fa, scenario.expected.fa, "coefficient")
+      expectWithinTolerance(coefficients.fv, scenario.expected.fv, "coefficient")
+      expectWithinTolerance(coefficients.i, scenario.importance_coefficient, "coefficient")
+      expectWithinTolerance(coefficients.t0, scenario.expected.t0, "period")
+      expectWithinTolerance(coefficients.tc, scenario.expected.tc, "period")
+      expectWithinTolerance(coefficients.tl, scenario.expected.tl, "period")
+      expectWithinTolerance(coefficients.saMax, scenario.expected.sa_max, "acceleration")
 
       for (const expectedPoint of scenario.expected_sa_points) {
         const point = saAt(expectedPoint.period, params)
         expect(point.status).toBe("ok")
         if (point.status !== "ok") throw new Error("Supported oracle soil returned A.2.10")
 
-        expectWithinTolerance(point.sa, expectedPoint.sa)
+        expectWithinTolerance(point.sa, expectedPoint.sa, "acceleration")
         expect(point.branch).toBe(expectedPoint.branch)
       }
     })
@@ -89,7 +94,7 @@ describe("NSR-10 spectrum properties", () => {
     const atZero = saAt(0, { ...base, mode: "modal" })
     expect(atZero.status).toBe("ok")
     if (atZero.status !== "ok") return
-    expectWithinTolerance(atZero.sa, 0.4 * coefficients.saMax)
+    expectWithinTolerance(atZero.sa, 0.4 * coefficients.saMax, "acceleration")
     expect(atZero.branch).toBe("rising-A.2.6-7")
 
     const atT0 = saAt(coefficients.t0, { ...base, mode: "modal" })
@@ -121,8 +126,8 @@ describe("NSR-10 spectrum properties", () => {
         coefficients.i) /
       tl ** 2
 
-    expectWithinTolerance(inverseAtTc, saMax)
-    expectWithinTolerance(inverseAtTl, inverseSquareAtTl)
+    expectWithinTolerance(inverseAtTc, saMax, "acceleration")
+    expectWithinTolerance(inverseAtTl, inverseSquareAtTl, "acceleration")
 
     const relativeEpsilon = 1e-10
     for (const boundary of [tc, tl]) {
@@ -177,7 +182,11 @@ describe("NSR-10 spectrum properties", () => {
       expect(values[index].saMax).toBeGreaterThan(values[index - 1].saMax)
     }
     for (const { importanceGroup, saMax } of values) {
-      expectWithinTolerance(saMax / values[0].saMax, factors[importanceGroup])
+      expectWithinTolerance(
+        saMax / values[0].saMax,
+        factors[importanceGroup],
+        "coefficient",
+      )
     }
   })
 
@@ -227,18 +236,18 @@ describe("NSR-10 additional hazard levels", () => {
       returnPeriodYears: 225,
       dampingRatio: 0.05,
     })
-    expectWithinTolerance(coefficients.fa, 1.5)
-    expectWithinTolerance(coefficients.fv, 2.2)
-    expectWithinTolerance(coefficients.t0, (0.1 * 2.2) / 1.5)
-    expectWithinTolerance(coefficients.tc, (0.48 * 2.2) / 1.5)
-    expectWithinTolerance(coefficients.tl, 2.4 * 2.2)
-    expectWithinTolerance(coefficients.saMax, 2.5 * 0.15 * 1.5)
-    expectWithinTolerance(coefficients.pga, 0.15 * 1.5)
+    expectWithinTolerance(coefficients.fa, 1.5, "coefficient")
+    expectWithinTolerance(coefficients.fv, 2.2, "coefficient")
+    expectWithinTolerance(coefficients.t0, (0.1 * 2.2) / 1.5, "period")
+    expectWithinTolerance(coefficients.tc, (0.48 * 2.2) / 1.5, "period")
+    expectWithinTolerance(coefficients.tl, 2.4 * 2.2, "period")
+    expectWithinTolerance(coefficients.saMax, 2.5 * 0.15 * 1.5, "acceleration")
+    expectWithinTolerance(coefficients.pga, 0.15 * 1.5, "acceleration")
 
     const atOneSecond = saAt(1, params)
     expect(atOneSecond.status).toBe("ok")
     if (atOneSecond.status !== "ok") return
-    expectWithinTolerance(atOneSecond.sa, 1.2 * 0.15 * 2.2)
+    expectWithinTolerance(atOneSecond.sa, 1.2 * 0.15 * 2.2, "acceleration")
     expect(atOneSecond.branch).toBe("inverse-T-A.2.6-1")
 
     expect(spectrum.points.at(-1)!.t).toBeGreaterThan(coefficients.tl)
@@ -259,12 +268,12 @@ describe("NSR-10 additional hazard levels", () => {
       returnPeriodYears: 31,
       dampingRatio: 0.02,
     })
-    expectWithinTolerance(coefficients.fv, 2.4)
-    expectWithinTolerance(coefficients.s, 3)
-    expectWithinTolerance(coefficients.tc, 1.5)
-    expectWithinTolerance(coefficients.tl, 7.2)
-    expectWithinTolerance(coefficients.saMax, 0.27)
-    expectWithinTolerance(coefficients.pga, 0.09)
+    expectWithinTolerance(coefficients.fv, 2.4, "coefficient")
+    expectWithinTolerance(coefficients.s, 3, "coefficient")
+    expectWithinTolerance(coefficients.tc, 1.5, "period")
+    expectWithinTolerance(coefficients.tl, 7.2, "period")
+    expectWithinTolerance(coefficients.saMax, 0.27, "acceleration")
+    expectWithinTolerance(coefficients.pga, 0.09, "acceleration")
 
     for (const [t, sa, branch] of [
       [0, 0.09, "rising-A.12.3-2"],
@@ -276,7 +285,7 @@ describe("NSR-10 additional hazard levels", () => {
       const point = saAt(t, params)
       expect(point.status).toBe("ok")
       if (point.status !== "ok") continue
-      expectWithinTolerance(point.sa, sa)
+      expectWithinTolerance(point.sa, sa, "acceleration")
       expect(point.branch).toBe(branch)
     }
 

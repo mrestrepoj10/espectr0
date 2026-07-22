@@ -1,0 +1,9 @@
+# Regulatory evidence and golden artifacts are byte-for-byte reproducible on
+# every platform. In particular, Windows must not check these files out as CRLF.
+/lib/nsr10/data/*.json text eol=lf
+/lib/nsr10/data/*.md text eol=lf
+/lib/nsr10/evidence/*.json text eol=lf
+/lib/nsr10/__snapshots__/*.snap text eol=lf
+/scripts/*nsr10*.json text eol=lf
+/scripts/*nsr10*.mjs text eol=lf
+/scripts/*nsr10*.py text eol=lf

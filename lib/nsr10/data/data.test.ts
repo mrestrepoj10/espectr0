@@ -3,11 +3,14 @@ import { describe, expect, it } from "vitest"
 import importanceCoefficientsData from "./importance-coefficients.json"
 import municipiosData from "./municipios.json"
 import oracleData from "./oracle.json"
+import oracleInputData from "./oracle-input.json"
 import siteCoefficientsData from "./site-coefficients.json"
 import {
   importanceCoefficientsSchema,
   municipiosSchema,
+  oracleAbsoluteTolerancesSchema,
   oracleSchema,
+  oracleUnitsSchema,
   siteCoefficientsSchema,
 } from "../schema"
 
@@ -19,6 +22,50 @@ describe("NSR-10 checked-in datasets", () => {
     expect(() => siteCoefficientsSchema.parse(siteCoefficientsData)).not.toThrow()
     expect(() => importanceCoefficientsSchema.parse(importanceCoefficientsData)).not.toThrow()
     expect(() => oracleSchema.parse(oracleData)).not.toThrow()
+    expect(() => oracleUnitsSchema.parse(oracleInputData.units)).not.toThrow()
+    expect(() =>
+      oracleAbsoluteTolerancesSchema.parse(oracleInputData.absolute_tolerances),
+    ).not.toThrow()
+  })
+
+  it("declares every generated formula and unit in the independent oracle", () => {
+    const spectrumEquations = [
+      "A.2.6-1",
+      "A.2.6-2",
+      "A.2.6-3",
+      "A.2.6-4",
+      "A.2.6-5",
+      "A.2.6-6",
+    ]
+
+    expect(oracleInputData.source.spectrum_equations).toEqual(spectrumEquations)
+    expect(oracleData.formula_inventory).toEqual(spectrumEquations)
+    expect(oracleData.units).toEqual(oracleInputData.units)
+    expect(oracleData.numeric_contract.absolute_tolerances).toEqual(
+      oracleInputData.absolute_tolerances,
+    )
+    expect(oracleData.units).toMatchObject({
+      t: "s",
+      fixed_periods: "s",
+      period: "s",
+      period_decimal: "s",
+      t0: "s",
+      tc: "s",
+      tl: "s",
+      aa: "fraction-of-g",
+      av: "fraction-of-g",
+      sa: "fraction-of-g",
+      sa_decimal: "fraction-of-g",
+      sa_max: "fraction-of-g",
+      fa: "dimensionless",
+      fv: "dimensionless",
+      importance_coefficient: "dimensionless",
+    })
+    expect(oracleData.numeric_contract.absolute_tolerances).toEqual({
+      acceleration: { value: 1e-12, unit: "fraction-of-g" },
+      period: { value: 1e-12, unit: "s" },
+      coefficient: { value: 1e-12, unit: "dimensionless" },
+    })
   })
 
   it("contains exactly 1,123 unique DANE codes and location pairs", () => {
