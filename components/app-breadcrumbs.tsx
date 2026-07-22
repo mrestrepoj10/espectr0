@@ -3,7 +3,6 @@ import {
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
 export function AppBreadcrumbs({ module }: { module: string }) {
@@ -11,11 +10,9 @@ export function AppBreadcrumbs({ module }: { module: string }) {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <span>Torre 12 · Cali</span>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator>/</BreadcrumbSeparator>
-        <BreadcrumbItem>
-          <BreadcrumbPage>{module}</BreadcrumbPage>
+          <BreadcrumbPage className="font-heading font-semibold text-base tracking-tight">
+            {module}
+          </BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>

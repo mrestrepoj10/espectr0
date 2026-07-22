@@ -539,7 +539,13 @@ function TraceabilitySheet({
 	);
 }
 
-function SpectrumChart({ spectrum }: { spectrum: SpectrumOk }) {
+function SpectrumChart({
+	spectrum,
+	municipio,
+}: {
+	spectrum: SpectrumOk;
+	municipio: Municipio;
+}) {
 	const { coefficients } = spectrum;
 	const plotEnd = Math.max(4, coefficients.tl);
 
@@ -554,9 +560,12 @@ function SpectrumChart({ spectrum }: { spectrum: SpectrumOk }) {
 							1/T².
 						</CardDescription>
 					</div>
-					<Badge variant="secondary">
-						Sa máx {formatDecimal(coefficients.saMax, 3)} g
-					</Badge>
+					<div className="flex flex-col items-start gap-2 sm:items-end">
+						<Badge variant="secondary">
+							Sa máx {formatDecimal(coefficients.saMax, 3)} g
+						</Badge>
+						<ExportActions municipio={municipio} spectrum={spectrum} />
+					</div>
 				</div>
 			</CardHeader>
 			<CardContent>
@@ -799,8 +808,14 @@ function ExportActions({
 	}
 
 	return (
-		<div className="flex flex-wrap items-center gap-2">
-			<Button disabled={!spectrum} onClick={copyJson} size="sm" type="button" variant="outline">
+		<div aria-label="Exportar resultados" className="flex flex-wrap items-center gap-2">
+			<Button
+				className="h-10 transition-transform active:scale-[0.96]"
+				disabled={!spectrum}
+				onClick={copyJson}
+				type="button"
+				variant="outline"
+			>
 				<ClipboardIcon data-icon="inline-start" />
 				Copiar JSON
 			</Button>
@@ -809,14 +824,14 @@ function ExportActions({
 				onClick={() => {
 					if (spectrum) downloadCsv(spectrum, municipio);
 				}}
-				size="sm"
+				className="h-10 transition-transform active:scale-[0.96]"
 				type="button"
 				variant="outline"
 			>
 				<DownloadIcon data-icon="inline-start" />
 				CSV (T, Sa)
 			</Button>
-			<Button disabled size="sm" type="button" variant="outline">
+			<Button disabled className="h-10" type="button" variant="outline">
 				<FileTextIcon data-icon="inline-start" />
 				PDF · próximamente
 			</Button>
@@ -851,20 +866,9 @@ export function CalculatorPage() {
 				onOpenChange={setTraceabilityOpen}
 				open={traceabilityOpen}
 			/>
-			<header className="flex flex-wrap items-end justify-between gap-3">
-				<div className="flex flex-col gap-1">
-					<h1 className="font-heading font-semibold text-2xl tracking-tight">
-						Calculadora de espectro
-					</h1>
-					<p className="text-muted-foreground text-sm">
-						Espectro elástico NSR-10 calculado localmente, sin envío de datos.
-					</p>
-				</div>
-				<div className="flex flex-col items-start gap-2 sm:items-end">
-					<Badge variant="outline">Motor NSR-10 · cálculo en vivo</Badge>
-					<ExportActions municipio={municipio} spectrum={spectrum} />
-				</div>
-			</header>
+			<p className="text-muted-foreground text-sm">
+				Espectro elástico NSR-10 calculado localmente, sin envío de datos.
+			</p>
 
 			<div className="grid items-start gap-4 xl:grid-cols-[18rem_minmax(0,1fr)]">
 				<ParameterRail
@@ -879,7 +883,7 @@ export function CalculatorPage() {
 				<div className="flex min-w-0 flex-col gap-4">
 					{spectrum ? (
 						<>
-							<SpectrumChart spectrum={spectrum} />
+							<SpectrumChart municipio={municipio} spectrum={spectrum} />
 							<ParameterTiles spectrum={spectrum} />
 							<SpectrumTable spectrum={spectrum} />
 						</>
