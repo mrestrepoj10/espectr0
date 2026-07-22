@@ -13,10 +13,12 @@ import {
 	ChevronDownIcon,
 	CodeXmlIcon,
 	DownloadIcon,
+	FileDownIcon,
 	FileJsonIcon,
 	FileTextIcon,
 	ImageIcon,
 	LandmarkIcon,
+	LoaderCircleIcon,
 	TriangleAlertIcon,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -555,6 +557,8 @@ function ExportActions({
 	municipio: Municipio;
 	params: SpectrumParams;
 }) {
+	const [isPdfExporting, setIsPdfExporting] = useState(false);
+
 	function copyJson() {
 		if (!spectrum) return;
 		const trace = computeCalculationTrace(params, { municipality: municipio });
@@ -620,6 +624,27 @@ function ExportActions({
 		}
 	}
 
+	async function exportMemoriaPdf() {
+		if (!spectrum || isPdfExporting) return;
+		setIsPdfExporting(true);
+
+		try {
+			const trace = computeCalculationTrace(params, { municipality: municipio });
+			if ("status" in trace) {
+				throw new Error("El perfil de suelo no permite generar una memoria espectral.");
+			}
+			const { downloadCalculationMemoriaPdf } = await import(
+				"@/lib/memoria-pdf-renderer"
+			);
+			await downloadCalculationMemoriaPdf(trace);
+			toast.success("Memoria PDF descargada.");
+		} catch {
+			toast.error("No fue posible generar la memoria PDF.");
+		} finally {
+			setIsPdfExporting(false);
+		}
+	}
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger
@@ -651,6 +676,17 @@ function ExportActions({
 					<DropdownMenuItem onClick={exportEtabs}>
 						<FileTextIcon />
 						Descargar TXT (ETABS)
+					</DropdownMenuItem>
+					<DropdownMenuItem
+						disabled={isPdfExporting}
+						onClick={() => void exportMemoriaPdf()}
+					>
+						{isPdfExporting ? (
+							<LoaderCircleIcon className="animate-spin" />
+						) : (
+							<FileDownIcon />
+						)}
+						{isPdfExporting ? "Generando memoria…" : "Descargar memoria PDF"}
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 			</DropdownMenuContent>
