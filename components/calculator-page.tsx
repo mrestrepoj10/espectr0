@@ -92,6 +92,7 @@ import {
 	downloadEtabsTxt,
 } from "@/lib/chart-export";
 import {
+	computeCalculationTrace,
 	computeSpectrum,
 	hazardLevelDetails,
 	lookupMunicipio,
@@ -106,6 +107,7 @@ import type {
 	SoilProfile,
 	SpectrumBranch,
 	SpectrumOk,
+	SpectrumParams,
 } from "@/lib/nsr10";
 
 const standards = [
@@ -451,9 +453,11 @@ function ParameterRail({
 function SpectrumChart({
 	spectrum,
 	municipio,
+	params,
 }: {
 	spectrum: SpectrumOk;
 	municipio: Municipio;
+	params: SpectrumParams;
 }) {
 	const chartContainerRef = useRef<HTMLDivElement>(null);
 	const { coefficients } = spectrum;
@@ -486,6 +490,7 @@ function SpectrumChart({
 					<ExportActions
 						chartContainerRef={chartContainerRef}
 						municipio={municipio}
+						params={params}
 						spectrum={spectrum}
 					/>
 				</div>
@@ -754,16 +759,20 @@ function ExportActions({
 	chartContainerRef,
 	spectrum,
 	municipio,
+	params,
 }: {
 	chartContainerRef: React.RefObject<HTMLDivElement | null>;
 	spectrum: SpectrumOk | null;
 	municipio: Municipio;
+	params: SpectrumParams;
 }) {
 	function copyJson() {
 		if (!spectrum) return;
+		const trace = computeCalculationTrace(params, { municipality: municipio });
+		if ("status" in trace) return;
 
 		void navigator.clipboard
-			.writeText(JSON.stringify(spectrum, null, 2))
+			.writeText(JSON.stringify(trace, null, 2))
 			.then(() => toast.success("JSON copiado al portapapeles."))
 			.catch(() => toast.error("No fue posible copiar el JSON."));
 	}
@@ -867,18 +876,17 @@ export function CalculatorPage() {
 	const [hazardLevel, setHazardLevel] = useState<HazardLevel>("design");
 	const [traceabilityOpen, setTraceabilityOpen] = useState(false);
 
-	const result = useMemo(
-		() =>
-			computeSpectrum({
-				aa: municipio.aa,
-				av: municipio.av,
-				ae: municipio.ae,
-				ad: municipio.ad,
-				hazardLevel,
-				soilProfile,
-				importanceGroup,
-				mode: "general",
-			}),
+	const spectrumParams = useMemo<SpectrumParams>(
+		() => ({
+			aa: municipio.aa,
+			av: municipio.av,
+			ae: municipio.ae,
+			ad: municipio.ad,
+			hazardLevel,
+			soilProfile,
+			importanceGroup,
+			mode: "general",
+		}),
 		[
 			hazardLevel,
 			importanceGroup,
@@ -889,6 +897,7 @@ export function CalculatorPage() {
 			soilProfile,
 		],
 	);
+	const result = useMemo(() => computeSpectrum(spectrumParams), [spectrumParams]);
 
 	const spectrum = result.status === "ok" ? result : null;
 
@@ -918,7 +927,11 @@ export function CalculatorPage() {
 				<div className="flex min-w-0 flex-col gap-4">
 					{spectrum ? (
 						<>
-							<SpectrumChart municipio={municipio} spectrum={spectrum} />
+							<SpectrumChart
+								municipio={municipio}
+								params={spectrumParams}
+								spectrum={spectrum}
+							/>
 							<ParameterTiles spectrum={spectrum} />
 							<SpectrumTable spectrum={spectrum} />
 						</>

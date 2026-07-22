@@ -20,6 +20,13 @@ export {
   baseShearEvidenceIds,
 } from "./base-shear-constants"
 export { computeSpectrum, hazardLevelDetails, saAt } from "./spectrum"
+export {
+  calculationStepSchema,
+  calculationTraceSchema,
+  computeCalculationTrace,
+  siteCoefficientInterpolationTraceSchema,
+  traceSaAt,
+} from "./calculation-trace"
 
 export type {
   ImportanceGroup,
@@ -69,3 +76,10 @@ export type {
   SpectrumPoint,
   SpectrumResult,
 } from "./spectrum"
+export type {
+  CalculationStep,
+  CalculationTrace,
+  CalculationTraceContext,
+  SpectralAccelerationTraceOk,
+  SpectralAccelerationTraceResult,
+} from "./calculation-trace"
