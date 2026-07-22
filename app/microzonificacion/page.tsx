@@ -7,9 +7,9 @@ export default function MicrozonificacionPage() {
 	return (
 		<AppShell>
 			<ConstructionState
-				description="Este módulo incorporará los parámetros definidos por los estudios de microzonificación sísmica disponibles para el proyecto."
+				description="Este módulo queda reservado exclusivamente para la futura incorporación del estudio SGC Amenaza Sísmica 2018."
 				icon={MapPinned}
-				title="Microzonificación"
+				title="SGC Amenaza Sísmica 2018 · próximamente"
 			/>
 		</AppShell>
 	);

@@ -3,7 +3,6 @@ import {
   ActivityIcon,
   BarChart3Icon,
   CircleHelpIcon,
-  FileTextIcon,
   MapPinIcon,
   SettingsIcon,
   WavesIcon,
@@ -40,14 +39,9 @@ export const navGroups: SidebarNavGroup[] = [
         icon: <WavesIcon />,
       },
       {
-        title: "Microzonificación",
+        title: "SGC Amenaza Sísmica 2018 · próximamente",
         path: "/microzonificacion",
         icon: <MapPinIcon />,
-      },
-      {
-        title: "Memoria PDF",
-        path: "/memoria",
-        icon: <FileTextIcon />,
       },
     ],
   },
