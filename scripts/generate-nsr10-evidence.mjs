@@ -22,6 +22,76 @@ const VALUE_HORIZONTAL_PADDING_POINTS = 1.2;
 const VALUE_VERTICAL_PADDING_POINTS = 0.8;
 const GEOMETRY_EPSILON = 1e-9;
 
+// Clause and table regions are pinned to the same immutable PDF as the
+// municipality rows. The generator re-extracts each transcription from these
+// normalized rectangles and asserts the coefficient-bearing tokens below.
+const NORMATIVE_CITATION_DEFINITIONS = [
+  {
+    id: "a3.0-gravity-mass",
+    reference: "A.3.0",
+    pageNumber: 55,
+    rect: { left: 0.05, top: 0.36, width: 0.9, height: 0.152 },
+    requiredTokens: ["9.8", "M se expresa en kg"],
+  },
+  {
+    id: "a3.4.2.1-fhe-applicability",
+    reference: "A.3.4.2.1",
+    pageNumber: 61,
+    rect: { left: 0.05, top: 0.27, width: 0.9, height: 0.18 },
+    requiredTokens: ["20 niveles", "60 m", "6 niveles", "18 m", "2T"],
+  },
+  {
+    id: "a3.4.2.2-dynamic-required",
+    reference: "A.3.4.2.2",
+    pageNumber: 61,
+    rect: { left: 0.05, top: 0.465, width: 0.9, height: 0.225 },
+    requiredTokens: ["20 niveles", "60 m", "1aA", "5 niveles", "20 m", "D, E o F", "2T"],
+  },
+  {
+    id: "a4.2.2-period-ceiling",
+    reference: "Ecuación A.4.2-2",
+    pageNumber: 80,
+    rect: { left: 0.05, top: 0.235, width: 0.9, height: 0.115 },
+    requiredTokens: ["1.75", "1.2A F", "menor de 1.2"],
+  },
+  {
+    id: "a4.2.3-approximate-period",
+    reference: "Ecuación A.4.2-3 y Tabla A.4.2-1",
+    pageNumber: 80,
+    rect: { left: 0.05, top: 0.365, width: 0.9, height: 0.38 },
+    requiredTokens: [
+      "0.047",
+      "0.9",
+      "0.072",
+      "0.8",
+      "0.073",
+      "0.75",
+      "0.049",
+    ],
+  },
+  {
+    id: "a4.3.1-base-shear",
+    reference: "Ecuación A.4.3-1",
+    pageNumber: 81,
+    rect: { left: 0.05, top: 0.17, width: 0.9, height: 0.135 },
+    requiredTokens: ["V S g M", "fracción de la de la gravedad"],
+  },
+  {
+    id: "a4.3.2-force-distribution",
+    reference: "Ecuaciones A.4.3-2 y A.4.3-3",
+    pageNumber: 81,
+    rect: { left: 0.05, top: 0.315, width: 0.9, height: 0.235 },
+    requiredTokens: ["0.5", "2.5", "0.75", "0.5T", "2.0"],
+  },
+  {
+    id: "a5.4.5-dynamic-minimum",
+    reference: "A.5.4.5",
+    pageNumber: 86,
+    rect: { left: 0.05, top: 0.595, width: 0.9, height: 0.09 },
+    requiredTokens: ["80 por ciento", "90 por ciento"],
+  },
+];
+
 function round(value) {
   return Number(value.toFixed(10));
 }
@@ -65,6 +135,81 @@ function combinedGlyphBounds(items) {
     right: Math.max(...bounds.map(({ right }) => right)),
     bottom: Math.max(...bounds.map(({ bottom }) => bottom)),
   };
+}
+
+function normalizeExtractedText(value) {
+  return value.replace(/\s+/g, " ").trim();
+}
+
+function itemCenter(item) {
+  const bounds = glyphBounds(item);
+  return {
+    x: (bounds.left + bounds.right) / 2,
+    y: (bounds.top + bounds.bottom) / 2,
+  };
+}
+
+function pointInRect({ x, y }, rect) {
+  return (
+    x >= rect.left &&
+    x <= rect.left + rect.width &&
+    y >= rect.top &&
+    y <= rect.top + rect.height
+  );
+}
+
+async function extractNormativeCitations(pdfBytes) {
+  const pdf = await getDocument({
+    data: new Uint8Array(pdfBytes),
+    disableWorker: true,
+    verbosity: 0,
+  }).promise;
+  const citations = [];
+
+  for (const definition of NORMATIVE_CITATION_DEFINITIONS) {
+    const page = await pdf.getPage(definition.pageNumber);
+    const viewport = page.getViewport({ scale: 1 });
+    invariant(
+      viewport.width === PDF_PAGE_WIDTH && viewport.height === PDF_PAGE_HEIGHT,
+      `Unexpected dimensions on physical page ${definition.pageNumber}`,
+    );
+
+    const { items } = await page.getTextContent();
+    const expectedPrintedPage = `A-${definition.pageNumber - 14}`;
+    const printedPages = items.filter((item) => item.str === expectedPrintedPage);
+    invariant(
+      printedPages.length === 1,
+      `Expected printed page ${expectedPrintedPage} for ${definition.id}`,
+    );
+
+    const transcription = normalizeExtractedText(
+      items
+        .filter(
+          (item) => item.str.trim() && pointInRect(itemCenter(item), definition.rect),
+        )
+        .map((item) => item.str)
+        .join(" "),
+    );
+    invariant(transcription, `Empty normative citation ${definition.id}`);
+    for (const token of definition.requiredTokens) {
+      invariant(
+        transcription.includes(token),
+        `Normative citation ${definition.id} is missing token ${token}`,
+      );
+    }
+
+    citations.push({
+      id: definition.id,
+      reference: definition.reference,
+      pageNumber: definition.pageNumber,
+      printedPage: expectedPrintedPage,
+      rect: definition.rect,
+      transcription,
+    });
+  }
+
+  await pdf.destroy();
+  return citations;
 }
 
 function coefficientAtBaseline(items, baseline, minimumX, maximumX, label) {
@@ -399,7 +544,10 @@ async function main() {
     `Expected ${EXPECTED_MUNICIPALITY_COUNT} canonical municipalities`,
   );
 
-  const rawRows = await extractSourceRows(pdfBytes);
+  const [rawRows, normativeCitations] = await Promise.all([
+    extractSourceRows(pdfBytes),
+    extractNormativeCitations(pdfBytes),
+  ]);
   invariant(
     rawRows.length === EXPECTED_RAW_ROW_COUNT,
     `Expected ${EXPECTED_RAW_ROW_COUNT} raw source rows, found ${rawRows.length}`,
@@ -425,7 +573,7 @@ async function main() {
   );
 
   const manifestOutput = JSON.stringify({
-    schemaVersion: 3,
+    schemaVersion: 4,
     source: {
       document: "NSR-10 Título A, versión consolidada 2017",
       appendix: "Apéndice A-4",
@@ -436,6 +584,7 @@ async function main() {
     },
     layout: appendixLayout,
     citations,
+    normativeCitations,
   });
 
   const municipalitiesOutput = `${JSON.stringify(canonicalMunicipalities, null, 2)}\n`;
@@ -448,13 +597,14 @@ async function main() {
         uniqueCodes: sourceByCode.size,
         duplicateCodes: overrides.sourceDuplicates.map(({ code }) => code).sort(),
         geometryRowsValidated: rawRows.length,
+        normativeCitations: normativeCitations.length,
         manifestBytes: Buffer.byteLength(manifestOutput),
         pdfSha256,
       }),
     );
   } else {
     console.log(
-      `${checkOnly ? "Verified" : "Generated"} ${citations.length} compact municipality citations from ${rawRows.length} Appendix A-4 rows.`,
+      `${checkOnly ? "Verified" : "Generated"} ${citations.length} compact municipality citations and ${normativeCitations.length} normative clause/table citations from the pinned PDF.`,
     );
   }
 }

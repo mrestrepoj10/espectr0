@@ -1,8 +1,58 @@
 import { z } from "zod"
 
+import { approximatePeriodSystems } from "./base-shear-constants"
+
 export const supportedSoilProfileSchema = z.enum(["A", "B", "C", "D", "E"])
 export const soilProfileSchema = z.enum(["A", "B", "C", "D", "E", "F"])
 export const importanceGroupSchema = z.enum(["I", "II", "III", "IV"])
+export const approximatePeriodSystemSchema = z.enum(approximatePeriodSystems)
+export const seismicHazardZoneSchema = z.enum(["low", "intermediate", "high"])
+export const structuralRegularitySchema = z.enum(["regular", "irregular"])
+
+export const approximatePeriodParamsSchema = z
+  .object({
+    system: approximatePeriodSystemSchema,
+    hn: z.number().finite().positive(),
+  })
+  .strict()
+
+export const periodCeilingParamsSchema = z
+  .object({
+    av: z.number().finite().positive(),
+    fv: z.number().finite().positive(),
+    ta: z.number().finite().positive(),
+    tAnalytical: z.number().finite().positive().optional(),
+  })
+  .strict()
+
+export const forceDistributionStorySchema = z
+  .object({
+    wx: z.number().finite().positive(),
+    hx: z.number().finite().positive(),
+  })
+  .strict()
+
+export const forceDistributionParamsSchema = z
+  .object({
+    stories: z.array(forceDistributionStorySchema).min(1),
+    t: z.number().finite().nonnegative(),
+    vs: z.number().finite().positive(),
+  })
+  .strict()
+
+export const fheApplicabilityParamsSchema = z
+  .object({
+    hazardZone: seismicHazardZoneSchema,
+    importanceGroup: importanceGroupSchema,
+    regularity: structuralRegularitySchema,
+    stories: z.number().int().positive(),
+    heightM: z.number().finite().positive(),
+    soilProfile: soilProfileSchema,
+    t: z.number().finite().nonnegative(),
+    tc: z.number().finite().positive().optional(),
+    flexibleOnRigid: z.boolean().optional(),
+  })
+  .strict()
 
 export const municipioSchema = z
   .object({
@@ -199,6 +249,14 @@ export const oracleSchema = z
 export type SupportedSoilProfile = z.infer<typeof supportedSoilProfileSchema>
 export type SoilProfile = z.infer<typeof soilProfileSchema>
 export type ImportanceGroup = z.infer<typeof importanceGroupSchema>
+export type ApproximatePeriodSystem = z.infer<typeof approximatePeriodSystemSchema>
+export type SeismicHazardZone = z.infer<typeof seismicHazardZoneSchema>
+export type StructuralRegularity = z.infer<typeof structuralRegularitySchema>
+export type ApproximatePeriodParams = z.infer<typeof approximatePeriodParamsSchema>
+export type PeriodCeilingParams = z.infer<typeof periodCeilingParamsSchema>
+export type ForceDistributionStory = z.infer<typeof forceDistributionStorySchema>
+export type ForceDistributionParams = z.infer<typeof forceDistributionParamsSchema>
+export type FheApplicabilityParams = z.infer<typeof fheApplicabilityParamsSchema>
 export type Municipio = z.infer<typeof municipioSchema>
 export type Municipios = z.infer<typeof municipiosSchema>
 export type SiteCoefficientTable = z.infer<typeof siteCoefficientTableSchema>
