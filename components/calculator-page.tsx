@@ -12,7 +12,6 @@ import {
 import {
 	ChevronDownIcon,
 	CodeXmlIcon,
-	DicesIcon,
 	DownloadIcon,
 	FileJsonIcon,
 	FileTextIcon,
@@ -22,6 +21,15 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+import {
+	defaultMunicipio,
+	getHazardNotice,
+	getMunicipalityCoefficients,
+	HazardLevelControl,
+	ImportanceGroupControl,
+	MunicipalityCombobox,
+	SoilProfileControl,
+} from "@/components/spectrum-controls";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -48,23 +56,9 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-	Combobox,
-	ComboboxContent,
-	ComboboxEmpty,
-	ComboboxInput,
-	ComboboxItem,
-	ComboboxList,
-} from "@/components/ui/combobox";
-import {
-	InputGroupAddon,
-	InputGroupButton,
-} from "@/components/ui/input-group";
-import {
 	Field,
 	FieldDescription,
 	FieldGroup,
-	FieldLegend,
-	FieldSet,
 	FieldTitle,
 } from "@/components/ui/field";
 import {
@@ -85,7 +79,6 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
 	copyChartPng,
 	copyChartSvg,
@@ -95,8 +88,6 @@ import {
 	computeCalculationTrace,
 	computeSpectrum,
 	hazardLevelDetails,
-	lookupMunicipio,
-	municipios,
 	normalizeSearchText,
 } from "@/lib/nsr10";
 
@@ -114,44 +105,6 @@ const standards = [
 	{ label: "NSR-10", value: "nsr10", disabled: false },
 	{ label: "CCP-14 · próximamente", value: "ccp14", disabled: true },
 ] as const;
-
-const hazardLevels = [
-	{ label: "Diseño · TR 475 años", value: "design" },
-	{
-		label: "Seguridad limitada · TR 225 años",
-		value: "limited-safety",
-	},
-	{
-		label: "Umbral de daño · TR 31 años",
-		value: "damage-threshold",
-	},
-] as const satisfies ReadonlyArray<{ label: string; value: HazardLevel }>;
-
-const soilProfiles = ["A", "B", "C", "D", "E", "F"] as const;
-const importanceGroups = ["I", "II", "III", "IV"] as const;
-
-const soilDescriptions: Record<SoilProfile, string> = {
-	A: "Roca competente",
-	B: "Roca de rigidez media",
-	C: "Suelo muy denso o roca blanda",
-	D: "Suelo rígido",
-	E: "Suelo blando",
-	F: "Requiere estudio específico",
-};
-
-const importanceDescriptions: Record<ImportanceGroup, string> = {
-	I: "Ocupación normal",
-	II: "Ocupación especial",
-	III: "Atención a la comunidad",
-	IV: "Edificación indispensable",
-};
-
-const importanceValues: Record<ImportanceGroup, string> = {
-	I: "1.00",
-	II: "1.10",
-	III: "1.25",
-	IV: "1.50",
-};
 
 const branchLabels: Record<SpectrumBranch, string> = {
 	"rising-A.2.6-7": "Ascendente · A.2.6-7",
@@ -171,126 +124,10 @@ const chartConfig = {
 	},
 } satisfies ChartConfig;
 
-const defaultMunicipio = lookupMunicipio("Cali", "Valle del Cauca")[0];
-
-if (!defaultMunicipio) {
-	throw new Error("El conjunto NSR-10 no contiene el municipio predeterminado de Cali");
-}
-
-function municipioLabel(municipio: Municipio) {
-	return `${municipio.municipio}, ${municipio.departamento}`;
-}
-
 function formatDecimal(value: number, digits: number) {
 	const factor = 10 ** digits;
 	const rounded = Math.round((value + Number.EPSILON) * factor) / factor;
 	return rounded.toFixed(digits);
-}
-
-function municipioMatches(municipio: Municipio, query: string) {
-	const normalizedQuery = normalizeSearchText(query);
-	if (!normalizedQuery) return true;
-
-	return normalizeSearchText(municipioLabel(municipio)).includes(normalizedQuery);
-}
-
-function MunicipalityCombobox({
-	value,
-	onValueChange,
-}: {
-	value: Municipio;
-	onValueChange: (municipio: Municipio) => void;
-}) {
-	return (
-		<Combobox
-			autoHighlight
-			filter={municipioMatches}
-			isItemEqualToValue={(item, selected) =>
-				item.departamento === selected.departamento &&
-				item.municipio === selected.municipio
-			}
-			items={municipios}
-			itemToStringLabel={municipioLabel}
-			itemToStringValue={municipioLabel}
-			onValueChange={(municipio) => {
-				if (municipio) onValueChange(municipio);
-			}}
-			value={value}
-		>
-			<ComboboxInput
-				aria-label="Buscar municipio"
-				className="w-full"
-				placeholder="Buscar municipio…"
-			>
-				<InputGroupAddon align="inline-end">
-					<InputGroupButton
-						aria-label="Elegir municipio al azar"
-						onClick={() => {
-							const randomMunicipio =
-								municipios[Math.floor(Math.random() * municipios.length)];
-							if (randomMunicipio) onValueChange(randomMunicipio);
-						}}
-						size="icon-xs"
-						title="Elegir municipio al azar"
-						variant="ghost"
-					>
-						<DicesIcon />
-					</InputGroupButton>
-				</InputGroupAddon>
-			</ComboboxInput>
-			<ComboboxContent>
-				<ComboboxEmpty>No se encontraron municipios.</ComboboxEmpty>
-				<ComboboxList>
-					{(municipio: Municipio) => (
-						<ComboboxItem
-							key={`${municipio.departamento}-${municipio.municipio}`}
-							value={municipio}
-						>
-							<span className="flex min-w-0 flex-col">
-								<span className="truncate">{municipio.municipio}</span>
-								<span className="truncate font-normal text-muted-foreground text-xs">
-									{municipio.departamento} · Aa {municipio.aa.toFixed(2)} · Av{" "}
-									{municipio.av.toFixed(2)}
-								</span>
-							</span>
-						</ComboboxItem>
-					)}
-				</ComboboxList>
-			</ComboboxContent>
-		</Combobox>
-	);
-}
-
-function SingleToggleGroup<T extends string>({
-	ariaLabel,
-	options,
-	value,
-	onValueChange,
-}: {
-	ariaLabel: string;
-	options: readonly T[];
-	value: T;
-	onValueChange: (value: T) => void;
-}) {
-	return (
-		<ToggleGroup
-			aria-label={ariaLabel}
-			className="w-full flex-wrap"
-			onValueChange={(values) => {
-				const nextValue = values[0] as T | undefined;
-				if (nextValue) onValueChange(nextValue);
-			}}
-			size="default"
-			value={[value]}
-			variant="contrast"
-		>
-			{options.map((option) => (
-				<ToggleGroupItem className="min-w-8 flex-1" key={option} value={option}>
-					{option}
-				</ToggleGroupItem>
-			))}
-		</ToggleGroup>
-	);
 }
 
 function ParameterRail({
@@ -315,24 +152,11 @@ function ParameterRail({
 	onHazardLevelChange: (level: HazardLevel) => void;
 }) {
 	const hazardDetails = hazardLevelDetails[hazardLevel];
-	const municipalityCoefficients =
-		hazardLevel === "design"
-			? `Aa ${municipio.aa.toFixed(2)} · Av ${municipio.av.toFixed(2)}`
-			: hazardLevel === "limited-safety"
-				? `Ae ${municipio.ae.toFixed(2)}`
-				: `Ad ${municipio.ad.toFixed(2)}`;
-	const importanceDescription =
-		hazardLevel === "damage-threshold"
-			? `${importanceGroup} — ${importanceDescriptions[importanceGroup]} · I no modifica A.12.3`
-			: `${importanceGroup} — ${importanceDescriptions[importanceGroup]} · I = ${importanceValues[importanceGroup]}`;
-	const hazardNotice =
-		hazardLevel === "limited-safety"
-			? "Uso restringido a las edificaciones existentes permitidas por A.10.9."
-			: hazardLevel === "damage-threshold"
-				? importanceGroup === "III" || importanceGroup === "IV"
-					? "Verificación especial de operatividad para las edificaciones cubiertas por A.12."
-					: "A.12 aplica a las edificaciones cubiertas de los grupos III y IV; revisa el grupo de uso."
-				: "Movimientos sísmicos de diseño para edificaciones nuevas y existentes.";
+	const municipalityCoefficients = getMunicipalityCoefficients(
+		municipio,
+		hazardLevel,
+	);
+	const hazardNotice = getHazardNotice(hazardLevel, importanceGroup);
 
 	return (
 		<Card className="self-start" size="sm">
@@ -387,56 +211,21 @@ function ParameterRail({
 						</Button>
 					</Field>
 
-					<FieldSet className="gap-2">
-						<FieldLegend variant="label">Perfil de suelo</FieldLegend>
-						<SingleToggleGroup
-							ariaLabel="Perfil de suelo"
-							onValueChange={onSoilProfileChange}
-							options={soilProfiles}
-							value={soilProfile}
-						/>
-						<FieldDescription>
-							{soilProfile} — {soilDescriptions[soilProfile]}
-						</FieldDescription>
-					</FieldSet>
+					<SoilProfileControl
+						onValueChange={onSoilProfileChange}
+						value={soilProfile}
+					/>
 
-					<FieldSet className="gap-2">
-						<FieldLegend variant="label">Grupo de uso</FieldLegend>
-						<SingleToggleGroup
-							ariaLabel="Grupo de uso"
-							onValueChange={onImportanceGroupChange}
-							options={importanceGroups}
-							value={importanceGroup}
-						/>
-						<FieldDescription>
-							{importanceDescription}
-						</FieldDescription>
-					</FieldSet>
+					<ImportanceGroupControl
+						hazardLevel={hazardLevel}
+						onValueChange={onImportanceGroupChange}
+						value={importanceGroup}
+					/>
 
-					<Field>
-						<FieldTitle>Nivel de amenaza</FieldTitle>
-						<Select
-							items={hazardLevels}
-							onValueChange={(value) => {
-								if (value) onHazardLevelChange(value as HazardLevel);
-							}}
-							value={hazardLevel}
-						>
-							<SelectTrigger className="w-full" aria-label="Nivel de amenaza">
-								<SelectValue />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectGroup>
-									<SelectLabel>Periodo de retorno</SelectLabel>
-									{hazardLevels.map((level) => (
-										<SelectItem key={level.value} value={level.value}>
-											{level.label}
-										</SelectItem>
-									))}
-								</SelectGroup>
-							</SelectContent>
-						</Select>
-					</Field>
+					<HazardLevelControl
+						onValueChange={onHazardLevelChange}
+						value={hazardLevel}
+					/>
 				</FieldGroup>
 			</CardContent>
 			<CardFooter className="flex-col items-stretch gap-3">
