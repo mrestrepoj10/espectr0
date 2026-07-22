@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import overridesData from "../../../scripts/nsr10-evidence-overrides.json";
 import municipiosData from "../data/municipios.json";
 import manifestData from "./manifest.json";
-import { getMunicipalityTraceability } from "./index";
+import { getMunicipalityTraceability, getNormativeCitation } from "./index";
 import { sourceEvidenceManifestSchema } from "./schema";
 
 const manifest = sourceEvidenceManifestSchema.parse(manifestData);
@@ -24,7 +24,7 @@ describe("NSR-10 municipality traceability", () => {
 	});
 
 	it("keeps fixed geometry and source metadata once", () => {
-		expect(Buffer.byteLength(JSON.stringify(manifestData))).toBeLessThan(35_000);
+		expect(Buffer.byteLength(JSON.stringify(manifestData))).toBeLessThan(42_000);
 		expect(manifest.source).toMatchObject({
 			pdfPath: "/nsr10-titulo-a-2017.pdf",
 			pdfSha256:
@@ -63,6 +63,31 @@ describe("NSR-10 municipality traceability", () => {
 				},
 			},
 		});
+	});
+
+	it("stores PDF-region transcriptions for every base-shear normative value", () => {
+		expect(manifest.normativeCitations.map(({ id }) => id)).toEqual([
+			"a3.0-gravity-mass",
+			"a3.4.2.1-fhe-applicability",
+			"a3.4.2.2-dynamic-required",
+			"a4.2.2-period-ceiling",
+			"a4.2.3-approximate-period",
+			"a4.3.1-base-shear",
+			"a4.3.2-force-distribution",
+			"a5.4.5-dynamic-minimum",
+		]);
+		for (const citation of manifest.normativeCitations) {
+			expect(citation.printedPage).toBe(`A-${citation.pageNumber - 14}`);
+			expect(citation.transcription.length).toBeGreaterThan(40);
+			expect(getNormativeCitation(citation.id)).toEqual(citation);
+		}
+		expect(getNormativeCitation("a4.2.3-approximate-period")?.transcription).toContain(
+			"0.047 0.9",
+		);
+		expect(getNormativeCitation("a5.4.5-dynamic-minimum")?.transcription).toContain(
+			"80 por ciento",
+		);
+		expect(getNormativeCitation("unknown")).toBeUndefined();
 	});
 
 	it.each([

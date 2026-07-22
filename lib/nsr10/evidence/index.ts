@@ -4,17 +4,21 @@ import { lookupMunicipioByCode } from "../municipios";
 import type {
 	CompactMunicipalityCitation,
 	MunicipalityTraceability,
+	NormativeCitation,
 	NormalizedPdfRect,
 	SourceEvidenceManifest,
 } from "./schema";
 
-export type { MunicipalityTraceability } from "./schema";
+export type { MunicipalityTraceability, NormativeCitation } from "./schema";
 
 // The generator and its tests strictly validate this checked-in artifact.
 // Runtime keeps the hot path to a small tuple lookup with no eager expansion.
 const manifest = manifestData as unknown as SourceEvidenceManifest;
 const citationByCode = new Map(
 	manifest.citations.map((citation) => [citation[0], citation]),
+);
+const normativeCitationById = new Map(
+	manifest.normativeCitations.map((citation) => [citation.id, citation]),
 );
 
 function composeValueRect(
@@ -76,4 +80,8 @@ export function getMunicipalityTraceability(
 	return municipality && citation
 		? composeTraceability(municipality, citation)
 		: undefined;
+}
+
+export function getNormativeCitation(id: string): NormativeCitation | undefined {
+	return normativeCitationById.get(id);
 }

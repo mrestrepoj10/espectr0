@@ -84,15 +84,27 @@ export const compactMunicipalityCitationSchema = z.tuple([
 	z.number().finite().min(0).max(1),
 ]);
 
+export const normativeCitationSchema = z
+	.object({
+		id: z.string().regex(/^[a-z0-9.-]+$/),
+		reference: z.string().trim().min(1),
+		pageNumber: z.number().int().positive(),
+		printedPage: z.string().regex(/^A-\d+$/),
+		rect: normalizedPdfRectSchema,
+		transcription: z.string().trim().min(1),
+	})
+	.strict();
+
 export const sourceEvidenceManifestSchema = z
 	.object({
-		schemaVersion: z.literal(3),
+		schemaVersion: z.literal(4),
 		source: sourceSchema,
 		layout: appendixLayoutSchema,
 		citations: z.array(compactMunicipalityCitationSchema),
+		normativeCitations: z.array(normativeCitationSchema),
 	})
 	.strict()
-	.superRefine(({ citations, layout }, context) => {
+	.superRefine(({ citations, layout, normativeCitations }, context) => {
 		const seenCodes = new Set<string>();
 
 		for (let index = 0; index < citations.length; index += 1) {
@@ -114,12 +126,26 @@ export const sourceEvidenceManifestSchema = z
 				});
 			}
 		}
+
+		const seenNormativeIds = new Set<string>();
+		for (let index = 0; index < normativeCitations.length; index += 1) {
+			const citation = normativeCitations[index];
+			if (seenNormativeIds.has(citation.id)) {
+				context.addIssue({
+					code: "custom",
+					message: `Duplicate normative citation id ${citation.id}`,
+					path: ["normativeCitations", index, "id"],
+				});
+			}
+			seenNormativeIds.add(citation.id);
+		}
 	});
 
 export type NormalizedPdfRect = z.infer<typeof normalizedPdfRectSchema>;
 export type CompactMunicipalityCitation = z.infer<
 	typeof compactMunicipalityCitationSchema
 >;
+export type NormativeCitation = z.infer<typeof normativeCitationSchema>;
 export type SourceEvidenceManifest = z.infer<
 	typeof sourceEvidenceManifestSchema
 >;

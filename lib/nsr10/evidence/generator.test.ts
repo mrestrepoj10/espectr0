@@ -22,9 +22,10 @@ describe("NSR-10 evidence generator", () => {
 			uniqueCodes: 1_123,
 			duplicateCodes: ["11001"],
 			geometryRowsValidated: 1_124,
+			normativeCitations: 8,
 			pdfSha256:
 				"47207abe1e832f5feb5fb8448af884b8d539fddaf89b6b21ab466765dd8524b0",
 		});
-		expect(report.manifestBytes).toBeLessThan(35_000);
+		expect(report.manifestBytes).toBeLessThan(42_000);
 	}, 15_000);
 });

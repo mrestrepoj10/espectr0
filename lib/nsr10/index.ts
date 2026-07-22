@@ -6,6 +6,19 @@ export {
   searchMunicipios,
 } from "./municipios"
 export { fa, fv } from "./site-coefficients"
+export {
+  approximatePeriod,
+  baseShear,
+  fheApplicability,
+  forceDistribution,
+  periodCeiling,
+} from "./base-shear"
+export {
+  approximatePeriodCoefficients,
+  approximatePeriodSystems,
+  baseShearConstants,
+  baseShearEvidenceIds,
+} from "./base-shear-constants"
 export { computeSpectrum, hazardLevelDetails, saAt } from "./spectrum"
 
 export type {
@@ -14,6 +27,30 @@ export type {
   SoilProfile,
   SupportedSoilProfile,
 } from "./schema"
+export type {
+  ApproximatePeriodParams,
+  ApproximatePeriodSystem,
+  FheApplicabilityParams,
+  ForceDistributionParams,
+  ForceDistributionStory,
+  PeriodCeilingParams,
+  SeismicHazardZone,
+  StructuralRegularity,
+} from "./schema"
+export type {
+  ApproximatePeriodResult,
+  BaseShearOk,
+  BaseShearParams,
+  BaseShearResult,
+  DistributedStoryForce,
+  DynamicBaseShearNote,
+  FheApplicabilityResult,
+  FheApplicabilityRule,
+  FheApplicabilityWarning,
+  FheApplicabilityWarningCode,
+  ForceDistributionResult,
+  PeriodCeilingResult,
+} from "./base-shear"
 export type {
   DamageThresholdSpectrumBranch,
   DamageThresholdSpectrumCoefficients,
