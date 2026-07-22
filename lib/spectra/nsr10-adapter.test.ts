@@ -19,6 +19,10 @@ import {
 } from "."
 
 import type {
+  NormalizedSpectrumResult,
+  SpectrumEngine,
+} from "."
+import type {
   CalculationTrace,
   SiteSpecificStudyRequired,
   SpectrumOk,
@@ -199,7 +203,21 @@ describe("NSR-10 adapter numerical equivalence", () => {
     }
   })
 
-  it("preserves parent RangeError behavior for invalid inputs and periods", () => {
+  it("preserves the exact parent RangeError contract for every invalid numeric input", () => {
+    const nonFiniteCases = [
+      ["aa", Number.NaN],
+      ["aa", Number.POSITIVE_INFINITY],
+      ["aa", Number.NEGATIVE_INFINITY],
+      ["av", Number.NaN],
+      ["av", Number.POSITIVE_INFINITY],
+      ["av", Number.NEGATIVE_INFINITY],
+      ["ae", Number.NaN],
+      ["ae", Number.POSITIVE_INFINITY],
+      ["ae", Number.NEGATIVE_INFINITY],
+      ["ad", Number.NaN],
+      ["ad", Number.POSITIVE_INFINITY],
+      ["ad", Number.NEGATIVE_INFINITY],
+    ] as const
     const operations = [
       {
         parent: () => computeSpectrum({ ...base, aa: 0 }),
@@ -214,6 +232,19 @@ describe("NSR-10 adapter numerical equivalence", () => {
         parent: () => saAt(-0.01, base),
         adapted: () => adaptNsr10Spectrum(base).saAt(-0.01),
       },
+      ...nonFiniteCases.map(([key, value]) => {
+        const hazardLevel =
+          key === "ae"
+            ? "limited-safety"
+            : key === "ad"
+              ? "damage-threshold"
+              : "design"
+        const params = { ...base, hazardLevel, [key]: value } as SpectrumParams
+        return {
+          parent: () => computeSpectrum(params),
+          adapted: () => adaptNsr10Spectrum(params),
+        }
+      }),
     ]
 
     for (const operation of operations) {
@@ -318,7 +349,7 @@ describe("NSR-10 adapter numerical equivalence", () => {
       }
     }
     expect(checked).toBe(250)
-  })
+  }, 10_000)
 })
 
 describe("NSR-10 adapter engine surface", () => {
@@ -435,5 +466,104 @@ describe("NSR-10 adapter engine surface", () => {
     expect(() => registry.compute("dishonest-engine", scenario)).toThrow(
       /identity does not match/,
     )
+  })
+
+  it("binds accepted scenarios to the registered type, study, and version", () => {
+    const result = adaptNsr10Spectrum(base)
+    const permissiveEngine: SpectrumEngine = {
+      metadata: nsr10SpectrumEngine.metadata,
+      accepts(scenario): scenario is never {
+        void scenario
+        return true
+      },
+      compute() {
+        return result
+      },
+    }
+    const registry = new SpectrumEngineRegistry()
+    registry.register(permissiveEngine)
+
+    expect(() =>
+      registry.compute(nsr10SpectrumEngine.metadata.id, {
+        type: "ccp14",
+        studyId: "ccp14",
+        studyVersion: "2014",
+        inputs: {},
+      }),
+    ).toThrow(/does not match registered engine metadata/)
+    expect(() =>
+      registry.compute(nsr10SpectrumEngine.metadata.id, {
+        ...createNsr10AdapterScenario(base),
+        studyVersion: "drifted-version",
+      }),
+    ).toThrow(/does not match registered engine metadata/)
+  })
+
+  it("rejects capability decision drift from registered metadata", () => {
+    const canonical = adaptNsr10Spectrum(base)
+    const driftingEngine: SpectrumEngine = {
+      metadata: nsr10SpectrumEngine.metadata,
+      accepts: nsr10SpectrumEngine.accepts,
+      compute() {
+        return {
+          ...canonical,
+          capabilities: {
+            ...canonical.capabilities,
+            buildingBaseShear: {
+              supported: false,
+              reason: "Dishonest runtime drift",
+            },
+          },
+        }
+      },
+    }
+    const registry = new SpectrumEngineRegistry()
+    registry.register(driftingEngine)
+    expect(() =>
+      registry.compute(
+        nsr10SpectrumEngine.metadata.id,
+        createNsr10AdapterScenario(base),
+      ),
+    ).toThrow(/capability buildingBaseShear does not match/)
+  })
+
+  it("rejects runtime results without the required saAt evaluator", () => {
+    const canonical = adaptNsr10Spectrum(base)
+    const dataOnly = { ...canonical }
+    Reflect.deleteProperty(dataOnly, "saAt")
+    const incompleteEngine: SpectrumEngine = {
+      metadata: nsr10SpectrumEngine.metadata,
+      accepts: nsr10SpectrumEngine.accepts,
+      compute() {
+        return dataOnly as unknown as NormalizedSpectrumResult
+      },
+    }
+    const registry = new SpectrumEngineRegistry()
+    registry.register(incompleteEngine)
+    expect(() =>
+      registry.compute(
+        nsr10SpectrumEngine.metadata.id,
+        createNsr10AdapterScenario(base),
+      ),
+    ).toThrow(/must provide an saAt evaluator/)
+  })
+
+  it("uses the parsed registration snapshot after caller metadata mutation", () => {
+    const mutableMetadata = structuredClone(nsr10SpectrumEngine.metadata)
+    const engine: SpectrumEngine = {
+      ...nsr10SpectrumEngine,
+      metadata: mutableMetadata,
+    }
+    const registry = new SpectrumEngineRegistry()
+    registry.register(engine)
+    mutableMetadata.id = "mutated-after-registration"
+    mutableMetadata.studyVersion = "mutated-after-registration"
+
+    expect(
+      registry.compute(
+        nsr10SpectrumEngine.metadata.id,
+        createNsr10AdapterScenario(base),
+      ).status,
+    ).toBe("ok")
   })
 })

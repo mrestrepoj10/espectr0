@@ -76,6 +76,18 @@ export function parseNsr10TraceEnvelope(trace: {
   if (parsed.schemaVersion !== trace.schemaVersion) {
     throw new Error("NSR-10 trace envelope version does not match its payload")
   }
+  for (const [kind, entries] of [
+    ["step", parsed.steps],
+    ["branch", parsed.branches],
+  ] as const) {
+    const ids = new Set<string>()
+    for (const entry of entries) {
+      if (ids.has(entry.id)) {
+        throw new Error(`Duplicate NSR-10 trace ${kind} ID: ${entry.id}`)
+      }
+      ids.add(entry.id)
+    }
+  }
   return parsed
 }
 
@@ -133,12 +145,32 @@ export function assertNsr10LineageResolves(
   }
   if (result.status !== "ok") return
   const trace = result.trace.data as unknown as CalculationTrace
+  const stepById = new Map(trace.steps.map((step) => [step.id, step]))
   for (const id of result.formulaIds) {
     if (!resolveNsr10FormulaId(trace, id)) {
       throw new Error(`Unresolved NSR-10 formula ID: ${id}`)
     }
   }
   for (const metric of result.metrics) {
+    if (metric.formulaId !== null) {
+      const formulaStep = stepById.get(metric.formulaId)
+      if (!formulaStep) {
+        throw new Error(
+          `NSR-10 metric formula does not resolve to a trace step: ${metric.formulaId}`,
+        )
+      }
+      if (
+        metric.dependencyIds.length !== formulaStep.dependencies.length ||
+        metric.dependencyIds.some(
+          (dependencyId, index) =>
+            dependencyId !== formulaStep.dependencies[index],
+        )
+      ) {
+        throw new Error(
+          `NSR-10 metric dependencies do not match formula ${metric.formulaId}`,
+        )
+      }
+    }
     for (const id of metric.dependencyIds) {
       if (!resolveNsr10DependencyId(trace, id)) {
         throw new Error(`Unresolved NSR-10 dependency ID: ${id}`)

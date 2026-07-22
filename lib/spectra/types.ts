@@ -247,6 +247,38 @@ export const spectrumTraceEnvelopeSchema = z
         path: ["data", "schemaVersion"],
       })
     }
+    const stepIds = new Set<string>()
+    trace.data.steps.forEach((step, index) => {
+      if (stepIds.has(step.id)) {
+        addRelationalIssue(context, `Duplicate trace step ID: ${step.id}`, [
+          "data",
+          "steps",
+          index,
+          "id",
+        ])
+      }
+      stepIds.add(step.id)
+    })
+    const branchIds = new Set<string>()
+    trace.data.branches.forEach((branch, index) => {
+      if (branchIds.has(branch.id)) {
+        addRelationalIssue(context, `Duplicate trace branch ID: ${branch.id}`, [
+          "data",
+          "branches",
+          index,
+          "id",
+        ])
+      }
+      if (stepIds.has(branch.id)) {
+        addRelationalIssue(context, `Trace ID is ambiguous: ${branch.id}`, [
+          "data",
+          "branches",
+          index,
+          "id",
+        ])
+      }
+      branchIds.add(branch.id)
+    })
   })
 
 const hazardSchema = z
@@ -273,7 +305,7 @@ const identityShape = {
   scenarioType: spectrumScenarioTypeSchema,
   normalizedInputs: normalizedInputsSchema,
   warnings: z.array(spectrumWarningSchema),
-  sourceIds: uniqueIdsSchema,
+  sourceIds: uniqueIdsSchema.min(1),
   citationIds: uniqueIdsSchema,
   evidenceAvailability: evidenceAvailabilitySchema,
   traceSchemaVersion: z.number().int().positive(),
@@ -403,6 +435,16 @@ export const normalizedSpectrumResultDataSchema = z
         ["traceSchemaVersion"],
       )
     }
+    if (
+      result.evidenceAvailability.status === "available" &&
+      result.citationIds.length === 0
+    ) {
+      addRelationalIssue(
+        context,
+        "Available evidence must declare at least one citation",
+        ["citationIds"],
+      )
+    }
 
     const topCitationIds = new Set(result.citationIds)
     result.warnings.forEach((warning, index) => {
@@ -436,6 +478,9 @@ export const normalizedSpectrumResultDataSchema = z
       ...result.trace.data.branches.map(({ id }) => id),
     ])
     const traceStepIds = new Set(result.trace.data.steps.map(({ id }) => id))
+    const traceStepById = new Map(
+      result.trace.data.steps.map((step) => [step.id, step]),
+    )
     const traceBranchIds = new Set(result.trace.data.branches.map(({ id }) => id))
 
     result.branches.forEach((branch, index) => {
@@ -513,6 +558,32 @@ export const normalizedSpectrumResultDataSchema = z
             "formulaId",
           ])
         }
+        const formulaStep = traceStepById.get(metric.formulaId)
+        if (!formulaStep) {
+          addRelationalIssue(
+            context,
+            `Metric formula must resolve to a trace step: ${metric.formulaId}`,
+            ["metrics", index, "formulaId"],
+          )
+        } else if (
+          metric.dependencyIds.length !== formulaStep.dependencies.length ||
+          metric.dependencyIds.some(
+            (dependencyId, dependencyIndex) =>
+              dependencyId !== formulaStep.dependencies[dependencyIndex],
+          )
+        ) {
+          addRelationalIssue(
+            context,
+            `Metric dependencies must exactly match its trace step in declared order: ${metric.formulaId}`,
+            ["metrics", index, "dependencyIds"],
+          )
+        }
+      } else if (metric.dependencyIds.length > 0) {
+        addRelationalIssue(
+          context,
+          "Metrics without a formula cannot declare dependencies",
+          ["metrics", index, "dependencyIds"],
+        )
       }
       metric.dependencyIds.forEach((id) => {
         if (!traceStepIds.has(id)) {

@@ -2,6 +2,7 @@ import { z } from "zod"
 
 import {
   SPECTRUM_CAPABILITIES_SCHEMA_VERSION,
+  spectrumCapabilityKeys,
   spectrumCapabilitiesSchema,
 } from "./capabilities"
 import type {
@@ -59,6 +60,9 @@ export function assertEngineResultIdentity(
   metadata: SpectrumEngineMetadata,
   result: NormalizedSpectrumResult,
 ): void {
+  if (typeof result.saAt !== "function") {
+    throw new Error("Spectrum result must provide an saAt evaluator")
+  }
   const data = { ...result }
   Reflect.deleteProperty(data, "saAt")
   const parsed = normalizedSpectrumResultDataSchema.parse(data)
@@ -70,5 +74,19 @@ export function assertEngineResultIdentity(
     parsed.scenarioType !== metadata.scenarioType
   ) {
     throw new Error("Spectrum result identity does not match registered engine metadata")
+  }
+  for (const key of spectrumCapabilityKeys) {
+    const expected = metadata.capabilities[key]
+    const actual = parsed.capabilities[key]
+    if (
+      actual.supported !== expected.supported ||
+      (!actual.supported &&
+        !expected.supported &&
+        actual.reason !== expected.reason)
+    ) {
+      throw new Error(
+        `Spectrum result capability ${key} does not match registered engine metadata`,
+      )
+    }
   }
 }

@@ -220,6 +220,66 @@ describe("engine-neutral spectrum contract", () => {
     expectContradiction((data) => {
       data.formulaIds.push(data.formulaIds[0])
     })
+    expectContradiction((data) => {
+      const metric = data.metrics.find(({ id }) => id === "tc")!
+      metric.dependencyIds = ["pga"]
+    })
+    expectContradiction((data) => {
+      const metric = data.metrics.find(({ id }) => id === "tc")!
+      metric.dependencyIds.reverse()
+    })
+    expectContradiction((data) => {
+      const metric = data.metrics.find(({ formulaId }) => formulaId === null)!
+      metric.dependencyIds = ["pga"]
+    })
+    expectContradiction((data) => {
+      data.trace.data.steps.push(structuredClone(data.trace.data.steps[0]))
+    })
+    expectContradiction((data) => {
+      data.trace.data.branches.push(structuredClone(data.trace.data.branches[0]))
+    })
+  })
+
+  it("rejects ambiguous or formula-inconsistent lineage at export", () => {
+    const mutations = [
+      (data: SuccessfulData) => {
+        const metric = data.metrics.find(({ id }) => id === "tc")!
+        metric.dependencyIds = ["pga"]
+      },
+      (data: SuccessfulData) => {
+        const metric = data.metrics.find(({ id }) => id === "tc")!
+        metric.dependencyIds.reverse()
+      },
+      (data: SuccessfulData) => {
+        data.trace.data.steps.push(structuredClone(data.trace.data.steps[0]))
+      },
+      (data: SuccessfulData) => {
+        data.trace.data.branches.push(structuredClone(data.trace.data.branches[0]))
+      },
+    ]
+
+    for (const mutate of mutations) {
+      const result = adaptNsr10Spectrum({
+        aa: 0.25,
+        av: 0.25,
+        soilProfile: "D",
+        importanceGroup: "II",
+      })
+      if (result.status !== "ok") throw new Error("Expected successful fixture")
+      const data = structuredClone(spectrumResultData(result)) as SuccessfulData
+      mutate(data)
+      expect(() => createSpectrumExport({ ...data, saAt: result.saAt })).toThrow()
+    }
+  })
+
+  it("rejects evidence states without their minimum source and citation declarations", () => {
+    expectContradiction((data) => {
+      data.sourceIds = []
+    })
+    expectContradiction((data) => {
+      data.evidenceAvailability = { status: "available" }
+      data.citationIds = []
+    })
   })
 
   it("emits a versioned JSON-safe projection without the evaluator function", () => {

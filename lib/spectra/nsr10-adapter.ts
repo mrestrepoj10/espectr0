@@ -66,19 +66,6 @@ export const nsr10Capabilities = spectrumCapabilitiesSchema.parse({
   traceabilityViewer: supportedCapability(),
 })
 
-const parentSpectrumParamsSchema = z
-  .object({
-    aa: z.number(),
-    av: z.number(),
-    ae: z.number().optional(),
-    ad: z.number().optional(),
-    hazardLevel: z.enum(["design", "limited-safety", "damage-threshold"]).optional(),
-    soilProfile: soilProfileSchema,
-    importanceGroup: importanceGroupSchema,
-    mode: z.enum(["general", "modal"]).optional(),
-  })
-  .strict()
-
 const normalizedNsr10InputsSchema = z
   .object({
     aa: z.number().finite(),
@@ -108,7 +95,10 @@ export const nsr10AdapterScenarioSchema = nsr10NationalScenarioSchema.extend({
 export type Nsr10AdapterScenario = z.infer<typeof nsr10AdapterScenarioSchema>
 
 function snapshotInputs(params: SpectrumParams) {
-  const snapshot = Object.freeze({
+  // Snapshot first, but leave runtime validation to the parent API. In
+  // particular, Zod rejects non-finite numbers with a ZodError while the
+  // existing NSR-10 functions deliberately expose stable RangeError messages.
+  return Object.freeze({
     aa: params.aa,
     av: params.av,
     ...(params.ae === undefined ? {} : { ae: params.ae }),
@@ -117,8 +107,7 @@ function snapshotInputs(params: SpectrumParams) {
     soilProfile: params.soilProfile,
     importanceGroup: params.importanceGroup,
     ...(params.mode === undefined ? {} : { mode: params.mode }),
-  })
-  return Object.freeze(parentSpectrumParamsSchema.parse(snapshot)) as SpectrumParams
+  }) as SpectrumParams
 }
 
 function snapshotContext(context: CalculationTraceContext): CalculationTraceContext {
