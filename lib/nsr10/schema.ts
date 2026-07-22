@@ -6,6 +6,7 @@ export const importanceGroupSchema = z.enum(["I", "II", "III", "IV"])
 
 export const municipioSchema = z
   .object({
+    code: z.string().regex(/^\d{5}$/, "Expected a five-digit DANE municipality code"),
     departamento: z.string().trim().min(1),
     municipio: z.string().trim().min(1),
     aa: z.number().finite().min(0.05).max(0.5),

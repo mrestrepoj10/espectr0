@@ -2,12 +2,23 @@ import { describe, expect, it } from "vitest"
 
 import {
   lookupMunicipio,
+  lookupMunicipioByCode,
   municipios,
   normalizeSearchText,
   searchMunicipios,
 } from "./municipios"
 
 describe("NSR-10 municipality helpers", () => {
+
+  it("finds municipalities by stable DANE code", () => {
+    expect(lookupMunicipioByCode("76001")).toMatchObject({
+      code: "76001",
+      departamento: "Valle del Cauca",
+      municipio: "Cali",
+    })
+    expect(lookupMunicipioByCode("00000")).toBeUndefined()
+  })
+
   it("normalizes case and Spanish diacritics", () => {
     expect(normalizeSearchText("  MEDELLÍN ")).toBe("medellin")
   })

@@ -1,5 +1,6 @@
 export {
   lookupMunicipio,
+  lookupMunicipioByCode,
   municipios,
   normalizeSearchText,
   searchMunicipios,

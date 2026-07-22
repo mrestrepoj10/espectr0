@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import dynamic from "next/dynamic";
 import {
 	Area,
 	AreaChart,
@@ -13,17 +12,16 @@ import {
 import {
 	ClipboardIcon,
 	DownloadIcon,
-	ExternalLinkIcon,
 	FileTextIcon,
 	LandmarkIcon,
-	ListTreeIcon,
 	TriangleAlertIcon,
 } from "lucide-react";
 import { toast } from "sonner";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
+import { TraceabilitySheet } from "@/components/traceability/traceability-sheet";
 import {
 	Card,
 	CardContent,
@@ -64,14 +62,6 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import {
-	Sheet,
-	SheetContent,
-	SheetDescription,
-	SheetHeader,
-	SheetTitle,
-} from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
 	Table,
 	TableBody,
@@ -152,17 +142,6 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const defaultMunicipio = lookupMunicipio("Cali", "Valle del Cauca")[0];
-
-const sourceNsr10PdfUrl =
-	"https://iisee.kenken.go.jp/worldlist/11_Colombia/Colombia%20Titulo%20A-NSR-10-Ver-2017.pdf";
-
-const CaliSourcePdf = dynamic(
-	() => import("@/components/cali-source-pdf").then((module) => module.CaliSourcePdf),
-	{
-		ssr: false,
-		loading: () => <Skeleton className="aspect-[612/792] w-full" />,
-	},
-);
 
 if (!defaultMunicipio) {
 	throw new Error("El conjunto NSR-10 no contiene el municipio predeterminado de Cali");
@@ -285,9 +264,6 @@ function ParameterRail({
 	onSoilProfileChange: (profile: SoilProfile) => void;
 	onImportanceGroupChange: (group: ImportanceGroup) => void;
 }) {
-	const hasTraceability =
-		municipio.municipio === "Cali" && municipio.departamento === "Valle del Cauca";
-
 	return (
 		<Card className="self-start shadow-none dark:ring-0" size="sm">
 			<CardHeader>
@@ -331,7 +307,6 @@ function ParameterRail({
 							Aa {municipio.aa.toFixed(2)} · Av {municipio.av.toFixed(2)} · Apéndice A-4
 						</FieldDescription>
 						<Button
-							disabled={!hasTraceability}
 							onClick={onTraceabilityOpen}
 							size="sm"
 							type="button"
@@ -340,9 +315,6 @@ function ParameterRail({
 							<LandmarkIcon data-icon="inline-start" />
 							Ver trazabilidad
 						</Button>
-						{!hasTraceability && (
-							<FieldDescription>Este piloto solo está disponible para Cali.</FieldDescription>
-						)}
 					</Field>
 
 					<FieldSet className="gap-2">
@@ -403,127 +375,6 @@ function ParameterRail({
 				</p>
 			</CardFooter>
 		</Card>
-	);
-}
-
-function TraceabilitySheet({
-	municipio,
-	open,
-	onOpenChange,
-}: {
-	municipio: Municipio;
-	open: boolean;
-	onOpenChange: (open: boolean) => void;
-}) {
-	return (
-		<Sheet onOpenChange={onOpenChange} open={open}>
-			<SheetContent
-				className="h-dvh overflow-hidden border-0 data-[side=right]:w-screen data-[side=right]:max-w-none data-[side=right]:sm:w-[52vw] data-[side=right]:sm:min-w-[36rem] data-[side=right]:sm:max-w-none data-[side=right]:sm:border-l"
-				side="right"
-			>
-				<SheetHeader className="border-b pr-16">
-					<div className="flex flex-wrap items-center gap-2">
-						<SheetTitle>Trazabilidad normativa</SheetTitle>
-						<Badge variant="secondary">Piloto · Cali</Badge>
-					</div>
-					<SheetDescription>
-						Origen de Aa y Av usados por el cálculo actual, con evidencia en la NSR-10.
-					</SheetDescription>
-				</SheetHeader>
-
-				<div className="min-h-0 flex-1 overflow-y-auto">
-					<div className="flex flex-col gap-6 p-4 sm:p-6">
-						<section aria-labelledby="source-values" className="flex flex-col gap-3">
-							<div className="flex flex-wrap items-center justify-between gap-2">
-								<h2 className="font-heading font-medium" id="source-values">
-									Valores de origen
-								</h2>
-								<Badge variant="outline">Dato normativo directo</Badge>
-							</div>
-
-							<Alert>
-								<LandmarkIcon />
-								<AlertTitle>Apéndice A-4 · municipio de Cali</AlertTitle>
-								<AlertDescription>
-									Estos coeficientes se transcriben de la norma; no resultan de una fórmula
-									del motor.
-								</AlertDescription>
-							</Alert>
-
-							<Table>
-								<TableHeader>
-									<TableRow>
-										<TableHead>Municipio</TableHead>
-										<TableHead>Código</TableHead>
-										<TableHead className="text-right">Aa</TableHead>
-										<TableHead className="text-right">Av</TableHead>
-									</TableRow>
-								</TableHeader>
-								<TableBody>
-									<TableRow>
-										<TableCell className="font-medium">{municipio.municipio}</TableCell>
-										<TableCell className="font-mono">76001</TableCell>
-										<TableCell className="text-right font-mono tabular-nums">
-											{municipio.aa.toFixed(2)}
-										</TableCell>
-										<TableCell className="text-right font-mono tabular-nums">
-											{municipio.av.toFixed(2)}
-										</TableCell>
-									</TableRow>
-								</TableBody>
-							</Table>
-						</section>
-
-						<Separator />
-
-						<section aria-labelledby="calculation-use" className="flex flex-col gap-3">
-							<div className="flex items-center gap-2">
-								<ListTreeIcon />
-								<h2 className="font-heading font-medium" id="calculation-use">
-									Uso en este cálculo
-								</h2>
-							</div>
-							<p className="text-muted-foreground text-sm">
-								Aa y Av entran al motor como valores directos. Fa, Fv, T₀, TC, TL y las
-								ordenadas Sa son resultados derivados según las ecuaciones y tablas del
-								Título A.
-							</p>
-						</section>
-
-						<Separator />
-
-						<section aria-labelledby="pdf-evidence" className="flex flex-col gap-3">
-							<div className="flex flex-wrap items-center justify-between gap-2">
-								<div className="flex flex-col gap-1">
-									<h2 className="font-heading font-medium" id="pdf-evidence">
-										Evidencia en el documento
-									</h2>
-									<p className="text-muted-foreground text-xs">
-										Página PDF 191 · página impresa A-177
-									</p>
-								</div>
-								<a
-									className={buttonVariants({ size: "sm", variant: "outline" })}
-									href={sourceNsr10PdfUrl}
-									rel="noreferrer"
-									target="_blank"
-								>
-									Abrir PDF fuente
-									<ExternalLinkIcon data-icon="inline-end" />
-								</a>
-							</div>
-
-							{open && <CaliSourcePdf />}
-
-							<p className="text-muted-foreground text-xs">
-								Extracto accesible: “Cali · código 76001 · Aa 0.25 · Av 0.25 · zona de
-								amenaza sísmica alta”.
-							</p>
-						</section>
-					</div>
-				</div>
-			</SheetContent>
-		</Sheet>
 	);
 }
 
@@ -835,7 +686,7 @@ export function CalculatorPage() {
 	return (
 		<div className="flex flex-col gap-5">
 			<TraceabilitySheet
-				municipio={municipio}
+				municipalityCode={municipio.code}
 				onOpenChange={setTraceabilityOpen}
 				open={traceabilityOpen}
 			/>

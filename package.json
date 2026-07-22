@@ -7,7 +7,9 @@
     "build": "next build && eslint",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "evidence:generate": "node scripts/generate-nsr10-evidence.mjs",
+    "evidence:check": "node scripts/generate-nsr10-evidence.mjs --check"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
