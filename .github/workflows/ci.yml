@@ -55,5 +55,8 @@ jobs:
       - name: Build
         run: pnpm exec next build
 
+      - name: Verify navigation verifier failures
+        run: node scripts/check-navigation-verifier-failures.mjs
+
       - name: Verify navigation routes
         run: node scripts/verify-navigation-routes.mjs

@@ -1,25 +1,13 @@
-import { isValidElement, type ReactElement, type ReactNode } from "react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+// @vitest-environment jsdom
+
+import { act } from "react";
+import { createRoot, type Root } from "react-dom/client";
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 const { downloadCalculationMemoriaPdf, toastSuccess } = vi.hoisted(() => ({
 	downloadCalculationMemoriaPdf: vi.fn().mockResolvedValue(undefined),
 	toastSuccess: vi.fn(),
 }));
-
-vi.mock("react", async () => {
-	const react = await vi.importActual<typeof import("react")>("react");
-	return {
-		...react,
-		useMemo: <T,>(factory: () => T) => factory(),
-		useRef: <T,>(initialValue: T) => ({ current: initialValue }),
-		useState: <T,>(initialValue: T | (() => T)) => [
-			typeof initialValue === "function"
-				? (initialValue as () => T)()
-				: initialValue,
-			vi.fn(),
-		],
-	};
-});
 
 vi.mock("sonner", () => ({
 	toast: {
@@ -34,88 +22,92 @@ vi.mock("@/lib/memoria-pdf-renderer", () => ({
 
 import { CalculatorPage } from "./calculator-page";
 
-function findElement(
-	node: ReactNode,
-	predicate: (element: ReactElement<Record<string, unknown>>) => boolean,
-): ReactElement<Record<string, unknown>> | undefined {
-	if (Array.isArray(node)) {
-		for (const child of node) {
-			const match = findElement(child, predicate);
-			if (match) return match;
-		}
-		return undefined;
+class ResizeObserverStub implements ResizeObserver {
+	disconnect() {}
+	observe() {}
+	unobserve() {}
+}
+
+let container: HTMLDivElement;
+let root: Root;
+
+async function waitForElement(
+	selector: string,
+	text: string,
+	timeoutMs = 2_000,
+) {
+	const deadline = Date.now() + timeoutMs;
+	while (Date.now() < deadline) {
+		const match = [...document.querySelectorAll<HTMLElement>(selector)].find(
+			(element) => element.textContent?.includes(text),
+		);
+		if (match) return match;
+		await act(async () => {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		});
 	}
-	if (!isValidElement<Record<string, unknown>>(node)) return undefined;
-	if (predicate(node)) return node;
-	return findElement(node.props.children as ReactNode, predicate);
+	throw new Error(`Could not find ${selector} containing “${text}”.`);
 }
 
-function renderFunctionElement(
-	element: ReactElement<Record<string, unknown>>,
-): ReactNode {
-	if (typeof element.type !== "function") {
-		throw new Error("Expected a function component element.");
+beforeAll(() => {
+	Object.assign(globalThis, {
+		IS_REACT_ACT_ENVIRONMENT: true,
+		ResizeObserver: ResizeObserverStub,
+	});
+	if (!("PointerEvent" in window)) {
+		Object.defineProperty(window, "PointerEvent", { value: MouseEvent });
 	}
-	const Component = element.type as (
-		props: Record<string, unknown>,
-	) => ReactNode;
-	return Component(element.props);
-}
+	Object.defineProperty(window, "matchMedia", {
+		configurable: true,
+		value: vi.fn().mockImplementation((query: string) => ({
+			addEventListener: vi.fn(),
+			dispatchEvent: vi.fn(),
+			matches: false,
+			media: query,
+			onchange: null,
+			removeEventListener: vi.fn(),
+		})),
+	});
+	Element.prototype.scrollIntoView = vi.fn();
+});
 
-function componentName(element: ReactElement<Record<string, unknown>>) {
-	return typeof element.type === "function" ? element.type.name : "";
-}
+beforeEach(async () => {
+	downloadCalculationMemoriaPdf.mockClear();
+	toastSuccess.mockClear();
+	container = document.createElement("div");
+	document.body.append(container);
+	root = createRoot(container);
+	await act(async () => {
+		root.render(<CalculatorPage />);
+	});
+});
 
-function hasText(node: ReactNode, text: string): boolean {
-	if (typeof node === "string") return node.includes(text);
-	if (Array.isArray(node)) return node.some((child) => hasText(child, text));
-	return isValidElement<Record<string, unknown>>(node)
-		? hasText(node.props.children as ReactNode, text)
-		: false;
-}
+afterEach(async () => {
+	await act(async () => {
+		root.unmount();
+	});
+	container.remove();
+	document.body.replaceChildren();
+});
 
 describe("calculator contextual PDF action", () => {
-	beforeEach(() => {
-		downloadCalculationMemoriaPdf.mockClear();
-		toastSuccess.mockClear();
-	});
+	it("opens the real export menu and downloads a successful trace", async () => {
+		const exportTrigger = await waitForElement("button", "Exportar");
+		expect(exportTrigger).not.toHaveProperty("disabled", true);
 
-	it("invokes the contextual PDF downloader from a successful result", async () => {
-		const calculator = CalculatorPage();
-		const spectrumChart = findElement(
-			calculator,
-			(element) => componentName(element) === "SpectrumChart",
+		await act(async () => {
+			exportTrigger.click();
+		});
+
+		const pdfAction = await waitForElement(
+			'[role="menuitem"]',
+			"Descargar memoria PDF",
 		);
-		expect(spectrumChart).toBeDefined();
+		expect(document.body.contains(pdfAction)).toBe(true);
 
-		const chart = renderFunctionElement(spectrumChart!);
-		const exportActions = findElement(
-			chart,
-			(element) => componentName(element) === "ExportActions",
-		);
-		expect(exportActions).toBeDefined();
-
-		const actions = renderFunctionElement(exportActions!);
-		const exportTrigger = findElement(
-			actions,
-			(element) =>
-				"disabled" in element.props &&
-				hasText(element.props.children as ReactNode, "Exportar"),
-		);
-		expect(exportTrigger?.props.disabled).toBe(false);
-
-		const pdfAction = findElement(
-			actions,
-			(element) =>
-				typeof element.props.onClick === "function" &&
-				hasText(
-					element.props.children as ReactNode,
-					"Descargar memoria PDF",
-				),
-		);
-		expect(pdfAction).toBeDefined();
-
-		(pdfAction!.props.onClick as () => void)();
+		await act(async () => {
+			pdfAction.click();
+		});
 
 		await vi.waitFor(() => {
 			expect(downloadCalculationMemoriaPdf).toHaveBeenCalledTimes(1);
