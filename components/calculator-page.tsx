@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import {
 	ClipboardIcon,
+	DicesIcon,
 	DownloadIcon,
 	LandmarkIcon,
 	TriangleAlertIcon,
@@ -43,6 +44,10 @@ import {
 	ComboboxItem,
 	ComboboxList,
 } from "@/components/ui/combobox";
+import {
+	InputGroupAddon,
+	InputGroupButton,
+} from "@/components/ui/input-group";
 import {
 	Field,
 	FieldDescription,
@@ -198,7 +203,23 @@ function MunicipalityCombobox({
 				aria-label="Buscar municipio"
 				className="w-full"
 				placeholder="Buscar municipio…"
-			/>
+			>
+				<InputGroupAddon align="inline-end">
+					<InputGroupButton
+						aria-label="Elegir municipio al azar"
+						onClick={() => {
+							const randomMunicipio =
+								municipios[Math.floor(Math.random() * municipios.length)];
+							if (randomMunicipio) onValueChange(randomMunicipio);
+						}}
+						size="icon-xs"
+						title="Elegir municipio al azar"
+						variant="ghost"
+					>
+						<DicesIcon />
+					</InputGroupButton>
+				</InputGroupAddon>
+			</ComboboxInput>
 			<ComboboxContent>
 				<ComboboxEmpty>No se encontraron municipios.</ComboboxEmpty>
 				<ComboboxList>
