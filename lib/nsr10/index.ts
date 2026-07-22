@@ -37,6 +37,7 @@ export type {
 export type {
   ApproximatePeriodParams,
   ApproximatePeriodSystem,
+  DynamicAnalysisIrregularity,
   FheApplicabilityParams,
   ForceDistributionParams,
   ForceDistributionStory,

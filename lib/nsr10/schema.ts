@@ -8,6 +8,14 @@ export const importanceGroupSchema = z.enum(["I", "II", "III", "IV"])
 export const approximatePeriodSystemSchema = z.enum(approximatePeriodSystems)
 export const seismicHazardZoneSchema = z.enum(["low", "intermediate", "high"])
 export const structuralRegularitySchema = z.enum(["regular", "irregular"])
+export const dynamicAnalysisIrregularitySchema = z.enum([
+  "none",
+  "vertical-1aA",
+  "vertical-1bA",
+  "vertical-2A",
+  "vertical-3A",
+  "unclassified",
+])
 
 export const approximatePeriodParamsSchema = z
   .object({
@@ -45,6 +53,7 @@ export const fheApplicabilityParamsSchema = z
     hazardZone: seismicHazardZoneSchema,
     importanceGroup: importanceGroupSchema,
     regularity: structuralRegularitySchema,
+    dynamicAnalysisIrregularity: dynamicAnalysisIrregularitySchema,
     stories: z.number().int().positive(),
     heightM: z.number().finite().positive(),
     soilProfile: soilProfileSchema,
@@ -252,6 +261,7 @@ export type ImportanceGroup = z.infer<typeof importanceGroupSchema>
 export type ApproximatePeriodSystem = z.infer<typeof approximatePeriodSystemSchema>
 export type SeismicHazardZone = z.infer<typeof seismicHazardZoneSchema>
 export type StructuralRegularity = z.infer<typeof structuralRegularitySchema>
+export type DynamicAnalysisIrregularity = z.infer<typeof dynamicAnalysisIrregularitySchema>
 export type ApproximatePeriodParams = z.infer<typeof approximatePeriodParamsSchema>
 export type PeriodCeilingParams = z.infer<typeof periodCeilingParamsSchema>
 export type ForceDistributionStory = z.infer<typeof forceDistributionStorySchema>

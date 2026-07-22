@@ -33,7 +33,7 @@ export type ComputedComparisonScenario = ComparisonScenario & {
 export type ComparisonChartRow = { t: number } & Record<string, number>;
 
 export function comparisonScenarioLabel(scenario: ComparisonScenario) {
-	return `${scenario.municipio.municipio} · Suelo ${scenario.soilProfile} · Grupo ${scenario.importanceGroup} · ${hazardLevelDetails[scenario.hazardLevel].label}`;
+	return `${scenario.municipio.municipio}, ${scenario.municipio.departamento} · Suelo ${scenario.soilProfile} · Grupo ${scenario.importanceGroup} · ${hazardLevelDetails[scenario.hazardLevel].label}`;
 }
 
 export function comparisonSeriesKey(id: string) {

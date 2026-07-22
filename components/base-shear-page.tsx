@@ -97,6 +97,7 @@ import {
 
 import type {
   ApproximatePeriodSystem,
+  DynamicAnalysisIrregularity,
   HazardLevel,
   ImportanceGroup,
   Municipio,
@@ -128,6 +129,17 @@ const regularities = [
   { value: "irregular", label: "Irregular" },
 ] as const satisfies ReadonlyArray<{
   value: StructuralRegularity
+  label: string
+}>
+const dynamicAnalysisIrregularities = [
+  { value: "none", label: "Ninguna de las listadas" },
+  { value: "vertical-1aA", label: "Vertical 1aA" },
+  { value: "vertical-1bA", label: "Vertical 1bA" },
+  { value: "vertical-2A", label: "Vertical 2A" },
+  { value: "vertical-3A", label: "Vertical 3A" },
+  { value: "unclassified", label: "Irregularidad no clasificada" },
+] as const satisfies ReadonlyArray<{
+  value: DynamicAnalysisIrregularity
   label: string
 }>
 const unitLabels: Record<WeightUnit, string> = {
@@ -169,6 +181,7 @@ function calculateBaseShearWorkspace({
   stories,
   hazardZone,
   regularity,
+  dynamicAnalysisIrregularity,
 }: {
   municipio: Municipio
   soilProfile: SoilProfile
@@ -182,6 +195,7 @@ function calculateBaseShearWorkspace({
   stories: EditableStory[]
   hazardZone: SeismicHazardZone
   regularity: StructuralRegularity
+  dynamicAnalysisIrregularity: DynamicAnalysisIrregularity
 }) {
   if (analyticalPeriod !== undefined && (!Number.isFinite(analyticalPeriod) || analyticalPeriod <= 0)) {
     return {
@@ -254,6 +268,7 @@ function calculateBaseShearWorkspace({
     hazardZone,
     importanceGroup,
     regularity,
+    dynamicAnalysisIrregularity,
     stories: stories.length,
     heightM,
     soilProfile,
@@ -431,6 +446,8 @@ export function BaseShearPage() {
   const [analyticalPeriod, setAnalyticalPeriod] = useState("")
   const [hazardZone, setHazardZone] = useState<SeismicHazardZone>("high")
   const [regularity, setRegularity] = useState<StructuralRegularity>("regular")
+  const [dynamicAnalysisIrregularity, setDynamicAnalysisIrregularity] =
+    useState<DynamicAnalysisIrregularity>("none")
   const [pasteValue, setPasteValue] = useState("")
   const [pasteError, setPasteError] = useState<string>()
 
@@ -449,6 +466,7 @@ export function BaseShearPage() {
         stories,
         hazardZone,
         regularity,
+        dynamicAnalysisIrregularity,
       }),
     [
       municipio,
@@ -463,6 +481,7 @@ export function BaseShearPage() {
       stories,
       hazardZone,
       regularity,
+      dynamicAnalysisIrregularity,
     ],
   )
 
@@ -656,7 +675,7 @@ export function BaseShearPage() {
                     value={analyticalPeriod}
                   />
                   <FieldDescription>
-                    Si se omite, el motor usa el límite normativo calculado.
+                    Si se omite, el motor usa el periodo aproximado Ta.
                   </FieldDescription>
                 </Field>
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -685,9 +704,14 @@ export function BaseShearPage() {
                     <FieldTitle>Regularidad</FieldTitle>
                     <Select
                       items={regularities}
-                      onValueChange={(value) =>
-                        value && setRegularity(value as StructuralRegularity)
-                      }
+                      onValueChange={(value) => {
+                        if (!value) return
+                        const nextRegularity = value as StructuralRegularity
+                        setRegularity(nextRegularity)
+                        if (nextRegularity === "regular") {
+                          setDynamicAnalysisIrregularity("none")
+                        }
+                      }}
                       value={regularity}
                     >
                       <SelectTrigger aria-label="Regularidad estructural" className="w-full">
@@ -703,6 +727,37 @@ export function BaseShearPage() {
                     </Select>
                   </Field>
                 </div>
+                <Field>
+                  <FieldTitle>Irregularidad que exige análisis dinámico</FieldTitle>
+                  <Select
+                    items={dynamicAnalysisIrregularities}
+                    onValueChange={(value) => {
+                      if (!value) return
+                      const nextIrregularity = value as DynamicAnalysisIrregularity
+                      setDynamicAnalysisIrregularity(nextIrregularity)
+                      if (nextIrregularity !== "none") setRegularity("irregular")
+                    }}
+                    value={dynamicAnalysisIrregularity}
+                  >
+                    <SelectTrigger
+                      aria-label="Irregularidad que exige análisis dinámico"
+                      className="w-full"
+                    >
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {dynamicAnalysisIrregularities.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FieldDescription>
+                    Tipos 1aA, 1bA, 2A y 3A, o irregularidades no clasificadas, requieren
+                    análisis dinámico según A.3.4.2.2.
+                  </FieldDescription>
+                </Field>
               </FieldGroup>
             </CardContent>
           </Card>
@@ -885,6 +940,8 @@ export function BaseShearPage() {
                   </div>
                   {calculation.period.governedBy === "cu-times-ta" ? (
                     <Badge variant="destructive">Gobernado por Cu·Ta</Badge>
+                  ) : calculation.period.governedBy === "approximate-period" ? (
+                    <Badge variant="secondary">Gobierna Ta</Badge>
                   ) : (
                     <Badge variant="secondary">Gobierna T analítico</Badge>
                   )}

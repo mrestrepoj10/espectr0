@@ -149,6 +149,14 @@ function chartBackground(container: Element | null) {
 	return "#ffffff";
 }
 
+export function copyTextToClipboard(text: string) {
+	if (typeof navigator === "undefined" || !navigator.clipboard?.writeText) {
+		return Promise.reject(new Error("The Async Clipboard API is unavailable."));
+	}
+
+	return navigator.clipboard.writeText(text);
+}
+
 /** Must be invoked directly from a click handler to retain Safari clipboard activation. */
 export function copyChartPng(svgEl: SVGSVGElement, container?: Element | null) {
 	const svg = serializeChartSvg(svgEl);

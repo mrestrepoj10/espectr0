@@ -70,6 +70,7 @@ import {
 import {
 	copyChartPng,
 	copyChartSvg,
+	copyTextToClipboard,
 	downloadEtabsTxt,
 } from "@/lib/chart-export";
 import { normalizeSearchText } from "@/lib/nsr10";
@@ -241,8 +242,7 @@ function ComparisonExportActions({
 	}
 
 	function copyJson() {
-		void navigator.clipboard
-			.writeText(JSON.stringify(comparisonJson(scenarios), null, 2))
+		void copyTextToClipboard(JSON.stringify(comparisonJson(scenarios), null, 2))
 			.then(() => toast.success("Comparación JSON copiada."))
 			.catch(() => toast.error("No fue posible copiar la comparación JSON."));
 	}

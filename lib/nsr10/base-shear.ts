@@ -42,7 +42,7 @@ export type PeriodCeilingResult = {
   maximumPeriod: number
   tAnalytical?: number
   t: number
-  governedBy: "analytical-period" | "cu-times-ta" | "equal"
+  governedBy: "approximate-period" | "analytical-period" | "cu-times-ta" | "equal"
   reference: "A.4.2-2"
   evidenceId: typeof baseShearEvidenceIds.periodCeiling
 }
@@ -109,6 +109,7 @@ export type FheApplicabilityWarningCode =
   | "regular-height-limit"
   | "soft-soil-long-period"
   | "soft-soil-period-check-unavailable"
+  | "dynamic-analysis-irregularity"
   | "irregular-story-limit"
   | "irregular-height-limit"
 
@@ -163,11 +164,16 @@ export function periodCeiling(params: PeriodCeilingParams): PeriodCeilingResult 
     constants.intercept - constants.avFvFactor * parsed.av * parsed.fv,
   )
   const maximumPeriod = cu * parsed.ta
-  const t = Math.min(parsed.tAnalytical ?? Number.POSITIVE_INFINITY, maximumPeriod)
+  const t =
+    parsed.tAnalytical === undefined
+      ? parsed.ta
+      : Math.min(parsed.tAnalytical, maximumPeriod)
   const governedBy =
-    parsed.tAnalytical === maximumPeriod
+    parsed.tAnalytical === undefined
+      ? "approximate-period"
+      : parsed.tAnalytical === maximumPeriod
       ? "equal"
-      : parsed.tAnalytical !== undefined && parsed.tAnalytical < maximumPeriod
+      : parsed.tAnalytical < maximumPeriod
         ? "analytical-period"
         : "cu-times-ta"
 
@@ -338,6 +344,19 @@ export function fheApplicability(params: FheApplicabilityParams): FheApplicabili
 
   const limits = baseShearConstants.fheApplicability
   const warnings: FheApplicabilityWarning[] = []
+  if (parsed.dynamicAnalysisIrregularity !== "none") {
+    const irregularity =
+      parsed.dynamicAnalysisIrregularity === "unclassified"
+        ? "no clasificada"
+        : parsed.dynamicAnalysisIrregularity.replace("vertical-", "vertical ")
+    warnings.push(
+      applicabilityWarning(
+        "dynamic-analysis-irregularity",
+        `La irregularidad ${irregularity} requiere el método de análisis dinámico elástico.`,
+        "dynamic-required",
+      ),
+    )
+  }
   const hasSoftSoil = ["D", "E", "F"].includes(parsed.soilProfile)
   if (hasSoftSoil && parsed.tc === undefined) {
     warnings.push(

@@ -40,26 +40,29 @@ describe("NSR-10 base shear engine", () => {
     expect(() => approximatePeriod({ system: "all-other", hn: 0 })).toThrow()
   })
 
-  it("applies the Cu floor and governs with Cu·Ta when no analytical period exists", () => {
+  it("applies the Cu floor but uses Ta when no analytical period exists", () => {
     const result = periodCeiling({ av: 0.5, fv: 2, ta: 1.5 })
 
     expect(result).toMatchObject({
       status: "ok",
       cu: 1.2,
-      governedBy: "cu-times-ta",
+      governedBy: "approximate-period",
       reference: "A.4.2-2",
     })
     expect(result.maximumPeriod).toBeCloseTo(1.8, 12)
-    expect(result.t).toBeCloseTo(1.8, 12)
+    expect(result.t).toBeCloseTo(1.5, 12)
   })
 
-  it("selects the analytical period below the ceiling and reports equality", () => {
+  it("selects or caps an analytical period and reports equality", () => {
     const below = periodCeiling({ av: 0.25, fv: 1.5, ta: 1, tAnalytical: 0.9 })
     expect(below.cu).toBeCloseTo(1.3, 12)
     expect(below).toMatchObject({ t: 0.9, governedBy: "analytical-period" })
 
     const equal = periodCeiling({ av: 0.25, fv: 1.5, ta: 1, tAnalytical: 1.3 })
     expect(equal).toMatchObject({ t: 1.3, governedBy: "equal" })
+
+    const capped = periodCeiling({ av: 0.25, fv: 1.5, ta: 1, tAnalytical: 1.5 })
+    expect(capped).toMatchObject({ t: 1.3, governedBy: "cu-times-ta" })
   })
 
   it("computes base shear consistently from mass and weight", () => {
@@ -213,6 +216,7 @@ describe("NSR-10 base shear engine", () => {
     const shared = {
       importanceGroup: "IV" as const,
       regularity: "irregular" as const,
+      dynamicAnalysisIrregularity: "vertical-1aA" as const,
       stories: 50,
       heightM: 150,
       soilProfile: "F" as const,
@@ -241,6 +245,7 @@ describe("NSR-10 base shear engine", () => {
       hazardZone: "high",
       importanceGroup: "II",
       regularity: "regular",
+      dynamicAnalysisIrregularity: "none",
       stories: 20,
       heightM: 60,
       soilProfile: "D",
@@ -257,6 +262,7 @@ describe("NSR-10 base shear engine", () => {
       hazardZone: "high",
       importanceGroup: "II",
       regularity: "regular",
+      dynamicAnalysisIrregularity: "none",
       stories: 21,
       heightM: 61,
       soilProfile: "D",
@@ -276,6 +282,7 @@ describe("NSR-10 base shear engine", () => {
       hazardZone: "high",
       importanceGroup: "II",
       regularity: "regular",
+      dynamicAnalysisIrregularity: "none",
       stories: 10,
       heightM: 30,
       soilProfile: "F",
@@ -292,6 +299,7 @@ describe("NSR-10 base shear engine", () => {
       hazardZone: "high",
       importanceGroup: "II",
       regularity: "irregular",
+      dynamicAnalysisIrregularity: "none",
       stories: 6,
       heightM: 18,
       soilProfile: "E",
@@ -308,6 +316,7 @@ describe("NSR-10 base shear engine", () => {
       hazardZone: "high",
       importanceGroup: "II",
       regularity: "irregular",
+      dynamicAnalysisIrregularity: "none",
       stories: 7,
       heightM: 19,
       soilProfile: "A",
@@ -325,6 +334,7 @@ describe("NSR-10 base shear engine", () => {
       hazardZone: "high",
       importanceGroup: "II",
       regularity: "irregular",
+      dynamicAnalysisIrregularity: "none",
       stories: 4,
       heightM: 12,
       soilProfile: "E",
@@ -336,11 +346,41 @@ describe("NSR-10 base shear engine", () => {
     expect(result.warnings.map(({ code }) => code)).toEqual(["soft-soil-long-period"])
   })
 
+  it.each([
+    "vertical-1aA",
+    "vertical-1bA",
+    "vertical-2A",
+    "vertical-3A",
+    "unclassified",
+  ] as const)("requires dynamic analysis for %s irregularity", (dynamicAnalysisIrregularity) => {
+    const result = fheApplicability({
+      hazardZone: "high",
+      importanceGroup: "II",
+      regularity: "irregular",
+      dynamicAnalysisIrregularity,
+      stories: 4,
+      heightM: 12,
+      soilProfile: "A",
+      t: 0.5,
+    })
+
+    expect(result.applicable).toBe(false)
+    expect(result.qualifyingRule).toBeUndefined()
+    expect(result.warnings).toContainEqual(
+      expect.objectContaining({
+        code: "dynamic-analysis-irregularity",
+        reference: "A.3.4.2.2",
+        evidenceId: "a3.4.2.2-dynamic-required",
+      }),
+    )
+  })
+
   it("reports the flexible-on-rigid exception and dynamic minimum information", () => {
     const regular = fheApplicability({
       hazardZone: "high",
       importanceGroup: "IV",
       regularity: "regular",
+      dynamicAnalysisIrregularity: "none",
       stories: 40,
       heightM: 120,
       soilProfile: "A",
@@ -351,6 +391,7 @@ describe("NSR-10 base shear engine", () => {
       hazardZone: "high",
       importanceGroup: "IV",
       regularity: "irregular",
+      dynamicAnalysisIrregularity: "none",
       stories: 5,
       heightM: 15,
       soilProfile: "A",
@@ -370,5 +411,17 @@ describe("NSR-10 base shear engine", () => {
     for (const evidenceId of Object.values(baseShearEvidenceIds)) {
       expect(getNormativeCitation(evidenceId), evidenceId).toBeDefined()
     }
+  })
+
+  it("anchors the corrected period and irregularity rules to pinned PDF transcriptions", () => {
+    expect(getNormativeCitation("a4.2.2-period-ceiling")?.transcription).toContain(
+      "calculado a partir de las propiedades del sistema",
+    )
+    expect(getNormativeCitation("a4.2.3-approximate-period")?.transcription).toContain(
+      "Alternativamente el valor de T puede ser igual al período fundamental aproximado",
+    )
+    expect(getNormativeCitation("a3.4.2.2-dynamic-required")?.transcription).toContain(
+      "1aA, 1bA, 2A y 3A",
+    )
   })
 })
