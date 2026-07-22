@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
 	Area,
 	AreaChart,
@@ -10,9 +10,13 @@ import {
 	YAxis,
 } from "recharts";
 import {
-	ClipboardIcon,
+	ChevronDownIcon,
+	CodeXmlIcon,
 	DicesIcon,
 	DownloadIcon,
+	FileJsonIcon,
+	FileTextIcon,
+	ImageIcon,
 	LandmarkIcon,
 	TriangleAlertIcon,
 } from "lucide-react";
@@ -36,6 +40,13 @@ import {
 	ChartTooltip,
 	ChartTooltipContent,
 } from "@/components/ui/chart";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
 	Combobox,
 	ComboboxContent,
@@ -75,6 +86,11 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import {
+	copyChartPng,
+	copyChartSvg,
+	downloadEtabsTxt,
+} from "@/lib/chart-export";
 import {
 	computeSpectrum,
 	hazardLevelDetails,
@@ -439,6 +455,7 @@ function SpectrumChart({
 	spectrum: SpectrumOk;
 	municipio: Municipio;
 }) {
+	const chartContainerRef = useRef<HTMLDivElement>(null);
 	const { coefficients } = spectrum;
 	const details = hazardLevelDetails[spectrum.hazardLevel];
 	const plotEnd = spectrum.points.at(-1)?.t ?? Math.max(4, coefficients.tl);
@@ -466,7 +483,11 @@ function SpectrumChart({
 						</div>
 						<CardDescription>{description}</CardDescription>
 					</div>
-					<ExportActions municipio={municipio} spectrum={spectrum} />
+					<ExportActions
+						chartContainerRef={chartContainerRef}
+						municipio={municipio}
+						spectrum={spectrum}
+					/>
 				</div>
 			</CardHeader>
 			<CardContent>
@@ -475,6 +496,7 @@ function SpectrumChart({
 					className="h-80 w-full md:h-96"
 					config={chartConfig}
 					initialDimension={{ width: 960, height: 384 }}
+					ref={chartContainerRef}
 				>
 					<AreaChart
 						accessibilityLayer
@@ -729,48 +751,112 @@ function downloadCsv(spectrum: SpectrumOk, municipio: Municipio) {
 }
 
 function ExportActions({
+	chartContainerRef,
 	spectrum,
 	municipio,
 }: {
+	chartContainerRef: React.RefObject<HTMLDivElement | null>;
 	spectrum: SpectrumOk | null;
 	municipio: Municipio;
 }) {
-	async function copyJson() {
+	function copyJson() {
+		if (!spectrum) return;
+
+		void navigator.clipboard
+			.writeText(JSON.stringify(spectrum, null, 2))
+			.then(() => toast.success("JSON copiado al portapapeles."))
+			.catch(() => toast.error("No fue posible copiar el JSON."));
+	}
+
+	function chartSvg() {
+		const svg = chartContainerRef.current?.querySelector<SVGSVGElement>(
+			"svg.recharts-surface",
+		);
+		if (!svg) throw new Error("No se encontró el gráfico para exportar.");
+		return svg;
+	}
+
+	function copyPng() {
+		try {
+			void copyChartPng(chartSvg(), chartContainerRef.current)
+				.then(() => toast.success("PNG copiado al portapapeles."))
+				.catch(() => toast.error("No fue posible copiar el PNG."));
+		} catch {
+			toast.error("No fue posible copiar el PNG.");
+		}
+	}
+
+	function copySvg() {
+		try {
+			void copyChartSvg(chartSvg())
+				.then(() => toast.success("SVG copiado al portapapeles."))
+				.catch(() => toast.error("No fue posible copiar el SVG."));
+		} catch {
+			toast.error("No fue posible copiar el SVG.");
+		}
+	}
+
+	function exportCsv() {
 		if (!spectrum) return;
 
 		try {
-			await navigator.clipboard.writeText(JSON.stringify(spectrum, null, 2));
-			toast.success("JSON copiado al portapapeles.");
+			downloadCsv(spectrum, municipio);
+			toast.success("CSV descargado.");
 		} catch {
-			toast.error("No fue posible copiar el JSON.");
+			toast.error("No fue posible descargar el CSV.");
+		}
+	}
+
+	function exportEtabs() {
+		if (!spectrum) return;
+
+		try {
+			const slug = normalizeSearchText(municipio.municipio).replace(/\s+/g, "-");
+			downloadEtabsTxt(
+				spectrum.points,
+				`espectr0-${slug}-${spectrum.hazardLevel}-etabs.txt`,
+			);
+			toast.success("TXT para ETABS descargado.");
+		} catch {
+			toast.error("No fue posible descargar el TXT para ETABS.");
 		}
 	}
 
 	return (
-		<div aria-label="Exportar resultados" className="flex flex-wrap items-center gap-2">
-			<Button
-				className="h-10"
+		<DropdownMenu>
+			<DropdownMenuTrigger
 				disabled={!spectrum}
-				onClick={copyJson}
-				type="button"
-				variant="outline"
-			>
-				<ClipboardIcon data-icon="inline-start" />
-				Copiar JSON
-			</Button>
-			<Button
-				disabled={!spectrum}
-				onClick={() => {
-					if (spectrum) downloadCsv(spectrum, municipio);
-				}}
-				className="h-10"
-				type="button"
-				variant="outline"
+				render={<Button className="h-10" type="button" variant="outline" />}
 			>
 				<DownloadIcon data-icon="inline-start" />
-				CSV (T, Sa)
-			</Button>
-		</div>
+				Exportar
+				<ChevronDownIcon data-icon="inline-end" />
+			</DropdownMenuTrigger>
+			<DropdownMenuContent align="end" aria-label="Exportar resultados">
+				<DropdownMenuGroup>
+					<DropdownMenuItem onClick={copyJson}>
+						<FileJsonIcon />
+						Copiar JSON
+					</DropdownMenuItem>
+					<DropdownMenuItem onClick={copyPng}>
+						<ImageIcon />
+						Copiar PNG
+					</DropdownMenuItem>
+					<DropdownMenuItem onClick={copySvg}>
+						<CodeXmlIcon />
+						Copiar SVG
+					</DropdownMenuItem>
+					<DropdownMenuItem onClick={exportCsv}>
+						<DownloadIcon />
+						Descargar CSV
+					</DropdownMenuItem>
+					<DropdownMenuItem onClick={exportEtabs}>
+						<FileTextIcon />
+						Descargar TXT (ETABS)
+					</DropdownMenuItem>
+				</DropdownMenuGroup>
+			</DropdownMenuContent>
+		</DropdownMenu>
 	);
 }
 
