@@ -2,11 +2,13 @@
   "name": "espectr0",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.15.1",
   "scripts": {
     "dev": "next dev",
     "build": "next build && eslint",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "evidence:generate": "node scripts/generate-nsr10-evidence.mjs",
     "evidence:check": "node scripts/generate-nsr10-evidence.mjs --check"

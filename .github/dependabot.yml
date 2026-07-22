@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # Keep GitHub Actions up to date (security + new runner/node requirements).
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # npm dependencies, grouped so you get one PR per week instead of twenty.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      minor-and-patch:
+        update-types: ["minor", "patch"]
