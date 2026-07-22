@@ -219,6 +219,47 @@ describe("strict aggregate boundary", () => {
 		).rejects.toThrow(/child failed/);
 	});
 
+	it("rejects contradictory duplicate/override sets and unexplained raw surplus", async () => {
+		const validReport = evidenceCheckReportSchema.parse(
+			await checkEvidenceStudy(fixture(), { repositoryRoot }),
+		);
+		const contradictory = structuredClone(validReport);
+		contradictory.rawRows = {
+			count: 3,
+			ids: ["fixture-raw", "ghost-a", "ghost-b"],
+		};
+		contradictory.duplicates = [
+			{
+				rowKey: "option-a/hazard-a",
+				rawRowIds: ["fixture-raw", "ghost-a"],
+				overrideId: "fixture-override",
+			},
+		];
+		contradictory.overrides = [
+			{
+				id: "fixture-override",
+				competingRawRowIds: ["ghost-b", "missing-row"],
+				selectedRawRowId: "missing-row",
+				reviewStatus: "reviewed",
+			},
+		];
+		const contradiction = runInstalledDescriptors(
+			[{ studyId: "framework-fixture", check: async () => contradictory }],
+			{ repositoryRoot },
+		);
+		await expect(contradiction).rejects.toThrow(/Invalid report override/);
+		await expect(contradiction).rejects.toThrow(/duplicate\/override raw rows differ/);
+
+		const unexplained = structuredClone(validReport);
+		unexplained.rawRows = { count: 2, ids: ["fixture-raw", "ghost-row"] };
+		await expect(
+			runInstalledDescriptors(
+				[{ studyId: "framework-fixture", check: async () => unexplained }],
+				{ repositoryRoot },
+			),
+		).rejects.toThrow(/unexplained surplus/);
+	});
+
 	it("runs the plain-Node aggregate twice with byte-identical LF output", () => {
 		const command = [resolve("scripts/regulatory/check-evidence.mjs"), "--check", "--report-json"];
 		const first = execFileSync(process.execPath, command, { encoding: "utf8" });
@@ -320,6 +361,20 @@ describe("exact rows and values", () => {
 		valueMismatch.canonicalRows[0].fields.result = 3;
 		await expect(checkEvidenceStudy(valueMismatch, { repositoryRoot })).rejects.toThrow(
 			/field result differs from its value/,
+		);
+	});
+
+	it("binds raw and canonical row sources to their citation ancestry", async () => {
+		const rawMismatch = fixture();
+		rawMismatch.rawRows[0].sourceDocumentId = "fixture-external";
+		await expect(checkEvidenceStudy(rawMismatch, { repositoryRoot })).rejects.toThrow(
+			/Raw row fixture-raw citation fixture-cell-base has source ancestry outside fixture-external/,
+		);
+
+		const canonicalMismatch = fixture();
+		canonicalMismatch.canonicalRows[0].sourceDocumentId = "fixture-external";
+		await expect(checkEvidenceStudy(canonicalMismatch, { repositoryRoot })).rejects.toThrow(
+			/Canonical row fixture-canonical citation fixture-cell-base has source ancestry outside fixture-external/,
 		);
 	});
 

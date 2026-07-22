@@ -7,3 +7,4 @@
 /scripts/*nsr10*.json text eol=lf
 /scripts/*nsr10*.mjs text eol=lf
 /scripts/*nsr10*.py text eol=lf
+/lib/regulatory/evidence/fixture-source.txt text eol=lf
