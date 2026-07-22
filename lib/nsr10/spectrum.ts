@@ -257,7 +257,9 @@ function damageThresholdCoefficients(
   }
 }
 
-function coefficientsFor(params: SpectrumParams): SpectrumCoefficients | SiteSpecificStudyRequired {
+export function spectrumCoefficients(
+  params: SpectrumParams,
+): SpectrumCoefficients | SiteSpecificStudyRequired {
   const hazardLevel = params.hazardLevel ?? "design"
   if (params.soilProfile === "F") return siteSpecificStudyRequired(hazardLevel)
 
@@ -370,7 +372,7 @@ export function saAt(t: number, params: SpectrumParams): SpectralAccelerationRes
     throw new RangeError("T must be a finite period greater than or equal to zero")
   }
 
-  const coefficients = coefficientsFor(params)
+  const coefficients = spectrumCoefficients(params)
   if ("status" in coefficients) return coefficients
 
   return accelerationAt(t, coefficients, params.mode ?? "general")
@@ -398,7 +400,7 @@ function sampledPeriods(coefficients: SpectrumCoefficients, mode: SpectrumMode) 
  * acceleration value is expressed as a fraction of gravitational acceleration g.
  */
 export function computeSpectrum(params: SpectrumParams): SpectrumResult {
-  const coefficients = coefficientsFor(params)
+  const coefficients = spectrumCoefficients(params)
   if ("status" in coefficients) return coefficients
 
   const hazardLevel = coefficients.hazardLevel
