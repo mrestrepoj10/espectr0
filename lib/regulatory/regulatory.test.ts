@@ -252,6 +252,10 @@ describe("regulatory evidence contracts", () => {
 		expect(() => checkEvidenceStudy(unexpectedRow)).toThrow(
 			/outside declared option\/hazard coverage/,
 		);
+
+		const cyclicCitation = fixture();
+		cyclicCitation.citations[0].parentCitationId = "cell-base";
+		expect(() => checkEvidenceStudy(cyclicCitation)).toThrow(/Citation parent cycle/);
 	});
 
 	it("rejects a duplicate row without an explicit override", () => {

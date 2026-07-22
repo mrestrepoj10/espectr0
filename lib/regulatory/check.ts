@@ -87,6 +87,21 @@ function assertNoDerivedCycles(study: RegulatoryEvidenceStudy): void {
 	for (const id of dependencies.keys()) visit(id);
 }
 
+function assertNoCitationCycles(study: RegulatoryEvidenceStudy): void {
+	const parents = new Map(
+		study.citations.map((citation) => [citation.id, citation.parentCitationId]),
+	);
+	for (const citation of study.citations) {
+		const seen = new Set<string>();
+		let currentId: string | undefined = citation.id;
+		while (currentId) {
+			if (seen.has(currentId)) throw new Error(`Citation parent cycle at ${currentId}`);
+			seen.add(currentId);
+			currentId = parents.get(currentId);
+		}
+	}
+}
+
 export function checkEvidenceStudy(
 	input: unknown,
 	options: {
@@ -176,6 +191,7 @@ export function checkEvidenceStudy(
 			usedCitationIds.add(parent.id);
 		}
 	}
+	assertNoCitationCycles(study);
 	const orphanSources = [...sourceById.keys()].filter((id) => !citedSourceIds.has(id));
 	if (orphanSources.length > 0) {
 		throw new Error(`Orphan sources: ${orphanSources.sort().join(", ")}`);
