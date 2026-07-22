@@ -120,3 +120,36 @@ describe("calculator contextual PDF action", () => {
 		expect(toastSuccess).toHaveBeenCalledWith("Memoria PDF descargada.");
 	});
 });
+
+describe("unified calculator NSR-10 mode", () => {
+	it("renders the controlled shell, shared Sa(T) lookup, and current default result", () => {
+		const shell = container.querySelector<HTMLElement>("[data-slot='calculator-shell']");
+		expect(shell?.dataset.calculationMode).toBe("nsr10-national");
+		expect(container.textContent).toContain("NSR-10 Nacional");
+		expect(container.querySelector("#period-lookup-input")).toBeTruthy();
+		expect(container.querySelector("output")?.textContent).toMatch(/g/);
+		expect(container.textContent).toContain("Datos del espectro");
+	});
+
+	it("renders the typed site-specific applicability state for soil profile F", async () => {
+		const profileF = [...container.querySelectorAll<HTMLButtonElement>("button")].find(
+			(button) => button.textContent?.trim() === "F",
+		);
+		expect(profileF).toBeTruthy();
+
+		await act(async () => {
+			profileF?.click();
+		});
+
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain("Perfil F: análisis específico requerido");
+		});
+		const notices = container.querySelector<HTMLElement>(
+			"[data-slot='calculator-notices']",
+		);
+		expect(notices?.dataset.applicability).toBe(
+			"site-specific-study-required",
+		);
+		expect(container.querySelector("#period-lookup-input")).toBeNull();
+	});
+});
