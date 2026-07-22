@@ -54,3 +54,6 @@ jobs:
       # so invoke next directly to avoid doing it twice.
       - name: Build
         run: pnpm exec next build
+
+      - name: Verify navigation routes
+        run: node scripts/verify-navigation-routes.mjs
