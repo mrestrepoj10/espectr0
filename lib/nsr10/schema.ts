@@ -133,6 +133,36 @@ const decimalWitnessSchema = z
   .string()
   .regex(/^-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?$/, "Expected a decimal witness")
 
+export const oracleUnitsSchema = z
+  .object({
+    aa: z.literal("fraction-of-g"),
+    av: z.literal("fraction-of-g"),
+    fa: z.literal("dimensionless"),
+    fv: z.literal("dimensionless"),
+    importance_coefficient: z.literal("dimensionless"),
+    t: z.literal("s"),
+    fixed_periods: z.literal("s"),
+    period: z.literal("s"),
+    period_decimal: z.literal("s"),
+    t0: z.literal("s"),
+    tc: z.literal("s"),
+    tl: z.literal("s"),
+    sa_max: z.literal("fraction-of-g"),
+    sa: z.literal("fraction-of-g"),
+    sa_decimal: z.literal("fraction-of-g"),
+    recommended_f64_absolute_tolerance: z.literal("fraction-of-g"),
+  })
+  .strict()
+
+const oracleFormulaReferenceSchema = z.enum([
+  "A.2.6-1",
+  "A.2.6-2",
+  "A.2.6-3",
+  "A.2.6-4",
+  "A.2.6-5",
+  "A.2.6-6",
+])
+
 const oracleDerivedValuesSchema = z
   .object({
     fa: z.number().finite().positive(),
@@ -225,6 +255,8 @@ export const oracleSchema = z
       .strict(),
     legal_qualification: z.string().min(1),
     sampling_note: z.string().min(1),
+    units: oracleUnitsSchema,
+    formula_inventory: z.array(oracleFormulaReferenceSchema).length(6),
     sources: z
       .object({
         municipios: oracleSourceSchema,

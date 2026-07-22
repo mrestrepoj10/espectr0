@@ -18,7 +18,8 @@ retired rather than reconstructed from an unverifiable description.
 Version 2 replaces that missing path with two immutable, checked-in inputs:
 
 - `oracle-input.json` independently repeats the coefficient tables, importance
-  factors, fixed periods, case inputs, formula identifiers, and pinned PDF lock.
+  factors, fixed periods, case inputs, complete A.2.6-1 through A.2.6-6 formula
+  inventory, machine-validated units, and pinned PDF lock.
 - `scripts/generate-nsr10-oracle.py` implements the arithmetic with Python
   `Decimal` at 50-digit precision. It does not import the TypeScript engine or
   read production canonical JSON while calculating expected results.
@@ -30,3 +31,9 @@ the generated oracle declares its input and current canonical regulatory JSON
 hashes. `evidence:check` verifies every lock, the pinned PDF hash and page count,
 all oracle case inputs against the canonical municipality data, and
 byte-for-byte reproduction of `oracle.json`.
+
+The units contract classifies T/fixed periods, emitted period values and their
+decimal witnesses, and T0/TC/TL as seconds; Aa, Av, Sa/Sa-max and their decimal
+witnesses, and the absolute binary64 tolerance as fractions of g; and Fa, Fv,
+and I as dimensionless. The same contract and formula inventory are emitted in
+the generated oracle and validated by the runtime Zod schema.

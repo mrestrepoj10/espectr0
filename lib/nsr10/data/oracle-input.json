@@ -3,7 +3,25 @@
   "description": "Independent NSR-10 design-spectrum oracle inputs, transcribed separately from the production TypeScript engine.",
   "generator": {
     "path": "scripts/generate-nsr10-oracle.py",
-    "sha256": "07084f1cd7687cb4223f2d549bd05f76446792c09977b6dbf9ec2464916f6820"
+    "sha256": "eb51fed622b99df480972508da0c4f64cfe8c2339875c25a6a46a414678130fe"
+  },
+  "units": {
+    "aa": "fraction-of-g",
+    "av": "fraction-of-g",
+    "fa": "dimensionless",
+    "fv": "dimensionless",
+    "importance_coefficient": "dimensionless",
+    "t": "s",
+    "fixed_periods": "s",
+    "period": "s",
+    "period_decimal": "s",
+    "t0": "s",
+    "tc": "s",
+    "tl": "s",
+    "sa_max": "fraction-of-g",
+    "sa": "fraction-of-g",
+    "sa_decimal": "fraction-of-g",
+    "recommended_f64_absolute_tolerance": "fraction-of-g"
   },
   "source": {
     "document": "NSR-10 Título A, versión consolidada 2017",
@@ -12,7 +30,7 @@
     "pdf_page_count": 206,
     "site_coefficients": "Tablas A.2.4-3 y A.2.4-4",
     "importance_coefficients": "Tabla A.2.5-1",
-    "spectrum_equations": ["A.2.6-1", "A.2.6-3", "A.2.6-4", "A.2.6-5", "A.2.6-6"]
+    "spectrum_equations": ["A.2.6-1", "A.2.6-2", "A.2.6-3", "A.2.6-4", "A.2.6-5", "A.2.6-6"]
   },
   "fixed_periods": ["0", "0.1", "0.5", "1", "2", "5", "10"],
   "site_coefficients": {

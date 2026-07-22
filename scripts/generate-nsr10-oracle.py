@@ -13,6 +13,15 @@ from typing import Any
 
 getcontext().prec = 50
 
+REQUIRED_SPECTRUM_EQUATIONS = [
+    "A.2.6-1",
+    "A.2.6-2",
+    "A.2.6-3",
+    "A.2.6-4",
+    "A.2.6-5",
+    "A.2.6-6",
+]
+
 ROOT = Path(__file__).resolve().parent.parent
 INPUT_PATH = ROOT / "lib/nsr10/data/oracle-input.json"
 OUTPUT_PATH = ROOT / "lib/nsr10/data/oracle.json"
@@ -145,6 +154,8 @@ def build_oracle() -> dict[str, Any]:
     inputs = json.loads(INPUT_PATH.read_text(encoding="utf-8"))
     if sha256(Path(__file__)) != inputs["generator"]["sha256"]:
         raise SystemExit("Oracle program SHA-256 does not match oracle-input.json")
+    if inputs["source"]["spectrum_equations"] != REQUIRED_SPECTRUM_EQUATIONS:
+        raise SystemExit("Oracle formula inventory is incomplete or out of order")
     cases = [generate_case(case, inputs) for case in inputs["cases"]]
     return {
         "schema_version": 2,
@@ -157,6 +168,8 @@ def build_oracle() -> dict[str, Any]:
         },
         "legal_qualification": "The default uses equation A.2.6-3's plateau from zero through TC. Equation A.2.6-7's rising branch below T0 is reserved for modal analysis under A.2.6.1.3.",
         "sampling_note": "low/intermediate/high coefficient labels are oracle coverage strata, not NSR-10 hazard-zone classifications.",
+        "units": inputs["units"],
+        "formula_inventory": inputs["source"]["spectrum_equations"],
         "sources": {
             "municipios": {"path": "lib/nsr10/data/municipios.json", "sha256": "6d6da041d21085f5ca79cbb796a68d62ff42babae52fd2b7474f10da14786a12"},
             "site_coefficients": {"path": "lib/nsr10/data/site-coefficients.json", "sha256": "2c22ab2cf3a49db81f18be486aec4b96aa3dbb3517aaeedad4b8a6c0e1f161c4"},

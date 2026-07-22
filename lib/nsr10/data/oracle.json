@@ -9,6 +9,32 @@
   },
   "legal_qualification": "The default uses equation A.2.6-3's plateau from zero through TC. Equation A.2.6-7's rising branch below T0 is reserved for modal analysis under A.2.6.1.3.",
   "sampling_note": "low/intermediate/high coefficient labels are oracle coverage strata, not NSR-10 hazard-zone classifications.",
+  "units": {
+    "aa": "fraction-of-g",
+    "av": "fraction-of-g",
+    "fa": "dimensionless",
+    "fv": "dimensionless",
+    "importance_coefficient": "dimensionless",
+    "t": "s",
+    "fixed_periods": "s",
+    "period": "s",
+    "period_decimal": "s",
+    "t0": "s",
+    "tc": "s",
+    "tl": "s",
+    "sa_max": "fraction-of-g",
+    "sa": "fraction-of-g",
+    "sa_decimal": "fraction-of-g",
+    "recommended_f64_absolute_tolerance": "fraction-of-g"
+  },
+  "formula_inventory": [
+    "A.2.6-1",
+    "A.2.6-2",
+    "A.2.6-3",
+    "A.2.6-4",
+    "A.2.6-5",
+    "A.2.6-6"
+  ],
   "sources": {
     "municipios": {
       "path": "lib/nsr10/data/municipios.json",
@@ -24,7 +50,7 @@
     },
     "spectrum_formulas": {
       "path": "lib/nsr10/data/oracle-input.json",
-      "sha256": "2e01e418fb4addf32748b38a061e4e708f1d74b9ae14d74d4f972cd840f006a6"
+      "sha256": "2ec5b71cf7ec5d883cce801e3cf48cce8ea9b2a118b4f73960e4c350287cfcce"
     }
   },
   "coverage": {

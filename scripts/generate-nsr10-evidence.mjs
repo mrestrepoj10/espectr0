@@ -113,10 +113,12 @@ const manifestFile = resolve(
 );
 const overridesFile = resolve(scriptDirectory, "nsr10-evidence-overrides.json");
 const oracleFile = resolve(repositoryRoot, "lib/nsr10/data/oracle.json");
-const oracleInputFile = resolve(
-  repositoryRoot,
-  "lib/nsr10/data/oracle-input.json",
+const oracleInputArgument = process.argv.find((argument) =>
+  argument.startsWith("--oracle-input="),
 );
+const oracleInputFile = oracleInputArgument
+  ? resolve(repositoryRoot, oracleInputArgument.slice("--oracle-input=".length))
+  : resolve(repositoryRoot, "lib/nsr10/data/oracle-input.json");
 const checkOnly = process.argv.includes("--check");
 const reportJson = process.argv.includes("--report-json");
 
@@ -198,6 +200,22 @@ async function assertOracleProgramLock(oracleInput) {
     `Oracle program changed: expected ${program.sha256}, found ${actual}`,
   );
   return actual;
+}
+
+function assertOraclePdfLock(oracleInput, actual) {
+  const declaredPath = resolve(repositoryRoot, oracleInput.source.pdf_path);
+  invariant(
+    declaredPath === actual.path,
+    `Oracle PDF path changed: expected ${actual.path}, found ${declaredPath}`,
+  );
+  invariant(
+    oracleInput.source.pdf_sha256 === actual.sha256,
+    `Oracle PDF SHA-256 changed: expected ${actual.sha256}, found ${oracleInput.source.pdf_sha256}`,
+  );
+  invariant(
+    oracleInput.source.pdf_page_count === actual.pageCount,
+    `Oracle PDF page count changed: expected ${actual.pageCount}, found ${oracleInput.source.pdf_page_count}`,
+  );
 }
 
 function glyphBounds(item) {
@@ -323,6 +341,7 @@ async function extractSourceRows(pdfBytes) {
     pdf.numPages === EXPECTED_PDF_PAGE_COUNT,
     `Expected ${EXPECTED_PDF_PAGE_COUNT} PDF pages, found ${pdf.numPages}`,
   );
+  const pageCount = pdf.numPages;
   const rows = [];
 
   for (
@@ -379,7 +398,7 @@ async function extractSourceRows(pdfBytes) {
   }
 
   await pdf.destroy();
-  return rows;
+  return { rows, pageCount };
 }
 
 function groupRowsByCode(rows) {
@@ -661,10 +680,16 @@ async function main() {
   const oracleSourceHashes = await assertOracleSourceLocks(oracle);
   oracleSourceHashes.oracle_program = await assertOracleProgramLock(oracleInput);
 
-  const [rawRows, normativeCitations] = await Promise.all([
+  const [sourceExtraction, normativeCitations] = await Promise.all([
     extractSourceRows(pdfBytes),
     extractNormativeCitations(pdfBytes),
   ]);
+  const { rows: rawRows, pageCount: pdfPageCount } = sourceExtraction;
+  assertOraclePdfLock(oracleInput, {
+    path: pdfFile,
+    sha256: pdfSha256,
+    pageCount: pdfPageCount,
+  });
   invariant(
     rawRows.length === EXPECTED_RAW_ROW_COUNT,
     `Expected ${EXPECTED_RAW_ROW_COUNT} raw source rows, found ${rawRows.length}`,
@@ -716,7 +741,7 @@ async function main() {
         geometryRowsValidated: rawRows.length,
         normativeCitations: normativeCitations.length,
         sourceHashes: { pdf: pdfSha256, ...oracleSourceHashes },
-        sourcePageCounts: { pdf: EXPECTED_PDF_PAGE_COUNT },
+        sourcePageCounts: { pdf: pdfPageCount },
         historicalAaAvProjectionSha256: aaAvProjectionSha256,
         oracleCases: oracle.cases.length,
         artifactSizes: {
