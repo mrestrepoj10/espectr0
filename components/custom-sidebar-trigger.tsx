@@ -9,7 +9,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 export function CustomSidebarTrigger() {
 	return (
 		<Tooltip>
-			<TooltipTrigger delay={1000} render={<SidebarTrigger />} />
+			<SidebarTrigger render={<TooltipTrigger delay={1000} />} />
 			<TooltipContent className="px-2 py-1" side="right">
 				Alternar barra lateral{" "}
 				<KbdGroup>
