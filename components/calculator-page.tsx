@@ -84,6 +84,7 @@ import {
 import {
 	copyChartPng,
 	copyChartSvg,
+	copyTextToClipboard,
 	downloadEtabsTxt,
 } from "@/lib/chart-export";
 import {
@@ -564,8 +565,7 @@ function ExportActions({
 		const trace = computeCalculationTrace(params, { municipality: municipio });
 		if ("status" in trace) return;
 
-		void navigator.clipboard
-			.writeText(JSON.stringify(trace, null, 2))
+		void copyTextToClipboard(JSON.stringify(trace, null, 2))
 			.then(() => toast.success("JSON copiado al portapapeles."))
 			.catch(() => toast.error("No fue posible copiar el JSON."));
 	}

@@ -1,6 +1,10 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { formatEtabsTxt, serializeChartSvg } from "./chart-export";
+import {
+	copyTextToClipboard,
+	formatEtabsTxt,
+	serializeChartSvg,
+} from "./chart-export";
 
 class FakeStyle {
 	values = new Map<string, string>();
@@ -43,6 +47,22 @@ afterEach(() => {
 });
 
 describe("chart export formatting", () => {
+	it("rejects predictably when text clipboard support is unavailable", async () => {
+		vi.stubGlobal("navigator", {});
+
+		await expect(copyTextToClipboard("spectrum")).rejects.toThrow(
+			"Async Clipboard API is unavailable",
+		);
+	});
+
+	it("writes text through the Async Clipboard API when supported", async () => {
+		const writeText = vi.fn().mockResolvedValue(undefined);
+		vi.stubGlobal("navigator", { clipboard: { writeText } });
+
+		await expect(copyTextToClipboard("spectrum")).resolves.toBeUndefined();
+		expect(writeText).toHaveBeenCalledWith("spectrum");
+	});
+
 	it("formats ETABS points as two tab-separated columns without a header", () => {
 		expect(
 			formatEtabsTxt([

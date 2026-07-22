@@ -57,7 +57,7 @@ describe("spectrum comparison helpers", () => {
 		const csv = formatComparisonCsv(computed, data);
 		const json = comparisonJson(computed);
 
-		expect(csv.split("\n")[0]).toContain("Cali · Suelo C");
+		expect(csv.split("\n")[0]).toContain("Cali, Valle del Cauca · Suelo C");
 		expect(csv).not.toContain("Suelo F");
 		expect(JSON.parse(JSON.stringify(json))).toMatchObject({
 			schemaVersion: 1,
@@ -69,5 +69,21 @@ describe("spectrum comparison helpers", () => {
 				},
 			],
 		});
+	});
+
+	it("includes departments in labels so duplicate municipality names remain distinct", () => {
+		const antioquia = lookupMunicipio("Argelia", "Antioquia")[0];
+		const cauca = lookupMunicipio("Argelia", "Cauca")[0];
+		if (!antioquia || !cauca) throw new Error("Expected duplicate Argelia entries");
+
+		const computed = computeComparisonScenarios([
+			{ ...scenarios[0], id: "argelia-ant", municipio: antioquia },
+			{ ...scenarios[0], id: "argelia-cau", municipio: cauca },
+		]);
+
+		expect(computed.map(({ label }) => label)).toEqual([
+			expect.stringContaining("Argelia, Antioquia"),
+			expect.stringContaining("Argelia, Cauca"),
+		]);
 	});
 });
