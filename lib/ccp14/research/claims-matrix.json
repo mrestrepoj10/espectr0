@@ -1,0 +1,163 @@
+{
+  "claims": [
+    {
+      "claim": "Resolution 0000108/2015 adopts CCP-2014 for INVÍAS National Road Network bridge studies, design, construction, and maintenance.",
+      "id": "adoption",
+      "locator": "Resolution 0000108/2015, Article 1, physical page 1",
+      "source": "invias-resolution-108-2015",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "The resolution is effective on publication and repeals contrary provisions, especially Resolution 3600/1996.",
+      "id": "effective-repeal",
+      "locator": "Resolution 0000108/2015, Article 2, physical page 2",
+      "source": "invias-resolution-108-2015",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "The general design hazard is 7% probability of exceedance in 75 years, approximately a 1000-year mean return period, at 5% damping.",
+      "id": "hazard",
+      "locator": "Section 3 physical pages 50-53, printed 3-46 through 3-49",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "The general procedure obtains PGA, Ss, and S1 from the three maps or contracting-entity-approved special values/maps and uses linear contour interpolation.",
+      "id": "map-inputs",
+      "locator": "Section 3 physical page 50, printed 3-46, 3.10.2.1",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "A finite official selectable locality count and exact locality-to-PGA/Ss/S1 registry is available in the published package.",
+      "id": "exact-locality-count",
+      "locator": "Official ZIP central directory and C3.10.2.1",
+      "source": "invias-ccp14-official-zip",
+      "status": "not-supported-activation-blocked"
+    },
+    {
+      "claim": "The site-specific procedure is mandatory for distance under 10 km to an active fault, class F, expected long-duration events, or bridge importance requiring lower exceedance probability/longer return period.",
+      "id": "site-specific-triggers",
+      "locator": "Section 3 physical page 50, printed 3-46, 3.10.2",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "The site-specific analysis must document uncertainty and be reviewed/approved by experts appointed by the contracting entity.",
+      "id": "site-specific-review",
+      "locator": "Section 3 physical page 54, printed 3-50, 3.10.2.2",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "A site-specific spectrum cannot be below two-thirds of the general spectrum from 0.5Tr to 2.0Tr.",
+      "id": "site-specific-floor",
+      "locator": "Section 3 physical pages 54-55, printed 3-50 and 3-51",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "Site classes A through F and class-F site-specific requirements are defined by 3.10.3.1.",
+      "id": "soils",
+      "locator": "Section 3 physical pages 55-56, printed 3-51 and 3-52",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "Fpga, Fa, and Fv values and linear interpolation rules are provided in Tables 3.10.3.2-1 through 3.10.3.2-3.",
+      "id": "site-factor-tables",
+      "locator": "Section 3 physical pages 58-59, printed 3-54 and 3-55",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-115-cell-f3-package"
+    },
+    {
+      "claim": "As = Fpga * PGA.",
+      "id": "as",
+      "locator": "Section 3 physical page 60, printed 3-56, Equation 3.10.4.2-2",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "SDS = Fa * Ss.",
+      "id": "sds",
+      "locator": "Section 3 physical page 60, printed 3-56, Equation 3.10.4.2-3",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "SD1 = Fv * S1.",
+      "id": "sd1",
+      "locator": "Section 3 physical page 61, printed 3-57; equation mislabeled 3.10.4.2-3 and referenced as 3.10.4.2-6 in 3.10.6",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-value-numbering-defect"
+    },
+    {
+      "claim": "Ts = SD1 / SDS.",
+      "id": "ts",
+      "locator": "Section 3 physical page 60, printed 3-56, definition and Figure 3.10.4.1-1",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "T0 has one unambiguous value.",
+      "id": "t0",
+      "locator": "Section 3 physical page 60, printed 3-56",
+      "source": "invias-ccp14-section-3",
+      "status": "contradicted-by-same-official-page-activation-blocked"
+    },
+    {
+      "claim": "The spectrum uses a linear initial branch, SDS plateau, and SD1/T long-period branch; no 1/T^2 branch is specified.",
+      "id": "spectrum-branches",
+      "locator": "Section 3 physical pages 60-61, printed 3-56 and 3-57, Equations 3.10.4.2-1, -4, -5",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-formulas-initial-boundary-blocked"
+    },
+    {
+      "claim": "The contracting entity assigns critical, essential, or other bridge category.",
+      "id": "operational-category",
+      "locator": "Section 3 physical page 61, printed 3-57, 3.10.5",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "Seismic performance zones 1-4 are selected by SD1 thresholds 0.15, 0.30, and 0.50 with the printed boundary inclusions.",
+      "id": "zones",
+      "locator": "Section 3 physical page 61, printed 3-57, Table 3.10.6-1",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "Substructure and connection R factors are tabulated by bridge category/element.",
+      "id": "r-tables",
+      "locator": "Section 3 physical page 62, printed 3-58, Tables 3.10.7.1-1 and 3.10.7.1-2",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "R applies in both orthogonal horizontal directions; inelastic time-history analysis uses R=1 for substructure and all connections.",
+      "id": "r-application",
+      "locator": "Section 3 physical page 62, printed 3-58, 3.10.7.1 and 3.10.7.2",
+      "source": "invias-ccp14-section-3",
+      "status": "verified-primary"
+    },
+    {
+      "claim": "An adopted Section 3 amendment or erratum supersedes the recovered passages.",
+      "id": "currentness",
+      "locator": "INVÍAS/MinTransporte/SUIN official searches through 2026-07-22",
+      "source": "official-search-ledger",
+      "status": "not-found"
+    },
+    {
+      "claim": "The April 2026 Section 13 consultation is an adopted amendment affecting Section 3.",
+      "id": "section-13-proposal",
+      "locator": "MinTransporte projects page, consultation 2026-04-09 through 2026-04-24",
+      "source": "mintransporte-projects",
+      "status": "false-nonbinding-and-out-of-scope"
+    }
+  ],
+  "summary": {
+    "activationBlockingClaims": 2,
+    "normativeClaimsWithPrimarySupport": 18,
+    "totalClaims": 22
+  }
+}

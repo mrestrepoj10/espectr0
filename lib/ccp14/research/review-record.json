@@ -1,0 +1,23 @@
+{
+  "activationDecision": "do-not-activate",
+  "authorReview": {
+    "date": "2026-07-22",
+    "reviewer": "Codex research agent",
+    "status": "complete",
+    "verified": [
+      "source hashes and byte counts",
+      "adoption scope",
+      "site-factor cells",
+      "R-factor cells",
+      "formula transcription",
+      "visual T0 conflict",
+      "official ZIP contents"
+    ]
+  },
+  "independentDomainReview": {
+    "requiredExpertise": "Colombian bridge seismic design and CCP-14 regulatory application",
+    "reviewer": null,
+    "status": "pending"
+  },
+  "mergeDecision": "draft-only; no merge until an authoritative T0 resolution, official selectable location dataset, and independent review are recorded"
+}

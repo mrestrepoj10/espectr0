@@ -1,0 +1,72 @@
+{
+  "factorInterpolationCases": [
+    {
+      "argument": "0.35",
+      "lowerArgument": "0.30",
+      "lowerFactor": "1.2",
+      "upperArgument": "0.40",
+      "upperFactor": "1.1"
+    },
+    {
+      "argument": "0.625",
+      "lowerArgument": "0.50",
+      "lowerFactor": "1.2",
+      "upperArgument": "0.75",
+      "upperFactor": "1.1"
+    },
+    {
+      "argument": "0.25",
+      "lowerArgument": "0.20",
+      "lowerFactor": "3.2",
+      "upperArgument": "0.30",
+      "upperFactor": "2.8"
+    }
+  ],
+  "invalidCases": [
+    {
+      "id": "negative-period",
+      "value": "-0.01"
+    },
+    {
+      "id": "site-class-f",
+      "value": "F"
+    },
+    {
+      "id": "unknown-r-element",
+      "value": "cable-stayed-tower"
+    }
+  ],
+  "rLookupCases": [
+    {
+      "category": "essential",
+      "element": "steel-or-composite-frame-vertical-piles-only",
+      "expected": "3.5"
+    },
+    {
+      "category": "all",
+      "element": "superstructure-to-abutment",
+      "expected": "0.8"
+    },
+    {
+      "category": "inelastic-time-history",
+      "element": "all-substructures-and-connections",
+      "expected": "1.0"
+    }
+  ],
+  "spectrumCase": {
+    "Fa": "1.2",
+    "Fpga": "1.2",
+    "Fv": "1.8",
+    "PGA": "0.30",
+    "S1": "0.30",
+    "Ss": "0.75",
+    "periods": [
+      "0",
+      "0.10",
+      "0.12",
+      "0.20",
+      "0.60",
+      "1.00"
+    ]
+  }
+}

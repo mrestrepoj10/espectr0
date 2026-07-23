@@ -1,0 +1,61 @@
+{
+  "factorInterpolation": [
+    "1.15",
+    "1.15",
+    "3.00"
+  ],
+  "invalidCases": [
+    {
+      "id": "negative-period",
+      "outcome": "reject"
+    },
+    {
+      "id": "site-class-f",
+      "outcome": "site-specific-study-required"
+    },
+    {
+      "id": "unknown-r-element",
+      "outcome": "not-tabulated"
+    }
+  ],
+  "parameters": {
+    "As": "0.360",
+    "SD1": "0.540",
+    "SDS": "0.900",
+    "Ts": "0.6"
+  },
+  "performanceZone": 4,
+  "rLookup": [
+    "3.5",
+    "0.8",
+    "1.0"
+  ],
+  "spectrumCompetingReadings": {
+    "figure-T0-equals-0.2Ts": {
+      "T0": "0.12",
+      "values": [
+        "0.360",
+        "0.8100",
+        "0.900",
+        "0.900",
+        "0.900",
+        "0.540"
+      ]
+    },
+    "text-T0-equals-0.2s": {
+      "T0": "0.2",
+      "values": [
+        "0.360",
+        "0.6300",
+        "0.6840",
+        "0.900",
+        "0.900",
+        "0.540"
+      ]
+    }
+  },
+  "t0ConflictEffect": {
+    "absoluteDifferenceAtT0.10": "0.1800",
+    "activationDecision": "blocked"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "retrievedOn": "2026-07-22",
+  "sources": [
+    {
+      "archiveCapture": "https://web.archive.org/web/20210515075336id_/https://www.invias.gov.co/index.php/archivo-y-documentos/bibilioteca-virtual/resoluciones-circulares-y-otros/3610-resolucion-no-108-del-26-de-enero-de-2015/file",
+      "bytes": 564302,
+      "id": "invias-resolution-108-2015",
+      "officialUrl": "https://www.invias.gov.co/index.php/archivo-y-documentos/bibilioteca-virtual/resoluciones-circulares-y-otros/3610-resolucion-no-108-del-26-de-enero-de-2015/file",
+      "pageCount": 2,
+      "redistribution": "external-only",
+      "sha256": "e17c4aa764716c5533cb82499984f87e4eda032888c91544fab10b804d5a753a",
+      "transportNote": "Wayback supplied transport for bytes originally published by INVÍAS; it is not treated as the issuing authority."
+    },
+    {
+      "archiveCapture": "https://web.archive.org/web/20220305150428id_/https://www.invias.gov.co/index.php/archivo-y-documentos/documentos-tecnicos/3709-norma-colombiana-de-diseno-de-puentes-ccp14/file",
+      "bytes": 40260753,
+      "centralDirectoryEntryCount": 16,
+      "id": "invias-ccp14-official-zip",
+      "officialUrl": "https://www.invias.gov.co/index.php/archivo-y-documentos/documentos-tecnicos/3709-norma-colombiana-de-diseno-de-puentes-ccp14",
+      "redistribution": "external-only",
+      "sha256": "e6d71cd1a0efffb8b8be95f8e3c42a7fd180485c704f0761e07faf6af28fbd8d",
+      "transportNote": "Wayback supplied transport for the official INVÍAS ZIP; the ZIP passed central-directory extraction."
+    },
+    {
+      "archiveMember": "SECCIÓN 3 - CARGAS Y FACTORES DE CARGA.pdf",
+      "bytes": 5153318,
+      "id": "invias-ccp14-section-3",
+      "pageCount": 140,
+      "parentArchive": "invias-ccp14-official-zip",
+      "redistribution": "external-only",
+      "sha256": "55f53d68dfc568a930b726b0c7dba510ea608128490353bf604f827a27ffc8ca"
+    },
+    {
+      "archiveMember": "PREFACIO.pdf",
+      "bytes": 448341,
+      "id": "invias-ccp14-preface",
+      "pageCount": 7,
+      "parentArchive": "invias-ccp14-official-zip",
+      "redistribution": "external-only",
+      "sha256": "a6c4eea8837580438585aa1b43b6167c3b626aa6d49373595ccc3b43be7a6fdf"
+    }
+  ]
+}
