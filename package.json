@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "evidence:generate": "node scripts/generate-nsr10-evidence.mjs",
-    "evidence:check": "node scripts/generate-nsr10-evidence.mjs --check"
+    "evidence:check": "node scripts/regulatory/check-evidence.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
