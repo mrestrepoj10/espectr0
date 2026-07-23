@@ -147,6 +147,18 @@ function normalizedInputs(
   }
 }
 
+function scenarioEvidenceKey(
+  context: CalculationTraceContext,
+  hazardId: string,
+) {
+  return {
+    studyId: NSR10_STUDY_ID,
+    studyVersion: NSR10_STUDY_VERSION,
+    optionId: context.municipality?.code ?? null,
+    hazardId,
+  }
+}
+
 function normalizedPoint(point: {
   t: number
   sa: number
@@ -279,6 +291,10 @@ export function adaptNsr10Spectrum(
         scenarioType: "nsr10-national",
       },
       study: { id: NSR10_STUDY_ID, version: NSR10_STUDY_VERSION },
+      scenarioEvidenceKey: scenarioEvidenceKey(
+        contextSnapshot,
+        parent.hazardLevel,
+      ),
       scenarioType: "nsr10-national",
       normalizedInputs: inputs,
       hazard: {
@@ -348,6 +364,10 @@ export function adaptNsr10Spectrum(
       scenarioType: "nsr10-national",
     },
     study: { id: NSR10_STUDY_ID, version: NSR10_STUDY_VERSION },
+    scenarioEvidenceKey: scenarioEvidenceKey(
+      contextSnapshot,
+      parent.hazardLevel,
+    ),
     scenarioType: "nsr10-national",
     normalizedInputs: inputs,
     points: parent.points.map(normalizedPoint),

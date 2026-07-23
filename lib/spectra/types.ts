@@ -2,8 +2,8 @@ import { z } from "zod"
 
 import { spectrumCapabilitiesSchema } from "./capabilities"
 
-export const SPECTRUM_CONTRACT_SCHEMA_VERSION = 1 as const
-export const SPECTRUM_EXPORT_SCHEMA_VERSION = 1 as const
+export const SPECTRUM_CONTRACT_SCHEMA_VERSION = 2 as const
+export const SPECTRUM_EXPORT_SCHEMA_VERSION = 2 as const
 
 export const spectrumScenarioTypeSchema = z.enum([
   "nsr10-national",
@@ -96,6 +96,15 @@ const uniqueIdsSchema = z.array(idSchema).superRefine((ids, context) => {
     seen.add(id)
   })
 })
+
+export const scenarioEvidenceKeySchema = z
+  .object({
+    studyId: idSchema,
+    studyVersion: idSchema,
+    optionId: idSchema.nullable(),
+    hazardId: idSchema.nullable(),
+  })
+  .strict()
 
 export const spectrumMetricSchema = z
   .object({
@@ -302,6 +311,7 @@ const identityShape = {
     })
     .strict(),
   study: z.object({ id: idSchema, version: idSchema }).strict(),
+  scenarioEvidenceKey: scenarioEvidenceKeySchema,
   scenarioType: spectrumScenarioTypeSchema,
   normalizedInputs: normalizedInputsSchema,
   warnings: z.array(spectrumWarningSchema),
@@ -428,6 +438,36 @@ export const normalizedSpectrumResultDataSchema = z
   ])
   .superRefine((result, context) => {
     assertIdentity(result, context)
+    if (
+      result.scenarioEvidenceKey.studyId !== result.study.id ||
+      result.scenarioEvidenceKey.studyVersion !== result.study.version
+    ) {
+      addRelationalIssue(
+        context,
+        "Scenario evidence key must agree with the active study",
+        ["scenarioEvidenceKey"],
+      )
+    }
+    if (
+      result.hazard !== null &&
+      result.scenarioEvidenceKey.hazardId !== result.hazard.id
+    ) {
+      addRelationalIssue(
+        context,
+        "Scenario evidence key must agree with the active hazard",
+        ["scenarioEvidenceKey", "hazardId"],
+      )
+    }
+    if (
+      result.hazard === null &&
+      result.scenarioEvidenceKey.hazardId !== null
+    ) {
+      addRelationalIssue(
+        context,
+        "Scenario evidence key cannot declare a hazard when no hazard resolved",
+        ["scenarioEvidenceKey", "hazardId"],
+      )
+    }
     if (result.trace && result.traceSchemaVersion !== result.trace.schemaVersion) {
       addRelationalIssue(
         context,
@@ -635,6 +675,7 @@ export type Nsr10NationalScenario = z.infer<typeof nsr10NationalScenarioSchema>
 export type Ccp14Scenario = z.infer<typeof ccp14ScenarioSchema>
 export type MunicipalStudyScenario = z.infer<typeof municipalStudyScenarioSchema>
 export type SpectrumScenario = z.infer<typeof spectrumScenarioSchema>
+export type ScenarioEvidenceKey = z.infer<typeof scenarioEvidenceKeySchema>
 export type SpectrumUnit = z.infer<typeof spectrumUnitSchema>
 export type SpectrumMetric = z.infer<typeof spectrumMetricSchema>
 export type NormalizedSpectrumPoint = z.infer<typeof normalizedSpectrumPointSchema>

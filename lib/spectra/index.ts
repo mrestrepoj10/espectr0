@@ -7,7 +7,21 @@ export {
   unsupportedCapability,
 } from "./capabilities"
 export { assertEngineResultIdentity, spectrumEngineMetadataSchema } from "./engine"
-export { createSpectrumExport, spectrumResultData } from "./export"
+export {
+  createSpectrumExport,
+  assertSpectrumExportCapability,
+  formatSpectrumCsv,
+  formatSpectrumEtabs,
+  formatSpectrumJson,
+  spectrumExportFilename,
+  spectrumResultData,
+} from "./export"
+export {
+  SPECTRUM_EVIDENCE_VIEW_SCHEMA_VERSION,
+  SpectrumEvidenceResolverRegistry,
+  resolveSpectrumEvidence,
+  spectrumEvidenceResolverRegistry,
+} from "./evidence"
 export { SpectrumEngineRegistry } from "./registry"
 export {
   NSR10_ENGINE_VERSION,
@@ -49,6 +63,7 @@ export {
   normalizedSpectrumResultDataSchema,
   nonApplicableSchema,
   nsr10NationalScenarioSchema,
+  scenarioEvidenceKeySchema,
   spectrumBranchMetadataSchema,
   spectrumExportSchema,
   spectrumMetricSchema,
@@ -65,6 +80,16 @@ export type {
   SpectrumCapabilityKey,
 } from "./capabilities"
 export type { SpectrumEngine, SpectrumEngineMetadata } from "./engine"
+export type {
+  SpectrumBranchLineage,
+  SpectrumDirectValue,
+  SpectrumEvidenceCitation,
+  SpectrumEvidenceDocument,
+  SpectrumEvidenceRect,
+  SpectrumEvidenceResolver,
+  SpectrumEvidenceView,
+  SpectrumMetricLineage,
+} from "./evidence"
 export type { Nsr10AdapterScenario } from "./nsr10-adapter"
 export type {
   Applicability,
@@ -78,6 +103,7 @@ export type {
   NormalizedSpectrumResultData,
   NonApplicable,
   Nsr10NationalScenario,
+  ScenarioEvidenceKey,
   SpectrumBranchMetadata,
   SpectrumExport,
   SpectrumMetric,

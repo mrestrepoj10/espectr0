@@ -6,7 +6,12 @@ import { FileWarningIcon } from "lucide-react";
 import { Document, Page, pdfjs } from "react-pdf";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import type { MunicipalityTraceability } from "@/lib/nsr10/evidence";
+import type {
+	SpectrumEvidenceCitation,
+	SpectrumEvidenceDocument,
+	SpectrumEvidenceRect,
+} from "@/lib/spectra";
+import { cn } from "@/lib/utils";
 
 import { PdfLoading } from "./pdf-loading";
 
@@ -15,7 +20,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 	import.meta.url,
 ).toString();
 
-function rectStyle(rect: MunicipalityTraceability["row"]): CSSProperties {
+function rectStyle(rect: SpectrumEvidenceRect): CSSProperties {
 	return {
 		left: `${rect.left * 100}%`,
 		top: `${rect.top * 100}%`,
@@ -40,18 +45,30 @@ function PdfError() {
 }
 
 export function SourcePdfViewer({
-	traceability,
+	document,
+	citations,
 }: {
-	traceability: MunicipalityTraceability;
+	document: SpectrumEvidenceDocument;
+	citations: SpectrumEvidenceCitation[];
 }) {
 	const [pageRendered, setPageRendered] = useState(false);
-	const { pageNumber, row, source, values } = traceability;
+	const pageNumber = citations[0]?.physicalPage;
+	if (!document.localPath || !pageNumber) return <PdfError />;
+	if (
+		citations.some(
+			(citation) =>
+				citation.sourceId !== document.sourceId ||
+				citation.physicalPage !== pageNumber,
+		)
+	) {
+		throw new Error("PDF evidence viewer requires citations from one source page");
+	}
 
 	return (
 		<div className="overflow-hidden rounded-2xl bg-muted shadow-[0_1px_2px_rgb(0_0_0/0.08),0_8px_24px_rgb(0_0_0/0.08)] ring-1 ring-black/10 dark:ring-white/10">
 			<Document
 				error={<PdfError />}
-				file={source.pdfPath}
+				file={document.localPath}
 				loading={<PdfLoading />}
 				onLoadError={() => setPageRendered(false)}
 			>
@@ -67,19 +84,18 @@ export function SourcePdfViewer({
 						renderTextLayer={false}
 						width={900}
 					/>
-					<div
-						aria-hidden="true"
-						className="pointer-events-none absolute rounded-[2px] bg-yellow-300/25 opacity-0 ring-1 ring-inset ring-yellow-600/50 transition-opacity duration-200 motion-reduce:transition-none data-[visible=true]:opacity-100"
-						data-visible={pageRendered}
-						style={rectStyle(row)}
-					/>
-					{Object.entries(values).map(([key, value]) => (
+					{citations.map((citation) => (
 						<div
 							aria-hidden="true"
-							className="pointer-events-none absolute rounded-[2px] bg-yellow-300/60 opacity-0 ring-1 ring-inset ring-yellow-700/70 transition-opacity delay-75 duration-200 motion-reduce:transition-none data-[visible=true]:opacity-100"
+							className={cn(
+								"pointer-events-none absolute rounded-[2px] opacity-0 ring-1 ring-inset transition-opacity duration-200 motion-reduce:transition-none data-[visible=true]:opacity-100",
+								citation.kind === "cell"
+									? "bg-yellow-300/60 ring-yellow-700/70 delay-75"
+									: "bg-yellow-300/25 ring-yellow-600/50",
+							)}
 							data-visible={pageRendered}
-							key={key}
-							style={rectStyle(value.rect)}
+							key={citation.id}
+							style={rectStyle(citation.rect)}
 						/>
 					))}
 				</div>
