@@ -27,6 +27,11 @@ duplicate IDs. Adding a study therefore changes only that study's directory.
   normalization. Text media is scoped to its form-feed-delimited physical page;
   PDF text items must intersect the declared normalized region. Citation-bearing
   bundled media without a built-in extractor fails closed.
+- Normalized cell values are recomputed from their extracted token using a
+  fail-closed transformation registry. `decimal parse` accepts only a finite
+  canonical dot-decimal token and requires an identical numeric mirror;
+  `text identity` applies the same NFKC/whitespace normalization and requires a
+  unitless string. Unknown transformations and token/value mismatches reject.
 - Every direct scalar has exactly one cell citation whose normalized value, unit,
   and transformation match. Interpolation cites at least two cell inputs. Derived
   lineage separates a clause/equation formula citation from per-dependency input

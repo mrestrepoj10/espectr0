@@ -218,6 +218,41 @@ describe("mandatory source policy", () => {
 		);
 	});
 
+	it("derives normalized values from the locked token transformation", async () => {
+		await expect(checkEvidenceStudy(fixture(), { repositoryRoot })).resolves.toMatchObject({
+			studyId: "framework-fixture",
+		});
+
+		const mismatched = fixture();
+		const baseCitation = mismatched.citations.find(
+			({ id }) => id === "fixture-cell-base",
+		)!;
+		baseCitation.extractedToken = "999.00";
+		baseCitation.requiredTokens = ["999.00"];
+		await expect(checkEvidenceStudy(mismatched, { repositoryRoot })).rejects.toThrow(
+			/Citation fixture-cell-base transformation decimal parse produced 999, not normalized value 1/,
+		);
+	});
+
+	it("rejects unsupported transformations and units on normalized text", async () => {
+		const unsupported = fixture();
+		unsupported.citations[2].transformation = "caller-defined parse";
+		unsupported.values[0].transformation = "caller-defined parse";
+		await expect(checkEvidenceStudy(unsupported, { repositoryRoot })).rejects.toThrow(
+			/Citation fixture-cell-base uses unsupported normalization transformation caller-defined parse/,
+		);
+
+		const unitBearingText = fixture();
+		unitBearingText.citations[2].extractedToken = "option-a";
+		unitBearingText.citations[2].requiredTokens = ["option-a"];
+		unitBearingText.citations[2].normalizedValue = "option-a";
+		delete unitBearingText.citations[2].normalizedNumericValue;
+		unitBearingText.citations[2].transformation = "text identity";
+		await expect(checkEvidenceStudy(unitBearingText, { repositoryRoot })).rejects.toThrow(
+			/Citation fixture-cell-base text identity requires no numeric mirror or unit/,
+		);
+	});
+
 	it("rejects claimed regions absent from an unrelated hash-matching PDF", async () => {
 		const unrelatedPdf = fixture();
 		unrelatedPdf.sources[0].mediaType = "application/pdf";
@@ -606,13 +641,17 @@ describe("page, hierarchy, and direct evidence", () => {
 
 	it("checks non-numeric direct transcription, unit, and transformation", async () => {
 		const study = fixture();
-		study.values[0].value = "one";
+		study.values[0].value = "different";
 		study.values[0].unit = null;
-		study.rawRows[0].fields.base = "one";
-		study.canonicalRows[0].fields.base = "one";
-		study.citations[2].normalizedValue = "different";
+		study.values[0].transformation = "text identity";
+		study.rawRows[0].fields.base = "different";
+		study.canonicalRows[0].fields.base = "different";
+		study.citations[2].extractedToken = "option-a";
+		study.citations[2].requiredTokens = ["option-a"];
+		study.citations[2].normalizedValue = "option-a";
 		delete study.citations[2].normalizedNumericValue;
 		study.citations[2].unit = null;
+		study.citations[2].transformation = "text identity";
 		await expect(checkEvidenceStudy(study, { repositoryRoot })).rejects.toThrow(
 			/does not match its exact cell transcription/,
 		);
