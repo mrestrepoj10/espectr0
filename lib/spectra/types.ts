@@ -372,6 +372,51 @@ const siteSpecificResultSchema = failedResultSchema(
   siteSpecificApplicabilitySchema,
 )
 
+type SpectrumStudyRelationInput =
+  | z.infer<typeof successfulSpectrumResultSchema>
+  | z.infer<typeof invalidInputResultSchema>
+  | z.infer<typeof unsupportedResultSchema>
+  | z.infer<typeof notApplicableResultSchema>
+  | z.infer<typeof siteSpecificResultSchema>
+
+export type SpectrumStudyRelationValidator = {
+  studyId: string
+  validate(
+    result: SpectrumStudyRelationInput,
+    context: z.RefinementCtx,
+  ): void
+}
+
+export class SpectrumStudyRelationRegistry {
+  readonly #validators = new Map<string, SpectrumStudyRelationValidator>()
+
+  register(validator: SpectrumStudyRelationValidator) {
+    if (this.#validators.has(validator.studyId)) {
+      throw new Error(
+        `Study relation validator already registered: ${validator.studyId}`,
+      )
+    }
+    this.#validators.set(validator.studyId, validator)
+    return this
+  }
+
+  validate(result: SpectrumStudyRelationInput, context: z.RefinementCtx) {
+    const validator = this.#validators.get(result.study.id)
+    if (!validator) {
+      addRelationalIssue(
+        context,
+        `No study relation validator is registered for ${result.study.id}`,
+        ["study", "id"],
+      )
+      return
+    }
+    validator.validate(result, context)
+  }
+}
+
+export const spectrumStudyRelationRegistry =
+  new SpectrumStudyRelationRegistry()
+
 function assertIdentity(
   result: {
     scenarioType: SpectrumScenarioType
@@ -438,6 +483,7 @@ export const normalizedSpectrumResultDataSchema = z
   ])
   .superRefine((result, context) => {
     assertIdentity(result, context)
+    spectrumStudyRelationRegistry.validate(result, context)
     if (
       result.scenarioEvidenceKey.studyId !== result.study.id ||
       result.scenarioEvidenceKey.studyVersion !== result.study.version

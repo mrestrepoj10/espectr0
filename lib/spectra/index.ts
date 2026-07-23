@@ -19,7 +19,15 @@ export {
 export {
   SPECTRUM_EVIDENCE_VIEW_SCHEMA_VERSION,
   SpectrumEvidenceResolverRegistry,
+  nsr10EvidenceResolver,
   resolveSpectrumEvidence,
+  spectrumBranchLineageSchema,
+  spectrumDirectValueSchema,
+  spectrumEvidenceCitationSchema,
+  spectrumEvidenceDocumentSchema,
+  spectrumEvidenceRectSchema,
+  spectrumEvidenceViewSchema,
+  spectrumMetricLineageSchema,
   spectrumEvidenceResolverRegistry,
 } from "./evidence"
 export { SpectrumEngineRegistry } from "./registry"
@@ -69,6 +77,8 @@ export {
   spectrumMetricSchema,
   spectrumScenarioSchema,
   spectrumScenarioTypeSchema,
+  SpectrumStudyRelationRegistry,
+  spectrumStudyRelationRegistry,
   spectrumTraceEnvelopeSchema,
   spectrumUnitSchema,
   spectrumWarningSchema,
@@ -109,6 +119,7 @@ export type {
   SpectrumMetric,
   SpectrumScenario,
   SpectrumScenarioType,
+  SpectrumStudyRelationValidator,
   SpectrumTraceEnvelope,
   SpectrumUnit,
   SpectrumWarning,

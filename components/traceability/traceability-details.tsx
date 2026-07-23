@@ -242,7 +242,21 @@ function citationPageLabel(citation: SpectrumEvidenceCitation) {
 	}`;
 }
 
-function EvidenceDocument({
+export function groupCitationsByPhysicalPage(
+	citations: SpectrumEvidenceCitation[],
+) {
+	const groups = new Map<number, SpectrumEvidenceCitation[]>();
+	for (const citation of citations) {
+		const page = groups.get(citation.physicalPage) ?? [];
+		page.push(citation);
+		groups.set(citation.physicalPage, page);
+	}
+	return [...groups.entries()]
+		.sort(([left], [right]) => left - right)
+		.map(([, pageCitations]) => pageCitations);
+}
+
+export function EvidenceDocument({
 	document,
 	citations,
 }: {
@@ -252,6 +266,7 @@ function EvidenceDocument({
 	const rowAndCells = citations.filter(
 		(citation) => citation.kind === "row" || citation.kind === "cell",
 	);
+	const citedPages = groupCitationsByPhysicalPage(rowAndCells);
 	return (
 		<Card size="sm">
 			<CardHeader>
@@ -302,9 +317,16 @@ function EvidenceDocument({
 						<ExternalLinkIcon data-icon="inline-end" />
 					</Button>
 				</div>
-				{document.localPath && rowAndCells.length > 0 ? (
-					<SourcePdfViewer citations={rowAndCells} document={document} />
-				) : null}
+				{document.localPath
+					? citedPages.map((pageCitations) => (
+						<section
+							aria-label={`Vista de evidencia · ${citationPageLabel(pageCitations[0])}`}
+							key={pageCitations[0].physicalPage}
+						>
+							<SourcePdfViewer citations={pageCitations} document={document} />
+						</section>
+					))
+					: null}
 				<div className="flex flex-col gap-2">
 					<h3 className="text-sm font-medium">Transcripción accesible</h3>
 					{citations.map((citation) => (

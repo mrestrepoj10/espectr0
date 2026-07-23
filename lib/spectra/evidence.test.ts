@@ -3,9 +3,9 @@ import { describe, expect, it } from "vitest"
 import { adaptNsr10Spectrum } from "./nsr10-adapter"
 import {
   SpectrumEvidenceResolverRegistry,
+  nsr10EvidenceResolver,
   resolveSpectrumEvidence,
 } from "./evidence"
-import { NSR10_ENGINE_ID } from "./nsr10-evidence"
 
 const cali = {
   municipality: {
@@ -37,7 +37,7 @@ describe("normalized scenario evidence", () => {
       hazardId: "design",
     })
     expect(evidence).toMatchObject({
-      schemaVersion: 1,
+      schemaVersion: 2,
       status: "partial",
       study: { id: "nsr10-national", version: "NSR-10-2010" },
       selection: {
@@ -140,7 +140,7 @@ describe("normalized scenario evidence", () => {
     const result = adaptNsr10Spectrum(params, cali)
     const canonical = resolveSpectrumEvidence(result)
     const resolver = {
-      engineId: NSR10_ENGINE_ID,
+      ...nsr10EvidenceResolver,
       resolve: () => ({
         ...canonical,
         directValues: canonical.directValues.map((value, index) =>
@@ -152,5 +152,118 @@ describe("normalized scenario evidence", () => {
 
     expect(() => registry.register(resolver)).toThrow(/already registered/)
     expect(() => registry.resolve(result)).toThrow(/no cell citation/)
+  })
+
+  it("runtime-rejects fabricated status, selection, regions, metrics, and branches", () => {
+    const result = adaptNsr10Spectrum(params, cali)
+    const canonical = resolveSpectrumEvidence(result)
+    const forgedViews = [
+      {
+        expected: /cannot upgrade normalized availability/,
+        view: {
+          ...canonical,
+          status: "available" as const,
+          unavailableClaims: [],
+        },
+      },
+      {
+        expected: /installed source and trace model/,
+        view: {
+          ...canonical,
+          selection: { ...canonical.selection, location: "Bogota, D.C." },
+        },
+      },
+      {
+        expected: /does not match normalized input/,
+        view: {
+          ...canonical,
+          directValues: canonical.directValues.map((value, index) =>
+            index === 0 ? { ...value, value: 0.15 } : value,
+          ),
+        },
+      },
+      {
+        expected: /installed source and trace model/,
+        view: {
+          ...canonical,
+          documents: canonical.documents.map((document, index) =>
+            index === 0
+              ? { ...document, sourceUrl: "https://example.com/fabricated.pdf" }
+              : document,
+          ),
+        },
+      },
+      {
+        expected: /greater than0|too_small|expected number to be >0/i,
+        view: {
+          ...canonical,
+          citations: canonical.citations.map((citation, index) =>
+            index === 0
+              ? { ...citation, rect: { ...citation.rect, width: 0 } }
+              : citation,
+          ),
+        },
+      },
+      {
+        expected: /exceeds the page width/,
+        view: {
+          ...canonical,
+          citations: canonical.citations.map((citation, index) =>
+            index === 0
+              ? {
+                  ...citation,
+                  rect: { ...citation.rect, left: 0.9, width: 0.2 },
+                }
+              : citation,
+          ),
+        },
+      },
+      {
+        expected: /installed source and trace model/,
+        view: {
+          ...canonical,
+          citations: canonical.citations.map((citation, index) =>
+            index === 0
+              ? { ...citation, physicalPage: citation.physicalPage + 1 }
+              : citation,
+          ),
+        },
+      },
+      {
+        expected: /metric lineage does not match result/,
+        view: {
+          ...canonical,
+          metricLineage: canonical.metricLineage.map((metric, index) =>
+            index === 0 ? { ...metric, value: metric.value + 1 } : metric,
+          ),
+        },
+      },
+      {
+        expected: /metric lineage does not match result/,
+        view: {
+          ...canonical,
+          metricLineage: canonical.metricLineage.map((metric) =>
+            metric.id === "tc" ? { ...metric, dependencyIds: [] } : metric,
+          ),
+        },
+      },
+      {
+        expected: /installed source and trace model/,
+        view: {
+          ...canonical,
+          branchLineage: canonical.branchLineage.map((branch, index) =>
+            index === 0 ? { ...branch, formula: "fabricated" } : branch,
+          ),
+        },
+      },
+    ]
+
+    for (const { expected, view } of forgedViews) {
+      const registry = new SpectrumEvidenceResolverRegistry().register({
+        ...nsr10EvidenceResolver,
+        resolve: () => view,
+      })
+      expect(() => registry.resolve(result)).toThrow(expected)
+    }
   })
 })

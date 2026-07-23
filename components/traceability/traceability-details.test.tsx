@@ -5,12 +5,15 @@ import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("next/dynamic", () => ({
-	default: () => () => null,
+	default: () =>
+		({ citations }: { citations: Array<{ physicalPage: number }> }) => (
+			<div data-pdf-page={citations[0]?.physicalPage} />
+		),
 }));
 
-import { adaptNsr10Spectrum } from "@/lib/spectra";
+import { adaptNsr10Spectrum, resolveSpectrumEvidence } from "@/lib/spectra";
 
-import { TraceabilityDetails } from "./traceability-details";
+import { EvidenceDocument, TraceabilityDetails } from "./traceability-details";
 
 const params = {
 	aa: 0.25,
@@ -89,5 +92,42 @@ describe("generic traceability details", () => {
 			"no declara una ubicación o zona verificable",
 		);
 		expect(container.textContent).not.toContain("Transcripción accesible");
+	});
+
+	it("renders one accessible source viewer per physical page", async () => {
+		const result = adaptNsr10Spectrum(params, cali);
+		const evidence = resolveSpectrumEvidence(result);
+		const document = evidence.documents[0];
+		const firstCell = evidence.citations.find(({ kind }) => kind === "cell");
+		if (!document || !firstCell) throw new Error("Expected source fixtures");
+		const secondPageCell = {
+			...firstCell,
+			id: `${firstCell.id}:page-192`,
+			physicalPage: 192,
+			printedPage: "A-178",
+			transcription: "Celda accesible en segunda página",
+		};
+
+		await act(async () => {
+			root.render(
+				<EvidenceDocument
+					citations={[firstCell, secondPageCell]}
+					document={document}
+				/>,
+			);
+		});
+
+		expect(
+			[...container.querySelectorAll("[data-pdf-page]")].map((node) =>
+				node.getAttribute("data-pdf-page"),
+			),
+		).toEqual(["191", "192"]);
+		expect(
+			container.querySelector('[aria-label*="Página PDF 191"]'),
+		).not.toBeNull();
+		expect(
+			container.querySelector('[aria-label*="Página PDF 192"]'),
+		).not.toBeNull();
+		expect(container.textContent).toContain("Celda accesible en segunda página");
 	});
 });

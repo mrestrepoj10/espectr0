@@ -26,6 +26,10 @@ import {
   validateNsr10MunicipalityContext,
 } from "./nsr10-evidence"
 import {
+  NSR10_STUDY_ID,
+  NSR10_STUDY_VERSION,
+} from "./nsr10-study-relations"
+import {
   SPECTRUM_CONTRACT_SCHEMA_VERSION,
   normalizedSpectrumOrdinateSchema,
   normalizedSpectrumResultDataSchema,
@@ -47,8 +51,7 @@ import type {
 } from "./types"
 
 export const NSR10_ENGINE_VERSION = "1" as const
-export const NSR10_STUDY_ID = "nsr10-national" as const
-export const NSR10_STUDY_VERSION = "NSR-10-2010" as const
+export { NSR10_STUDY_ID, NSR10_STUDY_VERSION }
 export const NSR10_TRACE_SCHEMA_VERSION = 1 as const
 
 export const nsr10Capabilities = spectrumCapabilitiesSchema.parse({
