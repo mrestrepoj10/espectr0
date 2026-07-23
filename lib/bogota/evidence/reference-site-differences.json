@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "comparison": "Decreto 523/2010 vs current Decreto 670/2025 Title 1",
+  "unchangedTechnicalContent": [
+    "16 response-zone rows",
+    "Tables 3–5 numeric coefficients",
+    "Three hazard-level curve families",
+    "Core warnings and site-specific-study triggers"
+  ],
+  "observedAdministrativeUpdates": [
+    "D670 Article 4 references Decreto 555/2021 Article 29 instead of D190/2004 Article 144.",
+    "D670 names IDIGER/SIRE where the original instrument named FOPAE/SIRE.",
+    "D670 renumbers D523 Articles 1–9 as Title 1 Articles 2–10 and carries parenthetical origin annotations."
+  ],
+  "legalEffect": "D670 Article 1526 expressly repeals the compiled D523 instrument; Articles 1520–1522 preserve consolidated legal effects and motivations, and Article 1525 preserves maps as annexes.",
+  "nonInference": "This comparison does not infer a new technical study, coefficient change, or technical supersession where none is stated."
+}

@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "claims": [
+    {
+      "id": "legal-current",
+      "statement": "The controlling current text is Decreto 670/2025, Title 1, Articles 2–10; D523/2010 is the named compilation origin, not a parallel current instrument.",
+      "citation": {
+        "sourceDocumentId": "decreto-distrital-670-2025",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Título 1, artículos 2–10; artículo 1526, ítem 50",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    },
+    {
+      "id": "legal-preservation",
+      "statement": "Compilation/repeal does not erase consolidated effects or the technical motivations; maps are preserved as annexes.",
+      "citation": {
+        "sourceDocumentId": "decreto-distrital-670-2025",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Artículos 1520–1522 y 1525",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    },
+    {
+      "id": "scope-mandatory",
+      "statement": "The Bogotá provisions are mandatory, substitute NSR-10 A.2.4 and A.2.6, apply to buildings in A.1.2.3, and cannot be used with NSR-98.",
+      "citation": {
+        "sourceDocumentId": "decreto-distrital-670-2025",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Artículo 2",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    },
+    {
+      "id": "scope-design",
+      "statement": "Design coefficients apply to new, expanded, adapted, structurally modified, strengthened, or rehabilitated buildings; NSR-10 Title E construction is excluded.",
+      "citation": {
+        "sourceDocumentId": "decreto-distrital-670-2025",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Artículo 5, párrafo inicial",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    },
+    {
+      "id": "scope-limited",
+      "statement": "Limited-safety coefficients apply to NSR-10 Title A.10 evaluation and intervention of existing buildings.",
+      "citation": {
+        "sourceDocumentId": "decreto-distrital-670-2025",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Artículo 5, después de Tabla 3",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    },
+    {
+      "id": "scope-damage",
+      "statement": "Damage-threshold coefficients apply to Group IV and the stated Group III buildings under NSR-10 Title A.12.",
+      "citation": {
+        "sourceDocumentId": "decreto-distrital-670-2025",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Artículo 5, antes de Tabla 5",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    },
+    {
+      "id": "warning-professional-zone",
+      "statement": "A geotechnical professional must classify the site from the official maps and the Title H geotechnical study; inconsistent ground requires expanded study.",
+      "citation": {
+        "sourceDocumentId": "decreto-distrital-670-2025",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Artículo 6, numeral 5",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    },
+    {
+      "id": "warning-transition",
+      "statement": "Inside the 100 m transition band, use the period-dependent average acceleration of adjacent zones unless supported reclassification applies.",
+      "citation": {
+        "sourceDocumentId": "decreto-distrital-670-2025",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Artículo 6, numeral 6",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    },
+    {
+      "id": "warning-reclassification",
+      "statement": "A supported alternate classification must be adjacent or at most one intervening zone away and within 500 m.",
+      "citation": {
+        "sourceDocumentId": "decreto-distrital-670-2025",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Artículo 6, numeral 5",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    },
+    {
+      "id": "warning-site-specific",
+      "statement": "Fills thicker than 3 m and rigid-base fundamental periods above 2.5 s require a site-specific seismic response study.",
+      "citation": {
+        "sourceDocumentId": "decreto-distrital-670-2025",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Artículo 6, numerales 11 y 12",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    },
+    {
+      "id": "warning-resonance",
+      "statement": "For building periods above 1.0 s, evaluate soil-building resonance within ±10% of the deposit period.",
+      "citation": {
+        "sourceDocumentId": "decreto-distrital-670-2025",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Artículo 6, numeral 16",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    },
+    {
+      "id": "warning-liquefaction",
+      "statement": "Piedemonte, Aluvial, Llanura and channel/susceptible-soil settings require liquefaction assessment where applicable.",
+      "citation": {
+        "sourceDocumentId": "decreto-distrital-670-2025",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Artículo 6, numeral 9",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    },
+    {
+      "id": "warning-minimums",
+      "statement": "Site-specific Fa/Fv cannot be below NSR-10 A.2.10.2.4 or 80% of the municipal values; higher values govern.",
+      "citation": {
+        "sourceDocumentId": "decreto-distrital-670-2025",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Artículo 8, numeral 7",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    },
+    {
+      "id": "technical-recurrence",
+      "statement": "The three levels are 475 years/10% in 50 years/5%, 225 years/20% in 50 years/5%, and 31 years/80% in 50 years/2%.",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 140,
+        "printedPage": "124",
+        "reference": "Página física 140, impresa 124",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    },
+    {
+      "id": "technical-building-only",
+      "statement": "The published parameters are for building design and amplification factors are tied to NSR-10 formulations.",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 140,
+        "printedPage": "124",
+        "reference": "Página física 140, impresa 124",
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        }
+      }
+    }
+  ],
+  "directMatrix": {
+    "expectedOptionHazardPairs": 48,
+    "exactCoveredPairs": 48,
+    "expectedFieldValues": 288,
+    "exactCoveredFieldValues": 288,
+    "directSourceValues": 256,
+    "derivedValues": 32
+  }
+}
