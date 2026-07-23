@@ -6,11 +6,13 @@ import {
 	FileWarningIcon,
 	LandmarkIcon,
 	ListTreeIcon,
+	ShieldCheckIcon,
 } from "lucide-react";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {
 	Table,
@@ -21,9 +23,13 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import {
-	getMunicipalityTraceability,
-	type MunicipalityTraceability,
-} from "@/lib/nsr10/evidence";
+	resolveSpectrumEvidence,
+	type NormalizedSpectrumResultData,
+	type ScenarioEvidenceKey,
+	type SpectrumEvidenceCitation,
+	type SpectrumEvidenceDocument,
+	type SpectrumEvidenceView,
+} from "@/lib/spectra";
 
 import { PdfLoading } from "./pdf-loading";
 
@@ -36,210 +42,363 @@ const SourcePdfViewer = dynamic(
 	},
 );
 
-function HighlightedValue({ value }: { value: number }) {
+const numberFormatter = new Intl.NumberFormat("es-CO", {
+	maximumFractionDigits: 6,
+	useGrouping: false,
+});
+
+function displayValue(value: unknown) {
+	return typeof value === "number" ? numberFormatter.format(value) : String(value);
+}
+
+function StudyAndSelection({ evidence }: { evidence: SpectrumEvidenceView }) {
+	const { selection, study } = evidence;
 	return (
-		<span className="inline-flex rounded-md bg-yellow-300/45 px-1.5 py-0.5 text-yellow-950 ring-1 ring-inset ring-yellow-600/40 dark:bg-yellow-300/80">
-			{value.toFixed(2)}
-		</span>
+		<section aria-labelledby="active-study" className="flex flex-col gap-3">
+			<div className="flex flex-wrap items-center justify-between gap-2">
+				<h2 className="font-heading font-medium text-pretty" id="active-study">
+					Estudio & escenario activos
+				</h2>
+				<Badge variant={evidence.status === "available" ? "default" : "outline"}>
+					{evidence.status === "available"
+						? "Evidencia disponible"
+						: evidence.status === "partial"
+							? "Evidencia parcial"
+							: "Evidencia no disponible"}
+				</Badge>
+			</div>
+			<Card size="sm">
+				<CardHeader>
+					<CardTitle>{study.label}</CardTitle>
+				</CardHeader>
+				<CardContent>
+					<dl className="grid gap-3 text-sm sm:grid-cols-2">
+						<div className="flex flex-col gap-1">
+							<dt className="text-muted-foreground">Versión</dt>
+							<dd translate="no">{study.version}</dd>
+						</div>
+						<div className="flex flex-col gap-1">
+							<dt className="text-muted-foreground">Ubicación</dt>
+							<dd>{selection.location ?? "No resuelta"}</dd>
+						</div>
+						<div className="flex flex-col gap-1">
+							<dt className="text-muted-foreground">Zona</dt>
+							<dd>{selection.zone ?? "No aplica o no está declarada"}</dd>
+						</div>
+						<div className="flex flex-col gap-1">
+							<dt className="text-muted-foreground">Amenaza</dt>
+							<dd>{selection.hazardLabel ?? selection.hazardId ?? "No resuelta"}</dd>
+						</div>
+					</dl>
+				</CardContent>
+			</Card>
+		</section>
 	);
 }
 
-function SourceValues({
-	traceability,
-}: {
-	traceability: MunicipalityTraceability;
-}) {
-	const { municipality, source, values } = traceability;
-
+function EvidenceNotices({ evidence }: { evidence: SpectrumEvidenceView }) {
+	if (evidence.unavailableClaims.length === 0) return null;
 	return (
-		<section aria-labelledby="source-values" className="flex flex-col gap-3">
+		<Alert variant={evidence.status === "unavailable" ? "destructive" : "default"}>
+			<FileWarningIcon />
+			<AlertTitle>
+				{evidence.status === "unavailable"
+					? "Evidencia no disponible"
+					: "Cobertura de evidencia parcial"}
+			</AlertTitle>
+			<AlertDescription>
+				<ul className="flex list-disc flex-col gap-1 pl-4">
+					{evidence.unavailableClaims.map((claim) => (
+						<li key={claim.id}>{claim.reason}</li>
+					))}
+				</ul>
+			</AlertDescription>
+		</Alert>
+	);
+}
+
+function DirectValues({ evidence }: { evidence: SpectrumEvidenceView }) {
+	if (evidence.directValues.length === 0) return null;
+	return (
+		<section aria-labelledby="direct-values" className="flex flex-col gap-3">
 			<div className="flex flex-wrap items-center justify-between gap-2">
-				<h2 className="font-heading font-medium" id="source-values">
-					Valores de origen
-				</h2>
-				<Badge variant="outline">Dato normativo directo</Badge>
+				<div className="flex items-center gap-2">
+					<LandmarkIcon aria-hidden="true" />
+					<h2 className="font-heading font-medium" id="direct-values">
+						Valores directos de fuente
+					</h2>
+				</div>
+				<Badge variant="outline">direct-source</Badge>
 			</div>
-
-			<Alert>
-				<LandmarkIcon />
-				<AlertTitle>
-					{source.appendix} · municipio de {municipality.municipio}
-				</AlertTitle>
-				<AlertDescription>
-					Estos coeficientes se transcriben de la norma; no resultan de una fórmula
-					del motor.
-				</AlertDescription>
-			</Alert>
-
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead>Municipio</TableHead>
-						<TableHead>Código DANE</TableHead>
-						<TableHead className="text-right">Aa</TableHead>
-						<TableHead className="text-right">Av</TableHead>
-						<TableHead className="text-right">Ae</TableHead>
-						<TableHead className="text-right">Ad</TableHead>
+						<TableHead>Campo</TableHead>
+						<TableHead className="text-right">Valor</TableHead>
+						<TableHead>Evidencia</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
-					<TableRow>
-						<TableCell className="font-medium">
-							{municipality.municipio}
-						</TableCell>
-						<TableCell className="font-mono">{municipality.code}</TableCell>
-						<TableCell className="text-right font-mono tabular-nums">
-							<HighlightedValue value={values.aa.value} />
-						</TableCell>
-						<TableCell className="text-right font-mono tabular-nums">
-							<HighlightedValue value={values.av.value} />
-						</TableCell>
-						<TableCell className="text-right font-mono tabular-nums">
-							<HighlightedValue value={values.ae.value} />
-						</TableCell>
-						<TableCell className="text-right font-mono tabular-nums">
-							<HighlightedValue value={values.ad.value} />
-						</TableCell>
-					</TableRow>
+					{evidence.directValues.map((value) => (
+						<TableRow key={value.id}>
+							<TableCell className="font-medium">{value.label}</TableCell>
+							<TableCell className="text-right font-mono tabular-nums">
+								{displayValue(value.value)} {value.unit ?? ""}
+							</TableCell>
+							<TableCell>
+								<Badge variant="secondary" translate="no">
+									{value.citationId}
+								</Badge>
+							</TableCell>
+						</TableRow>
+					))}
 				</TableBody>
 			</Table>
 		</section>
 	);
 }
 
-function CalculationUse() {
+function Lineage({ evidence }: { evidence: SpectrumEvidenceView }) {
+	if (evidence.metricLineage.length === 0 && evidence.branchLineage.length === 0) {
+		return null;
+	}
 	return (
-		<section aria-labelledby="calculation-use" className="flex flex-col gap-3">
+		<section aria-labelledby="calculation-lineage" className="flex flex-col gap-4">
 			<div className="flex items-center gap-2">
-				<ListTreeIcon />
-				<h2 className="font-heading font-medium" id="calculation-use">
-					Uso en este cálculo
+				<ListTreeIcon aria-hidden="true" />
+				<h2 className="font-heading font-medium" id="calculation-lineage">
+					Linaje del resultado
 				</h2>
 			</div>
-			<p className="text-muted-foreground text-sm">
-				Aa y Av alimentan el espectro de diseño, Ae el de seguridad limitada y Ad
-				el del umbral de daño. Los factores de sitio, periodos de control y
-				ordenadas Sa se derivan según el nivel seleccionado.
-			</p>
+			<div className="flex flex-col gap-3">
+				<h3 className="text-sm font-medium">Métricas derivadas</h3>
+				{evidence.metricLineage.map((metric) => (
+					<Card key={metric.id} size="sm">
+						<CardHeader>
+							<CardTitle>
+								{metric.label}: {numberFormatter.format(metric.value)} {metric.unit}
+							</CardTitle>
+						</CardHeader>
+						<CardContent>
+							<dl className="grid gap-2 text-xs sm:grid-cols-2">
+								<div className="flex flex-col gap-1">
+									<dt className="text-muted-foreground">Fórmula & referencia</dt>
+									<dd>{metric.formula ?? "Valor directo o fórmula no disponible"}</dd>
+									<dd className="text-muted-foreground">{metric.reference ?? "Sin referencia regional"}</dd>
+								</div>
+								<div className="flex flex-col gap-1">
+									<dt className="text-muted-foreground">Sustitución & dependencias</dt>
+									<dd>{metric.substitution ?? "No aplica"}</dd>
+									<dd className="break-words font-mono" translate="no">
+										{metric.dependencyIds.join(" → ") || "Sin dependencias"}
+									</dd>
+								</div>
+							</dl>
+						</CardContent>
+					</Card>
+				))}
+			</div>
+			<div className="flex flex-col gap-3">
+				<h3 className="text-sm font-medium">Sa(T) por rama</h3>
+				<Table>
+					<TableHeader>
+						<TableRow>
+							<TableHead>Rama</TableHead>
+							<TableHead>Intervalo T</TableHead>
+							<TableHead>Fórmula & referencia</TableHead>
+						</TableRow>
+					</TableHeader>
+					<TableBody>
+						{evidence.branchLineage.map((branch) => (
+							<TableRow key={branch.branchId}>
+								<TableCell className="font-mono text-xs" translate="no">
+									{branch.branchId}
+								</TableCell>
+								<TableCell className="font-mono tabular-nums">
+									{numberFormatter.format(branch.periodRangeSeconds.from)}–
+									{numberFormatter.format(branch.periodRangeSeconds.to)} s
+								</TableCell>
+								<TableCell>
+									<p>{branch.formula ?? branch.formulaId}</p>
+									<p className="text-muted-foreground text-xs">
+										{branch.condition ?? "Condición regional no disponible"}
+									</p>
+									<p className="text-muted-foreground text-xs">
+										{branch.reference ?? "Referencia regional no disponible"}
+									</p>
+								</TableCell>
+							</TableRow>
+						))}
+					</TableBody>
+				</Table>
+			</div>
 		</section>
 	);
 }
 
-function EvidenceDocument({
-	traceability,
+function citationPageLabel(citation: SpectrumEvidenceCitation) {
+	return `Página PDF ${citation.physicalPage}${
+		citation.printedPage ? ` · impresa ${citation.printedPage}` : ""
+	}`;
+}
+
+export function groupCitationsByPhysicalPage(
+	citations: SpectrumEvidenceCitation[],
+) {
+	const groups = new Map<number, SpectrumEvidenceCitation[]>();
+	for (const citation of citations) {
+		const page = groups.get(citation.physicalPage) ?? [];
+		page.push(citation);
+		groups.set(citation.physicalPage, page);
+	}
+	return [...groups.entries()]
+		.sort(([left], [right]) => left - right)
+		.map(([, pageCitations]) => pageCitations);
+}
+
+export function EvidenceDocument({
+	document,
+	citations,
 }: {
-	traceability: MunicipalityTraceability;
+	document: SpectrumEvidenceDocument;
+	citations: SpectrumEvidenceCitation[];
 }) {
-	const { municipality, pageNumber, printedPage, source, values } = traceability;
-
+	const rowAndCells = citations.filter(
+		(citation) => citation.kind === "row" || citation.kind === "cell",
+	);
+	const citedPages = groupCitationsByPhysicalPage(rowAndCells);
 	return (
-		<section aria-labelledby="pdf-evidence" className="flex flex-col gap-3">
-			<div className="flex flex-wrap items-center justify-between gap-2">
-				<div className="flex flex-col gap-1">
-					<h2 className="font-heading font-medium" id="pdf-evidence">
-						Evidencia en el documento
-					</h2>
-					<p className="text-muted-foreground text-xs">
-						Página PDF {pageNumber} · página impresa {printedPage}
-					</p>
+		<Card size="sm">
+			<CardHeader>
+				<CardTitle>{document.title}</CardTitle>
+			</CardHeader>
+			<CardContent className="flex flex-col gap-4">
+				<dl className="grid gap-3 text-sm sm:grid-cols-2">
+					<div className="flex flex-col gap-1">
+						<dt className="text-muted-foreground">Autoridad</dt>
+						<dd>{document.issuingAuthority ?? "No registrada en la evidencia instalada"}</dd>
+					</div>
+					<div className="flex flex-col gap-1">
+						<dt className="text-muted-foreground">Edición</dt>
+						<dd>{document.edition}</dd>
+					</div>
+					<div className="flex flex-col gap-1">
+						<dt className="text-muted-foreground">Instrumento de adopción</dt>
+						<dd>{document.adoptionInstrument ?? "No registrado en la evidencia instalada"}</dd>
+					</div>
+					<div className="flex min-w-0 flex-col gap-1">
+						<dt className="text-muted-foreground">SHA-256</dt>
+						<dd className="break-all font-mono text-xs" translate="no">
+							{document.sha256}
+						</dd>
+					</div>
+				</dl>
+				<div className="flex flex-wrap gap-2">
+					{document.officialUrl ? (
+						<Button
+							nativeButton={false}
+							render={<a href={document.officialUrl} rel="noreferrer" target="_blank" />}
+							size="sm"
+							variant="outline"
+						>
+							Abrir enlace oficial
+							<ExternalLinkIcon data-icon="inline-end" />
+						</Button>
+					) : (
+						<Badge variant="outline">Enlace oficial no disponible</Badge>
+					)}
+					<Button
+						nativeButton={false}
+						render={<a href={document.sourceUrl} rel="noreferrer" target="_blank" />}
+						size="sm"
+						variant="outline"
+					>
+						Abrir fuente disponible
+						<ExternalLinkIcon data-icon="inline-end" />
+					</Button>
 				</div>
-				<a
-					className={buttonVariants({ size: "sm", variant: "outline" })}
-					href={source.sourceUrl}
-					rel="noreferrer"
-					target="_blank"
-				>
-					Abrir PDF fuente
-					<ExternalLinkIcon data-icon="inline-end" />
-				</a>
+				{document.localPath
+					? citedPages.map((pageCitations) => (
+						<section
+							aria-label={`Vista de evidencia · ${citationPageLabel(pageCitations[0])}`}
+							key={pageCitations[0].physicalPage}
+						>
+							<SourcePdfViewer citations={pageCitations} document={document} />
+						</section>
+					))
+					: null}
+				<div className="flex flex-col gap-2">
+					<h3 className="text-sm font-medium">Transcripción accesible</h3>
+					{citations.map((citation) => (
+						<div className="flex flex-col gap-1 text-xs" key={citation.id}>
+							<p className="font-medium">
+								{citation.reference} · {citationPageLabel(citation)}
+							</p>
+							<dl className="grid gap-1 sm:grid-cols-3">
+								<div className="flex gap-1">
+									<dt className="text-muted-foreground">Tabla:</dt>
+									<dd>{citation.table ?? "No aplica"}</dd>
+								</div>
+								<div className="flex gap-1">
+									<dt className="text-muted-foreground">Fila:</dt>
+									<dd>{citation.row ?? "No aplica"}</dd>
+								</div>
+								<div className="flex gap-1">
+									<dt className="text-muted-foreground">Celda:</dt>
+									<dd>{citation.cell ?? "No aplica"}</dd>
+								</div>
+							</dl>
+							<p className="text-muted-foreground">{citation.transcription}</p>
+						</div>
+					))}
+				</div>
+			</CardContent>
+		</Card>
+	);
+}
+
+function Documents({ evidence }: { evidence: SpectrumEvidenceView }) {
+	if (evidence.documents.length === 0) return null;
+	return (
+		<section aria-labelledby="evidence-documents" className="flex flex-col gap-3">
+			<div className="flex items-center gap-2">
+				<ShieldCheckIcon aria-hidden="true" />
+				<h2 className="font-heading font-medium" id="evidence-documents">
+					Documentos & regiones de evidencia
+				</h2>
 			</div>
-
-			<SourcePdfViewer
-				key={`${municipality.code}-${pageNumber}`}
-				traceability={traceability}
-			/>
-
-			<div
-				aria-label="Leyenda del resaltado"
-				className="flex flex-wrap items-center gap-x-4 gap-y-2 text-muted-foreground text-xs"
-				role="group"
-			>
-				<span className="inline-flex items-center gap-2">
-					<span
-						aria-hidden="true"
-						className="size-3 rounded-[3px] bg-yellow-300/25 ring-1 ring-inset ring-yellow-600/50"
-					/>
-					Fila normativa
-				</span>
-				<span className="inline-flex items-center gap-2">
-					<span
-						aria-hidden="true"
-						className="size-3 rounded-[3px] bg-yellow-300/70 ring-1 ring-inset ring-yellow-600/50"
-					/>
-					Valores Aa, Av, Ae y Ad
-				</span>
-			</div>
-
-			<p className="text-muted-foreground text-xs">
-				Extracto accesible: {municipality.municipio}, {municipality.departamento},
-				código DANE {municipality.code}: Aa {values.aa.value.toFixed(2)}, Av{" "}
-				{values.av.value.toFixed(2)}, Ae {values.ae.value.toFixed(2)} y Ad{" "}
-				{values.ad.value.toFixed(2)}, resaltados en la página impresa {printedPage} de{" "}
-				{source.appendix}.
-			</p>
+			{evidence.documents.map((document) => (
+				<EvidenceDocument
+					citations={evidence.citations.filter(
+						(citation) => citation.sourceId === document.sourceId,
+					)}
+					document={document}
+					key={document.sourceId}
+				/>
+			))}
 		</section>
-	);
-}
-
-function TraceabilityUnavailable({ municipalityCode }: { municipalityCode: string }) {
-	return (
-		<div className="min-h-0 flex-1 overflow-y-auto">
-			<div className="p-4 sm:p-6">
-				<Alert variant="destructive">
-					<FileWarningIcon />
-					<AlertTitle>Evidencia no disponible</AlertTitle>
-					<AlertDescription>
-						No existe una referencia normativa para el código DANE{" "}
-						<span className="font-mono">{municipalityCode}</span>.
-					</AlertDescription>
-				</Alert>
-			</div>
-		</div>
-	);
-}
-
-function TraceabilityContent({
-	traceability,
-}: {
-	traceability: MunicipalityTraceability;
-}) {
-	return (
-		<div className="min-h-0 flex-1 overflow-y-auto">
-			<div className="flex flex-col gap-6 p-4 sm:p-6">
-				<div className="flex flex-wrap items-center gap-2 text-muted-foreground text-xs">
-					<span>Fuente normativa</span>
-					<Badge variant="secondary">{traceability.source.document}</Badge>
-				</div>
-				<SourceValues traceability={traceability} />
-				<Separator />
-				<CalculationUse />
-				<Separator />
-				<EvidenceDocument traceability={traceability} />
-			</div>
-		</div>
 	);
 }
 
 export function TraceabilityDetails({
-	municipalityCode,
+	result,
+	scenarioEvidenceKey,
 }: {
-	municipalityCode: string;
+	result: NormalizedSpectrumResultData;
+	scenarioEvidenceKey: ScenarioEvidenceKey;
 }) {
-	const traceability = getMunicipalityTraceability(municipalityCode);
-
-	return traceability ? (
-		<TraceabilityContent traceability={traceability} />
-	) : (
-		<TraceabilityUnavailable municipalityCode={municipalityCode} />
+	const evidence = resolveSpectrumEvidence(result, scenarioEvidenceKey);
+	return (
+		<div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+			<div className="flex flex-col gap-6 p-4 sm:p-6">
+				<StudyAndSelection evidence={evidence} />
+				<EvidenceNotices evidence={evidence} />
+				<DirectValues evidence={evidence} />
+				<Separator />
+				<Lineage evidence={evidence} />
+				<Separator />
+				<Documents evidence={evidence} />
+			</div>
+		</div>
 	);
 }

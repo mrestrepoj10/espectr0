@@ -282,6 +282,78 @@ describe("engine-neutral spectrum contract", () => {
     })
   })
 
+  it("rejects NSR evidence selectors that drift from normalized scenario inputs", () => {
+    const result = adaptNsr10Spectrum(
+      {
+        aa: 0.25,
+        av: 0.25,
+        ae: 0.15,
+        ad: 0.09,
+        hazardLevel: "design",
+        soilProfile: "D",
+        importanceGroup: "II",
+      },
+      {
+        municipality: {
+          code: "76001",
+          municipio: "Cali",
+          departamento: "Valle del Cauca",
+        },
+      },
+    )
+    const caliData = spectrumResultData(result)
+
+    expect(() =>
+      spectrumResultData({
+        ...result,
+        scenarioEvidenceKey: {
+          ...result.scenarioEvidenceKey,
+          optionId: "11001",
+        },
+      }),
+    ).toThrow(/municipality\.code/)
+    expect(
+      normalizedSpectrumResultDataSchema.safeParse({
+        ...caliData,
+        scenarioEvidenceKey: {
+          ...caliData.scenarioEvidenceKey,
+          hazardId: "limited-safety",
+        },
+        hazard: {
+          ...caliData.hazard,
+          id: "limited-safety",
+        },
+      }).success,
+    ).toBe(false)
+  })
+
+  it("fails closed when a study has no registered relation validator", () => {
+    const data = successfulData()
+    const parsed = normalizedSpectrumResultDataSchema.safeParse({
+      ...data,
+      scenarioType: "municipal-study",
+      study: { id: "future-study", version: "1" },
+      engine: {
+        ...data.engine,
+        studyId: "future-study",
+        studyVersion: "1",
+        scenarioType: "municipal-study",
+      },
+      scenarioEvidenceKey: {
+        ...data.scenarioEvidenceKey,
+        studyId: "future-study",
+        studyVersion: "1",
+      },
+    })
+
+    expect(parsed.success).toBe(false)
+    if (!parsed.success) {
+      expect(parsed.error.issues.map(({ message }) => message)).toContain(
+        "No study relation validator is registered for future-study",
+      )
+    }
+  })
+
   it("emits a versioned JSON-safe projection without the evaluator function", () => {
     const result = adaptNsr10Spectrum({
       aa: 0.25,

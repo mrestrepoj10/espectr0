@@ -63,13 +63,16 @@ import {
 	copyChartPng,
 	copyChartSvg,
 	copyTextToClipboard,
-	downloadEtabsTxt,
 } from "@/lib/chart-export";
 import { capabilityUiState } from "@/lib/calculator-shell";
-import { hazardLevelDetails, normalizeSearchText } from "@/lib/nsr10";
+import { hazardLevelDetails } from "@/lib/nsr10";
 import {
 	adaptNsr10Spectrum,
-	parseNsr10TraceEnvelope,
+	assertSpectrumExportCapability,
+	formatSpectrumCsv,
+	formatSpectrumEtabs,
+	formatSpectrumJson,
+	spectrumExportFilename,
 } from "@/lib/spectra";
 
 import type {
@@ -262,21 +265,12 @@ function SiteSpecificStudyNotice({
 	);
 }
 
-function spectrumCsv(result: NormalizedSpectrumOk) {
-	const rows = result.points.map((point) => `${point.tSeconds},${point.saG}`);
-	return ["T (s),Sa (g)", ...rows].join("\n");
-}
-
-function downloadCsv(result: NormalizedSpectrumOk, municipio: Municipio) {
-	const blob = new Blob([`\uFEFF${spectrumCsv(result)}`], {
-		type: "text/csv;charset=utf-8",
-	});
+function downloadTextFile(content: string, filename: string, mediaType: string) {
+	const blob = new Blob([content], { type: mediaType });
 	const url = URL.createObjectURL(blob);
 	const anchor = document.createElement("a");
-	const slug = normalizeSearchText(municipio.municipio).replace(/\s+/g, "-");
-
 	anchor.href = url;
-	anchor.download = `espectr0-${slug}-${result.hazard.id}.csv`;
+	anchor.download = filename;
 	anchor.click();
 	URL.revokeObjectURL(url);
 }
@@ -284,18 +278,16 @@ function downloadCsv(result: NormalizedSpectrumOk, municipio: Municipio) {
 function ExportActions({
 	chartContainerRef,
 	result,
-	municipio,
 	capabilities,
 }: {
 	chartContainerRef: React.RefObject<HTMLDivElement | null>;
 	result: NormalizedSpectrumOk;
-	municipio: Municipio;
 	capabilities: SpectrumCapabilities;
 }) {
 	const [isPdfExporting, setIsPdfExporting] = useState(false);
 
 	function copyJson() {
-		void copyTextToClipboard(JSON.stringify(result.trace.data, null, 2))
+		void copyTextToClipboard(formatSpectrumJson(result))
 			.then(() => toast.success("JSON copiado al portapapeles."))
 			.catch(() => toast.error("No fue posible copiar el JSON."));
 	}
@@ -310,6 +302,7 @@ function ExportActions({
 
 	function copyPng() {
 		try {
+			assertSpectrumExportCapability(result, "svgPngExport");
 			void copyChartPng(chartSvg(), chartContainerRef.current)
 				.then(() => toast.success("PNG copiado al portapapeles."))
 				.catch(() => toast.error("No fue posible copiar el PNG."));
@@ -320,6 +313,7 @@ function ExportActions({
 
 	function copySvg() {
 		try {
+			assertSpectrumExportCapability(result, "svgPngExport");
 			void copyChartSvg(chartSvg())
 				.then(() => toast.success("SVG copiado al portapapeles."))
 				.catch(() => toast.error("No fue posible copiar el SVG."));
@@ -330,7 +324,11 @@ function ExportActions({
 
 	function exportCsv() {
 		try {
-			downloadCsv(result, municipio);
+			downloadTextFile(
+				`\uFEFF${formatSpectrumCsv(result)}`,
+				spectrumExportFilename(result, "csv"),
+				"text/csv;charset=utf-8",
+			);
 			toast.success("CSV descargado.");
 		} catch {
 			toast.error("No fue posible descargar el CSV.");
@@ -339,10 +337,10 @@ function ExportActions({
 
 	function exportEtabs() {
 		try {
-			const slug = normalizeSearchText(municipio.municipio).replace(/\s+/g, "-");
-			downloadEtabsTxt(
-				result.points.map((point) => ({ t: point.tSeconds, sa: point.saG })),
-				`espectr0-${slug}-${result.hazard.id}-etabs.txt`,
+			downloadTextFile(
+				formatSpectrumEtabs(result),
+				spectrumExportFilename(result, "etabs.txt"),
+				"text/plain;charset=utf-8",
 			);
 			toast.success("TXT para ETABS descargado.");
 		} catch {
@@ -355,11 +353,10 @@ function ExportActions({
 		setIsPdfExporting(true);
 
 		try {
-			const trace = parseNsr10TraceEnvelope(result.trace);
-			const { downloadCalculationMemoriaPdf } = await import(
+			const { downloadNormalizedSpectrumMemoriaPdf } = await import(
 				"@/lib/memoria-pdf-renderer"
 			);
-			await downloadCalculationMemoriaPdf(trace);
+			await downloadNormalizedSpectrumMemoriaPdf(result);
 			toast.success("Memoria PDF descargada.");
 		} catch {
 			toast.error("No fue posible generar la memoria PDF.");
@@ -524,7 +521,6 @@ export function CalculatorPage() {
 				<ExportActions
 					capabilities={result.capabilities}
 					chartContainerRef={chartContainerRef}
-					municipio={municipio}
 					result={result}
 				/>
 			</>
@@ -533,9 +529,10 @@ export function CalculatorPage() {
 	return (
 		<div className="flex flex-col gap-5">
 			<TraceabilitySheet
-				municipalityCode={municipio.code}
 				onOpenChange={setTraceabilityOpen}
 				open={traceabilityOpen}
+				result={result}
+				scenarioEvidenceKey={result.scenarioEvidenceKey}
 			/>
 			<p className="text-muted-foreground text-sm">
 				Espectro elástico NSR-10 calculado localmente, sin envío de datos.
