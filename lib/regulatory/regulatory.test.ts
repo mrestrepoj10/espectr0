@@ -13,6 +13,7 @@ import {
 	validateInstalledDescriptors,
 	verifySourceLocks,
 	type EvidenceCitation,
+	type EvidenceCheckReport,
 	type EvidenceOverride,
 	type RegulatoryEvidenceStudy,
 	type SourceDocument,
@@ -422,14 +423,20 @@ describe("strict aggregate boundary", () => {
 		const second = execFileSync(process.execPath, command, { encoding: "utf8" });
 		expect(second).toBe(first);
 		expect(first.endsWith("\n")).toBe(true);
-		expect(JSON.parse(first)).toMatchObject({
-			schemaVersion: 1,
-			installedStudies: ["framework-fixture", "nsr10"],
-			studies: [
-				{ studyId: "framework-fixture", coverage: { bundledSources: 1 } },
-				{ studyId: "nsr10", coverage: { expectedRows: 1_123 } },
-			],
+		const aggregate = JSON.parse(first);
+		expect(aggregate.schemaVersion).toBe(1);
+		expect(aggregate.installedStudies).toEqual([...aggregate.installedStudies].sort());
+		expect(aggregate.installedStudies).toEqual(
+			expect.arrayContaining(["ccp14-seismic-research", "framework-fixture", "nsr10"]),
+		);
+		const studies = Object.fromEntries(
+			aggregate.studies.map((study: { studyId: string }) => [study.studyId, study]),
+		) as Record<string, EvidenceCheckReport>;
+		expect(studies["ccp14-seismic-research"]).toMatchObject({
+			coverage: { expectedRows: 115, expectedValues: 115, bundledSources: 0 },
 		});
+		expect(studies["framework-fixture"]).toMatchObject({ coverage: { bundledSources: 1 } });
+		expect(studies.nsr10).toMatchObject({ coverage: { expectedRows: 1_123 } });
 	}, 30_000);
 });
 

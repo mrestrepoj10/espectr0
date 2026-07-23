@@ -1,0 +1,14 @@
+{
+  "algorithm": "sha256",
+  "artifacts": [
+    { "bytes": 1294, "path": "lib/ccp14/data/location-coverage.json", "sha256": "63cbfaa24732d26659d8526134c7c57229655e66a3ff4b2443a4871b7c41748b" },
+    { "bytes": 1442, "path": "lib/ccp14/data/r-factors.json", "sha256": "c5e87739c083140071c74f522b0950ab794c885d26327051ce6b2913772c55ec" },
+    { "bytes": 2658, "path": "lib/ccp14/data/site-factors.json", "sha256": "760718f6c32d628b8054a55963bbe175b930f04847d2aeb9607ccff75046e476" },
+    { "bytes": 968, "path": "lib/ccp14/data/soil-classes.json", "sha256": "532aa2b836725a554c8174618d2098532d90c7b38fe575ce6641ba38f0b0f38e" },
+    { "bytes": 1022, "path": "lib/ccp14/oracle/expected-results.json", "sha256": "dea2e5fcdd03c27514deb3b08a54e83b0f39c496bede25e7f8dc002b5e378841" },
+    { "bytes": 1378, "path": "lib/ccp14/oracle/inputs.json", "sha256": "cdc94187d18ef7e13d8e5fd11c2cc67b8cd76a4c63f9d7aa8fe5d5aabd03fd38" },
+    { "bytes": 7082, "path": "lib/ccp14/research/claims-matrix.json", "sha256": "046358c91db529605a8d68ecf16e02acd939cbd854643a1754b50992b7e516f4" },
+    { "bytes": 3671, "path": "lib/ccp14/research/formula-inventory.json", "sha256": "4a02a3b8bbef56c28918c52f961a871be4e899412025e67bd248e821b62044b9" }
+  ],
+  "generatedOn": "2026-07-22"
+}

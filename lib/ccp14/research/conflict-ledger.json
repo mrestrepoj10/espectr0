@@ -1,0 +1,52 @@
+{
+  "conflicts": [
+    {
+      "activationImpact": "block",
+      "id": "t0-definition",
+      "officialResolutionSearch": "No CCP-14 erratum, circular, amendment, later official edition, or adopted correction resolving this passage was located in INVÍAS, MinTransporte, or SUIN searches on 2026-07-22.",
+      "passageA": {
+        "locator": "Section 3 PDF physical page 60, printed 3-56, Figure 3.10.4.1-1",
+        "reading": "T0 = 0.2 Ts",
+        "region": {
+          "height": 0.08,
+          "left": 0.22,
+          "top": 0.34,
+          "width": 0.24
+        },
+        "renderedRegionSha256": "39f90d52cb6879395948701750757b8eee2c51848c63a082e0ffd01ffebe872a"
+      },
+      "passageB": {
+        "locator": "Section 3 PDF physical page 60, printed 3-56, T0 definition",
+        "reading": "T0 is equal to 0.2 seconds",
+        "region": {
+          "height": 0.1,
+          "left": 0.04,
+          "top": 0.82,
+          "width": 0.44
+        },
+        "renderedRegionSha256": "455bc9f9b643b4ea8ca099c0853ccfe85bd8416a56eb42ae862130081ea835d3"
+      },
+      "sourceSha256": "55f53d68dfc568a930b726b0c7dba510ea608128490353bf604f827a27ffc8ca",
+      "status": "unresolved"
+    },
+    {
+      "activationImpact": "block-location-selection",
+      "id": "missing-location-dataset",
+      "officialArchiveEvidence": "The 16-entry official ZIP contains only PDFs. No CD image, spreadsheet, CSV, database, web-tool export, or municipality/locality table is present.",
+      "officialText": "Commentary C3.10.2.1 says PGA, Ss, and S1 values would be available on a CD and web tools.",
+      "status": "unresolved"
+    },
+    {
+      "activationImpact": "none-currently",
+      "id": "section-13-2026-proposal",
+      "issue": "MinTransporte listed a 9-24 April 2026 consultation proposal to modify CCP-2014 Section 13 (barriers). It is a proposal, not an adopted amendment, and it does not modify Section 3.",
+      "status": "nonbinding-proposal"
+    },
+    {
+      "activationImpact": "review-required",
+      "id": "critical-bridge-hazard",
+      "issue": "The preface discusses a 2% in 50 years / about 2500-year objective for critical bridges, while normative 3.10.2 routes lower exceedance probability/longer return period to a site-specific procedure. No official 2500-year selectable map/value dataset was found.",
+      "status": "do-not-expose-as-tabulated-hazard"
+    }
+  ]
+}

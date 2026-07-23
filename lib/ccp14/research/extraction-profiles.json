@@ -1,0 +1,50 @@
+{
+  "profiles": [
+    {
+      "id": "official-zip",
+      "method": "ZIP central-directory enumeration and per-member SHA-256",
+      "result": "16 PDF members; no machine-readable locality dataset"
+    },
+    {
+      "id": "section-3-text",
+      "method": "pypdf 6.14.2 text extraction used for discovery only",
+      "qualification": "Text extraction does not establish table layout or equation typography."
+    },
+    {
+      "id": "section-3-visual",
+      "method": "pypdfium2 5.12.1 rendering at scale 2.5; visual inspection of physical pages 55-62",
+      "result": "Tables, boundaries, and the T0 contradiction were visually confirmed."
+    },
+    {
+      "id": "f3-cells",
+      "method": "normalized page/table/row/cell rectangles in evidence/study.mjs",
+      "result": "90 site-factor cells (including 15 class-F note cells) and 25 R cells"
+    },
+    {
+      "id": "t0-region-locks",
+      "method": "normalized crops of the official page-60 render",
+      "regions": [
+        {
+          "id": "figure",
+          "rect": {
+            "height": 0.08,
+            "left": 0.22,
+            "top": 0.34,
+            "width": 0.24
+          },
+          "sha256": "39f90d52cb6879395948701750757b8eee2c51848c63a082e0ffd01ffebe872a"
+        },
+        {
+          "id": "text",
+          "rect": {
+            "height": 0.1,
+            "left": 0.04,
+            "top": 0.82,
+            "width": 0.44
+          },
+          "sha256": "455bc9f9b643b4ea8ca099c0853ccfe85bd8416a56eb42ae862130081ea835d3"
+        }
+      ]
+    }
+  ]
+}
