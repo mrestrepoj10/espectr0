@@ -1,0 +1,128 @@
+{
+  "applicability": "Bridge seismic design under CCP-14 Section 3; this is not the NSR-10 building base-shear procedure.",
+  "dampingRatio": 0.05,
+  "hazard": {
+    "approximateMeanReturnPeriodYears": 1000,
+    "probabilityOfExceedance": 0.07,
+    "referenceExposureYears": 75
+  },
+  "interpolation": [
+    {
+      "arguments": [
+        "PGA",
+        "Ss",
+        "S1"
+      ],
+      "formula": "linear interpolation between adjacent tabulated factor breakpoints",
+      "source": "Tables 3.10.3.2-1 through 3.10.3.2-3, Note 1"
+    },
+    {
+      "arguments": [
+        "map contours/local extrema"
+      ],
+      "formula": "linear interpolation",
+      "source": "3.10.2.1"
+    }
+  ],
+  "parameters": [
+    {
+      "formula": "As = Fpga * PGA",
+      "id": "As",
+      "source": "Equation 3.10.4.2-2",
+      "status": "verified"
+    },
+    {
+      "formula": "SDS = Fa * Ss",
+      "id": "SDS",
+      "source": "Equation 3.10.4.2-3",
+      "status": "verified"
+    },
+    {
+      "formula": "SD1 = Fv * S1",
+      "id": "SD1",
+      "source": "equation printed as 3.10.4.2-3 on page 3-57; cross-reference in 3.10.6 calls it 3.10.4.2-6",
+      "status": "verified-value-with-numbering-defect"
+    },
+    {
+      "formula": "Ts = SD1 / SDS",
+      "id": "Ts",
+      "source": "definition and Figure 3.10.4.1-1",
+      "status": "verified"
+    },
+    {
+      "formula": null,
+      "id": "T0",
+      "source": "Figure 3.10.4.1-1 versus definition below Equation 3.10.4.2-3",
+      "status": "blocked-internal-conflict"
+    }
+  ],
+  "performanceZones": [
+    {
+      "condition": "SD1 <= 0.15",
+      "zone": 1
+    },
+    {
+      "condition": "0.15 < SD1 <= 0.30",
+      "zone": 2
+    },
+    {
+      "condition": "0.30 < SD1 <= 0.50",
+      "zone": 3
+    },
+    {
+      "condition": "0.50 < SD1",
+      "zone": 4
+    }
+  ],
+  "siteSpecific": {
+    "alwaysPermitted": true,
+    "mandatoryIf": [
+      "site is closer than 10 km to an active fault",
+      "site class is F",
+      "long-duration earthquakes are expected in the region",
+      "bridge importance requires a lower exceedance probability and longer mean return period"
+    ],
+    "review": "Detailed documentation and review/approval by an expert group appointed by the contracting entity.",
+    "spectrumFloor": "Not less than two-thirds of the general-procedure design spectrum over 0.5 Tr through 2.0 Tr."
+  },
+  "spectrumBranches": [
+    {
+      "condition": "T <= T0",
+      "formula": "Csm = As + (SDS - As) * (T / T0)",
+      "source": "Equation 3.10.4.2-1",
+      "status": "formula-verified-but-T0-blocked"
+    },
+    {
+      "condition": "T0 <= T <= Ts",
+      "formula": "Csm = SDS",
+      "source": "Equation 3.10.4.2-4",
+      "status": "verified"
+    },
+    {
+      "condition": "T > Ts",
+      "formula": "Csm = SD1 / T",
+      "source": "Equation 3.10.4.2-5",
+      "status": "verified"
+    }
+  ],
+  "t0Conflict": {
+    "effect": "The two readings change the rising-branch endpoint and therefore Csm for periods below max/min of the competing T0 values.",
+    "figureReading": "T0 = 0.2 * Ts",
+    "figureSource": "PDF physical page 60, printed 3-56, Figure 3.10.4.1-1",
+    "officialResolutionFound": false,
+    "textReading": "T0 = 0.2 seconds",
+    "textSource": "PDF physical page 60, printed 3-56, T0 definition below Equation 3.10.4.2-3"
+  },
+  "units": {
+    "As": "g/g (dimensionless acceleration coefficient)",
+    "Csm": "dimensionless coefficient applied to weight",
+    "PGA": "g",
+    "S1": "g",
+    "SD1": "g/g (dimensionless acceleration coefficient)",
+    "SDS": "g/g (dimensionless acceleration coefficient)",
+    "Ss": "g",
+    "T": "s",
+    "T0": "s",
+    "Ts": "s"
+  }
+}

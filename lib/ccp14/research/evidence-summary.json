@@ -1,0 +1,24 @@
+{
+  "canonicalDirectCells": 115,
+  "formulaInventory": {
+    "blocked": 1,
+    "numberingDefects": 1,
+    "verified": 7
+  },
+  "locationCoverage": {
+    "certifiedOptions": 0,
+    "exactOfficialSelectableCount": null,
+    "status": "blocked"
+  },
+  "normativeTableCoverage": {
+    "Fa": 30,
+    "Fpga": 30,
+    "Fv": 30,
+    "R-connections": 4,
+    "R-substructures": 21,
+    "expected": 115,
+    "status": "complete"
+  },
+  "sourcePolicy": "external-only/hash-locked",
+  "studyId": "ccp14-seismic-research"
+}

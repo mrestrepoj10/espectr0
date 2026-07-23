@@ -1,0 +1,22 @@
+{
+  "activationStatus": "blocked",
+  "exactOfficialSelectableLocationCount": null,
+  "generalProcedure": {
+    "baseValues": [
+      "PGA",
+      "Ss",
+      "S1"
+    ],
+    "method": "read the three national contour maps or contracting-entity-approved special values/maps and linearly interpolate between contours or local extrema",
+    "source": "CCP-14 3.10.2.1"
+  },
+  "officialArchiveFinding": {
+    "archiveEntries": "PREFACIO.pdf plus Sections 1 through 15",
+    "archiveEntryCount": 16,
+    "machineReadableLocationDatasetPresent": false,
+    "municipalityOrLocalityTablePresent": false
+  },
+  "reason": "The official CCP-14 ZIP contains maps but no finite locality registry or exact locality-to-PGA/Ss/S1 table. Commentary C3.10.2.1 says values would be available on a CD and web tools, but those authoritative data were not found in the current official publication or official searches. A reference-site count, map digitization, coordinates, GIS inference, or a secondary table cannot be substituted for the missing official selectable dataset.",
+  "requiredResolution": "Obtain and hash-lock the official CCP-14 CD/web dataset, or obtain an authoritative INVÍAS/MinTransporte clarification defining the finite location set and exact values.",
+  "verifiedSelectableLocations": []
+}

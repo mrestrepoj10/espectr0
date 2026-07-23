@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "id": "current-official-url-404",
+      "mitigation": "Retain original official URL, archived transport timestamp, byte size, and SHA-256; do not call the archive host the authority.",
+      "severity": "medium"
+    },
+    {
+      "id": "redistribution-rights",
+      "mitigation": "Keep all official PDFs/ZIP external-only; commit no copied source bytes.",
+      "severity": "medium"
+    },
+    {
+      "id": "no-independent-domain-review",
+      "mitigation": "Keep the PR draft and block activation/merge until an independent bridge-seismic reviewer signs the review record.",
+      "severity": "high"
+    },
+    {
+      "id": "continuous-map-not-finite-registry",
+      "mitigation": "Do not claim an exact selectable location count or synthesize one from municipal references, GIS, coordinates, or contours.",
+      "severity": "critical"
+    }
+  ]
+}

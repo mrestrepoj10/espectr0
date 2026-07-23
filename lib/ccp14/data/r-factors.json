@@ -1,0 +1,74 @@
+{
+  "application": {
+    "directions": "both orthogonal horizontal directions of the substructure",
+    "inelasticTimeHistoryOverride": 1,
+    "rule": "divide elastic bridge-analysis forces by the applicable R"
+  },
+  "connection": {
+    "columns": [
+      "all-operational-categories"
+    ],
+    "rows": {
+      "column-or-pier-to-foundation": [
+        1
+      ],
+      "column-pier-or-pile-to-beam-or-superstructure": [
+        1
+      ],
+      "expansion-joint-in-superstructure-span": [
+        0.8
+      ],
+      "superstructure-to-abutment": [
+        0.8
+      ]
+    },
+    "sourceTable": "3.10.7.1-2"
+  },
+  "edition": "CCP-14",
+  "substructure": {
+    "columns": [
+      "critical",
+      "essential",
+      "other"
+    ],
+    "rows": {
+      "multiple-column-frames": [
+        1.5,
+        3.5,
+        5
+      ],
+      "reinforced-concrete-frame-inclined-piles": [
+        1.5,
+        1.5,
+        2
+      ],
+      "reinforced-concrete-frame-vertical-piles-only": [
+        1.5,
+        2,
+        3
+      ],
+      "single-columns": [
+        1.5,
+        2,
+        3
+      ],
+      "steel-or-composite-frame-inclined-piles": [
+        1.5,
+        2,
+        3
+      ],
+      "steel-or-composite-frame-vertical-piles-only": [
+        1.5,
+        3.5,
+        5
+      ],
+      "wall-piers-major-dimension": [
+        1.5,
+        1.5,
+        2
+      ]
+    },
+    "sourceTable": "3.10.7.1-1"
+  },
+  "units": "dimensionless"
+}

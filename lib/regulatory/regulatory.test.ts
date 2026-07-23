@@ -428,6 +428,7 @@ describe("strict aggregate boundary", () => {
 			expect.arrayContaining([
 				"bogota-microzonation",
 				"cali-microzonation",
+				"ccp14-seismic-research",
 				"framework-fixture",
 				"manizales-microzonation",
 				"medellin-microzonation",
@@ -442,6 +443,14 @@ describe("strict aggregate boundary", () => {
 		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "framework-fixture")).toMatchObject({
 			studyId: "framework-fixture",
 			coverage: { bundledSources: 1 },
+		});
+		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "ccp14-seismic-research")).toMatchObject({
+			studyId: "ccp14-seismic-research",
+			rawRows: { count: 115 },
+			canonicalRows: { count: 115 },
+			citations: { cell: 115, applicability: 6 },
+			coverage: { expectedRows: 115, expectedValues: 115, bundledSources: 0 },
+			uncoveredValues: [],
 		});
 		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "nsr10")).toMatchObject({
 			studyId: "nsr10",
