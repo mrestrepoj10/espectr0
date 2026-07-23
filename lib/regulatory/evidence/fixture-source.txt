@@ -1,1 +1,3 @@
-fixture regulatory source
+Table F-1 base 1.00 2.00 999.00
+option-a 1.00 2.00 999.00
+R = B * 2

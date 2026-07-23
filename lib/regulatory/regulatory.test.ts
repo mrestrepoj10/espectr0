@@ -49,8 +49,11 @@ function addDuplicate(study: RegulatoryEvidenceStudy, value = 1): EvidenceOverri
 		affected: { sourceDocumentId: "fixture-bundled", optionId: "option-a" },
 		reason: "The fixture intentionally repeats the option row.",
 		competingOccurrences: [
-			{ rawRowId: "fixture-raw", citationId: "fixture-cell-base" },
-			{ rawRowId: "fixture-raw-duplicate", citationId: "fixture-cell-duplicate" },
+			{ rawRowId: "fixture-raw", fieldCitationIds: { base: ["fixture-cell-base"] } },
+			{
+				rawRowId: "fixture-raw-duplicate",
+				fieldCitationIds: { base: ["fixture-cell-duplicate"] },
+			},
 		],
 		chosenOccurrenceRawRowId: "fixture-raw-duplicate",
 		author: "Fixture Author",
@@ -59,6 +62,69 @@ function addDuplicate(study: RegulatoryEvidenceStudy, value = 1): EvidenceOverri
 	};
 	study.overrides.push(override);
 	return override;
+}
+
+function twoDirectFieldDuplicateStudy(): RegulatoryEvidenceStudy {
+	const study = fixture();
+	const resultValue = study.values.find(({ fieldId }) => fieldId === "result")!;
+	resultValue.provenance = "direct-source";
+	resultValue.citationIds = ["fixture-cell-result"];
+	resultValue.transformation = "decimal parse";
+	delete resultValue.derivedLineage;
+	study.citations = study.citations.filter(({ id }) => id !== "fixture-formula");
+
+	const firstResult = duplicateCitation("fixture-cell-result", 2);
+	firstResult.rect = { left: 0.35, top: 0.15, width: 0.1, height: 0.05 };
+	study.citations.push(firstResult);
+	study.rawRows[0].citationIds = ["fixture-cell-base", "fixture-cell-result"];
+	study.canonicalRows[0].citationIds = ["fixture-cell-base", "fixture-cell-result"];
+
+	const secondRow = structuredClone(
+		study.citations.find(({ id }) => id === "fixture-row")!,
+	);
+	secondRow.id = "fixture-row-duplicate";
+	secondRow.rect = { left: 0.1, top: 0.31, width: 0.6, height: 0.1 };
+	const secondBase = duplicateCitation("fixture-cell-duplicate-base", 1);
+	secondBase.parentCitationId = secondRow.id;
+	secondBase.rect = { left: 0.2, top: 0.33, width: 0.1, height: 0.04 };
+	const secondResult = duplicateCitation("fixture-cell-duplicate-result", 2);
+	secondResult.parentCitationId = secondRow.id;
+	secondResult.rect = { left: 0.35, top: 0.33, width: 0.1, height: 0.04 };
+	study.citations.push(secondRow, secondBase, secondResult);
+
+	study.rawRows.push({
+		...structuredClone(study.rawRows[0]),
+		id: "fixture-raw-duplicate",
+		citationIds: [secondBase.id, secondResult.id],
+	});
+	study.canonicalRows[0].citationIds = [secondBase.id, secondResult.id];
+	study.canonicalRows[0].sourceRowIds = ["fixture-raw-duplicate"];
+	study.overrides.push({
+		id: "fixture-override",
+		affected: { sourceDocumentId: "fixture-bundled", optionId: "option-a" },
+		reason: "The fixture intentionally repeats a row with two direct fields.",
+		competingOccurrences: [
+			{
+				rawRowId: "fixture-raw",
+				fieldCitationIds: {
+					base: ["fixture-cell-base"],
+					result: ["fixture-cell-result"],
+				},
+			},
+			{
+				rawRowId: "fixture-raw-duplicate",
+				fieldCitationIds: {
+					base: [secondBase.id],
+					result: [secondResult.id],
+				},
+			},
+		],
+		chosenOccurrenceRawRowId: "fixture-raw-duplicate",
+		author: "Fixture Author",
+		independentReviewer: "Fixture Reviewer",
+		reviewDate: "2026-07-22",
+	});
+	return study;
 }
 
 describe("valid generic runtime", () => {
@@ -78,7 +144,7 @@ describe("valid generic runtime", () => {
 				{
 					id: "fixture-bundled",
 					sha256:
-						"90178d0d26dd4435fd32165bbb5f421d434e222cad077799b1635d90c0605a53",
+						"8e9b737c440ad0da747afcb669ac64306b6d22ed95fbe91dc82e4163897f5204",
 					pageCount: 1,
 				},
 			],
@@ -120,9 +186,51 @@ describe("valid generic runtime", () => {
 			reviewStatus: "reviewed",
 		});
 	});
+
+	it("accepts complete field-scoped evidence for both occurrences of a two-direct-field duplicate", async () => {
+		await expect(
+			checkEvidenceStudy(twoDirectFieldDuplicateStudy(), { repositoryRoot }),
+		).resolves.toMatchObject({
+			duplicates: [
+				{
+					rowKey: "option-a/hazard-a",
+					rawRowIds: ["fixture-raw", "fixture-raw-duplicate"],
+					overrideId: "fixture-override",
+				},
+			],
+		});
+	});
 });
 
 describe("mandatory source policy", () => {
+	it("binds normalized citation transcriptions to extracted locked text", async () => {
+		const normalizedWhitespace = fixture();
+		normalizedWhitespace.citations[0].extractedToken = "Table F-1   base 1.00";
+		await expect(
+			checkEvidenceStudy(normalizedWhitespace, { repositoryRoot }),
+		).resolves.toMatchObject({ studyId: "framework-fixture" });
+
+		const fabricated = fixture();
+		fabricated.citations[2].extractedToken = "fabricated cell 42.00";
+		fabricated.citations[2].requiredTokens = ["42.00"];
+		await expect(checkEvidenceStudy(fabricated, { repositoryRoot })).rejects.toThrow(
+			/Citation fixture-cell-base transcription is absent from locked source fixture-bundled/,
+		);
+	});
+
+	it("rejects claimed regions absent from an unrelated hash-matching PDF", async () => {
+		const unrelatedPdf = fixture();
+		unrelatedPdf.sources[0].mediaType = "application/pdf";
+		unrelatedPdf.sources[0].pageCount = 206;
+		unrelatedPdf.sources[0].sha256 =
+			"47207abe1e832f5feb5fb8448af884b8d539fddaf89b6b21ab466765dd8524b0";
+		unrelatedPdf.sources[0].redistribution.localPath =
+			"public/nsr10-titulo-a-2017.pdf";
+		await expect(checkEvidenceStudy(unrelatedPdf, { repositoryRoot })).rejects.toThrow(
+			/Citation fixture-table transcription is absent from locked source fixture-bundled/,
+		);
+	}, 30_000);
+
 	it("cannot bypass bundled hash verification", async () => {
 		const study = fixture();
 		study.sources[0].sha256 = "f".repeat(64);
@@ -291,6 +399,26 @@ describe("strict aggregate boundary", () => {
 });
 
 describe("override/canonical binding", () => {
+	it("rejects cell and parent-row support borrowed across duplicate occurrences", async () => {
+		const borrowedCell = twoDirectFieldDuplicateStudy();
+		borrowedCell.rawRows[1].citationIds = [
+			"fixture-cell-duplicate-base",
+			"fixture-cell-result",
+		];
+		await expect(checkEvidenceStudy(borrowedCell, { repositoryRoot })).rejects.toThrow(
+			/Raw row fixture-raw-duplicate citation fixture-cell-result is not row\/cell evidence/,
+		);
+
+		const borrowedParent = twoDirectFieldDuplicateStudy();
+		borrowedParent.rawRows[1].citationIds = [
+			"fixture-cell-duplicate-base",
+			"fixture-row",
+		];
+		await expect(checkEvidenceStudy(borrowedParent, { repositoryRoot })).rejects.toThrow(
+			/Raw row fixture-raw-duplicate citation fixture-row is not row\/cell evidence/,
+		);
+	});
+
 	it("rejects an override whose canonical row uses the unselected occurrence", async () => {
 		const study = fixture();
 		addDuplicate(study, 999);
@@ -302,7 +430,7 @@ describe("override/canonical binding", () => {
 	it("rejects reused occurrence citations and regions", async () => {
 		const study = fixture();
 		const override = addDuplicate(study);
-		override.competingOccurrences[1].citationId = "fixture-cell-base";
+		override.competingOccurrences[1].fieldCitationIds.base = ["fixture-cell-base"];
 		await expect(checkEvidenceStudy(study, { repositoryRoot })).rejects.toThrow(
 			/Duplicate override occurrence citation/,
 		);

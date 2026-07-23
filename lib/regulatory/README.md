@@ -22,6 +22,11 @@ duplicate IDs. Adding a study therefore changes only that study's directory.
   page separately from the printed page label. Parent citation IDs prove that
   cells fit inside rows and rows inside tables. Every cited physical page requires
   rotation, crop, and an explicit printed label or explicit `null`.
+- Bundled citation transcriptions and required tokens are checked against text
+  extracted from the hash-locked bytes after Unicode NFKC and whitespace
+  normalization. Text media is scoped to its form-feed-delimited physical page;
+  PDF text items must intersect the declared normalized region. Citation-bearing
+  bundled media without a built-in extractor fails closed.
 - Every direct scalar has exactly one cell citation whose normalized value, unit,
   and transformation match. Interpolation cites at least two cell inputs. Derived
   lineage separates a clause/equation formula citation from per-dependency input
@@ -30,8 +35,10 @@ duplicate IDs. Adding a study therefore changes only that study's directory.
   Rows have exact keys/field sets, every raw occurrence is consumed, and canonical
   fields must equal both the selected source occurrence and canonical values.
 - Duplicate source rows require reviewed overrides naming every competing
-  occurrence and the chosen occurrence. Canonicalization must use that selection;
-  occurrence regions must be distinct. Unused overrides and citations fail.
+  occurrence, its cell citations per direct/interpolated field, and the chosen
+  occurrence. Each duplicate row is limited to those field cells or their own row
+  ancestry; canonicalization must use the reviewed selection, occurrence regions
+  must be distinct, and unused overrides and citations fail.
 - Deterministic JSON uses sorted object keys, preserves semantic array order, and
   always ends with LF.
 

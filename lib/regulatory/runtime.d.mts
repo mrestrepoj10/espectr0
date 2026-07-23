@@ -103,7 +103,10 @@ export type EvidenceOverride = {
 	id: string;
 	affected: { sourceDocumentId: string; optionId: string };
 	reason: string;
-	competingOccurrences: Array<{ rawRowId: string; citationId: string }>;
+	competingOccurrences: Array<{
+		rawRowId: string;
+		fieldCitationIds: Record<string, string[]>;
+	}>;
 	chosenOccurrenceRawRowId: string;
 	author: string;
 	independentReviewer: string;
