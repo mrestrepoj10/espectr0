@@ -4,10 +4,30 @@ import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
-const { downloadCalculationMemoriaPdf, toastSuccess } = vi.hoisted(() => ({
+const {
+	adaptNsr10SpectrumMock,
+	downloadCalculationMemoriaPdf,
+	spectrumMockState,
+	toastSuccess,
+} = vi.hoisted(() => ({
+	adaptNsr10SpectrumMock: vi.fn(),
 	downloadCalculationMemoriaPdf: vi.fn().mockResolvedValue(undefined),
+	spectrumMockState: {
+		actualAdapter: undefined as
+			| ((...args: unknown[]) => unknown)
+			| undefined,
+	},
 	toastSuccess: vi.fn(),
 }));
+
+vi.mock("@/lib/spectra", async (importOriginal) => {
+	const actual = await importOriginal<typeof import("@/lib/spectra")>();
+	spectrumMockState.actualAdapter = actual.adaptNsr10Spectrum as (
+		...args: unknown[]
+	) => unknown;
+	adaptNsr10SpectrumMock.mockImplementation(spectrumMockState.actualAdapter);
+	return { ...actual, adaptNsr10Spectrum: adaptNsr10SpectrumMock };
+});
 
 vi.mock("sonner", () => ({
 	toast: {
@@ -72,6 +92,10 @@ beforeAll(() => {
 });
 
 beforeEach(async () => {
+	const actualAdapter = spectrumMockState.actualAdapter;
+	if (!actualAdapter) throw new Error("The real NSR-10 adapter was not loaded.");
+	adaptNsr10SpectrumMock.mockReset();
+	adaptNsr10SpectrumMock.mockImplementation(actualAdapter);
 	downloadCalculationMemoriaPdf.mockClear();
 	toastSuccess.mockClear();
 	container = document.createElement("div");
@@ -151,5 +175,67 @@ describe("unified calculator NSR-10 mode", () => {
 			"site-specific-study-required",
 		);
 		expect(container.querySelector("#period-lookup-input")).toBeNull();
+	});
+
+	it("renders unavailable state only from the normalized engine result", async () => {
+		adaptNsr10SpectrumMock.mockImplementation((...args: unknown[]) => {
+			const actualResult = spectrumMockState.actualAdapter?.(...args);
+			if (
+				typeof actualResult !== "object" ||
+				actualResult === null ||
+				!("status" in actualResult) ||
+				actualResult.status === "ok"
+			) {
+				return actualResult;
+			}
+			const result = actualResult as Exclude<
+				ReturnType<typeof import("@/lib/spectra").adaptNsr10Spectrum>,
+				{ status: "ok" }
+			>;
+			return {
+				...result,
+				applicability: {
+					...result.applicability,
+					message: "APPLICABILITY_FROM_NORMALIZED_RESULT",
+				},
+				capabilities: {
+					...result.capabilities,
+					traceabilityViewer: {
+						supported: false,
+						reason: "TRACEABILITY_DISABLED_BY_NORMALIZED_RESULT",
+					},
+				},
+				warnings: [
+					{
+						citationIds: [],
+						code: "normalized-result-warning",
+						message: "WARNING_FROM_NORMALIZED_RESULT",
+						severity: "error",
+					},
+				],
+			};
+		});
+
+		const profileF = [...container.querySelectorAll<HTMLButtonElement>("button")].find(
+			(button) => button.textContent?.trim() === "F",
+		);
+		await act(async () => {
+			profileF?.click();
+		});
+
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain(
+				"APPLICABILITY_FROM_NORMALIZED_RESULT",
+			);
+		});
+		expect(container.textContent).toContain("WARNING_FROM_NORMALIZED_RESULT");
+		const traceabilityAction = [...container.querySelectorAll<HTMLButtonElement>("button")].find(
+			(button) => button.textContent?.includes("Ver trazabilidad"),
+		);
+		expect(traceabilityAction?.disabled).toBe(true);
+		expect(traceabilityAction?.title).toBe(
+			"TRACEABILITY_DISABLED_BY_NORMALIZED_RESULT",
+		);
+		expect(container.textContent).not.toContain("Exportar");
 	});
 });

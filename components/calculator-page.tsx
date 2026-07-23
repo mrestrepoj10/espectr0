@@ -69,7 +69,6 @@ import { capabilityUiState } from "@/lib/calculator-shell";
 import { hazardLevelDetails, normalizeSearchText } from "@/lib/nsr10";
 import {
 	adaptNsr10Spectrum,
-	nsr10Capabilities,
 	parseNsr10TraceEnvelope,
 } from "@/lib/spectra";
 
@@ -215,15 +214,19 @@ function ParameterRail({
 }
 
 function SiteSpecificStudyNotice({
-	hazardLevel,
+	result,
 	onTraceabilityOpen,
 }: {
-	hazardLevel: HazardLevel;
+	result: Exclude<NormalizedSpectrumResult, { status: "ok" }>;
 	onTraceabilityOpen: () => void;
 }) {
-	const coefficientNames =
-		hazardLevel === "damage-threshold" ? "Fv" : "Fa y Fv";
-	const traceability = capabilityUiState(nsr10Capabilities.traceabilityViewer);
+	const traceability = capabilityUiState(
+		result.capabilities.traceabilityViewer,
+	);
+	const title =
+		result.status === "site-specific-study-required"
+			? "Perfil F: análisis específico requerido"
+			: "Resultado no disponible";
 
 	return (
 		<Card>
@@ -240,27 +243,19 @@ function SiteSpecificStudyNotice({
 						Ver trazabilidad
 					</Button>
 				}
-				applicability="site-specific-study-required"
-				description={`La NSR-10 no define ${coefficientNames} tabulados para este perfil.`}
-				title="Perfil F: análisis específico requerido"
+				applicability={result.applicability.status}
+				description={result.applicability.message}
+				title={title}
 			/>
 			<CardContent>
 				<CalculatorNotices
-					applicability="site-specific-study-required"
-					notices={[
-						{
-							code: "nsr10-soil-profile-f",
-							severity: "warning",
-							title: "Estudio de respuesta sísmica del sitio",
-							message:
-								"La sección A.2.10 exige una investigación geotécnica y un análisis de amplificación de ondas específicos. No se genera un espectro hasta contar con esos resultados.",
-						},
-					]}
+					applicability={result.applicability.status}
+					notices={result.warnings}
 				/>
 			</CardContent>
 			<CardFooter>
 				<p className="text-muted-foreground text-xs">
-					Resultado tipado del motor: estudio específico requerido · A.2.10.
+					Resultado tipado del motor · {result.applicability.reasonCode}
 				</p>
 			</CardFooter>
 		</Card>
@@ -601,8 +596,8 @@ export function CalculatorPage() {
 					</>
 				) : (
 					<SiteSpecificStudyNotice
-						hazardLevel={hazardLevel}
 						onTraceabilityOpen={() => setTraceabilityOpen(true)}
+						result={result}
 					/>
 				)}
 			</CalculatorShell>

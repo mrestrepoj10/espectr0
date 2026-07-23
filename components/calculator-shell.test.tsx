@@ -136,8 +136,12 @@ describe("controlled unified calculator shell", () => {
     expect(container.querySelector("aside")?.getAttribute("aria-label")).toBe(
       "Entradas del modo seleccionado",
     )
+    const results = container.querySelector("[data-slot='calculator-results']")
+    expect(results?.tagName).toBe("SECTION")
+    expect(results?.getAttribute("aria-labelledby")).toBe("calculator-results-heading")
+    expect(results?.getAttribute("aria-label")).toBeNull()
     expect(
-      container.querySelector("[data-slot='calculator-results']")?.getAttribute("aria-label"),
+      results?.querySelector("#calculator-results-heading")?.textContent,
     ).toBe("Resultado del cálculo")
     expect(container.querySelector("[aria-describedby='calculation-mode-description']")).toBeTruthy()
   })

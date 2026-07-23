@@ -44,7 +44,7 @@ export type CalculatorApplicability =
 export type CalculatorNotice = {
   code: string
   severity: "info" | "warning" | "error"
-  title: string
+  title?: string
   message: string
 }
 
@@ -139,13 +139,16 @@ export function CalculatorShell({
         <aside aria-label="Entradas del modo seleccionado" data-slot="mode-input-panel">
           {inputPanel}
         </aside>
-        <div
-          aria-label="Resultado del cálculo"
+        <section
+          aria-labelledby="calculator-results-heading"
           className="flex min-w-0 flex-col gap-4"
           data-slot="calculator-results"
         >
+          <h2 className="sr-only" id="calculator-results-heading">
+            Resultado del cálculo
+          </h2>
           {children}
-        </div>
+        </section>
       </div>
     </section>
   )
@@ -210,7 +213,9 @@ export function CalculatorNotices({
       {notices.map((notice) => (
         <Alert key={notice.code} variant={notice.severity === "error" ? "destructive" : "default"}>
           <TriangleAlertIcon />
-          <AlertTitle>{notice.title}</AlertTitle>
+          <AlertTitle>
+            {notice.title ?? (notice.severity === "error" ? "Error del motor" : "Advertencia del motor")}
+          </AlertTitle>
           <AlertDescription>{notice.message}</AlertDescription>
         </Alert>
       ))}
