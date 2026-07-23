@@ -1,14 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
-import {
-	Area,
-	AreaChart,
-	CartesianGrid,
-	ReferenceLine,
-	XAxis,
-	YAxis,
-} from "recharts";
+import { useCallback, useMemo, useRef, useState } from "react";
 import {
 	ChevronDownIcon,
 	CodeXmlIcon,
@@ -19,10 +11,15 @@ import {
 	ImageIcon,
 	LandmarkIcon,
 	LoaderCircleIcon,
-	TriangleAlertIcon,
 } from "lucide-react";
 import { toast } from "sonner";
 
+import {
+	CalculatorNotices,
+	CalculatorResultHeader,
+	CalculatorShell,
+	SpectrumPeriodLookup,
+} from "@/components/calculator-shell";
 import {
 	defaultMunicipio,
 	getHazardNotice,
@@ -32,10 +29,14 @@ import {
 	MunicipalityCombobox,
 	SoilProfileControl,
 } from "@/components/spectrum-controls";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import {
+	SharedSpectrumChart,
+	SharedSpectrumMetrics,
+	SharedSpectrumNotices,
+	SharedSpectrumTable,
+} from "@/components/spectrum-result";
 import { TraceabilitySheet } from "@/components/traceability/traceability-sheet";
+import { Button } from "@/components/ui/button";
 import {
 	Card,
 	CardContent,
@@ -44,12 +45,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import {
-	type ChartConfig,
-	ChartContainer,
-	ChartTooltip,
-	ChartTooltipContent,
-} from "@/components/ui/chart";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -63,50 +58,42 @@ import {
 	FieldGroup,
 	FieldTitle,
 } from "@/components/ui/field";
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectLabel,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table";
 import {
 	copyChartPng,
 	copyChartSvg,
 	copyTextToClipboard,
 	downloadEtabsTxt,
 } from "@/lib/chart-export";
+import { capabilityUiState } from "@/lib/calculator-shell";
+import { hazardLevelDetails, normalizeSearchText } from "@/lib/nsr10";
 import {
-	computeCalculationTrace,
-	computeSpectrum,
-	hazardLevelDetails,
-	normalizeSearchText,
-} from "@/lib/nsr10";
+	adaptNsr10Spectrum,
+	parseNsr10TraceEnvelope,
+} from "@/lib/spectra";
 
 import type {
-	ImportanceGroup,
 	HazardLevel,
+	ImportanceGroup,
 	Municipio,
 	SoilProfile,
 	SpectrumBranch,
-	SpectrumOk,
 	SpectrumParams,
 } from "@/lib/nsr10";
+import type {
+	NormalizedSpectrumResult,
+	SpectrumCapabilities,
+} from "@/lib/spectra";
 
-const standards = [
-	{ label: "NSR-10", value: "nsr10", disabled: false },
-	{ label: "CCP-14 · próximamente", value: "ccp14", disabled: true },
+type NormalizedSpectrumOk = Extract<NormalizedSpectrumResult, { status: "ok" }>;
+
+const calculationModes = [
+	{
+		id: "nsr10-national",
+		label: "NSR-10 Nacional",
+		description:
+			"Espectro elástico nacional para edificaciones, con los tres niveles de amenaza ya soportados.",
+	},
 ] as const;
 
 const branchLabels: Record<SpectrumBranch, string> = {
@@ -120,12 +107,32 @@ const branchLabels: Record<SpectrumBranch, string> = {
 	"inverse-T2-A.12.3-6": "1/T² · A.12.3-6",
 };
 
-const chartConfig = {
-	sa: {
-		label: "Sa (g)",
-		color: "var(--chart-1)",
-	},
-} satisfies ChartConfig;
+const metricPresentation = {
+	aa: { digits: 2 },
+	av: { digits: 2 },
+	ae: { digits: 2 },
+	ad: { digits: 2 },
+	fa: { digits: 2 },
+	fv: { digits: 2 },
+	i: { digits: 2 },
+	s: { digits: 2 },
+	t0: { label: "T₀", digits: 3 },
+	tc: { digits: 3 },
+	tl: { digits: 2 },
+	saMax: { label: "Sa máx", digits: 3 },
+	pga: { digits: 3 },
+} as const;
+
+function damageMetricPresentation(hazardLevel: HazardLevel) {
+	return hazardLevel === "damage-threshold"
+		? {
+				...metricPresentation,
+				tc: { label: "TCd", digits: 3 },
+				tl: { label: "TLd", digits: 2 },
+				pga: { label: "Sad(0)", digits: 3 },
+			}
+		: metricPresentation;
+}
 
 function formatDecimal(value: number, digits: number) {
 	const factor = 10 ** digits;
@@ -138,7 +145,6 @@ function ParameterRail({
 	soilProfile,
 	importanceGroup,
 	hazardLevel,
-	onTraceabilityOpen,
 	onMunicipioChange,
 	onSoilProfileChange,
 	onImportanceGroupChange,
@@ -148,7 +154,6 @@ function ParameterRail({
 	soilProfile: SoilProfile;
 	importanceGroup: ImportanceGroup;
 	hazardLevel: HazardLevel;
-	onTraceabilityOpen: () => void;
 	onMunicipioChange: (municipio: Municipio) => void;
 	onSoilProfileChange: (profile: SoilProfile) => void;
 	onImportanceGroupChange: (group: ImportanceGroup) => void;
@@ -172,29 +177,6 @@ function ParameterRail({
 			<CardContent>
 				<FieldGroup className="gap-5">
 					<Field>
-						<FieldTitle>Norma</FieldTitle>
-						<Select defaultValue="nsr10" items={standards}>
-							<SelectTrigger className="w-full" aria-label="Norma de diseño">
-								<SelectValue />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectGroup>
-									<SelectLabel>Norma de diseño</SelectLabel>
-									{standards.map((standard) => (
-										<SelectItem
-											disabled={standard.disabled}
-											key={standard.value}
-											value={standard.value}
-										>
-											{standard.label}
-										</SelectItem>
-									))}
-								</SelectGroup>
-							</SelectContent>
-						</Select>
-					</Field>
-
-					<Field>
 						<FieldTitle>Municipio</FieldTitle>
 						<MunicipalityCombobox
 							onValueChange={onMunicipioChange}
@@ -203,28 +185,17 @@ function ParameterRail({
 						<FieldDescription>
 							{municipalityCoefficients} · Apéndice A-4
 						</FieldDescription>
-						<Button
-							onClick={onTraceabilityOpen}
-							size="lg"
-							type="button"
-							variant="outline"
-						>
-							<LandmarkIcon data-icon="inline-start" />
-							Ver trazabilidad
-						</Button>
 					</Field>
 
 					<SoilProfileControl
 						onValueChange={onSoilProfileChange}
 						value={soilProfile}
 					/>
-
 					<ImportanceGroupControl
 						hazardLevel={hazardLevel}
 						onValueChange={onImportanceGroupChange}
 						value={importanceGroup}
 					/>
-
 					<HazardLevelControl
 						onValueChange={onHazardLevelChange}
 						value={hazardLevel}
@@ -242,299 +213,62 @@ function ParameterRail({
 	);
 }
 
-function SpectrumChart({
-	spectrum,
-	municipio,
-	params,
+function SiteSpecificStudyNotice({
+	result,
+	onTraceabilityOpen,
 }: {
-	spectrum: SpectrumOk;
-	municipio: Municipio;
-	params: SpectrumParams;
+	result: Exclude<NormalizedSpectrumResult, { status: "ok" }>;
+	onTraceabilityOpen: () => void;
 }) {
-	const chartContainerRef = useRef<HTMLDivElement>(null);
-	const { coefficients } = spectrum;
-	const details = hazardLevelDetails[spectrum.hazardLevel];
-	const plotEnd = spectrum.points.at(-1)?.t ?? Math.max(4, coefficients.tl);
-	const transitionLabels =
-		spectrum.hazardLevel === "damage-threshold"
-			? { tc: "TCd", tl: "TLd" }
-			: { tc: "TC", tl: "TL" };
-	const description =
-		spectrum.hazardLevel === "damage-threshold"
-			? "A.12.3: rama ascendente hasta 0,25 s, meseta y ramas 1/T y 1/T²."
-			: spectrum.hazardLevel === "limited-safety"
-				? "A.10.3: forma A.2.6 calculada con Ae en reemplazo de Aa y Av."
-				: "A.2.6 general: meseta desde T = 0 hasta TC, seguida por ramas 1/T y 1/T².";
+	const traceability = capabilityUiState(
+		result.capabilities.traceabilityViewer,
+	);
+	const title =
+		result.status === "site-specific-study-required"
+			? "Perfil F: análisis específico requerido"
+			: "Resultado no disponible";
 
 	return (
-		<Card variant="elevated">
-			<CardHeader>
-				<div className="flex flex-wrap items-start justify-between gap-3">
-					<div className="flex min-w-0 flex-col gap-1.5">
-						<div className="flex flex-wrap items-center gap-2">
-							<CardTitle>Espectro elástico · {details.label} (Sa vs. T)</CardTitle>
-							<Badge variant="secondary">
-								Sa máx {formatDecimal(coefficients.saMax, 3)} g
-							</Badge>
-						</div>
-						<CardDescription>{description}</CardDescription>
-					</div>
-					<ExportActions
-						chartContainerRef={chartContainerRef}
-						municipio={municipio}
-						params={params}
-						spectrum={spectrum}
-					/>
-				</div>
-			</CardHeader>
-			<CardContent>
-				<ChartContainer
-					aria-label={`Espectro elástico de ${details.label.toLocaleLowerCase("es-CO")} NSR-10 calculado`}
-					className="h-80 w-full md:h-96"
-					config={chartConfig}
-					initialDimension={{ width: 960, height: 384 }}
-					ref={chartContainerRef}
-				>
-					<AreaChart
-						accessibilityLayer
-						data={spectrum.points}
-						margin={{ top: 12, right: 16, bottom: 24, left: 4 }}
+		<Card>
+			<CalculatorResultHeader
+				actions={
+					<Button
+						disabled={!traceability.enabled}
+						onClick={onTraceabilityOpen}
+						title={traceability.reason ?? undefined}
+						type="button"
+						variant="outline"
 					>
-						<defs>
-							<linearGradient id="spectrum-fill" x1="0" x2="0" y1="0" y2="1">
-								<stop
-									offset="5%"
-									stopColor="var(--color-sa)"
-									stopOpacity={0.35}
-								/>
-								<stop
-									offset="95%"
-									stopColor="var(--color-sa)"
-									stopOpacity={0.02}
-								/>
-							</linearGradient>
-						</defs>
-						<CartesianGrid className="stroke-border" vertical={false} />
-						<XAxis
-							axisLine={false}
-							dataKey="t"
-							domain={[0, plotEnd]}
-							label={{ value: "Periodo T (s)", position: "insideBottom", offset: -16 }}
-							tickFormatter={(value) => formatDecimal(Number(value), 2)}
-							tickLine={false}
-							tickMargin={8}
-							type="number"
-						/>
-						<YAxis
-							axisLine={false}
-							domain={[0, "auto"]}
-							label={{ value: "Sa (g)", angle: -90, position: "insideLeft" }}
-							tickFormatter={(value) => Number(value).toFixed(2)}
-							tickLine={false}
-							tickMargin={8}
-						/>
-						<ReferenceLine
-							label={{ value: transitionLabels.tc, position: "insideTopRight" }}
-							stroke="var(--muted-foreground)"
-							strokeDasharray="3 3"
-							x={coefficients.tc}
-						/>
-						<ReferenceLine
-							label={{ value: transitionLabels.tl, position: "insideTopRight" }}
-							stroke="var(--muted-foreground)"
-							strokeDasharray="3 3"
-							x={coefficients.tl}
-						/>
-						<ChartTooltip
-							content={
-								<ChartTooltipContent
-									indicator="line"
-									labelFormatter={(_, payload) =>
-										`T = ${Number(payload[0]?.payload?.t ?? 0).toFixed(3)} s`
-									}
-								/>
-							}
-							cursor={false}
-						/>
-						<Area
-							activeDot={{ r: 5 }}
-							dataKey="sa"
-							fill="url(#spectrum-fill)"
-							fillOpacity={1}
-							isAnimationActive={false}
-							stroke="var(--color-sa)"
-							strokeWidth={2.5}
-							type="linear"
-						/>
-					</AreaChart>
-				</ChartContainer>
+						<LandmarkIcon data-icon="inline-start" />
+						Ver trazabilidad
+					</Button>
+				}
+				applicability={result.applicability.status}
+				description={result.applicability.message}
+				title={title}
+			/>
+			<CardContent>
+				<CalculatorNotices
+					applicability={result.applicability.status}
+					notices={result.warnings}
+				/>
 			</CardContent>
 			<CardFooter>
 				<p className="text-muted-foreground text-xs">
-					TR {spectrum.returnPeriodYears} años · amortiguamiento crítico del{" "}
-					{spectrum.dampingRatio * 100} % · aceleraciones como fracción de g.
+					Resultado tipado del motor · {result.applicability.reasonCode}
 				</p>
 			</CardFooter>
 		</Card>
 	);
 }
 
-function ParameterTiles({ spectrum }: { spectrum: SpectrumOk }) {
-	const { coefficients } = spectrum;
-	const commonParameters = [
-		{
-			label: coefficients.hazardLevel === "damage-threshold" ? "TCd" : "TC",
-			value: `${formatDecimal(coefficients.tc, 3)} s`,
-		},
-		{
-			label: coefficients.hazardLevel === "damage-threshold" ? "TLd" : "TL",
-			value: `${formatDecimal(coefficients.tl, 2)} s`,
-		},
-		{ label: "Sa máx", value: `${formatDecimal(coefficients.saMax, 3)} g` },
-		{
-			label: coefficients.hazardLevel === "damage-threshold" ? "Sad(0)" : "PGA",
-			value: `${formatDecimal(coefficients.pga, 3)} g`,
-		},
-	];
-	const parameters =
-		coefficients.hazardLevel === "design"
-			? [
-					{ label: "Aa", value: formatDecimal(coefficients.aa, 2) },
-					{ label: "Av", value: formatDecimal(coefficients.av, 2) },
-					{ label: "Fa", value: formatDecimal(coefficients.fa, 2) },
-					{ label: "Fv", value: formatDecimal(coefficients.fv, 2) },
-					{ label: "I", value: formatDecimal(coefficients.i, 2) },
-					{ label: "T₀", value: `${formatDecimal(coefficients.t0, 3)} s` },
-					...commonParameters,
-				]
-			: coefficients.hazardLevel === "limited-safety"
-				? [
-						{ label: "Ae", value: formatDecimal(coefficients.ae, 2) },
-						{ label: "Fa", value: formatDecimal(coefficients.fa, 2) },
-						{ label: "Fv", value: formatDecimal(coefficients.fv, 2) },
-						{ label: "I", value: formatDecimal(coefficients.i, 2) },
-						{ label: "T₀", value: `${formatDecimal(coefficients.t0, 3)} s` },
-						...commonParameters,
-					]
-				: [
-						{ label: "Ad", value: formatDecimal(coefficients.ad, 2) },
-						{ label: "Fv", value: formatDecimal(coefficients.fv, 2) },
-						{ label: "S", value: formatDecimal(coefficients.s, 2) },
-						...commonParameters,
-					];
-
-	return (
-		<section aria-labelledby="derived-parameters" className="flex flex-col gap-3">
-			<div className="flex flex-wrap items-center justify-between gap-2">
-				<h2 className="font-heading font-medium" id="derived-parameters">
-					Parámetros calculados
-				</h2>
-				<Badge variant="outline">NSR-10 · resultado en vivo</Badge>
-			</div>
-			<div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-				{parameters.map((parameter) => (
-					<Card key={parameter.label} size="sm" variant="metric">
-						<CardHeader>
-							<CardTitle className="font-normal text-muted-foreground text-xs">
-								{parameter.label}
-							</CardTitle>
-						</CardHeader>
-						<CardContent>
-							<p className="font-mono font-semibold text-xl tabular-nums">
-								{parameter.value}
-							</p>
-						</CardContent>
-					</Card>
-				))}
-			</div>
-		</section>
-	);
-}
-
-function SpectrumTable({ spectrum }: { spectrum: SpectrumOk }) {
-	const transitionNames =
-		spectrum.hazardLevel === "damage-threshold" ? "TCd y TLd" : "TC y TL";
-
-	return (
-		<Card>
-			<CardHeader>
-				<CardTitle>Datos del espectro</CardTitle>
-				<CardDescription>
-					{spectrum.points.length} puntos calculados; {transitionNames} se incluyen
-					exactamente.
-				</CardDescription>
-			</CardHeader>
-			<CardContent>
-				<div className="max-h-80 overflow-auto">
-					<Table>
-						<TableHeader className="sticky top-0 bg-card">
-							<TableRow>
-								<TableHead>Tramo</TableHead>
-								<TableHead className="text-right">T (s)</TableHead>
-								<TableHead className="text-right">Sa (g)</TableHead>
-							</TableRow>
-						</TableHeader>
-						<TableBody>
-							{spectrum.points.map((point) => (
-								<TableRow key={point.t}>
-									<TableCell className="font-medium">
-										{branchLabels[point.branch]}
-									</TableCell>
-									<TableCell className="text-right font-mono tabular-nums">
-										{point.t.toFixed(3)}
-									</TableCell>
-									<TableCell className="text-right font-mono tabular-nums">
-										{point.sa.toFixed(6)}
-									</TableCell>
-								</TableRow>
-							))}
-						</TableBody>
-					</Table>
-				</div>
-			</CardContent>
-		</Card>
-	);
-}
-
-function SiteSpecificStudyNotice({ hazardLevel }: { hazardLevel: HazardLevel }) {
-	const coefficientNames =
-		hazardLevel === "damage-threshold" ? "Fv" : "Fa y Fv";
-
-	return (
-		<Card>
-			<CardHeader>
-				<CardTitle>Perfil F: análisis específico requerido</CardTitle>
-				<CardDescription>
-					La NSR-10 no define {coefficientNames} tabulados para este perfil.
-				</CardDescription>
-			</CardHeader>
-			<CardContent>
-				<Alert>
-					<TriangleAlertIcon />
-					<AlertTitle>Estudio de respuesta sísmica del sitio</AlertTitle>
-					<AlertDescription>
-						La sección A.2.10 exige una investigación geotécnica y un análisis de
-						amplificación de ondas específicos. No se genera un espectro hasta contar con
-						esos resultados.
-					</AlertDescription>
-				</Alert>
-			</CardContent>
-			<CardFooter>
-				<p className="text-muted-foreground text-xs">
-					Resultado tipado del motor: estudio específico requerido · A.2.10.
-				</p>
-			</CardFooter>
-		</Card>
-	);
-}
-
-function spectrumCsv(spectrum: SpectrumOk) {
-	const rows = spectrum.points.map((point) => `${point.t},${point.sa}`);
+function spectrumCsv(result: NormalizedSpectrumOk) {
+	const rows = result.points.map((point) => `${point.tSeconds},${point.saG}`);
 	return ["T (s),Sa (g)", ...rows].join("\n");
 }
 
-function downloadCsv(spectrum: SpectrumOk, municipio: Municipio) {
-	const blob = new Blob([`\uFEFF${spectrumCsv(spectrum)}`], {
+function downloadCsv(result: NormalizedSpectrumOk, municipio: Municipio) {
+	const blob = new Blob([`\uFEFF${spectrumCsv(result)}`], {
 		type: "text/csv;charset=utf-8",
 	});
 	const url = URL.createObjectURL(blob);
@@ -542,30 +276,26 @@ function downloadCsv(spectrum: SpectrumOk, municipio: Municipio) {
 	const slug = normalizeSearchText(municipio.municipio).replace(/\s+/g, "-");
 
 	anchor.href = url;
-	anchor.download = `espectr0-${slug}-${spectrum.hazardLevel}.csv`;
+	anchor.download = `espectr0-${slug}-${result.hazard.id}.csv`;
 	anchor.click();
 	URL.revokeObjectURL(url);
 }
 
 function ExportActions({
 	chartContainerRef,
-	spectrum,
+	result,
 	municipio,
-	params,
+	capabilities,
 }: {
 	chartContainerRef: React.RefObject<HTMLDivElement | null>;
-	spectrum: SpectrumOk | null;
+	result: NormalizedSpectrumOk;
 	municipio: Municipio;
-	params: SpectrumParams;
+	capabilities: SpectrumCapabilities;
 }) {
 	const [isPdfExporting, setIsPdfExporting] = useState(false);
 
 	function copyJson() {
-		if (!spectrum) return;
-		const trace = computeCalculationTrace(params, { municipality: municipio });
-		if ("status" in trace) return;
-
-		void copyTextToClipboard(JSON.stringify(trace, null, 2))
+		void copyTextToClipboard(JSON.stringify(result.trace.data, null, 2))
 			.then(() => toast.success("JSON copiado al portapapeles."))
 			.catch(() => toast.error("No fue posible copiar el JSON."));
 	}
@@ -599,10 +329,8 @@ function ExportActions({
 	}
 
 	function exportCsv() {
-		if (!spectrum) return;
-
 		try {
-			downloadCsv(spectrum, municipio);
+			downloadCsv(result, municipio);
 			toast.success("CSV descargado.");
 		} catch {
 			toast.error("No fue posible descargar el CSV.");
@@ -610,13 +338,11 @@ function ExportActions({
 	}
 
 	function exportEtabs() {
-		if (!spectrum) return;
-
 		try {
 			const slug = normalizeSearchText(municipio.municipio).replace(/\s+/g, "-");
 			downloadEtabsTxt(
-				spectrum.points,
-				`espectr0-${slug}-${spectrum.hazardLevel}-etabs.txt`,
+				result.points.map((point) => ({ t: point.tSeconds, sa: point.saG })),
+				`espectr0-${slug}-${result.hazard.id}-etabs.txt`,
 			);
 			toast.success("TXT para ETABS descargado.");
 		} catch {
@@ -625,14 +351,11 @@ function ExportActions({
 	}
 
 	async function exportMemoriaPdf() {
-		if (!spectrum || isPdfExporting) return;
+		if (isPdfExporting) return;
 		setIsPdfExporting(true);
 
 		try {
-			const trace = computeCalculationTrace(params, { municipality: municipio });
-			if ("status" in trace) {
-				throw new Error("El perfil de suelo no permite generar una memoria espectral.");
-			}
+			const trace = parseNsr10TraceEnvelope(result.trace);
 			const { downloadCalculationMemoriaPdf } = await import(
 				"@/lib/memoria-pdf-renderer"
 			);
@@ -645,10 +368,15 @@ function ExportActions({
 		}
 	}
 
+	const jsonCapability = capabilityUiState(capabilities.jsonExport);
+	const imageCapability = capabilityUiState(capabilities.svgPngExport);
+	const csvCapability = capabilityUiState(capabilities.csvExport);
+	const etabsCapability = capabilityUiState(capabilities.etabsExport);
+	const pdfCapability = capabilityUiState(capabilities.contextualPdf);
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger
-				disabled={!spectrum}
 				render={<Button className="h-10" type="button" variant="outline" />}
 			>
 				<DownloadIcon data-icon="inline-start" />
@@ -657,29 +385,50 @@ function ExportActions({
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end" aria-label="Exportar resultados">
 				<DropdownMenuGroup>
-					<DropdownMenuItem onClick={copyJson}>
+					<DropdownMenuItem
+						disabled={!jsonCapability.enabled}
+						onClick={copyJson}
+						title={jsonCapability.reason ?? undefined}
+					>
 						<FileJsonIcon />
 						Copiar JSON
 					</DropdownMenuItem>
-					<DropdownMenuItem onClick={copyPng}>
+					<DropdownMenuItem
+						disabled={!imageCapability.enabled}
+						onClick={copyPng}
+						title={imageCapability.reason ?? undefined}
+					>
 						<ImageIcon />
 						Copiar PNG
 					</DropdownMenuItem>
-					<DropdownMenuItem onClick={copySvg}>
+					<DropdownMenuItem
+						disabled={!imageCapability.enabled}
+						onClick={copySvg}
+						title={imageCapability.reason ?? undefined}
+					>
 						<CodeXmlIcon />
 						Copiar SVG
 					</DropdownMenuItem>
-					<DropdownMenuItem onClick={exportCsv}>
+					<DropdownMenuItem
+						disabled={!csvCapability.enabled}
+						onClick={exportCsv}
+						title={csvCapability.reason ?? undefined}
+					>
 						<DownloadIcon />
 						Descargar CSV
 					</DropdownMenuItem>
-					<DropdownMenuItem onClick={exportEtabs}>
+					<DropdownMenuItem
+						disabled={!etabsCapability.enabled}
+						onClick={exportEtabs}
+						title={etabsCapability.reason ?? undefined}
+					>
 						<FileTextIcon />
 						Descargar TXT (ETABS)
 					</DropdownMenuItem>
 					<DropdownMenuItem
-						disabled={isPdfExporting}
+						disabled={isPdfExporting || !pdfCapability.enabled}
 						onClick={() => void exportMemoriaPdf()}
+						title={pdfCapability.reason ?? undefined}
 					>
 						{isPdfExporting ? (
 							<LoaderCircleIcon className="animate-spin" />
@@ -694,12 +443,25 @@ function ExportActions({
 	);
 }
 
+function chartDescription(hazardLevel: HazardLevel) {
+	if (hazardLevel === "damage-threshold") {
+		return "A.12.3: rama ascendente hasta 0,25 s, meseta y ramas 1/T y 1/T².";
+	}
+	if (hazardLevel === "limited-safety") {
+		return "A.10.3: forma A.2.6 calculada con Ae en reemplazo de Aa y Av.";
+	}
+	return "A.2.6 general: meseta desde T = 0 hasta TC, seguida por ramas 1/T y 1/T².";
+}
+
 export function CalculatorPage() {
+	const [calculationMode, setCalculationMode] =
+		useState<(typeof calculationModes)[number]["id"]>("nsr10-national");
 	const [municipio, setMunicipio] = useState<Municipio>(defaultMunicipio);
 	const [soilProfile, setSoilProfile] = useState<SoilProfile>("D");
 	const [importanceGroup, setImportanceGroup] = useState<ImportanceGroup>("I");
 	const [hazardLevel, setHazardLevel] = useState<HazardLevel>("design");
 	const [traceabilityOpen, setTraceabilityOpen] = useState(false);
+	const chartContainerRef = useRef<HTMLDivElement>(null);
 
 	const spectrumParams = useMemo<SpectrumParams>(
 		() => ({
@@ -722,9 +484,51 @@ export function CalculatorPage() {
 			soilProfile,
 		],
 	);
-	const result = useMemo(() => computeSpectrum(spectrumParams), [spectrumParams]);
+	const result = useMemo(
+		() => adaptNsr10Spectrum(spectrumParams, { municipality: municipio }),
+		[spectrumParams, municipio],
+	);
+	const evaluatePeriod = useCallback(
+		(periodSeconds: number) => {
+			const ordinate = result.saAt(periodSeconds);
+			return ordinate.status === "ok"
+				? {
+						status: "ok" as const,
+						saG: ordinate.point.saG,
+						branchLabel:
+							branchLabels[ordinate.point.branchId as SpectrumBranch] ??
+							ordinate.point.branchId,
+					}
+				: {
+						status: "unavailable" as const,
+						message: ordinate.applicability.message,
+					};
+		},
+		[result],
+	);
 
-	const spectrum = result.status === "ok" ? result : null;
+	const traceability = capabilityUiState(result.capabilities.traceabilityViewer);
+	const resultActions =
+		result.status === "ok" ? (
+			<>
+				<Button
+					disabled={!traceability.enabled}
+					onClick={() => setTraceabilityOpen(true)}
+					title={traceability.reason ?? undefined}
+					type="button"
+					variant="outline"
+				>
+					<LandmarkIcon data-icon="inline-start" />
+					Ver trazabilidad
+				</Button>
+				<ExportActions
+					capabilities={result.capabilities}
+					chartContainerRef={chartContainerRef}
+					municipio={municipio}
+					result={result}
+				/>
+			</>
+		) : null;
 
 	return (
 		<div className="flex flex-col gap-5">
@@ -737,34 +541,66 @@ export function CalculatorPage() {
 				Espectro elástico NSR-10 calculado localmente, sin envío de datos.
 			</p>
 
-			<div className="grid items-start gap-4 xl:grid-cols-[18rem_minmax(0,1fr)]">
-				<ParameterRail
-					hazardLevel={hazardLevel}
-					importanceGroup={importanceGroup}
-					municipio={municipio}
-					onImportanceGroupChange={setImportanceGroup}
-					onHazardLevelChange={setHazardLevel}
-					onMunicipioChange={setMunicipio}
-					onSoilProfileChange={setSoilProfile}
-					onTraceabilityOpen={() => setTraceabilityOpen(true)}
-					soilProfile={soilProfile}
-				/>
-				<div className="flex min-w-0 flex-col gap-4">
-					{spectrum ? (
-						<>
-							<SpectrumChart
-								municipio={municipio}
-								params={spectrumParams}
-								spectrum={spectrum}
-							/>
-							<ParameterTiles spectrum={spectrum} />
-							<SpectrumTable spectrum={spectrum} />
-						</>
-					) : (
-						<SiteSpecificStudyNotice hazardLevel={hazardLevel} />
-					)}
-				</div>
-			</div>
+			<CalculatorShell
+				inputPanel={
+					<ParameterRail
+						hazardLevel={hazardLevel}
+						importanceGroup={importanceGroup}
+						municipio={municipio}
+						onHazardLevelChange={setHazardLevel}
+						onImportanceGroupChange={setImportanceGroup}
+						onMunicipioChange={setMunicipio}
+						onSoilProfileChange={setSoilProfile}
+						soilProfile={soilProfile}
+					/>
+				}
+				modes={calculationModes}
+				onValueChange={(nextMode) => {
+					if (nextMode === "nsr10-national") setCalculationMode(nextMode);
+				}}
+				value={calculationMode}
+			>
+				{result.status === "ok" ? (
+					<>
+						<SharedSpectrumChart
+							actions={resultActions}
+							description={chartDescription(hazardLevel)}
+							highlight={`Sa máx ${formatDecimal(
+								result.metrics.find((metric) => metric.id === "saMax")?.value ?? 0,
+								3,
+							)} g`}
+							ref={chartContainerRef}
+							result={result}
+							title={`Espectro elástico · ${result.hazard.label} (Sa vs. T)`}
+							transitionMetrics={[
+								{
+									id: "tc",
+									label: hazardLevel === "damage-threshold" ? "TCd" : "TC",
+								},
+								{
+									id: "tl",
+									label: hazardLevel === "damage-threshold" ? "TLd" : "TL",
+								},
+							]}
+						/>
+						<SharedSpectrumNotices warnings={result.warnings} />
+						<SpectrumPeriodLookup evaluate={evaluatePeriod} />
+						<SharedSpectrumMetrics
+							metrics={result.metrics}
+							presentation={damageMetricPresentation(hazardLevel)}
+						/>
+						<SharedSpectrumTable
+							branchLabels={branchLabels}
+							points={result.points}
+						/>
+					</>
+				) : (
+					<SiteSpecificStudyNotice
+						onTraceabilityOpen={() => setTraceabilityOpen(true)}
+						result={result}
+					/>
+				)}
+			</CalculatorShell>
 		</div>
 	);
 }
