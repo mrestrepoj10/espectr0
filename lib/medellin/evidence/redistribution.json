@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "decision": "external-only-all-sources",
+  "sources": [
+    {
+      "sourceDocumentId": "medellin-dap-2011-support",
+      "officialUrl": "https://www.medellin.gov.co/irj/go/km/docs/wpccontent/Sites/Subportal%20del%20Ciudadano/Plan%20de%20Desarrollo/Secciones/Informaci%C3%B3n%20General/Documentos/POT/Recomendaciones%20Microzonificaci%C3%B3n%20S%C3%ADsmica/Microzonificaci%C3%B3n%20s%C3%ADsmica%20del%20%C3%A1rea%20urbana%20de%20Medell%C3%ADn.pdf",
+      "decision": "external-only",
+      "rationale": "No express redistribution license located on the official delivery page."
+    },
+    {
+      "sourceDocumentId": "medellin-dap-letter-2011",
+      "officialUrl": "https://www.medellin.gov.co/irj/go/km/docs/wpccontent/Sites/Subportal%20del%20Ciudadano/Plan%20de%20Desarrollo/Secciones/Informaci%C3%B3n%20General/Documentos/POT/Recomendaciones%20Microzonificaci%C3%B3n%20S%C3%ADsmica/Oficio%20microzonificaci%C3%B3n%20s%C3%ADsmica.pdf",
+      "decision": "external-only",
+      "rationale": "No express redistribution license located on the official delivery page."
+    },
+    {
+      "sourceDocumentId": "medellin-pot-evaluation-2014",
+      "officialUrl": "https://www.medellin.gov.co/irj/go/km/docs/pccdesign/SubportaldelCiudadano_2/PlandeDesarrollo_0_17/ProgramasyProyectos/Shared%20Content/Documentos/2015/DTS_POT048/POT_IIIb_Evaluaci%C3%B3nSeguimiento.pdf",
+      "decision": "external-only",
+      "rationale": "No express redistribution license located on the official delivery page."
+    },
+    {
+      "sourceDocumentId": "medellin-pot-inputs-2026-v2",
+      "officialUrl": "https://www.medellin.gov.co/es/wp-content/uploads/2026/03/Insumos_Tecnicos_TomoIIIA-v2.pdf",
+      "decision": "external-only",
+      "rationale": "No express redistribution license located on the official delivery page."
+    }
+  ],
+  "committedSourceBytes": false
+}

@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "status": "incomplete-blocks-activation",
+  "formulas": [
+    {
+      "id": "plateau-ordinate",
+      "expression": "Smax = Fa × aSmax × I",
+      "citation": {
+        "citationId": "equation-plateau",
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "regionKind": "equation",
+        "physicalPage": 21,
+        "printedPage": null,
+        "reference": "Figura 0, ordenada de la meseta",
+        "rect": {
+          "left": 0.39,
+          "top": 0.57,
+          "width": 0.28,
+          "height": 0.08
+        }
+      },
+      "status": "source-stated"
+    },
+    {
+      "id": "plateau-branch",
+      "expression": "Sa = Smax for T0 ≤ T ≤ Tc",
+      "citation": {
+        "citationId": "figure-spectrum-branches",
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "regionKind": "figure",
+        "physicalPage": 21,
+        "printedPage": null,
+        "reference": "Figura 0. Espectro generalizado",
+        "rect": {
+          "left": 0.3,
+          "top": 0.54,
+          "width": 0.39,
+          "height": 0.29
+        }
+      },
+      "status": "graphically-stated"
+    },
+    {
+      "id": "decay-branch",
+      "expression": "Sa = Smax × (Tc / T)^α for T > Tc",
+      "citation": {
+        "citationId": "equation-tail",
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "regionKind": "equation",
+        "physicalPage": 21,
+        "printedPage": null,
+        "reference": "Figura 0, rama decreciente",
+        "rect": {
+          "left": 0.49,
+          "top": 0.63,
+          "width": 0.28,
+          "height": 0.1
+        }
+      },
+      "status": "source-stated"
+    },
+    {
+      "id": "short-period-branch",
+      "expression": null,
+      "citation": {
+        "citationId": "figure-spectrum-branches",
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "regionKind": "figure",
+        "physicalPage": 21,
+        "printedPage": null,
+        "reference": "Figura 0. Espectro generalizado",
+        "rect": {
+          "left": 0.3,
+          "top": 0.54,
+          "width": 0.39,
+          "height": 0.29
+        }
+      },
+      "status": "blocked-equation-absent",
+      "issue": "The figure draws a rising line from aSmax at T=0 to Smax at T0 but supplies no equation; linear interpolation is not silently assumed."
+    },
+    {
+      "id": "rc-short-period",
+      "expression": "Rc = min(R, 1 + (R - 1) × 2T/(T0 + Tc))",
+      "citation": {
+        "citationId": "equation-rc",
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "regionKind": "equation",
+        "physicalPage": 23,
+        "printedPage": null,
+        "reference": "Variación del coeficiente de disipación",
+        "rect": {
+          "left": 0.31,
+          "top": 0.54,
+          "width": 0.42,
+          "height": 0.12
+        }
+      },
+      "status": "source-stated"
+    }
+  ]
+}

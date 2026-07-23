@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "directMatrix": {
+    "options": 14,
+    "hazards": 2,
+    "fields": 6,
+    "exactCoveredPairs": 28,
+    "exactCoveredFieldValues": 168,
+    "coveragePercent": 100
+  },
+  "claims": [
+    {
+      "id": "applicability-directive-scope",
+      "kind": "applicability",
+      "claim": "Alcance de la directiva DAP",
+      "citation": {
+        "sourceDocumentId": "medellin-dap-letter-2011",
+        "physicalPage": 2,
+        "printedPage": "2",
+        "citationId": "applicability-directive-scope"
+      }
+    },
+    {
+      "id": "applicability-2014-not-regulatory",
+      "kind": "applicability",
+      "claim": "Ausencia de incorporación reglamentaria",
+      "citation": {
+        "sourceDocumentId": "medellin-pot-evaluation-2014",
+        "physicalPage": 192,
+        "printedPage": "191",
+        "citationId": "applicability-2014-not-regulatory"
+      }
+    },
+    {
+      "id": "applicability-2014-repeal",
+      "kind": "applicability",
+      "claim": "Historia de D638/1999 y D143/2000",
+      "citation": {
+        "sourceDocumentId": "medellin-pot-evaluation-2014",
+        "physicalPage": 188,
+        "printedPage": "187",
+        "citationId": "applicability-2014-repeal"
+      }
+    },
+    {
+      "id": "applicability-2026-not-adopted",
+      "kind": "applicability",
+      "claim": "Estado del estudio de armonización 2019",
+      "citation": {
+        "sourceDocumentId": "medellin-pot-inputs-2026-v2",
+        "physicalPage": 193,
+        "printedPage": "168",
+        "citationId": "applicability-2026-not-adopted"
+      }
+    },
+    {
+      "id": "warning-damping",
+      "kind": "warning",
+      "claim": "Amortiguamiento",
+      "citation": {
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "physicalPage": 21,
+        "printedPage": null,
+        "citationId": "warning-damping"
+      }
+    },
+    {
+      "id": "warning-period-domain",
+      "kind": "warning",
+      "claim": "Dominio máximo",
+      "citation": {
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "physicalPage": 22,
+        "printedPage": null,
+        "citationId": "warning-period-domain"
+      }
+    },
+    {
+      "id": "warning-fills",
+      "kind": "warning",
+      "claim": "Rellenos artificiales",
+      "citation": {
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "physicalPage": 23,
+        "printedPage": null,
+        "citationId": "warning-fills"
+      }
+    },
+    {
+      "id": "warning-transition",
+      "kind": "warning",
+      "claim": "Franja de transición",
+      "citation": {
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "physicalPage": 23,
+        "printedPage": null,
+        "citationId": "warning-transition"
+      }
+    },
+    {
+      "id": "warning-unstable",
+      "kind": "warning",
+      "claim": "Zonas inestables",
+      "citation": {
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "physicalPage": 23,
+        "printedPage": null,
+        "citationId": "warning-unstable"
+      }
+    },
+    {
+      "id": "warning-soil-profile",
+      "kind": "warning",
+      "claim": "Perfil de suelo por estudio geotécnico",
+      "citation": {
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "physicalPage": 24,
+        "printedPage": null,
+        "citationId": "warning-soil-profile"
+      }
+    },
+    {
+      "id": "equation-plateau",
+      "kind": "equation",
+      "claim": "Figura 0, ordenada de la meseta",
+      "citation": {
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "physicalPage": 21,
+        "printedPage": null,
+        "citationId": "equation-plateau"
+      }
+    },
+    {
+      "id": "equation-tail",
+      "kind": "equation",
+      "claim": "Figura 0, rama decreciente",
+      "citation": {
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "physicalPage": 21,
+        "printedPage": null,
+        "citationId": "equation-tail"
+      }
+    },
+    {
+      "id": "figure-spectrum-branches",
+      "kind": "figure",
+      "claim": "Figura 0. Espectro generalizado",
+      "citation": {
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "physicalPage": 21,
+        "printedPage": null,
+        "citationId": "figure-spectrum-branches"
+      }
+    },
+    {
+      "id": "equation-rc",
+      "kind": "equation",
+      "claim": "Variación del coeficiente de disipación",
+      "citation": {
+        "sourceDocumentId": "medellin-dap-2011-support",
+        "physicalPage": 23,
+        "printedPage": null,
+        "citationId": "equation-rc"
+      }
+    }
+  ]
+}

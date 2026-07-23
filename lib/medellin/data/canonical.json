@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 1,
+  "studyId": "medellin-microzonation",
+  "status": "research-only-activation-blocked",
+  "governingConclusion": "No municipal substitute to NSR-10 is demonstrated as adopted as of the March 2026 official POT input.",
+  "controllingBuildingStandard": "NSR-10 national workflow; historical Medellín coefficients must not replace A.2.4/A.2.6 in this product.",
+  "historicalTechnicalEdition": "1999 study as republished in DAP support dated May 2011",
+  "blockers": [
+    "no-adopted-decree",
+    "return-periods-not-stated-in-locked-primary-sources",
+    "rising-branch-equation-not-stated",
+    "referenced-site-specific-method-not-present"
+  ],
+  "options": [
+    {
+      "id": "zone-01",
+      "sourceLabel": "Zona homogénea 1",
+      "description": "Noroccidental"
+    },
+    {
+      "id": "zone-02",
+      "sourceLabel": "Zona homogénea 2",
+      "description": "Centro occidental"
+    },
+    {
+      "id": "zone-03",
+      "sourceLabel": "Zona homogénea 3",
+      "description": "Suroccidental"
+    },
+    {
+      "id": "zone-04",
+      "sourceLabel": "Zona homogénea 4",
+      "description": "Flujos del sector occidental"
+    },
+    {
+      "id": "zone-05",
+      "sourceLabel": "Zona homogénea 5",
+      "description": "Depósitos aluviales finos (margen izquierda río Medellín)"
+    },
+    {
+      "id": "zone-06",
+      "sourceLabel": "Zona homogénea 6",
+      "description": "Depósitos aluviales gruesos"
+    },
+    {
+      "id": "zone-07",
+      "sourceLabel": "Zona homogénea 7",
+      "description": "Depósitos aluviales finos (sector oriental)"
+    },
+    {
+      "id": "zone-08",
+      "sourceLabel": "Zona homogénea 8",
+      "description": "Suelos residuales de dunita parte baja"
+    },
+    {
+      "id": "zone-09",
+      "sourceLabel": "Zona homogénea 9",
+      "description": "Suelos residuales de anfibolita"
+    },
+    {
+      "id": "zone-10",
+      "sourceLabel": "Zona homogénea 10",
+      "description": "Suelos residuales de dunita parte alta"
+    },
+    {
+      "id": "zone-11",
+      "sourceLabel": "Zona homogénea 11",
+      "description": "Margen izquierda de la quebrada Santa Elena"
+    },
+    {
+      "id": "zone-12",
+      "sourceLabel": "Zona homogénea 12",
+      "description": "Transición suelos residuales de gabro y anfibolita"
+    },
+    {
+      "id": "zone-13",
+      "sourceLabel": "Zona homogénea 13",
+      "description": "Flujos parte alta de El Poblado"
+    },
+    {
+      "id": "zone-14",
+      "sourceLabel": "Zona homogénea 14",
+      "description": "Flujos parte baja de El Poblado"
+    }
+  ],
+  "hazards": [
+    {
+      "id": "damage-control",
+      "label": "Sismo de control de daños (también llamado de servicio)",
+      "dampingRatio": 0.02,
+      "returnPeriodYears": null
+    },
+    {
+      "id": "design",
+      "label": "Sismo de diseño",
+      "dampingRatio": 0.05,
+      "returnPeriodYears": null
+    }
+  ],
+  "fieldSemantics": {
+    "ground_peak": {
+      "sourceLabel": "aSmax",
+      "unit": "g"
+    },
+    "short_amplification": {
+      "sourceLabel": "Fa",
+      "unit": null
+    },
+    "plateau_per_importance": {
+      "sourceLabel": "Samax/I",
+      "unit": "g"
+    },
+    "plateau_start": {
+      "sourceLabel": "T0",
+      "unit": "s"
+    },
+    "decay_start": {
+      "sourceLabel": "Tc",
+      "unit": "s"
+    },
+    "decay_exponent": {
+      "sourceLabel": "α",
+      "unit": null
+    }
+  },
+  "rows": [
+    {
+      "optionId": "zone-01",
+      "hazardId": "damage-control",
+      "fields": {
+        "ground_peak": 0.05,
+        "short_amplification": 4.5,
+        "plateau_per_importance": 0.23,
+        "plateau_start": 0.1,
+        "decay_start": 0.5,
+        "decay_exponent": 1.43
+      }
+    },
+    {
+      "optionId": "zone-02",
+      "hazardId": "damage-control",
+      "fields": {
+        "ground_peak": 0.08,
+        "short_amplification": 2.8,
+        "plateau_per_importance": 0.22,
+        "plateau_start": 0.1,
+        "decay_start": 0.3,
+        "decay_exponent": 1.17
+      }
+    },
+    {
+      "optionId": "zone-03",
+      "hazardId": "damage-control",
+      "fields": {
+        "ground_peak": 0.07,
+        "short_amplification": 3.57,
+        "plateau_per_importance": 0.25,
+        "plateau_start": 0.1,
+        "decay_start": 0.5,
+        "decay_exponent": 1.48
+      }
+    },
+    {
+      "optionId": "zone-04",
+      "hazardId": "damage-control",
+      "fields": {
+        "ground_peak": 0.05,
+        "short_amplification": 3.6,
+        "plateau_per_importance": 0.18,
+        "plateau_start": 0.1,
+        "decay_start": 0.6,
+        "decay_exponent": 1.46
+      }
+    },
+    {
+      "optionId": "zone-05",
+      "hazardId": "damage-control",
+      "fields": {
+        "ground_peak": 0.06,
+        "short_amplification": 3.66,
+        "plateau_per_importance": 0.22,
+        "plateau_start": 0.1,
+        "decay_start": 0.5,
+        "decay_exponent": 1.42
+      }
+    },
+    {
+      "optionId": "zone-06",
+      "hazardId": "damage-control",
+      "fields": {
+        "ground_peak": 0.05,
+        "short_amplification": 2.81,
+        "plateau_per_importance": 0.14,
+        "plateau_start": 0.1,
+        "decay_start": 0.4,
+        "decay_exponent": 1.11
+      }
+    },
+    {
+      "optionId": "zone-07",
+      "hazardId": "damage-control",
+      "fields": {
+        "ground_peak": 0.06,
+        "short_amplification": 3.66,
+        "plateau_per_importance": 0.22,
+        "plateau_start": 0.1,
+        "decay_start": 0.5,
+        "decay_exponent": 1.42
+      }
+    },
+    {
+      "optionId": "zone-08",
+      "hazardId": "damage-control",
+      "fields": {
+        "ground_peak": 0.08,
+        "short_amplification": 2.25,
+        "plateau_per_importance": 0.18,
+        "plateau_start": 0.1,
+        "decay_start": 0.65,
+        "decay_exponent": 1.52
+      }
+    },
+    {
+      "optionId": "zone-09",
+      "hazardId": "damage-control",
+      "fields": {
+        "ground_peak": 0.06,
+        "short_amplification": 3.75,
+        "plateau_per_importance": 0.23,
+        "plateau_start": 0.1,
+        "decay_start": 0.4,
+        "decay_exponent": 1.31
+      }
+    },
+    {
+      "optionId": "zone-10",
+      "hazardId": "damage-control",
+      "fields": {
+        "ground_peak": 0.09,
+        "short_amplification": 2.78,
+        "plateau_per_importance": 0.25,
+        "plateau_start": 0.1,
+        "decay_start": 0.4,
+        "decay_exponent": 1.35
+      }
+    },
+    {
+      "optionId": "zone-11",
+      "hazardId": "damage-control",
+      "fields": {
+        "ground_peak": 0.06,
+        "short_amplification": 3.75,
+        "plateau_per_importance": 0.23,
+        "plateau_start": 0.1,
+        "decay_start": 0.5,
+        "decay_exponent": 1.43
+      }
+    },
+    {
+      "optionId": "zone-12",
+      "hazardId": "damage-control",
+      "fields": {
+        "ground_peak": 0.06,
+        "short_amplification": 4.16,
+        "plateau_per_importance": 0.25,
+        "plateau_start": 0.1,
+        "decay_start": 0.65,
+        "decay_exponent": 1.67
+      }
+    },
+    {
+      "optionId": "zone-13",
+      "hazardId": "damage-control",
+      "fields": {
+        "ground_peak": 0.06,
+        "short_amplification": 4.16,
+        "plateau_per_importance": 0.25,
+        "plateau_start": 0.1,
+        "decay_start": 0.4,
+        "decay_exponent": 1.35
+      }
+    },
+    {
+      "optionId": "zone-14",
+      "hazardId": "damage-control",
+      "fields": {
+        "ground_peak": 0.05,
+        "short_amplification": 2.81,
+        "plateau_per_importance": 0.14,
+        "plateau_start": 0.1,
+        "decay_start": 0.5,
+        "decay_exponent": 1.23
+      }
+    },
+    {
+      "optionId": "zone-01",
+      "hazardId": "design",
+      "fields": {
+        "ground_peak": 0.27,
+        "short_amplification": 2.6,
+        "plateau_per_importance": 0.7,
+        "plateau_start": 0.1,
+        "decay_start": 0.6,
+        "decay_exponent": 1.34
+      }
+    },
+    {
+      "optionId": "zone-02",
+      "hazardId": "design",
+      "fields": {
+        "ground_peak": 0.34,
+        "short_amplification": 2.35,
+        "plateau_per_importance": 0.8,
+        "plateau_start": 0.1,
+        "decay_start": 0.4,
+        "decay_exponent": 1.17
+      }
+    },
+    {
+      "optionId": "zone-03",
+      "hazardId": "design",
+      "fields": {
+        "ground_peak": 0.3,
+        "short_amplification": 2.66,
+        "plateau_per_importance": 0.8,
+        "plateau_start": 0.2,
+        "decay_start": 0.7,
+        "decay_exponent": 1.52
+      }
+    },
+    {
+      "optionId": "zone-04",
+      "hazardId": "design",
+      "fields": {
+        "ground_peak": 0.23,
+        "short_amplification": 2.17,
+        "plateau_per_importance": 0.5,
+        "plateau_start": 0.1,
+        "decay_start": 0.65,
+        "decay_exponent": 1.22
+      }
+    },
+    {
+      "optionId": "zone-05",
+      "hazardId": "design",
+      "fields": {
+        "ground_peak": 0.2,
+        "short_amplification": 3,
+        "plateau_per_importance": 0.6,
+        "plateau_start": 0.1,
+        "decay_start": 0.6,
+        "decay_exponent": 1.26
+      }
+    },
+    {
+      "optionId": "zone-06",
+      "hazardId": "design",
+      "fields": {
+        "ground_peak": 0.2,
+        "short_amplification": 2.5,
+        "plateau_per_importance": 0.5,
+        "plateau_start": 0.1,
+        "decay_start": 0.5,
+        "decay_exponent": 1.07
+      }
+    },
+    {
+      "optionId": "zone-07",
+      "hazardId": "design",
+      "fields": {
+        "ground_peak": 0.2,
+        "short_amplification": 3,
+        "plateau_per_importance": 0.6,
+        "plateau_start": 0.1,
+        "decay_start": 0.6,
+        "decay_exponent": 1.26
+      }
+    },
+    {
+      "optionId": "zone-08",
+      "hazardId": "design",
+      "fields": {
+        "ground_peak": 0.23,
+        "short_amplification": 2.4,
+        "plateau_per_importance": 0.55,
+        "plateau_start": 0.1,
+        "decay_start": 0.75,
+        "decay_exponent": 1.37
+      }
+    },
+    {
+      "optionId": "zone-09",
+      "hazardId": "design",
+      "fields": {
+        "ground_peak": 0.26,
+        "short_amplification": 2.7,
+        "plateau_per_importance": 0.7,
+        "plateau_start": 0.1,
+        "decay_start": 0.55,
+        "decay_exponent": 1.28
+      }
+    },
+    {
+      "optionId": "zone-10",
+      "hazardId": "design",
+      "fields": {
+        "ground_peak": 0.38,
+        "short_amplification": 2.1,
+        "plateau_per_importance": 0.8,
+        "plateau_start": 0.1,
+        "decay_start": 0.5,
+        "decay_exponent": 1.29
+      }
+    },
+    {
+      "optionId": "zone-11",
+      "hazardId": "design",
+      "fields": {
+        "ground_peak": 0.26,
+        "short_amplification": 2.88,
+        "plateau_per_importance": 0.75,
+        "plateau_start": 0.1,
+        "decay_start": 0.65,
+        "decay_exponent": 1.43
+      }
+    },
+    {
+      "optionId": "zone-12",
+      "hazardId": "design",
+      "fields": {
+        "ground_peak": 0.26,
+        "short_amplification": 3.07,
+        "plateau_per_importance": 0.8,
+        "plateau_start": 0.15,
+        "decay_start": 0.7,
+        "decay_exponent": 1.52
+      }
+    },
+    {
+      "optionId": "zone-13",
+      "hazardId": "design",
+      "fields": {
+        "ground_peak": 0.26,
+        "short_amplification": 3.07,
+        "plateau_per_importance": 0.8,
+        "plateau_start": 0.1,
+        "decay_start": 0.5,
+        "decay_exponent": 1.29
+      }
+    },
+    {
+      "optionId": "zone-14",
+      "hazardId": "design",
+      "fields": {
+        "ground_peak": 0.2,
+        "short_amplification": 3,
+        "plateau_per_importance": 0.6,
+        "plateau_start": 0.1,
+        "decay_start": 0.55,
+        "decay_exponent": 1.21
+      }
+    }
+  ]
+}

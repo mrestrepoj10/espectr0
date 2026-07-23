@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "1999-mandate-vs-2000-repeal",
+      "status": "resolved-for-product",
+      "officialEvidence": [
+        "applicability-2014-repeal",
+        "applicability-2014-not-regulatory"
+      ],
+      "resolution": "Treat coefficients as historical/research-only; NSR-10 remains governing in the product."
+    },
+    {
+      "id": "2011-note-vs-letter-scope",
+      "status": "resolved-for-product",
+      "officialEvidence": [
+        "warning-damping",
+        "applicability-directive-scope"
+      ],
+      "resolution": "The support text says all buildings, but the signed directive limits recipients to public/decentralized/state-commercial entities; it is not generalized."
+    },
+    {
+      "id": "2019-study-vs-adoption",
+      "status": "resolved-for-product",
+      "officialEvidence": [
+        "applicability-2026-not-adopted"
+      ],
+      "resolution": "A later harmonization study exists but the official 2026 source says its adoption decree has not been adopted; do not mix its model with 1999 values."
+    }
+  ]
+}

@@ -1,0 +1,2338 @@
+{
+  "schemaVersion": 1,
+  "studyId": "medellin-microzonation",
+  "decimalPrecision": 50,
+  "status": "partial-oracle-activation-blocked",
+  "recordCount": 28,
+  "records": [
+    {
+      "optionId": "zone-01",
+      "hazardId": "damage-control",
+      "directDecimals": {
+        "ground_peak": "0.05",
+        "short_amplification": "4.50",
+        "plateau_per_importance": "0.23",
+        "plateau_start": "0.10",
+        "decay_start": "0.50",
+        "decay_exponent": "1.43"
+      },
+      "plateauProductWitness": {
+        "expression": "0.05 × 4.50",
+        "exact": "0.2250",
+        "roundedHalfUp2": "0.23",
+        "published": "0.23"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.23"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.23"
+        },
+        {
+          "period": "0.499999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.23"
+        },
+        {
+          "period": "0.50",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.23"
+        },
+        {
+          "period": "0.500000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.22999999934220000159845399634486852809611621061524"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.011757342091768103671757523028474560659496589902675"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.30",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.15",
+            "rc": "3"
+          },
+          {
+            "period": "0.30",
+            "rc": "5"
+          },
+          {
+            "period": "0.300000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-02",
+      "hazardId": "damage-control",
+      "directDecimals": {
+        "ground_peak": "0.08",
+        "short_amplification": "2.80",
+        "plateau_per_importance": "0.22",
+        "plateau_start": "0.10",
+        "decay_start": "0.30",
+        "decay_exponent": "1.17"
+      },
+      "plateauProductWitness": {
+        "expression": "0.08 × 2.80",
+        "exact": "0.2240",
+        "roundedHalfUp2": "0.22",
+        "published": "0.22"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.22"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.22"
+        },
+        {
+          "period": "0.299999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.22"
+        },
+        {
+          "period": "0.30",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.22"
+        },
+        {
+          "period": "0.300000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.21999999914200000310309998907019226020330411909187"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.010622930961165349605586555270384268428134432917968"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.20",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.10",
+            "rc": "3"
+          },
+          {
+            "period": "0.20",
+            "rc": "5"
+          },
+          {
+            "period": "0.200000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-03",
+      "hazardId": "damage-control",
+      "directDecimals": {
+        "ground_peak": "0.07",
+        "short_amplification": "3.57",
+        "plateau_per_importance": "0.25",
+        "plateau_start": "0.10",
+        "decay_start": "0.50",
+        "decay_exponent": "1.48"
+      },
+      "plateauProductWitness": {
+        "expression": "0.07 × 3.57",
+        "exact": "0.2499",
+        "roundedHalfUp2": "0.25",
+        "published": "0.25"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.499999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.50",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.500000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.24999999926000000183519999574233600953716733909453"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.011517728260086728221027849747913589890687918752877"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.30",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.15",
+            "rc": "3"
+          },
+          {
+            "period": "0.30",
+            "rc": "5"
+          },
+          {
+            "period": "0.300000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-04",
+      "hazardId": "damage-control",
+      "directDecimals": {
+        "ground_peak": "0.05",
+        "short_amplification": "3.60",
+        "plateau_per_importance": "0.18",
+        "plateau_start": "0.10",
+        "decay_start": "0.60",
+        "decay_exponent": "1.46"
+      },
+      "plateauProductWitness": {
+        "expression": "0.05 × 3.60",
+        "exact": "0.1800",
+        "roundedHalfUp2": "0.18",
+        "published": "0.18"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.18"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.18"
+        },
+        {
+          "period": "0.599999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.18"
+        },
+        {
+          "period": "0.60",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.18"
+        },
+        {
+          "period": "0.600000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.17999999956200000089789999827403666987408185527362"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.011281471311231540315184631757600248093399871455514"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.35",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.175",
+            "rc": "3"
+          },
+          {
+            "period": "0.35",
+            "rc": "5"
+          },
+          {
+            "period": "0.350000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-05",
+      "hazardId": "damage-control",
+      "directDecimals": {
+        "ground_peak": "0.06",
+        "short_amplification": "3.66",
+        "plateau_per_importance": "0.22",
+        "plateau_start": "0.10",
+        "decay_start": "0.50",
+        "decay_exponent": "1.42"
+      },
+      "plateauProductWitness": {
+        "expression": "0.06 × 3.66",
+        "exact": "0.2196",
+        "roundedHalfUp2": "0.22",
+        "published": "0.22"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.22"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.22"
+        },
+        {
+          "period": "0.499999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.22"
+        },
+        {
+          "period": "0.50",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.22"
+        },
+        {
+          "period": "0.500000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.21999999937520000151201599655260352761874620428256"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.011482458892140078651778985134882885722134668367032"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.30",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.15",
+            "rc": "3"
+          },
+          {
+            "period": "0.30",
+            "rc": "5"
+          },
+          {
+            "period": "0.300000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-06",
+      "hazardId": "damage-control",
+      "directDecimals": {
+        "ground_peak": "0.05",
+        "short_amplification": "2.81",
+        "plateau_per_importance": "0.14",
+        "plateau_start": "0.10",
+        "decay_start": "0.40",
+        "decay_exponent": "1.11"
+      },
+      "plateauProductWitness": {
+        "expression": "0.05 × 2.81",
+        "exact": "0.1405",
+        "roundedHalfUp2": "0.14",
+        "published": "0.14"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.14"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.14"
+        },
+        {
+          "period": "0.399999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.14"
+        },
+        {
+          "period": "0.40",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.14"
+        },
+        {
+          "period": "0.400000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.13999999961150000102466874734440016307157208120370"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.010867459632801684274511813691919403720632841622679"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.25",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.125",
+            "rc": "3"
+          },
+          {
+            "period": "0.25",
+            "rc": "5"
+          },
+          {
+            "period": "0.250000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-07",
+      "hazardId": "damage-control",
+      "directDecimals": {
+        "ground_peak": "0.06",
+        "short_amplification": "3.66",
+        "plateau_per_importance": "0.22",
+        "plateau_start": "0.10",
+        "decay_start": "0.50",
+        "decay_exponent": "1.42"
+      },
+      "plateauProductWitness": {
+        "expression": "0.06 × 3.66",
+        "exact": "0.2196",
+        "roundedHalfUp2": "0.22",
+        "published": "0.22"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.22"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.22"
+        },
+        {
+          "period": "0.499999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.22"
+        },
+        {
+          "period": "0.50",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.22"
+        },
+        {
+          "period": "0.500000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.21999999937520000151201599655260352761874620428256"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.011482458892140078651778985134882885722134668367032"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.30",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.15",
+            "rc": "3"
+          },
+          {
+            "period": "0.30",
+            "rc": "5"
+          },
+          {
+            "period": "0.300000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-08",
+      "hazardId": "damage-control",
+      "directDecimals": {
+        "ground_peak": "0.08",
+        "short_amplification": "2.25",
+        "plateau_per_importance": "0.18",
+        "plateau_start": "0.10",
+        "decay_start": "0.65",
+        "decay_exponent": "1.52"
+      },
+      "plateauProductWitness": {
+        "expression": "0.08 × 2.25",
+        "exact": "0.1800",
+        "roundedHalfUp2": "0.18",
+        "published": "0.18"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.18"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.18"
+        },
+        {
+          "period": "0.649999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.18"
+        },
+        {
+          "period": "0.65",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.18"
+        },
+        {
+          "period": "0.650000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.17999999957907692389286627071646703942900582149744"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.011370239702194730769732262566074637910010939915958"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.375",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.1875",
+            "rc": "3"
+          },
+          {
+            "period": "0.375",
+            "rc": "5"
+          },
+          {
+            "period": "0.375000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-09",
+      "hazardId": "damage-control",
+      "directDecimals": {
+        "ground_peak": "0.06",
+        "short_amplification": "3.75",
+        "plateau_per_importance": "0.23",
+        "plateau_start": "0.10",
+        "decay_start": "0.40",
+        "decay_exponent": "1.31"
+      },
+      "plateauProductWitness": {
+        "expression": "0.06 × 3.75",
+        "exact": "0.2250",
+        "roundedHalfUp2": "0.23",
+        "published": "0.23"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.23"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.23"
+        },
+        {
+          "period": "0.399999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.23"
+        },
+        {
+          "period": "0.40",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.23"
+        },
+        {
+          "period": "0.400000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.22999999924675000217500936900059915678588602203425"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.011264912845474262505937096911161522743029752234913"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.25",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.125",
+            "rc": "3"
+          },
+          {
+            "period": "0.25",
+            "rc": "5"
+          },
+          {
+            "period": "0.250000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-10",
+      "hazardId": "damage-control",
+      "directDecimals": {
+        "ground_peak": "0.09",
+        "short_amplification": "2.78",
+        "plateau_per_importance": "0.25",
+        "plateau_start": "0.10",
+        "decay_start": "0.40",
+        "decay_exponent": "1.35"
+      },
+      "plateauProductWitness": {
+        "expression": "0.09 × 2.78",
+        "exact": "0.2502",
+        "roundedHalfUp2": "0.25",
+        "published": "0.25"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.399999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.40",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.400000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.24999999915625000247851561808081056568654627536271"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.011167089803774077963906263107984415409432504465200"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.25",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.125",
+            "rc": "3"
+          },
+          {
+            "period": "0.25",
+            "rc": "5"
+          },
+          {
+            "period": "0.250000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-11",
+      "hazardId": "damage-control",
+      "directDecimals": {
+        "ground_peak": "0.06",
+        "short_amplification": "3.75",
+        "plateau_per_importance": "0.23",
+        "plateau_start": "0.10",
+        "decay_start": "0.50",
+        "decay_exponent": "1.43"
+      },
+      "plateauProductWitness": {
+        "expression": "0.06 × 3.75",
+        "exact": "0.2250",
+        "roundedHalfUp2": "0.23",
+        "published": "0.23"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.23"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.23"
+        },
+        {
+          "period": "0.499999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.23"
+        },
+        {
+          "period": "0.50",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.23"
+        },
+        {
+          "period": "0.500000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.22999999934220000159845399634486852809611621061524"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.011757342091768103671757523028474560659496589902675"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.30",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.15",
+            "rc": "3"
+          },
+          {
+            "period": "0.30",
+            "rc": "5"
+          },
+          {
+            "period": "0.300000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-12",
+      "hazardId": "damage-control",
+      "directDecimals": {
+        "ground_peak": "0.06",
+        "short_amplification": "4.16",
+        "plateau_per_importance": "0.25",
+        "plateau_start": "0.10",
+        "decay_start": "0.65",
+        "decay_exponent": "1.67"
+      },
+      "plateauProductWitness": {
+        "expression": "0.06 × 4.16",
+        "exact": "0.2496",
+        "roundedHalfUp2": "0.25",
+        "published": "0.25"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.649999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.65",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.650000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.24999999935769230901150887325684069631202461845846"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.012024447451028019118156576552788163267453411623075"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.375",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.1875",
+            "rc": "3"
+          },
+          {
+            "period": "0.375",
+            "rc": "5"
+          },
+          {
+            "period": "0.375000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-13",
+      "hazardId": "damage-control",
+      "directDecimals": {
+        "ground_peak": "0.06",
+        "short_amplification": "4.16",
+        "plateau_per_importance": "0.25",
+        "plateau_start": "0.10",
+        "decay_start": "0.40",
+        "decay_exponent": "1.35"
+      },
+      "plateauProductWitness": {
+        "expression": "0.06 × 4.16",
+        "exact": "0.2496",
+        "roundedHalfUp2": "0.25",
+        "published": "0.25"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.399999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.40",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.25"
+        },
+        {
+          "period": "0.400000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.24999999915625000247851561808081056568654627536271"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.011167089803774077963906263107984415409432504465200"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.25",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.125",
+            "rc": "3"
+          },
+          {
+            "period": "0.25",
+            "rc": "5"
+          },
+          {
+            "period": "0.250000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-14",
+      "hazardId": "damage-control",
+      "directDecimals": {
+        "ground_peak": "0.05",
+        "short_amplification": "2.81",
+        "plateau_per_importance": "0.14",
+        "plateau_start": "0.10",
+        "decay_start": "0.50",
+        "decay_exponent": "1.23"
+      },
+      "plateauProductWitness": {
+        "expression": "0.05 × 2.81",
+        "exact": "0.1405",
+        "roundedHalfUp2": "0.14",
+        "published": "0.14"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.14"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.14"
+        },
+        {
+          "period": "0.499999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.14"
+        },
+        {
+          "period": "0.50",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.14"
+        },
+        {
+          "period": "0.500000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.13999999965560000076801199834621416349775704428269"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.010847442374466132413894978312725924245845621693400"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.30",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.15",
+            "rc": "3"
+          },
+          {
+            "period": "0.30",
+            "rc": "5"
+          },
+          {
+            "period": "0.300000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-01",
+      "hazardId": "design",
+      "directDecimals": {
+        "ground_peak": "0.27",
+        "short_amplification": "2.60",
+        "plateau_per_importance": "0.70",
+        "plateau_start": "0.10",
+        "decay_start": "0.60",
+        "decay_exponent": "1.34"
+      },
+      "plateauProductWitness": {
+        "expression": "0.27 × 2.60",
+        "exact": "0.7020",
+        "roundedHalfUp2": "0.70",
+        "published": "0.70"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.70"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.70"
+        },
+        {
+          "period": "0.599999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.70"
+        },
+        {
+          "period": "0.60",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.70"
+        },
+        {
+          "period": "0.600000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.69999999843666666971516666101000556578468437994030"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.055088421353205581832084025250982531847870205217495"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.35",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.175",
+            "rc": "3"
+          },
+          {
+            "period": "0.35",
+            "rc": "5"
+          },
+          {
+            "period": "0.350000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-02",
+      "hazardId": "design",
+      "directDecimals": {
+        "ground_peak": "0.34",
+        "short_amplification": "2.35",
+        "plateau_per_importance": "0.80",
+        "plateau_start": "0.10",
+        "decay_start": "0.40",
+        "decay_exponent": "1.17"
+      },
+      "plateauProductWitness": {
+        "expression": "0.34 × 2.35",
+        "exact": "0.7990",
+        "roundedHalfUp2": "0.80",
+        "published": "0.80"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.399999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.40",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.400000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.79999999766000000634724998323268129369982437922346"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.054086638031358541684719355969405355860762068904169"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.25",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.125",
+            "rc": "3"
+          },
+          {
+            "period": "0.25",
+            "rc": "5"
+          },
+          {
+            "period": "0.250000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-03",
+      "hazardId": "design",
+      "directDecimals": {
+        "ground_peak": "0.30",
+        "short_amplification": "2.66",
+        "plateau_per_importance": "0.80",
+        "plateau_start": "0.20",
+        "decay_start": "0.70",
+        "decay_exponent": "1.52"
+      },
+      "plateauProductWitness": {
+        "expression": "0.30 × 2.66",
+        "exact": "0.7980",
+        "roundedHalfUp2": "0.80",
+        "published": "0.80"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.20",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.200000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.699999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.70",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.700000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.79999999826285714598399999475879184519550132776397"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.056559794257181057252475297145418479224125302256751"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.45",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.225",
+            "rc": "3"
+          },
+          {
+            "period": "0.45",
+            "rc": "5"
+          },
+          {
+            "period": "0.450000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.20",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-04",
+      "hazardId": "design",
+      "directDecimals": {
+        "ground_peak": "0.23",
+        "short_amplification": "2.17",
+        "plateau_per_importance": "0.50",
+        "plateau_start": "0.10",
+        "decay_start": "0.65",
+        "decay_exponent": "1.22"
+      },
+      "plateauProductWitness": {
+        "expression": "0.23 × 2.17",
+        "exact": "0.4991",
+        "roundedHalfUp2": "0.50",
+        "published": "0.50"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.50"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.50"
+        },
+        {
+          "period": "0.649999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.50"
+        },
+        {
+          "period": "0.65",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.50"
+        },
+        {
+          "period": "0.650000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.49999999906153846314106508611104597607492997454442"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.054476739926189518051920081781800147500586953200400"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.375",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.1875",
+            "rc": "3"
+          },
+          {
+            "period": "0.375",
+            "rc": "5"
+          },
+          {
+            "period": "0.375000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-05",
+      "hazardId": "design",
+      "directDecimals": {
+        "ground_peak": "0.20",
+        "short_amplification": "3.00",
+        "plateau_per_importance": "0.60",
+        "plateau_start": "0.10",
+        "decay_start": "0.60",
+        "decay_exponent": "1.26"
+      },
+      "plateauProductWitness": {
+        "expression": "0.20 × 3.00",
+        "exact": "0.6000",
+        "roundedHalfUp2": "0.60",
+        "published": "0.60"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.60"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.60"
+        },
+        {
+          "period": "0.599999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.60"
+        },
+        {
+          "period": "0.60",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.60"
+        },
+        {
+          "period": "0.600000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.59999999874000000237299999570223334096186915329130"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.054957407397119234492581343555476046533190265475853"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.35",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.175",
+            "rc": "3"
+          },
+          {
+            "period": "0.35",
+            "rc": "5"
+          },
+          {
+            "period": "0.350000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-06",
+      "hazardId": "design",
+      "directDecimals": {
+        "ground_peak": "0.20",
+        "short_amplification": "2.50",
+        "plateau_per_importance": "0.50",
+        "plateau_start": "0.10",
+        "decay_start": "0.50",
+        "decay_exponent": "1.07"
+      },
+      "plateauProductWitness": {
+        "expression": "0.20 × 2.50",
+        "exact": "0.5000",
+        "roundedHalfUp2": "0.50",
+        "published": "0.50"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.50"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.50"
+        },
+        {
+          "period": "0.499999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.50"
+        },
+        {
+          "period": "0.50",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.50"
+        },
+        {
+          "period": "0.500000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.49999999893000000221489999546683800922498465129173"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.054033576956741574714058195892192852292980603557160"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.30",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.15",
+            "rc": "3"
+          },
+          {
+            "period": "0.30",
+            "rc": "5"
+          },
+          {
+            "period": "0.300000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-07",
+      "hazardId": "design",
+      "directDecimals": {
+        "ground_peak": "0.20",
+        "short_amplification": "3.00",
+        "plateau_per_importance": "0.60",
+        "plateau_start": "0.10",
+        "decay_start": "0.60",
+        "decay_exponent": "1.26"
+      },
+      "plateauProductWitness": {
+        "expression": "0.20 × 3.00",
+        "exact": "0.6000",
+        "roundedHalfUp2": "0.60",
+        "published": "0.60"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.60"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.60"
+        },
+        {
+          "period": "0.599999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.60"
+        },
+        {
+          "period": "0.60",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.60"
+        },
+        {
+          "period": "0.600000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.59999999874000000237299999570223334096186915329130"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.054957407397119234492581343555476046533190265475853"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.35",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.175",
+            "rc": "3"
+          },
+          {
+            "period": "0.35",
+            "rc": "5"
+          },
+          {
+            "period": "0.350000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-08",
+      "hazardId": "design",
+      "directDecimals": {
+        "ground_peak": "0.23",
+        "short_amplification": "2.40",
+        "plateau_per_importance": "0.55",
+        "plateau_start": "0.10",
+        "decay_start": "0.75",
+        "decay_exponent": "1.37"
+      },
+      "plateauProductWitness": {
+        "expression": "0.23 × 2.40",
+        "exact": "0.5520",
+        "roundedHalfUp2": "0.55",
+        "published": "0.55"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.55"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.55"
+        },
+        {
+          "period": "0.749999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.55"
+        },
+        {
+          "period": "0.75",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.55"
+        },
+        {
+          "period": "0.750000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.54999999899533333492070666428913416642623530506529"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.055510409639291528449364410732693293767179560683530"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.425",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.2125",
+            "rc": "3"
+          },
+          {
+            "period": "0.425",
+            "rc": "5"
+          },
+          {
+            "period": "0.425000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-09",
+      "hazardId": "design",
+      "directDecimals": {
+        "ground_peak": "0.26",
+        "short_amplification": "2.70",
+        "plateau_per_importance": "0.70",
+        "plateau_start": "0.10",
+        "decay_start": "0.55",
+        "decay_exponent": "1.28"
+      },
+      "plateauProductWitness": {
+        "expression": "0.26 × 2.70",
+        "exact": "0.7020",
+        "roundedHalfUp2": "0.70",
+        "published": "0.70"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.70"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.70"
+        },
+        {
+          "period": "0.549999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.70"
+        },
+        {
+          "period": "0.55",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.70"
+        },
+        {
+          "period": "0.550000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.69999999837090909428575205940330940449366688838958"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.055223699054405607391569046478391026554799052385006"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.325",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.1625",
+            "rc": "3"
+          },
+          {
+            "period": "0.325",
+            "rc": "5"
+          },
+          {
+            "period": "0.325000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-10",
+      "hazardId": "design",
+      "directDecimals": {
+        "ground_peak": "0.38",
+        "short_amplification": "2.10",
+        "plateau_per_importance": "0.80",
+        "plateau_start": "0.10",
+        "decay_start": "0.50",
+        "decay_exponent": "1.29"
+      },
+      "plateauProductWitness": {
+        "expression": "0.38 × 2.10",
+        "exact": "0.7980",
+        "roundedHalfUp2": "0.80",
+        "published": "0.80"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.499999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.50",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.500000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.79999999793600000472655998963307842223704678494641"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.054714685063036976559902670747566430305177320709506"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.30",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.15",
+            "rc": "3"
+          },
+          {
+            "period": "0.30",
+            "rc": "5"
+          },
+          {
+            "period": "0.300000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-11",
+      "hazardId": "design",
+      "directDecimals": {
+        "ground_peak": "0.26",
+        "short_amplification": "2.88",
+        "plateau_per_importance": "0.75",
+        "plateau_start": "0.10",
+        "decay_start": "0.65",
+        "decay_exponent": "1.43"
+      },
+      "plateauProductWitness": {
+        "expression": "0.26 × 2.88",
+        "exact": "0.7488",
+        "roundedHalfUp2": "0.75",
+        "published": "0.75"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.75"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.75"
+        },
+        {
+          "period": "0.649999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.75"
+        },
+        {
+          "period": "0.65",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.75"
+        },
+        {
+          "period": "0.650000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.74999999835000000308423076380568639977605089488850"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.055793239164313659651620806443768517625881578795208"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.375",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.1875",
+            "rc": "3"
+          },
+          {
+            "period": "0.375",
+            "rc": "5"
+          },
+          {
+            "period": "0.375000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-12",
+      "hazardId": "design",
+      "directDecimals": {
+        "ground_peak": "0.26",
+        "short_amplification": "3.07",
+        "plateau_per_importance": "0.80",
+        "plateau_start": "0.15",
+        "decay_start": "0.70",
+        "decay_exponent": "1.52"
+      },
+      "plateauProductWitness": {
+        "expression": "0.26 × 3.07",
+        "exact": "0.7982",
+        "roundedHalfUp2": "0.80",
+        "published": "0.80"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.15",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.150000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.699999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.70",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.700000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.79999999826285714598399999475879184519550132776397"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.056559794257181057252475297145418479224125302256751"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.425",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.2125",
+            "rc": "3"
+          },
+          {
+            "period": "0.425",
+            "rc": "5"
+          },
+          {
+            "period": "0.425000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.15",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-13",
+      "hazardId": "design",
+      "directDecimals": {
+        "ground_peak": "0.26",
+        "short_amplification": "3.07",
+        "plateau_per_importance": "0.80",
+        "plateau_start": "0.10",
+        "decay_start": "0.50",
+        "decay_exponent": "1.29"
+      },
+      "plateauProductWitness": {
+        "expression": "0.26 × 3.07",
+        "exact": "0.7982",
+        "roundedHalfUp2": "0.80",
+        "published": "0.80"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.499999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.50",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.80"
+        },
+        {
+          "period": "0.500000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.79999999793600000472655998963307842223704678494641"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.054714685063036976559902670747566430305177320709506"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.30",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.15",
+            "rc": "3"
+          },
+          {
+            "period": "0.30",
+            "rc": "5"
+          },
+          {
+            "period": "0.300000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    },
+    {
+      "optionId": "zone-14",
+      "hazardId": "design",
+      "directDecimals": {
+        "ground_peak": "0.20",
+        "short_amplification": "3.00",
+        "plateau_per_importance": "0.60",
+        "plateau_start": "0.10",
+        "decay_start": "0.55",
+        "decay_exponent": "1.21"
+      },
+      "plateauProductWitness": {
+        "expression": "0.20 × 3.00",
+        "exact": "0.6000",
+        "roundedHalfUp2": "0.60",
+        "published": "0.60"
+      },
+      "verifiedSpectrumWitnesses": [
+        {
+          "period": "0.10",
+          "side": "exact",
+          "branch": "plateau",
+          "saPerImportance": "0.60"
+        },
+        {
+          "period": "0.100000001",
+          "side": "just-right",
+          "branch": "plateau",
+          "saPerImportance": "0.60"
+        },
+        {
+          "period": "0.549999999",
+          "side": "just-left",
+          "branch": "plateau",
+          "saPerImportance": "0.60"
+        },
+        {
+          "period": "0.55",
+          "side": "exact",
+          "branch": "plateau-tail-boundary",
+          "saPerImportance": "0.60"
+        },
+        {
+          "period": "0.550000001",
+          "side": "just-right",
+          "branch": "power-decay",
+          "saPerImportance": "0.59999999868000000265199999484065455532765651022056"
+        },
+        {
+          "period": "4",
+          "side": "domain-end",
+          "branch": "power-decay",
+          "saPerImportance": "0.054387301991788078445239201458487765780058063512520"
+        }
+      ],
+      "rcWitness": {
+        "R": "5",
+        "boundary": "0.325",
+        "values": [
+          {
+            "period": "0",
+            "rc": "1"
+          },
+          {
+            "period": "0.1625",
+            "rc": "3"
+          },
+          {
+            "period": "0.325",
+            "rc": "5"
+          },
+          {
+            "period": "0.325000001",
+            "rc": "5"
+          }
+        ]
+      },
+      "unverified": {
+        "periodDomain": "0 < T < 0.10",
+        "reason": "rising-branch equation absent"
+      }
+    }
+  ],
+  "negativeCases": [
+    {
+      "case": "unknown-zone",
+      "expected": "reject"
+    },
+    {
+      "case": "unknown-hazard",
+      "expected": "reject"
+    },
+    {
+      "case": "T<0",
+      "expected": "reject"
+    },
+    {
+      "case": "T>4",
+      "expected": "reject-or-outside-source-domain"
+    },
+    {
+      "case": "0<T<T0",
+      "expected": "blocked-missing-equation"
+    },
+    {
+      "case": "activation",
+      "expected": "blocked-no-adopted-decree"
+    }
+  ],
+  "declaredBinary64Tolerance": "1e-12",
+  "blockers": [
+    "0<T<T0 rising branch: equation absent from locked primary source",
+    "return period for each historical hazard",
+    "general legal applicability",
+    "adoption of the 2019 harmonization"
+  ]
+}

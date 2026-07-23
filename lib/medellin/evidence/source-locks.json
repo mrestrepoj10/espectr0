@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "retrievedOn": "2026-07-22",
+  "locks": [
+    {
+      "sourceDocumentId": "medellin-dap-2011-support",
+      "officialUrl": "https://www.medellin.gov.co/irj/go/km/docs/wpccontent/Sites/Subportal%20del%20Ciudadano/Plan%20de%20Desarrollo/Secciones/Informaci%C3%B3n%20General/Documentos/POT/Recomendaciones%20Microzonificaci%C3%B3n%20S%C3%ADsmica/Microzonificaci%C3%B3n%20s%C3%ADsmica%20del%20%C3%A1rea%20urbana%20de%20Medell%C3%ADn.pdf",
+      "sha256": "31376f731fdc838fd1341f253d62fd0bac4691cefe6fb9e93143780799468160",
+      "pageCount": 24,
+      "byteLength": 324222,
+      "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "medellin-dap-letter-2011",
+      "officialUrl": "https://www.medellin.gov.co/irj/go/km/docs/wpccontent/Sites/Subportal%20del%20Ciudadano/Plan%20de%20Desarrollo/Secciones/Informaci%C3%B3n%20General/Documentos/POT/Recomendaciones%20Microzonificaci%C3%B3n%20S%C3%ADsmica/Oficio%20microzonificaci%C3%B3n%20s%C3%ADsmica.pdf",
+      "sha256": "baf1c46237b4529fb28a574813f995f70e6732e1050e4206fbd501c68962bed1",
+      "pageCount": 2,
+      "byteLength": 582721,
+      "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "medellin-pot-evaluation-2014",
+      "officialUrl": "https://www.medellin.gov.co/irj/go/km/docs/pccdesign/SubportaldelCiudadano_2/PlandeDesarrollo_0_17/ProgramasyProyectos/Shared%20Content/Documentos/2015/DTS_POT048/POT_IIIb_Evaluaci%C3%B3nSeguimiento.pdf",
+      "sha256": "895088861c0b9ce77a162c1a9927553835ceac4b6b5046312526d6f9bd161684",
+      "pageCount": 284,
+      "byteLength": 5715360,
+      "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "medellin-pot-inputs-2026-v2",
+      "officialUrl": "https://www.medellin.gov.co/es/wp-content/uploads/2026/03/Insumos_Tecnicos_TomoIIIA-v2.pdf",
+      "sha256": "c92b571be8e4b48dfda77fe93d832aa27304a8dd36e5bd782052ede7d67526ce",
+      "pageCount": 944,
+      "byteLength": 38296454,
+      "redistributionDecision": "external-only"
+    }
+  ]
+}
