@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "authorRole": "research agent R3",
+  "preparedOn": "2026-07-22",
+  "independentReview": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewedOn": null,
+    "requiredReproductions": [
+      "all four source hashes",
+      "selected cells in both six-column hazard blocks",
+      "plateau product rounding",
+      "Tc boundary and decay witness",
+      "legal no-adoption chain"
+    ]
+  },
+  "activationDecision": "blocked-material-regulatory-and-formula-gaps",
+  "mergeRecommendation": "do-not-merge-until-independent-review; even after evidence review, do not activate without resolution of all blockers"
+}

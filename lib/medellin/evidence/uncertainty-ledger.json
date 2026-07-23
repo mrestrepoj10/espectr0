@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "blocking": true,
+  "entries": [
+    {
+      "id": "governing-status",
+      "severity": "blocker",
+      "status": "resolved-no-adoption",
+      "issue": "Whether the 1999/2011 material currently substitutes NSR-10.",
+      "resolution": "Official 2014 and March 2026 sources say it was not incorporated/adopted; activation is prohibited unless a later adoption instrument and CAP approval are produced."
+    },
+    {
+      "id": "return-periods",
+      "severity": "blocker",
+      "status": "open",
+      "issue": "Neither locked table/support nor official POT excerpts state return periods for the two historical hazards.",
+      "requiredResolution": "Obtain the primary 1999 report or 2019 harmonization report and an adopted instrument explicitly defining probabilities/return periods."
+    },
+    {
+      "id": "short-period-equation",
+      "severity": "blocker",
+      "status": "open",
+      "issue": "The rising branch 0 < T < T0 is drawn but not defined algebraically.",
+      "requiredResolution": "Obtain a primary source with the exact equation and branch inclusivity; do not infer linearity from the drawing."
+    },
+    {
+      "id": "directive-currentness",
+      "severity": "blocker",
+      "status": "open",
+      "issue": "The 2011 letter is scoped to public entities and its current administrative effect is not established.",
+      "requiredResolution": "Obtain a current legal determination; it cannot support a general building calculator."
+    },
+    {
+      "id": "site-specific-method",
+      "severity": "blocker",
+      "status": "open",
+      "issue": "The fill and transition clauses require a detailed/site-specific study under the ‘artículo cuarto del presente decreto’, but that article and its method are absent from the locked 24-page support package.",
+      "requiredResolution": "Obtain and lock the complete governing instrument or adopted technical annex containing the referenced method and acceptance criteria."
+    }
+  ]
+}

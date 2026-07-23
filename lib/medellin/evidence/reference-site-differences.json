@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "benchmarkUse": "UX only",
+  "differences": [
+    "Any reference-site activation of Medellín is unsupported by the currently locked official adoption chain.",
+    "Reference-site return periods or short-period formulas must not fill the primary-source gaps.",
+    "Product selection, if ever approved, must remain manual; GIS and address inference are out of scope."
+  ],
+  "nonInference": "No coefficient, period, formula, or legal status was copied from a reference calculator."
+}
