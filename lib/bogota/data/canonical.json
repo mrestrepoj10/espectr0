@@ -92,7 +92,7 @@
       },
       "printedPage": "139",
       "physicalPage": 155,
-      "tableReference": "Tabla 6-1. Coeficientes de diseño",
+      "tableReference": "Tabla 7.5. Coeficientes y curva de diseño",
       "sourceFields": [
         "fa",
         "fv",
@@ -112,7 +112,7 @@
       },
       "printedPage": "140",
       "physicalPage": 156,
-      "tableReference": "Tabla 6-2. Coeficientes de seguridad limitada",
+      "tableReference": "Tabla 7.6. Coeficientes y curva de seguridad limitada",
       "sourceFields": [
         "fa",
         "fv",
@@ -132,7 +132,7 @@
       },
       "printedPage": "141",
       "physicalPage": 157,
-      "tableReference": "Tabla 6-3. Coeficientes de umbral de daño",
+      "tableReference": "Tabla 7.7. Coeficientes y curva de umbral de daño",
       "sourceFields": [
         "fa",
         "fv",

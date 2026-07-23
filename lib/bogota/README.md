@@ -24,7 +24,7 @@ The canonical research matrix covers exactly 16 zones × 3 hazard levels × 6 se
 - 256 exact direct cell transcriptions from physical PDF pages 155–157 (printed pages 139–141).
 - 32 derived zero-second plateau starts for the design and limited-safety graphs.
 - Three levels: design (475 years, 10% in 50 years, 5% damping), limited safety (225 years, 20% in 50 years, 5%), and damage threshold (31 years, 80% in 50 years, 2%).
-- Fourteen branch/boundary equations with exact page coordinates and domains in `formula-inventory.json`.
+- Fourteen branch/boundary equations with source-page regions and domains in `formula-inventory.json`.
 
 The published tables round `Tc`, `T0d`, and `Tcd` to two decimals. Recomputing their displayed formulas therefore differs by as much as 0.004736842105263157… s in this matrix, and the largest plateau-to-decay join gap at a tabulated boundary is 0.005 g. The research resolution is deliberate: **the adopted tabulated period selects the branch; the formula-derived period is an audit witness and does not overwrite it**. The independent Decimal oracle records every residual.
 
@@ -50,6 +50,8 @@ The complete exact claim-to-source locator matrix is in `evidence/claims-matrix.
 - `evidence/manifest.json`: F3 study with exact table → row → cell provenance.
 - `evidence/source-locks.json`: official URL, retrieval date, byte length, and cryptographic hash for all pathless sources.
 - `evidence/extraction-profile.json`: render and normalized-coordinate method.
+- `evidence/extraction-attestation.json`: locked source hash plus exact table/row/cell token and containment-window evidence; legal claims are bound to their source hash, locator, and statement digest.
+- `evidence/verify_official_pdf.py`: offline independent verifier that recomputes all 3 table, 48 row, and 256 cell checks from locally supplied official PDF bytes without vendoring them.
 - `evidence/formula-inventory.json` and `evidence/claims-matrix.json`: formula, applicability, and warning citations.
 - `evidence/uncertainty-ledger.json`, `conflict-ledger.json`, and `reference-site-differences.json`: unresolved/currentness items and reasoned resolutions.
 - `evidence/redistribution.json`: why no source bytes or rendered pages are committed.
@@ -64,6 +66,7 @@ node lib/bogota/evidence/generate.mjs --check
 python lib/bogota/oracle/generate_oracle.py --check
 pnpm evidence:check
 pnpm vitest run lib/bogota/evidence/evidence.test.mjs
+python lib/bogota/evidence/verify_official_pdf.py --pdf C:\path\to\official-fopae-report.pdf
 ```
 
-All source documents are external-only/pathless. Independent review must re-download each official URL and match the committed byte length and SHA-256 before approving activation. The FOPAE report is not bundled because its cover states that total or partial reproduction requires written authorization.
+The offline verifier is deliberately version-pinned to `pdfplumber==0.11.10` and `pdfminer.six==20260107`; a different extraction profile fails closed. All source documents are external-only/pathless. Independent review must re-download each official URL and match the committed byte length and SHA-256 before approving activation. The FOPAE report is not bundled because its cover states that total or partial reproduction requires written authorization.

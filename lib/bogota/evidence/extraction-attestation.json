@@ -1,0 +1,4071 @@
+{
+  "schemaVersion": 1,
+  "profile": {
+    "schemaVersion": 2,
+    "sourceDocumentId": "fopae-2010-final-report-v1",
+    "extractor": {
+      "engine": "pdfplumber",
+      "version": "0.11.10",
+      "pdfminerVersion": "20260107",
+      "parameters": {
+        "xTolerance": 2,
+        "yTolerance": 2,
+        "useTextFlow": false,
+        "keepBlankChars": false
+      }
+    },
+    "pageGeometryPoints": {
+      "width": 612,
+      "height": 792
+    },
+    "coordinateSystem": "normalized top-left origin; containment windows are divided by the 612×792 PDF page geometry and rounded to six decimals",
+    "normalization": "Unicode NFC; collapse Unicode whitespace to one ASCII space; preserve accents, case, punctuation, and printed decimal precision",
+    "tables": [
+      {
+        "hazardId": "design",
+        "physicalPage": 155,
+        "printedPage": "139",
+        "reference": "Tabla 7.5. Coeficientes y curva de diseño",
+        "rect": {
+          "left": 0.198,
+          "top": 0.0985,
+          "width": 0.584,
+          "height": 0.7863
+        },
+        "titleRect": {
+          "left": 0.4,
+          "top": 0.0985,
+          "width": 0.2,
+          "height": 0.0155
+        },
+        "captionRect": {
+          "left": 0.337,
+          "top": 0.8708,
+          "width": 0.326,
+          "height": 0.014
+        },
+        "rowCount": 16,
+        "numericColumnCount": 5
+      },
+      {
+        "hazardId": "limited-safety",
+        "physicalPage": 156,
+        "printedPage": "140",
+        "reference": "Tabla 7.6. Coeficientes y curva de seguridad limitada",
+        "rect": {
+          "left": 0.198,
+          "top": 0.1145,
+          "width": 0.584,
+          "height": 0.774
+        },
+        "titleRect": {
+          "left": 0.35,
+          "top": 0.1145,
+          "width": 0.3,
+          "height": 0.016
+        },
+        "captionRect": {
+          "left": 0.291,
+          "top": 0.8743,
+          "width": 0.418,
+          "height": 0.0142
+        },
+        "rowCount": 16,
+        "numericColumnCount": 5
+      },
+      {
+        "hazardId": "damage-threshold",
+        "physicalPage": 157,
+        "printedPage": "141",
+        "reference": "Tabla 7.7. Coeficientes y curva de umbral de daño",
+        "rect": {
+          "left": 0.158,
+          "top": 0.1145,
+          "width": 0.665,
+          "height": 0.7824
+        },
+        "titleRect": {
+          "left": 0.36,
+          "top": 0.1145,
+          "width": 0.28,
+          "height": 0.016
+        },
+        "captionRect": {
+          "left": 0.303,
+          "top": 0.8829,
+          "width": 0.394,
+          "height": 0.014
+        },
+        "rowCount": 16,
+        "numericColumnCount": 6
+      }
+    ],
+    "qualityControls": [
+      "The committed attestation binds the locked PDF SHA-256, page, table, row, cell, rectangle, token, and normalized value.",
+      "The offline verifier re-extracts words from locally supplied official bytes and fails on any source, token, coordinate, table, row, cell, or coverage mismatch.",
+      "Two decimal digits are preserved where printed; TL/TLd preserve one decimal digit."
+    ]
+  },
+  "source": {
+    "sourceDocumentId": "fopae-2010-final-report-v1",
+    "byteLength": 12386790,
+    "sha256": "74ba7a6a8d038dce4a81eedc62a47fa2ed0f0a208481ff62dbbdb40dfaac6dc3",
+    "pageCount": 168
+  },
+  "tables": [
+    {
+      "hazardId": "design",
+      "physicalPage": 155,
+      "printedPage": "139",
+      "reference": "Tabla 7.5. Coeficientes y curva de diseño",
+      "rect": {
+        "left": 0.198,
+        "top": 0.0985,
+        "width": 0.584,
+        "height": 0.7863
+      },
+      "title": {
+        "token": "Coeficientes de diseño",
+        "rect": {
+          "left": 0.4,
+          "top": 0.0985,
+          "width": 0.2,
+          "height": 0.0155
+        }
+      },
+      "caption": {
+        "token": "Tabla 7.5. Coeficientes y curva de diseño",
+        "rect": {
+          "left": 0.337,
+          "top": 0.8708,
+          "width": 0.326,
+          "height": 0.014
+        }
+      },
+      "zeroOrigin": {
+        "citationId": "equation-design-starts-at-zero",
+        "token": "0",
+        "rect": {
+          "left": 0.1538,
+          "top": 0.7288,
+          "width": 0.0075,
+          "height": 0.0102
+        }
+      },
+      "citationId": "table-design",
+      "rows": [
+        {
+          "optionId": "cerros",
+          "citationId": "row-design-cerros",
+          "token": "CERROS 1.35 1.30 0.62 3.0 0.18",
+          "rect": {
+            "left": 0.198,
+            "top": 0.171343,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-cerros-fa",
+              "token": "1.35",
+              "normalizedValue": 1.35,
+              "rect": {
+                "left": 0.422,
+                "top": 0.171343,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-cerros-fv",
+              "token": "1.30",
+              "normalizedValue": 1.3,
+              "rect": {
+                "left": 0.504,
+                "top": 0.171343,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-cerros-transition_end",
+              "token": "0.62",
+              "normalizedValue": 0.62,
+              "rect": {
+                "left": 0.587,
+                "top": 0.171343,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-cerros-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.672,
+                "top": 0.171343,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-cerros-ground_peak",
+              "token": "0.18",
+              "normalizedValue": 0.18,
+              "rect": {
+                "left": 0.751,
+                "top": 0.171343,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "piedemonte-a",
+          "citationId": "row-design-piedemonte-a",
+          "token": "PIEDEMONTE A 1.65 2.00 0.78 3.0 0.22",
+          "rect": {
+            "left": 0.198,
+            "top": 0.18354,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-piedemonte-a-fa",
+              "token": "1.65",
+              "normalizedValue": 1.65,
+              "rect": {
+                "left": 0.422,
+                "top": 0.18354,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-piedemonte-a-fv",
+              "token": "2.00",
+              "normalizedValue": 2,
+              "rect": {
+                "left": 0.504,
+                "top": 0.18354,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-piedemonte-a-transition_end",
+              "token": "0.78",
+              "normalizedValue": 0.78,
+              "rect": {
+                "left": 0.587,
+                "top": 0.18354,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-piedemonte-a-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.672,
+                "top": 0.18354,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-piedemonte-a-ground_peak",
+              "token": "0.22",
+              "normalizedValue": 0.22,
+              "rect": {
+                "left": 0.751,
+                "top": 0.18354,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "piedemonte-b",
+          "citationId": "row-design-piedemonte-b",
+          "token": "PIEDEMONTE B 1.95 1.70 0.56 3.0 0.26",
+          "rect": {
+            "left": 0.198,
+            "top": 0.195737,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-piedemonte-b-fa",
+              "token": "1.95",
+              "normalizedValue": 1.95,
+              "rect": {
+                "left": 0.422,
+                "top": 0.195737,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-piedemonte-b-fv",
+              "token": "1.70",
+              "normalizedValue": 1.7,
+              "rect": {
+                "left": 0.504,
+                "top": 0.195737,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-piedemonte-b-transition_end",
+              "token": "0.56",
+              "normalizedValue": 0.56,
+              "rect": {
+                "left": 0.587,
+                "top": 0.195737,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-piedemonte-b-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.672,
+                "top": 0.195737,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-piedemonte-b-ground_peak",
+              "token": "0.26",
+              "normalizedValue": 0.26,
+              "rect": {
+                "left": 0.751,
+                "top": 0.195737,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "piedemonte-c",
+          "citationId": "row-design-piedemonte-c",
+          "token": "PIEDEMONTE C 1.80 1.70 0.60 3.0 0.24",
+          "rect": {
+            "left": 0.198,
+            "top": 0.207934,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-piedemonte-c-fa",
+              "token": "1.80",
+              "normalizedValue": 1.8,
+              "rect": {
+                "left": 0.422,
+                "top": 0.207934,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-piedemonte-c-fv",
+              "token": "1.70",
+              "normalizedValue": 1.7,
+              "rect": {
+                "left": 0.504,
+                "top": 0.207934,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-piedemonte-c-transition_end",
+              "token": "0.60",
+              "normalizedValue": 0.6,
+              "rect": {
+                "left": 0.587,
+                "top": 0.207934,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-piedemonte-c-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.672,
+                "top": 0.207934,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-piedemonte-c-ground_peak",
+              "token": "0.24",
+              "normalizedValue": 0.24,
+              "rect": {
+                "left": 0.751,
+                "top": 0.207934,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-50",
+          "citationId": "row-design-lacustre-50",
+          "token": "LACUSTRE-50 1.40 2.90 1.33 4.0 0.21",
+          "rect": {
+            "left": 0.198,
+            "top": 0.220131,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-lacustre-50-fa",
+              "token": "1.40",
+              "normalizedValue": 1.4,
+              "rect": {
+                "left": 0.422,
+                "top": 0.220131,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-lacustre-50-fv",
+              "token": "2.90",
+              "normalizedValue": 2.9,
+              "rect": {
+                "left": 0.504,
+                "top": 0.220131,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-lacustre-50-transition_end",
+              "token": "1.33",
+              "normalizedValue": 1.33,
+              "rect": {
+                "left": 0.587,
+                "top": 0.220131,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-lacustre-50-long_period",
+              "token": "4.0",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.672,
+                "top": 0.220131,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-lacustre-50-ground_peak",
+              "token": "0.21",
+              "normalizedValue": 0.21,
+              "rect": {
+                "left": 0.751,
+                "top": 0.220131,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-100",
+          "citationId": "row-design-lacustre-100",
+          "token": "LACUSTRE-100 1.30 3.20 1.58 4.0 0.20",
+          "rect": {
+            "left": 0.198,
+            "top": 0.232328,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-lacustre-100-fa",
+              "token": "1.30",
+              "normalizedValue": 1.3,
+              "rect": {
+                "left": 0.422,
+                "top": 0.232328,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-lacustre-100-fv",
+              "token": "3.20",
+              "normalizedValue": 3.2,
+              "rect": {
+                "left": 0.504,
+                "top": 0.232328,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-lacustre-100-transition_end",
+              "token": "1.58",
+              "normalizedValue": 1.58,
+              "rect": {
+                "left": 0.587,
+                "top": 0.232328,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-lacustre-100-long_period",
+              "token": "4.0",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.672,
+                "top": 0.232328,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-lacustre-100-ground_peak",
+              "token": "0.20",
+              "normalizedValue": 0.2,
+              "rect": {
+                "left": 0.751,
+                "top": 0.232328,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-200",
+          "citationId": "row-design-lacustre-200",
+          "token": "LACUSTRE-200 1.20 3.50 1.87 4.0 0.18",
+          "rect": {
+            "left": 0.198,
+            "top": 0.244525,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-lacustre-200-fa",
+              "token": "1.20",
+              "normalizedValue": 1.2,
+              "rect": {
+                "left": 0.422,
+                "top": 0.244525,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-lacustre-200-fv",
+              "token": "3.50",
+              "normalizedValue": 3.5,
+              "rect": {
+                "left": 0.504,
+                "top": 0.244525,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-lacustre-200-transition_end",
+              "token": "1.87",
+              "normalizedValue": 1.87,
+              "rect": {
+                "left": 0.587,
+                "top": 0.244525,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-lacustre-200-long_period",
+              "token": "4.0",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.672,
+                "top": 0.244525,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-lacustre-200-ground_peak",
+              "token": "0.18",
+              "normalizedValue": 0.18,
+              "rect": {
+                "left": 0.751,
+                "top": 0.244525,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-300",
+          "citationId": "row-design-lacustre-300",
+          "token": "LACUSTRE-300 1.05 2.90 1.77 5.0 0.16",
+          "rect": {
+            "left": 0.198,
+            "top": 0.256722,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-lacustre-300-fa",
+              "token": "1.05",
+              "normalizedValue": 1.05,
+              "rect": {
+                "left": 0.422,
+                "top": 0.256722,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-lacustre-300-fv",
+              "token": "2.90",
+              "normalizedValue": 2.9,
+              "rect": {
+                "left": 0.504,
+                "top": 0.256722,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-lacustre-300-transition_end",
+              "token": "1.77",
+              "normalizedValue": 1.77,
+              "rect": {
+                "left": 0.587,
+                "top": 0.256722,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-lacustre-300-long_period",
+              "token": "5.0",
+              "normalizedValue": 5,
+              "rect": {
+                "left": 0.672,
+                "top": 0.256722,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-lacustre-300-ground_peak",
+              "token": "0.16",
+              "normalizedValue": 0.16,
+              "rect": {
+                "left": 0.751,
+                "top": 0.256722,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-500",
+          "citationId": "row-design-lacustre-500",
+          "token": "LACUSTRE-500 0.95 2.70 1.82 5.0 0.14",
+          "rect": {
+            "left": 0.198,
+            "top": 0.268919,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-lacustre-500-fa",
+              "token": "0.95",
+              "normalizedValue": 0.95,
+              "rect": {
+                "left": 0.422,
+                "top": 0.268919,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-lacustre-500-fv",
+              "token": "2.70",
+              "normalizedValue": 2.7,
+              "rect": {
+                "left": 0.504,
+                "top": 0.268919,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-lacustre-500-transition_end",
+              "token": "1.82",
+              "normalizedValue": 1.82,
+              "rect": {
+                "left": 0.587,
+                "top": 0.268919,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-lacustre-500-long_period",
+              "token": "5.0",
+              "normalizedValue": 5,
+              "rect": {
+                "left": 0.672,
+                "top": 0.268919,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-lacustre-500-ground_peak",
+              "token": "0.14",
+              "normalizedValue": 0.14,
+              "rect": {
+                "left": 0.751,
+                "top": 0.268919,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-aluvial-200",
+          "citationId": "row-design-lacustre-aluvial-200",
+          "token": "LACUSTRE ALUVIAL-200 1.10 2.80 1.63 4.0 0.17",
+          "rect": {
+            "left": 0.198,
+            "top": 0.281116,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-lacustre-aluvial-200-fa",
+              "token": "1.10",
+              "normalizedValue": 1.1,
+              "rect": {
+                "left": 0.422,
+                "top": 0.281116,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-lacustre-aluvial-200-fv",
+              "token": "2.80",
+              "normalizedValue": 2.8,
+              "rect": {
+                "left": 0.504,
+                "top": 0.281116,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-lacustre-aluvial-200-transition_end",
+              "token": "1.63",
+              "normalizedValue": 1.63,
+              "rect": {
+                "left": 0.587,
+                "top": 0.281116,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-lacustre-aluvial-200-long_period",
+              "token": "4.0",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.672,
+                "top": 0.281116,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-lacustre-aluvial-200-ground_peak",
+              "token": "0.17",
+              "normalizedValue": 0.17,
+              "rect": {
+                "left": 0.751,
+                "top": 0.281116,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-aluvial-300",
+          "citationId": "row-design-lacustre-aluvial-300",
+          "token": "LACUSTRE ALUVIAL-300 1.00 2.50 1.60 5.0 0.15",
+          "rect": {
+            "left": 0.198,
+            "top": 0.293313,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-lacustre-aluvial-300-fa",
+              "token": "1.00",
+              "normalizedValue": 1,
+              "rect": {
+                "left": 0.422,
+                "top": 0.293313,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-lacustre-aluvial-300-fv",
+              "token": "2.50",
+              "normalizedValue": 2.5,
+              "rect": {
+                "left": 0.504,
+                "top": 0.293313,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-lacustre-aluvial-300-transition_end",
+              "token": "1.60",
+              "normalizedValue": 1.6,
+              "rect": {
+                "left": 0.587,
+                "top": 0.293313,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-lacustre-aluvial-300-long_period",
+              "token": "5.0",
+              "normalizedValue": 5,
+              "rect": {
+                "left": 0.672,
+                "top": 0.293313,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-lacustre-aluvial-300-ground_peak",
+              "token": "0.15",
+              "normalizedValue": 0.15,
+              "rect": {
+                "left": 0.751,
+                "top": 0.293313,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "aluvial-50",
+          "citationId": "row-design-aluvial-50",
+          "token": "ALUVIAL-50 1.35 1.80 0.85 3.5 0.20",
+          "rect": {
+            "left": 0.198,
+            "top": 0.30551,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-aluvial-50-fa",
+              "token": "1.35",
+              "normalizedValue": 1.35,
+              "rect": {
+                "left": 0.422,
+                "top": 0.30551,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-aluvial-50-fv",
+              "token": "1.80",
+              "normalizedValue": 1.8,
+              "rect": {
+                "left": 0.504,
+                "top": 0.30551,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-aluvial-50-transition_end",
+              "token": "0.85",
+              "normalizedValue": 0.85,
+              "rect": {
+                "left": 0.587,
+                "top": 0.30551,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-aluvial-50-long_period",
+              "token": "3.5",
+              "normalizedValue": 3.5,
+              "rect": {
+                "left": 0.672,
+                "top": 0.30551,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-aluvial-50-ground_peak",
+              "token": "0.20",
+              "normalizedValue": 0.2,
+              "rect": {
+                "left": 0.751,
+                "top": 0.30551,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "aluvial-100",
+          "citationId": "row-design-aluvial-100",
+          "token": "ALUVIAL-100 1.20 2.10 1.12 3.5 0.18",
+          "rect": {
+            "left": 0.198,
+            "top": 0.317707,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-aluvial-100-fa",
+              "token": "1.20",
+              "normalizedValue": 1.2,
+              "rect": {
+                "left": 0.422,
+                "top": 0.317707,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-aluvial-100-fv",
+              "token": "2.10",
+              "normalizedValue": 2.1,
+              "rect": {
+                "left": 0.504,
+                "top": 0.317707,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-aluvial-100-transition_end",
+              "token": "1.12",
+              "normalizedValue": 1.12,
+              "rect": {
+                "left": 0.587,
+                "top": 0.317707,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-aluvial-100-long_period",
+              "token": "3.5",
+              "normalizedValue": 3.5,
+              "rect": {
+                "left": 0.672,
+                "top": 0.317707,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-aluvial-100-ground_peak",
+              "token": "0.18",
+              "normalizedValue": 0.18,
+              "rect": {
+                "left": 0.751,
+                "top": 0.317707,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "aluvial-200",
+          "citationId": "row-design-aluvial-200",
+          "token": "ALUVIAL-200 1.05 2.10 1.28 3.5 0.16",
+          "rect": {
+            "left": 0.198,
+            "top": 0.329904,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-aluvial-200-fa",
+              "token": "1.05",
+              "normalizedValue": 1.05,
+              "rect": {
+                "left": 0.422,
+                "top": 0.329904,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-aluvial-200-fv",
+              "token": "2.10",
+              "normalizedValue": 2.1,
+              "rect": {
+                "left": 0.504,
+                "top": 0.329904,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-aluvial-200-transition_end",
+              "token": "1.28",
+              "normalizedValue": 1.28,
+              "rect": {
+                "left": 0.587,
+                "top": 0.329904,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-aluvial-200-long_period",
+              "token": "3.5",
+              "normalizedValue": 3.5,
+              "rect": {
+                "left": 0.672,
+                "top": 0.329904,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-aluvial-200-ground_peak",
+              "token": "0.16",
+              "normalizedValue": 0.16,
+              "rect": {
+                "left": 0.751,
+                "top": 0.329904,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "aluvial-300",
+          "citationId": "row-design-aluvial-300",
+          "token": "ALUVIAL-300 0.95 2.10 1.41 3.5 0.14",
+          "rect": {
+            "left": 0.198,
+            "top": 0.342101,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-aluvial-300-fa",
+              "token": "0.95",
+              "normalizedValue": 0.95,
+              "rect": {
+                "left": 0.422,
+                "top": 0.342101,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-aluvial-300-fv",
+              "token": "2.10",
+              "normalizedValue": 2.1,
+              "rect": {
+                "left": 0.504,
+                "top": 0.342101,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-aluvial-300-transition_end",
+              "token": "1.41",
+              "normalizedValue": 1.41,
+              "rect": {
+                "left": 0.587,
+                "top": 0.342101,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-aluvial-300-long_period",
+              "token": "3.5",
+              "normalizedValue": 3.5,
+              "rect": {
+                "left": 0.672,
+                "top": 0.342101,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-aluvial-300-ground_peak",
+              "token": "0.14",
+              "normalizedValue": 0.14,
+              "rect": {
+                "left": 0.751,
+                "top": 0.342101,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "deposito-ladera",
+          "citationId": "row-design-deposito-ladera",
+          "token": "DEPÓSITO LADERA 1.65 1.70 0.66 3.0 0.22",
+          "rect": {
+            "left": 0.198,
+            "top": 0.354298,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-design-deposito-ladera-fa",
+              "token": "1.65",
+              "normalizedValue": 1.65,
+              "rect": {
+                "left": 0.422,
+                "top": 0.354298,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-design-deposito-ladera-fv",
+              "token": "1.70",
+              "normalizedValue": 1.7,
+              "rect": {
+                "left": 0.504,
+                "top": 0.354298,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-design-deposito-ladera-transition_end",
+              "token": "0.66",
+              "normalizedValue": 0.66,
+              "rect": {
+                "left": 0.587,
+                "top": 0.354298,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-design-deposito-ladera-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.672,
+                "top": 0.354298,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-design-deposito-ladera-ground_peak",
+              "token": "0.22",
+              "normalizedValue": 0.22,
+              "rect": {
+                "left": 0.751,
+                "top": 0.354298,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "hazardId": "limited-safety",
+      "physicalPage": 156,
+      "printedPage": "140",
+      "reference": "Tabla 7.6. Coeficientes y curva de seguridad limitada",
+      "rect": {
+        "left": 0.198,
+        "top": 0.1145,
+        "width": 0.584,
+        "height": 0.774
+      },
+      "title": {
+        "token": "Coeficientes de seguridad limitada",
+        "rect": {
+          "left": 0.35,
+          "top": 0.1145,
+          "width": 0.3,
+          "height": 0.016
+        }
+      },
+      "caption": {
+        "token": "Tabla 7.6. Coeficientes y curva de seguridad limitada",
+        "rect": {
+          "left": 0.291,
+          "top": 0.8743,
+          "width": 0.418,
+          "height": 0.0142
+        }
+      },
+      "zeroOrigin": {
+        "citationId": "equation-limited-safety-starts-at-zero",
+        "token": "0",
+        "rect": {
+          "left": 0.1538,
+          "top": 0.7324,
+          "width": 0.0075,
+          "height": 0.0102
+        }
+      },
+      "citationId": "table-limited-safety",
+      "rows": [
+        {
+          "optionId": "cerros",
+          "citationId": "row-limited-safety-cerros",
+          "token": "CERROS 1.40 1.50 0.51 3.0 0.16",
+          "rect": {
+            "left": 0.198,
+            "top": 0.179677,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-cerros-fa",
+              "token": "1.40",
+              "normalizedValue": 1.4,
+              "rect": {
+                "left": 0.422,
+                "top": 0.179677,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-cerros-fv",
+              "token": "1.50",
+              "normalizedValue": 1.5,
+              "rect": {
+                "left": 0.504,
+                "top": 0.179677,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-cerros-transition_end",
+              "token": "0.51",
+              "normalizedValue": 0.51,
+              "rect": {
+                "left": 0.587,
+                "top": 0.179677,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-cerros-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.672,
+                "top": 0.179677,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-cerros-ground_peak",
+              "token": "0.16",
+              "normalizedValue": 0.16,
+              "rect": {
+                "left": 0.751,
+                "top": 0.179677,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "piedemonte-a",
+          "citationId": "row-limited-safety-piedemonte-a",
+          "token": "PIEDEMONTE A 1.70 2.35 0.66 3.0 0.20",
+          "rect": {
+            "left": 0.198,
+            "top": 0.191874,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-piedemonte-a-fa",
+              "token": "1.70",
+              "normalizedValue": 1.7,
+              "rect": {
+                "left": 0.422,
+                "top": 0.191874,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-piedemonte-a-fv",
+              "token": "2.35",
+              "normalizedValue": 2.35,
+              "rect": {
+                "left": 0.504,
+                "top": 0.191874,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-piedemonte-a-transition_end",
+              "token": "0.66",
+              "normalizedValue": 0.66,
+              "rect": {
+                "left": 0.587,
+                "top": 0.191874,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-piedemonte-a-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.672,
+                "top": 0.191874,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-piedemonte-a-ground_peak",
+              "token": "0.20",
+              "normalizedValue": 0.2,
+              "rect": {
+                "left": 0.751,
+                "top": 0.191874,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "piedemonte-b",
+          "citationId": "row-limited-safety-piedemonte-b",
+          "token": "PIEDEMONTE B 2.00 1.95 0.47 3.0 0.23",
+          "rect": {
+            "left": 0.198,
+            "top": 0.204071,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-piedemonte-b-fa",
+              "token": "2.00",
+              "normalizedValue": 2,
+              "rect": {
+                "left": 0.422,
+                "top": 0.204071,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-piedemonte-b-fv",
+              "token": "1.95",
+              "normalizedValue": 1.95,
+              "rect": {
+                "left": 0.504,
+                "top": 0.204071,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-piedemonte-b-transition_end",
+              "token": "0.47",
+              "normalizedValue": 0.47,
+              "rect": {
+                "left": 0.587,
+                "top": 0.204071,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-piedemonte-b-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.672,
+                "top": 0.204071,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-piedemonte-b-ground_peak",
+              "token": "0.23",
+              "normalizedValue": 0.23,
+              "rect": {
+                "left": 0.751,
+                "top": 0.204071,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "piedemonte-c",
+          "citationId": "row-limited-safety-piedemonte-c",
+          "token": "PIEDEMONTE C 1.85 1.95 0.51 3.0 0.22",
+          "rect": {
+            "left": 0.198,
+            "top": 0.216268,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-piedemonte-c-fa",
+              "token": "1.85",
+              "normalizedValue": 1.85,
+              "rect": {
+                "left": 0.422,
+                "top": 0.216268,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-piedemonte-c-fv",
+              "token": "1.95",
+              "normalizedValue": 1.95,
+              "rect": {
+                "left": 0.504,
+                "top": 0.216268,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-piedemonte-c-transition_end",
+              "token": "0.51",
+              "normalizedValue": 0.51,
+              "rect": {
+                "left": 0.587,
+                "top": 0.216268,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-piedemonte-c-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.672,
+                "top": 0.216268,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-piedemonte-c-ground_peak",
+              "token": "0.22",
+              "normalizedValue": 0.22,
+              "rect": {
+                "left": 0.751,
+                "top": 0.216268,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-50",
+          "citationId": "row-limited-safety-lacustre-50",
+          "token": "LACUSTRE-50 1.45 3.40 1.13 4.0 0.19",
+          "rect": {
+            "left": 0.198,
+            "top": 0.228465,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-lacustre-50-fa",
+              "token": "1.45",
+              "normalizedValue": 1.45,
+              "rect": {
+                "left": 0.422,
+                "top": 0.228465,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-lacustre-50-fv",
+              "token": "3.40",
+              "normalizedValue": 3.4,
+              "rect": {
+                "left": 0.504,
+                "top": 0.228465,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-lacustre-50-transition_end",
+              "token": "1.13",
+              "normalizedValue": 1.13,
+              "rect": {
+                "left": 0.587,
+                "top": 0.228465,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-lacustre-50-long_period",
+              "token": "4.0",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.672,
+                "top": 0.228465,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-lacustre-50-ground_peak",
+              "token": "0.19",
+              "normalizedValue": 0.19,
+              "rect": {
+                "left": 0.751,
+                "top": 0.228465,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-100",
+          "citationId": "row-limited-safety-lacustre-100",
+          "token": "LACUSTRE-100 1.35 3.70 1.32 4.0 0.18",
+          "rect": {
+            "left": 0.198,
+            "top": 0.240662,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-lacustre-100-fa",
+              "token": "1.35",
+              "normalizedValue": 1.35,
+              "rect": {
+                "left": 0.422,
+                "top": 0.240662,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-lacustre-100-fv",
+              "token": "3.70",
+              "normalizedValue": 3.7,
+              "rect": {
+                "left": 0.504,
+                "top": 0.240662,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-lacustre-100-transition_end",
+              "token": "1.32",
+              "normalizedValue": 1.32,
+              "rect": {
+                "left": 0.587,
+                "top": 0.240662,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-lacustre-100-long_period",
+              "token": "4.0",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.672,
+                "top": 0.240662,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-lacustre-100-ground_peak",
+              "token": "0.18",
+              "normalizedValue": 0.18,
+              "rect": {
+                "left": 0.751,
+                "top": 0.240662,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-200",
+          "citationId": "row-limited-safety-lacustre-200",
+          "token": "LACUSTRE-200 1.25 4.00 1.54 4.0 0.16",
+          "rect": {
+            "left": 0.198,
+            "top": 0.252859,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-lacustre-200-fa",
+              "token": "1.25",
+              "normalizedValue": 1.25,
+              "rect": {
+                "left": 0.422,
+                "top": 0.252859,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-lacustre-200-fv",
+              "token": "4.00",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.504,
+                "top": 0.252859,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-lacustre-200-transition_end",
+              "token": "1.54",
+              "normalizedValue": 1.54,
+              "rect": {
+                "left": 0.587,
+                "top": 0.252859,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-lacustre-200-long_period",
+              "token": "4.0",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.672,
+                "top": 0.252859,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-lacustre-200-ground_peak",
+              "token": "0.16",
+              "normalizedValue": 0.16,
+              "rect": {
+                "left": 0.751,
+                "top": 0.252859,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-300",
+          "citationId": "row-limited-safety-lacustre-300",
+          "token": "LACUSTRE-300 1.10 3.40 1.48 5.0 0.14",
+          "rect": {
+            "left": 0.198,
+            "top": 0.265056,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-lacustre-300-fa",
+              "token": "1.10",
+              "normalizedValue": 1.1,
+              "rect": {
+                "left": 0.422,
+                "top": 0.265056,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-lacustre-300-fv",
+              "token": "3.40",
+              "normalizedValue": 3.4,
+              "rect": {
+                "left": 0.504,
+                "top": 0.265056,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-lacustre-300-transition_end",
+              "token": "1.48",
+              "normalizedValue": 1.48,
+              "rect": {
+                "left": 0.587,
+                "top": 0.265056,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-lacustre-300-long_period",
+              "token": "5.0",
+              "normalizedValue": 5,
+              "rect": {
+                "left": 0.672,
+                "top": 0.265056,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-lacustre-300-ground_peak",
+              "token": "0.14",
+              "normalizedValue": 0.14,
+              "rect": {
+                "left": 0.751,
+                "top": 0.265056,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-500",
+          "citationId": "row-limited-safety-lacustre-500",
+          "token": "LACUSTRE-500 1.00 3.10 1.49 5.0 0.13",
+          "rect": {
+            "left": 0.198,
+            "top": 0.277253,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-lacustre-500-fa",
+              "token": "1.00",
+              "normalizedValue": 1,
+              "rect": {
+                "left": 0.422,
+                "top": 0.277253,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-lacustre-500-fv",
+              "token": "3.10",
+              "normalizedValue": 3.1,
+              "rect": {
+                "left": 0.504,
+                "top": 0.277253,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-lacustre-500-transition_end",
+              "token": "1.49",
+              "normalizedValue": 1.49,
+              "rect": {
+                "left": 0.587,
+                "top": 0.277253,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-lacustre-500-long_period",
+              "token": "5.0",
+              "normalizedValue": 5,
+              "rect": {
+                "left": 0.672,
+                "top": 0.277253,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-lacustre-500-ground_peak",
+              "token": "0.13",
+              "normalizedValue": 0.13,
+              "rect": {
+                "left": 0.751,
+                "top": 0.277253,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-aluvial-200",
+          "citationId": "row-limited-safety-lacustre-aluvial-200",
+          "token": "LACUSTRE ALUVIAL-200 1.15 3.20 1.34 4.0 0.15",
+          "rect": {
+            "left": 0.198,
+            "top": 0.289449,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-lacustre-aluvial-200-fa",
+              "token": "1.15",
+              "normalizedValue": 1.15,
+              "rect": {
+                "left": 0.422,
+                "top": 0.289449,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-lacustre-aluvial-200-fv",
+              "token": "3.20",
+              "normalizedValue": 3.2,
+              "rect": {
+                "left": 0.504,
+                "top": 0.289449,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-lacustre-aluvial-200-transition_end",
+              "token": "1.34",
+              "normalizedValue": 1.34,
+              "rect": {
+                "left": 0.587,
+                "top": 0.289449,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-lacustre-aluvial-200-long_period",
+              "token": "4.0",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.672,
+                "top": 0.289449,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-lacustre-aluvial-200-ground_peak",
+              "token": "0.15",
+              "normalizedValue": 0.15,
+              "rect": {
+                "left": 0.751,
+                "top": 0.289449,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-aluvial-300",
+          "citationId": "row-limited-safety-lacustre-aluvial-300",
+          "token": "LACUSTRE ALUVIAL-300 1.05 2.90 1.33 5.0 0.14",
+          "rect": {
+            "left": 0.198,
+            "top": 0.301646,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-lacustre-aluvial-300-fa",
+              "token": "1.05",
+              "normalizedValue": 1.05,
+              "rect": {
+                "left": 0.422,
+                "top": 0.301646,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-lacustre-aluvial-300-fv",
+              "token": "2.90",
+              "normalizedValue": 2.9,
+              "rect": {
+                "left": 0.504,
+                "top": 0.301646,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-lacustre-aluvial-300-transition_end",
+              "token": "1.33",
+              "normalizedValue": 1.33,
+              "rect": {
+                "left": 0.587,
+                "top": 0.301646,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-lacustre-aluvial-300-long_period",
+              "token": "5.0",
+              "normalizedValue": 5,
+              "rect": {
+                "left": 0.672,
+                "top": 0.301646,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-lacustre-aluvial-300-ground_peak",
+              "token": "0.14",
+              "normalizedValue": 0.14,
+              "rect": {
+                "left": 0.751,
+                "top": 0.301646,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "aluvial-50",
+          "citationId": "row-limited-safety-aluvial-50",
+          "token": "ALUVIAL-50 1.40 2.10 0.72 3.5 0.18",
+          "rect": {
+            "left": 0.198,
+            "top": 0.313843,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-aluvial-50-fa",
+              "token": "1.40",
+              "normalizedValue": 1.4,
+              "rect": {
+                "left": 0.422,
+                "top": 0.313843,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-aluvial-50-fv",
+              "token": "2.10",
+              "normalizedValue": 2.1,
+              "rect": {
+                "left": 0.504,
+                "top": 0.313843,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-aluvial-50-transition_end",
+              "token": "0.72",
+              "normalizedValue": 0.72,
+              "rect": {
+                "left": 0.587,
+                "top": 0.313843,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-aluvial-50-long_period",
+              "token": "3.5",
+              "normalizedValue": 3.5,
+              "rect": {
+                "left": 0.672,
+                "top": 0.313843,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-aluvial-50-ground_peak",
+              "token": "0.18",
+              "normalizedValue": 0.18,
+              "rect": {
+                "left": 0.751,
+                "top": 0.313843,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "aluvial-100",
+          "citationId": "row-limited-safety-aluvial-100",
+          "token": "ALUVIAL-100 1.25 2.50 0.96 3.5 0.16",
+          "rect": {
+            "left": 0.198,
+            "top": 0.32604,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-aluvial-100-fa",
+              "token": "1.25",
+              "normalizedValue": 1.25,
+              "rect": {
+                "left": 0.422,
+                "top": 0.32604,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-aluvial-100-fv",
+              "token": "2.50",
+              "normalizedValue": 2.5,
+              "rect": {
+                "left": 0.504,
+                "top": 0.32604,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-aluvial-100-transition_end",
+              "token": "0.96",
+              "normalizedValue": 0.96,
+              "rect": {
+                "left": 0.587,
+                "top": 0.32604,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-aluvial-100-long_period",
+              "token": "3.5",
+              "normalizedValue": 3.5,
+              "rect": {
+                "left": 0.672,
+                "top": 0.32604,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-aluvial-100-ground_peak",
+              "token": "0.16",
+              "normalizedValue": 0.16,
+              "rect": {
+                "left": 0.751,
+                "top": 0.32604,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "aluvial-200",
+          "citationId": "row-limited-safety-aluvial-200",
+          "token": "ALUVIAL-200 1.10 2.50 1.09 3.5 0.14",
+          "rect": {
+            "left": 0.198,
+            "top": 0.338237,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-aluvial-200-fa",
+              "token": "1.10",
+              "normalizedValue": 1.1,
+              "rect": {
+                "left": 0.422,
+                "top": 0.338237,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-aluvial-200-fv",
+              "token": "2.50",
+              "normalizedValue": 2.5,
+              "rect": {
+                "left": 0.504,
+                "top": 0.338237,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-aluvial-200-transition_end",
+              "token": "1.09",
+              "normalizedValue": 1.09,
+              "rect": {
+                "left": 0.587,
+                "top": 0.338237,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-aluvial-200-long_period",
+              "token": "3.5",
+              "normalizedValue": 3.5,
+              "rect": {
+                "left": 0.672,
+                "top": 0.338237,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-aluvial-200-ground_peak",
+              "token": "0.14",
+              "normalizedValue": 0.14,
+              "rect": {
+                "left": 0.751,
+                "top": 0.338237,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "aluvial-300",
+          "citationId": "row-limited-safety-aluvial-300",
+          "token": "ALUVIAL-300 1.00 2.50 1.20 3.5 0.13",
+          "rect": {
+            "left": 0.198,
+            "top": 0.350434,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-aluvial-300-fa",
+              "token": "1.00",
+              "normalizedValue": 1,
+              "rect": {
+                "left": 0.422,
+                "top": 0.350434,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-aluvial-300-fv",
+              "token": "2.50",
+              "normalizedValue": 2.5,
+              "rect": {
+                "left": 0.504,
+                "top": 0.350434,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-aluvial-300-transition_end",
+              "token": "1.20",
+              "normalizedValue": 1.2,
+              "rect": {
+                "left": 0.587,
+                "top": 0.350434,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-aluvial-300-long_period",
+              "token": "3.5",
+              "normalizedValue": 3.5,
+              "rect": {
+                "left": 0.672,
+                "top": 0.350434,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-aluvial-300-ground_peak",
+              "token": "0.13",
+              "normalizedValue": 0.13,
+              "rect": {
+                "left": 0.751,
+                "top": 0.350434,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "deposito-ladera",
+          "citationId": "row-limited-safety-deposito-ladera",
+          "token": "DEPÓSITO LADERA 1.70 1.95 0.55 3.0 0.20",
+          "rect": {
+            "left": 0.198,
+            "top": 0.362631,
+            "width": 0.584,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-limited-safety-deposito-ladera-fa",
+              "token": "1.70",
+              "normalizedValue": 1.7,
+              "rect": {
+                "left": 0.422,
+                "top": 0.362631,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-limited-safety-deposito-ladera-fv",
+              "token": "1.95",
+              "normalizedValue": 1.95,
+              "rect": {
+                "left": 0.504,
+                "top": 0.362631,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-limited-safety-deposito-ladera-transition_end",
+              "token": "0.55",
+              "normalizedValue": 0.55,
+              "rect": {
+                "left": 0.587,
+                "top": 0.362631,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-limited-safety-deposito-ladera-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.672,
+                "top": 0.362631,
+                "width": 0.024,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-limited-safety-deposito-ladera-ground_peak",
+              "token": "0.20",
+              "normalizedValue": 0.2,
+              "rect": {
+                "left": 0.751,
+                "top": 0.362631,
+                "width": 0.03,
+                "height": 0.01115
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "hazardId": "damage-threshold",
+      "physicalPage": 157,
+      "printedPage": "141",
+      "reference": "Tabla 7.7. Coeficientes y curva de umbral de daño",
+      "rect": {
+        "left": 0.158,
+        "top": 0.1145,
+        "width": 0.665,
+        "height": 0.7824
+      },
+      "title": {
+        "token": "Coeficientes de umbral de daño",
+        "rect": {
+          "left": 0.36,
+          "top": 0.1145,
+          "width": 0.28,
+          "height": 0.016
+        }
+      },
+      "caption": {
+        "token": "Tabla 7.7. Coeficientes y curva de umbral de daño",
+        "rect": {
+          "left": 0.303,
+          "top": 0.8829,
+          "width": 0.394,
+          "height": 0.014
+        }
+      },
+      "zeroOrigin": null,
+      "citationId": "table-damage-threshold",
+      "rows": [
+        {
+          "optionId": "cerros",
+          "citationId": "row-damage-threshold-cerros",
+          "token": "CERROS 1.50 1.70 0.11 0.57 3.0 0.08",
+          "rect": {
+            "left": 0.158,
+            "top": 0.179677,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-cerros-fa",
+              "token": "1.50",
+              "normalizedValue": 1.5,
+              "rect": {
+                "left": 0.381,
+                "top": 0.179677,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-cerros-fv",
+              "token": "1.70",
+              "normalizedValue": 1.7,
+              "rect": {
+                "left": 0.463,
+                "top": 0.179677,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-cerros-transition_start",
+              "token": "0.11",
+              "normalizedValue": 0.11,
+              "rect": {
+                "left": 0.545,
+                "top": 0.179677,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-cerros-transition_end",
+              "token": "0.57",
+              "normalizedValue": 0.57,
+              "rect": {
+                "left": 0.627,
+                "top": 0.179677,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-cerros-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.714,
+                "top": 0.179677,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-cerros-ground_peak",
+              "token": "0.08",
+              "normalizedValue": 0.08,
+              "rect": {
+                "left": 0.793,
+                "top": 0.179677,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "piedemonte-a",
+          "citationId": "row-damage-threshold-piedemonte-a",
+          "token": "PIEDEMONTE A 1.90 2.75 0.14 0.72 3.0 0.10",
+          "rect": {
+            "left": 0.158,
+            "top": 0.191874,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-piedemonte-a-fa",
+              "token": "1.90",
+              "normalizedValue": 1.9,
+              "rect": {
+                "left": 0.381,
+                "top": 0.191874,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-piedemonte-a-fv",
+              "token": "2.75",
+              "normalizedValue": 2.75,
+              "rect": {
+                "left": 0.463,
+                "top": 0.191874,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-piedemonte-a-transition_start",
+              "token": "0.14",
+              "normalizedValue": 0.14,
+              "rect": {
+                "left": 0.545,
+                "top": 0.191874,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-piedemonte-a-transition_end",
+              "token": "0.72",
+              "normalizedValue": 0.72,
+              "rect": {
+                "left": 0.627,
+                "top": 0.191874,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-piedemonte-a-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.714,
+                "top": 0.191874,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-piedemonte-a-ground_peak",
+              "token": "0.10",
+              "normalizedValue": 0.1,
+              "rect": {
+                "left": 0.793,
+                "top": 0.191874,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "piedemonte-b",
+          "citationId": "row-damage-threshold-piedemonte-b",
+          "token": "PIEDEMONTE B 2.20 2.25 0.10 0.51 3.0 0.12",
+          "rect": {
+            "left": 0.158,
+            "top": 0.204071,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-piedemonte-b-fa",
+              "token": "2.20",
+              "normalizedValue": 2.2,
+              "rect": {
+                "left": 0.381,
+                "top": 0.204071,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-piedemonte-b-fv",
+              "token": "2.25",
+              "normalizedValue": 2.25,
+              "rect": {
+                "left": 0.463,
+                "top": 0.204071,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-piedemonte-b-transition_start",
+              "token": "0.10",
+              "normalizedValue": 0.1,
+              "rect": {
+                "left": 0.545,
+                "top": 0.204071,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-piedemonte-b-transition_end",
+              "token": "0.51",
+              "normalizedValue": 0.51,
+              "rect": {
+                "left": 0.627,
+                "top": 0.204071,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-piedemonte-b-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.714,
+                "top": 0.204071,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-piedemonte-b-ground_peak",
+              "token": "0.12",
+              "normalizedValue": 0.12,
+              "rect": {
+                "left": 0.793,
+                "top": 0.204071,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "piedemonte-c",
+          "citationId": "row-damage-threshold-piedemonte-c",
+          "token": "PIEDEMONTE C 2.05 2.25 0.11 0.55 3.0 0.11",
+          "rect": {
+            "left": 0.158,
+            "top": 0.216268,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-piedemonte-c-fa",
+              "token": "2.05",
+              "normalizedValue": 2.05,
+              "rect": {
+                "left": 0.381,
+                "top": 0.216268,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-piedemonte-c-fv",
+              "token": "2.25",
+              "normalizedValue": 2.25,
+              "rect": {
+                "left": 0.463,
+                "top": 0.216268,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-piedemonte-c-transition_start",
+              "token": "0.11",
+              "normalizedValue": 0.11,
+              "rect": {
+                "left": 0.545,
+                "top": 0.216268,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-piedemonte-c-transition_end",
+              "token": "0.55",
+              "normalizedValue": 0.55,
+              "rect": {
+                "left": 0.627,
+                "top": 0.216268,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-piedemonte-c-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.714,
+                "top": 0.216268,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-piedemonte-c-ground_peak",
+              "token": "0.11",
+              "normalizedValue": 0.11,
+              "rect": {
+                "left": 0.793,
+                "top": 0.216268,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-50",
+          "citationId": "row-damage-threshold-lacustre-50",
+          "token": "LACUSTRE-50 1.55 4.00 0.26 1.29 4.0 0.09",
+          "rect": {
+            "left": 0.158,
+            "top": 0.228465,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-lacustre-50-fa",
+              "token": "1.55",
+              "normalizedValue": 1.55,
+              "rect": {
+                "left": 0.381,
+                "top": 0.228465,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-lacustre-50-fv",
+              "token": "4.00",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.463,
+                "top": 0.228465,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-lacustre-50-transition_start",
+              "token": "0.26",
+              "normalizedValue": 0.26,
+              "rect": {
+                "left": 0.545,
+                "top": 0.228465,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-lacustre-50-transition_end",
+              "token": "1.29",
+              "normalizedValue": 1.29,
+              "rect": {
+                "left": 0.627,
+                "top": 0.228465,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-lacustre-50-long_period",
+              "token": "4.0",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.714,
+                "top": 0.228465,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-lacustre-50-ground_peak",
+              "token": "0.09",
+              "normalizedValue": 0.09,
+              "rect": {
+                "left": 0.793,
+                "top": 0.228465,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-100",
+          "citationId": "row-damage-threshold-lacustre-100",
+          "token": "LACUSTRE-100 1.45 4.40 0.30 1.52 4.0 0.09",
+          "rect": {
+            "left": 0.158,
+            "top": 0.240662,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-lacustre-100-fa",
+              "token": "1.45",
+              "normalizedValue": 1.45,
+              "rect": {
+                "left": 0.381,
+                "top": 0.240662,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-lacustre-100-fv",
+              "token": "4.40",
+              "normalizedValue": 4.4,
+              "rect": {
+                "left": 0.463,
+                "top": 0.240662,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-lacustre-100-transition_start",
+              "token": "0.30",
+              "normalizedValue": 0.3,
+              "rect": {
+                "left": 0.545,
+                "top": 0.240662,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-lacustre-100-transition_end",
+              "token": "1.52",
+              "normalizedValue": 1.52,
+              "rect": {
+                "left": 0.627,
+                "top": 0.240662,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-lacustre-100-long_period",
+              "token": "4.0",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.714,
+                "top": 0.240662,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-lacustre-100-ground_peak",
+              "token": "0.09",
+              "normalizedValue": 0.09,
+              "rect": {
+                "left": 0.793,
+                "top": 0.240662,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-200",
+          "citationId": "row-damage-threshold-lacustre-200",
+          "token": "LACUSTRE-200 1.35 4.75 0.35 1.76 4.0 0.08",
+          "rect": {
+            "left": 0.158,
+            "top": 0.252859,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-lacustre-200-fa",
+              "token": "1.35",
+              "normalizedValue": 1.35,
+              "rect": {
+                "left": 0.381,
+                "top": 0.252859,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-lacustre-200-fv",
+              "token": "4.75",
+              "normalizedValue": 4.75,
+              "rect": {
+                "left": 0.463,
+                "top": 0.252859,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-lacustre-200-transition_start",
+              "token": "0.35",
+              "normalizedValue": 0.35,
+              "rect": {
+                "left": 0.545,
+                "top": 0.252859,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-lacustre-200-transition_end",
+              "token": "1.76",
+              "normalizedValue": 1.76,
+              "rect": {
+                "left": 0.627,
+                "top": 0.252859,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-lacustre-200-long_period",
+              "token": "4.0",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.714,
+                "top": 0.252859,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-lacustre-200-ground_peak",
+              "token": "0.08",
+              "normalizedValue": 0.08,
+              "rect": {
+                "left": 0.793,
+                "top": 0.252859,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-300",
+          "citationId": "row-damage-threshold-lacustre-300",
+          "token": "LACUSTRE-300 1.25 4.00 0.32 1.60 5.0 0.08",
+          "rect": {
+            "left": 0.158,
+            "top": 0.265056,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-lacustre-300-fa",
+              "token": "1.25",
+              "normalizedValue": 1.25,
+              "rect": {
+                "left": 0.381,
+                "top": 0.265056,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-lacustre-300-fv",
+              "token": "4.00",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.463,
+                "top": 0.265056,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-lacustre-300-transition_start",
+              "token": "0.32",
+              "normalizedValue": 0.32,
+              "rect": {
+                "left": 0.545,
+                "top": 0.265056,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-lacustre-300-transition_end",
+              "token": "1.60",
+              "normalizedValue": 1.6,
+              "rect": {
+                "left": 0.627,
+                "top": 0.265056,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-lacustre-300-long_period",
+              "token": "5.0",
+              "normalizedValue": 5,
+              "rect": {
+                "left": 0.714,
+                "top": 0.265056,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-lacustre-300-ground_peak",
+              "token": "0.08",
+              "normalizedValue": 0.08,
+              "rect": {
+                "left": 0.793,
+                "top": 0.265056,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-500",
+          "citationId": "row-damage-threshold-lacustre-500",
+          "token": "LACUSTRE-500 1.10 3.75 0.34 1.70 5.0 0.07",
+          "rect": {
+            "left": 0.158,
+            "top": 0.277253,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-lacustre-500-fa",
+              "token": "1.10",
+              "normalizedValue": 1.1,
+              "rect": {
+                "left": 0.381,
+                "top": 0.277253,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-lacustre-500-fv",
+              "token": "3.75",
+              "normalizedValue": 3.75,
+              "rect": {
+                "left": 0.463,
+                "top": 0.277253,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-lacustre-500-transition_start",
+              "token": "0.34",
+              "normalizedValue": 0.34,
+              "rect": {
+                "left": 0.545,
+                "top": 0.277253,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-lacustre-500-transition_end",
+              "token": "1.70",
+              "normalizedValue": 1.7,
+              "rect": {
+                "left": 0.627,
+                "top": 0.277253,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-lacustre-500-long_period",
+              "token": "5.0",
+              "normalizedValue": 5,
+              "rect": {
+                "left": 0.714,
+                "top": 0.277253,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-lacustre-500-ground_peak",
+              "token": "0.07",
+              "normalizedValue": 0.07,
+              "rect": {
+                "left": 0.793,
+                "top": 0.277253,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-aluvial-200",
+          "citationId": "row-damage-threshold-lacustre-aluvial-200",
+          "token": "LACUSTRE ALUVIAL-200 1.30 3.85 0.30 1.48 4.0 0.08",
+          "rect": {
+            "left": 0.158,
+            "top": 0.289449,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-lacustre-aluvial-200-fa",
+              "token": "1.30",
+              "normalizedValue": 1.3,
+              "rect": {
+                "left": 0.381,
+                "top": 0.289449,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-lacustre-aluvial-200-fv",
+              "token": "3.85",
+              "normalizedValue": 3.85,
+              "rect": {
+                "left": 0.463,
+                "top": 0.289449,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-lacustre-aluvial-200-transition_start",
+              "token": "0.30",
+              "normalizedValue": 0.3,
+              "rect": {
+                "left": 0.545,
+                "top": 0.289449,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-lacustre-aluvial-200-transition_end",
+              "token": "1.48",
+              "normalizedValue": 1.48,
+              "rect": {
+                "left": 0.627,
+                "top": 0.289449,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-lacustre-aluvial-200-long_period",
+              "token": "4.0",
+              "normalizedValue": 4,
+              "rect": {
+                "left": 0.714,
+                "top": 0.289449,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-lacustre-aluvial-200-ground_peak",
+              "token": "0.08",
+              "normalizedValue": 0.08,
+              "rect": {
+                "left": 0.793,
+                "top": 0.289449,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "lacustre-aluvial-300",
+          "citationId": "row-damage-threshold-lacustre-aluvial-300",
+          "token": "LACUSTRE ALUVIAL-300 1.20 3.50 0.29 1.46 5.0 0.07",
+          "rect": {
+            "left": 0.158,
+            "top": 0.301646,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-lacustre-aluvial-300-fa",
+              "token": "1.20",
+              "normalizedValue": 1.2,
+              "rect": {
+                "left": 0.381,
+                "top": 0.301646,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-lacustre-aluvial-300-fv",
+              "token": "3.50",
+              "normalizedValue": 3.5,
+              "rect": {
+                "left": 0.463,
+                "top": 0.301646,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-lacustre-aluvial-300-transition_start",
+              "token": "0.29",
+              "normalizedValue": 0.29,
+              "rect": {
+                "left": 0.545,
+                "top": 0.301646,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-lacustre-aluvial-300-transition_end",
+              "token": "1.46",
+              "normalizedValue": 1.46,
+              "rect": {
+                "left": 0.627,
+                "top": 0.301646,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-lacustre-aluvial-300-long_period",
+              "token": "5.0",
+              "normalizedValue": 5,
+              "rect": {
+                "left": 0.714,
+                "top": 0.301646,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-lacustre-aluvial-300-ground_peak",
+              "token": "0.07",
+              "normalizedValue": 0.07,
+              "rect": {
+                "left": 0.793,
+                "top": 0.301646,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "aluvial-50",
+          "citationId": "row-damage-threshold-aluvial-50",
+          "token": "ALUVIAL-50 1.50 2.50 0.17 0.83 3.5 0.09",
+          "rect": {
+            "left": 0.158,
+            "top": 0.313843,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-aluvial-50-fa",
+              "token": "1.50",
+              "normalizedValue": 1.5,
+              "rect": {
+                "left": 0.381,
+                "top": 0.313843,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-aluvial-50-fv",
+              "token": "2.50",
+              "normalizedValue": 2.5,
+              "rect": {
+                "left": 0.463,
+                "top": 0.313843,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-aluvial-50-transition_start",
+              "token": "0.17",
+              "normalizedValue": 0.17,
+              "rect": {
+                "left": 0.545,
+                "top": 0.313843,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-aluvial-50-transition_end",
+              "token": "0.83",
+              "normalizedValue": 0.83,
+              "rect": {
+                "left": 0.627,
+                "top": 0.313843,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-aluvial-50-long_period",
+              "token": "3.5",
+              "normalizedValue": 3.5,
+              "rect": {
+                "left": 0.714,
+                "top": 0.313843,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-aluvial-50-ground_peak",
+              "token": "0.09",
+              "normalizedValue": 0.09,
+              "rect": {
+                "left": 0.793,
+                "top": 0.313843,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "aluvial-100",
+          "citationId": "row-damage-threshold-aluvial-100",
+          "token": "ALUVIAL-100 1.40 2.90 0.21 1.04 3.5 0.08",
+          "rect": {
+            "left": 0.158,
+            "top": 0.32604,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-aluvial-100-fa",
+              "token": "1.40",
+              "normalizedValue": 1.4,
+              "rect": {
+                "left": 0.381,
+                "top": 0.32604,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-aluvial-100-fv",
+              "token": "2.90",
+              "normalizedValue": 2.9,
+              "rect": {
+                "left": 0.463,
+                "top": 0.32604,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-aluvial-100-transition_start",
+              "token": "0.21",
+              "normalizedValue": 0.21,
+              "rect": {
+                "left": 0.545,
+                "top": 0.32604,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-aluvial-100-transition_end",
+              "token": "1.04",
+              "normalizedValue": 1.04,
+              "rect": {
+                "left": 0.627,
+                "top": 0.32604,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-aluvial-100-long_period",
+              "token": "3.5",
+              "normalizedValue": 3.5,
+              "rect": {
+                "left": 0.714,
+                "top": 0.32604,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-aluvial-100-ground_peak",
+              "token": "0.08",
+              "normalizedValue": 0.08,
+              "rect": {
+                "left": 0.793,
+                "top": 0.32604,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "aluvial-200",
+          "citationId": "row-damage-threshold-aluvial-200",
+          "token": "ALUVIAL-200 1.20 2.90 0.24 1.21 3.5 0.07",
+          "rect": {
+            "left": 0.158,
+            "top": 0.338237,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-aluvial-200-fa",
+              "token": "1.20",
+              "normalizedValue": 1.2,
+              "rect": {
+                "left": 0.381,
+                "top": 0.338237,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-aluvial-200-fv",
+              "token": "2.90",
+              "normalizedValue": 2.9,
+              "rect": {
+                "left": 0.463,
+                "top": 0.338237,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-aluvial-200-transition_start",
+              "token": "0.24",
+              "normalizedValue": 0.24,
+              "rect": {
+                "left": 0.545,
+                "top": 0.338237,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-aluvial-200-transition_end",
+              "token": "1.21",
+              "normalizedValue": 1.21,
+              "rect": {
+                "left": 0.627,
+                "top": 0.338237,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-aluvial-200-long_period",
+              "token": "3.5",
+              "normalizedValue": 3.5,
+              "rect": {
+                "left": 0.714,
+                "top": 0.338237,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-aluvial-200-ground_peak",
+              "token": "0.07",
+              "normalizedValue": 0.07,
+              "rect": {
+                "left": 0.793,
+                "top": 0.338237,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "aluvial-300",
+          "citationId": "row-damage-threshold-aluvial-300",
+          "token": "ALUVIAL-300 1.10 2.90 0.26 1.32 3.5 0.07",
+          "rect": {
+            "left": 0.158,
+            "top": 0.350434,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-aluvial-300-fa",
+              "token": "1.10",
+              "normalizedValue": 1.1,
+              "rect": {
+                "left": 0.381,
+                "top": 0.350434,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-aluvial-300-fv",
+              "token": "2.90",
+              "normalizedValue": 2.9,
+              "rect": {
+                "left": 0.463,
+                "top": 0.350434,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-aluvial-300-transition_start",
+              "token": "0.26",
+              "normalizedValue": 0.26,
+              "rect": {
+                "left": 0.545,
+                "top": 0.350434,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-aluvial-300-transition_end",
+              "token": "1.32",
+              "normalizedValue": 1.32,
+              "rect": {
+                "left": 0.627,
+                "top": 0.350434,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-aluvial-300-long_period",
+              "token": "3.5",
+              "normalizedValue": 3.5,
+              "rect": {
+                "left": 0.714,
+                "top": 0.350434,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-aluvial-300-ground_peak",
+              "token": "0.07",
+              "normalizedValue": 0.07,
+              "rect": {
+                "left": 0.793,
+                "top": 0.350434,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "deposito-ladera",
+          "citationId": "row-damage-threshold-deposito-ladera",
+          "token": "DEPOSITO LADERA 1.90 2.25 0.12 0.59 3.0 0.10",
+          "rect": {
+            "left": 0.158,
+            "top": 0.362631,
+            "width": 0.665,
+            "height": 0.01115
+          },
+          "cells": [
+            {
+              "fieldId": "fa",
+              "citationId": "cell-damage-threshold-deposito-ladera-fa",
+              "token": "1.90",
+              "normalizedValue": 1.9,
+              "rect": {
+                "left": 0.381,
+                "top": 0.362631,
+                "width": 0.029,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "fv",
+              "citationId": "cell-damage-threshold-deposito-ladera-fv",
+              "token": "2.25",
+              "normalizedValue": 2.25,
+              "rect": {
+                "left": 0.463,
+                "top": 0.362631,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_start",
+              "citationId": "cell-damage-threshold-deposito-ladera-transition_start",
+              "token": "0.12",
+              "normalizedValue": 0.12,
+              "rect": {
+                "left": 0.545,
+                "top": 0.362631,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "transition_end",
+              "citationId": "cell-damage-threshold-deposito-ladera-transition_end",
+              "token": "0.59",
+              "normalizedValue": 0.59,
+              "rect": {
+                "left": 0.627,
+                "top": 0.362631,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "long_period",
+              "citationId": "cell-damage-threshold-deposito-ladera-long_period",
+              "token": "3.0",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.714,
+                "top": 0.362631,
+                "width": 0.0225,
+                "height": 0.01115
+              }
+            },
+            {
+              "fieldId": "ground_peak",
+              "citationId": "cell-damage-threshold-deposito-ladera-ground_peak",
+              "token": "0.10",
+              "normalizedValue": 0.1,
+              "rect": {
+                "left": 0.793,
+                "top": 0.362631,
+                "width": 0.0295,
+                "height": 0.01115
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claimId": "legal-current",
+      "sourceDocumentId": "decreto-distrital-670-2025",
+      "sourceSha256": "dcf16893e8812c9ade0a2b7295f480b0b409e10e1bb6939a2b2eae73ef07e894",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Título 1, artículos 2–10; artículo 1526, ítem 50",
+      "statementSha256": "3d99cbed18f165c369d3cc3d7d9fae3b160fd7207cb7b1f04d1027a40e2fcc9b"
+    },
+    {
+      "claimId": "legal-preservation",
+      "sourceDocumentId": "decreto-distrital-670-2025",
+      "sourceSha256": "dcf16893e8812c9ade0a2b7295f480b0b409e10e1bb6939a2b2eae73ef07e894",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Artículos 1520–1522 y 1525",
+      "statementSha256": "b0869a2468a43398c5266635c93cea1a3233858c8b7b7cdd081d879eb90cb920"
+    },
+    {
+      "claimId": "scope-mandatory",
+      "sourceDocumentId": "decreto-distrital-670-2025",
+      "sourceSha256": "dcf16893e8812c9ade0a2b7295f480b0b409e10e1bb6939a2b2eae73ef07e894",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Artículo 2",
+      "statementSha256": "a538a7b095d5667f7dd401307f6c817c4e7d254171c1703a733f514a8ea7ca97"
+    },
+    {
+      "claimId": "scope-design",
+      "sourceDocumentId": "decreto-distrital-670-2025",
+      "sourceSha256": "dcf16893e8812c9ade0a2b7295f480b0b409e10e1bb6939a2b2eae73ef07e894",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Artículo 5, párrafo inicial",
+      "statementSha256": "8918f38b9243b264bb9e8216b89af4fc90979fa2683053a729836e5856007b8d"
+    },
+    {
+      "claimId": "scope-limited",
+      "sourceDocumentId": "decreto-distrital-670-2025",
+      "sourceSha256": "dcf16893e8812c9ade0a2b7295f480b0b409e10e1bb6939a2b2eae73ef07e894",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Artículo 5, después de Tabla 3",
+      "statementSha256": "9db085e162fff0babff3177c72324ea259b7292cb72831e444cf7eb5878164ec"
+    },
+    {
+      "claimId": "scope-damage",
+      "sourceDocumentId": "decreto-distrital-670-2025",
+      "sourceSha256": "dcf16893e8812c9ade0a2b7295f480b0b409e10e1bb6939a2b2eae73ef07e894",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Artículo 5, antes de Tabla 5",
+      "statementSha256": "7db6eff912735d287509af3a79faff778993558dbce49dfbfa8a7d3367e17a7e"
+    },
+    {
+      "claimId": "warning-professional-zone",
+      "sourceDocumentId": "decreto-distrital-670-2025",
+      "sourceSha256": "dcf16893e8812c9ade0a2b7295f480b0b409e10e1bb6939a2b2eae73ef07e894",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Artículo 6, numeral 5",
+      "statementSha256": "29563dcbab087ef566e1c5c326230bea99a3e5516a99e8162d995e6234e89661"
+    },
+    {
+      "claimId": "warning-transition",
+      "sourceDocumentId": "decreto-distrital-670-2025",
+      "sourceSha256": "dcf16893e8812c9ade0a2b7295f480b0b409e10e1bb6939a2b2eae73ef07e894",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Artículo 6, numeral 6",
+      "statementSha256": "d7fb4fd07660cb661b6de4749e7c23c3471d8c39153c8fc5d2f0883bd7b62a42"
+    },
+    {
+      "claimId": "warning-reclassification",
+      "sourceDocumentId": "decreto-distrital-670-2025",
+      "sourceSha256": "dcf16893e8812c9ade0a2b7295f480b0b409e10e1bb6939a2b2eae73ef07e894",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Artículo 6, numeral 5",
+      "statementSha256": "e45f1b1fcfc1fc01edf22b45ec3cd6de20054447b9e57721c161c3bb9159d201"
+    },
+    {
+      "claimId": "warning-site-specific",
+      "sourceDocumentId": "decreto-distrital-670-2025",
+      "sourceSha256": "dcf16893e8812c9ade0a2b7295f480b0b409e10e1bb6939a2b2eae73ef07e894",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Artículo 6, numerales 11 y 12",
+      "statementSha256": "ee4a6c675fbf4b4cb163e1eac73b427b1abbeb5d1fd016f5d2307ff99c6fec93"
+    },
+    {
+      "claimId": "warning-resonance",
+      "sourceDocumentId": "decreto-distrital-670-2025",
+      "sourceSha256": "dcf16893e8812c9ade0a2b7295f480b0b409e10e1bb6939a2b2eae73ef07e894",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Artículo 6, numeral 16",
+      "statementSha256": "f566c485d701cfb6fe408a0e70c14a37290e4c25458172e1e1d8d35c824412d1"
+    },
+    {
+      "claimId": "warning-liquefaction",
+      "sourceDocumentId": "decreto-distrital-670-2025",
+      "sourceSha256": "dcf16893e8812c9ade0a2b7295f480b0b409e10e1bb6939a2b2eae73ef07e894",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Artículo 6, numeral 9",
+      "statementSha256": "baa2c426aac23533e480becbc6e896cf92f2a9700f714fd177f2f120c892e23c"
+    },
+    {
+      "claimId": "warning-minimums",
+      "sourceDocumentId": "decreto-distrital-670-2025",
+      "sourceSha256": "dcf16893e8812c9ade0a2b7295f480b0b409e10e1bb6939a2b2eae73ef07e894",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Artículo 8, numeral 7",
+      "statementSha256": "52f0bf33cc7014c02907f2b3de3260f88a28684c1e89a0a986136730fdb8f8c4"
+    },
+    {
+      "claimId": "technical-recurrence",
+      "sourceDocumentId": "fopae-2010-final-report-v1",
+      "sourceSha256": "74ba7a6a8d038dce4a81eedc62a47fa2ed0f0a208481ff62dbbdb40dfaac6dc3",
+      "physicalPage": 140,
+      "printedPage": "124",
+      "reference": "Página física 140, impresa 124",
+      "statementSha256": "dba606dd8d504ac6ba953a061717f501025ad4aff0456c6402e061b3019ebfa0"
+    },
+    {
+      "claimId": "technical-building-only",
+      "sourceDocumentId": "fopae-2010-final-report-v1",
+      "sourceSha256": "74ba7a6a8d038dce4a81eedc62a47fa2ed0f0a208481ff62dbbdb40dfaac6dc3",
+      "physicalPage": 140,
+      "printedPage": "124",
+      "reference": "Página física 140, impresa 124",
+      "statementSha256": "855d0956b11cea842db2a75a27c6e12db48b0a1f5892202fada6ac7ef4ff8067"
+    }
+  ],
+  "payloadSha256": "27d27014d9e57c590c088bf2b99216f65726f057c8b5d29e0618730d6e7371e1"
+}

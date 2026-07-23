@@ -1,27 +1,46 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "sourceDocumentId": "fopae-2010-final-report-v1",
-  "renderer": {
-    "engine": "Poppler pdftoppm",
-    "dpi": 144,
-    "renderedPixels": {
-      "width": 1224,
-      "height": 1584
-    },
-    "rotationDegrees": 0
+  "extractor": {
+    "engine": "pdfplumber",
+    "version": "0.11.10",
+    "pdfminerVersion": "20260107",
+    "parameters": {
+      "xTolerance": 2,
+      "yTolerance": 2,
+      "useTextFlow": false,
+      "keepBlankChars": false
+    }
   },
-  "coordinateSystem": "normalized top-left origin; rect = left/top/width/height divided by rendered page width/height",
+  "pageGeometryPoints": {
+    "width": 612,
+    "height": 792
+  },
+  "coordinateSystem": "normalized top-left origin; containment windows are divided by the 612×792 PDF page geometry and rounded to six decimals",
+  "normalization": "Unicode NFC; collapse Unicode whitespace to one ASCII space; preserve accents, case, punctuation, and printed decimal precision",
   "tables": [
     {
       "hazardId": "design",
       "physicalPage": 155,
       "printedPage": "139",
-      "reference": "Tabla 6-1. Coeficientes de diseño",
+      "reference": "Tabla 7.5. Coeficientes y curva de diseño",
       "rect": {
-        "left": 0.185,
-        "top": 0.128,
-        "width": 0.63,
-        "height": 0.25
+        "left": 0.198,
+        "top": 0.0985,
+        "width": 0.584,
+        "height": 0.7863
+      },
+      "titleRect": {
+        "left": 0.4,
+        "top": 0.0985,
+        "width": 0.2,
+        "height": 0.0155
+      },
+      "captionRect": {
+        "left": 0.337,
+        "top": 0.8708,
+        "width": 0.326,
+        "height": 0.014
       },
       "rowCount": 16,
       "numericColumnCount": 5
@@ -30,12 +49,24 @@
       "hazardId": "limited-safety",
       "physicalPage": 156,
       "printedPage": "140",
-      "reference": "Tabla 6-2. Coeficientes de seguridad limitada",
+      "reference": "Tabla 7.6. Coeficientes y curva de seguridad limitada",
       "rect": {
-        "left": 0.185,
-        "top": 0.128,
-        "width": 0.63,
-        "height": 0.25
+        "left": 0.198,
+        "top": 0.1145,
+        "width": 0.584,
+        "height": 0.774
+      },
+      "titleRect": {
+        "left": 0.35,
+        "top": 0.1145,
+        "width": 0.3,
+        "height": 0.016
+      },
+      "captionRect": {
+        "left": 0.291,
+        "top": 0.8743,
+        "width": 0.418,
+        "height": 0.0142
       },
       "rowCount": 16,
       "numericColumnCount": 5
@@ -44,20 +75,32 @@
       "hazardId": "damage-threshold",
       "physicalPage": 157,
       "printedPage": "141",
-      "reference": "Tabla 6-3. Coeficientes de umbral de daño",
+      "reference": "Tabla 7.7. Coeficientes y curva de umbral de daño",
       "rect": {
-        "left": 0.145,
-        "top": 0.135,
-        "width": 0.71,
-        "height": 0.25
+        "left": 0.158,
+        "top": 0.1145,
+        "width": 0.665,
+        "height": 0.7824
+      },
+      "titleRect": {
+        "left": 0.36,
+        "top": 0.1145,
+        "width": 0.28,
+        "height": 0.016
+      },
+      "captionRect": {
+        "left": 0.303,
+        "top": 0.8829,
+        "width": 0.394,
+        "height": 0.014
       },
       "rowCount": 16,
       "numericColumnCount": 6
     }
   ],
   "qualityControls": [
-    "Two decimal digits preserved where printed; TL/TLd preserve one decimal digit.",
-    "Each direct value has one cell citation nested in its exact row and table.",
-    "Coordinates were visually checked against the 1224×1584 render; no OCR-derived numeric value was accepted without visual transcription."
+    "The committed attestation binds the locked PDF SHA-256, page, table, row, cell, rectangle, token, and normalized value.",
+    "The offline verifier re-extracts words from locally supplied official bytes and fails on any source, token, coordinate, table, row, cell, or coverage mismatch.",
+    "Two decimal digits are preserved where printed; TL/TLd preserve one decimal digit."
   ]
 }
