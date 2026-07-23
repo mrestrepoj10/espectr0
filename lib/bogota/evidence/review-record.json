@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "authorRole": "research agent R2",
+  "preparedOn": "2026-07-22",
+  "independentReview": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewedOn": null,
+    "scope": [
+      "source-lock re-fetch",
+      "16×3 transcription",
+      "formula branches",
+      "legal currentness",
+      "warning completeness",
+      "rounded-boundary policy"
+    ]
+  },
+  "activationDecision": "blocked-pending-independent-review"
+}

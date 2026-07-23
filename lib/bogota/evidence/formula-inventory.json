@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 1,
+  "boundaryPolicy": "Use the published tabulated Tc/Tcd/T0d/TL/TLd values as branch boundaries. Formula-derived boundary values are audit witnesses only because the tables round to two decimals.",
+  "variables": {
+    "T": "s",
+    "Sa": "g",
+    "Sad": "g",
+    "I": "dimensionless",
+    "Aa": "0.15 g",
+    "Av": "0.20 g",
+    "Ae": "0.13 g",
+    "Ad": "0.06 g"
+  },
+  "formulas": [
+    {
+      "id": "design-plateau",
+      "hazardId": "design",
+      "domain": "0 <= T <= Tc",
+      "expression": "Sa = 2.5 * Aa * Fa * I",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 155,
+        "printedPage": "139",
+        "reference": "Tabla 6-1. Coeficientes de diseño, curva y ecuaciones",
+        "rect": {
+          "left": 0.12,
+          "top": 0.38,
+          "width": 0.76,
+          "height": 0.34
+        }
+      }
+    },
+    {
+      "id": "design-decay",
+      "hazardId": "design",
+      "domain": "Tc < T <= TL",
+      "expression": "Sa = 1.2 * Av * Fv * I / T",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 155,
+        "printedPage": "139",
+        "reference": "Tabla 6-1. Coeficientes de diseño, curva y ecuaciones",
+        "rect": {
+          "left": 0.12,
+          "top": 0.38,
+          "width": 0.76,
+          "height": 0.34
+        }
+      }
+    },
+    {
+      "id": "design-long",
+      "hazardId": "design",
+      "domain": "T > TL",
+      "expression": "Sa = 1.2 * Av * Fv * TL * I / T^2",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 155,
+        "printedPage": "139",
+        "reference": "Tabla 6-1. Coeficientes de diseño, curva y ecuaciones",
+        "rect": {
+          "left": 0.12,
+          "top": 0.38,
+          "width": 0.76,
+          "height": 0.34
+        }
+      }
+    },
+    {
+      "id": "design-tc-audit",
+      "hazardId": "design",
+      "domain": "audit only",
+      "expression": "Tc_formula = 0.48 * Av * Fv / (Aa * Fa)",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 155,
+        "printedPage": "139",
+        "reference": "Tabla 6-1. Coeficientes de diseño, curva y ecuaciones",
+        "rect": {
+          "left": 0.12,
+          "top": 0.38,
+          "width": 0.76,
+          "height": 0.34
+        }
+      }
+    },
+    {
+      "id": "limited-plateau",
+      "hazardId": "limited-safety",
+      "domain": "0 <= T <= Tc",
+      "expression": "Sa = 2.5 * Ae * Fa * I",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 156,
+        "printedPage": "140",
+        "reference": "Tabla 6-2. Coeficientes de seguridad limitada, curva y ecuaciones",
+        "rect": {
+          "left": 0.12,
+          "top": 0.38,
+          "width": 0.76,
+          "height": 0.34
+        }
+      }
+    },
+    {
+      "id": "limited-decay",
+      "hazardId": "limited-safety",
+      "domain": "Tc < T <= TL",
+      "expression": "Sa = 1.2 * Ae * Fv * I / T",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 156,
+        "printedPage": "140",
+        "reference": "Tabla 6-2. Coeficientes de seguridad limitada, curva y ecuaciones",
+        "rect": {
+          "left": 0.12,
+          "top": 0.38,
+          "width": 0.76,
+          "height": 0.34
+        }
+      }
+    },
+    {
+      "id": "limited-long",
+      "hazardId": "limited-safety",
+      "domain": "T > TL",
+      "expression": "Sa = 1.2 * Ae * Fv * TL * I / T^2",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 156,
+        "printedPage": "140",
+        "reference": "Tabla 6-2. Coeficientes de seguridad limitada, curva y ecuaciones",
+        "rect": {
+          "left": 0.12,
+          "top": 0.38,
+          "width": 0.76,
+          "height": 0.34
+        }
+      }
+    },
+    {
+      "id": "limited-tc-audit",
+      "hazardId": "limited-safety",
+      "domain": "audit only",
+      "expression": "Tc_formula = 0.48 * Fv / Fa",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 156,
+        "printedPage": "140",
+        "reference": "Tabla 6-2. Coeficientes de seguridad limitada, curva y ecuaciones",
+        "rect": {
+          "left": 0.12,
+          "top": 0.38,
+          "width": 0.76,
+          "height": 0.34
+        }
+      }
+    },
+    {
+      "id": "damage-ramp",
+      "hazardId": "damage-threshold",
+      "domain": "0 <= T < T0d",
+      "expression": "Sad = A0d + ((3 * Ad * Fa - A0d) / T0d) * T",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 157,
+        "printedPage": "141",
+        "reference": "Tabla 6-3. Coeficientes de umbral de daño, curva y ecuaciones",
+        "rect": {
+          "left": 0.12,
+          "top": 0.38,
+          "width": 0.76,
+          "height": 0.34
+        }
+      }
+    },
+    {
+      "id": "damage-plateau",
+      "hazardId": "damage-threshold",
+      "domain": "T0d <= T <= Tcd",
+      "expression": "Sad = 3 * Ad * Fa",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 157,
+        "printedPage": "141",
+        "reference": "Tabla 6-3. Coeficientes de umbral de daño, curva y ecuaciones",
+        "rect": {
+          "left": 0.12,
+          "top": 0.38,
+          "width": 0.76,
+          "height": 0.34
+        }
+      }
+    },
+    {
+      "id": "damage-decay",
+      "hazardId": "damage-threshold",
+      "domain": "Tcd < T <= TLd",
+      "expression": "Sad = 1.5 * Ad * Fv / T",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 157,
+        "printedPage": "141",
+        "reference": "Tabla 6-3. Coeficientes de umbral de daño, curva y ecuaciones",
+        "rect": {
+          "left": 0.12,
+          "top": 0.38,
+          "width": 0.76,
+          "height": 0.34
+        }
+      }
+    },
+    {
+      "id": "damage-long",
+      "hazardId": "damage-threshold",
+      "domain": "T > TLd",
+      "expression": "Sad = 1.5 * Ad * Fv * TLd / T^2",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 157,
+        "printedPage": "141",
+        "reference": "Tabla 6-3. Coeficientes de umbral de daño, curva y ecuaciones",
+        "rect": {
+          "left": 0.12,
+          "top": 0.38,
+          "width": 0.76,
+          "height": 0.34
+        }
+      }
+    },
+    {
+      "id": "damage-t0d-audit",
+      "hazardId": "damage-threshold",
+      "domain": "audit only",
+      "expression": "T0d_formula = 0.1 * Fv / Fa",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 157,
+        "printedPage": "141",
+        "reference": "Tabla 6-3. Coeficientes de umbral de daño, curva y ecuaciones",
+        "rect": {
+          "left": 0.12,
+          "top": 0.38,
+          "width": 0.76,
+          "height": 0.34
+        }
+      }
+    },
+    {
+      "id": "damage-tcd-audit",
+      "hazardId": "damage-threshold",
+      "domain": "audit only",
+      "expression": "Tcd_formula = 0.5 * Fv / Fa",
+      "citation": {
+        "sourceDocumentId": "fopae-2010-final-report-v1",
+        "physicalPage": 157,
+        "printedPage": "141",
+        "reference": "Tabla 6-3. Coeficientes de umbral de daño, curva y ecuaciones",
+        "rect": {
+          "left": 0.12,
+          "top": 0.38,
+          "width": 0.76,
+          "height": 0.34
+        }
+      }
+    }
+  ]
+}

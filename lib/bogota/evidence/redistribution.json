@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "decision": "external-only-all-sources",
+  "rationale": [
+    "The FOPAE report cover requires written authorization for reproduction.",
+    "The SISJUR pages are current/historical official dynamic records and are kept pathless to avoid stale vendored legal text.",
+    "Only structured factual transcriptions, source fingerprints, and normalized coordinates are committed."
+  ],
+  "prohibitedArtifacts": [
+    "Source PDF",
+    "Rendered source pages",
+    "Downloaded SISJUR HTML",
+    "Formula JPEGs"
+  ]
+}

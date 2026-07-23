@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "sourceDocumentId": "fopae-2010-final-report-v1",
+  "renderer": {
+    "engine": "Poppler pdftoppm",
+    "dpi": 144,
+    "renderedPixels": {
+      "width": 1224,
+      "height": 1584
+    },
+    "rotationDegrees": 0
+  },
+  "coordinateSystem": "normalized top-left origin; rect = left/top/width/height divided by rendered page width/height",
+  "tables": [
+    {
+      "hazardId": "design",
+      "physicalPage": 155,
+      "printedPage": "139",
+      "reference": "Tabla 6-1. Coeficientes de diseño",
+      "rect": {
+        "left": 0.185,
+        "top": 0.128,
+        "width": 0.63,
+        "height": 0.25
+      },
+      "rowCount": 16,
+      "numericColumnCount": 5
+    },
+    {
+      "hazardId": "limited-safety",
+      "physicalPage": 156,
+      "printedPage": "140",
+      "reference": "Tabla 6-2. Coeficientes de seguridad limitada",
+      "rect": {
+        "left": 0.185,
+        "top": 0.128,
+        "width": 0.63,
+        "height": 0.25
+      },
+      "rowCount": 16,
+      "numericColumnCount": 5
+    },
+    {
+      "hazardId": "damage-threshold",
+      "physicalPage": 157,
+      "printedPage": "141",
+      "reference": "Tabla 6-3. Coeficientes de umbral de daño",
+      "rect": {
+        "left": 0.145,
+        "top": 0.135,
+        "width": 0.71,
+        "height": 0.25
+      },
+      "rowCount": 16,
+      "numericColumnCount": 6
+    }
+  ],
+  "qualityControls": [
+    "Two decimal digits preserved where printed; TL/TLd preserve one decimal digit.",
+    "Each direct value has one cell citation nested in its exact row and table.",
+    "Coordinates were visually checked against the 1224×1584 render; no OCR-derived numeric value was accepted without visual transcription."
+  ]
+}

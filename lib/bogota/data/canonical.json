@@ -1,0 +1,724 @@
+{
+  "schemaVersion": 1,
+  "studyId": "bogota-microzonation",
+  "status": "research-only-not-activated",
+  "controllingInstrument": "decreto-distrital-670-2025",
+  "historicalAdoptionInstrument": "decreto-distrital-523-2010",
+  "technicalSource": "fopae-2010-final-report-v1",
+  "fieldSemantics": {
+    "fa": "Dimensionless short-period amplification coefficient",
+    "fv": "Dimensionless intermediate-period amplification coefficient",
+    "transition_start": "Start of the plateau branch; T=0 for design/limited-safety and tabulated T0d for damage-threshold",
+    "transition_end": "Tabulated Tc or Tcd in seconds; table value is the canonical branch boundary",
+    "long_period": "Tabulated TL or TLd in seconds",
+    "ground_peak": "Tabulated A0 or A0d in g"
+  },
+  "options": [
+    {
+      "id": "cerros",
+      "sourceLabel": "CERROS"
+    },
+    {
+      "id": "piedemonte-a",
+      "sourceLabel": "PIEDEMONTE A"
+    },
+    {
+      "id": "piedemonte-b",
+      "sourceLabel": "PIEDEMONTE B"
+    },
+    {
+      "id": "piedemonte-c",
+      "sourceLabel": "PIEDEMONTE C"
+    },
+    {
+      "id": "lacustre-50",
+      "sourceLabel": "LACUSTRE-50"
+    },
+    {
+      "id": "lacustre-100",
+      "sourceLabel": "LACUSTRE-100"
+    },
+    {
+      "id": "lacustre-200",
+      "sourceLabel": "LACUSTRE-200"
+    },
+    {
+      "id": "lacustre-300",
+      "sourceLabel": "LACUSTRE-300"
+    },
+    {
+      "id": "lacustre-500",
+      "sourceLabel": "LACUSTRE-500"
+    },
+    {
+      "id": "lacustre-aluvial-200",
+      "sourceLabel": "LACUSTRE ALUVIAL-200"
+    },
+    {
+      "id": "lacustre-aluvial-300",
+      "sourceLabel": "LACUSTRE ALUVIAL-300"
+    },
+    {
+      "id": "aluvial-50",
+      "sourceLabel": "ALUVIAL-50"
+    },
+    {
+      "id": "aluvial-100",
+      "sourceLabel": "ALUVIAL-100"
+    },
+    {
+      "id": "aluvial-200",
+      "sourceLabel": "ALUVIAL-200"
+    },
+    {
+      "id": "aluvial-300",
+      "sourceLabel": "ALUVIAL-300"
+    },
+    {
+      "id": "deposito-ladera",
+      "sourceLabel": "DEPOSITO LADERA"
+    }
+  ],
+  "hazards": [
+    {
+      "id": "design",
+      "label": "Diseño",
+      "returnPeriodYears": 475,
+      "probability": "10% en 50 años",
+      "dampingRatio": 0.05,
+      "baseAccelerations": {
+        "Aa": 0.15,
+        "Av": 0.2
+      },
+      "printedPage": "139",
+      "physicalPage": 155,
+      "tableReference": "Tabla 6-1. Coeficientes de diseño",
+      "sourceFields": [
+        "fa",
+        "fv",
+        "transition_end",
+        "long_period",
+        "ground_peak"
+      ]
+    },
+    {
+      "id": "limited-safety",
+      "label": "Seguridad limitada",
+      "returnPeriodYears": 225,
+      "probability": "20% en 50 años",
+      "dampingRatio": 0.05,
+      "baseAccelerations": {
+        "Ae": 0.13
+      },
+      "printedPage": "140",
+      "physicalPage": 156,
+      "tableReference": "Tabla 6-2. Coeficientes de seguridad limitada",
+      "sourceFields": [
+        "fa",
+        "fv",
+        "transition_end",
+        "long_period",
+        "ground_peak"
+      ]
+    },
+    {
+      "id": "damage-threshold",
+      "label": "Umbral de daño",
+      "returnPeriodYears": 31,
+      "probability": "80% en 50 años",
+      "dampingRatio": 0.02,
+      "baseAccelerations": {
+        "Ad": 0.06
+      },
+      "printedPage": "141",
+      "physicalPage": 157,
+      "tableReference": "Tabla 6-3. Coeficientes de umbral de daño",
+      "sourceFields": [
+        "fa",
+        "fv",
+        "transition_start",
+        "transition_end",
+        "long_period",
+        "ground_peak"
+      ]
+    }
+  ],
+  "rows": [
+    {
+      "optionId": "cerros",
+      "hazardId": "design",
+      "fields": {
+        "fa": 1.35,
+        "fv": 1.3,
+        "transition_start": 0,
+        "transition_end": 0.62,
+        "long_period": 3,
+        "ground_peak": 0.18
+      }
+    },
+    {
+      "optionId": "piedemonte-a",
+      "hazardId": "design",
+      "fields": {
+        "fa": 1.65,
+        "fv": 2,
+        "transition_start": 0,
+        "transition_end": 0.78,
+        "long_period": 3,
+        "ground_peak": 0.22
+      }
+    },
+    {
+      "optionId": "piedemonte-b",
+      "hazardId": "design",
+      "fields": {
+        "fa": 1.95,
+        "fv": 1.7,
+        "transition_start": 0,
+        "transition_end": 0.56,
+        "long_period": 3,
+        "ground_peak": 0.26
+      }
+    },
+    {
+      "optionId": "piedemonte-c",
+      "hazardId": "design",
+      "fields": {
+        "fa": 1.8,
+        "fv": 1.7,
+        "transition_start": 0,
+        "transition_end": 0.6,
+        "long_period": 3,
+        "ground_peak": 0.24
+      }
+    },
+    {
+      "optionId": "lacustre-50",
+      "hazardId": "design",
+      "fields": {
+        "fa": 1.4,
+        "fv": 2.9,
+        "transition_start": 0,
+        "transition_end": 1.33,
+        "long_period": 4,
+        "ground_peak": 0.21
+      }
+    },
+    {
+      "optionId": "lacustre-100",
+      "hazardId": "design",
+      "fields": {
+        "fa": 1.3,
+        "fv": 3.2,
+        "transition_start": 0,
+        "transition_end": 1.58,
+        "long_period": 4,
+        "ground_peak": 0.2
+      }
+    },
+    {
+      "optionId": "lacustre-200",
+      "hazardId": "design",
+      "fields": {
+        "fa": 1.2,
+        "fv": 3.5,
+        "transition_start": 0,
+        "transition_end": 1.87,
+        "long_period": 4,
+        "ground_peak": 0.18
+      }
+    },
+    {
+      "optionId": "lacustre-300",
+      "hazardId": "design",
+      "fields": {
+        "fa": 1.05,
+        "fv": 2.9,
+        "transition_start": 0,
+        "transition_end": 1.77,
+        "long_period": 5,
+        "ground_peak": 0.16
+      }
+    },
+    {
+      "optionId": "lacustre-500",
+      "hazardId": "design",
+      "fields": {
+        "fa": 0.95,
+        "fv": 2.7,
+        "transition_start": 0,
+        "transition_end": 1.82,
+        "long_period": 5,
+        "ground_peak": 0.14
+      }
+    },
+    {
+      "optionId": "lacustre-aluvial-200",
+      "hazardId": "design",
+      "fields": {
+        "fa": 1.1,
+        "fv": 2.8,
+        "transition_start": 0,
+        "transition_end": 1.63,
+        "long_period": 4,
+        "ground_peak": 0.17
+      }
+    },
+    {
+      "optionId": "lacustre-aluvial-300",
+      "hazardId": "design",
+      "fields": {
+        "fa": 1,
+        "fv": 2.5,
+        "transition_start": 0,
+        "transition_end": 1.6,
+        "long_period": 5,
+        "ground_peak": 0.15
+      }
+    },
+    {
+      "optionId": "aluvial-50",
+      "hazardId": "design",
+      "fields": {
+        "fa": 1.35,
+        "fv": 1.8,
+        "transition_start": 0,
+        "transition_end": 0.85,
+        "long_period": 3.5,
+        "ground_peak": 0.2
+      }
+    },
+    {
+      "optionId": "aluvial-100",
+      "hazardId": "design",
+      "fields": {
+        "fa": 1.2,
+        "fv": 2.1,
+        "transition_start": 0,
+        "transition_end": 1.12,
+        "long_period": 3.5,
+        "ground_peak": 0.18
+      }
+    },
+    {
+      "optionId": "aluvial-200",
+      "hazardId": "design",
+      "fields": {
+        "fa": 1.05,
+        "fv": 2.1,
+        "transition_start": 0,
+        "transition_end": 1.28,
+        "long_period": 3.5,
+        "ground_peak": 0.16
+      }
+    },
+    {
+      "optionId": "aluvial-300",
+      "hazardId": "design",
+      "fields": {
+        "fa": 0.95,
+        "fv": 2.1,
+        "transition_start": 0,
+        "transition_end": 1.41,
+        "long_period": 3.5,
+        "ground_peak": 0.14
+      }
+    },
+    {
+      "optionId": "deposito-ladera",
+      "hazardId": "design",
+      "fields": {
+        "fa": 1.65,
+        "fv": 1.7,
+        "transition_start": 0,
+        "transition_end": 0.66,
+        "long_period": 3,
+        "ground_peak": 0.22
+      }
+    },
+    {
+      "optionId": "cerros",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1.4,
+        "fv": 1.5,
+        "transition_start": 0,
+        "transition_end": 0.51,
+        "long_period": 3,
+        "ground_peak": 0.16
+      }
+    },
+    {
+      "optionId": "piedemonte-a",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1.7,
+        "fv": 2.35,
+        "transition_start": 0,
+        "transition_end": 0.66,
+        "long_period": 3,
+        "ground_peak": 0.2
+      }
+    },
+    {
+      "optionId": "piedemonte-b",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 2,
+        "fv": 1.95,
+        "transition_start": 0,
+        "transition_end": 0.47,
+        "long_period": 3,
+        "ground_peak": 0.23
+      }
+    },
+    {
+      "optionId": "piedemonte-c",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1.85,
+        "fv": 1.95,
+        "transition_start": 0,
+        "transition_end": 0.51,
+        "long_period": 3,
+        "ground_peak": 0.22
+      }
+    },
+    {
+      "optionId": "lacustre-50",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1.45,
+        "fv": 3.4,
+        "transition_start": 0,
+        "transition_end": 1.13,
+        "long_period": 4,
+        "ground_peak": 0.19
+      }
+    },
+    {
+      "optionId": "lacustre-100",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1.35,
+        "fv": 3.7,
+        "transition_start": 0,
+        "transition_end": 1.32,
+        "long_period": 4,
+        "ground_peak": 0.18
+      }
+    },
+    {
+      "optionId": "lacustre-200",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1.25,
+        "fv": 4,
+        "transition_start": 0,
+        "transition_end": 1.54,
+        "long_period": 4,
+        "ground_peak": 0.16
+      }
+    },
+    {
+      "optionId": "lacustre-300",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1.1,
+        "fv": 3.4,
+        "transition_start": 0,
+        "transition_end": 1.48,
+        "long_period": 5,
+        "ground_peak": 0.14
+      }
+    },
+    {
+      "optionId": "lacustre-500",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1,
+        "fv": 3.1,
+        "transition_start": 0,
+        "transition_end": 1.49,
+        "long_period": 5,
+        "ground_peak": 0.13
+      }
+    },
+    {
+      "optionId": "lacustre-aluvial-200",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1.15,
+        "fv": 3.2,
+        "transition_start": 0,
+        "transition_end": 1.34,
+        "long_period": 4,
+        "ground_peak": 0.15
+      }
+    },
+    {
+      "optionId": "lacustre-aluvial-300",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1.05,
+        "fv": 2.9,
+        "transition_start": 0,
+        "transition_end": 1.33,
+        "long_period": 5,
+        "ground_peak": 0.14
+      }
+    },
+    {
+      "optionId": "aluvial-50",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1.4,
+        "fv": 2.1,
+        "transition_start": 0,
+        "transition_end": 0.72,
+        "long_period": 3.5,
+        "ground_peak": 0.18
+      }
+    },
+    {
+      "optionId": "aluvial-100",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1.25,
+        "fv": 2.5,
+        "transition_start": 0,
+        "transition_end": 0.96,
+        "long_period": 3.5,
+        "ground_peak": 0.16
+      }
+    },
+    {
+      "optionId": "aluvial-200",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1.1,
+        "fv": 2.5,
+        "transition_start": 0,
+        "transition_end": 1.09,
+        "long_period": 3.5,
+        "ground_peak": 0.14
+      }
+    },
+    {
+      "optionId": "aluvial-300",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1,
+        "fv": 2.5,
+        "transition_start": 0,
+        "transition_end": 1.2,
+        "long_period": 3.5,
+        "ground_peak": 0.13
+      }
+    },
+    {
+      "optionId": "deposito-ladera",
+      "hazardId": "limited-safety",
+      "fields": {
+        "fa": 1.7,
+        "fv": 1.95,
+        "transition_start": 0,
+        "transition_end": 0.55,
+        "long_period": 3,
+        "ground_peak": 0.2
+      }
+    },
+    {
+      "optionId": "cerros",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 1.5,
+        "fv": 1.7,
+        "transition_start": 0.11,
+        "transition_end": 0.57,
+        "long_period": 3,
+        "ground_peak": 0.08
+      }
+    },
+    {
+      "optionId": "piedemonte-a",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 1.9,
+        "fv": 2.75,
+        "transition_start": 0.14,
+        "transition_end": 0.72,
+        "long_period": 3,
+        "ground_peak": 0.1
+      }
+    },
+    {
+      "optionId": "piedemonte-b",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 2.2,
+        "fv": 2.25,
+        "transition_start": 0.1,
+        "transition_end": 0.51,
+        "long_period": 3,
+        "ground_peak": 0.12
+      }
+    },
+    {
+      "optionId": "piedemonte-c",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 2.05,
+        "fv": 2.25,
+        "transition_start": 0.11,
+        "transition_end": 0.55,
+        "long_period": 3,
+        "ground_peak": 0.11
+      }
+    },
+    {
+      "optionId": "lacustre-50",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 1.55,
+        "fv": 4,
+        "transition_start": 0.26,
+        "transition_end": 1.29,
+        "long_period": 4,
+        "ground_peak": 0.09
+      }
+    },
+    {
+      "optionId": "lacustre-100",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 1.45,
+        "fv": 4.4,
+        "transition_start": 0.3,
+        "transition_end": 1.52,
+        "long_period": 4,
+        "ground_peak": 0.09
+      }
+    },
+    {
+      "optionId": "lacustre-200",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 1.35,
+        "fv": 4.75,
+        "transition_start": 0.35,
+        "transition_end": 1.76,
+        "long_period": 4,
+        "ground_peak": 0.08
+      }
+    },
+    {
+      "optionId": "lacustre-300",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 1.25,
+        "fv": 4,
+        "transition_start": 0.32,
+        "transition_end": 1.6,
+        "long_period": 5,
+        "ground_peak": 0.08
+      }
+    },
+    {
+      "optionId": "lacustre-500",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 1.1,
+        "fv": 3.75,
+        "transition_start": 0.34,
+        "transition_end": 1.7,
+        "long_period": 5,
+        "ground_peak": 0.07
+      }
+    },
+    {
+      "optionId": "lacustre-aluvial-200",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 1.3,
+        "fv": 3.85,
+        "transition_start": 0.3,
+        "transition_end": 1.48,
+        "long_period": 4,
+        "ground_peak": 0.08
+      }
+    },
+    {
+      "optionId": "lacustre-aluvial-300",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 1.2,
+        "fv": 3.5,
+        "transition_start": 0.29,
+        "transition_end": 1.46,
+        "long_period": 5,
+        "ground_peak": 0.07
+      }
+    },
+    {
+      "optionId": "aluvial-50",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 1.5,
+        "fv": 2.5,
+        "transition_start": 0.17,
+        "transition_end": 0.83,
+        "long_period": 3.5,
+        "ground_peak": 0.09
+      }
+    },
+    {
+      "optionId": "aluvial-100",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 1.4,
+        "fv": 2.9,
+        "transition_start": 0.21,
+        "transition_end": 1.04,
+        "long_period": 3.5,
+        "ground_peak": 0.08
+      }
+    },
+    {
+      "optionId": "aluvial-200",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 1.2,
+        "fv": 2.9,
+        "transition_start": 0.24,
+        "transition_end": 1.21,
+        "long_period": 3.5,
+        "ground_peak": 0.07
+      }
+    },
+    {
+      "optionId": "aluvial-300",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 1.1,
+        "fv": 2.9,
+        "transition_start": 0.26,
+        "transition_end": 1.32,
+        "long_period": 3.5,
+        "ground_peak": 0.07
+      }
+    },
+    {
+      "optionId": "deposito-ladera",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "fa": 1.9,
+        "fv": 2.25,
+        "transition_start": 0.12,
+        "transition_end": 0.59,
+        "long_period": 3,
+        "ground_peak": 0.1
+      }
+    }
+  ]
+}
