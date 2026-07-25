@@ -1,8 +1,16 @@
 # Bogotá D.C. microzonation research dossier
 
-Status: **research complete; independent review pending; not activated in the calculator**.
+Status: **research dossier merged; pure E2 engine implemented; not activated in the calculator**.
 
-This folder is an evidence package only. It contains no spectrum-engine, registry, UI, GIS, or routing change. The product workflow permitted by this dossier is manual selection of one of the 16 published response zones, accompanied by the professional-verification warnings below.
+This folder contains the canonical evidence package and its pure spectrum engine. It contains no shared-registry, UI, GIS, export-renderer, or routing change. The product workflow permitted by this dossier is manual selection of one of the 16 published response zones, accompanied by the professional-verification warnings below.
+
+## Pure engine contract
+
+`adapter.ts` exports a municipal-study adapter and an unregistered `SpectrumEngine` compatible with the normalized F2 contract. The engine snapshots its inputs, returns typed invalid and site-specific outcomes, exposes direct `saAt(T)`, and emits a versioned calculation trace whose direct values, formulas, warnings, and applicability claims resolve back to this dossier.
+
+The adapter accepts an explicit importance factor (default `1.0`) for the design and limited-safety expressions; the damage-threshold expression does not use it. The independent Decimal oracle exercises the approved unit-importance spectrum. Rellenos above 3 m and rigid-base periods above 2.5 s fail closed with `site-specific-study-required`. Exact threshold values remain in the tabulated workflow.
+
+The sampled spectrum uses the same evaluator as `saAt(T)` and always includes every tabulated boundary. The direct tabulated boundary selects the left branch exactly; no smoothing or recomputation replaces the rounded published value. Continuity is enforced and tested only at the joins where the approved equations require it.
 
 ## Controlling legal chain
 
@@ -58,14 +66,17 @@ The complete exact claim-to-source locator matrix is in `evidence/claims-matrix.
 - `evidence/review-record.json`: independent review checklist and activation gate.
 - `oracle/oracle-input.json`: separate manual transcription, not generated from canonical data.
 - `oracle/oracle.json`: 50-digit Decimal witnesses, branch selections, joins, and rounded-boundary residuals.
+- `oracle/engine-locks.json` and `oracle/check-engine-oracle.mjs`: pinned canonical/oracle hashes and declared binary64 tolerances.
+- `schema.ts`, `engine.ts`, `adapter.ts`, and `evidence.ts`: runtime-validated pure engine, normalized adapter, and fail-closed evidence lineage.
 
 Run from the repository root:
 
 ```powershell
 node lib/bogota/evidence/generate.mjs --check
 python lib/bogota/oracle/generate_oracle.py --check
+node lib/bogota/oracle/check-engine-oracle.mjs --check
 pnpm evidence:check
-pnpm vitest run lib/bogota/evidence/evidence.test.mjs
+pnpm vitest run lib/bogota/evidence/evidence.test.mjs lib/bogota/engine.test.ts
 python lib/bogota/evidence/verify_official_pdf.py --pdf C:\path\to\official-fopae-report.pdf
 ```
 
