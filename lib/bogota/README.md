@@ -22,7 +22,7 @@ No amendment annotation was observed on D670 Title 1 Articles 2–10 in the offi
 The canonical research matrix covers exactly 16 zones × 3 hazard levels × 6 semantic fields = 288 values:
 
 - 256 exact direct cell transcriptions from physical PDF pages 155–157 (printed pages 139–141).
-- 32 derived zero-second plateau starts for the design and limited-safety graphs.
+- 32 derived zero-second plateau starts for the design and limited-safety graphs. These are explicitly classified as graphical inferences: the locked regions show the `T(s)` and `Sₐ(g)` axes intersecting at x=147.0 pt and the plateau beginning at x=147.48 pt (within the attested 0.5 pt tolerance). No printed `0` token is claimed; the nearby `0` glyph in `A₀` is recorded and rejected as a false candidate.
 - Three levels: design (475 years, 10% in 50 years, 5% damping), limited safety (225 years, 20% in 50 years, 5%), and damage threshold (31 years, 80% in 50 years, 2%).
 - Fourteen branch/boundary equations with source-page regions and domains in `formula-inventory.json`.
 
@@ -39,7 +39,7 @@ Any downstream implementation must show, at minimum:
 - A reclassification must be consistent with an adjacent zone or at most one zone away and within 500 m.
 - Fills thicker than 3 m and rigid-base periods above 2.5 s require a site-specific response study.
 - For building periods above 1.0 s, evaluate soil–building resonance within ±10% of the deposit period.
-- Evaluate liquefaction in the settings identified by Article 8.
+- Evaluate liquefaction in the settings identified by Article 6, numeral 9.
 - Site-specific `Fa`/`Fv` cannot fall below the NSR-10 minimum or 80% of the municipal value; the higher value governs.
 
 The complete exact claim-to-source locator matrix is in `evidence/claims-matrix.json`. GIS/geometry ingestion is intentionally out of scope; this is not a product blocker because the authorized product interaction is explicit manual zone selection.
@@ -50,8 +50,8 @@ The complete exact claim-to-source locator matrix is in `evidence/claims-matrix.
 - `evidence/manifest.json`: F3 study with exact table → row → cell provenance.
 - `evidence/source-locks.json`: official URL, retrieval date, byte length, and cryptographic hash for all pathless sources.
 - `evidence/extraction-profile.json`: render and normalized-coordinate method.
-- `evidence/extraction-attestation.json`: locked source hash plus exact table/row/cell token and containment-window evidence; legal claims are bound to their source hash, locator, and statement digest.
-- `evidence/verify_official_pdf.py`: offline independent verifier that recomputes all 3 table, 48 row, and 256 cell checks from locally supplied official PDF bytes without vendoring them.
+- `evidence/extraction-attestation.json`: locked source hash plus exact table/row/cell token and containment-window evidence; the two graphical origins add a rendered-region hash, five vector-primitive hashes, axis/plateau geometry, and an `A₀` false-candidate guard; legal claims are bound to their source hash, locator, and statement digest.
+- `evidence/verify_official_pdf.py`: offline independent verifier that recomputes all 3 table, 48 row, 256 cell, and 2 graphical-origin checks from locally supplied official PDF bytes without vendoring them.
 - `evidence/formula-inventory.json` and `evidence/claims-matrix.json`: formula, applicability, and warning citations.
 - `evidence/uncertainty-ledger.json`, `conflict-ledger.json`, and `reference-site-differences.json`: unresolved/currentness items and reasoned resolutions.
 - `evidence/redistribution.json`: why no source bytes or rendered pages are committed.
@@ -69,4 +69,4 @@ pnpm vitest run lib/bogota/evidence/evidence.test.mjs
 python lib/bogota/evidence/verify_official_pdf.py --pdf C:\path\to\official-fopae-report.pdf
 ```
 
-The offline verifier is deliberately version-pinned to `pdfplumber==0.11.10` and `pdfminer.six==20260107`; a different extraction profile fails closed. All source documents are external-only/pathless. Independent review must re-download each official URL and match the committed byte length and SHA-256 before approving activation. The FOPAE report is not bundled because its cover states that total or partial reproduction requires written authorization.
+The offline verifier is deliberately version-pinned to `pdfplumber==0.11.10`, `pdfminer.six==20260107`, `pypdfium2==5.12.1`, and `Pillow==12.3.0`; a different extraction/render profile fails closed. All source documents are external-only/pathless. Independent review must re-download each official URL and match the committed byte length and SHA-256 before approving activation. The FOPAE report is not bundled because its cover states that total or partial reproduction requires written authorization.

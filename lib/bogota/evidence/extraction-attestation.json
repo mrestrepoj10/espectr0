@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "profile": {
-    "schemaVersion": 2,
+    "schemaVersion": 3,
     "sourceDocumentId": "fopae-2010-final-report-v1",
     "extractor": {
       "engine": "pdfplumber",
@@ -13,6 +13,15 @@
         "useTextFlow": false,
         "keepBlankChars": false
       }
+    },
+    "renderer": {
+      "engine": "pypdfium2",
+      "version": "5.12.1",
+      "pillowVersion": "12.3.0",
+      "resolutionDpi": 144,
+      "antialias": false,
+      "colorMode": "RGB",
+      "digestPayload": "ASCII mode:widthxheight: prefix followed by raw pixel bytes"
     },
     "pageGeometryPoints": {
       "width": 612,
@@ -100,9 +109,36 @@
         "numericColumnCount": 6
       }
     ],
+    "graphicalOrigins": [
+      {
+        "hazardId": "design",
+        "physicalPage": 155,
+        "printedPage": "139",
+        "rect": {
+          "left": 0.21,
+          "top": 0.398,
+          "width": 0.575,
+          "height": 0.22
+        },
+        "semanticMethod": "Graphical inference from the vector T(s)/Sₐ(g) axes intersection and the plateau's aligned left endpoint; no printed zero token is claimed."
+      },
+      {
+        "hazardId": "limited-safety",
+        "physicalPage": 156,
+        "printedPage": "140",
+        "rect": {
+          "left": 0.21,
+          "top": 0.422,
+          "width": 0.575,
+          "height": 0.22
+        },
+        "semanticMethod": "Graphical inference from the vector T(s)/Sₐ(g) axes intersection and the plateau's aligned left endpoint; no printed zero token is claimed."
+      }
+    ],
     "qualityControls": [
       "The committed attestation binds the locked PDF SHA-256, page, table, row, cell, rectangle, token, and normalized value.",
-      "The offline verifier re-extracts words from locally supplied official bytes and fails on any source, token, coordinate, table, row, cell, or coverage mismatch.",
+      "The two zero-second starts are graphical inferences bound to a rendered-region hash, five vector-primitive hashes, axis/plateau alignment, and explicit rejection of the A₀ subscript false candidate.",
+      "The offline verifier re-extracts words and graphics from locally supplied official bytes and fails on any source, token, coordinate, image, vector, table, row, cell, or coverage mismatch.",
       "Two decimal digits are preserved where printed; TL/TLd preserve one decimal digit."
     ]
   },
@@ -142,14 +178,68 @@
           "height": 0.014
         }
       },
-      "zeroOrigin": {
-        "citationId": "equation-design-starts-at-zero",
-        "token": "0",
+      "graphicalOrigin": {
+        "figureCitationId": "figure-design-spectrum-curve",
+        "equationCitationId": "equation-design-starts-at-graphical-origin",
+        "inferenceKind": "graphical-axis-origin",
+        "token": "(g) T(s)",
+        "requiredTokens": [
+          "(g)",
+          "T(s)"
+        ],
         "rect": {
-          "left": 0.1538,
-          "top": 0.7288,
-          "width": 0.0075,
-          "height": 0.0102
+          "left": 0.21,
+          "top": 0.398,
+          "width": 0.575,
+          "height": 0.22
+        },
+        "imageRegion": {
+          "pixelWidth": 703,
+          "pixelHeight": 348,
+          "sha256": "7dd74d8775db0bfd65107601b51e0d9ed1a6acaf202badf98e160a85b9078114"
+        },
+        "vectorEvidence": {
+          "regionSha256": "1e331203288aacbe484b9d610d2324de611fd0272e4ea13c215453c2a226e6d6",
+          "primitiveSha256": {
+            "periodAxis": "5b7ee3ea7a2fbfe1461f45c0e4d31163726ab4c853b342b481860300c6878957",
+            "periodArrow": "d05c26e2bfd294cd16ba3e2a6eb731833015dd3d32b79b8aa00486b09cac02b6",
+            "spectralAxis": "e78a7448397eec239241c52ef48bf0876d05d3e46015ed2a5ab1aa033be585c8",
+            "spectralArrow": "97b0ab551e99927932cc8c471d8df87c225bd35051201576c50226f304fc14b1",
+            "plateau": "640995bdccb38c54ebc170af97cdd2a1896b9510929084a2314ecc6e76923c1f"
+          },
+          "axisIntersectionPoints": {
+            "x": 147,
+            "y": 482.4
+          },
+          "plateauStartPoints": {
+            "x": 147.48,
+            "y": 370.62
+          },
+          "alignmentTolerancePoints": 0.5
+        },
+        "rejectedTextCandidate": {
+          "semanticRole": "A0 parameter subscript, not a period-axis origin",
+          "token": "0",
+          "rect": {
+            "left": 0.1538,
+            "top": 0.7288,
+            "width": 0.0075,
+            "height": 0.0102
+          },
+          "contextRect": {
+            "left": 0.138,
+            "top": 0.718,
+            "width": 0.42,
+            "height": 0.023
+          },
+          "contextRequiredTokens": [
+            "A",
+            "0",
+            "Aceleración",
+            "terreno",
+            "superficie",
+            "(g)"
+          ]
         }
       },
       "citationId": "table-design",
@@ -1353,14 +1443,68 @@
           "height": 0.0142
         }
       },
-      "zeroOrigin": {
-        "citationId": "equation-limited-safety-starts-at-zero",
-        "token": "0",
+      "graphicalOrigin": {
+        "figureCitationId": "figure-limited-safety-spectrum-curve",
+        "equationCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "inferenceKind": "graphical-axis-origin",
+        "token": "(g) T(s)",
+        "requiredTokens": [
+          "(g)",
+          "T(s)"
+        ],
         "rect": {
-          "left": 0.1538,
-          "top": 0.7324,
-          "width": 0.0075,
-          "height": 0.0102
+          "left": 0.21,
+          "top": 0.422,
+          "width": 0.575,
+          "height": 0.22
+        },
+        "imageRegion": {
+          "pixelWidth": 703,
+          "pixelHeight": 348,
+          "sha256": "adfbc15fb9b47fefb51bd90cc01dd8a51c1021e63bc5ac5aa54793bac82799c2"
+        },
+        "vectorEvidence": {
+          "regionSha256": "5e3c26502274bede7505240b7cbe4fabd7f6fa0e3df7cec30394ab9abeb528a9",
+          "primitiveSha256": {
+            "periodAxis": "de909d85db7572d265c6e93c6cbdef69bffe5e14353353ee2f0a3fbc08e20143",
+            "periodArrow": "f9c0da8fe8348806c95b97ccf99158b6c74b9566d4c9ee7d00cd61bd6a4cb41a",
+            "spectralAxis": "568f4abf02d91b3b0f7da52f89f6daeef8c4003503aa02cec89cd8bdcda62fed",
+            "spectralArrow": "d7231d6d3b1dfa7c39de826e94f866ae632a21956b0852389b1cef69d5ac2ce0",
+            "plateau": "91c14a6f417951e3cfffb412e237141f2d99918a622a8bacfd677590ec7644fa"
+          },
+          "axisIntersectionPoints": {
+            "x": 147,
+            "y": 501.78
+          },
+          "plateauStartPoints": {
+            "x": 147.48,
+            "y": 390.06
+          },
+          "alignmentTolerancePoints": 0.5
+        },
+        "rejectedTextCandidate": {
+          "semanticRole": "A0 parameter subscript, not a period-axis origin",
+          "token": "0",
+          "rect": {
+            "left": 0.1538,
+            "top": 0.7324,
+            "width": 0.0075,
+            "height": 0.0102
+          },
+          "contextRect": {
+            "left": 0.138,
+            "top": 0.722,
+            "width": 0.42,
+            "height": 0.023
+          },
+          "contextRequiredTokens": [
+            "A",
+            "0",
+            "Aceleración",
+            "terreno",
+            "superficie",
+            "(g)"
+          ]
         }
       },
       "citationId": "table-limited-safety",
@@ -2564,7 +2708,7 @@
           "height": 0.014
         }
       },
-      "zeroOrigin": null,
+      "graphicalOrigin": null,
       "citationId": "table-damage-threshold",
       "rows": [
         {
@@ -4067,5 +4211,5 @@
       "statementSha256": "855d0956b11cea842db2a75a27c6e12db48b0a1f5892202fada6ac7ef4ff8067"
     }
   ],
-  "payloadSha256": "27d27014d9e57c590c088bf2b99216f65726f057c8b5d29e0618730d6e7371e1"
+  "payloadSha256": "c2d9e8ea2e9fcbe9d8ad54c41f36fbc26885ebb5681945afb2cdb254f2d154cf"
 }

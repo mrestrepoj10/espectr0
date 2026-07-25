@@ -169,23 +169,46 @@
       ]
     },
     {
-      "id": "equation-design-starts-at-zero",
+      "id": "figure-design-spectrum-curve",
+      "sourceDocumentId": "fopae-2010-final-report-v1",
+      "regionKind": "figure",
+      "physicalPage": 155,
+      "printedPage": "139",
+      "reference": "Tabla 7.5. Coeficientes y curva de diseño, gráfica completa con ejes Sₐ(g) y T(s)",
+      "rect": {
+        "left": 0.21,
+        "top": 0.398,
+        "width": 0.575,
+        "height": 0.22
+      },
+      "extractedToken": "(g) T(s)",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "(g)",
+        "T(s)"
+      ]
+    },
+    {
+      "id": "equation-design-starts-at-graphical-origin",
       "sourceDocumentId": "fopae-2010-final-report-v1",
       "regionKind": "equation",
       "physicalPage": 155,
       "printedPage": "139",
-      "reference": "Tabla 7.5. Coeficientes y curva de diseño, origen T=0 de la gráfica",
+      "reference": "Tabla 7.5. Coeficientes y curva de diseño, inferencia gráfica del inicio de la meseta en el origen del eje T(s)",
+      "parentCitationId": "figure-design-spectrum-curve",
       "rect": {
-        "left": 0.1538,
-        "top": 0.7288,
-        "width": 0.0075,
-        "height": 0.0102
+        "left": 0.21,
+        "top": 0.398,
+        "width": 0.575,
+        "height": 0.22
       },
-      "extractedToken": "0",
+      "extractedToken": "(g) T(s)",
       "unit": null,
       "transformation": null,
       "requiredTokens": [
-        "0"
+        "(g)",
+        "T(s)"
       ]
     },
     {
@@ -2385,23 +2408,46 @@
       ]
     },
     {
-      "id": "equation-limited-safety-starts-at-zero",
+      "id": "figure-limited-safety-spectrum-curve",
+      "sourceDocumentId": "fopae-2010-final-report-v1",
+      "regionKind": "figure",
+      "physicalPage": 156,
+      "printedPage": "140",
+      "reference": "Tabla 7.6. Coeficientes y curva de seguridad limitada, gráfica completa con ejes Sₐ(g) y T(s)",
+      "rect": {
+        "left": 0.21,
+        "top": 0.422,
+        "width": 0.575,
+        "height": 0.22
+      },
+      "extractedToken": "(g) T(s)",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "(g)",
+        "T(s)"
+      ]
+    },
+    {
+      "id": "equation-limited-safety-starts-at-graphical-origin",
       "sourceDocumentId": "fopae-2010-final-report-v1",
       "regionKind": "equation",
       "physicalPage": 156,
       "printedPage": "140",
-      "reference": "Tabla 7.6. Coeficientes y curva de seguridad limitada, origen T=0 de la gráfica",
+      "reference": "Tabla 7.6. Coeficientes y curva de seguridad limitada, inferencia gráfica del inicio de la meseta en el origen del eje T(s)",
+      "parentCitationId": "figure-limited-safety-spectrum-curve",
       "rect": {
-        "left": 0.1538,
-        "top": 0.7324,
-        "width": 0.0075,
-        "height": 0.0102
+        "left": 0.21,
+        "top": 0.422,
+        "width": 0.575,
+        "height": 0.22
       },
-      "extractedToken": "0",
+      "extractedToken": "(g) T(s)",
       "unit": null,
       "transformation": null,
       "requiredTokens": [
-        "0"
+        "(g)",
+        "T(s)"
       ]
     },
     {
@@ -7309,9 +7355,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -7400,9 +7446,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -7491,9 +7537,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -7582,9 +7628,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -7673,9 +7719,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -7764,9 +7810,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -7855,9 +7901,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -7946,9 +7992,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -8037,9 +8083,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -8128,9 +8174,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -8219,9 +8265,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -8310,9 +8356,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -8401,9 +8447,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -8492,9 +8538,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -8583,9 +8629,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -8674,9 +8720,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-design-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-design-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -8765,9 +8811,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -8856,9 +8902,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -8947,9 +8993,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -9038,9 +9084,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -9129,9 +9175,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -9220,9 +9266,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -9311,9 +9357,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -9402,9 +9448,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -9493,9 +9539,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -9584,9 +9630,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -9675,9 +9721,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -9766,9 +9812,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -9857,9 +9903,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -9948,9 +9994,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -10039,9 +10085,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }
@@ -10130,9 +10176,9 @@
             ]
           }
         ],
-        "formulaCitationId": "equation-limited-safety-starts-at-zero",
-        "formula": "0",
-        "substitution": "The published graph's period axis begins at the extracted origin token 0; Fa identifies the selected row.",
+        "formulaCitationId": "equation-limited-safety-starts-at-graphical-origin",
+        "formula": "T(s)",
+        "substitution": "Graphical inference, not a printed-zero transcription: the T(s) and Sₐ(g) axes intersect at x=147.0 pt and the plateau begins at x=147.48 pt, within the attested 0.5 pt alignment tolerance; the period coordinate at that axis origin is T=0 s, while Fa identifies the selected row.",
         "result": 0,
         "unit": "s"
       }

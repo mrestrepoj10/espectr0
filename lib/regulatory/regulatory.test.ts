@@ -671,6 +671,27 @@ describe("page, hierarchy, and direct evidence", () => {
 });
 
 describe("role-based derived lineage", () => {
+	it("supports equation evidence nested in its source figure and rejects other parents", async () => {
+		const nested = fixture();
+		const equation = nested.citations.find(({ id }) => id === "fixture-formula")!;
+		const figure: EvidenceCitation = {
+			...structuredClone(equation),
+			id: "fixture-figure",
+			regionKind: "figure",
+		};
+		equation.parentCitationId = figure.id;
+		nested.citations.push(figure);
+		await expect(checkEvidenceStudy(nested, { repositoryRoot })).resolves.toMatchObject({
+			studyId: "framework-fixture",
+		});
+
+		const invalid = fixture();
+		invalid.citations.find(({ id }) => id === "fixture-formula")!.parentCitationId = "fixture-row";
+		await expect(checkEvidenceStudy(invalid, { repositoryRoot })).rejects.toThrow(
+			/Equation citation fixture-formula requires a figure parent/,
+		);
+	});
+
 	it("requires a clause/equation formula citation", async () => {
 		const study = fixture();
 		study.citations[3].regionKind = "warning";
