@@ -137,7 +137,7 @@ def main() -> None:
     for claim in claims["claims"]:
         citation = claim["citation"]
         claim_lock = lock_by_id[citation["sourceDocumentId"]]
-        attested_claims.append({
+        attested_claim = {
             "claimId": claim["id"],
             "sourceDocumentId": citation["sourceDocumentId"],
             "sourceSha256": claim_lock["sha256"],
@@ -145,7 +145,11 @@ def main() -> None:
             "printedPage": citation["printedPage"],
             "reference": citation["reference"],
             "statementSha256": digest(claim["statement"].encode("utf-8")),
-        })
+        }
+        for field in ("scanMarker", "rect", "extractedToken", "requiredTokens", "regionAttestationId"):
+            if field in citation:
+                attested_claim[field] = citation[field]
+        attested_claims.append(attested_claim)
 
     payload = {
         "schemaVersion": 1,

@@ -288,8 +288,8 @@
       "sha256": "c6d45337349043f6b816146952b79d3d4c27e6f414e9d692d2bd30566de378e1",
       "pages": [
         {
-          "physicalPage": 136,
-          "printedPage": "747",
+          "physicalPage": 147,
+          "printedPage": "136",
           "rotationDegrees": 0,
           "crop": {
             "left": 0,
@@ -366,20 +366,21 @@
       "id": "app-study-historical",
       "sourceDocumentId": "cali-ingeominas-dagma-2005-tomo6",
       "regionKind": "applicability",
-      "physicalPage": 136,
-      "printedPage": "747",
-      "reference": "Parámetros del estudio técnico de 2005",
+      "physicalPage": 147,
+      "printedPage": "136",
+      "reference": "Numeral 8; pie interno 136; marcador manuscrito 747",
       "rect": {
-        "left": 0,
-        "top": 0,
-        "width": 1,
-        "height": 1
+        "left": 0.16,
+        "top": 0.56,
+        "width": 0.72,
+        "height": 0.29
       },
-      "extractedToken": "Ad = 0.05; período de retorno de 10 años",
+      "extractedToken": "Ad = 0.05g, el cual se calculó probabilísticamente para un periodo de retorno de 10 años",
       "unit": null,
       "transformation": null,
       "requiredTokens": [
-        "Ad = 0.05; período de retorno de 10 años"
+        "Ad = 0.05g",
+        "periodo de retorno de 10 años"
       ]
     },
     {

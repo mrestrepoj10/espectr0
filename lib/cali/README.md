@@ -24,6 +24,15 @@ requires a locally supplied official PDF:
 python lib/cali/evidence/verify_official_pdf.py --pdf C:\path\to\documentoId7429.pdf
 ```
 
+The historical `Ad=0.05g` / ten-year return-period statement is independently
+locked to Tomo 6 physical PDF page 147, printed footer 136, and handwritten scan
+marker 747. The offline verifier also rejects physical page 136 (footer 125,
+marker 736), which contains Zona 4E / Figure 7.9 instead:
+
+```powershell
+python lib/cali/evidence/verify_historical_pdf.py --pdf C:\path\to\TOMO6CONVENIO022002.pdf
+```
+
 No OCR was used. Values were entered twice against the official scan and the
 deterministic crop locks make each review region reproducible.
 

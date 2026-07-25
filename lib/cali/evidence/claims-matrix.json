@@ -126,9 +126,22 @@
       "statement": "El estudio de 2005 usó Ad=0.05 y retorno de 10 años; el Decreto 0158 armonizado con NSR-10 adopta después Ad=0.09.",
       "citation": {
         "sourceDocumentId": "cali-ingeominas-dagma-2005-tomo6",
-        "physicalPage": 136,
-        "printedPage": "747",
-        "reference": "Espectro de umbral de daño"
+        "physicalPage": 147,
+        "printedPage": "136",
+        "scanMarker": "747",
+        "reference": "Numeral 8; pie interno 136; marcador manuscrito 747",
+        "rect": {
+          "left": 0.16,
+          "top": 0.56,
+          "width": 0.72,
+          "height": 0.29
+        },
+        "extractedToken": "Ad = 0.05g, el cual se calculó probabilísticamente para un periodo de retorno de 10 años",
+        "requiredTokens": [
+          "Ad = 0.05g",
+          "periodo de retorno de 10 años"
+        ],
+        "regionAttestationId": "historical-threshold-p147"
       }
     }
   ]

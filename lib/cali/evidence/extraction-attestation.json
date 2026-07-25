@@ -3189,10 +3189,23 @@
       "claimId": "historical-threshold",
       "sourceDocumentId": "cali-ingeominas-dagma-2005-tomo6",
       "sourceSha256": "c6d45337349043f6b816146952b79d3d4c27e6f414e9d692d2bd30566de378e1",
-      "physicalPage": 136,
-      "printedPage": "747",
-      "reference": "Espectro de umbral de daño",
-      "statementSha256": "fab9a17c3ec237645f61540d669d99823514fd482e0e2b9512fba70d7fc61473"
+      "physicalPage": 147,
+      "printedPage": "136",
+      "reference": "Numeral 8; pie interno 136; marcador manuscrito 747",
+      "statementSha256": "fab9a17c3ec237645f61540d669d99823514fd482e0e2b9512fba70d7fc61473",
+      "scanMarker": "747",
+      "rect": {
+        "left": 0.16,
+        "top": 0.56,
+        "width": 0.72,
+        "height": 0.29
+      },
+      "extractedToken": "Ad = 0.05g, el cual se calculó probabilísticamente para un periodo de retorno de 10 años",
+      "requiredTokens": [
+        "Ad = 0.05g",
+        "periodo de retorno de 10 años"
+      ],
+      "regionAttestationId": "historical-threshold-p147"
     }
   ],
   "manualReview": {
@@ -3201,5 +3214,5 @@
     "status": "complete",
     "reviewedOn": "2026-07-25"
   },
-  "payloadSha256": "f6a375532b1a1121663cf9127dcc0698a7fd0a5d99f1d1fcd50cd02c6a1eaaca"
+  "payloadSha256": "08092b671773ad91aaaefe7ad4f59880b05112e149f806f44449c4fb4b06134f"
 }
