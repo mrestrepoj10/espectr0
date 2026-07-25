@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "decision": "external-only-all-sources",
+  "committedSourceBytes": false,
+  "rationale": "No express redistribution license was found.",
+  "prohibitedArtifacts": [
+    "official PDFs",
+    "rendered source pages",
+    "secondary mirrors"
+  ]
+}

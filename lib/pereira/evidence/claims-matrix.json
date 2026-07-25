@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "regulatoryStatusMatrix": {
+    "expected": 1,
+    "cited": 1,
+    "coveragePercent": 100
+  },
+  "proposedSpectrumMatrix": {
+    "expected": 0,
+    "cited": 0,
+    "coverageStatus": "not-applicable-no-adopted-complete-matrix"
+  },
+  "claimCoverage": {
+    "applicability": {
+      "expected": 3,
+      "cited": 3,
+      "coveragePercent": 100
+    },
+    "warnings": {
+      "expected": 5,
+      "cited": 5,
+      "coveragePercent": 100
+    }
+  },
+  "claims": [
+    {
+      "id": "legacy-rule",
+      "statement": "The 2016 POT points to NSR-10 plus Decreto 932 until the new microzonation is issued.",
+      "citationId": "pot-legacy-until-new"
+    },
+    {
+      "id": "cap-approval-not-adoption",
+      "statement": "Acta 201 records CAP approval of the study; it does not identify a municipal adoption decree.",
+      "citationId": "cap-approval-cell"
+    },
+    {
+      "id": "geotechnical",
+      "statement": "The POT expressly preserves NSR-10 Title H geotechnical requirements.",
+      "citationId": "pot-geotechnical-warning"
+    }
+  ]
+}

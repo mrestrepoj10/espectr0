@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "studyId": "pereira-microzonation",
+  "status": "research-only-activation-blocked",
+  "municipality": "Pereira",
+  "regulatoryStatus": "cap-approved-municipal-adoption-and-primary-technical-source-unresolved",
+  "proposedSpectrumMatrix": {
+    "selectableOptions": [],
+    "hazards": [],
+    "rows": []
+  },
+  "historicalRecord": {
+    "decree932PrimaryBytesLocated": false,
+    "coefficientsCanonicalized": false,
+    "formulasCanonicalized": false
+  },
+  "newStudy": {
+    "capApprovedOn": "2024-12-13",
+    "municipalAdoptionInstrumentLocated": false,
+    "primaryTechnicalReportLocated": false
+  },
+  "blockers": [
+    "No municipal decree adopting the CAP-approved study was located.",
+    "The primary technical report, exact zones, coefficients, hazards, damping and formulas were not located.",
+    "Primary official bytes for Decreto 932 de 2011 and its complete technical annex were not located.",
+    "The 2016 POT preserves Decreto 932 until issuance of the new microzonation.",
+    "Professional geotechnical and current municipal-authority verification is required."
+  ],
+  "capabilities": {
+    "traceabilityViewer": true,
+    "municipalSpectrumCalculation": false,
+    "automaticZoneSelection": false
+  }
+}

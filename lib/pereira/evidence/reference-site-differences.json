@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "comparison": "Pereira versus Dosquebradas and Santa Rosa de Cabal",
+  "materialDifferences": [
+    "Separate municipal adoption chain",
+    "CAP-approved new study",
+    "Pereira-specific legacy Decreto 932",
+    "Unavailable primary technical matrix"
+  ],
+  "nonInference": "No missing primary-source fact is imported from a neighboring municipality or reference site."
+}

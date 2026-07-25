@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "policy": "Both official PDFs remain external-only and are locked by URL, byte length, page count and SHA-256.",
+  "locks": [
+    {
+      "sourceDocumentId": "acuerdo-035-2016",
+      "officialUrl": "https://s3.pagegear.co/9/documentos/acuerdos/2115.pdf",
+      "retrievedOn": "2026-07-25",
+      "byteLength": 6271986,
+      "pageCount": 399,
+      "sha256": "90568117201b668164e38f65550350cbfc51d6a111fc5981fcd463e0b487a90e",
+      "mediaType": "application/pdf",
+      "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "cap-acta-201",
+      "officialUrl": "https://asosismica.org.co/wp-content/uploads/2025/02/Acta-201-CAP-FINAL_fdo.pdf",
+      "retrievedOn": "2026-07-25",
+      "byteLength": 769392,
+      "pageCount": 36,
+      "sha256": "500e8d72facae767884494d2f4e8daf7fc2993c951ad89dde41b70825551c787",
+      "mediaType": "application/pdf",
+      "redistributionDecision": "external-only"
+    }
+  ]
+}

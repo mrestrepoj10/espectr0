@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "extractor": {
+    "engine": "pypdf",
+    "version": "6.14.2",
+    "ocrUsed": false
+  },
+  "coordinateSystem": "normalized top-left; full-page applicability regions and a bounded CAP approval region",
+  "normalization": "Unicode NFC and whitespace collapse",
+  "qualityControls": [
+    "No secondary mirror value is transcribed.",
+    "CAP approval is not represented as municipal adoption.",
+    "The proposed spectrum matrix is exactly empty."
+  ]
+}
