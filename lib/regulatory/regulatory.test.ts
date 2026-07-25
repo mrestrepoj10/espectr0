@@ -422,13 +422,21 @@ describe("strict aggregate boundary", () => {
 		const second = execFileSync(process.execPath, command, { encoding: "utf8" });
 		expect(second).toBe(first);
 		expect(first.endsWith("\n")).toBe(true);
-		expect(JSON.parse(first)).toMatchObject({
-			schemaVersion: 1,
-			installedStudies: ["framework-fixture", "nsr10"],
-			studies: [
-				{ studyId: "framework-fixture", coverage: { bundledSources: 1 } },
-				{ studyId: "nsr10", coverage: { expectedRows: 1_123 } },
-			],
+		const aggregate = JSON.parse(first);
+		expect(aggregate.schemaVersion).toBe(1);
+		expect(aggregate.installedStudies).toEqual(
+			expect.arrayContaining(["cali-microzonation", "framework-fixture", "nsr10"]),
+		);
+		expect(aggregate.installedStudies).toEqual([...aggregate.installedStudies].sort());
+		expect(new Set(aggregate.installedStudies).size).toBe(aggregate.installedStudies.length);
+		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "framework-fixture")).toMatchObject({
+			studyId: "framework-fixture", coverage: { bundledSources: 1 },
+		});
+		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "nsr10")).toMatchObject({
+			studyId: "nsr10", coverage: { expectedRows: 1_123 },
+		});
+		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "cali-microzonation")).toMatchObject({
+			studyId: "cali-microzonation", coverage: { expectedRows: 39, expectedValues: 156 }, uncoveredValues: [],
 		});
 	}, 30_000);
 });

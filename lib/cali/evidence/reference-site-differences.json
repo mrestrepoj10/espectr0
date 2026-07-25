@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "referenceSite": "Bogotá",
+  "differences": [
+    "Cali adopta 10 etiquetas de respuesta y 13 componentes de curva; Bogotá usa su propia zonificación y no es fuente de coeficientes para Cali.",
+    "Cali publica pares concurrentes para 4B, 4C y 5.",
+    "La tabla de umbral de daño de Cali omite A0d y Fa aunque su ecuación los requiere."
+  ],
+  "nonInference": "No se transfieren coeficientes, fórmulas faltantes ni reglas de otra ciudad."
+}
