@@ -31,6 +31,7 @@ export {
   evaluateBogotaOrdinate,
   findBogotaHazard,
   findBogotaRow,
+  preflightBogotaSpectrum,
   sampleBogotaSpectrum,
 } from "./engine"
 export {
@@ -57,6 +58,7 @@ export type { BogotaTracePayload } from "./evidence"
 export type {
   BogotaBranchDefinition,
   BogotaEnginePoint,
+  BogotaSpectrumPreflight,
 } from "./engine"
 export type {
   BogotaCanonical,

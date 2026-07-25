@@ -18,10 +18,13 @@ import {
   bogotaBoundaryPolicy,
   bogotaCanonical,
   bogotaCanonicalSchema,
+  bogotaComputationInputSchema,
   bogotaScenarioSchema,
   bogotaSpectrumEngine,
   bogotaTracePayloadSchema,
   createBogotaScenario,
+  findBogotaHazard,
+  preflightBogotaSpectrum,
   resolveBogotaCitation,
   resolveBogotaFormulaEvidence,
   resolveBogotaValueEvidence,
@@ -235,6 +238,158 @@ describe("Bogotá normalized adapter", () => {
       expect(result.saAt(period).status).toBe("invalid-input")
     },
   )
+
+  it("keeps all 48 canonical rows typed and finite at Number.MAX_VALUE", () => {
+    const observedBranches = new Set<string>()
+    for (const row of bogotaCanonical.rows) {
+      const result = adaptBogotaSpectrum({
+        zoneId: row.optionId,
+        hazardId: row.hazardId,
+        importanceFactor: Number.MAX_VALUE,
+      })
+      expect(result.status, `${row.optionId}/${row.hazardId}`).toBe("ok")
+      if (result.status !== "ok") continue
+      expect(() => createSpectrumExport(result)).not.toThrow()
+
+      for (const point of result.points) {
+        expect(Number.isFinite(point.saG)).toBe(true)
+        observedBranches.add(point.branchId)
+      }
+      const longPeriod = row.fields.long_period * 2
+      const long = result.saAt(longPeriod)
+      expect(long.status, `${row.optionId}/${row.hazardId} T=${longPeriod}`).toBe(
+        "ok",
+      )
+      if (long.status === "ok") {
+        expect(long.point.branchId).toMatch(/-long$/)
+        expect(Number.isFinite(long.point.saG)).toBe(true)
+      }
+    }
+    expect(observedBranches).toEqual(
+      new Set([
+        "bogota-design-plateau",
+        "bogota-design-decay",
+        "bogota-design-long",
+        "bogota-limited-plateau",
+        "bogota-limited-decay",
+        "bogota-limited-long",
+        "bogota-damage-ramp",
+        "bogota-damage-plateau",
+        "bogota-damage-decay",
+        "bogota-damage-long",
+      ]),
+    )
+  })
+
+  it.each([
+    ["lacustre-200", "design"],
+    ["lacustre-200", "limited-safety"],
+  ] as const)(
+    "evaluates representable %s/%s long ordinates after division without intermediate overflow",
+    (zoneId, hazardId) => {
+      const row = bogotaCanonical.rows.find(
+        (candidate) =>
+          candidate.optionId === zoneId && candidate.hazardId === hazardId,
+      )!
+      const hazard = findBogotaHazard(hazardId)!
+      const acceleration =
+        hazard.id === "design"
+          ? hazard.baseAccelerations.Av
+          : hazard.id === "limited-safety"
+            ? hazard.baseAccelerations.Ae
+            : 0
+      const tSeconds = row.fields.long_period * 2
+      const oldNumerator =
+        1.2 *
+        acceleration *
+        row.fields.fv *
+        row.fields.long_period *
+        Number.MAX_VALUE
+      expect(oldNumerator).toBe(Number.POSITIVE_INFINITY)
+
+      const result = successful(zoneId, hazardId, {
+        importanceFactor: Number.MAX_VALUE,
+      })
+      const long = ordinate(result, tSeconds)
+      const independentExpected =
+        (Number.MAX_VALUE / tSeconds) *
+        (1.2 * acceleration * row.fields.fv) *
+        (row.fields.long_period / tSeconds)
+      expect(Number.isFinite(long.saG)).toBe(true)
+      expect(Math.abs(long.saG / independentExpected - 1)).toBeLessThan(1e-14)
+
+      const extremePeriod = ordinate(result, Number.MAX_VALUE)
+      expect(extremePeriod.branchId).toMatch(/-long$/)
+      expect(Number.isFinite(extremePeriod.saG)).toBe(true)
+      expect(extremePeriod.saG).toBeGreaterThan(0)
+    },
+  )
+
+  it("fails closed in preflight when a mathematically required point is non-finite", () => {
+    const row = structuredClone(
+      bogotaCanonical.rows.find(
+        ({ optionId, hazardId }) =>
+          optionId === "cerros" && hazardId === "design",
+      )!,
+    )
+    row.fields.fv = Number.MAX_VALUE
+    const hazard = findBogotaHazard("design")!
+
+    expect(() =>
+      preflightBogotaSpectrum(row, hazard, Number.MAX_VALUE),
+    ).not.toThrow()
+    expect(
+      preflightBogotaSpectrum(row, hazard, Number.MAX_VALUE),
+    ).toMatchObject({
+      status: "unsupported",
+      reasonCode: "bogota-numerical-representation-unsupported",
+    })
+  })
+
+  it("never throws for seeded schema-accepted importance factors or ordinate periods", () => {
+    let state = 0x6d2b79f5
+    const random = () => {
+      state = (Math.imul(state, 1664525) + 1013904223) >>> 0
+      return state / 0x1_0000_0000
+    }
+    const fixedFactors = [
+      Number.MIN_VALUE,
+      Number.EPSILON,
+      1,
+      1e100,
+      1e300,
+      Number.MAX_VALUE,
+    ]
+
+    for (let index = 0; index < 192; index += 1) {
+      const row = bogotaCanonical.rows[index % bogotaCanonical.rows.length]
+      const exponent = Math.floor(random() * 2098) - 1074
+      const generated = Math.min(
+        Number.MAX_VALUE,
+        (1 + random()) * 2 ** exponent,
+      )
+      const importanceFactor =
+        index < fixedFactors.length ? fixedFactors[index] : generated
+      const input = {
+        zoneId: row.optionId,
+        hazardId: row.hazardId,
+        importanceFactor,
+      }
+      expect(bogotaComputationInputSchema.safeParse(input).success).toBe(true)
+
+      let result: ReturnType<typeof adaptBogotaSpectrum> | undefined
+      expect(() => {
+        result = adaptBogotaSpectrum(input)
+      }).not.toThrow()
+      expect(result).toBeDefined()
+      if (!result) continue
+      expect(() => result!.saAt(Number.MAX_VALUE)).not.toThrow()
+      expect(["ok", "unsupported"]).toContain(result.status)
+      expect(["ok", "unsupported"]).toContain(
+        result.saAt(Number.MAX_VALUE).status,
+      )
+    }
+  })
 
   it("returns typed site-specific outcomes only above the approved strict limits", () => {
     expect(

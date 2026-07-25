@@ -79,6 +79,23 @@ export type BogotaEnginePoint = {
   formulaId: BogotaBranchDefinition["formulaId"]
 }
 
+export type BogotaSpectrumPreflight =
+  | { status: "ok"; points: BogotaEnginePoint[] }
+  | {
+      status: "unsupported"
+      reasonCode: "bogota-numerical-representation-unsupported"
+      message: string
+    }
+
+export class BogotaNumericalRepresentationError extends RangeError {
+  readonly code = "bogota-numerical-representation-unsupported" as const
+
+  constructor(formulaId: string) {
+    super(`Bogotá formula ${formulaId} produced an unrepresentable Sa`)
+    this.name = "BogotaNumericalRepresentationError"
+  }
+}
+
 const rowBySelection = new Map(
   bogotaCanonical.rows.map((row) => [
     `${row.optionId}/${row.hazardId}`,
@@ -120,7 +137,7 @@ function point(
   definition: BogotaBranchDefinition,
 ): BogotaEnginePoint {
   if (!Number.isFinite(saG) || saG < 0) {
-    throw new Error(`Bogotá formula ${definition.formulaId} produced invalid Sa`)
+    throw new BogotaNumericalRepresentationError(definition.formulaId)
   }
   return {
     tSeconds,
@@ -141,56 +158,52 @@ export function evaluateBogotaOrdinate(
 
   if (hazard.id === "design") {
     const [plateau, decay, long] = bogotaBranchDefinitions.design
+    const plateauScale = 2.5 * hazard.baseAccelerations.Aa * fa
+    const velocityScale = 1.2 * hazard.baseAccelerations.Av * fv
     if (tSeconds <= transition_end) {
       return point(
         tSeconds,
-        2.5 * hazard.baseAccelerations.Aa * fa * importanceFactor,
+        plateauScale * importanceFactor,
         plateau,
       )
     }
     if (tSeconds <= long_period) {
       return point(
         tSeconds,
-        (1.2 * hazard.baseAccelerations.Av * fv * importanceFactor) / tSeconds,
+        (velocityScale / tSeconds) * importanceFactor,
         decay,
       )
     }
     return point(
       tSeconds,
-      (1.2 *
-        hazard.baseAccelerations.Av *
-        fv *
-        long_period *
-        importanceFactor) /
-        (tSeconds * tSeconds),
+      ((velocityScale * (long_period / tSeconds)) * importanceFactor) /
+        tSeconds,
       long,
     )
   }
 
   if (hazard.id === "limited-safety") {
     const [plateau, decay, long] = bogotaBranchDefinitions["limited-safety"]
+    const plateauScale = 2.5 * hazard.baseAccelerations.Ae * fa
+    const velocityScale = 1.2 * hazard.baseAccelerations.Ae * fv
     if (tSeconds <= transition_end) {
       return point(
         tSeconds,
-        2.5 * hazard.baseAccelerations.Ae * fa * importanceFactor,
+        plateauScale * importanceFactor,
         plateau,
       )
     }
     if (tSeconds <= long_period) {
       return point(
         tSeconds,
-        (1.2 * hazard.baseAccelerations.Ae * fv * importanceFactor) / tSeconds,
+        (velocityScale / tSeconds) * importanceFactor,
         decay,
       )
     }
     return point(
       tSeconds,
-      (1.2 *
-        hazard.baseAccelerations.Ae *
-        fv *
-        long_period *
-        importanceFactor) /
-        (tSeconds * tSeconds),
+      ((velocityScale * (long_period / tSeconds)) * importanceFactor) /
+        tSeconds,
       long,
     )
   }
@@ -207,20 +220,20 @@ export function evaluateBogotaOrdinate(
       ramp,
     )
   }
+  const velocityScale = 1.5 * hazard.baseAccelerations.Ad * fv
   if (tSeconds <= transition_end) {
     return point(tSeconds, 3 * hazard.baseAccelerations.Ad * fa, plateau)
   }
   if (tSeconds <= long_period) {
     return point(
       tSeconds,
-      (1.5 * hazard.baseAccelerations.Ad * fv) / tSeconds,
+      velocityScale / tSeconds,
       decay,
     )
   }
   return point(
     tSeconds,
-    (1.5 * hazard.baseAccelerations.Ad * fv * long_period) /
-      (tSeconds * tSeconds),
+    (velocityScale * (long_period / tSeconds)) / tSeconds,
     long,
   )
 }
@@ -253,4 +266,33 @@ export function sampleBogotaSpectrum(
   return bogotaSamplePeriods(row).map((tSeconds) =>
     evaluateBogotaOrdinate(tSeconds, row, hazard, importanceFactor),
   )
+}
+
+export function preflightBogotaSpectrum(
+  row: BogotaCanonicalRow,
+  hazard: BogotaHazard,
+  importanceFactor: number,
+): BogotaSpectrumPreflight {
+  try {
+    const points = sampleBogotaSpectrum(row, hazard, importanceFactor)
+    if (
+      points.some(
+        ({ tSeconds, saG }) =>
+          !Number.isFinite(tSeconds) || !Number.isFinite(saG),
+      )
+    ) {
+      throw new BogotaNumericalRepresentationError("spectrum-preflight")
+    }
+    return { status: "ok", points }
+  } catch (error) {
+    if (error instanceof BogotaNumericalRepresentationError) {
+      return {
+        status: "unsupported",
+        reasonCode: error.code,
+        message:
+          "El espectro solicitado no puede representarse como números finitos.",
+      }
+    }
+    throw error
+  }
 }

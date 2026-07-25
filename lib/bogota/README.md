@@ -10,6 +10,8 @@ This folder contains the canonical evidence package and its pure spectrum engine
 
 The adapter accepts an explicit importance factor (default `1.0`) for the design and limited-safety expressions; the damage-threshold expression does not use it. The independent Decimal oracle exercises the approved unit-importance spectrum. Rellenos above 3 m and rigid-base periods above 2.5 s fail closed with `site-specific-study-required`. Exact threshold values remain in the tabulated workflow.
 
+Finite positive importance factors are not given an uncited upper bound. Products and quotients are ordered to avoid intermediate overflow when the final ordinate is representable; sampled or direct ordinates that still cannot be represented fail closed as typed `unsupported` results instead of escaping as exceptions.
+
 The sampled spectrum uses the same evaluator as `saAt(T)` and always includes every tabulated boundary. The direct tabulated boundary selects the left branch exactly; no smoothing or recomputation replaces the rounded published value. Continuity is enforced and tested only at the joins where the approved equations require it.
 
 ## Controlling legal chain

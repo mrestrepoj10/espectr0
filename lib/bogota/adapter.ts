@@ -19,12 +19,13 @@ import {
   bogotaSourceIds,
 } from "./evidence"
 import {
+  BogotaNumericalRepresentationError,
   bogotaBranchDefinitions,
   bogotaSiteSpecificReason,
   evaluateBogotaOrdinate,
   findBogotaHazard,
   findBogotaRow,
-  sampleBogotaSpectrum,
+  preflightBogotaSpectrum,
 } from "./engine"
 import {
   BOGOTA_STUDY_ID,
@@ -214,6 +215,15 @@ function invalidApplicability(message: string) {
   }
 }
 
+function numericalUnsupportedApplicability(message: string) {
+  return {
+    status: "unsupported" as const,
+    reasonCode: "bogota-numerical-representation-unsupported",
+    message,
+    citationIds: [],
+  }
+}
+
 function invalidResult(input: unknown, message: string): NormalizedSpectrumResult {
   const inputs = invalidNormalizedInputs(input)
   const selection = resolvedSelection(inputs)
@@ -251,6 +261,46 @@ function invalidResult(input: unknown, message: string): NormalizedSpectrumResul
     saAt() {
       return normalizedSpectrumOrdinateSchema.parse({
         status: "invalid-input",
+        applicability,
+      })
+    },
+  }
+}
+
+function numericalUnsupportedResult(
+  inputs: BogotaNormalizedInputs,
+  hazard: BogotaHazard,
+  message: string,
+): NormalizedSpectrumResult {
+  const applicability = numericalUnsupportedApplicability(message)
+  const data = normalizedSpectrumResultDataSchema.parse({
+    schemaVersion: SPECTRUM_CONTRACT_SCHEMA_VERSION,
+    status: "unsupported",
+    engine: engineIdentity,
+    study: { id: BOGOTA_STUDY_ID, version: BOGOTA_STUDY_VERSION },
+    scenarioEvidenceKey: scenarioEvidenceKey(inputs.zoneId, inputs.hazardId),
+    scenarioType: "municipal-study",
+    normalizedInputs: inputs,
+    hazard: normalizedHazard(hazard),
+    warnings: [],
+    applicability,
+    sourceIds: [...bogotaSourceIds],
+    citationIds: [],
+    evidenceAvailability: {
+      status: "unavailable",
+      reason:
+        "La salida numérica solicitada no puede representarse de forma finita.",
+    },
+    traceSchemaVersion: BOGOTA_TRACE_SCHEMA_VERSION,
+    trace: null,
+    capabilities: bogotaCapabilities,
+  })
+  assertBogotaLineageResolves(data)
+  return {
+    ...data,
+    saAt() {
+      return normalizedSpectrumOrdinateSchema.parse({
+        status: "unsupported",
         applicability,
       })
     },
@@ -322,20 +372,42 @@ function invalidPeriodOrdinate(tSeconds: number) {
   })
 }
 
+function numericalUnsupportedOrdinate() {
+  const applicability = numericalUnsupportedApplicability(
+    "La ordenada solicitada no puede representarse como un número finito.",
+  )
+  return normalizedSpectrumOrdinateSchema.parse({
+    status: "unsupported",
+    applicability,
+  })
+}
+
 function successResult(
   inputs: BogotaNormalizedInputs,
   row: BogotaCanonicalRow,
   hazard: BogotaHazard,
 ): NormalizedSpectrumResult {
-  const trace = buildBogotaTrace(inputs, row, hazard)
-  const definitions = bogotaBranchDefinitions[hazard.id]
-  const points = sampleBogotaSpectrum(
+  const preflight = preflightBogotaSpectrum(
     row,
     hazard,
     inputs.importanceFactor,
-  ).map((point) => normalizeBogotaPoint(point, trace))
+  )
+  if (preflight.status === "unsupported") {
+    return numericalUnsupportedResult(inputs, hazard, preflight.message)
+  }
+  const sampledPoints = preflight.points
+  const trace = buildBogotaTrace(inputs, row, hazard)
+  const definitions = bogotaBranchDefinitions[hazard.id]
   const resultWarnings = successWarnings(hazard.id)
   const resultMetrics = bogotaMetrics(row, trace)
+  if (resultMetrics.some(({ value }) => !Number.isFinite(value))) {
+    return numericalUnsupportedResult(
+      inputs,
+      hazard,
+      "Las métricas solicitadas no pueden representarse como números finitos.",
+    )
+  }
+  const points = sampledPoints.map((point) => normalizeBogotaPoint(point, trace))
   const citations = [
     ...new Set([
       ...trace.steps.flatMap((step) => step.citationIds),
@@ -378,18 +450,25 @@ function successResult(
       if (!Number.isFinite(tSeconds) || tSeconds < 0) {
         return invalidPeriodOrdinate(tSeconds)
       }
-      return normalizedSpectrumOrdinateSchema.parse({
-        status: "ok",
-        point: normalizeBogotaPoint(
-          evaluateBogotaOrdinate(
-            tSeconds,
-            row,
-            hazard,
-            inputs.importanceFactor,
+      try {
+        return normalizedSpectrumOrdinateSchema.parse({
+          status: "ok",
+          point: normalizeBogotaPoint(
+            evaluateBogotaOrdinate(
+              tSeconds,
+              row,
+              hazard,
+              inputs.importanceFactor,
+            ),
+            trace,
           ),
-          trace,
-        ),
-      })
+        })
+      } catch (error) {
+        if (error instanceof BogotaNumericalRepresentationError) {
+          return numericalUnsupportedOrdinate()
+        }
+        throw error
+      }
     },
   }
 }
@@ -408,7 +487,18 @@ export function adaptBogotaSpectrum(input: unknown): NormalizedSpectrumResult {
   }
   const siteSpecific = bogotaSiteSpecificReason(inputs)
   if (siteSpecific) return siteSpecificResult(inputs, hazard, siteSpecific)
-  return successResult(inputs, row, hazard)
+  try {
+    return successResult(inputs, row, hazard)
+  } catch (error) {
+    if (error instanceof BogotaNumericalRepresentationError) {
+      return numericalUnsupportedResult(
+        inputs,
+        hazard,
+        "El espectro solicitado no puede representarse como números finitos.",
+      )
+    }
+    throw error
+  }
 }
 
 export function createBogotaScenario(
