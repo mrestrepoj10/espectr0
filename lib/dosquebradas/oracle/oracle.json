@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "status": "table-transcription-verified-calculation-blocked",
+  "records": [
+    {
+      "optionId": "zona-1",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.05,
+        "tc": 0.5,
+        "tl": 2.5,
+        "aa": 0.25,
+        "fa": 1.6,
+        "fv": 1.67
+      },
+      "tokens": {
+        "to": "0.05",
+        "tc": "0.5",
+        "tl": "2.5",
+        "aa": "0.25",
+        "fa": "1.60",
+        "fv": "1.67"
+      }
+    },
+    {
+      "optionId": "zona-2",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.05,
+        "tc": 0.7,
+        "tl": 3.5,
+        "aa": 0.25,
+        "fa": 1.76,
+        "fv": 2.57
+      },
+      "tokens": {
+        "to": "0.05",
+        "tc": "0.7",
+        "tl": "3.5",
+        "aa": "0.25",
+        "fa": "1.76",
+        "fv": "2.57"
+      }
+    },
+    {
+      "optionId": "zona-3",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.05,
+        "tc": 0.8,
+        "tl": 4.0,
+        "aa": 0.25,
+        "fa": 1.76,
+        "fv": 2.93
+      },
+      "tokens": {
+        "to": "0.05",
+        "tc": "0.8",
+        "tl": "4",
+        "aa": "0.25",
+        "fa": "1.76",
+        "fv": "2.93"
+      }
+    },
+    {
+      "optionId": "zona-4",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.05,
+        "tc": 0.32,
+        "tl": 1.6,
+        "aa": 0.25,
+        "fa": 1.76,
+        "fv": 1.17
+      },
+      "tokens": {
+        "to": "0.05",
+        "tc": "0.32",
+        "tl": "1.6",
+        "aa": "0.25",
+        "fa": "1.76",
+        "fv": "1.17"
+      }
+    },
+    {
+      "optionId": "zona-5",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.1,
+        "tc": 0.8,
+        "tl": 4.0,
+        "aa": 0.25,
+        "fa": 1.6,
+        "fv": 2.67
+      },
+      "tokens": {
+        "to": "0.1",
+        "tc": "0.8",
+        "tl": "4",
+        "aa": "0.25",
+        "fa": "1.60",
+        "fv": "2.67"
+      }
+    }
+  ],
+  "negativeCases": [
+    {
+      "id": "calculate-spectrum",
+      "reason": "official adopted formula unavailable",
+      "outcome": "reject"
+    },
+    {
+      "id": "assume-av",
+      "reason": "Av is defined but not tabulated",
+      "outcome": "reject"
+    },
+    {
+      "id": "automatic-zone",
+      "reason": "GIS automation is out of scope and unsupported",
+      "outcome": "reject"
+    }
+  ],
+  "inputSha256": "db8c869cb8d84e86942b507e522c7a15ec3c0d3e9acecada00746066194b6019"
+}
