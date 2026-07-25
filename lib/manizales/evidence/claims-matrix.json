@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "exactOptionHazardMatrix": {
+    "options": 1,
+    "hazards": 1,
+    "fieldsPerRow": 5,
+    "expectedFieldValues": 5,
+    "exactCoveredFieldValues": 5,
+    "coveragePercent": 100
+  },
+  "categoryCoverage": {
+    "direct": {
+      "expected": 5,
+      "cited": 5,
+      "coveragePercent": 100
+    },
+    "formulaInventory": {
+      "expected": 4,
+      "dispositioned": 4,
+      "coveragePercent": 100,
+      "operationalFormulaCoveragePercent": 0
+    },
+    "warning": {
+      "expected": 6,
+      "citedOrExplicitlyBlocked": 6,
+      "coveragePercent": 100
+    },
+    "applicability": {
+      "expected": 5,
+      "citedOrExplicitlyBlocked": 5,
+      "coveragePercent": 100
+    }
+  },
+  "claims": [
+    {
+      "id": "historical-zones",
+      "kind": "lineage",
+      "statement": "La actualizacion describe el estudio 2002 con tres zonas de diseno A, B y C.",
+      "citation": {
+        "sourceDocumentId": "manizales-update-2015",
+        "physicalPage": 2,
+        "printedPage": null,
+        "reference": "Introduccion"
+      }
+    },
+    {
+      "id": "updated-governing-model",
+      "kind": "direct",
+      "statement": "La actualizacion calcula 1275 sitios y presenta resultados rasterizados, no por zonas.",
+      "citation": {
+        "sourceDocumentId": "manizales-update-2015",
+        "physicalPage": 9,
+        "printedPage": null,
+        "reference": "Conclusiones, numeral 3"
+      }
+    },
+    {
+      "id": "hazard-return",
+      "kind": "direct",
+      "statement": "El unico periodo de retorno cuantificado para el espectro de amenaza uniforme es 475 anos.",
+      "citation": {
+        "sourceDocumentId": "manizales-update-2015",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Resumen"
+      }
+    },
+    {
+      "id": "fit-parameters",
+      "kind": "direct",
+      "statement": "El ajuste fija Aa=0.25g, Av=0.25g e I=1, y deja Fa/Fv como parametros libres de suelo.",
+      "citation": {
+        "sourceDocumentId": "manizales-update-2015",
+        "physicalPage": 8,
+        "printedPage": null,
+        "reference": "Seccion 5.1"
+      }
+    },
+    {
+      "id": "building-compatibility",
+      "kind": "applicability",
+      "statement": "La compatibilidad con la NSR-10 se formula para espectros de edificaciones nuevas una vez definido el espectro local.",
+      "citation": {
+        "sourceDocumentId": "manizales-update-2015",
+        "physicalPage": 9,
+        "printedPage": null,
+        "reference": "Conclusiones, numeral 5"
+      }
+    },
+    {
+      "id": "adoption-pending-2019",
+      "kind": "warning",
+      "statement": "El informe municipal de cierre 2016-2019 ubica adoptar e implementar la microzonificacion armonizada entre los temas en desarrollo.",
+      "citation": {
+        "sourceDocumentId": "manizales-management-report-2016-2019",
+        "physicalPage": 65,
+        "printedPage": null,
+        "reference": "Temas que se encuentran en desarrollo"
+      }
+    },
+    {
+      "id": "pot-current-2025",
+      "kind": "applicability",
+      "statement": "Una comunicacion oficial de 2025 denomina vigente al POT adoptado por Acuerdo 0958 de 2017; esto no acredita por si solo la adopcion de la microzonificacion.",
+      "citation": {
+        "sourceDocumentId": "manizales-pot-status-2025",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Primer parrafo tecnico"
+      }
+    }
+  ]
+}

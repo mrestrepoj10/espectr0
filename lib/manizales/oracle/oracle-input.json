@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "studyId": "manizales-microzonation",
+  "status": "research-only-activation-blocked",
+  "candidate": {
+    "optionId": "updated-raster-grid",
+    "hazardId": "uniform-hazard-475y",
+    "fields": {
+      "node-count": "1275",
+      "return-period": "475",
+      "aa": "0.25",
+      "av": "0.25",
+      "importance-factor-fit": "1"
+    }
+  },
+  "candidateMetadata": {
+    "spatialModel": "rasterized",
+    "soilParameters": "Fa/Fv"
+  },
+  "requiredForSpectrum": [
+    "node-specific Fa",
+    "node-specific Fv",
+    "piecewise spectrum formula",
+    "branch limits",
+    "spectrum damping",
+    "adoption instrument"
+  ]
+}

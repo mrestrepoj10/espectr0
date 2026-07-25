@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "blocking": true,
+  "entries": [
+    {
+      "id": "adoption-currentness",
+      "severity": "blocker",
+      "scope": "legal-status",
+      "finding": "No se recupero el acto de adopcion, vigencia, modificacion o derogatoria de la actualizacion armonizada.",
+      "disposition": "No activar. Exigir instrumento primario completo y busqueda de vigencia repetible."
+    },
+    {
+      "id": "manual-location-model",
+      "severity": "blocker",
+      "scope": "selector",
+      "finding": "El modelo tecnico gobernante es espacial por puntos; un selector manual de zonas alteraria el modelo.",
+      "disposition": "No discretizar, interpolar ni reutilizar A/B/C como si fueran la actualizacion."
+    },
+    {
+      "id": "missing-node-values",
+      "severity": "blocker",
+      "scope": "coefficients",
+      "finding": "No se dispone de los 1275 pares Fa/Fv en una fuente tabular bloqueada.",
+      "disposition": "Exigir tabla oficial completa o instrumento de consulta oficial reproducible."
+    },
+    {
+      "id": "missing-formula",
+      "severity": "blocker",
+      "scope": "formula",
+      "finding": "Faltan ecuacion operacional, limites de rama y amortiguamiento del espectro.",
+      "disposition": "No importar automaticamente formulas NSR-10 desde otra fuente como si fueran publicadas por el estudio."
+    },
+    {
+      "id": "original-byte-lock",
+      "severity": "blocker",
+      "scope": "lineage",
+      "finding": "El PDF original 2002 no pudo bloquearse; las advertencias indexadas no se canonizan.",
+      "disposition": "Recuperar y revisar el original antes de cualquier uso historico."
+    },
+    {
+      "id": "independent-review",
+      "severity": "blocker",
+      "scope": "review",
+      "finding": "No existe revision humana independiente firmada del dossier.",
+      "disposition": "Mantener no-merge/no-activation."
+    }
+  ]
+}

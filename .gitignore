@@ -42,3 +42,8 @@ next-env.d.ts
 
 # internal planning notes (local only)
 /docs/IDEAS.md
+
+# local research extraction/rendering scratch
+/tmp/
+__pycache__/
+*.pyc
