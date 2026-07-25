@@ -10,7 +10,12 @@ import {
   selectRepresentativeBoundaryPoints,
   slugifyPdfPart,
 } from "./memoria-pdf"
-import { renderCalculationMemoriaPdf } from "./memoria-pdf-renderer"
+import {
+  ContextualPdfRendererRegistry,
+  renderCalculationMemoriaPdf,
+  renderNormalizedSpectrumMemoriaPdf,
+} from "./memoria-pdf-renderer"
+import { adaptNsr10Spectrum } from "./spectra"
 
 function caliTrace() {
   const municipality = lookupMunicipioByCode("76001")
@@ -92,4 +97,61 @@ describe("calculation memoria PDF helpers", () => {
     expect(source.match(/\/Type \/Page\b/g)).toHaveLength(5)
     expect(bytes.byteLength).toBeGreaterThan(20_000)
   }, 30_000)
+
+  it("preserves the five rich NSR pages behind the normalized renderer", async () => {
+    const municipality = lookupMunicipioByCode("76001")
+    if (!municipality) throw new Error("Cali fixture is missing")
+    const result = adaptNsr10Spectrum(
+      {
+        aa: municipality.aa,
+        av: municipality.av,
+        ae: municipality.ae,
+        ad: municipality.ad,
+        hazardLevel: "design",
+        soilProfile: "D",
+        importanceGroup: "I",
+        mode: "general",
+      },
+      { municipality },
+    )
+    const blob = await renderNormalizedSpectrumMemoriaPdf(result)
+    const bytes = Buffer.from(await blob.arrayBuffer())
+    const source = bytes.toString("latin1")
+
+    expect(source.startsWith("%PDF-")).toBe(true)
+    expect(source.match(/\/Type \/Page\b/g)).toHaveLength(5)
+    expect(bytes.byteLength).toBeGreaterThan(20_000)
+  }, 30_000)
+
+  it("fails closed when a normalized engine has no PDF renderer", async () => {
+    const municipality = lookupMunicipioByCode("76001")
+    if (!municipality) throw new Error("Cali fixture is missing")
+    const result = adaptNsr10Spectrum(
+      {
+        aa: municipality.aa,
+        av: municipality.av,
+        soilProfile: "D",
+        importanceGroup: "I",
+      },
+      { municipality },
+    )
+
+    await expect(
+      renderNormalizedSpectrumMemoriaPdf({
+        ...result,
+        engine: { ...result.engine, id: "future-engine" },
+      }),
+    ).rejects.toThrow(/No contextual PDF renderer/)
+
+    const renderer = {
+      engineId: "test-engine",
+      render: async () => new Blob(),
+      filename: () => "test.pdf",
+    }
+    const registry = new ContextualPdfRendererRegistry().register(renderer)
+    expect(() => registry.register(renderer)).toThrow(/already registered/)
+    expect(() => registry.resolve("missing-engine")).toThrow(
+      /No contextual PDF renderer/,
+    )
+  })
 })

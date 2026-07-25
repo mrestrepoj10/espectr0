@@ -21,9 +21,18 @@ import {
   normalizePdfText,
   selectRepresentativeBoundaryPoints,
 } from "./memoria-pdf"
+import {
+  NSR10_ENGINE_ID,
+  parseNsr10TraceEnvelope,
+  spectrumResultData,
+} from "./spectra"
 
 import type { CalculationStep, CalculationTrace } from "./nsr10"
 import type { SiteCoefficientInterpolationTrace } from "./nsr10/site-coefficients"
+import type {
+  NormalizedSpectrumResult,
+  NormalizedSpectrumResultData,
+} from "./spectra"
 
 const colors = {
   ink: "#172033",
@@ -643,6 +652,76 @@ export async function downloadCalculationMemoriaPdf(trace: CalculationTrace) {
   const anchor = document.createElement("a")
   anchor.href = url
   anchor.download = calculationMemoriaFilename(trace)
+  anchor.click()
+  window.setTimeout(() => URL.revokeObjectURL(url), 0)
+}
+
+function normalizedResultData(result: NormalizedSpectrumResult) {
+  if (!result.capabilities.contextualPdf.supported) {
+    throw new Error(result.capabilities.contextualPdf.reason)
+  }
+  const data = spectrumResultData(result)
+  if (data.status !== "ok") {
+    throw new Error("Contextual PDF requires an applicable normalized spectrum result")
+  }
+  return data
+}
+
+export type ContextualPdfRenderer = {
+  engineId: string
+  render(result: NormalizedSpectrumResultData): Promise<Blob>
+  filename(result: NormalizedSpectrumResultData): string
+}
+
+export class ContextualPdfRendererRegistry {
+  readonly #renderers = new Map<string, ContextualPdfRenderer>()
+
+  register(renderer: ContextualPdfRenderer) {
+    if (this.#renderers.has(renderer.engineId)) {
+      throw new Error(`Contextual PDF renderer already registered: ${renderer.engineId}`)
+    }
+    this.#renderers.set(renderer.engineId, renderer)
+    return this
+  }
+
+  resolve(engineId: string) {
+    const renderer = this.#renderers.get(engineId)
+    if (!renderer) {
+      throw new Error(`No contextual PDF renderer is installed for ${engineId}`)
+    }
+    return renderer
+  }
+}
+
+export const contextualPdfRendererRegistry = new ContextualPdfRendererRegistry().register({
+  engineId: NSR10_ENGINE_ID,
+  async render(result) {
+    if (result.status !== "ok") throw new Error("Expected an applicable NSR result")
+    return renderCalculationMemoriaPdf(parseNsr10TraceEnvelope(result.trace))
+  },
+  filename(result) {
+    if (result.status !== "ok") throw new Error("Expected an applicable NSR result")
+    return calculationMemoriaFilename(parseNsr10TraceEnvelope(result.trace))
+  },
+})
+
+export async function renderNormalizedSpectrumMemoriaPdf(
+  result: NormalizedSpectrumResult,
+) {
+  const data = normalizedResultData(result)
+  return contextualPdfRendererRegistry.resolve(data.engine.id).render(data)
+}
+
+export async function downloadNormalizedSpectrumMemoriaPdf(
+  result: NormalizedSpectrumResult,
+) {
+  const data = normalizedResultData(result)
+  const renderer = contextualPdfRendererRegistry.resolve(data.engine.id)
+  const blob = await renderer.render(data)
+  const url = URL.createObjectURL(blob)
+  const anchor = document.createElement("a")
+  anchor.href = url
+  anchor.download = renderer.filename(data)
   anchor.click()
   window.setTimeout(() => URL.revokeObjectURL(url), 0)
 }
