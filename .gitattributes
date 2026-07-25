@@ -8,3 +8,7 @@
 /scripts/*nsr10*.mjs text eol=lf
 /scripts/*nsr10*.py text eol=lf
 /lib/regulatory/evidence/fixture-source.txt text eol=lf
+/lib/armenia/**/*.json text eol=lf
+/lib/armenia/**/*.md text eol=lf
+/lib/armenia/**/*.mjs text eol=lf
+/lib/armenia/**/*.py text eol=lf

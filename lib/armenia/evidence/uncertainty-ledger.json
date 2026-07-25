@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "blocking": true,
+  "entries": [
+    {
+      "id": "official-decree-079-bytes-and-technical-annex-not-located",
+      "severity": "blocker",
+      "status": "open",
+      "issue": "The official decree bytes and complete adopted technical annex were not located; exact historical zones, coefficients, equations and warnings cannot be attested.",
+      "requiredResolution": "Obtain source bytes from the issuing authority, verify CAP approval and municipal adoption, then rebuild the complete option × hazard × field evidence and independent numerical oracle."
+    },
+    {
+      "id": "legacy-study-not-demonstrated-harmonized-with-nsr10",
+      "severity": "blocker",
+      "status": "resolved-not-applicable-for-product",
+      "issue": "The legacy model was adopted against NSR-98 and is not demonstrated harmonized with NSR-10.",
+      "requiredResolution": "Obtain source bytes from the issuing authority, verify CAP approval and municipal adoption, then rebuild the complete option × hazard × field evidence and independent numerical oracle."
+    },
+    {
+      "id": "2025-study-not-demonstrated-cap-approved",
+      "severity": "blocker",
+      "status": "open",
+      "issue": "No primary Commission approval for the delivered 2025 study was verified.",
+      "requiredResolution": "Obtain source bytes from the issuing authority, verify CAP approval and municipal adoption, then rebuild the complete option × hazard × field evidence and independent numerical oracle."
+    },
+    {
+      "id": "2025-study-not-demonstrated-adopted-by-municipal-decree",
+      "severity": "blocker",
+      "status": "open",
+      "issue": "No municipal decree adopting the delivered 2025 study was verified.",
+      "requiredResolution": "Obtain source bytes from the issuing authority, verify CAP approval and municipal adoption, then rebuild the complete option × hazard × field evidence and independent numerical oracle."
+    },
+    {
+      "id": "current-zones-hazards-coefficients-formulas-and-site-specific-rules-unavailable",
+      "severity": "blocker",
+      "status": "open",
+      "issue": "The current exact zone × hazard matrix and its formulas/site-specific branches are unavailable from an adopted primary package.",
+      "requiredResolution": "Obtain source bytes from the issuing authority, verify CAP approval and municipal adoption, then rebuild the complete option × hazard × field evidence and independent numerical oracle."
+    }
+  ]
+}

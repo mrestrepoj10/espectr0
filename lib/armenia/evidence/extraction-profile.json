@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "coordinateSystem": "normalized top-left [0,1]",
+  "sourceDelivery": "external-only",
+  "pdfExtractor": {
+    "name": "pdfplumber",
+    "version": "0.11.10",
+    "ocrUsed": false
+  },
+  "pdfPageCounter": {
+    "name": "pypdf",
+    "version": "6.14.2"
+  },
+  "htmlExtractor": {
+    "method": "UTF-8 exact text and absence assertions",
+    "ocrUsed": false
+  },
+  "verifier": "verify_official_sources.py"
+}

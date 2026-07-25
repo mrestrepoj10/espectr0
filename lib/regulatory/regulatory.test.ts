@@ -422,14 +422,24 @@ describe("strict aggregate boundary", () => {
 		const second = execFileSync(process.execPath, command, { encoding: "utf8" });
 		expect(second).toBe(first);
 		expect(first.endsWith("\n")).toBe(true);
-		expect(JSON.parse(first)).toMatchObject({
-			schemaVersion: 1,
-			installedStudies: ["framework-fixture", "nsr10"],
-			studies: [
-				{ studyId: "framework-fixture", coverage: { bundledSources: 1 } },
-				{ studyId: "nsr10", coverage: { expectedRows: 1_123 } },
-			],
-		});
+		const report = JSON.parse(first);
+		expect(report.schemaVersion).toBe(1);
+		expect(report.installedStudies).toEqual([...report.installedStudies].sort());
+		expect(report.studies.map(({ studyId }: { studyId: string }) => studyId)).toEqual(
+			report.installedStudies,
+		);
+		expect(report.studies).toEqual(
+			expect.arrayContaining([
+				expect.objectContaining({
+					studyId: "framework-fixture",
+					coverage: expect.objectContaining({ bundledSources: 1 }),
+				}),
+				expect.objectContaining({
+					studyId: "nsr10",
+					coverage: expect.objectContaining({ expectedRows: 1_123 }),
+				}),
+			]),
+		);
 	}, 30_000);
 });
 
