@@ -1,3 +1,4 @@
+/.gitattributes text eol=lf
 # Regulatory evidence and golden artifacts are byte-for-byte reproducible on
 # every platform. In particular, Windows must not check these files out as CRLF.
 /lib/nsr10/data/*.json text eol=lf
@@ -8,3 +9,11 @@
 /scripts/*nsr10*.mjs text eol=lf
 /scripts/*nsr10*.py text eol=lf
 /lib/regulatory/evidence/fixture-source.txt text eol=lf
+/lib/bogota/data/*.json text eol=lf
+/lib/bogota/evidence/*.json text eol=lf
+/lib/bogota/evidence/*.mjs text eol=lf
+/lib/bogota/evidence/*.py text eol=lf
+/lib/bogota/oracle/*.json text eol=lf
+/lib/bogota/oracle/*.py text eol=lf
+/lib/bogota/*.md text eol=lf
+/lib/bogota/oracle/*.md text eol=lf
