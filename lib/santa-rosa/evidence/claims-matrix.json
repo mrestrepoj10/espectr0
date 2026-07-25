@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "regulatoryStatusMatrix": {
+    "expected": 1,
+    "cited": 1,
+    "coveragePercent": 100
+  },
+  "proposedSpectrumMatrix": {
+    "expected": 0,
+    "cited": 0,
+    "coverageStatus": "not-applicable-no-complete-current-primary-matrix"
+  },
+  "claimCoverage": {
+    "applicability": {
+      "expected": 5,
+      "cited": 5,
+      "coveragePercent": 100
+    },
+    "warnings": {
+      "expected": 5,
+      "cited": 5,
+      "coveragePercent": 100
+    }
+  },
+  "claims": [
+    {
+      "id": "incorporated",
+      "statement": "Acuerdo 028 incorporates Acuerdo 012's microzonation.",
+      "citationId": "incorporation"
+    },
+    {
+      "id": "transition",
+      "statement": "The transition strip is approximately 200 m each side and uses the more demanding adjacent acceleration.",
+      "citationId": "zones-and-transition"
+    },
+    {
+      "id": "geotechnical",
+      "statement": "The municipal spectrum never replaces project geotechnical investigation.",
+      "citationId": "geotechnical-and-aa-av"
+    },
+    {
+      "id": "aa-av",
+      "statement": "Aa and Av are not valid with the municipal spectra; the text points to Am and An equivalents.",
+      "citationId": "geotechnical-and-aa-av"
+    },
+    {
+      "id": "later-nsr10-reference",
+      "statement": "The 2013 modification references NRS-10 together with the adopted municipal soil zoning.",
+      "citationId": "compatibility-cell"
+    }
+  ]
+}

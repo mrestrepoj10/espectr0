@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "nsr98-versus-nrs10",
+      "status": "resolved-for-product",
+      "issue": "Acuerdo 028 names NSR-98; Acuerdo 076 later names NRS-10 in selected height provisions.",
+      "resolution": "Record both exact clauses; do not invent a harmonized equation set."
+    },
+    {
+      "id": "acuerdo012-missing",
+      "status": "resolved-for-product",
+      "issue": "Acuerdo 028 incorporates Acuerdo 012, but the latter's complete primary package was not located.",
+      "resolution": "Preserve legal lineage and warnings; ship zero spectrum rows."
+    },
+    {
+      "id": "zone-labels-without-values",
+      "status": "resolved-for-product",
+      "issue": "Zone labels are official but coefficient/formula tables are unavailable.",
+      "resolution": "Document labels without making them calculator-selectable."
+    }
+  ]
+}
