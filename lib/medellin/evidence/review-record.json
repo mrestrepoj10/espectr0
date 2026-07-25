@@ -1,13 +1,14 @@
 {
   "schemaVersion": 1,
   "authorRole": "research agent R3",
-  "preparedOn": "2026-07-22",
+  "preparedOn": "2026-07-25",
   "independentReview": {
     "status": "pending",
     "reviewer": null,
     "reviewedOn": null,
     "requiredReproductions": [
-      "all four source hashes",
+      "all six source hashes",
+      "July 2026 currentness attestation on physical pages 202, 1345 and 1346",
       "selected cells in both six-column hazard blocks",
       "plateau product rounding",
       "Tc boundary and decay witness",

@@ -11,5 +11,6 @@
 /lib/medellin/data/*.json text eol=lf
 /lib/medellin/evidence/*.json text eol=lf
 /lib/medellin/evidence/*.mjs text eol=lf
+/lib/medellin/evidence/*.py text eol=lf
 /lib/medellin/oracle/*.json text eol=lf
 /lib/medellin/oracle/*.py text eol=lf

@@ -365,6 +365,83 @@
           }
         }
       ]
+    },
+    {
+      "id": "medellin-pot-inputs-2026-v3",
+      "issuingAuthority": "Distrito Especial de Ciencia, Tecnología e Innovación de Medellín",
+      "officialTitle": "Insumos técnicos Tomo IIIA",
+      "edition": "Versión 3, junio de 2026",
+      "revision": "Publicación oficial de julio de 2026; consulta 25 de julio de 2026",
+      "adoptionInstrument": "Insumo técnico de revisión POT; declara expresamente que el decreto de adopción de la microzonificación no ha sido adoptado",
+      "amendmentsAndErrata": [],
+      "legalStatus": "draft",
+      "applicabilityStatus": "not-applicable",
+      "officialUrl": "https://www.medellin.gov.co/es/wp-content/uploads/2026/07/3_Tomo_III_A_InsTec_REst_SPyC.pdf",
+      "retrievedOn": "2026-07-25",
+      "redistribution": {
+        "decision": "external-only",
+        "rationale": "Documento oficial de trabajo sin licencia expresa de redistribución; se conservan huella, localizador y atestación reproducible, no los bytes."
+      },
+      "mediaType": "application/pdf",
+      "pageCount": 1043,
+      "sha256": "a1b8f55760917cbb84fe27094f58b1366df573d4f344cabc477ea64534da1b38",
+      "pages": [
+        {
+          "physicalPage": 202,
+          "printedPage": "175",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "medellin-pot-draft-agreement-2026-v3",
+      "issuingAuthority": "Distrito Especial de Ciencia, Tecnología e Innovación de Medellín",
+      "officialTitle": "Tomo V - Proyecto de Acuerdo del Plan de Ordenamiento Territorial",
+      "edition": "Versión 3, julio de 2026",
+      "revision": "Consulta oficial 25 de julio de 2026",
+      "adoptionInstrument": "Proyecto de Acuerdo; el artículo 547 G propuesto exige un acto administrativo distrital separado y aval previo de la Comisión Asesora Permanente",
+      "amendmentsAndErrata": [],
+      "legalStatus": "draft",
+      "applicabilityStatus": "not-applicable",
+      "officialUrl": "https://www.medellin.gov.co/es/wp-content/uploads/2026/07/13_Tomo_V_Proyecto-de-Acuerdo.pdf",
+      "retrievedOn": "2026-07-25",
+      "redistribution": {
+        "decision": "external-only",
+        "rationale": "Proyecto normativo oficial sin licencia expresa de redistribución; se conservan huella, localizadores y atestación reproducible, no los bytes."
+      },
+      "mediaType": "application/pdf",
+      "pageCount": 1499,
+      "sha256": "596b6aabf59576ad1c336c1a7eef0df98436950fa23a478494015f240bde509b",
+      "pages": [
+        {
+          "physicalPage": 1345,
+          "printedPage": "1345",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "physicalPage": 1346,
+          "printedPage": "1346",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ]
     }
   ],
   "citations": [
@@ -4926,13 +5003,81 @@
         "Decreto",
         "no ha sido adoptado"
       ]
+    },
+    {
+      "id": "applicability-2026-v3-not-adopted",
+      "sourceDocumentId": "medellin-pot-inputs-2026-v3",
+      "regionKind": "applicability",
+      "physicalPage": 202,
+      "printedPage": "175",
+      "reference": "Estudio de armonización, versión 3",
+      "rect": {
+        "left": 0.13,
+        "top": 0.68,
+        "width": 0.74,
+        "height": 0.12
+      },
+      "extractedToken": "Aunque actualmente el Decreto para adoptar las disposiciones de la microzonificación sísmica no ha sido adoptado",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Decreto",
+        "no ha sido adoptado"
+      ]
+    },
+    {
+      "id": "applicability-2026-proposed-separate-act",
+      "sourceDocumentId": "medellin-pot-draft-agreement-2026-v3",
+      "regionKind": "applicability",
+      "physicalPage": 1345,
+      "printedPage": "1345",
+      "reference": "Proyecto de artículo 547 G, inicio",
+      "rect": {
+        "left": 0.51,
+        "top": 0.78,
+        "width": 0.47,
+        "height": 0.12
+      },
+      "extractedToken": "Los resultados del Estudio de Armonización de la Microzonificación Sísmica del Valle de Aburrá deberán ser adoptados mediante acto administrativo expedido por el Distrito, previo aval de la Comisión Asesora Permanente del Régimen de Construcciones Sismo",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "deberán ser adoptados mediante acto administrativo",
+        "previo aval",
+        "Comisión Asesora Permanente"
+      ]
+    },
+    {
+      "id": "applicability-2026-proposed-nsr-purpose",
+      "sourceDocumentId": "medellin-pot-draft-agreement-2026-v3",
+      "regionKind": "applicability",
+      "physicalPage": 1346,
+      "printedPage": "1346",
+      "reference": "Proyecto de artículo 547 G, continuación",
+      "rect": {
+        "left": 0.51,
+        "top": 0,
+        "width": 0.47,
+        "height": 0.16
+      },
+      "extractedToken": "Resistentes, con el fin de asegurar que las nuevas edificaciones cumplan con los parámetros de diseño establecidos en la Norma Sismo Resistente NSR -10 o en las disposiciones que la modifiquen o sustituyan",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Resistentes",
+        "nuevas edificaciones",
+        "NSR -10"
+      ]
     }
   ],
   "applicabilityCitationIds": [
     "applicability-directive-scope",
     "applicability-2014-not-regulatory",
     "applicability-2014-repeal",
-    "applicability-2026-not-adopted"
+    "applicability-2026-not-adopted",
+    "applicability-2026-v3-not-adopted",
+    "applicability-2026-proposed-separate-act",
+    "applicability-2026-proposed-nsr-purpose"
   ],
   "coverage": {
     "optionIds": [

@@ -26,6 +26,24 @@
         "applicability-2026-not-adopted"
       ],
       "resolution": "A later harmonization study exists but the official 2026 source says its adoption decree has not been adopted; do not mix its model with 1999 values."
+    },
+    {
+      "id": "march-v2-vs-june-v3-currentness",
+      "status": "resolved-for-product",
+      "officialEvidence": [
+        "applicability-2026-not-adopted",
+        "applicability-2026-v3-not-adopted"
+      ],
+      "resolution": "The later June 2026 version 3 repeats the no-adoption statement and controls the currentness conclusion without changing the historical table."
+    },
+    {
+      "id": "proposed-article-vs-present-adoption",
+      "status": "resolved-for-product",
+      "officialEvidence": [
+        "applicability-2026-proposed-separate-act",
+        "applicability-2026-proposed-nsr-purpose"
+      ],
+      "resolution": "Proposed article 547 G requires a future separate district administrative act and prior CAP approval; the proposal is not itself present adoption."
     }
   ]
 }

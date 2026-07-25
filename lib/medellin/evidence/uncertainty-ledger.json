@@ -7,13 +7,13 @@
       "severity": "blocker",
       "status": "resolved-no-adoption",
       "issue": "Whether the 1999/2011 material currently substitutes NSR-10.",
-      "resolution": "Official 2014 and March 2026 sources say it was not incorporated/adopted; activation is prohibited unless a later adoption instrument and CAP approval are produced."
+      "resolution": "Official 2014, June 2026 v3 and July 2026 proposed-POT sources do not establish adoption; activation is prohibited unless the separate district act and prior CAP approval required by the proposed article 547 G are produced."
     },
     {
       "id": "return-periods",
       "severity": "blocker",
       "status": "open",
-      "issue": "Neither locked table/support nor official POT excerpts state return periods for the two historical hazards.",
+      "issue": "None of the six locked official sources states return periods for the two historical hazards.",
       "requiredResolution": "Obtain the primary 1999 report or 2019 harmonization report and an adopted instrument explicitly defining probabilities/return periods."
     },
     {

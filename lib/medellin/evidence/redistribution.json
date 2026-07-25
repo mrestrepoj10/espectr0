@@ -25,6 +25,18 @@
       "officialUrl": "https://www.medellin.gov.co/es/wp-content/uploads/2026/03/Insumos_Tecnicos_TomoIIIA-v2.pdf",
       "decision": "external-only",
       "rationale": "No express redistribution license located on the official delivery page."
+    },
+    {
+      "sourceDocumentId": "medellin-pot-inputs-2026-v3",
+      "officialUrl": "https://www.medellin.gov.co/es/wp-content/uploads/2026/07/3_Tomo_III_A_InsTec_REst_SPyC.pdf",
+      "decision": "external-only",
+      "rationale": "No express redistribution license located on the official delivery page."
+    },
+    {
+      "sourceDocumentId": "medellin-pot-draft-agreement-2026-v3",
+      "officialUrl": "https://www.medellin.gov.co/es/wp-content/uploads/2026/07/13_Tomo_V_Proyecto-de-Acuerdo.pdf",
+      "decision": "external-only",
+      "rationale": "No express redistribution license located on the official delivery page."
     }
   ],
   "committedSourceBytes": false

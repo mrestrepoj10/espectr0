@@ -54,6 +54,39 @@
       }
     },
     {
+      "id": "applicability-2026-v3-not-adopted",
+      "kind": "applicability",
+      "claim": "Estudio de armonización, versión 3",
+      "citation": {
+        "sourceDocumentId": "medellin-pot-inputs-2026-v3",
+        "physicalPage": 202,
+        "printedPage": "175",
+        "citationId": "applicability-2026-v3-not-adopted"
+      }
+    },
+    {
+      "id": "applicability-2026-proposed-separate-act",
+      "kind": "applicability",
+      "claim": "Proyecto de artículo 547 G, inicio",
+      "citation": {
+        "sourceDocumentId": "medellin-pot-draft-agreement-2026-v3",
+        "physicalPage": 1345,
+        "printedPage": "1345",
+        "citationId": "applicability-2026-proposed-separate-act"
+      }
+    },
+    {
+      "id": "applicability-2026-proposed-nsr-purpose",
+      "kind": "applicability",
+      "claim": "Proyecto de artículo 547 G, continuación",
+      "citation": {
+        "sourceDocumentId": "medellin-pot-draft-agreement-2026-v3",
+        "physicalPage": 1346,
+        "printedPage": "1346",
+        "citationId": "applicability-2026-proposed-nsr-purpose"
+      }
+    },
+    {
       "id": "warning-damping",
       "kind": "warning",
       "claim": "Amortiguamiento",

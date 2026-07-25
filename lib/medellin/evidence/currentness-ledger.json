@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-07-25",
+  "status": "no-current-municipal-adoption-established",
+  "controllingBuildingWorkflow": "NSR-10 national",
+  "latestOfficialEvidence": [
+    {
+      "sourceDocumentId": "medellin-pot-inputs-2026-v3",
+      "citationIds": [
+        "applicability-2026-v3-not-adopted"
+      ],
+      "conclusion": "The June 2026 version 3 official POT input states that the microzonation adoption decree has not been adopted."
+    },
+    {
+      "sourceDocumentId": "medellin-pot-draft-agreement-2026-v3",
+      "citationIds": [
+        "applicability-2026-proposed-separate-act",
+        "applicability-2026-proposed-nsr-purpose"
+      ],
+      "conclusion": "The July 2026 proposed article 547 G contemplates future adoption through a separate district act after CAP approval; it does not enact the parameters."
+    }
+  ],
+  "openQuestions": [
+    "return-periods",
+    "short-period-equation",
+    "site-specific-method",
+    "directive-currentness"
+  ],
+  "activationDecision": "research-only-no-activation"
+}

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "retrievedOn": "2026-07-22",
+  "retrievedOn": "2026-07-25",
   "locks": [
     {
       "sourceDocumentId": "medellin-dap-2011-support",
@@ -32,6 +32,22 @@
       "sha256": "c92b571be8e4b48dfda77fe93d832aa27304a8dd36e5bd782052ede7d67526ce",
       "pageCount": 944,
       "byteLength": 38296454,
+      "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "medellin-pot-inputs-2026-v3",
+      "officialUrl": "https://www.medellin.gov.co/es/wp-content/uploads/2026/07/3_Tomo_III_A_InsTec_REst_SPyC.pdf",
+      "sha256": "a1b8f55760917cbb84fe27094f58b1366df573d4f344cabc477ea64534da1b38",
+      "pageCount": 1043,
+      "byteLength": 44842400,
+      "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "medellin-pot-draft-agreement-2026-v3",
+      "officialUrl": "https://www.medellin.gov.co/es/wp-content/uploads/2026/07/13_Tomo_V_Proyecto-de-Acuerdo.pdf",
+      "sha256": "596b6aabf59576ad1c336c1a7eef0df98436950fa23a478494015f240bde509b",
+      "pageCount": 1499,
+      "byteLength": 13785296,
       "redistributionDecision": "external-only"
     }
   ]

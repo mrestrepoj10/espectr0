@@ -1,6 +1,6 @@
 # Adoption and currentness analysis
 
-Retrieval date: 2026-07-22. Only primary official Medellín sources establish conclusions below.
+Currentness date: 2026-07-25. Only primary official Medellín sources establish conclusions below.
 
 ## Timeline
 
@@ -13,10 +13,12 @@ Retrieval date: 2026-07-22. Only primary official Medellín sources establish co
 | 2014 | POT evaluation, printed p. 191 (physical PDF p. 192) | Says the study results were not incorporated as regulatory rules and must be harmonized with NSR-10 before they can be required for building permits. | NSR-10 remains the calculator's governing building workflow. |
 | 2019 | Lineage reported by official POT input v2 (2026), printed p. 168 (physical p. 193) | AMVA/DAGRED/Universidad de los Andes produced a harmonization and included Medellín's five corregimientos. | A newer technical model exists, so mixing 1999 coefficients with later geography/model assumptions is forbidden. |
 | 2026-03 | Official POT input v2, printed p. 168 (physical p. 193) | Expressly says the decree adopting the microzonation provisions has not been adopted. | Current municipal activation is blocked. |
+| 2026-06 (published 2026-07) | Official POT input v3, printed p. 175 (physical p. 202) | Repeats literally that the decree to adopt the microzonation provisions has not been adopted. | This later official version controls the currentness conclusion and keeps activation blocked. |
+| 2026-07 | Proposed POT agreement v3, proposed article 547 G, physical/printed pp. 1345-1346 | Says the harmonization results **must be adopted** by a separate District administrative act, after prior approval by the permanent national advisory commission. | A proposal for a future adoption route is not present adoption and supplies neither enforceable parameters nor a production capability. |
 
 ## Version resolution
 
-There is no demonstrated “2011 edition” that supersedes the 1999 technical study. The May 2011 document is support for the April 2011 DAP directive and cites the 1999 study as its technical basis. A 2019 harmonization is newer technical work, but the March 2026 official record says its adoption decree remains unadopted and the exact report/tables were not available in the locked official delivery set.
+There is no demonstrated “2011 edition” that supersedes the 1999 technical study. The May 2011 document is support for the April 2011 DAP directive and cites the 1999 study as its technical basis. A 2019 harmonization is newer technical work, but the June 2026 version 3 official record says its adoption decree remains unadopted and the exact report/tables were not available in the locked official delivery set. The July 2026 proposed article 547 G reinforces rather than cures that gap: it contemplates a future, separate District act after prior CAP approval. It is a proposal, not an enacted adoption instrument.
 
 The only defensible product decision is therefore:
 
