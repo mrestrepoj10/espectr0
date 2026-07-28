@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "blocking": true,
+  "entries": [
+    {
+      "id": "missing-damage-inputs",
+      "severity": "blocker",
+      "scope": "activation",
+      "finding": "La Tabla 4 publica Fv, S, Tcd y TLd, pero no publica A0d ni Fa, aunque la gráfica los requiere para T≤Tcd.",
+      "disposition": "No inferir ni sustituir con NSR-10; activar solo tras aclaración normativa primaria."
+    },
+    {
+      "id": "legal-currentness",
+      "severity": "monitor",
+      "scope": "legal-status",
+      "finding": "No se localizó acto oficial posterior que derogue o modifique el Decreto 0158; el POT 2014 ordena aplicarlo y actualizarlo.",
+      "disposition": "Repetir búsqueda de vigencia en la fecha de una futura activación."
+    },
+    {
+      "id": "independent-review",
+      "severity": "blocker",
+      "scope": "merge/activation",
+      "finding": "La transcripción manual y sus recortes deterministas aún no tienen firma de revisor independiente.",
+      "disposition": "Mantener estado research-only hasta revisión."
+    }
+  ]
+}

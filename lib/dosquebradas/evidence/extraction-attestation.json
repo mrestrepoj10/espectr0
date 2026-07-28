@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "externalOnly": true,
+  "sourceHashes": {
+    "acuerdo-007-2024": "d32475535e6065d2d99663ce95f046cde066c3c8e9b880e215dcd23ce9e3f047",
+    "pot-2024-diagnostico-amenazas": "cf4608f280c14e430eee91da224c5e61e9601a09103ad3f4b8767d5cd632ad66",
+    "pot-2024-dts-general": "2060d4626bcd2b94af6e2a7401a2a3075b8d750e01397bf18a1d372d6cb24d15"
+  },
+  "coverage": {
+    "tables": 1,
+    "optionRows": 5,
+    "directCells": 30,
+    "applicabilityClaims": 3,
+    "percent": 100
+  },
+  "table": {
+    "citationId": "table-27",
+    "rows": [
+      {
+        "optionId": "zona-1",
+        "rowCitationId": "row-zona-1",
+        "cells": [
+          {
+            "fieldId": "to",
+            "citationId": "cell-zona-1-to",
+            "token": "0.05",
+            "value": 0.05
+          },
+          {
+            "fieldId": "tc",
+            "citationId": "cell-zona-1-tc",
+            "token": "0.5",
+            "value": 0.5
+          },
+          {
+            "fieldId": "tl",
+            "citationId": "cell-zona-1-tl",
+            "token": "2.5",
+            "value": 2.5
+          },
+          {
+            "fieldId": "aa",
+            "citationId": "cell-zona-1-aa",
+            "token": "0.25",
+            "value": 0.25
+          },
+          {
+            "fieldId": "fa",
+            "citationId": "cell-zona-1-fa",
+            "token": "1.60",
+            "value": 1.6
+          },
+          {
+            "fieldId": "fv",
+            "citationId": "cell-zona-1-fv",
+            "token": "1.67",
+            "value": 1.67
+          }
+        ]
+      },
+      {
+        "optionId": "zona-2",
+        "rowCitationId": "row-zona-2",
+        "cells": [
+          {
+            "fieldId": "to",
+            "citationId": "cell-zona-2-to",
+            "token": "0.05",
+            "value": 0.05
+          },
+          {
+            "fieldId": "tc",
+            "citationId": "cell-zona-2-tc",
+            "token": "0.7",
+            "value": 0.7
+          },
+          {
+            "fieldId": "tl",
+            "citationId": "cell-zona-2-tl",
+            "token": "3.5",
+            "value": 3.5
+          },
+          {
+            "fieldId": "aa",
+            "citationId": "cell-zona-2-aa",
+            "token": "0.25",
+            "value": 0.25
+          },
+          {
+            "fieldId": "fa",
+            "citationId": "cell-zona-2-fa",
+            "token": "1.76",
+            "value": 1.76
+          },
+          {
+            "fieldId": "fv",
+            "citationId": "cell-zona-2-fv",
+            "token": "2.57",
+            "value": 2.57
+          }
+        ]
+      },
+      {
+        "optionId": "zona-3",
+        "rowCitationId": "row-zona-3",
+        "cells": [
+          {
+            "fieldId": "to",
+            "citationId": "cell-zona-3-to",
+            "token": "0.05",
+            "value": 0.05
+          },
+          {
+            "fieldId": "tc",
+            "citationId": "cell-zona-3-tc",
+            "token": "0.8",
+            "value": 0.8
+          },
+          {
+            "fieldId": "tl",
+            "citationId": "cell-zona-3-tl",
+            "token": "4",
+            "value": 4
+          },
+          {
+            "fieldId": "aa",
+            "citationId": "cell-zona-3-aa",
+            "token": "0.25",
+            "value": 0.25
+          },
+          {
+            "fieldId": "fa",
+            "citationId": "cell-zona-3-fa",
+            "token": "1.76",
+            "value": 1.76
+          },
+          {
+            "fieldId": "fv",
+            "citationId": "cell-zona-3-fv",
+            "token": "2.93",
+            "value": 2.93
+          }
+        ]
+      },
+      {
+        "optionId": "zona-4",
+        "rowCitationId": "row-zona-4",
+        "cells": [
+          {
+            "fieldId": "to",
+            "citationId": "cell-zona-4-to",
+            "token": "0.05",
+            "value": 0.05
+          },
+          {
+            "fieldId": "tc",
+            "citationId": "cell-zona-4-tc",
+            "token": "0.32",
+            "value": 0.32
+          },
+          {
+            "fieldId": "tl",
+            "citationId": "cell-zona-4-tl",
+            "token": "1.6",
+            "value": 1.6
+          },
+          {
+            "fieldId": "aa",
+            "citationId": "cell-zona-4-aa",
+            "token": "0.25",
+            "value": 0.25
+          },
+          {
+            "fieldId": "fa",
+            "citationId": "cell-zona-4-fa",
+            "token": "1.76",
+            "value": 1.76
+          },
+          {
+            "fieldId": "fv",
+            "citationId": "cell-zona-4-fv",
+            "token": "1.17",
+            "value": 1.17
+          }
+        ]
+      },
+      {
+        "optionId": "zona-5",
+        "rowCitationId": "row-zona-5",
+        "cells": [
+          {
+            "fieldId": "to",
+            "citationId": "cell-zona-5-to",
+            "token": "0.1",
+            "value": 0.1
+          },
+          {
+            "fieldId": "tc",
+            "citationId": "cell-zona-5-tc",
+            "token": "0.8",
+            "value": 0.8
+          },
+          {
+            "fieldId": "tl",
+            "citationId": "cell-zona-5-tl",
+            "token": "4",
+            "value": 4
+          },
+          {
+            "fieldId": "aa",
+            "citationId": "cell-zona-5-aa",
+            "token": "0.25",
+            "value": 0.25
+          },
+          {
+            "fieldId": "fa",
+            "citationId": "cell-zona-5-fa",
+            "token": "1.60",
+            "value": 1.6
+          },
+          {
+            "fieldId": "fv",
+            "citationId": "cell-zona-5-fv",
+            "token": "2.67",
+            "value": 2.67
+          }
+        ]
+      }
+    ]
+  },
+  "visualChecks": [
+    {
+      "citationId": "damping-five-percent",
+      "method": "rendered embedded figure inspected at original resolution",
+      "observed": "β=5%"
+    }
+  ],
+  "nonInference": "The attestation binds only printed table values and the printed damping label. It does not infer Av, return period, formula or branch policy.",
+  "payloadSha256": "5c7e452fa6a7780029c0e95a8077d3e6b2d0bd1af5e2e382836e97b0eee9544a"
+}

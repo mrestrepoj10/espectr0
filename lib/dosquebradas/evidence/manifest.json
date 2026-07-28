@@ -1,0 +1,1707 @@
+{
+  "schemaVersion": 1,
+  "studyId": "dosquebradas-microzonation",
+  "title": "Dosquebradas POT 2024 — direct spectral table, activation blocked",
+  "sources": [
+    {
+      "id": "acuerdo-007-2024",
+      "issuingAuthority": "Concejo Municipal de Dosquebradas",
+      "officialTitle": "Acuerdo 007 del 24 de abril de 2024 — revisión ordinaria del POT",
+      "edition": "Sancionado el 26 de abril de 2024",
+      "revision": null,
+      "adoptionInstrument": "Acuerdo Municipal 007 de 2024",
+      "amendmentsAndErrata": [],
+      "legalStatus": "active",
+      "applicabilityStatus": "applicable",
+      "officialUrl": "https://pot.dosquebradas.gov.co/repositorio/pot-2024-1/ACUERDO%20007%20DEL%2024%20DE%20ABRIL%20DE%202024%20%E2%80%9CPOR%20EL%20CUAL%20SE%20CUAL%20SE%20ADOPTA%20LA%20REVISI%C3%93N%20ORDINARIA%20DE%20CONTENIDOS%20DE%20LARGO%20PLAZO%20DEL%20PLAN%20DE%20ORDENAMIENTO%20TERRITORIAL%20DEL%20MUNICIPIO%20DE%20DOSQUEBRADAS%E2%80%9D/ACUERDO%20007%20DEL%2024%20DE%20ABRIL%20DE%202024%20%E2%80%9CPOR%20EL%20CUAL%20SE%20CUAL%20SE%20ADOPTA%20LA%20REVISI%C3%93N%20ORDINARIA%20DE%20CONTENIDOS%20DE%20LARGO%20PLAZO%20DEL%20PLAN%20DE%20ORDENAMIENTO%20TERRITORIAL%20DEL%20MUNICIPIO%20DE%20DOSQUEBRADAS%E2%80%9D.pdf",
+      "retrievedOn": "2026-07-25",
+      "redistribution": {
+        "decision": "external-only",
+        "rationale": "No se localizó licencia expresa de redistribución; se conserva solo URL y huella."
+      },
+      "mediaType": "application/pdf",
+      "pageCount": 505,
+      "sha256": "d32475535e6065d2d99663ce95f046cde066c3c8e9b880e215dcd23ce9e3f047",
+      "pages": [
+        {
+          "physicalPage": 1,
+          "printedPage": null,
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "pot-2024-diagnostico-amenazas",
+      "issuingAuthority": "Municipio de Dosquebradas",
+      "officialTitle": "Diagnóstico de amenazas de origen natural e instrumentos de gestión del riesgo",
+      "edition": "Soporte del POT adoptado en 2024",
+      "revision": null,
+      "adoptionInstrument": "Anexo técnico del Acuerdo 007 de 2024",
+      "amendmentsAndErrata": [],
+      "legalStatus": "active",
+      "applicabilityStatus": "conditional",
+      "officialUrl": "https://pot.dosquebradas.gov.co/repositorio/pot-2024-1/3.Diagnostico/3.1%20AMBIENTAL/3.1.2%20Diagnostico%20Amenazas%20origen%20natural%20e%20instrumentos%20de%20GRD.pdf",
+      "retrievedOn": "2026-07-25",
+      "redistribution": {
+        "decision": "external-only",
+        "rationale": "No se localizó licencia expresa de redistribución; se conserva solo URL y huella."
+      },
+      "mediaType": "application/pdf",
+      "pageCount": 395,
+      "sha256": "cf4608f280c14e430eee91da224c5e61e9601a09103ad3f4b8767d5cd632ad66",
+      "pages": [
+        {
+          "physicalPage": 105,
+          "printedPage": null,
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "physicalPage": 111,
+          "printedPage": null,
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "physicalPage": 112,
+          "printedPage": null,
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "pot-2024-dts-general",
+      "issuingAuthority": "Municipio de Dosquebradas",
+      "officialTitle": "Documento Técnico de Soporte General",
+      "edition": "POT 2024–2035",
+      "revision": null,
+      "adoptionInstrument": "Anexo técnico del Acuerdo 007 de 2024",
+      "amendmentsAndErrata": [],
+      "legalStatus": "active",
+      "applicabilityStatus": "conditional",
+      "officialUrl": "https://pot.dosquebradas.gov.co/repositorio/pot-2024-1/4.DTS/4.1%20DTS%20GENERAL.pdf",
+      "retrievedOn": "2026-07-25",
+      "redistribution": {
+        "decision": "external-only",
+        "rationale": "No se localizó licencia expresa de redistribución; se conserva solo URL y huella."
+      },
+      "mediaType": "application/pdf",
+      "pageCount": 228,
+      "sha256": "2060d4626bcd2b94af6e2a7401a2a3075b8d750e01397bf18a1d372d6cb24d15",
+      "pages": [
+        {
+          "physicalPage": 124,
+          "printedPage": "120",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "adoption-2024",
+      "sourceDocumentId": "acuerdo-007-2024",
+      "regionKind": "applicability",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Portada y sanción",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "extractedToken": "ACUERDO NÚMERO 007 Abril 24 de 2024",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "007",
+        "2024"
+      ]
+    },
+    {
+      "id": "currentness-and-harmonization",
+      "sourceDocumentId": "pot-2024-dts-general",
+      "regionKind": "applicability",
+      "physicalPage": 124,
+      "printedPage": "120",
+      "reference": "Sección 6.2.4.3",
+      "rect": {
+        "left": 0.114379,
+        "top": 0.353535,
+        "width": 0.776144,
+        "height": 0.555556
+      },
+      "extractedToken": "permanecen vigentes ... plazo no mayor a 24 meses ... ajustar y armonizar ... según los requerimientos de la NSR-10",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "permanecen vigentes",
+        "24 meses",
+        "NSR-10"
+      ]
+    },
+    {
+      "id": "damping-five-percent",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "applicability",
+      "physicalPage": 112,
+      "printedPage": null,
+      "reference": "Figura 16, rótulo β=5%",
+      "rect": {
+        "left": 0.457516,
+        "top": 0.126263,
+        "width": 0.408497,
+        "height": 0.366162
+      },
+      "extractedToken": "β=5%",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "5%"
+      ]
+    },
+    {
+      "id": "table-27",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "table",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27. Coeficientes Espectrales de Diseño para Dosquebradas",
+      "rect": {
+        "left": 0.179739,
+        "top": 0.555556,
+        "width": 0.596405,
+        "height": 0.119949
+      },
+      "extractedToken": "Variables Zona 1 Zona 2 Zona 3 Zona 4 Zona 5 To Tc TL Aa Fa Fv",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Variables",
+        "Zona 1",
+        "Fv"
+      ]
+    },
+    {
+      "id": "row-zona-1",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "row",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 1",
+      "parentCitationId": "table-27",
+      "rect": {
+        "left": 0.293105,
+        "top": 0.560606,
+        "width": 0.040779,
+        "height": 0.112374
+      },
+      "extractedToken": "Zona 1 0.05 0.5 2.5 0.25 1.60 1.67",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Zona 1",
+        "0.05",
+        "0.5",
+        "2.5",
+        "0.25",
+        "1.60",
+        "1.67"
+      ]
+    },
+    {
+      "id": "cell-zona-1-to",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 1, to",
+      "parentCitationId": "row-zona-1",
+      "rect": {
+        "left": 0.298007,
+        "top": 0.576212,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.05",
+      "normalizedValue": 0.05,
+      "normalizedNumericValue": 0.05,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.05"
+      ]
+    },
+    {
+      "id": "cell-zona-1-tc",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 1, tc",
+      "parentCitationId": "row-zona-1",
+      "rect": {
+        "left": 0.298007,
+        "top": 0.592576,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.5",
+      "normalizedValue": 0.5,
+      "normalizedNumericValue": 0.5,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.5"
+      ]
+    },
+    {
+      "id": "cell-zona-1-tl",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 1, tl",
+      "parentCitationId": "row-zona-1",
+      "rect": {
+        "left": 0.298007,
+        "top": 0.608788,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "2.5",
+      "normalizedValue": 2.5,
+      "normalizedNumericValue": 2.5,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "2.5"
+      ]
+    },
+    {
+      "id": "cell-zona-1-aa",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 1, aa",
+      "parentCitationId": "row-zona-1",
+      "rect": {
+        "left": 0.298007,
+        "top": 0.625152,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.25",
+      "normalizedValue": 0.25,
+      "normalizedNumericValue": 0.25,
+      "unit": "g",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.25"
+      ]
+    },
+    {
+      "id": "cell-zona-1-fa",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 1, fa",
+      "parentCitationId": "row-zona-1",
+      "rect": {
+        "left": 0.298007,
+        "top": 0.641364,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "1.60",
+      "normalizedValue": 1.6,
+      "normalizedNumericValue": 1.6,
+      "unit": null,
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "1.60"
+      ]
+    },
+    {
+      "id": "cell-zona-1-fv",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 1, fv",
+      "parentCitationId": "row-zona-1",
+      "rect": {
+        "left": 0.298007,
+        "top": 0.657727,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "1.67",
+      "normalizedValue": 1.67,
+      "normalizedNumericValue": 1.67,
+      "unit": null,
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "1.67"
+      ]
+    },
+    {
+      "id": "row-zona-2",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "row",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 2",
+      "parentCitationId": "table-27",
+      "rect": {
+        "left": 0.397859,
+        "top": 0.560606,
+        "width": 0.040779,
+        "height": 0.112374
+      },
+      "extractedToken": "Zona 2 0.05 0.7 3.5 0.25 1.76 2.57",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Zona 2",
+        "0.05",
+        "0.7",
+        "3.5",
+        "0.25",
+        "1.76",
+        "2.57"
+      ]
+    },
+    {
+      "id": "cell-zona-2-to",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 2, to",
+      "parentCitationId": "row-zona-2",
+      "rect": {
+        "left": 0.402761,
+        "top": 0.576212,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.05",
+      "normalizedValue": 0.05,
+      "normalizedNumericValue": 0.05,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.05"
+      ]
+    },
+    {
+      "id": "cell-zona-2-tc",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 2, tc",
+      "parentCitationId": "row-zona-2",
+      "rect": {
+        "left": 0.402761,
+        "top": 0.592576,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.7",
+      "normalizedValue": 0.7,
+      "normalizedNumericValue": 0.7,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.7"
+      ]
+    },
+    {
+      "id": "cell-zona-2-tl",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 2, tl",
+      "parentCitationId": "row-zona-2",
+      "rect": {
+        "left": 0.402761,
+        "top": 0.608788,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "3.5",
+      "normalizedValue": 3.5,
+      "normalizedNumericValue": 3.5,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "3.5"
+      ]
+    },
+    {
+      "id": "cell-zona-2-aa",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 2, aa",
+      "parentCitationId": "row-zona-2",
+      "rect": {
+        "left": 0.402761,
+        "top": 0.625152,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.25",
+      "normalizedValue": 0.25,
+      "normalizedNumericValue": 0.25,
+      "unit": "g",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.25"
+      ]
+    },
+    {
+      "id": "cell-zona-2-fa",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 2, fa",
+      "parentCitationId": "row-zona-2",
+      "rect": {
+        "left": 0.402761,
+        "top": 0.641364,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "1.76",
+      "normalizedValue": 1.76,
+      "normalizedNumericValue": 1.76,
+      "unit": null,
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "1.76"
+      ]
+    },
+    {
+      "id": "cell-zona-2-fv",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 2, fv",
+      "parentCitationId": "row-zona-2",
+      "rect": {
+        "left": 0.402761,
+        "top": 0.657727,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "2.57",
+      "normalizedValue": 2.57,
+      "normalizedNumericValue": 2.57,
+      "unit": null,
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "2.57"
+      ]
+    },
+    {
+      "id": "row-zona-3",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "row",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 3",
+      "parentCitationId": "table-27",
+      "rect": {
+        "left": 0.502369,
+        "top": 0.560606,
+        "width": 0.040779,
+        "height": 0.112374
+      },
+      "extractedToken": "Zona 3 0.05 0.8 4 0.25 1.76 2.93",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Zona 3",
+        "0.05",
+        "0.8",
+        "4",
+        "0.25",
+        "1.76",
+        "2.93"
+      ]
+    },
+    {
+      "id": "cell-zona-3-to",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 3, to",
+      "parentCitationId": "row-zona-3",
+      "rect": {
+        "left": 0.507271,
+        "top": 0.576212,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.05",
+      "normalizedValue": 0.05,
+      "normalizedNumericValue": 0.05,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.05"
+      ]
+    },
+    {
+      "id": "cell-zona-3-tc",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 3, tc",
+      "parentCitationId": "row-zona-3",
+      "rect": {
+        "left": 0.507271,
+        "top": 0.592576,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.8",
+      "normalizedValue": 0.8,
+      "normalizedNumericValue": 0.8,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.8"
+      ]
+    },
+    {
+      "id": "cell-zona-3-tl",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 3, tl",
+      "parentCitationId": "row-zona-3",
+      "rect": {
+        "left": 0.507271,
+        "top": 0.608788,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "4",
+      "normalizedValue": 4,
+      "normalizedNumericValue": 4,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "4"
+      ]
+    },
+    {
+      "id": "cell-zona-3-aa",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 3, aa",
+      "parentCitationId": "row-zona-3",
+      "rect": {
+        "left": 0.507271,
+        "top": 0.625152,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.25",
+      "normalizedValue": 0.25,
+      "normalizedNumericValue": 0.25,
+      "unit": "g",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.25"
+      ]
+    },
+    {
+      "id": "cell-zona-3-fa",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 3, fa",
+      "parentCitationId": "row-zona-3",
+      "rect": {
+        "left": 0.507271,
+        "top": 0.641364,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "1.76",
+      "normalizedValue": 1.76,
+      "normalizedNumericValue": 1.76,
+      "unit": null,
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "1.76"
+      ]
+    },
+    {
+      "id": "cell-zona-3-fv",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 3, fv",
+      "parentCitationId": "row-zona-3",
+      "rect": {
+        "left": 0.507271,
+        "top": 0.657727,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "2.93",
+      "normalizedValue": 2.93,
+      "normalizedNumericValue": 2.93,
+      "unit": null,
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "2.93"
+      ]
+    },
+    {
+      "id": "row-zona-4",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "row",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 4",
+      "parentCitationId": "table-27",
+      "rect": {
+        "left": 0.606912,
+        "top": 0.560606,
+        "width": 0.040779,
+        "height": 0.112374
+      },
+      "extractedToken": "Zona 4 0.05 0.32 1.6 0.25 1.76 1.17",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Zona 4",
+        "0.05",
+        "0.32",
+        "1.6",
+        "0.25",
+        "1.76",
+        "1.17"
+      ]
+    },
+    {
+      "id": "cell-zona-4-to",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 4, to",
+      "parentCitationId": "row-zona-4",
+      "rect": {
+        "left": 0.611814,
+        "top": 0.576212,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.05",
+      "normalizedValue": 0.05,
+      "normalizedNumericValue": 0.05,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.05"
+      ]
+    },
+    {
+      "id": "cell-zona-4-tc",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 4, tc",
+      "parentCitationId": "row-zona-4",
+      "rect": {
+        "left": 0.611814,
+        "top": 0.592576,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.32",
+      "normalizedValue": 0.32,
+      "normalizedNumericValue": 0.32,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.32"
+      ]
+    },
+    {
+      "id": "cell-zona-4-tl",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 4, tl",
+      "parentCitationId": "row-zona-4",
+      "rect": {
+        "left": 0.611814,
+        "top": 0.608788,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "1.6",
+      "normalizedValue": 1.6,
+      "normalizedNumericValue": 1.6,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "1.6"
+      ]
+    },
+    {
+      "id": "cell-zona-4-aa",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 4, aa",
+      "parentCitationId": "row-zona-4",
+      "rect": {
+        "left": 0.611814,
+        "top": 0.625152,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.25",
+      "normalizedValue": 0.25,
+      "normalizedNumericValue": 0.25,
+      "unit": "g",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.25"
+      ]
+    },
+    {
+      "id": "cell-zona-4-fa",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 4, fa",
+      "parentCitationId": "row-zona-4",
+      "rect": {
+        "left": 0.611814,
+        "top": 0.641364,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "1.76",
+      "normalizedValue": 1.76,
+      "normalizedNumericValue": 1.76,
+      "unit": null,
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "1.76"
+      ]
+    },
+    {
+      "id": "cell-zona-4-fv",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 4, fv",
+      "parentCitationId": "row-zona-4",
+      "rect": {
+        "left": 0.611814,
+        "top": 0.657727,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "1.17",
+      "normalizedValue": 1.17,
+      "normalizedNumericValue": 1.17,
+      "unit": null,
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "1.17"
+      ]
+    },
+    {
+      "id": "row-zona-5",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "row",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 5",
+      "parentCitationId": "table-27",
+      "rect": {
+        "left": 0.711618,
+        "top": 0.560606,
+        "width": 0.040779,
+        "height": 0.112374
+      },
+      "extractedToken": "Zona 5 0.1 0.8 4 0.25 1.60 2.67",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Zona 5",
+        "0.1",
+        "0.8",
+        "4",
+        "0.25",
+        "1.60",
+        "2.67"
+      ]
+    },
+    {
+      "id": "cell-zona-5-to",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 5, to",
+      "parentCitationId": "row-zona-5",
+      "rect": {
+        "left": 0.71652,
+        "top": 0.576212,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.1",
+      "normalizedValue": 0.1,
+      "normalizedNumericValue": 0.1,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.1"
+      ]
+    },
+    {
+      "id": "cell-zona-5-tc",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 5, tc",
+      "parentCitationId": "row-zona-5",
+      "rect": {
+        "left": 0.71652,
+        "top": 0.592576,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.8",
+      "normalizedValue": 0.8,
+      "normalizedNumericValue": 0.8,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.8"
+      ]
+    },
+    {
+      "id": "cell-zona-5-tl",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 5, tl",
+      "parentCitationId": "row-zona-5",
+      "rect": {
+        "left": 0.71652,
+        "top": 0.608788,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "4",
+      "normalizedValue": 4,
+      "normalizedNumericValue": 4,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "4"
+      ]
+    },
+    {
+      "id": "cell-zona-5-aa",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 5, aa",
+      "parentCitationId": "row-zona-5",
+      "rect": {
+        "left": 0.71652,
+        "top": 0.625152,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "0.25",
+      "normalizedValue": 0.25,
+      "normalizedNumericValue": 0.25,
+      "unit": "g",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.25"
+      ]
+    },
+    {
+      "id": "cell-zona-5-fa",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 5, fa",
+      "parentCitationId": "row-zona-5",
+      "rect": {
+        "left": 0.71652,
+        "top": 0.641364,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "1.60",
+      "normalizedValue": 1.6,
+      "normalizedNumericValue": 1.6,
+      "unit": null,
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "1.60"
+      ]
+    },
+    {
+      "id": "cell-zona-5-fv",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "regionKind": "cell",
+      "physicalPage": 111,
+      "printedPage": null,
+      "reference": "Tabla 27, Zona 5, fv",
+      "parentCitationId": "row-zona-5",
+      "rect": {
+        "left": 0.71652,
+        "top": 0.657727,
+        "width": 0.029342,
+        "height": 0.013889
+      },
+      "extractedToken": "2.67",
+      "normalizedValue": 2.67,
+      "normalizedNumericValue": 2.67,
+      "unit": null,
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "2.67"
+      ]
+    }
+  ],
+  "applicabilityCitationIds": [
+    "adoption-2024",
+    "currentness-and-harmonization",
+    "damping-five-percent"
+  ],
+  "coverage": {
+    "optionIds": [
+      "zona-1",
+      "zona-2",
+      "zona-3",
+      "zona-4",
+      "zona-5"
+    ],
+    "hazardIds": [
+      "design"
+    ],
+    "fieldIds": [
+      "to",
+      "tc",
+      "tl",
+      "aa",
+      "fa",
+      "fv"
+    ]
+  },
+  "values": [
+    {
+      "id": "value-zona-1-design-to",
+      "optionId": "zona-1",
+      "hazardId": "design",
+      "fieldId": "to",
+      "value": 0.05,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-1-to"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-1-design-tc",
+      "optionId": "zona-1",
+      "hazardId": "design",
+      "fieldId": "tc",
+      "value": 0.5,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-1-tc"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-1-design-tl",
+      "optionId": "zona-1",
+      "hazardId": "design",
+      "fieldId": "tl",
+      "value": 2.5,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-1-tl"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-1-design-aa",
+      "optionId": "zona-1",
+      "hazardId": "design",
+      "fieldId": "aa",
+      "value": 0.25,
+      "unit": "g",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-1-aa"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-1-design-fa",
+      "optionId": "zona-1",
+      "hazardId": "design",
+      "fieldId": "fa",
+      "value": 1.6,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-1-fa"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-1-design-fv",
+      "optionId": "zona-1",
+      "hazardId": "design",
+      "fieldId": "fv",
+      "value": 1.67,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-1-fv"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-2-design-to",
+      "optionId": "zona-2",
+      "hazardId": "design",
+      "fieldId": "to",
+      "value": 0.05,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-2-to"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-2-design-tc",
+      "optionId": "zona-2",
+      "hazardId": "design",
+      "fieldId": "tc",
+      "value": 0.7,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-2-tc"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-2-design-tl",
+      "optionId": "zona-2",
+      "hazardId": "design",
+      "fieldId": "tl",
+      "value": 3.5,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-2-tl"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-2-design-aa",
+      "optionId": "zona-2",
+      "hazardId": "design",
+      "fieldId": "aa",
+      "value": 0.25,
+      "unit": "g",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-2-aa"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-2-design-fa",
+      "optionId": "zona-2",
+      "hazardId": "design",
+      "fieldId": "fa",
+      "value": 1.76,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-2-fa"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-2-design-fv",
+      "optionId": "zona-2",
+      "hazardId": "design",
+      "fieldId": "fv",
+      "value": 2.57,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-2-fv"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-3-design-to",
+      "optionId": "zona-3",
+      "hazardId": "design",
+      "fieldId": "to",
+      "value": 0.05,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-3-to"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-3-design-tc",
+      "optionId": "zona-3",
+      "hazardId": "design",
+      "fieldId": "tc",
+      "value": 0.8,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-3-tc"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-3-design-tl",
+      "optionId": "zona-3",
+      "hazardId": "design",
+      "fieldId": "tl",
+      "value": 4,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-3-tl"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-3-design-aa",
+      "optionId": "zona-3",
+      "hazardId": "design",
+      "fieldId": "aa",
+      "value": 0.25,
+      "unit": "g",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-3-aa"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-3-design-fa",
+      "optionId": "zona-3",
+      "hazardId": "design",
+      "fieldId": "fa",
+      "value": 1.76,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-3-fa"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-3-design-fv",
+      "optionId": "zona-3",
+      "hazardId": "design",
+      "fieldId": "fv",
+      "value": 2.93,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-3-fv"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-4-design-to",
+      "optionId": "zona-4",
+      "hazardId": "design",
+      "fieldId": "to",
+      "value": 0.05,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-4-to"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-4-design-tc",
+      "optionId": "zona-4",
+      "hazardId": "design",
+      "fieldId": "tc",
+      "value": 0.32,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-4-tc"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-4-design-tl",
+      "optionId": "zona-4",
+      "hazardId": "design",
+      "fieldId": "tl",
+      "value": 1.6,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-4-tl"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-4-design-aa",
+      "optionId": "zona-4",
+      "hazardId": "design",
+      "fieldId": "aa",
+      "value": 0.25,
+      "unit": "g",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-4-aa"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-4-design-fa",
+      "optionId": "zona-4",
+      "hazardId": "design",
+      "fieldId": "fa",
+      "value": 1.76,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-4-fa"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-4-design-fv",
+      "optionId": "zona-4",
+      "hazardId": "design",
+      "fieldId": "fv",
+      "value": 1.17,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-4-fv"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-5-design-to",
+      "optionId": "zona-5",
+      "hazardId": "design",
+      "fieldId": "to",
+      "value": 0.1,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-5-to"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-5-design-tc",
+      "optionId": "zona-5",
+      "hazardId": "design",
+      "fieldId": "tc",
+      "value": 0.8,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-5-tc"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-5-design-tl",
+      "optionId": "zona-5",
+      "hazardId": "design",
+      "fieldId": "tl",
+      "value": 4,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-5-tl"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-5-design-aa",
+      "optionId": "zona-5",
+      "hazardId": "design",
+      "fieldId": "aa",
+      "value": 0.25,
+      "unit": "g",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-5-aa"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-5-design-fa",
+      "optionId": "zona-5",
+      "hazardId": "design",
+      "fieldId": "fa",
+      "value": 1.6,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-5-fa"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zona-5-design-fv",
+      "optionId": "zona-5",
+      "hazardId": "design",
+      "fieldId": "fv",
+      "value": 2.67,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zona-5-fv"
+      ],
+      "transformation": "decimal parse"
+    }
+  ],
+  "rawRows": [
+    {
+      "id": "raw-zona-1-design",
+      "rowKey": "zona-1/design",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "optionId": "zona-1",
+      "hazardId": "design",
+      "citationIds": [
+        "cell-zona-1-to",
+        "cell-zona-1-tc",
+        "cell-zona-1-tl",
+        "cell-zona-1-aa",
+        "cell-zona-1-fa",
+        "cell-zona-1-fv"
+      ],
+      "fields": {
+        "to": 0.05,
+        "tc": 0.5,
+        "tl": 2.5,
+        "aa": 0.25,
+        "fa": 1.6,
+        "fv": 1.67
+      }
+    },
+    {
+      "id": "raw-zona-2-design",
+      "rowKey": "zona-2/design",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "optionId": "zona-2",
+      "hazardId": "design",
+      "citationIds": [
+        "cell-zona-2-to",
+        "cell-zona-2-tc",
+        "cell-zona-2-tl",
+        "cell-zona-2-aa",
+        "cell-zona-2-fa",
+        "cell-zona-2-fv"
+      ],
+      "fields": {
+        "to": 0.05,
+        "tc": 0.7,
+        "tl": 3.5,
+        "aa": 0.25,
+        "fa": 1.76,
+        "fv": 2.57
+      }
+    },
+    {
+      "id": "raw-zona-3-design",
+      "rowKey": "zona-3/design",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "optionId": "zona-3",
+      "hazardId": "design",
+      "citationIds": [
+        "cell-zona-3-to",
+        "cell-zona-3-tc",
+        "cell-zona-3-tl",
+        "cell-zona-3-aa",
+        "cell-zona-3-fa",
+        "cell-zona-3-fv"
+      ],
+      "fields": {
+        "to": 0.05,
+        "tc": 0.8,
+        "tl": 4,
+        "aa": 0.25,
+        "fa": 1.76,
+        "fv": 2.93
+      }
+    },
+    {
+      "id": "raw-zona-4-design",
+      "rowKey": "zona-4/design",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "optionId": "zona-4",
+      "hazardId": "design",
+      "citationIds": [
+        "cell-zona-4-to",
+        "cell-zona-4-tc",
+        "cell-zona-4-tl",
+        "cell-zona-4-aa",
+        "cell-zona-4-fa",
+        "cell-zona-4-fv"
+      ],
+      "fields": {
+        "to": 0.05,
+        "tc": 0.32,
+        "tl": 1.6,
+        "aa": 0.25,
+        "fa": 1.76,
+        "fv": 1.17
+      }
+    },
+    {
+      "id": "raw-zona-5-design",
+      "rowKey": "zona-5/design",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "optionId": "zona-5",
+      "hazardId": "design",
+      "citationIds": [
+        "cell-zona-5-to",
+        "cell-zona-5-tc",
+        "cell-zona-5-tl",
+        "cell-zona-5-aa",
+        "cell-zona-5-fa",
+        "cell-zona-5-fv"
+      ],
+      "fields": {
+        "to": 0.1,
+        "tc": 0.8,
+        "tl": 4,
+        "aa": 0.25,
+        "fa": 1.6,
+        "fv": 2.67
+      }
+    }
+  ],
+  "canonicalRows": [
+    {
+      "id": "canonical-zona-1-design",
+      "rowKey": "zona-1/design",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "optionId": "zona-1",
+      "hazardId": "design",
+      "citationIds": [
+        "cell-zona-1-to",
+        "cell-zona-1-tc",
+        "cell-zona-1-tl",
+        "cell-zona-1-aa",
+        "cell-zona-1-fa",
+        "cell-zona-1-fv"
+      ],
+      "fields": {
+        "to": 0.05,
+        "tc": 0.5,
+        "tl": 2.5,
+        "aa": 0.25,
+        "fa": 1.6,
+        "fv": 1.67
+      },
+      "sourceRowIds": [
+        "raw-zona-1-design"
+      ]
+    },
+    {
+      "id": "canonical-zona-2-design",
+      "rowKey": "zona-2/design",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "optionId": "zona-2",
+      "hazardId": "design",
+      "citationIds": [
+        "cell-zona-2-to",
+        "cell-zona-2-tc",
+        "cell-zona-2-tl",
+        "cell-zona-2-aa",
+        "cell-zona-2-fa",
+        "cell-zona-2-fv"
+      ],
+      "fields": {
+        "to": 0.05,
+        "tc": 0.7,
+        "tl": 3.5,
+        "aa": 0.25,
+        "fa": 1.76,
+        "fv": 2.57
+      },
+      "sourceRowIds": [
+        "raw-zona-2-design"
+      ]
+    },
+    {
+      "id": "canonical-zona-3-design",
+      "rowKey": "zona-3/design",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "optionId": "zona-3",
+      "hazardId": "design",
+      "citationIds": [
+        "cell-zona-3-to",
+        "cell-zona-3-tc",
+        "cell-zona-3-tl",
+        "cell-zona-3-aa",
+        "cell-zona-3-fa",
+        "cell-zona-3-fv"
+      ],
+      "fields": {
+        "to": 0.05,
+        "tc": 0.8,
+        "tl": 4,
+        "aa": 0.25,
+        "fa": 1.76,
+        "fv": 2.93
+      },
+      "sourceRowIds": [
+        "raw-zona-3-design"
+      ]
+    },
+    {
+      "id": "canonical-zona-4-design",
+      "rowKey": "zona-4/design",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "optionId": "zona-4",
+      "hazardId": "design",
+      "citationIds": [
+        "cell-zona-4-to",
+        "cell-zona-4-tc",
+        "cell-zona-4-tl",
+        "cell-zona-4-aa",
+        "cell-zona-4-fa",
+        "cell-zona-4-fv"
+      ],
+      "fields": {
+        "to": 0.05,
+        "tc": 0.32,
+        "tl": 1.6,
+        "aa": 0.25,
+        "fa": 1.76,
+        "fv": 1.17
+      },
+      "sourceRowIds": [
+        "raw-zona-4-design"
+      ]
+    },
+    {
+      "id": "canonical-zona-5-design",
+      "rowKey": "zona-5/design",
+      "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+      "optionId": "zona-5",
+      "hazardId": "design",
+      "citationIds": [
+        "cell-zona-5-to",
+        "cell-zona-5-tc",
+        "cell-zona-5-tl",
+        "cell-zona-5-aa",
+        "cell-zona-5-fa",
+        "cell-zona-5-fv"
+      ],
+      "fields": {
+        "to": 0.1,
+        "tc": 0.8,
+        "tl": 4,
+        "aa": 0.25,
+        "fa": 1.6,
+        "fv": 2.67
+      },
+      "sourceRowIds": [
+        "raw-zona-5-design"
+      ]
+    }
+  ],
+  "overrides": []
+}

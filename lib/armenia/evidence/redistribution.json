@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "decision": "external-only-all-sources",
+  "committedSourceBytes": false,
+  "sources": [
+    {
+      "sourceDocumentId": "armenia-cap-acta-153-2019",
+      "officialUrl": "https://asosismica.org.co/wp-content/uploads/2019/04/Acta-153-CAP-DEFINITIVA-FDO.pdf",
+      "decision": "external-only",
+      "rationale": "No express redistribution license was located on the official delivery page."
+    },
+    {
+      "sourceDocumentId": "armenia-acuerdo-019-2009",
+      "officialUrl": "https://observatorio.quindio.gov.co/images/POT/Armenia/ACUERDO_019_2009.pdf",
+      "decision": "external-only",
+      "rationale": "No express redistribution license was located on the official delivery page."
+    },
+    {
+      "sourceDocumentId": "armenia-pot-volume-4b-2009",
+      "officialUrl": "https://observatorio.quindio.gov.co/images/POT/Armenia/VOL_04_B_COMPONENTE_URBANO.pdf",
+      "decision": "external-only",
+      "rationale": "No express redistribution license was located on the official delivery page."
+    },
+    {
+      "sourceDocumentId": "quindio-armenia-delivery-2025",
+      "officialUrl": "https://www.quindio.gov.co/gobernacion-trabaja-intensamente-para-que-quindio-sea-el-primer-departamento-de-colombia-con-estudios-de-microzonificacion-sismica",
+      "decision": "external-only",
+      "rationale": "No express redistribution license was located on the official delivery page."
+    },
+    {
+      "sourceDocumentId": "armenia-decree-index-2026-07-25",
+      "officialUrl": "https://www.armenia.gov.co/normativa/decretos",
+      "decision": "external-only",
+      "rationale": "No express redistribution license was located on the official delivery page."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "remain-versus-harmonize",
+      "status": "resolved-for-product",
+      "issue": "The same current POT preserves the CARDER supports and orders NSR-10 harmonization.",
+      "resolution": "Preserve direct table provenance; block calculation and activation."
+    },
+    {
+      "id": "av-defined-not-tabulated",
+      "status": "resolved-for-product",
+      "issue": "Page 112 defines Av while Table 27 omits its value.",
+      "resolution": "Do not derive or assume Av."
+    },
+    {
+      "id": "legacy-formulas",
+      "status": "resolved-for-product",
+      "issue": "Unofficial copies may show legacy formulas.",
+      "resolution": "Do not use secondary mirrors for normative calculation."
+    }
+  ]
+}

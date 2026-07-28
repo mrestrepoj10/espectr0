@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "status": "unavailable-blocks-activation",
+  "proposedProductionFormulas": [],
+  "coverage": {
+    "expected": 0,
+    "cited": 0,
+    "coverageStatus": "complete-empty-because-no-approved-spectrum"
+  },
+  "historicalFormulaStatus": {
+    "exactFormulaCountVerifiedFromLockedPrimarySources": 0,
+    "issue": "The primary official bytes/technical annex for Decreto 079 and the delivered 2025 study were not available in the official repositories inspected.",
+    "resolution": "Do not copy equations from the reference site or third-party mirrors; obtain the adopted primary technical annex."
+  }
+}

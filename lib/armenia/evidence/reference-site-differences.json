@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "benchmarkUse": "UX only",
+  "referenceSiteModelApplicability": "not-demonstrated",
+  "differences": [
+    "An active Armenia option on a reference calculator is not evidence of adoption or current applicability.",
+    "No reference-site zone, hazard, coefficient, formula, warning or return period is copied into this dossier.",
+    "Future selection remains manual; maps, coordinates, polygons, address lookup and GIS are out of scope."
+  ],
+  "nonInference": "No missing primary-source fact was filled from a third-party calculator, Scribd mirror, thesis or article."
+}

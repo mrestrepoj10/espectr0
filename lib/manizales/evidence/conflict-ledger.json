@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "zones-vs-raster",
+      "status": "resolved-research-only",
+      "original": "Tres zonas A/B/C en el estudio de 2002.",
+      "update": "Modelo rasterizado de 1275 puntos en la actualizacion de 2015.",
+      "resolution": "La actualizacion gobierna la representacion tecnica candidata; las zonas quedan solo como historia y no se ofrecen al producto."
+    },
+    {
+      "id": "technical-vs-legal",
+      "status": "unresolved-blocker",
+      "original": "La publicacion declara compatibilidad tecnica con NSR-10.",
+      "update": "No se recupero un acto municipal vigente de adopcion; en 2019 el proceso seguia en desarrollo.",
+      "resolution": "La compatibilidad tecnica no suple adopcion ni vigencia."
+    },
+    {
+      "id": "manual-selector-vs-spatial-model",
+      "status": "unresolved-blocker",
+      "original": "El producto exige selector manual sin GIS.",
+      "update": "Fa/Fv dependen de un nodo o ubicacion del modelo raster.",
+      "resolution": "No existe transformacion primaria autorizada a categorias manuales."
+    }
+  ]
+}

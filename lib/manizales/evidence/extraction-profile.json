@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "renderer": "Poppler pdftoppm",
+  "renderDpi": 144,
+  "textExtractor": "pdfplumber word extraction",
+  "ocrUsed": false,
+  "coordinateSystem": "normalized PDF page coordinates, top-left origin",
+  "cropEncoding": "PNG RGB, Pillow compress_level=9, optimize=false"
+}

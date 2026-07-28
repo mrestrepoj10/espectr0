@@ -1,6 +1,6 @@
-/.gitattributes text eol=lf
 # Regulatory evidence and golden artifacts are byte-for-byte reproducible on
 # every platform. In particular, Windows must not check these files out as CRLF.
+/.gitattributes text eol=lf
 /lib/nsr10/data/*.json text eol=lf
 /lib/nsr10/data/*.md text eol=lf
 /lib/nsr10/evidence/*.json text eol=lf
@@ -9,6 +9,34 @@
 /scripts/*nsr10*.mjs text eol=lf
 /scripts/*nsr10*.py text eol=lf
 /lib/regulatory/evidence/fixture-source.txt text eol=lf
+/lib/armenia/**/*.json text eol=lf
+/lib/armenia/**/*.md text eol=lf
+/lib/armenia/**/*.mjs text eol=lf
+/lib/armenia/**/*.py text eol=lf
+/lib/manizales/data/*.json text eol=lf
+/lib/manizales/evidence/*.json text eol=lf
+/lib/manizales/evidence/*.mjs text eol=lf
+/lib/manizales/evidence/*.py text eol=lf
+/lib/manizales/oracle/*.json text eol=lf
+/lib/manizales/oracle/*.py text eol=lf
+/lib/manizales/*.md text eol=lf
+/lib/manizales/evidence/*.md text eol=lf
+/lib/manizales/oracle/*.md text eol=lf
+/lib/cali/data/*.json text eol=lf
+/lib/cali/evidence/*.json text eol=lf
+/lib/cali/evidence/*.mjs text eol=lf
+/lib/cali/evidence/*.py text eol=lf
+/lib/cali/oracle/*.json text eol=lf
+/lib/cali/oracle/*.py text eol=lf
+/lib/cali/*.md text eol=lf
+/lib/cali/evidence/*.md text eol=lf
+/lib/cali/oracle/*.md text eol=lf
+/lib/medellin/data/*.json text eol=lf
+/lib/medellin/evidence/*.json text eol=lf
+/lib/medellin/evidence/*.mjs text eol=lf
+/lib/medellin/evidence/*.py text eol=lf
+/lib/medellin/oracle/*.json text eol=lf
+/lib/medellin/oracle/*.py text eol=lf
 /lib/bogota/data/*.json text eol=lf
 /lib/bogota/evidence/*.json text eol=lf
 /lib/bogota/evidence/*.mjs text eol=lf
