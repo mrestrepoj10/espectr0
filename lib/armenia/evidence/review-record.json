@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "authorRole": "research agent R6",
+  "preparedOn": "2026-07-25",
+  "independentReview": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewedOn": null,
+    "requiredReproductions": [
+      "three external PDF hashes, byte lengths and page counts; live semantic assertions for two dynamic HTML pages",
+      "Acta 153 page 17 harmonization statement",
+      "POT Volume 4-B page 81 NSR-98 origin and artificial-fill warning",
+      "2025 official delivery paragraph and current decree-index absence audit",
+      "negative oracle decision for legacy, delivered-study and building-workflow cases"
+    ]
+  },
+  "activationDecision": "blocked-material-adoption-and-primary-source-gaps",
+  "mergeRecommendation": "do-not-merge-until-independent-review; even after evidence review, do not activate Armenia until every blocker is resolved"
+}

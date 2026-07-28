@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "studyId": "manizales-microzonation",
+  "status": "partial-oracle-activation-blocked",
+  "precision": "Python Decimal, 50 significant digits",
+  "recordCount": 1,
+  "records": [
+    {
+      "optionId": "updated-raster-grid",
+      "hazardId": "uniform-hazard-475y",
+      "status": "direct-parameter-witness-only-no-spectrum",
+      "nodeCount": 1275,
+      "returnPeriodYears": 475,
+      "spatialModel": "rasterized",
+      "soilParameters": "Fa/Fv",
+      "fixedFitParameters": {
+        "aaG": "0.25",
+        "avG": "0.25",
+        "importanceFactor": "1"
+      },
+      "arithmeticWitnessNotSpectrum": {
+        "aaTimesFitImportance": "0.25",
+        "avTimesFitImportance": "0.25"
+      },
+      "spectralSamples": [],
+      "missingInputs": [
+        "node-specific Fa",
+        "node-specific Fv",
+        "piecewise spectrum formula",
+        "branch limits",
+        "spectrum damping",
+        "adoption instrument"
+      ]
+    }
+  ],
+  "negativeCases": [
+    {
+      "case": "activation",
+      "expected": "reject-missing-adoption-formula-node-values-damping-review"
+    },
+    {
+      "case": "manual-zone-selector",
+      "expected": "reject-updated-model-is-raster-not-zones"
+    },
+    {
+      "case": "zone-a-b-or-c-as-current",
+      "expected": "reject-historical-model-substitution"
+    },
+    {
+      "case": "spectrum-at-any-period",
+      "expected": "reject-missing-node-fa-fv-formula-branches-damping"
+    },
+    {
+      "case": "unknown-node-or-location",
+      "expected": "reject"
+    }
+  ]
+}

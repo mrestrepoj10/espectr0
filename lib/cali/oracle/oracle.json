@@ -1,0 +1,1800 @@
+{
+  "schemaVersion": 1,
+  "studyId": "cali-microzonation",
+  "status": "partial-oracle-activation-blocked",
+  "precision": "Python Decimal, 50 significant digits",
+  "boundaryPolicy": "Tabulated branch selectors are authoritative; residuals expose coefficient rounding and are not silently repaired.",
+  "recordCount": 52,
+  "records": [
+    {
+      "optionId": "zone-1",
+      "hazardId": "design",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.5375"
+        },
+        {
+          "periodSeconds": "0.55",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.5375"
+        },
+        {
+          "periodSeconds": "1.775",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.16732394366197183098591549295774647887323943661972"
+        },
+        {
+          "periodSeconds": "3",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.099"
+        },
+        {
+          "periodSeconds": "3.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.098343285394200947009414907120230461032438935552588"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.0025",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-2",
+      "hazardId": "design",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.75"
+        },
+        {
+          "periodSeconds": "0.45",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.75"
+        },
+        {
+          "periodSeconds": "1.725",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.19652173913043478260869565217391304347826086956522"
+        },
+        {
+          "periodSeconds": "3",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.113"
+        },
+        {
+          "periodSeconds": "3.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.11225041666206774759660489398571759693601615876204"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00333333333333333333333333333333333333333333333333",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-3",
+      "hazardId": "design",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.85"
+        },
+        {
+          "periodSeconds": "1.05",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.85"
+        },
+        {
+          "periodSeconds": "1.525",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.58622950819672131147540983606557377049180327868852"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.447"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.44256330288854236281280166332516521868270587361699"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00142857142857142857142857142857142857142857142857",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4a",
+      "hazardId": "design",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.75"
+        },
+        {
+          "periodSeconds": "0.75",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.75"
+        },
+        {
+          "periodSeconds": "1.375",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.41018181818181818181818181818181818181818181818182"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.282"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.2792010098759931684859285661246008762159352491275"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.002",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4b-tc",
+      "hazardId": "design",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.65"
+        },
+        {
+          "periodSeconds": "0.7",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.65"
+        },
+        {
+          "periodSeconds": "1.6",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.285"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.1824"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.18094950873795654037237504166600530150315074363899"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00142857142857142857142857142857142857142857142857",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4b-tl",
+      "hazardId": "design",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.5"
+        },
+        {
+          "periodSeconds": "1.6",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.5"
+        },
+        {
+          "periodSeconds": "2.05",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.39073170731707317073170731707317073170731707317073"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.3204"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.31785209758575260710147457976857510198250821415533"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.000625",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4c-tc",
+      "hazardId": "design",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "1"
+        },
+        {
+          "periodSeconds": "0.45",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "1"
+        },
+        {
+          "periodSeconds": "1.225",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.36734693877551020408163265306122448979591836734694"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.225"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.22276676319893071953664513254622410336377812430385"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "0",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4c-tl",
+      "hazardId": "design",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.65"
+        },
+        {
+          "periodSeconds": "1.5",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.65"
+        },
+        {
+          "periodSeconds": "1.8",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.54166666666666666666666666666666666666666666666667"
+        },
+        {
+          "periodSeconds": "2.1",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.46428571428571428571428571428571428571428571428571"
+        },
+        {
+          "periodSeconds": "2.11",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.45989533029356932683452752633588643561465375890029"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "0",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4d",
+      "hazardId": "design",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.61875"
+        },
+        {
+          "periodSeconds": "1.2",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.61875"
+        },
+        {
+          "periodSeconds": "1.6",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.465"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.372"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.36830771515556545630058661914309051756144649884904"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00125",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4e",
+      "hazardId": "design",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.56875"
+        },
+        {
+          "periodSeconds": "0.95",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.56875"
+        },
+        {
+          "periodSeconds": "1.975",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.27493670886075949367088607594936708860759493670886"
+        },
+        {
+          "periodSeconds": "3",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.181"
+        },
+        {
+          "periodSeconds": "3.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.17979933996313506473438483018951225703910552863655"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00282894736842105263157894736842105263157894736842",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-5-tc",
+      "hazardId": "design",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.7"
+        },
+        {
+          "periodSeconds": "0.6",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.7"
+        },
+        {
+          "periodSeconds": "1.55",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.27096774193548387096774193548387096774193548387097"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.168"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.16666402120601260297455595942921540927921779019381"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "0",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-5-tl",
+      "hazardId": "design",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.51875"
+        },
+        {
+          "periodSeconds": "1.35",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.51875"
+        },
+        {
+          "periodSeconds": "1.925",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.36467532467532467532467532467532467532467532467532"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.2808"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.27856700687290677925747210361740289836669259218108"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00125",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-6",
+      "hazardId": "design",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.68125"
+        },
+        {
+          "periodSeconds": "1.15",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.68125"
+        },
+        {
+          "periodSeconds": "1.825",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.42904109589041095890410958904109589041095890410959"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.3132"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.31070935381978063840256503865018015587054173743274"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "0.0003804347826086956521739130434782608695652173913",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-1",
+      "hazardId": "safety-limited",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.3225"
+        },
+        {
+          "periodSeconds": "0.55",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.3225"
+        },
+        {
+          "periodSeconds": "1.775",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.10039436619718309859154929577464788732394366197183"
+        },
+        {
+          "periodSeconds": "3",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.0594"
+        },
+        {
+          "periodSeconds": "3.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.059005971236520568205648944272138276619463361331553"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.0015",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-2",
+      "hazardId": "safety-limited",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.45"
+        },
+        {
+          "periodSeconds": "0.45",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.45"
+        },
+        {
+          "periodSeconds": "1.725",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.11791304347826086956521739130434782608695652173913"
+        },
+        {
+          "periodSeconds": "3",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.0678"
+        },
+        {
+          "periodSeconds": "3.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.067350249997240648557962936391430558161609695257227"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.002",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-3",
+      "hazardId": "safety-limited",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.51"
+        },
+        {
+          "periodSeconds": "1.05",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.51"
+        },
+        {
+          "periodSeconds": "1.525",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.35173770491803278688524590163934426229508196721311"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.2682"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.26553798173312541768768099799509913120962352417019"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00085714285714285714285714285714285714285714285714",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4a",
+      "hazardId": "safety-limited",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.45"
+        },
+        {
+          "periodSeconds": "0.75",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.45"
+        },
+        {
+          "periodSeconds": "1.375",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.24610909090909090909090909090909090909090909090909"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.1692"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.1675206059255959010915571396747605257295611494765"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.0012",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4b-tc",
+      "hazardId": "safety-limited",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.39"
+        },
+        {
+          "periodSeconds": "0.7",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.39"
+        },
+        {
+          "periodSeconds": "1.6",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.171"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.10944"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.10856970524277392422342502499960318090189044618339"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00085714285714285714285714285714285714285714285714",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4b-tl",
+      "hazardId": "safety-limited",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.3"
+        },
+        {
+          "periodSeconds": "1.6",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.3"
+        },
+        {
+          "periodSeconds": "2.05",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.23443902439024390243902439024390243902439024390244"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.19224"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.1907112585514515642608847478611450611895049284932"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.000375",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4c-tc",
+      "hazardId": "safety-limited",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.6"
+        },
+        {
+          "periodSeconds": "0.45",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.6"
+        },
+        {
+          "periodSeconds": "1.225",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.22040816326530612244897959183673469387755102040816"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.135"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.13366005791935843172198707952773446201826687458231"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "0",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4c-tl",
+      "hazardId": "safety-limited",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.39"
+        },
+        {
+          "periodSeconds": "1.5",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.39"
+        },
+        {
+          "periodSeconds": "1.8",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.325"
+        },
+        {
+          "periodSeconds": "2.1",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.27857142857142857142857142857142857142857142857143"
+        },
+        {
+          "periodSeconds": "2.11",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.27593719817614159610071651580153186136879225534018"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "0",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4d",
+      "hazardId": "safety-limited",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.37125"
+        },
+        {
+          "periodSeconds": "1.2",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.37125"
+        },
+        {
+          "periodSeconds": "1.6",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.279"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.2232"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.22098462909333927378035197148585431053686789930942"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00075",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4e",
+      "hazardId": "safety-limited",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.34125"
+        },
+        {
+          "periodSeconds": "0.95",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.34125"
+        },
+        {
+          "periodSeconds": "1.975",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.16496202531645569620253164556962025316455696202532"
+        },
+        {
+          "periodSeconds": "3",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.1086"
+        },
+        {
+          "periodSeconds": "3.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.10787960397788103884063089811370735422346331718193"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00169736842105263157894736842105263157894736842105",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-5-tc",
+      "hazardId": "safety-limited",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.42"
+        },
+        {
+          "periodSeconds": "0.6",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.42"
+        },
+        {
+          "periodSeconds": "1.55",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.16258064516129032258064516129032258064516129032258"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.1008"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.099998412723607561784733575657529245567530674116284"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "0",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-5-tl",
+      "hazardId": "safety-limited",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.31125"
+        },
+        {
+          "periodSeconds": "1.35",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.31125"
+        },
+        {
+          "periodSeconds": "1.925",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.21880519480519480519480519480519480519480519480519"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.16848"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.16714020412374406755448326217044173902001555530865"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00075",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-6",
+      "hazardId": "safety-limited",
+      "status": "complete-three-branch-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.40875"
+        },
+        {
+          "periodSeconds": "1.15",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.40875"
+        },
+        {
+          "periodSeconds": "1.825",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.25742465753424657534246575342465753424657534246575"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.18792"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.18642561229186838304153902319010809352232504245964"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "0.00022826086956521739130434782608695652173913043478",
+        "tlInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-1",
+      "hazardId": "damage-threshold",
+      "status": "partial-long-period-only-missing-a0d-fa",
+      "uncomputedRange": "T ≤ Tcd",
+      "samples": [
+        {
+          "periodSeconds": "0.63",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.21214285714285714285714285714285714285714285714286"
+        },
+        {
+          "periodSeconds": "3",
+          "branch": "inverse-at-tabulated-tld",
+          "spectralAccelerationG": "0.04455"
+        },
+        {
+          "periodSeconds": "3.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.044254478427390426154236708204103707464597520998664"
+        }
+      ],
+      "publishedConsistencyResiduals": {
+        "sMinus1.25Fv": "0.0025",
+        "tcdMinus0.5S": "0",
+        "tldInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-2",
+      "hazardId": "damage-threshold",
+      "status": "partial-long-period-only-missing-a0d-fa",
+      "uncomputedRange": "T ≤ Tcd",
+      "samples": [
+        {
+          "periodSeconds": "0.71",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.21485915492957746478873239436619718309859154929577"
+        },
+        {
+          "periodSeconds": "3",
+          "branch": "inverse-at-tabulated-tld",
+          "spectralAccelerationG": "0.05085"
+        },
+        {
+          "periodSeconds": "3.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.05051268749793048641847220229357291862120727144292"
+        }
+      ],
+      "publishedConsistencyResiduals": {
+        "sMinus1.25Fv": "-0.0025",
+        "tcdMinus0.5S": "-0.005",
+        "tldInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-3",
+      "hazardId": "damage-threshold",
+      "status": "partial-long-period-only-missing-a0d-fa",
+      "uncomputedRange": "T ≤ Tcd",
+      "samples": [
+        {
+          "periodSeconds": "1.87",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.21513368983957219251336898395721925133689839572193"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tld",
+          "spectralAccelerationG": "0.20115"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.19915348629984406326576074849632434840721764312765"
+        }
+      ],
+      "publishedConsistencyResiduals": {
+        "sMinus1.25Fv": "-0.005",
+        "tcdMinus0.5S": "0",
+        "tldInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4a",
+      "hazardId": "damage-threshold",
+      "status": "partial-long-period-only-missing-a0d-fa",
+      "uncomputedRange": "T ≤ Tcd",
+      "samples": [
+        {
+          "periodSeconds": "1.19",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.21327731092436974789915966386554621848739495798319"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tld",
+          "spectralAccelerationG": "0.1269"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.12564045444419692581866785475607039429717086210737"
+        }
+      ],
+      "publishedConsistencyResiduals": {
+        "sMinus1.25Fv": "0",
+        "tcdMinus0.5S": "0.005",
+        "tldInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4b-tc",
+      "hazardId": "damage-threshold",
+      "status": "partial-long-period-only-missing-a0d-fa",
+      "uncomputedRange": "T ≤ Tcd",
+      "samples": [
+        {
+          "periodSeconds": "1.68",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.21455357142857142857142857142857142857142857142857"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tld",
+          "spectralAccelerationG": "0.14418"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.1430334439135886731956635608958587958921286963699"
+        }
+      ],
+      "publishedConsistencyResiduals": {
+        "sMinus1.25Fv": "0.0025",
+        "tcdMinus0.5S": "0",
+        "tldInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4b-tl",
+      "hazardId": "damage-threshold",
+      "status": "partial-long-period-only-missing-a0d-fa",
+      "uncomputedRange": "T ≤ Tcd",
+      "samples": [
+        {
+          "periodSeconds": "1.68",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.21455357142857142857142857142857142857142857142857"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tld",
+          "spectralAccelerationG": "0.14418"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.1430334439135886731956635608958587958921286963699"
+        }
+      ],
+      "publishedConsistencyResiduals": {
+        "sMinus1.25Fv": "0.0025",
+        "tcdMinus0.5S": "0",
+        "tldInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4c-tc",
+      "hazardId": "damage-threshold",
+      "status": "partial-long-period-only-missing-a0d-fa",
+      "uncomputedRange": "T ≤ Tcd",
+      "samples": [
+        {
+          "periodSeconds": "2.04",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.21507352941176470588235294117647058823529411764706"
+        },
+        {
+          "periodSeconds": "2.1",
+          "branch": "inverse-at-tabulated-tld",
+          "spectralAccelerationG": "0.20892857142857142857142857142857142857142857142857"
+        },
+        {
+          "periodSeconds": "2.11",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.20695289863210619707553738685114889602659419150513"
+        }
+      ],
+      "publishedConsistencyResiduals": {
+        "sMinus1.25Fv": "-0.0025",
+        "tcdMinus0.5S": "0",
+        "tldInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4c-tl",
+      "hazardId": "damage-threshold",
+      "status": "partial-long-period-only-missing-a0d-fa",
+      "uncomputedRange": "T ≤ Tcd",
+      "samples": [
+        {
+          "periodSeconds": "2.04",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.21507352941176470588235294117647058823529411764706"
+        },
+        {
+          "periodSeconds": "2.1",
+          "branch": "inverse-at-tabulated-tld",
+          "spectralAccelerationG": "0.20892857142857142857142857142857142857142857142857"
+        },
+        {
+          "periodSeconds": "2.11",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.20695289863210619707553738685114889602659419150513"
+        }
+      ],
+      "publishedConsistencyResiduals": {
+        "sMinus1.25Fv": "-0.0025",
+        "tcdMinus0.5S": "0",
+        "tldInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4d",
+      "hazardId": "damage-threshold",
+      "status": "partial-long-period-only-missing-a0d-fa",
+      "uncomputedRange": "T ≤ Tcd",
+      "samples": [
+        {
+          "periodSeconds": "1.56",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.21461538461538461538461538461538461538461538461538"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tld",
+          "spectralAccelerationG": "0.1674"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.16573847182000445533526397861439073290265092448207"
+        }
+      ],
+      "publishedConsistencyResiduals": {
+        "sMinus1.25Fv": "0",
+        "tcdMinus0.5S": "0",
+        "tldInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-4e",
+      "hazardId": "damage-threshold",
+      "status": "partial-long-period-only-missing-a0d-fa",
+      "uncomputedRange": "T ≤ Tcd",
+      "samples": [
+        {
+          "periodSeconds": "1.14",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.21434210526315789473684210526315789473684210526316"
+        },
+        {
+          "periodSeconds": "3",
+          "branch": "inverse-at-tabulated-tld",
+          "spectralAccelerationG": "0.08145"
+        },
+        {
+          "periodSeconds": "3.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.080909702983410779130473173585280515667597487886447"
+        }
+      ],
+      "publishedConsistencyResiduals": {
+        "sMinus1.25Fv": "-0.0025",
+        "tcdMinus0.5S": "0",
+        "tldInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-5-tc",
+      "hazardId": "damage-threshold",
+      "status": "partial-long-period-only-missing-a0d-fa",
+      "uncomputedRange": "T ≤ Tcd",
+      "samples": [
+        {
+          "periodSeconds": "1.47",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.21489795918367346938775510204081632653061224489796"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tld",
+          "spectralAccelerationG": "0.12636"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.12535515309280805066586244662783130426501166648148"
+        }
+      ],
+      "publishedConsistencyResiduals": {
+        "sMinus1.25Fv": "0.005",
+        "tcdMinus0.5S": "-0.005",
+        "tldInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-5-tl",
+      "hazardId": "damage-threshold",
+      "status": "partial-long-period-only-missing-a0d-fa",
+      "uncomputedRange": "T ≤ Tcd",
+      "samples": [
+        {
+          "periodSeconds": "1.47",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.21489795918367346938775510204081632653061224489796"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tld",
+          "spectralAccelerationG": "0.12636"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.12535515309280805066586244662783130426501166648148"
+        }
+      ],
+      "publishedConsistencyResiduals": {
+        "sMinus1.25Fv": "0.005",
+        "tcdMinus0.5S": "-0.005",
+        "tldInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-6",
+      "hazardId": "damage-threshold",
+      "status": "partial-long-period-only-missing-a0d-fa",
+      "uncomputedRange": "T ≤ Tcd",
+      "samples": [
+        {
+          "periodSeconds": "1.64",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.2148475609756097560975609756097560975609756097561"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tld",
+          "spectralAccelerationG": "0.14094"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.13981920921890128728115426739258107014174378184473"
+        }
+      ],
+      "publishedConsistencyResiduals": {
+        "sMinus1.25Fv": "-0.0025",
+        "tcdMinus0.5S": "0",
+        "tldInverseMinusInverseSquare": "0"
+      }
+    },
+    {
+      "optionId": "zone-1",
+      "status": "complete-ancillary-design-lower-bound-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.45"
+        },
+        {
+          "periodSeconds": "0.55",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.45"
+        },
+        {
+          "periodSeconds": "1.775",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.14028169014084507042253521126760563380281690140845"
+        },
+        {
+          "periodSeconds": "3",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.083"
+        },
+        {
+          "periodSeconds": "3.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.082449421088067460624054922131102305714064966170351"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00272727272727272727272727272727272727272727272727",
+        "tlInverseMinusInverseSquare": "0"
+      },
+      "curveFamilyId": "site-specific-design-minimum"
+    },
+    {
+      "optionId": "zone-2",
+      "status": "complete-ancillary-design-lower-bound-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.66875"
+        },
+        {
+          "periodSeconds": "0.4",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.66875"
+        },
+        {
+          "periodSeconds": "1.7",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.15705882352941176470588235294117647058823529411765"
+        },
+        {
+          "periodSeconds": "3",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.089"
+        },
+        {
+          "periodSeconds": "3.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.08840962020286751801856491650202536395845520468869"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "0.00125",
+        "tlInverseMinusInverseSquare": "0"
+      },
+      "curveFamilyId": "site-specific-design-minimum"
+    },
+    {
+      "optionId": "zone-3",
+      "status": "complete-ancillary-design-lower-bound-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.75"
+        },
+        {
+          "periodSeconds": "0.85",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.75"
+        },
+        {
+          "periodSeconds": "1.425",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.44842105263157894736842105263157894736842105263158"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.3195"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.31632880374248162174203608821563822677656493651147"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00176470588235294117647058823529411764705882352941",
+        "tlInverseMinusInverseSquare": "0"
+      },
+      "curveFamilyId": "site-specific-design-minimum"
+    },
+    {
+      "optionId": "zone-4a",
+      "status": "complete-ancillary-design-lower-bound-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.7"
+        },
+        {
+          "periodSeconds": "0.65",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.7"
+        },
+        {
+          "periodSeconds": "1.325",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.3441509433962264150943396226415094339622641509434"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.228"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.22573698670824979579713373431350709140862849929457"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00153846153846153846153846153846153846153846153846",
+        "tlInverseMinusInverseSquare": "0"
+      },
+      "curveFamilyId": "site-specific-design-minimum"
+    },
+    {
+      "optionId": "zone-4b-tc",
+      "status": "complete-ancillary-design-lower-bound-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.6"
+        },
+        {
+          "periodSeconds": "0.5",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.6"
+        },
+        {
+          "periodSeconds": "1.5",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.2"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.12"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.11904572943286614498182568530658243519944127870986"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "0",
+        "tlInverseMinusInverseSquare": "0"
+      },
+      "curveFamilyId": "site-specific-design-minimum"
+    },
+    {
+      "optionId": "zone-4b-tl",
+      "status": "complete-ancillary-design-lower-bound-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.45"
+        },
+        {
+          "periodSeconds": "1.5",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.45"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.3375"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.27"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.26785289122394882620910779193981047919874287709719"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "0",
+        "tlInverseMinusInverseSquare": "0"
+      },
+      "curveFamilyId": "site-specific-design-minimum"
+    },
+    {
+      "optionId": "zone-4c-tc",
+      "status": "complete-ancillary-design-lower-bound-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.9"
+        },
+        {
+          "periodSeconds": "0.35",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.9"
+        },
+        {
+          "periodSeconds": "1.175",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.26808510638297872340425531914893617021276595744681"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.1575"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.1559367342392515036756515927823568723546446870127"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "0",
+        "tlInverseMinusInverseSquare": "0"
+      },
+      "curveFamilyId": "site-specific-design-minimum"
+    },
+    {
+      "optionId": "zone-4c-tl",
+      "status": "complete-ancillary-design-lower-bound-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.56875"
+        },
+        {
+          "periodSeconds": "1.3",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.56875"
+        },
+        {
+          "periodSeconds": "1.7",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.43588235294117647058823529411764705882352941176471"
+        },
+        {
+          "periodSeconds": "2.1",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.35285714285714285714285714285714285714285714285714"
+        },
+        {
+          "periodSeconds": "2.11",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.34952045102311268839424092001527369106713685676422"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00125",
+        "tlInverseMinusInverseSquare": "0"
+      },
+      "curveFamilyId": "site-specific-design-minimum"
+    },
+    {
+      "optionId": "zone-4d",
+      "status": "complete-ancillary-design-lower-bound-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.56875"
+        },
+        {
+          "periodSeconds": "1",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.56875"
+        },
+        {
+          "periodSeconds": "1.5",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.38"
+        },
+        {
+          "periodSeconds": "2",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.285"
+        },
+        {
+          "periodSeconds": "2.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.28217123338531224474641716789188386426078562411821"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00125",
+        "tlInverseMinusInverseSquare": "0"
+      },
+      "curveFamilyId": "site-specific-design-minimum"
+    },
+    {
+      "optionId": "zone-4e",
+      "status": "complete-ancillary-design-lower-bound-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.51875"
+        },
+        {
+          "periodSeconds": "0.8",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.51875"
+        },
+        {
+          "periodSeconds": "1.9",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.21947368421052631578947368421052631578947368421053"
+        },
+        {
+          "periodSeconds": "3",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.139"
+        },
+        {
+          "periodSeconds": "3.01",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.13807794615953466297281486959305084932837385900818"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.0025",
+        "tlInverseMinusInverseSquare": "0"
+      },
+      "curveFamilyId": "site-specific-design-minimum"
+    },
+    {
+      "optionId": "zone-5-tc",
+      "status": "complete-ancillary-design-lower-bound-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.65"
+        },
+        {
+          "periodSeconds": "0.5",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.65"
+        },
+        {
+          "periodSeconds": "1.5",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.216"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.1296"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.12856938778749543658037174013110903001539658100665"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "0.002",
+        "tlInverseMinusInverseSquare": "0"
+      },
+      "curveFamilyId": "site-specific-design-minimum"
+    },
+    {
+      "optionId": "zone-5-tl",
+      "status": "complete-ancillary-design-lower-bound-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.46875"
+        },
+        {
+          "periodSeconds": "1.2",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.46875"
+        },
+        {
+          "periodSeconds": "1.85",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.30486486486486486486486486486486486486486486486486"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.2256"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.22380597133378835256583228837637497817494960397454"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "-0.00125",
+        "tlInverseMinusInverseSquare": "0"
+      },
+      "curveFamilyId": "site-specific-design-minimum"
+    },
+    {
+      "optionId": "zone-6",
+      "status": "complete-ancillary-design-lower-bound-oracle",
+      "samples": [
+        {
+          "periodSeconds": "0",
+          "branch": "plateau",
+          "spectralAccelerationG": "0.58125"
+        },
+        {
+          "periodSeconds": "1.1",
+          "branch": "plateau-at-tabulated-tc",
+          "spectralAccelerationG": "0.58125"
+        },
+        {
+          "periodSeconds": "1.8",
+          "branch": "inverse",
+          "spectralAccelerationG": "0.355"
+        },
+        {
+          "periodSeconds": "2.5",
+          "branch": "inverse-at-tabulated-tl",
+          "spectralAccelerationG": "0.2556"
+        },
+        {
+          "periodSeconds": "2.51",
+          "branch": "inverse-square",
+          "spectralAccelerationG": "0.25356740369200488881128870970302058697480992365201"
+        }
+      ],
+      "boundaryResidualsG": {
+        "tcPlateauMinusInverse": "0.00034090909090909090909090909090909090909090909091",
+        "tlInverseMinusInverseSquare": "0"
+      },
+      "curveFamilyId": "site-specific-design-minimum"
+    }
+  ],
+  "negativeCases": [
+    {
+      "case": "activation",
+      "expected": "blocked-missing-damage-a0d-fa-and-independent-review"
+    },
+    {
+      "case": "damage-threshold-at-or-below-tcd",
+      "expected": "reject-uncomputable-without-a0d-fa"
+    },
+    {
+      "case": "zone-4b-4c-5-single-component",
+      "expected": "reject-both-concurrent-curves-required"
+    },
+    {
+      "case": "negative-period",
+      "expected": "reject"
+    },
+    {
+      "case": "unknown-zone",
+      "expected": "reject"
+    }
+  ]
+}

@@ -1,0 +1,1508 @@
+{
+  "schemaVersion": 1,
+  "studyId": "cali-microzonation",
+  "status": "research-only-activation-blocked",
+  "blockers": [
+    "La curva de umbral de daño usa A0d y Fa en las ramas T≤Tcd, pero el Decreto 0158 no publica esos valores en la Tabla 4.",
+    "La revisión humana independiente del paquete de evidencia está pendiente."
+  ],
+  "geographicOptions": [
+    "zone-1",
+    "zone-2",
+    "zone-3",
+    "zone-4a",
+    "zone-4b",
+    "zone-4c",
+    "zone-4d",
+    "zone-4e",
+    "zone-5",
+    "zone-6"
+  ],
+  "curveComponents": [
+    {
+      "id": "zone-1",
+      "sourceLabel": "1",
+      "label": "Zona 1",
+      "concurrentGroup": null
+    },
+    {
+      "id": "zone-2",
+      "sourceLabel": "2",
+      "label": "Zona 2",
+      "concurrentGroup": null
+    },
+    {
+      "id": "zone-3",
+      "sourceLabel": "3",
+      "label": "Zona 3",
+      "concurrentGroup": null
+    },
+    {
+      "id": "zone-4a",
+      "sourceLabel": "4a",
+      "label": "Zona 4A",
+      "concurrentGroup": null
+    },
+    {
+      "id": "zone-4b-tc",
+      "sourceLabel": "4b Tc",
+      "label": "Zona 4B — componente Tc",
+      "concurrentGroup": "zone-4b"
+    },
+    {
+      "id": "zone-4b-tl",
+      "sourceLabel": "4b TL",
+      "label": "Zona 4B — componente TL",
+      "concurrentGroup": "zone-4b"
+    },
+    {
+      "id": "zone-4c-tc",
+      "sourceLabel": "4c Tc",
+      "label": "Zona 4C — componente Tc",
+      "concurrentGroup": "zone-4c"
+    },
+    {
+      "id": "zone-4c-tl",
+      "sourceLabel": "4c TL",
+      "label": "Zona 4C — componente TL",
+      "concurrentGroup": "zone-4c"
+    },
+    {
+      "id": "zone-4d",
+      "sourceLabel": "4d",
+      "label": "Zona 4D",
+      "concurrentGroup": null
+    },
+    {
+      "id": "zone-4e",
+      "sourceLabel": "4e",
+      "label": "Zona 4E",
+      "concurrentGroup": null
+    },
+    {
+      "id": "zone-5-tc",
+      "sourceLabel": "5 Tc",
+      "label": "Zona 5 — componente Tc",
+      "concurrentGroup": "zone-5"
+    },
+    {
+      "id": "zone-5-tl",
+      "sourceLabel": "5 TL",
+      "label": "Zona 5 — componente TL",
+      "concurrentGroup": "zone-5"
+    },
+    {
+      "id": "zone-6",
+      "sourceLabel": "6",
+      "label": "Zona 6",
+      "concurrentGroup": null
+    }
+  ],
+  "groupingRule": "Los componentes Tc/TL de las zonas 4B, 4C y 5 son curvas concurrentes de una misma opción geográfica; el artículo 5(6) exige verificar ambas independientemente.",
+  "fieldSemantics": {
+    "design": {
+      "column-1": "Tc",
+      "column-2": "Fa",
+      "column-3": "TL",
+      "column-4": "Fv"
+    },
+    "safety-limited": {
+      "column-1": "Tc",
+      "column-2": "Fa",
+      "column-3": "TL",
+      "column-4": "Fv"
+    },
+    "damage-threshold": {
+      "column-1": "Fv",
+      "column-2": "S",
+      "column-3": "Tcd",
+      "column-4": "TLd"
+    }
+  },
+  "hazards": [
+    {
+      "id": "design",
+      "baseAccelerationG": 0.25,
+      "dampingRatio": 0.05,
+      "averageReturnPeriodYears": 475
+    },
+    {
+      "id": "safety-limited",
+      "baseAccelerationG": 0.15,
+      "dampingRatio": 0.05,
+      "averageReturnPeriodYears": 225
+    },
+    {
+      "id": "damage-threshold",
+      "baseAccelerationG": 0.09,
+      "dampingRatio": 0.02,
+      "averageReturnPeriodYears": 31
+    }
+  ],
+  "rows": [
+    {
+      "optionId": "zone-1",
+      "hazardId": "design",
+      "fields": {
+        "column-1": 0.55,
+        "column-2": 0.86,
+        "column-3": 3,
+        "column-4": 0.99
+      }
+    },
+    {
+      "optionId": "zone-2",
+      "hazardId": "design",
+      "fields": {
+        "column-1": 0.45,
+        "column-2": 1.2,
+        "column-3": 3,
+        "column-4": 1.13
+      }
+    },
+    {
+      "optionId": "zone-3",
+      "hazardId": "design",
+      "fields": {
+        "column-1": 1.05,
+        "column-2": 1.36,
+        "column-3": 2,
+        "column-4": 2.98
+      }
+    },
+    {
+      "optionId": "zone-4a",
+      "hazardId": "design",
+      "fields": {
+        "column-1": 0.75,
+        "column-2": 1.2,
+        "column-3": 2,
+        "column-4": 1.88
+      }
+    },
+    {
+      "optionId": "zone-4b-tc",
+      "hazardId": "design",
+      "fields": {
+        "column-1": 0.7,
+        "column-2": 1.04,
+        "column-3": 2.5,
+        "column-4": 1.52
+      }
+    },
+    {
+      "optionId": "zone-4b-tl",
+      "hazardId": "design",
+      "fields": {
+        "column-1": 1.6,
+        "column-2": 0.8,
+        "column-3": 2.5,
+        "column-4": 2.67
+      }
+    },
+    {
+      "optionId": "zone-4c-tc",
+      "hazardId": "design",
+      "fields": {
+        "column-1": 0.45,
+        "column-2": 1.6,
+        "column-3": 2,
+        "column-4": 1.5
+      }
+    },
+    {
+      "optionId": "zone-4c-tl",
+      "hazardId": "design",
+      "fields": {
+        "column-1": 1.5,
+        "column-2": 1.04,
+        "column-3": 2.1,
+        "column-4": 3.25
+      }
+    },
+    {
+      "optionId": "zone-4d",
+      "hazardId": "design",
+      "fields": {
+        "column-1": 1.2,
+        "column-2": 0.99,
+        "column-3": 2,
+        "column-4": 2.48
+      }
+    },
+    {
+      "optionId": "zone-4e",
+      "hazardId": "design",
+      "fields": {
+        "column-1": 0.95,
+        "column-2": 0.91,
+        "column-3": 3,
+        "column-4": 1.81
+      }
+    },
+    {
+      "optionId": "zone-5-tc",
+      "hazardId": "design",
+      "fields": {
+        "column-1": 0.6,
+        "column-2": 1.12,
+        "column-3": 2.5,
+        "column-4": 1.4
+      }
+    },
+    {
+      "optionId": "zone-5-tl",
+      "hazardId": "design",
+      "fields": {
+        "column-1": 1.35,
+        "column-2": 0.83,
+        "column-3": 2.5,
+        "column-4": 2.34
+      }
+    },
+    {
+      "optionId": "zone-6",
+      "hazardId": "design",
+      "fields": {
+        "column-1": 1.15,
+        "column-2": 1.09,
+        "column-3": 2.5,
+        "column-4": 2.61
+      }
+    },
+    {
+      "optionId": "zone-1",
+      "hazardId": "safety-limited",
+      "fields": {
+        "column-1": 0.55,
+        "column-2": 0.86,
+        "column-3": 3,
+        "column-4": 0.99
+      }
+    },
+    {
+      "optionId": "zone-2",
+      "hazardId": "safety-limited",
+      "fields": {
+        "column-1": 0.45,
+        "column-2": 1.2,
+        "column-3": 3,
+        "column-4": 1.13
+      }
+    },
+    {
+      "optionId": "zone-3",
+      "hazardId": "safety-limited",
+      "fields": {
+        "column-1": 1.05,
+        "column-2": 1.36,
+        "column-3": 2,
+        "column-4": 2.98
+      }
+    },
+    {
+      "optionId": "zone-4a",
+      "hazardId": "safety-limited",
+      "fields": {
+        "column-1": 0.75,
+        "column-2": 1.2,
+        "column-3": 2,
+        "column-4": 1.88
+      }
+    },
+    {
+      "optionId": "zone-4b-tc",
+      "hazardId": "safety-limited",
+      "fields": {
+        "column-1": 0.7,
+        "column-2": 1.04,
+        "column-3": 2.5,
+        "column-4": 1.52
+      }
+    },
+    {
+      "optionId": "zone-4b-tl",
+      "hazardId": "safety-limited",
+      "fields": {
+        "column-1": 1.6,
+        "column-2": 0.8,
+        "column-3": 2.5,
+        "column-4": 2.67
+      }
+    },
+    {
+      "optionId": "zone-4c-tc",
+      "hazardId": "safety-limited",
+      "fields": {
+        "column-1": 0.45,
+        "column-2": 1.6,
+        "column-3": 2,
+        "column-4": 1.5
+      }
+    },
+    {
+      "optionId": "zone-4c-tl",
+      "hazardId": "safety-limited",
+      "fields": {
+        "column-1": 1.5,
+        "column-2": 1.04,
+        "column-3": 2.1,
+        "column-4": 3.25
+      }
+    },
+    {
+      "optionId": "zone-4d",
+      "hazardId": "safety-limited",
+      "fields": {
+        "column-1": 1.2,
+        "column-2": 0.99,
+        "column-3": 2,
+        "column-4": 2.48
+      }
+    },
+    {
+      "optionId": "zone-4e",
+      "hazardId": "safety-limited",
+      "fields": {
+        "column-1": 0.95,
+        "column-2": 0.91,
+        "column-3": 3,
+        "column-4": 1.81
+      }
+    },
+    {
+      "optionId": "zone-5-tc",
+      "hazardId": "safety-limited",
+      "fields": {
+        "column-1": 0.6,
+        "column-2": 1.12,
+        "column-3": 2.5,
+        "column-4": 1.4
+      }
+    },
+    {
+      "optionId": "zone-5-tl",
+      "hazardId": "safety-limited",
+      "fields": {
+        "column-1": 1.35,
+        "column-2": 0.83,
+        "column-3": 2.5,
+        "column-4": 2.34
+      }
+    },
+    {
+      "optionId": "zone-6",
+      "hazardId": "safety-limited",
+      "fields": {
+        "column-1": 1.15,
+        "column-2": 1.09,
+        "column-3": 2.5,
+        "column-4": 2.61
+      }
+    },
+    {
+      "optionId": "zone-1",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "column-1": 0.99,
+        "column-2": 1.24,
+        "column-3": 0.62,
+        "column-4": 3
+      }
+    },
+    {
+      "optionId": "zone-2",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "column-1": 1.13,
+        "column-2": 1.41,
+        "column-3": 0.7,
+        "column-4": 3
+      }
+    },
+    {
+      "optionId": "zone-3",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "column-1": 2.98,
+        "column-2": 3.72,
+        "column-3": 1.86,
+        "column-4": 2
+      }
+    },
+    {
+      "optionId": "zone-4a",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "column-1": 1.88,
+        "column-2": 2.35,
+        "column-3": 1.18,
+        "column-4": 2
+      }
+    },
+    {
+      "optionId": "zone-4b-tc",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "column-1": 2.67,
+        "column-2": 3.34,
+        "column-3": 1.67,
+        "column-4": 2.5
+      }
+    },
+    {
+      "optionId": "zone-4b-tl",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "column-1": 2.67,
+        "column-2": 3.34,
+        "column-3": 1.67,
+        "column-4": 2.5
+      }
+    },
+    {
+      "optionId": "zone-4c-tc",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "column-1": 3.25,
+        "column-2": 4.06,
+        "column-3": 2.03,
+        "column-4": 2.1
+      }
+    },
+    {
+      "optionId": "zone-4c-tl",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "column-1": 3.25,
+        "column-2": 4.06,
+        "column-3": 2.03,
+        "column-4": 2.1
+      }
+    },
+    {
+      "optionId": "zone-4d",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "column-1": 2.48,
+        "column-2": 3.1,
+        "column-3": 1.55,
+        "column-4": 2
+      }
+    },
+    {
+      "optionId": "zone-4e",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "column-1": 1.81,
+        "column-2": 2.26,
+        "column-3": 1.13,
+        "column-4": 3
+      }
+    },
+    {
+      "optionId": "zone-5-tc",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "column-1": 2.34,
+        "column-2": 2.93,
+        "column-3": 1.46,
+        "column-4": 2.5
+      }
+    },
+    {
+      "optionId": "zone-5-tl",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "column-1": 2.34,
+        "column-2": 2.93,
+        "column-3": 1.46,
+        "column-4": 2.5
+      }
+    },
+    {
+      "optionId": "zone-6",
+      "hazardId": "damage-threshold",
+      "fields": {
+        "column-1": 2.61,
+        "column-2": 3.26,
+        "column-3": 1.63,
+        "column-4": 2.5
+      }
+    }
+  ],
+  "ancillary": {
+    "surfacePgaDesign": {
+      "id": "surface-pga-design",
+      "relation": "ancillary-ground-surface-design-pga-not-a-spectrum-hazard-axis",
+      "sourceDocumentId": "cali-decree-0158-2014",
+      "physicalPage": 15,
+      "printedPage": "16",
+      "reference": "Tabla 5",
+      "unit": "g",
+      "rows": [
+        {
+          "optionId": "zone-1",
+          "sourceLabel": "1",
+          "value": 0.26,
+          "cell": {
+            "id": "pga-zone-1",
+            "token": "0.26",
+            "normalizedValue": 0.26,
+            "rect": {
+              "left": 0.52,
+              "top": 0.2846153846153846,
+              "width": 0.16,
+              "height": 0.014423076923076924
+            }
+          }
+        },
+        {
+          "optionId": "zone-2",
+          "sourceLabel": "2",
+          "value": 0.35,
+          "cell": {
+            "id": "pga-zone-2",
+            "token": "0.35",
+            "normalizedValue": 0.35,
+            "rect": {
+              "left": 0.52,
+              "top": 0.29903846153846153,
+              "width": 0.16,
+              "height": 0.013942307692307693
+            }
+          }
+        },
+        {
+          "optionId": "zone-3",
+          "sourceLabel": "3",
+          "value": 0.35,
+          "cell": {
+            "id": "pga-zone-3",
+            "token": "0.35",
+            "normalizedValue": 0.35,
+            "rect": {
+              "left": 0.52,
+              "top": 0.31298076923076923,
+              "width": 0.16,
+              "height": 0.013461538461538462
+            }
+          }
+        },
+        {
+          "optionId": "zone-4a",
+          "sourceLabel": "4a",
+          "value": 0.33,
+          "cell": {
+            "id": "pga-zone-4a",
+            "token": "0.33",
+            "normalizedValue": 0.33,
+            "rect": {
+              "left": 0.52,
+              "top": 0.3264423076923077,
+              "width": 0.16,
+              "height": 0.013461538461538462
+            }
+          }
+        },
+        {
+          "optionId": "zone-4b",
+          "sourceLabel": "4b",
+          "value": 0.28,
+          "cell": {
+            "id": "pga-zone-4b",
+            "token": "0.28",
+            "normalizedValue": 0.28,
+            "rect": {
+              "left": 0.52,
+              "top": 0.33990384615384617,
+              "width": 0.16,
+              "height": 0.013461538461538462
+            }
+          }
+        },
+        {
+          "optionId": "zone-4c",
+          "sourceLabel": "4c",
+          "value": 0.4,
+          "cell": {
+            "id": "pga-zone-4c",
+            "token": "0.40",
+            "normalizedValue": 0.4,
+            "rect": {
+              "left": 0.52,
+              "top": 0.35336538461538464,
+              "width": 0.16,
+              "height": 0.013461538461538462
+            }
+          }
+        },
+        {
+          "optionId": "zone-4d",
+          "sourceLabel": "4d",
+          "value": 0.28,
+          "cell": {
+            "id": "pga-zone-4d",
+            "token": "0.28",
+            "normalizedValue": 0.28,
+            "rect": {
+              "left": 0.52,
+              "top": 0.36682692307692305,
+              "width": 0.16,
+              "height": 0.012980769230769231
+            }
+          }
+        },
+        {
+          "optionId": "zone-4e",
+          "sourceLabel": "4e",
+          "value": 0.25,
+          "cell": {
+            "id": "pga-zone-4e",
+            "token": "0.25",
+            "normalizedValue": 0.25,
+            "rect": {
+              "left": 0.52,
+              "top": 0.3798076923076923,
+              "width": 0.16,
+              "height": 0.013461538461538462
+            }
+          }
+        },
+        {
+          "optionId": "zone-5",
+          "sourceLabel": "5",
+          "value": 0.28,
+          "cell": {
+            "id": "pga-zone-5",
+            "token": "0.28",
+            "normalizedValue": 0.28,
+            "rect": {
+              "left": 0.52,
+              "top": 0.39326923076923076,
+              "width": 0.16,
+              "height": 0.013461538461538462
+            }
+          }
+        },
+        {
+          "optionId": "zone-6",
+          "sourceLabel": "6",
+          "value": 0.25,
+          "cell": {
+            "id": "pga-zone-6",
+            "token": "0.25",
+            "normalizedValue": 0.25,
+            "rect": {
+              "left": 0.52,
+              "top": 0.40673076923076923,
+              "width": 0.16,
+              "height": 0.014423076923076924
+            }
+          }
+        }
+      ]
+    },
+    "transitionBandMetersEachSide": 200,
+    "lateralSpreadingBandMeters": 300,
+    "uncontrolledFillAmplification": 1.2,
+    "siteSpecificDesignMinimum": {
+      "id": "site-specific-design-minimum",
+      "relation": "lower-bound-for-site-specific-design-curve-not-a-hazard",
+      "sourceDocumentId": "cali-decree-0158-2014",
+      "physicalPage": 18,
+      "printedPage": "19",
+      "reference": "Tabla 6. Coeficientes y curvas mínimas de diseño",
+      "baseAccelerationG": 0.25,
+      "dampingRatio": 0.05,
+      "fieldSemantics": {
+        "column-1": "Tc",
+        "column-2": "Fa",
+        "column-3": "TL",
+        "column-4": "Fv"
+      },
+      "rows": [
+        {
+          "optionId": "zone-1",
+          "sourceLabel": "1",
+          "fields": {
+            "column-1": 0.55,
+            "column-2": 0.72,
+            "column-3": 3,
+            "column-4": 0.83
+          },
+          "cells": [
+            {
+              "id": "minimum-zone-1-column-1",
+              "fieldId": "column-1",
+              "token": "0.55",
+              "normalizedValue": 0.55,
+              "rect": {
+                "left": 0.32,
+                "top": 0.36009615384615384,
+                "width": 0.09,
+                "height": 0.0125
+              }
+            },
+            {
+              "id": "minimum-zone-1-column-2",
+              "fieldId": "column-2",
+              "token": "0.72",
+              "normalizedValue": 0.72,
+              "rect": {
+                "left": 0.43,
+                "top": 0.36009615384615384,
+                "width": 0.09,
+                "height": 0.0125
+              }
+            },
+            {
+              "id": "minimum-zone-1-column-3",
+              "fieldId": "column-3",
+              "token": "3.00",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.55,
+                "top": 0.36009615384615384,
+                "width": 0.09,
+                "height": 0.0125
+              }
+            },
+            {
+              "id": "minimum-zone-1-column-4",
+              "fieldId": "column-4",
+              "token": "0.83",
+              "normalizedValue": 0.83,
+              "rect": {
+                "left": 0.67,
+                "top": 0.36009615384615384,
+                "width": 0.09,
+                "height": 0.0125
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "zone-2",
+          "sourceLabel": "2",
+          "fields": {
+            "column-1": 0.4,
+            "column-2": 1.07,
+            "column-3": 3,
+            "column-4": 0.89
+          },
+          "cells": [
+            {
+              "id": "minimum-zone-2-column-1",
+              "fieldId": "column-1",
+              "token": "0.40",
+              "normalizedValue": 0.4,
+              "rect": {
+                "left": 0.32,
+                "top": 0.37259615384615385,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            },
+            {
+              "id": "minimum-zone-2-column-2",
+              "fieldId": "column-2",
+              "token": "1.07",
+              "normalizedValue": 1.07,
+              "rect": {
+                "left": 0.43,
+                "top": 0.37259615384615385,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            },
+            {
+              "id": "minimum-zone-2-column-3",
+              "fieldId": "column-3",
+              "token": "3.00",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.55,
+                "top": 0.37259615384615385,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            },
+            {
+              "id": "minimum-zone-2-column-4",
+              "fieldId": "column-4",
+              "token": "0.89",
+              "normalizedValue": 0.89,
+              "rect": {
+                "left": 0.67,
+                "top": 0.37259615384615385,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "zone-3",
+          "sourceLabel": "3",
+          "fields": {
+            "column-1": 0.85,
+            "column-2": 1.2,
+            "column-3": 2,
+            "column-4": 2.13
+          },
+          "cells": [
+            {
+              "id": "minimum-zone-3-column-1",
+              "fieldId": "column-1",
+              "token": "0.85",
+              "normalizedValue": 0.85,
+              "rect": {
+                "left": 0.32,
+                "top": 0.38461538461538464,
+                "width": 0.09,
+                "height": 0.011538461538461539
+              }
+            },
+            {
+              "id": "minimum-zone-3-column-2",
+              "fieldId": "column-2",
+              "token": "1.20",
+              "normalizedValue": 1.2,
+              "rect": {
+                "left": 0.43,
+                "top": 0.38461538461538464,
+                "width": 0.09,
+                "height": 0.011538461538461539
+              }
+            },
+            {
+              "id": "minimum-zone-3-column-3",
+              "fieldId": "column-3",
+              "token": "2.00",
+              "normalizedValue": 2,
+              "rect": {
+                "left": 0.55,
+                "top": 0.38461538461538464,
+                "width": 0.09,
+                "height": 0.011538461538461539
+              }
+            },
+            {
+              "id": "minimum-zone-3-column-4",
+              "fieldId": "column-4",
+              "token": "2.13",
+              "normalizedValue": 2.13,
+              "rect": {
+                "left": 0.67,
+                "top": 0.38461538461538464,
+                "width": 0.09,
+                "height": 0.011538461538461539
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "zone-4a",
+          "sourceLabel": "4a",
+          "fields": {
+            "column-1": 0.65,
+            "column-2": 1.12,
+            "column-3": 2,
+            "column-4": 1.52
+          },
+          "cells": [
+            {
+              "id": "minimum-zone-4a-column-1",
+              "fieldId": "column-1",
+              "token": "0.65",
+              "normalizedValue": 0.65,
+              "rect": {
+                "left": 0.32,
+                "top": 0.39615384615384613,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            },
+            {
+              "id": "minimum-zone-4a-column-2",
+              "fieldId": "column-2",
+              "token": "1.12",
+              "normalizedValue": 1.12,
+              "rect": {
+                "left": 0.43,
+                "top": 0.39615384615384613,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            },
+            {
+              "id": "minimum-zone-4a-column-3",
+              "fieldId": "column-3",
+              "token": "2.00",
+              "normalizedValue": 2,
+              "rect": {
+                "left": 0.55,
+                "top": 0.39615384615384613,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            },
+            {
+              "id": "minimum-zone-4a-column-4",
+              "fieldId": "column-4",
+              "token": "1.52",
+              "normalizedValue": 1.52,
+              "rect": {
+                "left": 0.67,
+                "top": 0.39615384615384613,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "zone-4b-tc",
+          "sourceLabel": "4b Tc",
+          "fields": {
+            "column-1": 0.5,
+            "column-2": 0.96,
+            "column-3": 2.5,
+            "column-4": 1
+          },
+          "cells": [
+            {
+              "id": "minimum-zone-4b-tc-column-1",
+              "fieldId": "column-1",
+              "token": "0.50",
+              "normalizedValue": 0.5,
+              "rect": {
+                "left": 0.32,
+                "top": 0.4081730769230769,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            },
+            {
+              "id": "minimum-zone-4b-tc-column-2",
+              "fieldId": "column-2",
+              "token": "0.96",
+              "normalizedValue": 0.96,
+              "rect": {
+                "left": 0.43,
+                "top": 0.4081730769230769,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            },
+            {
+              "id": "minimum-zone-4b-tc-column-3",
+              "fieldId": "column-3",
+              "token": "2.50",
+              "normalizedValue": 2.5,
+              "rect": {
+                "left": 0.55,
+                "top": 0.4081730769230769,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            },
+            {
+              "id": "minimum-zone-4b-tc-column-4",
+              "fieldId": "column-4",
+              "token": "1.00",
+              "normalizedValue": 1,
+              "rect": {
+                "left": 0.67,
+                "top": 0.4081730769230769,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "zone-4b-tl",
+          "sourceLabel": "4b TL",
+          "fields": {
+            "column-1": 1.5,
+            "column-2": 0.72,
+            "column-3": 2.5,
+            "column-4": 2.25
+          },
+          "cells": [
+            {
+              "id": "minimum-zone-4b-tl-column-1",
+              "fieldId": "column-1",
+              "token": "1.50",
+              "normalizedValue": 1.5,
+              "rect": {
+                "left": 0.32,
+                "top": 0.4235576923076923,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            },
+            {
+              "id": "minimum-zone-4b-tl-column-2",
+              "fieldId": "column-2",
+              "token": "0.72",
+              "normalizedValue": 0.72,
+              "rect": {
+                "left": 0.43,
+                "top": 0.4235576923076923,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            },
+            {
+              "id": "minimum-zone-4b-tl-column-3",
+              "fieldId": "column-3",
+              "token": "2.50",
+              "normalizedValue": 2.5,
+              "rect": {
+                "left": 0.55,
+                "top": 0.4235576923076923,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            },
+            {
+              "id": "minimum-zone-4b-tl-column-4",
+              "fieldId": "column-4",
+              "token": "2.25",
+              "normalizedValue": 2.25,
+              "rect": {
+                "left": 0.67,
+                "top": 0.4235576923076923,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "zone-4c-tc",
+          "sourceLabel": "4c Tc",
+          "fields": {
+            "column-1": 0.35,
+            "column-2": 1.44,
+            "column-3": 2,
+            "column-4": 1.05
+          },
+          "cells": [
+            {
+              "id": "minimum-zone-4c-tc-column-1",
+              "fieldId": "column-1",
+              "token": "0.35",
+              "normalizedValue": 0.35,
+              "rect": {
+                "left": 0.32,
+                "top": 0.4389423076923077,
+                "width": 0.09,
+                "height": 0.014903846153846155
+              }
+            },
+            {
+              "id": "minimum-zone-4c-tc-column-2",
+              "fieldId": "column-2",
+              "token": "1.44",
+              "normalizedValue": 1.44,
+              "rect": {
+                "left": 0.43,
+                "top": 0.4389423076923077,
+                "width": 0.09,
+                "height": 0.014903846153846155
+              }
+            },
+            {
+              "id": "minimum-zone-4c-tc-column-3",
+              "fieldId": "column-3",
+              "token": "2.00",
+              "normalizedValue": 2,
+              "rect": {
+                "left": 0.55,
+                "top": 0.4389423076923077,
+                "width": 0.09,
+                "height": 0.014903846153846155
+              }
+            },
+            {
+              "id": "minimum-zone-4c-tc-column-4",
+              "fieldId": "column-4",
+              "token": "1.05",
+              "normalizedValue": 1.05,
+              "rect": {
+                "left": 0.67,
+                "top": 0.4389423076923077,
+                "width": 0.09,
+                "height": 0.014903846153846155
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "zone-4c-tl",
+          "sourceLabel": "4c TL",
+          "fields": {
+            "column-1": 1.3,
+            "column-2": 0.91,
+            "column-3": 2.1,
+            "column-4": 2.47
+          },
+          "cells": [
+            {
+              "id": "minimum-zone-4c-tl-column-1",
+              "fieldId": "column-1",
+              "token": "1.30",
+              "normalizedValue": 1.3,
+              "rect": {
+                "left": 0.32,
+                "top": 0.45384615384615384,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            },
+            {
+              "id": "minimum-zone-4c-tl-column-2",
+              "fieldId": "column-2",
+              "token": "0.91",
+              "normalizedValue": 0.91,
+              "rect": {
+                "left": 0.43,
+                "top": 0.45384615384615384,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            },
+            {
+              "id": "minimum-zone-4c-tl-column-3",
+              "fieldId": "column-3",
+              "token": "2.10",
+              "normalizedValue": 2.1,
+              "rect": {
+                "left": 0.55,
+                "top": 0.45384615384615384,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            },
+            {
+              "id": "minimum-zone-4c-tl-column-4",
+              "fieldId": "column-4",
+              "token": "2.47",
+              "normalizedValue": 2.47,
+              "rect": {
+                "left": 0.67,
+                "top": 0.45384615384615384,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "zone-4d",
+          "sourceLabel": "4d",
+          "fields": {
+            "column-1": 1,
+            "column-2": 0.91,
+            "column-3": 2,
+            "column-4": 1.9
+          },
+          "cells": [
+            {
+              "id": "minimum-zone-4d-column-1",
+              "fieldId": "column-1",
+              "token": "1.00",
+              "normalizedValue": 1,
+              "rect": {
+                "left": 0.32,
+                "top": 0.46923076923076923,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            },
+            {
+              "id": "minimum-zone-4d-column-2",
+              "fieldId": "column-2",
+              "token": "0.91",
+              "normalizedValue": 0.91,
+              "rect": {
+                "left": 0.43,
+                "top": 0.46923076923076923,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            },
+            {
+              "id": "minimum-zone-4d-column-3",
+              "fieldId": "column-3",
+              "token": "2.00",
+              "normalizedValue": 2,
+              "rect": {
+                "left": 0.55,
+                "top": 0.46923076923076923,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            },
+            {
+              "id": "minimum-zone-4d-column-4",
+              "fieldId": "column-4",
+              "token": "1.90",
+              "normalizedValue": 1.9,
+              "rect": {
+                "left": 0.67,
+                "top": 0.46923076923076923,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "zone-4e",
+          "sourceLabel": "4e",
+          "fields": {
+            "column-1": 0.8,
+            "column-2": 0.83,
+            "column-3": 3,
+            "column-4": 1.39
+          },
+          "cells": [
+            {
+              "id": "minimum-zone-4e-column-1",
+              "fieldId": "column-1",
+              "token": "0.80",
+              "normalizedValue": 0.8,
+              "rect": {
+                "left": 0.32,
+                "top": 0.48125,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            },
+            {
+              "id": "minimum-zone-4e-column-2",
+              "fieldId": "column-2",
+              "token": "0.83",
+              "normalizedValue": 0.83,
+              "rect": {
+                "left": 0.43,
+                "top": 0.48125,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            },
+            {
+              "id": "minimum-zone-4e-column-3",
+              "fieldId": "column-3",
+              "token": "3.00",
+              "normalizedValue": 3,
+              "rect": {
+                "left": 0.55,
+                "top": 0.48125,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            },
+            {
+              "id": "minimum-zone-4e-column-4",
+              "fieldId": "column-4",
+              "token": "1.39",
+              "normalizedValue": 1.39,
+              "rect": {
+                "left": 0.67,
+                "top": 0.48125,
+                "width": 0.09,
+                "height": 0.01201923076923077
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "zone-5-tc",
+          "sourceLabel": "5 Tc",
+          "fields": {
+            "column-1": 0.5,
+            "column-2": 1.04,
+            "column-3": 2.5,
+            "column-4": 1.08
+          },
+          "cells": [
+            {
+              "id": "minimum-zone-5-tc-column-1",
+              "fieldId": "column-1",
+              "token": "0.50",
+              "normalizedValue": 0.5,
+              "rect": {
+                "left": 0.32,
+                "top": 0.4932692307692308,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            },
+            {
+              "id": "minimum-zone-5-tc-column-2",
+              "fieldId": "column-2",
+              "token": "1.04",
+              "normalizedValue": 1.04,
+              "rect": {
+                "left": 0.43,
+                "top": 0.4932692307692308,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            },
+            {
+              "id": "minimum-zone-5-tc-column-3",
+              "fieldId": "column-3",
+              "token": "2.50",
+              "normalizedValue": 2.5,
+              "rect": {
+                "left": 0.55,
+                "top": 0.4932692307692308,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            },
+            {
+              "id": "minimum-zone-5-tc-column-4",
+              "fieldId": "column-4",
+              "token": "1.08",
+              "normalizedValue": 1.08,
+              "rect": {
+                "left": 0.67,
+                "top": 0.4932692307692308,
+                "width": 0.09,
+                "height": 0.015384615384615385
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "zone-5-tl",
+          "sourceLabel": "5 TL",
+          "fields": {
+            "column-1": 1.2,
+            "column-2": 0.75,
+            "column-3": 2.5,
+            "column-4": 1.88
+          },
+          "cells": [
+            {
+              "id": "minimum-zone-5-tl-column-1",
+              "fieldId": "column-1",
+              "token": "1.20",
+              "normalizedValue": 1.2,
+              "rect": {
+                "left": 0.32,
+                "top": 0.5086538461538461,
+                "width": 0.09,
+                "height": 0.014903846153846155
+              }
+            },
+            {
+              "id": "minimum-zone-5-tl-column-2",
+              "fieldId": "column-2",
+              "token": "0.75",
+              "normalizedValue": 0.75,
+              "rect": {
+                "left": 0.43,
+                "top": 0.5086538461538461,
+                "width": 0.09,
+                "height": 0.014903846153846155
+              }
+            },
+            {
+              "id": "minimum-zone-5-tl-column-3",
+              "fieldId": "column-3",
+              "token": "2.50",
+              "normalizedValue": 2.5,
+              "rect": {
+                "left": 0.55,
+                "top": 0.5086538461538461,
+                "width": 0.09,
+                "height": 0.014903846153846155
+              }
+            },
+            {
+              "id": "minimum-zone-5-tl-column-4",
+              "fieldId": "column-4",
+              "token": "1.88",
+              "normalizedValue": 1.88,
+              "rect": {
+                "left": 0.67,
+                "top": 0.5086538461538461,
+                "width": 0.09,
+                "height": 0.014903846153846155
+              }
+            }
+          ]
+        },
+        {
+          "optionId": "zone-6",
+          "sourceLabel": "6",
+          "fields": {
+            "column-1": 1.1,
+            "column-2": 0.93,
+            "column-3": 2.5,
+            "column-4": 2.13
+          },
+          "cells": [
+            {
+              "id": "minimum-zone-6-column-1",
+              "fieldId": "column-1",
+              "token": "1.10",
+              "normalizedValue": 1.1,
+              "rect": {
+                "left": 0.32,
+                "top": 0.5235576923076923,
+                "width": 0.09,
+                "height": 0.013461538461538462
+              }
+            },
+            {
+              "id": "minimum-zone-6-column-2",
+              "fieldId": "column-2",
+              "token": "0.93",
+              "normalizedValue": 0.93,
+              "rect": {
+                "left": 0.43,
+                "top": 0.5235576923076923,
+                "width": 0.09,
+                "height": 0.013461538461538462
+              }
+            },
+            {
+              "id": "minimum-zone-6-column-3",
+              "fieldId": "column-3",
+              "token": "2.50",
+              "normalizedValue": 2.5,
+              "rect": {
+                "left": 0.55,
+                "top": 0.5235576923076923,
+                "width": 0.09,
+                "height": 0.013461538461538462
+              }
+            },
+            {
+              "id": "minimum-zone-6-column-4",
+              "fieldId": "column-4",
+              "token": "2.13",
+              "normalizedValue": 2.13,
+              "rect": {
+                "left": 0.67,
+                "top": 0.5235576923076923,
+                "width": 0.09,
+                "height": 0.013461538461538462
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

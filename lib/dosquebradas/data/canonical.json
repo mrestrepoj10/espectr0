@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "studyId": "dosquebradas-microzonation",
+  "status": "research-only-activation-blocked",
+  "municipality": "Dosquebradas",
+  "controllingInstrument": "acuerdo-007-2024",
+  "technicalSource": "pot-2024-diagnostico-amenazas",
+  "selectionMode": "manual-zone-only",
+  "dampingRatio": 0.05,
+  "hazards": [
+    {
+      "id": "design",
+      "label": "Diseño",
+      "returnPeriodYears": null,
+      "probability": null,
+      "dampingRatio": 0.05
+    }
+  ],
+  "fields": {
+    "to": {
+      "unit": "s"
+    },
+    "tc": {
+      "unit": "s"
+    },
+    "tl": {
+      "unit": "s"
+    },
+    "aa": {
+      "unit": "g"
+    },
+    "fa": {
+      "unit": null
+    },
+    "fv": {
+      "unit": null
+    }
+  },
+  "zones": [
+    {
+      "id": "zona-1",
+      "label": "Zona 1",
+      "material": "Cenizas volcánicas de 10 a 20 m"
+    },
+    {
+      "id": "zona-2",
+      "label": "Zona 2",
+      "material": "Cenizas volcánicas de 8 m sobre suelos residuales"
+    },
+    {
+      "id": "zona-3",
+      "label": "Zona 3",
+      "material": "Depósitos fluviolacustres hasta 70 m"
+    },
+    {
+      "id": "zona-4",
+      "label": "Zona 4",
+      "material": "Cenizas volcánicas sobre suelos aluviales"
+    },
+    {
+      "id": "zona-5",
+      "label": "Zona 5",
+      "material": "Llenos antrópicos"
+    }
+  ],
+  "rows": [
+    {
+      "optionId": "zona-1",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.05,
+        "tc": 0.5,
+        "tl": 2.5,
+        "aa": 0.25,
+        "fa": 1.6,
+        "fv": 1.67
+      }
+    },
+    {
+      "optionId": "zona-2",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.05,
+        "tc": 0.7,
+        "tl": 3.5,
+        "aa": 0.25,
+        "fa": 1.76,
+        "fv": 2.57
+      }
+    },
+    {
+      "optionId": "zona-3",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.05,
+        "tc": 0.8,
+        "tl": 4,
+        "aa": 0.25,
+        "fa": 1.76,
+        "fv": 2.93
+      }
+    },
+    {
+      "optionId": "zona-4",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.05,
+        "tc": 0.32,
+        "tl": 1.6,
+        "aa": 0.25,
+        "fa": 1.76,
+        "fv": 1.17
+      }
+    },
+    {
+      "optionId": "zona-5",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.1,
+        "tc": 0.8,
+        "tl": 4,
+        "aa": 0.25,
+        "fa": 1.6,
+        "fv": 2.67
+      }
+    }
+  ],
+  "blockers": [
+    "No adopted formula or branch inclusivity was found in the official POT package.",
+    "Av is defined but not tabulated in Table 27.",
+    "The POT requires NSR-10 adjustment and harmonization within 24 months.",
+    "Return period/probability is not stated beside Table 27.",
+    "No automatic GIS selection is authorized."
+  ],
+  "capabilities": {
+    "traceabilityViewer": true,
+    "municipalSpectrumCalculation": false,
+    "automaticZoneSelection": false
+  }
+}

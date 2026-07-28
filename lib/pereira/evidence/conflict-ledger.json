@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "cap-versus-adoption",
+      "status": "resolved-for-product",
+      "issue": "CAP approved the study but no municipal adoption instrument was located.",
+      "resolution": "Treat technical approval and legal adoption as distinct; block activation."
+    },
+    {
+      "id": "legacy-versus-new",
+      "status": "resolved-for-product",
+      "issue": "POT preserves Decreto 932 until the new microzonation is issued.",
+      "resolution": "Do not silently supersede legacy law with the CAP act."
+    },
+    {
+      "id": "secondary-d932-copy",
+      "status": "resolved-for-product",
+      "issue": "Secondary copies expose possible values/formulas.",
+      "resolution": "Do not canonicalize without primary official bytes."
+    }
+  ]
+}

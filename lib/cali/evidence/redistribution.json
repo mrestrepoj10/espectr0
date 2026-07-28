@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "decision": "external-only-all-sources",
+  "committedSourceBytes": false,
+  "rationale": "Las cuatro fuentes se fijan por URL oficial, tamaño, páginas y SHA-256; no se encontró licencia expresa que autorice republicación dentro de este dossier.",
+  "localVerification": "verify_official_pdf.py acepta una copia oficial del Decreto 0158 suministrada localmente y valida huellas de página y recortes."
+}

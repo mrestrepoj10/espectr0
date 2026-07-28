@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "referenceWebsiteRole": "comparison-only-not-regulatory-source",
+  "inspectedForRegulatoryValues": false,
+  "differences": [
+    {
+      "id": "historical-zone-selector",
+      "status": "do-not-reproduce",
+      "finding": "Cualquier selector A/B/C representa el modelo historico 2002 y contradice el modelo raster actualizado si se presenta como vigente."
+    },
+    {
+      "id": "coefficients-or-formulas",
+      "status": "not-accepted",
+      "finding": "No se acepta ningun coeficiente, formula, limite, redondeo, valor por defecto o advertencia desde la web de referencia."
+    }
+  ],
+  "nonInference": "No se transfieren valores ni comportamientos de la web de referencia a la evidencia canonica."
+}

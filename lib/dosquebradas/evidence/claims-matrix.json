@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "directMatrix": {
+    "expectedOptionHazardPairs": 5,
+    "exactCoveredPairs": 5,
+    "expectedFieldValues": 30,
+    "exactCoveredFieldValues": 30,
+    "directSourceValues": 30,
+    "coveragePercent": 100
+  },
+  "claimCoverage": {
+    "applicability": {
+      "expected": 2,
+      "cited": 2,
+      "percent": 100
+    },
+    "warnings": {
+      "expected": 5,
+      "cited": 5,
+      "percent": 100
+    }
+  },
+  "claims": [
+    {
+      "id": "pot-adoption",
+      "statement": "Acuerdo 007 de 2024 adopts the ordinary POT revision.",
+      "citationId": "adoption-2024"
+    },
+    {
+      "id": "supports-remain",
+      "statement": "The current DTS says the CARDER microzonation technical supports remain in force.",
+      "citationId": "currentness-and-harmonization"
+    },
+    {
+      "id": "outside-map-nsr10",
+      "statement": "Areas without microzonation information must apply NSR-10.",
+      "citationId": "currentness-and-harmonization"
+    },
+    {
+      "id": "harmonization",
+      "statement": "The municipality must adjust and harmonize the model to NSR-10 within 24 months.",
+      "citationId": "currentness-and-harmonization"
+    },
+    {
+      "id": "damping",
+      "statement": "The published design-spectrum figure is labelled β=5%.",
+      "citationId": "damping-five-percent"
+    },
+    {
+      "id": "formula-gap",
+      "statement": "No formula is asserted by this dossier; Table 27 alone is insufficient for calculation.",
+      "citationId": "table-27"
+    }
+  ]
+}

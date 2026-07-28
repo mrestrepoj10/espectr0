@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "status": "unavailable-blocks-activation",
+  "proposedProductionFormulas": [],
+  "unresolvedRequiredInputs": [
+    "Av",
+    "piecewise equations",
+    "branch inclusivity",
+    "importance-factor placement"
+  ],
+  "coverage": {
+    "expectedForActivation": 4,
+    "cited": 0,
+    "percent": 0
+  },
+  "decision": "Table 27 may be displayed with traceability but cannot drive a municipal spectrum calculator."
+}

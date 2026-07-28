@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "retrievedOn": "2026-07-25",
+  "locks": [
+    {
+      "sourceDocumentId": "cali-decree-0158-2014",
+      "officialUrl": "https://www.cali.gov.co/aplicaciones/boletin_publicaciones/imagenes_documentos/documentoId7429.pdf",
+      "sha256": "8c58d68e34b1f79b5227beb98b58ca6fc8fb24031cb8d2c64ebecf71873ce9d6",
+      "pageCount": 20,
+      "byteLength": 7754229,
+      "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "cali-pot-0373-2014",
+      "officialUrl": "https://www.minvivienda.gov.co/sites/default/files/10%20A%20Acuerdo%200373%20de%202014.pdf",
+      "sha256": "f631e3e58bb8c2f9893a32d37845f85595f2c894a935cc141e0ece51c418e94b",
+      "pageCount": 433,
+      "byteLength": 2109799,
+      "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "nsr10-title-a-2017",
+      "officialUrl": "https://www.minvivienda.gov.co/sites/default/files/documentos/titulo-a-nsr-100.pdf",
+      "sha256": "47207abe1e832f5feb5fb8448af884b8d539fddaf89b6b21ab466765dd8524b0",
+      "pageCount": 206,
+      "byteLength": 3486413,
+      "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "cali-ingeominas-dagma-2005-tomo6",
+      "officialUrl": "https://web1.cali.gov.co/publico2/documentos/dagma/estudios_ambientales/CONTRATO022002/TOMO6CONVENIO022002.pdf",
+      "sha256": "c6d45337349043f6b816146952b79d3d4c27e6f414e9d692d2bd30566de378e1",
+      "pageCount": 159,
+      "byteLength": 13469947,
+      "redistributionDecision": "external-only"
+    }
+  ]
+}
