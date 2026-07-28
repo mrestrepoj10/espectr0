@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "source": "POT 2024 diagnosis, Table 27, physical PDF page 111",
+  "fieldOrder": ["to", "tc", "tl", "aa", "fa", "fv"],
+  "rows": [
+    ["zona-1", "0.05", "0.5", "2.5", "0.25", "1.60", "1.67"],
+    ["zona-2", "0.05", "0.7", "3.5", "0.25", "1.76", "2.57"],
+    ["zona-3", "0.05", "0.8", "4", "0.25", "1.76", "2.93"],
+    ["zona-4", "0.05", "0.32", "1.6", "0.25", "1.76", "1.17"],
+    ["zona-5", "0.1", "0.8", "4", "0.25", "1.60", "2.67"]
+  ],
+  "negativeCases": [
+    { "id": "calculate-spectrum", "reason": "official adopted formula unavailable" },
+    { "id": "assume-av", "reason": "Av is defined but not tabulated" },
+    { "id": "automatic-zone", "reason": "GIS automation is out of scope and unsupported" }
+  ]
+}

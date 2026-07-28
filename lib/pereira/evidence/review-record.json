@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "authorRole": "research agent R7",
+  "preparedOn": "2026-07-25",
+  "independentReview": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewedOn": null,
+    "scope": [
+      "source locks",
+      "CAP/adoption distinction",
+      "POT legacy chain",
+      "zero-spectrum fail-closed decision"
+    ]
+  },
+  "activationDecision": "blocked-pending-municipal-adoption-and-primary-technical-source",
+  "mergeDecision": "no-merge-for-production-activation"
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "policy": "Official PDFs remain external-only and are locked by URL, byte length, page count and SHA-256.",
+  "locks": [
+    {
+      "sourceDocumentId": "acuerdo-028-2000",
+      "officialUrl": "https://tramites1.suit.gov.co/registro-web/suit_descargar_archivo?A=78028",
+      "retrievedOn": "2026-07-25",
+      "byteLength": 962304,
+      "pageCount": 110,
+      "sha256": "e3fb9f146c9a00cfecd1faf6f12f61cb44863ffd626e45e3c4121342e15212f8",
+      "mediaType": "application/pdf",
+      "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "acuerdo-076-2013",
+      "officialUrl": "https://www.carder.gov.co/download/1-pbot-santa-rosa-de-cabal-acuerdo-076-de-2013-revision-excepcional/?wpdmdl=5003",
+      "retrievedOn": "2026-07-25",
+      "byteLength": 261815,
+      "pageCount": 14,
+      "sha256": "16d0c00b293a337d49e51132fc88068a26ec6aad74334c84a2c758e8cd45a346",
+      "mediaType": "application/pdf",
+      "redistributionDecision": "external-only"
+    }
+  ]
+}

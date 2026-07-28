@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "extractor": {
+    "engine": "pypdf",
+    "version": "6.14.2",
+    "ocrUsed": false
+  },
+  "coordinateSystem": "normalized top-left; full-page clauses and bounded direct status cell",
+  "normalization": "Unicode NFC and whitespace collapse",
+  "qualityControls": [
+    "No coefficient or equation from a secondary mirror is used.",
+    "The seven labels are recorded only as documentary metadata, not selectable calculator options.",
+    "NSR-98/2013 NRS-10 tension is not silently reconciled."
+  ]
+}

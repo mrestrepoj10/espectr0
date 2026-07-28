@@ -436,6 +436,9 @@ describe("strict aggregate boundary", () => {
 		);
 		expect(aggregate.installedStudies).toEqual([...aggregate.installedStudies].sort());
 		expect(new Set(aggregate.installedStudies).size).toBe(aggregate.installedStudies.length);
+		expect(aggregate.studies.map(({ studyId }: { studyId: string }) => studyId)).toEqual(
+			aggregate.installedStudies,
+		);
 		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "framework-fixture")).toMatchObject({
 			studyId: "framework-fixture",
 			coverage: { bundledSources: 1 },

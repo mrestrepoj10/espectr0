@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "blocking": true,
+  "entries": [
+    {
+      "id": "blocker-1",
+      "severity": "blocker",
+      "issue": "Primary official bytes for Acuerdo 012 de 2000 and its complete technical annex were not located.",
+      "disposition": "No municipal spectrum activation."
+    },
+    {
+      "id": "blocker-2",
+      "severity": "blocker",
+      "issue": "No primary coefficient tables or Am/An values were located.",
+      "disposition": "No municipal spectrum activation."
+    },
+    {
+      "id": "blocker-3",
+      "severity": "blocker",
+      "issue": "No complete current formulas, branch inclusivity, hazards, return periods or damping were located.",
+      "disposition": "No municipal spectrum activation."
+    },
+    {
+      "id": "blocker-4",
+      "severity": "blocker",
+      "issue": "Acuerdo 028 frames the technical rule under NSR-98 while Acuerdo 076 references NRS-10 for selected urban height provisions without republishing the technical model.",
+      "disposition": "No municipal spectrum activation."
+    },
+    {
+      "id": "blocker-5",
+      "severity": "blocker",
+      "issue": "Zone selection must remain manual and professionally verified; no GIS automation is authorized.",
+      "disposition": "No municipal spectrum activation."
+    }
+  ]
+}

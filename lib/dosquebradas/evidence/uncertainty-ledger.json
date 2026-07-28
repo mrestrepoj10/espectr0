@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "blocking": true,
+  "entries": [
+    {
+      "id": "blocker-1",
+      "severity": "blocker",
+      "issue": "No adopted formula or branch inclusivity was found in the official POT package.",
+      "disposition": "No activation until an official primary source resolves this item."
+    },
+    {
+      "id": "blocker-2",
+      "severity": "blocker",
+      "issue": "Av is defined but not tabulated in Table 27.",
+      "disposition": "No activation until an official primary source resolves this item."
+    },
+    {
+      "id": "blocker-3",
+      "severity": "blocker",
+      "issue": "The POT requires NSR-10 adjustment and harmonization within 24 months.",
+      "disposition": "No activation until an official primary source resolves this item."
+    },
+    {
+      "id": "blocker-4",
+      "severity": "blocker",
+      "issue": "Return period/probability is not stated beside Table 27.",
+      "disposition": "No activation until an official primary source resolves this item."
+    },
+    {
+      "id": "blocker-5",
+      "severity": "blocker",
+      "issue": "No automatic GIS selection is authorized.",
+      "disposition": "No activation until an official primary source resolves this item."
+    }
+  ]
+}

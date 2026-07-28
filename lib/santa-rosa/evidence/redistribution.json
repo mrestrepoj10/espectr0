@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "decision": "external-only-all-sources",
+  "committedSourceBytes": false,
+  "rationale": "No express redistribution license was found.",
+  "prohibitedArtifacts": [
+    "official PDFs",
+    "rendered pages",
+    "maps/GIS layers",
+    "secondary mirrors"
+  ]
+}
