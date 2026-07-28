@@ -15,6 +15,13 @@
       "status": "verified-primary"
     },
     {
+      "claim": "The official MinTransporte multipart publication reconstructs a 1,551-page scanned resolution-and-annex PDF; it is not byte- or page-equivalent to the later 16-PDF, 1,503-page INVÍAS technical ZIP.",
+      "id": "ministerial-package-provenance",
+      "locator": "MinTransporte files 12013-12015; reconstructed PDF physical pages 1-1551; INVÍAS ZIP central directory",
+      "source": "mintransporte-resolution-108-multipart-pdf",
+      "status": "verified-primary-reconciliation-required"
+    },
+    {
       "claim": "The general design hazard is 7% probability of exceedance in 75 years, approximately a 1000-year mean return period, at 5% damping.",
       "id": "hazard",
       "locator": "Section 3 physical pages 50-53, printed 3-46 through 3-49",
@@ -30,6 +37,8 @@
     },
     {
       "claim": "A finite official selectable locality count and exact locality-to-PGA/Ss/S1 registry is available in the published package.",
+      "corroboratingLocator": "MinTransporte reconstructed PDF physical page 107, printed 3-57, C3.10.2.1; multipart payload audit",
+      "corroboratingSource": "mintransporte-resolution-108-multipart-pdf",
       "id": "exact-locality-count",
       "locator": "Official ZIP central directory and C3.10.2.1",
       "source": "invias-ccp14-official-zip",
@@ -106,6 +115,13 @@
       "status": "contradicted-by-same-official-page-activation-blocked"
     },
     {
+      "claim": "The official MinTransporte resolution-and-annex scan independently repeats both incompatible T0 readings.",
+      "id": "ministerial-t0-conflict",
+      "locator": "Reconstructed PDF physical page 117, printed 3-67, Figure 3.10.4.1-1; physical page 118, printed 3-68, T0 definition",
+      "source": "mintransporte-resolution-108-multipart-pdf",
+      "status": "verified-primary-conflict-confirmed"
+    },
+    {
       "claim": "The spectrum uses a linear initial branch, SDS plateau, and SD1/T long-period branch; no 1/T^2 branch is specified.",
       "id": "spectrum-branches",
       "locator": "Section 3 physical pages 60-61, printed 3-56 and 3-57, Equations 3.10.4.2-1, -4, -5",
@@ -156,8 +172,8 @@
     }
   ],
   "summary": {
-    "activationBlockingClaims": 2,
-    "normativeClaimsWithPrimarySupport": 18,
-    "totalClaims": 22
+    "activationBlockingClaims": 3,
+    "normativeClaimsWithPrimarySupport": 20,
+    "totalClaims": 24
   }
 }

@@ -1,6 +1,11 @@
 {
   "profiles": [
     {
+      "id": "mintransporte-multipart-resolution-annex",
+      "method": "SHA-256 each official RAR volume; reconstruct with 7-Zip; verify PDF hash, metadata, 1,551-page count, embedded-content catalog, and render physical pages 107, 117, and 118",
+      "result": "Official scan repeats the CD/web promise and both incompatible T0 readings; no embedded dataset or URI was found"
+    },
+    {
       "id": "official-zip",
       "method": "ZIP central-directory enumeration and per-member SHA-256",
       "result": "16 PDF members; no machine-readable locality dataset"
