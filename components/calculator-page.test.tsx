@@ -6,12 +6,12 @@ import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vite
 
 const {
 	adaptNsr10SpectrumMock,
-	downloadCalculationMemoriaPdf,
+	downloadNormalizedSpectrumMemoriaPdf,
 	spectrumMockState,
 	toastSuccess,
 } = vi.hoisted(() => ({
 	adaptNsr10SpectrumMock: vi.fn(),
-	downloadCalculationMemoriaPdf: vi.fn().mockResolvedValue(undefined),
+	downloadNormalizedSpectrumMemoriaPdf: vi.fn().mockResolvedValue(undefined),
 	spectrumMockState: {
 		actualAdapter: undefined as
 			| ((...args: unknown[]) => unknown)
@@ -37,7 +37,7 @@ vi.mock("sonner", () => ({
 }));
 
 vi.mock("@/lib/memoria-pdf-renderer", () => ({
-	downloadCalculationMemoriaPdf,
+	downloadNormalizedSpectrumMemoriaPdf,
 }));
 
 import { CalculatorPage } from "./calculator-page";
@@ -96,7 +96,7 @@ beforeEach(async () => {
 	if (!actualAdapter) throw new Error("The real NSR-10 adapter was not loaded.");
 	adaptNsr10SpectrumMock.mockReset();
 	adaptNsr10SpectrumMock.mockImplementation(actualAdapter);
-	downloadCalculationMemoriaPdf.mockClear();
+	downloadNormalizedSpectrumMemoriaPdf.mockClear();
 	toastSuccess.mockClear();
 	container = document.createElement("div");
 	document.body.append(container);
@@ -134,11 +134,15 @@ describe("calculator contextual PDF action", () => {
 		});
 
 		await vi.waitFor(() => {
-			expect(downloadCalculationMemoriaPdf).toHaveBeenCalledTimes(1);
+			expect(downloadNormalizedSpectrumMemoriaPdf).toHaveBeenCalledTimes(1);
 		});
-		expect(downloadCalculationMemoriaPdf).toHaveBeenCalledWith(
+		expect(downloadNormalizedSpectrumMemoriaPdf).toHaveBeenCalledWith(
 			expect.objectContaining({
-				inputs: expect.objectContaining({ mode: "general" }),
+				status: "ok",
+				scenarioEvidenceKey: expect.objectContaining({
+					studyId: "nsr10-national",
+					optionId: "76001",
+				}),
 			}),
 		);
 		expect(toastSuccess).toHaveBeenCalledWith("Memoria PDF descargada.");

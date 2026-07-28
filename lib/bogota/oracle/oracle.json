@@ -1,0 +1,2574 @@
+{
+  "auditSummary": {
+    "expectedRecordCount": 48,
+    "maximumAbsolutePlateauToDecayJoinGapG": "0.005",
+    "maximumAbsoluteTableMinusFormulaBoundarySeconds": "0.0047368421052631578947368421052631578947368421053",
+    "recordCount": 48
+  },
+  "boundaryPolicy": "Direct tabulated periods select branches; formula-derived boundaries are audit witnesses only.",
+  "engine": "Python decimal.Decimal, precision 50",
+  "inputSha256": "ef06d6f1e1f65a555ae72f4e39fca2e27b1edc9818c8fc6a9294f329ea7ed431",
+  "records": [
+    {
+      "fields": {
+        "fa": "1.35",
+        "fv": "1.30",
+        "ground_peak": "0.18",
+        "long_period": "3.0",
+        "transition_end": "0.62",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.6162962962962962962962962962962962962962962962963"
+      },
+      "hazardId": "design",
+      "optionId": "cerros",
+      "plateauToDecayJoinGap": "-0.00302419354838709677419354838709677419354838709677",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0037037037037037037037037037037037037037037037037"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.50625",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.50625",
+          "branch": "plateau",
+          "period": "0.31"
+        },
+        {
+          "acceleration": "0.50625",
+          "branch": "plateau",
+          "period": "0.62"
+        },
+        {
+          "acceleration": "0.17237569060773480662983425414364640883977900552486",
+          "branch": "decay",
+          "period": "1.81"
+        },
+        {
+          "acceleration": "0.104",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.026",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.65",
+        "fv": "2.00",
+        "ground_peak": "0.22",
+        "long_period": "3.0",
+        "transition_end": "0.78",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.77575757575757575757575757575757575757575757575758"
+      },
+      "hazardId": "design",
+      "optionId": "piedemonte-a",
+      "plateauToDecayJoinGap": "-0.00336538461538461538461538461538461538461538461538",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.00424242424242424242424242424242424242424242424242"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.61875",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.61875",
+          "branch": "plateau",
+          "period": "0.39"
+        },
+        {
+          "acceleration": "0.61875",
+          "branch": "plateau",
+          "period": "0.78"
+        },
+        {
+          "acceleration": "0.25396825396825396825396825396825396825396825396825",
+          "branch": "decay",
+          "period": "1.89"
+        },
+        {
+          "acceleration": "0.16",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.04",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.95",
+        "fv": "1.70",
+        "ground_peak": "0.26",
+        "long_period": "3.0",
+        "transition_end": "0.56",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.55794871794871794871794871794871794871794871794872"
+      },
+      "hazardId": "design",
+      "optionId": "piedemonte-b",
+      "plateauToDecayJoinGap": "-0.00267857142857142857142857142857142857142857142857",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.00205128205128205128205128205128205128205128205128"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.73125",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.73125",
+          "branch": "plateau",
+          "period": "0.28"
+        },
+        {
+          "acceleration": "0.73125",
+          "branch": "plateau",
+          "period": "0.56"
+        },
+        {
+          "acceleration": "0.22921348314606741573033707865168539325842696629213",
+          "branch": "decay",
+          "period": "1.78"
+        },
+        {
+          "acceleration": "0.136",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.034",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.80",
+        "fv": "1.70",
+        "ground_peak": "0.24",
+        "long_period": "3.0",
+        "transition_end": "0.60",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.60444444444444444444444444444444444444444444444444"
+      },
+      "hazardId": "design",
+      "optionId": "piedemonte-c",
+      "plateauToDecayJoinGap": "0.005",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.00444444444444444444444444444444444444444444444444"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.675",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.675",
+          "branch": "plateau",
+          "period": "0.3"
+        },
+        {
+          "acceleration": "0.675",
+          "branch": "plateau",
+          "period": "0.6"
+        },
+        {
+          "acceleration": "0.22666666666666666666666666666666666666666666666667",
+          "branch": "decay",
+          "period": "1.8"
+        },
+        {
+          "acceleration": "0.136",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.034",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.40",
+        "fv": "2.90",
+        "ground_peak": "0.21",
+        "long_period": "4.0",
+        "transition_end": "1.33",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.3257142857142857142857142857142857142857142857143"
+      },
+      "hazardId": "design",
+      "optionId": "lacustre-50",
+      "plateauToDecayJoinGap": "-0.00169172932330827067669172932330827067669172932331",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0042857142857142857142857142857142857142857142857"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.525",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.525",
+          "branch": "plateau",
+          "period": "0.665"
+        },
+        {
+          "acceleration": "0.525",
+          "branch": "plateau",
+          "period": "1.33"
+        },
+        {
+          "acceleration": "0.26116322701688555347091932457786116322701688555347",
+          "branch": "decay",
+          "period": "2.665"
+        },
+        {
+          "acceleration": "0.174",
+          "branch": "decay",
+          "period": "4"
+        },
+        {
+          "acceleration": "0.0435",
+          "branch": "long",
+          "period": "8"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.30",
+        "fv": "3.20",
+        "ground_peak": "0.20",
+        "long_period": "4.0",
+        "transition_end": "1.58",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.5753846153846153846153846153846153846153846153846"
+      },
+      "hazardId": "design",
+      "optionId": "lacustre-100",
+      "plateauToDecayJoinGap": "-0.00142405063291139240506329113924050632911392405063",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0046153846153846153846153846153846153846153846154"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.4875",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.4875",
+          "branch": "plateau",
+          "period": "0.79"
+        },
+        {
+          "acceleration": "0.4875",
+          "branch": "plateau",
+          "period": "1.58"
+        },
+        {
+          "acceleration": "0.27526881720430107526881720430107526881720430107527",
+          "branch": "decay",
+          "period": "2.79"
+        },
+        {
+          "acceleration": "0.192",
+          "branch": "decay",
+          "period": "4"
+        },
+        {
+          "acceleration": "0.048",
+          "branch": "long",
+          "period": "8"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.20",
+        "fv": "3.50",
+        "ground_peak": "0.18",
+        "long_period": "4.0",
+        "transition_end": "1.87",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.8666666666666666666666666666666666666666666666667"
+      },
+      "hazardId": "design",
+      "optionId": "lacustre-200",
+      "plateauToDecayJoinGap": "-0.00080213903743315508021390374331550802139037433155",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0033333333333333333333333333333333333333333333333"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.45",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.45",
+          "branch": "plateau",
+          "period": "0.935"
+        },
+        {
+          "acceleration": "0.45",
+          "branch": "plateau",
+          "period": "1.87"
+        },
+        {
+          "acceleration": "0.28620102214650766609880749574105621805792163543441",
+          "branch": "decay",
+          "period": "2.935"
+        },
+        {
+          "acceleration": "0.21",
+          "branch": "decay",
+          "period": "4"
+        },
+        {
+          "acceleration": "0.0525",
+          "branch": "long",
+          "period": "8"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.05",
+        "fv": "2.90",
+        "ground_peak": "0.16",
+        "long_period": "5.0",
+        "transition_end": "1.77",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.767619047619047619047619047619047619047619047619"
+      },
+      "hazardId": "design",
+      "optionId": "lacustre-300",
+      "plateauToDecayJoinGap": "-0.00052966101694915254237288135593220338983050847458",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.002380952380952380952380952380952380952380952381"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.39375",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.39375",
+          "branch": "plateau",
+          "period": "0.885"
+        },
+        {
+          "acceleration": "0.39375",
+          "branch": "plateau",
+          "period": "1.77"
+        },
+        {
+          "acceleration": "0.20561299852289512555391432791728212703101920236337",
+          "branch": "decay",
+          "period": "3.385"
+        },
+        {
+          "acceleration": "0.1392",
+          "branch": "decay",
+          "period": "5"
+        },
+        {
+          "acceleration": "0.0348",
+          "branch": "long",
+          "period": "10"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "0.95",
+        "fv": "2.70",
+        "ground_peak": "0.14",
+        "long_period": "5.0",
+        "transition_end": "1.82",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.8189473684210526315789473684210526315789473684211"
+      },
+      "hazardId": "design",
+      "optionId": "lacustre-500",
+      "plateauToDecayJoinGap": "-0.00020604395604395604395604395604395604395604395604",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0010526315789473684210526315789473684210526315789"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.35625",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.35625",
+          "branch": "plateau",
+          "period": "0.91"
+        },
+        {
+          "acceleration": "0.35625",
+          "branch": "plateau",
+          "period": "1.82"
+        },
+        {
+          "acceleration": "0.19002932551319648093841642228739002932551319648094",
+          "branch": "decay",
+          "period": "3.41"
+        },
+        {
+          "acceleration": "0.1296",
+          "branch": "decay",
+          "period": "5"
+        },
+        {
+          "acceleration": "0.0324",
+          "branch": "long",
+          "period": "10"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.10",
+        "fv": "2.80",
+        "ground_peak": "0.17",
+        "long_period": "4.0",
+        "transition_end": "1.63",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.6290909090909090909090909090909090909090909090909"
+      },
+      "hazardId": "design",
+      "optionId": "lacustre-aluvial-200",
+      "plateauToDecayJoinGap": "-0.00023006134969325153374233128834355828220858895706",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0009090909090909090909090909090909090909090909091"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.4125",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.4125",
+          "branch": "plateau",
+          "period": "0.815"
+        },
+        {
+          "acceleration": "0.4125",
+          "branch": "plateau",
+          "period": "1.63"
+        },
+        {
+          "acceleration": "0.23872113676731793960923623445825932504440497335702",
+          "branch": "decay",
+          "period": "2.815"
+        },
+        {
+          "acceleration": "0.168",
+          "branch": "decay",
+          "period": "4"
+        },
+        {
+          "acceleration": "0.042",
+          "branch": "long",
+          "period": "8"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.00",
+        "fv": "2.50",
+        "ground_peak": "0.15",
+        "long_period": "5.0",
+        "transition_end": "1.60",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.6"
+      },
+      "hazardId": "design",
+      "optionId": "lacustre-aluvial-300",
+      "plateauToDecayJoinGap": "0",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.375",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.375",
+          "branch": "plateau",
+          "period": "0.8"
+        },
+        {
+          "acceleration": "0.375",
+          "branch": "plateau",
+          "period": "1.6"
+        },
+        {
+          "acceleration": "0.18181818181818181818181818181818181818181818181818",
+          "branch": "decay",
+          "period": "3.3"
+        },
+        {
+          "acceleration": "0.12",
+          "branch": "decay",
+          "period": "5"
+        },
+        {
+          "acceleration": "0.03",
+          "branch": "long",
+          "period": "10"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.35",
+        "fv": "1.80",
+        "ground_peak": "0.20",
+        "long_period": "3.5",
+        "transition_end": "0.85",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.85333333333333333333333333333333333333333333333333"
+      },
+      "hazardId": "design",
+      "optionId": "aluvial-50",
+      "plateauToDecayJoinGap": "0.00198529411764705882352941176470588235294117647059",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.00333333333333333333333333333333333333333333333333"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.50625",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.50625",
+          "branch": "plateau",
+          "period": "0.425"
+        },
+        {
+          "acceleration": "0.50625",
+          "branch": "plateau",
+          "period": "0.85"
+        },
+        {
+          "acceleration": "0.19862068965517241379310344827586206896551724137931",
+          "branch": "decay",
+          "period": "2.175"
+        },
+        {
+          "acceleration": "0.12342857142857142857142857142857142857142857142857",
+          "branch": "decay",
+          "period": "3.5"
+        },
+        {
+          "acceleration": "0.030857142857142857142857142857142857142857142857143",
+          "branch": "long",
+          "period": "7"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.20",
+        "fv": "2.10",
+        "ground_peak": "0.18",
+        "long_period": "3.5",
+        "transition_end": "1.12",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.12"
+      },
+      "hazardId": "design",
+      "optionId": "aluvial-100",
+      "plateauToDecayJoinGap": "0",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.45",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.45",
+          "branch": "plateau",
+          "period": "0.56"
+        },
+        {
+          "acceleration": "0.45",
+          "branch": "plateau",
+          "period": "1.12"
+        },
+        {
+          "acceleration": "0.21818181818181818181818181818181818181818181818182",
+          "branch": "decay",
+          "period": "2.31"
+        },
+        {
+          "acceleration": "0.144",
+          "branch": "decay",
+          "period": "3.5"
+        },
+        {
+          "acceleration": "0.036",
+          "branch": "long",
+          "period": "7"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.05",
+        "fv": "2.10",
+        "ground_peak": "0.16",
+        "long_period": "3.5",
+        "transition_end": "1.28",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.28"
+      },
+      "hazardId": "design",
+      "optionId": "aluvial-200",
+      "plateauToDecayJoinGap": "0",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.39375",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.39375",
+          "branch": "plateau",
+          "period": "0.64"
+        },
+        {
+          "acceleration": "0.39375",
+          "branch": "plateau",
+          "period": "1.28"
+        },
+        {
+          "acceleration": "0.21087866108786610878661087866108786610878661087866",
+          "branch": "decay",
+          "period": "2.39"
+        },
+        {
+          "acceleration": "0.144",
+          "branch": "decay",
+          "period": "3.5"
+        },
+        {
+          "acceleration": "0.036",
+          "branch": "long",
+          "period": "7"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "0.95",
+        "fv": "2.10",
+        "ground_peak": "0.14",
+        "long_period": "3.5",
+        "transition_end": "1.41",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.4147368421052631578947368421052631578947368421053"
+      },
+      "hazardId": "design",
+      "optionId": "aluvial-300",
+      "plateauToDecayJoinGap": "0.00119680851063829787234042553191489361702127659574",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.0047368421052631578947368421052631578947368421053"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.35625",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.35625",
+          "branch": "plateau",
+          "period": "0.705"
+        },
+        {
+          "acceleration": "0.35625",
+          "branch": "plateau",
+          "period": "1.41"
+        },
+        {
+          "acceleration": "0.20529531568228105906313645621181262729124236252546",
+          "branch": "decay",
+          "period": "2.455"
+        },
+        {
+          "acceleration": "0.144",
+          "branch": "decay",
+          "period": "3.5"
+        },
+        {
+          "acceleration": "0.036",
+          "branch": "long",
+          "period": "7"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.65",
+        "fv": "1.70",
+        "ground_peak": "0.22",
+        "long_period": "3.0",
+        "transition_end": "0.66",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.65939393939393939393939393939393939393939393939394"
+      },
+      "hazardId": "design",
+      "optionId": "deposito-ladera",
+      "plateauToDecayJoinGap": "-0.00056818181818181818181818181818181818181818181818",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.00060606060606060606060606060606060606060606060606"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.61875",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.61875",
+          "branch": "plateau",
+          "period": "0.33"
+        },
+        {
+          "acceleration": "0.61875",
+          "branch": "plateau",
+          "period": "0.66"
+        },
+        {
+          "acceleration": "0.22295081967213114754098360655737704918032786885246",
+          "branch": "decay",
+          "period": "1.83"
+        },
+        {
+          "acceleration": "0.136",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.034",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.40",
+        "fv": "1.50",
+        "ground_peak": "0.16",
+        "long_period": "3.0",
+        "transition_end": "0.51",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.51428571428571428571428571428571428571428571428571"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "cerros",
+      "plateauToDecayJoinGap": "0.00382352941176470588235294117647058823529411764706",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.00428571428571428571428571428571428571428571428571"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.455",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.455",
+          "branch": "plateau",
+          "period": "0.255"
+        },
+        {
+          "acceleration": "0.455",
+          "branch": "plateau",
+          "period": "0.51"
+        },
+        {
+          "acceleration": "0.13333333333333333333333333333333333333333333333333",
+          "branch": "decay",
+          "period": "1.755"
+        },
+        {
+          "acceleration": "0.078",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.0195",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.70",
+        "fv": "2.35",
+        "ground_peak": "0.20",
+        "long_period": "3.0",
+        "transition_end": "0.66",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.66352941176470588235294117647058823529411764705882"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "piedemonte-a",
+      "plateauToDecayJoinGap": "0.00295454545454545454545454545454545454545454545455",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.00352941176470588235294117647058823529411764705882"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.5525",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.5525",
+          "branch": "plateau",
+          "period": "0.33"
+        },
+        {
+          "acceleration": "0.5525",
+          "branch": "plateau",
+          "period": "0.66"
+        },
+        {
+          "acceleration": "0.20032786885245901639344262295081967213114754098361",
+          "branch": "decay",
+          "period": "1.83"
+        },
+        {
+          "acceleration": "0.1222",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.03055",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "2.00",
+        "fv": "1.95",
+        "ground_peak": "0.23",
+        "long_period": "3.0",
+        "transition_end": "0.47",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.468"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "piedemonte-b",
+      "plateauToDecayJoinGap": "-0.00276595744680851063829787234042553191489361702128",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.002"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.65",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.65",
+          "branch": "plateau",
+          "period": "0.235"
+        },
+        {
+          "acceleration": "0.65",
+          "branch": "plateau",
+          "period": "0.47"
+        },
+        {
+          "acceleration": "0.17533141210374639769452449567723342939481268011527",
+          "branch": "decay",
+          "period": "1.735"
+        },
+        {
+          "acceleration": "0.1014",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.02535",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.85",
+        "fv": "1.95",
+        "ground_peak": "0.22",
+        "long_period": "3.0",
+        "transition_end": "0.51",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.50594594594594594594594594594594594594594594594595"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "piedemonte-c",
+      "plateauToDecayJoinGap": "-0.00477941176470588235294117647058823529411764705882",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.00405405405405405405405405405405405405405405405405"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.60125",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.60125",
+          "branch": "plateau",
+          "period": "0.255"
+        },
+        {
+          "acceleration": "0.60125",
+          "branch": "plateau",
+          "period": "0.51"
+        },
+        {
+          "acceleration": "0.17333333333333333333333333333333333333333333333333",
+          "branch": "decay",
+          "period": "1.755"
+        },
+        {
+          "acceleration": "0.1014",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.02535",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.45",
+        "fv": "3.40",
+        "ground_peak": "0.19",
+        "long_period": "4.0",
+        "transition_end": "1.13",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.1255172413793103448275862068965517241379310344828"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "lacustre-50",
+      "plateauToDecayJoinGap": "-0.00186946902654867256637168141592920353982300884956",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0044827586206896551724137931034482758620689655172"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.47125",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.47125",
+          "branch": "plateau",
+          "period": "0.565"
+        },
+        {
+          "acceleration": "0.47125",
+          "branch": "plateau",
+          "period": "1.13"
+        },
+        {
+          "acceleration": "0.20678362573099415204678362573099415204678362573099",
+          "branch": "decay",
+          "period": "2.565"
+        },
+        {
+          "acceleration": "0.1326",
+          "branch": "decay",
+          "period": "4"
+        },
+        {
+          "acceleration": "0.03315",
+          "branch": "long",
+          "period": "8"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.35",
+        "fv": "3.70",
+        "ground_peak": "0.18",
+        "long_period": "4.0",
+        "transition_end": "1.32",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.3155555555555555555555555555555555555555555555556"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "lacustre-100",
+      "plateauToDecayJoinGap": "-0.00147727272727272727272727272727272727272727272727",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0044444444444444444444444444444444444444444444444"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.43875",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.43875",
+          "branch": "plateau",
+          "period": "0.66"
+        },
+        {
+          "acceleration": "0.43875",
+          "branch": "plateau",
+          "period": "1.32"
+        },
+        {
+          "acceleration": "0.21699248120300751879699248120300751879699248120301",
+          "branch": "decay",
+          "period": "2.66"
+        },
+        {
+          "acceleration": "0.1443",
+          "branch": "decay",
+          "period": "4"
+        },
+        {
+          "acceleration": "0.036075",
+          "branch": "long",
+          "period": "8"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.25",
+        "fv": "4.00",
+        "ground_peak": "0.16",
+        "long_period": "4.0",
+        "transition_end": "1.54",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.536"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "lacustre-200",
+      "plateauToDecayJoinGap": "-0.00105519480519480519480519480519480519480519480519",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.004"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.40625",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.40625",
+          "branch": "plateau",
+          "period": "0.77"
+        },
+        {
+          "acceleration": "0.40625",
+          "branch": "plateau",
+          "period": "1.54"
+        },
+        {
+          "acceleration": "0.22527075812274368231046931407942238267148014440433",
+          "branch": "decay",
+          "period": "2.77"
+        },
+        {
+          "acceleration": "0.156",
+          "branch": "decay",
+          "period": "4"
+        },
+        {
+          "acceleration": "0.039",
+          "branch": "long",
+          "period": "8"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.10",
+        "fv": "3.40",
+        "ground_peak": "0.14",
+        "long_period": "5.0",
+        "transition_end": "1.48",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.4836363636363636363636363636363636363636363636364"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "lacustre-300",
+      "plateauToDecayJoinGap": "0.00087837837837837837837837837837837837837837837838",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.0036363636363636363636363636363636363636363636364"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.3575",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.3575",
+          "branch": "plateau",
+          "period": "0.74"
+        },
+        {
+          "acceleration": "0.3575",
+          "branch": "plateau",
+          "period": "1.48"
+        },
+        {
+          "acceleration": "0.1637037037037037037037037037037037037037037037037",
+          "branch": "decay",
+          "period": "3.24"
+        },
+        {
+          "acceleration": "0.10608",
+          "branch": "decay",
+          "period": "5"
+        },
+        {
+          "acceleration": "0.02652",
+          "branch": "long",
+          "period": "10"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.00",
+        "fv": "3.10",
+        "ground_peak": "0.13",
+        "long_period": "5.0",
+        "transition_end": "1.49",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.488"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "lacustre-500",
+      "plateauToDecayJoinGap": "-0.00043624161073825503355704697986577181208053691275",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.002"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.325",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.325",
+          "branch": "plateau",
+          "period": "0.745"
+        },
+        {
+          "acceleration": "0.325",
+          "branch": "plateau",
+          "period": "1.49"
+        },
+        {
+          "acceleration": "0.14902927580893682588597842835130970724191063174114",
+          "branch": "decay",
+          "period": "3.245"
+        },
+        {
+          "acceleration": "0.09672",
+          "branch": "decay",
+          "period": "5"
+        },
+        {
+          "acceleration": "0.02418",
+          "branch": "long",
+          "period": "10"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.15",
+        "fv": "3.20",
+        "ground_peak": "0.15",
+        "long_period": "4.0",
+        "transition_end": "1.34",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.3356521739130434782608695652173913043478260869565"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "lacustre-aluvial-200",
+      "plateauToDecayJoinGap": "-0.00121268656716417910447761194029850746268656716418",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0043478260869565217391304347826086956521739130435"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.37375",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.37375",
+          "branch": "plateau",
+          "period": "0.67"
+        },
+        {
+          "acceleration": "0.37375",
+          "branch": "plateau",
+          "period": "1.34"
+        },
+        {
+          "acceleration": "0.18696629213483146067415730337078651685393258426966",
+          "branch": "decay",
+          "period": "2.67"
+        },
+        {
+          "acceleration": "0.1248",
+          "branch": "decay",
+          "period": "4"
+        },
+        {
+          "acceleration": "0.0312",
+          "branch": "long",
+          "period": "8"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.05",
+        "fv": "2.90",
+        "ground_peak": "0.14",
+        "long_period": "5.0",
+        "transition_end": "1.33",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.3257142857142857142857142857142857142857142857143"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "lacustre-aluvial-300",
+      "plateauToDecayJoinGap": "-0.00109962406015037593984962406015037593984962406015",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0042857142857142857142857142857142857142857142857"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.34125",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.34125",
+          "branch": "plateau",
+          "period": "0.665"
+        },
+        {
+          "acceleration": "0.34125",
+          "branch": "plateau",
+          "period": "1.33"
+        },
+        {
+          "acceleration": "0.14293838862559241706161137440758293838862559241706",
+          "branch": "decay",
+          "period": "3.165"
+        },
+        {
+          "acceleration": "0.09048",
+          "branch": "decay",
+          "period": "5"
+        },
+        {
+          "acceleration": "0.02262",
+          "branch": "long",
+          "period": "10"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.40",
+        "fv": "2.10",
+        "ground_peak": "0.18",
+        "long_period": "3.5",
+        "transition_end": "0.72",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.72"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "aluvial-50",
+      "plateauToDecayJoinGap": "0",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.455",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.455",
+          "branch": "plateau",
+          "period": "0.36"
+        },
+        {
+          "acceleration": "0.455",
+          "branch": "plateau",
+          "period": "0.72"
+        },
+        {
+          "acceleration": "0.15526066350710900473933649289099526066350710900474",
+          "branch": "decay",
+          "period": "2.11"
+        },
+        {
+          "acceleration": "0.0936",
+          "branch": "decay",
+          "period": "3.5"
+        },
+        {
+          "acceleration": "0.0234",
+          "branch": "long",
+          "period": "7"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.25",
+        "fv": "2.50",
+        "ground_peak": "0.16",
+        "long_period": "3.5",
+        "transition_end": "0.96",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.96"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "aluvial-100",
+      "plateauToDecayJoinGap": "0",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.40625",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.40625",
+          "branch": "plateau",
+          "period": "0.48"
+        },
+        {
+          "acceleration": "0.40625",
+          "branch": "plateau",
+          "period": "0.96"
+        },
+        {
+          "acceleration": "0.17488789237668161434977578475336322869955156950673",
+          "branch": "decay",
+          "period": "2.23"
+        },
+        {
+          "acceleration": "0.11142857142857142857142857142857142857142857142857",
+          "branch": "decay",
+          "period": "3.5"
+        },
+        {
+          "acceleration": "0.027857142857142857142857142857142857142857142857143",
+          "branch": "long",
+          "period": "7"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.10",
+        "fv": "2.50",
+        "ground_peak": "0.14",
+        "long_period": "3.5",
+        "transition_end": "1.09",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.0909090909090909090909090909090909090909090909091"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "aluvial-200",
+      "plateauToDecayJoinGap": "0.00029816513761467889908256880733944954128440366972",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.0009090909090909090909090909090909090909090909091"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.3575",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.3575",
+          "branch": "plateau",
+          "period": "0.545"
+        },
+        {
+          "acceleration": "0.3575",
+          "branch": "plateau",
+          "period": "1.09"
+        },
+        {
+          "acceleration": "0.16993464052287581699346405228758169934640522875817",
+          "branch": "decay",
+          "period": "2.295"
+        },
+        {
+          "acceleration": "0.11142857142857142857142857142857142857142857142857",
+          "branch": "decay",
+          "period": "3.5"
+        },
+        {
+          "acceleration": "0.027857142857142857142857142857142857142857142857143",
+          "branch": "long",
+          "period": "7"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.00",
+        "fv": "2.50",
+        "ground_peak": "0.13",
+        "long_period": "3.5",
+        "transition_end": "1.20",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.2"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "aluvial-300",
+      "plateauToDecayJoinGap": "0",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.325",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.325",
+          "branch": "plateau",
+          "period": "0.6"
+        },
+        {
+          "acceleration": "0.325",
+          "branch": "plateau",
+          "period": "1.2"
+        },
+        {
+          "acceleration": "0.1659574468085106382978723404255319148936170212766",
+          "branch": "decay",
+          "period": "2.35"
+        },
+        {
+          "acceleration": "0.11142857142857142857142857142857142857142857142857",
+          "branch": "decay",
+          "period": "3.5"
+        },
+        {
+          "acceleration": "0.027857142857142857142857142857142857142857142857143",
+          "branch": "long",
+          "period": "7"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.70",
+        "fv": "1.95",
+        "ground_peak": "0.20",
+        "long_period": "3.0",
+        "transition_end": "0.55",
+        "transition_start": "0"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.55058823529411764705882352941176470588235294117647"
+      },
+      "hazardId": "limited-safety",
+      "optionId": "deposito-ladera",
+      "plateauToDecayJoinGap": "0.00059090909090909090909090909090909090909090909091",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.00058823529411764705882352941176470588235294117647"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.5525",
+          "branch": "plateau",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.5525",
+          "branch": "plateau",
+          "period": "0.275"
+        },
+        {
+          "acceleration": "0.5525",
+          "branch": "plateau",
+          "period": "0.55"
+        },
+        {
+          "acceleration": "0.17138028169014084507042253521126760563380281690141",
+          "branch": "decay",
+          "period": "1.775"
+        },
+        {
+          "acceleration": "0.1014",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.02535",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.50",
+        "fv": "1.70",
+        "ground_peak": "0.08",
+        "long_period": "3.0",
+        "transition_end": "0.57",
+        "transition_start": "0.11"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.56666666666666666666666666666666666666666666666667",
+        "transition_start": "0.11333333333333333333333333333333333333333333333333"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "cerros",
+      "plateauToDecayJoinGap": "-0.00157894736842105263157894736842105263157894736842",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.00333333333333333333333333333333333333333333333333",
+        "transition_start": "-0.00333333333333333333333333333333333333333333333333"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.08",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.175",
+          "branch": "ramp",
+          "period": "0.055"
+        },
+        {
+          "acceleration": "0.27",
+          "branch": "plateau",
+          "period": "0.11"
+        },
+        {
+          "acceleration": "0.27",
+          "branch": "plateau",
+          "period": "0.57"
+        },
+        {
+          "acceleration": "0.085714285714285714285714285714285714285714285714286",
+          "branch": "decay",
+          "period": "1.785"
+        },
+        {
+          "acceleration": "0.051",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.01275",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.90",
+        "fv": "2.75",
+        "ground_peak": "0.10",
+        "long_period": "3.0",
+        "transition_end": "0.72",
+        "transition_start": "0.14"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.72368421052631578947368421052631578947368421052632",
+        "transition_start": "0.14473684210526315789473684210526315789473684210526"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "piedemonte-a",
+      "plateauToDecayJoinGap": "0.00175",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.00368421052631578947368421052631578947368421052632",
+        "transition_start": "-0.00473684210526315789473684210526315789473684210526"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.1",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.221",
+          "branch": "ramp",
+          "period": "0.07"
+        },
+        {
+          "acceleration": "0.342",
+          "branch": "plateau",
+          "period": "0.14"
+        },
+        {
+          "acceleration": "0.342",
+          "branch": "plateau",
+          "period": "0.72"
+        },
+        {
+          "acceleration": "0.13306451612903225806451612903225806451612903225806",
+          "branch": "decay",
+          "period": "1.86"
+        },
+        {
+          "acceleration": "0.0825",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.020625",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "2.20",
+        "fv": "2.25",
+        "ground_peak": "0.12",
+        "long_period": "3.0",
+        "transition_end": "0.51",
+        "transition_start": "0.10"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.51136363636363636363636363636363636363636363636364",
+        "transition_start": "0.10227272727272727272727272727272727272727272727273"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "piedemonte-b",
+      "plateauToDecayJoinGap": "0.00105882352941176470588235294117647058823529411765",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.00136363636363636363636363636363636363636363636364",
+        "transition_start": "-0.00227272727272727272727272727272727272727272727273"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.12",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.258",
+          "branch": "ramp",
+          "period": "0.05"
+        },
+        {
+          "acceleration": "0.396",
+          "branch": "plateau",
+          "period": "0.1"
+        },
+        {
+          "acceleration": "0.396",
+          "branch": "plateau",
+          "period": "0.51"
+        },
+        {
+          "acceleration": "0.11538461538461538461538461538461538461538461538462",
+          "branch": "decay",
+          "period": "1.755"
+        },
+        {
+          "acceleration": "0.0675",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.016875",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "2.05",
+        "fv": "2.25",
+        "ground_peak": "0.11",
+        "long_period": "3.0",
+        "transition_end": "0.55",
+        "transition_start": "0.11"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.54878048780487804878048780487804878048780487804878",
+        "transition_start": "0.10975609756097560975609756097560975609756097560976"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "piedemonte-c",
+      "plateauToDecayJoinGap": "-0.00081818181818181818181818181818181818181818181818",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.00121951219512195121951219512195121951219512195122",
+        "transition_start": "0.00024390243902439024390243902439024390243902439024"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.11",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.2395",
+          "branch": "ramp",
+          "period": "0.055"
+        },
+        {
+          "acceleration": "0.369",
+          "branch": "plateau",
+          "period": "0.11"
+        },
+        {
+          "acceleration": "0.369",
+          "branch": "plateau",
+          "period": "0.55"
+        },
+        {
+          "acceleration": "0.11408450704225352112676056338028169014084507042254",
+          "branch": "decay",
+          "period": "1.775"
+        },
+        {
+          "acceleration": "0.0675",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.016875",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.55",
+        "fv": "4.00",
+        "ground_peak": "0.09",
+        "long_period": "4.0",
+        "transition_end": "1.29",
+        "transition_start": "0.26"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.2903225806451612903225806451612903225806451612903",
+        "transition_start": "0.25806451612903225806451612903225806451612903225806"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "lacustre-50",
+      "plateauToDecayJoinGap": "0.00006976744186046511627906976744186046511627906977",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.0003225806451612903225806451612903225806451612903",
+        "transition_start": "0.00193548387096774193548387096774193548387096774194"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.09",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.1845",
+          "branch": "ramp",
+          "period": "0.13"
+        },
+        {
+          "acceleration": "0.279",
+          "branch": "plateau",
+          "period": "0.26"
+        },
+        {
+          "acceleration": "0.279",
+          "branch": "plateau",
+          "period": "1.29"
+        },
+        {
+          "acceleration": "0.13610586011342155009451795841209829867674858223062",
+          "branch": "decay",
+          "period": "2.645"
+        },
+        {
+          "acceleration": "0.09",
+          "branch": "decay",
+          "period": "4"
+        },
+        {
+          "acceleration": "0.0225",
+          "branch": "long",
+          "period": "8"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.45",
+        "fv": "4.40",
+        "ground_peak": "0.09",
+        "long_period": "4.0",
+        "transition_end": "1.52",
+        "transition_start": "0.30"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.5172413793103448275862068965517241379310344827586",
+        "transition_start": "0.30344827586206896551724137931034482758620689655172"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "lacustre-100",
+      "plateauToDecayJoinGap": "-0.00047368421052631578947368421052631578947368421053",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0027586206896551724137931034482758620689655172414",
+        "transition_start": "-0.00344827586206896551724137931034482758620689655172"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.09",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.1755",
+          "branch": "ramp",
+          "period": "0.15"
+        },
+        {
+          "acceleration": "0.261",
+          "branch": "plateau",
+          "period": "0.3"
+        },
+        {
+          "acceleration": "0.261",
+          "branch": "plateau",
+          "period": "1.52"
+        },
+        {
+          "acceleration": "0.14347826086956521739130434782608695652173913043478",
+          "branch": "decay",
+          "period": "2.76"
+        },
+        {
+          "acceleration": "0.099",
+          "branch": "decay",
+          "period": "4"
+        },
+        {
+          "acceleration": "0.02475",
+          "branch": "long",
+          "period": "8"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.35",
+        "fv": "4.75",
+        "ground_peak": "0.08",
+        "long_period": "4.0",
+        "transition_end": "1.76",
+        "transition_start": "0.35"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.7592592592592592592592592592592592592592592592593",
+        "transition_start": "0.35185185185185185185185185185185185185185185185185"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "lacustre-200",
+      "plateauToDecayJoinGap": "-0.00010227272727272727272727272727272727272727272727",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0007407407407407407407407407407407407407407407407",
+        "transition_start": "-0.00185185185185185185185185185185185185185185185185"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.08",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.1615",
+          "branch": "ramp",
+          "period": "0.175"
+        },
+        {
+          "acceleration": "0.243",
+          "branch": "plateau",
+          "period": "0.35"
+        },
+        {
+          "acceleration": "0.243",
+          "branch": "plateau",
+          "period": "1.76"
+        },
+        {
+          "acceleration": "0.1484375",
+          "branch": "decay",
+          "period": "2.88"
+        },
+        {
+          "acceleration": "0.106875",
+          "branch": "decay",
+          "period": "4"
+        },
+        {
+          "acceleration": "0.02671875",
+          "branch": "long",
+          "period": "8"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.25",
+        "fv": "4.00",
+        "ground_peak": "0.08",
+        "long_period": "5.0",
+        "transition_end": "1.60",
+        "transition_start": "0.32"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.6",
+        "transition_start": "0.32"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "lacustre-300",
+      "plateauToDecayJoinGap": "0",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0",
+        "transition_start": "0"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.08",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.1525",
+          "branch": "ramp",
+          "period": "0.16"
+        },
+        {
+          "acceleration": "0.225",
+          "branch": "plateau",
+          "period": "0.32"
+        },
+        {
+          "acceleration": "0.225",
+          "branch": "plateau",
+          "period": "1.6"
+        },
+        {
+          "acceleration": "0.10909090909090909090909090909090909090909090909091",
+          "branch": "decay",
+          "period": "3.3"
+        },
+        {
+          "acceleration": "0.072",
+          "branch": "decay",
+          "period": "5"
+        },
+        {
+          "acceleration": "0.018",
+          "branch": "long",
+          "period": "10"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.10",
+        "fv": "3.75",
+        "ground_peak": "0.07",
+        "long_period": "5.0",
+        "transition_end": "1.70",
+        "transition_start": "0.34"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.7045454545454545454545454545454545454545454545455",
+        "transition_start": "0.34090909090909090909090909090909090909090909090909"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "lacustre-500",
+      "plateauToDecayJoinGap": "0.00052941176470588235294117647058823529411764705882",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.0045454545454545454545454545454545454545454545455",
+        "transition_start": "-0.00090909090909090909090909090909090909090909090909"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.07",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.134",
+          "branch": "ramp",
+          "period": "0.17"
+        },
+        {
+          "acceleration": "0.198",
+          "branch": "plateau",
+          "period": "0.34"
+        },
+        {
+          "acceleration": "0.198",
+          "branch": "plateau",
+          "period": "1.7"
+        },
+        {
+          "acceleration": "0.10074626865671641791044776119402985074626865671642",
+          "branch": "decay",
+          "period": "3.35"
+        },
+        {
+          "acceleration": "0.0675",
+          "branch": "decay",
+          "period": "5"
+        },
+        {
+          "acceleration": "0.016875",
+          "branch": "long",
+          "period": "10"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.30",
+        "fv": "3.85",
+        "ground_peak": "0.08",
+        "long_period": "4.0",
+        "transition_end": "1.48",
+        "transition_start": "0.30"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.4807692307692307692307692307692307692307692307692",
+        "transition_start": "0.29615384615384615384615384615384615384615384615385"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "lacustre-aluvial-200",
+      "plateauToDecayJoinGap": "0.00012162162162162162162162162162162162162162162162",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.0007692307692307692307692307692307692307692307692",
+        "transition_start": "0.00384615384615384615384615384615384615384615384615"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.08",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.157",
+          "branch": "ramp",
+          "period": "0.15"
+        },
+        {
+          "acceleration": "0.234",
+          "branch": "plateau",
+          "period": "0.3"
+        },
+        {
+          "acceleration": "0.234",
+          "branch": "plateau",
+          "period": "1.48"
+        },
+        {
+          "acceleration": "0.1264598540145985401459854014598540145985401459854",
+          "branch": "decay",
+          "period": "2.74"
+        },
+        {
+          "acceleration": "0.086625",
+          "branch": "decay",
+          "period": "4"
+        },
+        {
+          "acceleration": "0.02165625",
+          "branch": "long",
+          "period": "8"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.20",
+        "fv": "3.50",
+        "ground_peak": "0.07",
+        "long_period": "5.0",
+        "transition_end": "1.46",
+        "transition_start": "0.29"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.4583333333333333333333333333333333333333333333333",
+        "transition_start": "0.29166666666666666666666666666666666666666666666667"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "lacustre-aluvial-300",
+      "plateauToDecayJoinGap": "-0.00024657534246575342465753424657534246575342465753",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0016666666666666666666666666666666666666666666667",
+        "transition_start": "-0.00166666666666666666666666666666666666666666666667"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.07",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.143",
+          "branch": "ramp",
+          "period": "0.145"
+        },
+        {
+          "acceleration": "0.216",
+          "branch": "plateau",
+          "period": "0.29"
+        },
+        {
+          "acceleration": "0.216",
+          "branch": "plateau",
+          "period": "1.46"
+        },
+        {
+          "acceleration": "0.097523219814241486068111455108359133126934984520124",
+          "branch": "decay",
+          "period": "3.23"
+        },
+        {
+          "acceleration": "0.063",
+          "branch": "decay",
+          "period": "5"
+        },
+        {
+          "acceleration": "0.01575",
+          "branch": "long",
+          "period": "10"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.50",
+        "fv": "2.50",
+        "ground_peak": "0.09",
+        "long_period": "3.5",
+        "transition_end": "0.83",
+        "transition_start": "0.17"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.83333333333333333333333333333333333333333333333333",
+        "transition_start": "0.16666666666666666666666666666666666666666666666667"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "aluvial-50",
+      "plateauToDecayJoinGap": "0.00108433734939759036144578313253012048192771084337",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.00333333333333333333333333333333333333333333333333",
+        "transition_start": "0.00333333333333333333333333333333333333333333333333"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.09",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.18",
+          "branch": "ramp",
+          "period": "0.085"
+        },
+        {
+          "acceleration": "0.27",
+          "branch": "plateau",
+          "period": "0.17"
+        },
+        {
+          "acceleration": "0.27",
+          "branch": "plateau",
+          "period": "0.83"
+        },
+        {
+          "acceleration": "0.10392609699769053117782909930715935334872979214781",
+          "branch": "decay",
+          "period": "2.165"
+        },
+        {
+          "acceleration": "0.064285714285714285714285714285714285714285714285714",
+          "branch": "decay",
+          "period": "3.5"
+        },
+        {
+          "acceleration": "0.016071428571428571428571428571428571428571428571429",
+          "branch": "long",
+          "period": "7"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.40",
+        "fv": "2.90",
+        "ground_peak": "0.08",
+        "long_period": "3.5",
+        "transition_end": "1.04",
+        "transition_start": "0.21"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.0357142857142857142857142857142857142857142857143",
+        "transition_start": "0.20714285714285714285714285714285714285714285714286"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "aluvial-100",
+      "plateauToDecayJoinGap": "-0.00103846153846153846153846153846153846153846153846",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0042857142857142857142857142857142857142857142857",
+        "transition_start": "0.00285714285714285714285714285714285714285714285714"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.08",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.166",
+          "branch": "ramp",
+          "period": "0.105"
+        },
+        {
+          "acceleration": "0.252",
+          "branch": "plateau",
+          "period": "0.21"
+        },
+        {
+          "acceleration": "0.252",
+          "branch": "plateau",
+          "period": "1.04"
+        },
+        {
+          "acceleration": "0.11497797356828193832599118942731277533039647577093",
+          "branch": "decay",
+          "period": "2.27"
+        },
+        {
+          "acceleration": "0.074571428571428571428571428571428571428571428571429",
+          "branch": "decay",
+          "period": "3.5"
+        },
+        {
+          "acceleration": "0.018642857142857142857142857142857142857142857142857",
+          "branch": "long",
+          "period": "7"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.20",
+        "fv": "2.90",
+        "ground_peak": "0.07",
+        "long_period": "3.5",
+        "transition_end": "1.21",
+        "transition_start": "0.24"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.2083333333333333333333333333333333333333333333333",
+        "transition_start": "0.24166666666666666666666666666666666666666666666667"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "aluvial-200",
+      "plateauToDecayJoinGap": "-0.00029752066115702479338842975206611570247933884298",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0016666666666666666666666666666666666666666666667",
+        "transition_start": "-0.00166666666666666666666666666666666666666666666667"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.07",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.143",
+          "branch": "ramp",
+          "period": "0.12"
+        },
+        {
+          "acceleration": "0.216",
+          "branch": "plateau",
+          "period": "0.24"
+        },
+        {
+          "acceleration": "0.216",
+          "branch": "plateau",
+          "period": "1.21"
+        },
+        {
+          "acceleration": "0.11082802547770700636942675159235668789808917197452",
+          "branch": "decay",
+          "period": "2.355"
+        },
+        {
+          "acceleration": "0.074571428571428571428571428571428571428571428571429",
+          "branch": "decay",
+          "period": "3.5"
+        },
+        {
+          "acceleration": "0.018642857142857142857142857142857142857142857142857",
+          "branch": "long",
+          "period": "7"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.10",
+        "fv": "2.90",
+        "ground_peak": "0.07",
+        "long_period": "3.5",
+        "transition_end": "1.32",
+        "transition_start": "0.26"
+      },
+      "formulaBoundaries": {
+        "transition_end": "1.3181818181818181818181818181818181818181818181818",
+        "transition_start": "0.26363636363636363636363636363636363636363636363636"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "aluvial-300",
+      "plateauToDecayJoinGap": "-0.00027272727272727272727272727272727272727272727273",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "0.0018181818181818181818181818181818181818181818182",
+        "transition_start": "-0.00363636363636363636363636363636363636363636363636"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.07",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.134",
+          "branch": "ramp",
+          "period": "0.13"
+        },
+        {
+          "acceleration": "0.198",
+          "branch": "plateau",
+          "period": "0.26"
+        },
+        {
+          "acceleration": "0.198",
+          "branch": "plateau",
+          "period": "1.32"
+        },
+        {
+          "acceleration": "0.1082987551867219917012448132780082987551867219917",
+          "branch": "decay",
+          "period": "2.41"
+        },
+        {
+          "acceleration": "0.074571428571428571428571428571428571428571428571429",
+          "branch": "decay",
+          "period": "3.5"
+        },
+        {
+          "acceleration": "0.018642857142857142857142857142857142857142857142857",
+          "branch": "long",
+          "period": "7"
+        }
+      ]
+    },
+    {
+      "fields": {
+        "fa": "1.90",
+        "fv": "2.25",
+        "ground_peak": "0.10",
+        "long_period": "3.0",
+        "transition_end": "0.59",
+        "transition_start": "0.12"
+      },
+      "formulaBoundaries": {
+        "transition_end": "0.59210526315789473684210526315789473684210526315789",
+        "transition_start": "0.11842105263157894736842105263157894736842105263158"
+      },
+      "hazardId": "damage-threshold",
+      "optionId": "deposito-ladera",
+      "plateauToDecayJoinGap": "0.00122033898305084745762711864406779661016949152542",
+      "tableMinusFormulaBoundary": {
+        "transition_end": "-0.00210526315789473684210526315789473684210526315789",
+        "transition_start": "0.00157894736842105263157894736842105263157894736842"
+      },
+      "witnesses": [
+        {
+          "acceleration": "0.1",
+          "branch": "ramp",
+          "period": "0"
+        },
+        {
+          "acceleration": "0.221",
+          "branch": "ramp",
+          "period": "0.06"
+        },
+        {
+          "acceleration": "0.342",
+          "branch": "plateau",
+          "period": "0.12"
+        },
+        {
+          "acceleration": "0.342",
+          "branch": "plateau",
+          "period": "0.59"
+        },
+        {
+          "acceleration": "0.1128133704735376044568245125348189415041782729805",
+          "branch": "decay",
+          "period": "1.795"
+        },
+        {
+          "acceleration": "0.0675",
+          "branch": "decay",
+          "period": "3"
+        },
+        {
+          "acceleration": "0.016875",
+          "branch": "long",
+          "period": "6"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 1
+}

@@ -10,6 +10,10 @@ import {
 	SheetTitle,
 } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
+import type {
+	NormalizedSpectrumResultData,
+	ScenarioEvidenceKey,
+} from "@/lib/spectra";
 
 const TraceabilityDetails = dynamic(
 	() =>
@@ -41,11 +45,13 @@ function TraceabilityDetailsLoading() {
 }
 
 export function TraceabilitySheet({
-	municipalityCode,
+	result,
+	scenarioEvidenceKey,
 	open,
 	onOpenChange,
 }: {
-	municipalityCode: string;
+	result: NormalizedSpectrumResultData;
+	scenarioEvidenceKey: ScenarioEvidenceKey;
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
 }) {
@@ -58,13 +64,14 @@ export function TraceabilitySheet({
 				<SheetHeader className="border-b pr-16">
 					<SheetTitle>Trazabilidad normativa</SheetTitle>
 					<SheetDescription>
-						Origen de Aa y Av usados por el cálculo actual, con evidencia en la norma.
+						Fuentes, regiones y linaje del resultado normalizado activo.
 					</SheetDescription>
 				</SheetHeader>
 				{open && (
 					<TraceabilityDetails
-						key={municipalityCode}
-						municipalityCode={municipalityCode}
+						key={Object.values(scenarioEvidenceKey).join(":")}
+						result={result}
+						scenarioEvidenceKey={scenarioEvidenceKey}
 					/>
 				)}
 			</SheetContent>
