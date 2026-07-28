@@ -48,7 +48,7 @@
       "inviasPublication": "Current INVÍAS portal file ID 29584: 16 PDFs, 1,503 total pages, 40,260,753 bytes, SHA-256 e6d71cd1a0efffb8b8be95f8e3c42a7fd180485c704f0761e07faf6af28fbd8d.",
       "issue": "The official MinTransporte package reconstructs a 1,551-page scanned resolution-and-annex PDF, while the later INVÍAS publication is a 1,503-page technical ZIP with different bytes, pagination, and revision presentation. No authoritative reconciliation identifies which differences belong to the adopted annex or later editorial publication.",
       "ministerialPublication": "Three official RAR volumes reconstruct a 60,041,340-byte PDF, 1,551 pages, SHA-256 084c6223291dd2db9458210ae675693b001a7aa790f92fa7163112442621c5bb.",
-      "productResolution": "The calculator follows the technical asset currently published by INVÍAS. MinTransporte is corroborating provenance only, and no MinTransporte-only value may be used.",
+      "productResolution": "MinTransporte Resolution 108/2015 remains the legal adoption authority. The calculator follows the technical asset currently published by INVÍAS; the separate MinTransporte multipart scan is corroborating provenance only, and no value unique to that scan may be used.",
       "residualCaveat": "The inter-agency editorial relationship remains unexplained but does not block a product whose declared source authority is the current INVÍAS publication.",
       "status": "resolved-for-product-invias-controls"
     },

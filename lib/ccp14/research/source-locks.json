@@ -3,7 +3,8 @@
   "retrievedOn": "2026-07-28",
   "updatedOn": "2026-07-28",
   "sourceAuthorityPolicy": {
-    "controllingAdoptionSource": "invias-resolution-108-2015",
+    "controllingAdoptionSource": "mintransporte-resolution-108-2015-invias-copy",
+    "legalAdoptionAuthority": "Ministerio de Transporte de Colombia",
     "controllingTechnicalPublication": "invias-ccp14-official-zip",
     "corroboratingOnly": [
       "mintransporte-resolution-108-part1-rar",
@@ -11,7 +12,7 @@
       "mintransporte-resolution-108-part3-rar",
       "mintransporte-resolution-108-multipart-pdf"
     ],
-    "rationale": "The product follows the assets currently published in the official INVÍAS catalog. MinTransporte material is retained for provenance and corroboration but does not override the INVÍAS technical ZIP.",
+    "rationale": "MinTransporte Resolution 108/2015 controls legal adoption. The product uses the technical asset currently published in the official INVÍAS catalog. Only the separate MinTransporte multipart scan is corroborating provenance and it does not override the INVÍAS technical ZIP.",
     "verifiedOn": "2026-07-28"
   },
   "sources": [
@@ -21,7 +22,9 @@
       "catalogUrl": "https://www.invias.gov.co/documentos/buscar/?q=norma%20puentes&id=818",
       "currentPortalDuplicateFileIds": [29585, 27516, 18745],
       "currentPortalVerifiedOn": "2026-07-28",
-      "id": "invias-resolution-108-2015",
+      "id": "mintransporte-resolution-108-2015-invias-copy",
+      "issuingAuthority": "Ministerio de Transporte de Colombia",
+      "currentPublicationCarrier": "Instituto Nacional de Vías (INVÍAS)",
       "legacyOfficialUrl": "https://www.invias.gov.co/index.php/archivo-y-documentos/bibilioteca-virtual/resoluciones-circulares-y-otros/3610-resolucion-no-108-del-26-de-enero-de-2015/file",
       "officialUrl": "https://www.invias.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=29585",
       "pageCount": 2,
