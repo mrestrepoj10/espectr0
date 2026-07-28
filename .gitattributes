@@ -13,6 +13,14 @@
 /lib/armenia/**/*.md text eol=lf
 /lib/armenia/**/*.mjs text eol=lf
 /lib/armenia/**/*.py text eol=lf
+/lib/dosquebradas/**/*.json text eol=lf
+/lib/dosquebradas/**/*.md text eol=lf
+/lib/dosquebradas/**/*.mjs text eol=lf
+/lib/dosquebradas/**/*.py text eol=lf
+/lib/pereira/**/*.json text eol=lf
+/lib/pereira/**/*.md text eol=lf
+/lib/pereira/**/*.mjs text eol=lf
+/lib/pereira/**/*.py text eol=lf
 /lib/manizales/data/*.json text eol=lf
 /lib/manizales/evidence/*.json text eol=lf
 /lib/manizales/evidence/*.mjs text eol=lf
