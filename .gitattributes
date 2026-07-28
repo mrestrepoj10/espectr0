@@ -18,6 +18,12 @@
 /lib/cali/*.md text eol=lf
 /lib/cali/evidence/*.md text eol=lf
 /lib/cali/oracle/*.md text eol=lf
+/lib/medellin/data/*.json text eol=lf
+/lib/medellin/evidence/*.json text eol=lf
+/lib/medellin/evidence/*.mjs text eol=lf
+/lib/medellin/evidence/*.py text eol=lf
+/lib/medellin/oracle/*.json text eol=lf
+/lib/medellin/oracle/*.py text eol=lf
 /lib/bogota/data/*.json text eol=lf
 /lib/bogota/evidence/*.json text eol=lf
 /lib/bogota/evidence/*.mjs text eol=lf

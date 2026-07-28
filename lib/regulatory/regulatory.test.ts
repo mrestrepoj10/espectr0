@@ -429,6 +429,7 @@ describe("strict aggregate boundary", () => {
 				"bogota-microzonation",
 				"cali-microzonation",
 				"framework-fixture",
+				"medellin-microzonation",
 				"nsr10",
 			]),
 		);
@@ -441,6 +442,11 @@ describe("strict aggregate boundary", () => {
 		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "nsr10")).toMatchObject({
 			studyId: "nsr10",
 			coverage: { expectedRows: 1_123 },
+		});
+		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "medellin-microzonation")).toMatchObject({
+			studyId: "medellin-microzonation",
+			coverage: { expectedRows: 28, expectedValues: 168 },
+			uncoveredValues: [],
 		});
 		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "bogota-microzonation")).toMatchObject({
 			studyId: "bogota-microzonation",
