@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "activationStatus": "research-complete-review-pending",
+  "entries": [
+    {
+      "id": "official-maps-not-ingested",
+      "severity": "intentional-product-boundary",
+      "issue": "The official geotechnical and seismic-response map layers were not ingested because the product brief excludes GIS automation. A manually selected zone must be verified by the responsible professional.",
+      "disposition": "No coordinate-to-zone lookup is authorized; the supported workflow is explicit manual zone selection with the regulatory warning."
+    },
+    {
+      "id": "current-article-annotation-check",
+      "severity": "low",
+      "issue": "The SISJUR page contains later amendment annotations elsewhere in the compiled decree.",
+      "disposition": "The retrieved current text showed no amendment annotation attached to Title 1 Articles 2–10; re-check the current official page at product activation."
+    },
+    {
+      "id": "external-source-reproducibility",
+      "severity": "medium",
+      "issue": "Copyright and dynamic-page constraints prevent bundling source bytes.",
+      "disposition": "Independent reviewer must re-fetch and verify the committed URL/length/SHA-256 locks."
+    }
+  ]
+}

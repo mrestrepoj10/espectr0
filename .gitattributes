@@ -18,3 +18,11 @@
 /lib/cali/*.md text eol=lf
 /lib/cali/evidence/*.md text eol=lf
 /lib/cali/oracle/*.md text eol=lf
+/lib/bogota/data/*.json text eol=lf
+/lib/bogota/evidence/*.json text eol=lf
+/lib/bogota/evidence/*.mjs text eol=lf
+/lib/bogota/evidence/*.py text eol=lf
+/lib/bogota/oracle/*.json text eol=lf
+/lib/bogota/oracle/*.py text eol=lf
+/lib/bogota/*.md text eol=lf
+/lib/bogota/oracle/*.md text eol=lf

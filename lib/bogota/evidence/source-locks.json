@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "policy": "All three official-source files remain external-only. Re-fetch from the exact URL and compare length and SHA-256 before independent review.",
+  "locks": [
+    {
+      "sourceDocumentId": "fopae-2010-final-report-v1",
+      "officialUrl": "https://backbiblio.sire.gov.co/server/api/core/bitstreams/fa01603a-e5d2-454d-96b0-07f8a73f0d35/content",
+      "retrievedOn": "2026-07-22",
+      "byteLength": 12386790,
+      "sha256": "74ba7a6a8d038dce4a81eedc62a47fa2ed0f0a208481ff62dbbdb40dfaac6dc3",
+      "md5FromRepositoryMetadata": "2ba849ac3b7098c1d2da81846b0ee564",
+      "mediaType": "application/pdf",
+      "pageCount": 168,
+      "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "decreto-distrital-670-2025",
+      "officialUrl": "https://www.alcaldiabogota.gov.co/sisjur/normas/Norma1.jsp?dt=S&i=191905",
+      "retrievedOn": "2026-07-22",
+      "byteLength": 13078215,
+      "sha256": "dcf16893e8812c9ade0a2b7295f480b0b409e10e1bb6939a2b2eae73ef07e894",
+      "mediaType": "text/html",
+      "virtualPageCount": 1,
+      "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "decreto-distrital-523-2010",
+      "officialUrl": "https://www.alcaldiabogota.gov.co/sisjur/normas/Norma1.jsp?i=40984",
+      "retrievedOn": "2026-07-22",
+      "byteLength": 130472,
+      "sha256": "8b5e0e77d622af9dcd7d80a8a453500b5422b4385f4bad4c019a530cf3c943d7",
+      "mediaType": "text/html",
+      "virtualPageCount": 1,
+      "redistributionDecision": "external-only"
+    }
+  ]
+}
