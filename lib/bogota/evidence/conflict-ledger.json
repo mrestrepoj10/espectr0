@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "compiled-versus-origin",
+      "status": "resolved",
+      "issue": "D523/2010 contains the original adoption but D670/2025 expressly repeals it while compiling its provisions.",
+      "resolution": "Cite D670/2025 as current controlling law and D523/2010 only as historical adoption provenance. Do not characterize the compilation as a technical supersession."
+    },
+    {
+      "id": "rounded-boundaries",
+      "status": "resolved-for-research-review-required-for-activation",
+      "issue": "Tabulated Tc/Tcd/T0d are rounded to two decimals, so recomputing the printed formulas can produce small differences and discontinuities at tabulated boundaries.",
+      "resolution": "Canonical branch selection uses the adopted direct table values. Exact formula-derived values remain audit witnesses in the independent oracle; no silent recomputation replaces the printed table."
+    },
+    {
+      "id": "limited-safety-label-typos",
+      "status": "resolved",
+      "issue": "Some HTML parameter labels in SISJUR are visibly garbled or duplicated due equation/image extraction.",
+      "resolution": "Use the legible official FOPAE PDF equations and tables as the technical source; use the decree for adoption and scope."
+    }
+  ]
+}

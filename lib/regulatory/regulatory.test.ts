@@ -422,24 +422,29 @@ describe("strict aggregate boundary", () => {
 		const second = execFileSync(process.execPath, command, { encoding: "utf8" });
 		expect(second).toBe(first);
 		expect(first.endsWith("\n")).toBe(true);
-		const report = JSON.parse(first);
-		expect(report.schemaVersion).toBe(1);
-		expect(report.installedStudies).toEqual([...report.installedStudies].sort());
-		expect(report.studies.map(({ studyId }: { studyId: string }) => studyId)).toEqual(
-			report.installedStudies,
+		const aggregate = JSON.parse(first);
+		expect(aggregate.schemaVersion).toBe(1);
+		expect(aggregate.installedStudies).toEqual(
+			expect.arrayContaining(["bogota-microzonation", "framework-fixture", "nsr10"]),
 		);
-		expect(report.studies).toEqual(
-			expect.arrayContaining([
-				expect.objectContaining({
-					studyId: "framework-fixture",
-					coverage: expect.objectContaining({ bundledSources: 1 }),
-				}),
-				expect.objectContaining({
-					studyId: "nsr10",
-					coverage: expect.objectContaining({ expectedRows: 1_123 }),
-				}),
-			]),
+		expect(aggregate.installedStudies).toEqual([...aggregate.installedStudies].sort());
+		expect(new Set(aggregate.installedStudies).size).toBe(aggregate.installedStudies.length);
+		expect(aggregate.studies.map(({ studyId }: { studyId: string }) => studyId)).toEqual(
+			aggregate.installedStudies,
 		);
+		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "framework-fixture")).toMatchObject({
+			studyId: "framework-fixture",
+			coverage: { bundledSources: 1 },
+		});
+		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "nsr10")).toMatchObject({
+			studyId: "nsr10",
+			coverage: { expectedRows: 1_123 },
+		});
+			expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "bogota-microzonation")).toMatchObject({
+			studyId: "bogota-microzonation",
+			coverage: { expectedRows: 48, expectedValues: 288 },
+			uncoveredValues: [],
+		});
 	}, 30_000);
 });
 
@@ -669,6 +674,27 @@ describe("page, hierarchy, and direct evidence", () => {
 });
 
 describe("role-based derived lineage", () => {
+	it("supports equation evidence nested in its source figure and rejects other parents", async () => {
+		const nested = fixture();
+		const equation = nested.citations.find(({ id }) => id === "fixture-formula")!;
+		const figure: EvidenceCitation = {
+			...structuredClone(equation),
+			id: "fixture-figure",
+			regionKind: "figure",
+		};
+		equation.parentCitationId = figure.id;
+		nested.citations.push(figure);
+		await expect(checkEvidenceStudy(nested, { repositoryRoot })).resolves.toMatchObject({
+			studyId: "framework-fixture",
+		});
+
+		const invalid = fixture();
+		invalid.citations.find(({ id }) => id === "fixture-formula")!.parentCitationId = "fixture-row";
+		await expect(checkEvidenceStudy(invalid, { repositoryRoot })).rejects.toThrow(
+			/Equation citation fixture-formula requires a figure parent/,
+		);
+	});
+
 	it("requires a clause/equation formula citation", async () => {
 		const study = fixture();
 		study.citations[3].regionKind = "warning";
