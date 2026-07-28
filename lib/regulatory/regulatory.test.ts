@@ -425,7 +425,7 @@ describe("strict aggregate boundary", () => {
 		const aggregate = JSON.parse(first);
 		expect(aggregate.schemaVersion).toBe(1);
 		expect(aggregate.installedStudies).toEqual(
-			expect.arrayContaining(["bogota-microzonation", "framework-fixture", "nsr10"]),
+			expect.arrayContaining(["bogota-microzonation", "framework-fixture", "medellin-microzonation", "nsr10"]),
 		);
 		expect(aggregate.installedStudies).toEqual([...aggregate.installedStudies].sort());
 		expect(new Set(aggregate.installedStudies).size).toBe(aggregate.installedStudies.length);
@@ -436,6 +436,11 @@ describe("strict aggregate boundary", () => {
 		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "nsr10")).toMatchObject({
 			studyId: "nsr10",
 			coverage: { expectedRows: 1_123 },
+		});
+		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "medellin-microzonation")).toMatchObject({
+			studyId: "medellin-microzonation",
+			coverage: { expectedRows: 28, expectedValues: 168 },
+			uncoveredValues: [],
 		});
 		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "bogota-microzonation")).toMatchObject({
 			studyId: "bogota-microzonation",
