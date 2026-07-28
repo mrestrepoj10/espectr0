@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "studyId": "armenia-microzonation",
+  "status": "negative-oracle-activation-blocked",
+  "arithmetic": "none-no-approved-spectrum",
+  "records": [
+    {
+      "case": "legacy-zone-request",
+      "input": {
+        "model": "decreto-079-2000",
+        "zone": "any",
+        "hazard": "any"
+      },
+      "expected": "reject-unharmonized-legacy-model"
+    },
+    {
+      "case": "delivered-2025-study-request",
+      "input": {
+        "model": "delivered-2025-study",
+        "zone": "any",
+        "hazard": "any"
+      },
+      "expected": "reject-pending-approval-and-decree"
+    },
+    {
+      "case": "unknown-zone-or-hazard",
+      "input": {
+        "model": "armenia-municipal",
+        "zone": "user-supplied",
+        "hazard": "user-supplied"
+      },
+      "expected": "reject-no-approved-option-hazard-matrix"
+    },
+    {
+      "case": "site-specific-branch-request",
+      "input": {
+        "model": "armenia-municipal",
+        "siteCondition": "artificial-fill-or-special-site"
+      },
+      "expected": "reject-missing-adopted-site-specific-rules"
+    },
+    {
+      "case": "national-building-workflow",
+      "input": {
+        "model": "nsr10-national",
+        "city": "Armenia"
+      },
+      "expected": "use-nsr10-national"
+    }
+  ],
+  "blockers": [
+    "official-decree-079-bytes-and-technical-annex-not-located",
+    "legacy-study-not-demonstrated-harmonized-with-nsr10",
+    "2025-study-not-demonstrated-cap-approved",
+    "2025-study-not-demonstrated-adopted-by-municipal-decree",
+    "current-zones-hazards-coefficients-formulas-and-site-specific-rules-unavailable"
+  ]
+}

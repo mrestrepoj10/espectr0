@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "studyId": "armenia-microzonation",
+  "status": "research-only-activation-blocked",
+  "governingConclusion": "No source-locked, CAP-approved and municipally adopted NSR-10-harmonized Armenia spectrum was verified as of 2026-07-25.",
+  "controllingBuildingWorkflow": "NSR-10 national mode only; no Armenia municipal substitute may be selected.",
+  "regulatoryStatusMatrix": {
+    "normalizedDecision": "blocked-pending-commission-approval-and-municipal-decree",
+    "options": [
+      {
+        "id": "armenia-citywide",
+        "sourceLabel": "Armenia (estado regulatorio, no opción espectral)"
+      }
+    ],
+    "hazards": [
+      {
+        "id": "regulatory-status",
+        "sourceLabel": "Estado de adopción (no amenaza sísmica)"
+      }
+    ],
+    "rows": [
+      {
+        "optionId": "armenia-citywide",
+        "hazardId": "regulatory-status",
+        "fields": {
+          "activation-status": "Ahora el municipio debe adelantar ante la Comisión Nacional Asesora Sismorresistente, para su aprobación y posterior oficialización a través de un decreto."
+        }
+      }
+    ]
+  },
+  "proposedSpectrumMatrix": {
+    "selectableOptions": [],
+    "hazards": [],
+    "rows": [],
+    "exactOptionHazardPairs": 0,
+    "reason": "The exact current zone model, hazard cases, coefficients and equations are unavailable in an adopted primary-source package."
+  },
+  "historicalRecord": {
+    "instrument": "Decreto Municipal 079 de 2000",
+    "basis": "NSR-98 / Decreto 033 de 1998",
+    "exactZonesVerifiedFromLockedPrimarySources": [],
+    "exactHazardsVerifiedFromLockedPrimarySources": [],
+    "coefficientsCanonicalized": false,
+    "formulasCanonicalized": false,
+    "applicability": "not-demonstrated-under-nsr10"
+  },
+  "currentStudy": {
+    "deliveredOn": "2025-12-10",
+    "adoptionStatusAtOfficialDeliveryNotice": "pending-commission-approval-and-municipal-decree",
+    "adoptionInstrumentVerifiedThrough": "2026-07-25",
+    "adoptionInstrument": null
+  },
+  "blockers": [
+    "official-decree-079-bytes-and-technical-annex-not-located",
+    "legacy-study-not-demonstrated-harmonized-with-nsr10",
+    "2025-study-not-demonstrated-cap-approved",
+    "2025-study-not-demonstrated-adopted-by-municipal-decree",
+    "current-zones-hazards-coefficients-formulas-and-site-specific-rules-unavailable"
+  ],
+  "capabilities": {
+    "spectrumCalculation": false,
+    "comparison": false,
+    "contextualPdf": false,
+    "csvExport": false,
+    "etabsExport": false,
+    "jsonExport": false,
+    "imageExport": false,
+    "buildingBaseShear": false,
+    "traceabilityViewer": true
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "preparedOn": "2026-07-25",
+  "externalOnly": true,
+  "extraction": {
+    "pdf": "pdfplumber 0.11.10 with pdfminer.six; pypdf 6.14.2 page-count cross-check",
+    "html": "Historical UTF-8 snapshot observation plus live full-document required/absent-token checks; dynamic raw bytes and line numbers are not immutable",
+    "ocrUsed": false,
+    "coordinateSystem": "normalized top-left [0,1]"
+  },
+  "attestations": [
+    {
+      "id": "attest-acta-153-harmonization",
+      "sourceDocumentId": "armenia-cap-acta-153-2019",
+      "sourceSha256": "f60b99efe9061922f0f365d7e2635abddfcf60b6350cd01a7ebe9a72fcec46f6",
+      "physicalPage": 17,
+      "rect": {
+        "left": 0.08,
+        "top": 0.32,
+        "width": 0.84,
+        "height": 0.27
+      },
+      "text": "si la ciudad ya ha adelantado estudios en el pasado, estos deberán actualizarse y armonizarse con la más vigente versión del Reglamento NSR-10 conforme con el numeral A.2.9.5",
+      "sha256": "63712fe3359e05934d017fcf8222e1889490ca66af97074d2c7ff34dc81d024f",
+      "requiredTokens": [
+        "actualizarse",
+        "armonizarse",
+        "NSR-10",
+        "A.2.9.5"
+      ]
+    },
+    {
+      "id": "attest-acuerdo-019-current-code",
+      "sourceDocumentId": "armenia-acuerdo-019-2009",
+      "sourceSha256": "a7967cf86a686583b9c7d39fb22488b4444b8de43195ca6ee7de8a04c3d7bc14",
+      "physicalPage": 47,
+      "rect": {
+        "left": 0.15,
+        "top": 0.62,
+        "width": 0.75,
+        "height": 0.07
+      },
+      "text": "aplicando rigurosamente los criterios definidos en el estudio de microzonificación sísmica del Municipio a nivel de coeficientes espectrales de diseño, cumpliendo con la Norma Sismoresistente vigente",
+      "sha256": "415d4e0a1bf8a73328f7a31413f9a23c296b1d3170240182d3a68d1205fb68db",
+      "requiredTokens": [
+        "microzonificación sísmica",
+        "coeficientes espectrales",
+        "Norma Sismoresistente vigente"
+      ]
+    },
+    {
+      "id": "attest-pot-decree-079-origin",
+      "sourceDocumentId": "armenia-pot-volume-4b-2009",
+      "sourceSha256": "1643056e170f4a901c0084c8fdf21cedd1be79c94fc20ac33e7102a84ad20ee2",
+      "physicalPage": 81,
+      "rect": {
+        "left": 0.08,
+        "top": 0.77,
+        "width": 0.4,
+        "height": 0.09
+      },
+      "text": "Decreto 079 de 2000 por el cual se adopta la zonificación sísmica y se reglamentan las secciones A.2.4 A.2.6. del Decreto 033 de 1998 N.S.R.98",
+      "sha256": "baf5838a052171e37fa8beb82caa267a0194fbf4c8bfa483755ce18399a3696c",
+      "requiredTokens": [
+        "Decreto 079 de 2000",
+        "Decreto 033 de 1998",
+        "N.S.R.98"
+      ]
+    },
+    {
+      "id": "attest-pot-fills",
+      "sourceDocumentId": "armenia-pot-volume-4b-2009",
+      "sourceSha256": "1643056e170f4a901c0084c8fdf21cedd1be79c94fc20ac33e7102a84ad20ee2",
+      "physicalPage": 81,
+      "rect": {
+        "left": 0.08,
+        "top": 0.56,
+        "width": 0.5,
+        "height": 0.09
+      },
+      "text": "los proyectos de construcción sobre los llenos artificiales existentes en la ciudad serán exigidos con estudios geotécnicos, de los cuales dependerán sus posibilidades de construcción",
+      "sha256": "c39951bad03d79f01e37c453fc9eaed49a0deb1ad081cca53dae6881e4fc72a4",
+      "requiredTokens": [
+        "llenos artificiales",
+        "estudios",
+        "geotécnicos"
+      ]
+    },
+    {
+      "id": "attest-delivery-pending",
+      "sourceDocumentId": "quindio-armenia-delivery-2025",
+      "verificationPolicy": "live-semantic-dynamic-html",
+      "sourceObservationSha256": "ddc685957dd77f0263d45ed84b4928b86edf9c7fbbe2caeede4d607a08de67a8",
+      "physicalPage": 1,
+      "htmlLineRange": [
+        1243,
+        1245
+      ],
+      "locatorScope": "historical-snapshot-lines-live-full-document-semantic-check",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "text": "Ahora el municipio debe adelantar ante la Comisión Nacional Asesora Sismorresistente, para su aprobación y posterior oficialización a través de un decreto.",
+      "sha256": "26bda04df98cd3e89045761be1845e633e9c69b49e9f9c169c3a1db8a9473865",
+      "requiredTokens": [
+        "Comisión Nacional Asesora Sismorresistente",
+        "aprobación",
+        "oficialización",
+        "decreto"
+      ]
+    },
+    {
+      "id": "attest-decree-index-audit",
+      "sourceDocumentId": "armenia-decree-index-2026-07-25",
+      "verificationPolicy": "live-semantic-dynamic-html",
+      "sourceObservationSha256": "d9e82ef0e7cd579afc59eedd6f7bc8f71b9daf8161b51c3b229f6aa313e95a37",
+      "physicalPage": 1,
+      "htmlLineRange": [
+        471,
+        479
+      ],
+      "locatorScope": "historical-snapshot-lines-live-full-document-semantic-check",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "text": "DECRETO NÚMERO 094 DE 2026; DECRETO NÚMERO 052 DE 2026",
+      "sha256": "bb9c4448ec2051971d6ab564fbf644391e17e69cb79e19f455c3a1c7638b05a9",
+      "requiredTokens": [
+        "DECRETO NÚMERO 094 DE 2026",
+        "DECRETO NÚMERO 052 DE 2026"
+      ],
+      "absentTokens": [
+        "microzonificación",
+        "microzonificacion",
+        "Decreto 079"
+      ],
+      "caveat": "Absence in the official index snapshot is corroborating evidence only; it is not treated as proof that no unindexed act exists."
+    }
+  ]
+}
