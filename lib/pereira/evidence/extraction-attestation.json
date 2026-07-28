@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "externalOnly": true,
+  "sourceHashes": {
+    "acuerdo-035-2016": "90568117201b668164e38f65550350cbfc51d6a111fc5981fcd463e0b487a90e",
+    "cap-acta-201": "500e8d72facae767884494d2f4e8daf7fc2993c951ad89dde41b70825551c787"
+  },
+  "coverage": {
+    "regulatoryStatusValues": 1,
+    "proposedSpectrumValues": 0,
+    "applicabilityClaims": 3,
+    "warningClaims": 5,
+    "percent": 100
+  },
+  "attestations": [
+    {
+      "id": "pot-lineage",
+      "citationId": "pot-legacy-until-new",
+      "textSha256": "09f84678d1b252f9bb7e916fe389023c9175b1b787b6b5ffc7fb1cc517a8f9dd"
+    },
+    {
+      "id": "geotechnical-warning",
+      "citationId": "pot-geotechnical-warning",
+      "textSha256": "3dbc9d2287948927aec130ddee15001d779ae8a81dd0fdac9788381f895c8b1e"
+    },
+    {
+      "id": "cap-approval",
+      "citationId": "cap-approval-cell",
+      "textSha256": "8419d6c96dd9b9620f5242c5137ddd9bd9160d5d8aa8c945edecb5cd21746aaa"
+    },
+    {
+      "id": "cap-date",
+      "citationId": "cap-date",
+      "textSha256": "98fe9b3534d1203cc23439f35fbb1c61510e67e25d10818a90d2d99fafc97b43"
+    }
+  ],
+  "nonInference": "CAP technical approval is not municipal adoption. Missing current adoption and technical bytes block activation.",
+  "payloadSha256": "320d0ab9f5fad93a1f537bb06a5beeef709bcd7237a8d1044211529fefe47627"
+}

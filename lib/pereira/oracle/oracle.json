@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "status": "negative-oracle-activation-blocked",
+  "cases": [
+    {
+      "id": "legacy-d932-spectrum",
+      "reason": "primary official decree and complete technical annex unavailable",
+      "outcome": "reject"
+    },
+    {
+      "id": "cap-approved-study-spectrum",
+      "reason": "CAP approval is not municipal adoption and primary technical matrix is unavailable",
+      "outcome": "reject"
+    },
+    {
+      "id": "neighboring-municipality-values",
+      "reason": "municipal legal and technical lineages differ",
+      "outcome": "reject"
+    },
+    {
+      "id": "automatic-zone",
+      "reason": "GIS automation is excluded and no adopted zones are installed",
+      "outcome": "reject"
+    }
+  ],
+  "inputSha256": "cb75830778499a3ac2878f596d4747a02f44899b4d054a93fd8844ee70ba0bea"
+}

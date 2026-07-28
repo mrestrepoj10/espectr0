@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 1,
+  "studyId": "pereira-microzonation",
+  "title": "Pereira regulatory-status dossier — spectrum activation blocked",
+  "sources": [
+    {
+      "id": "acuerdo-035-2016",
+      "issuingAuthority": "Concejo Municipal de Pereira",
+      "officialTitle": "Acuerdo 35 de 2016 — Plan de Ordenamiento Territorial",
+      "edition": "Acuerdo 35 de 2016",
+      "revision": null,
+      "adoptionInstrument": "Acuerdo Municipal 35 de 2016",
+      "amendmentsAndErrata": [],
+      "legalStatus": "active",
+      "applicabilityStatus": "conditional",
+      "officialUrl": "https://s3.pagegear.co/9/documentos/acuerdos/2115.pdf",
+      "retrievedOn": "2026-07-25",
+      "redistribution": {
+        "decision": "external-only",
+        "rationale": "No se localizó licencia expresa de redistribución; se conserva URL y huella."
+      },
+      "mediaType": "application/pdf",
+      "pageCount": 399,
+      "sha256": "90568117201b668164e38f65550350cbfc51d6a111fc5981fcd463e0b487a90e",
+      "pages": [
+        {
+          "physicalPage": 106,
+          "printedPage": "106",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "physicalPage": 110,
+          "printedPage": "110",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "cap-acta-201",
+      "issuingAuthority": "Comisión Asesora Permanente para el Régimen de Construcciones Sismo Resistentes",
+      "officialTitle": "Acta No. 201",
+      "edition": "Reunión del 13 de diciembre de 2024",
+      "revision": null,
+      "adoptionInstrument": "Aprobación técnica de la Comisión; no es decreto municipal",
+      "amendmentsAndErrata": [],
+      "legalStatus": "historical",
+      "applicabilityStatus": "conditional",
+      "officialUrl": "https://asosismica.org.co/wp-content/uploads/2025/02/Acta-201-CAP-FINAL_fdo.pdf",
+      "retrievedOn": "2026-07-25",
+      "redistribution": {
+        "decision": "external-only",
+        "rationale": "No se localizó licencia expresa de redistribución; se conserva URL y huella."
+      },
+      "mediaType": "application/pdf",
+      "pageCount": 36,
+      "sha256": "500e8d72facae767884494d2f4e8daf7fc2993c951ad89dde41b70825551c787",
+      "pages": [
+        {
+          "physicalPage": 1,
+          "printedPage": null,
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "physicalPage": 4,
+          "printedPage": null,
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "pot-legacy-until-new",
+      "sourceDocumentId": "acuerdo-035-2016",
+      "regionKind": "applicability",
+      "physicalPage": 106,
+      "printedPage": "106",
+      "reference": "Artículo 210, parágrafo 1",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "extractedToken": "se acoge la norma de Sismoresistencia NSR-10, y el Decreto Municipal 932 de 2011 el cual estará vigente hasta la respectiva expedición de la nueva microzonificación sísmica",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "NSR-10",
+        "Decreto Municipal 932 de 2011",
+        "nueva microzonificación sísmica"
+      ]
+    },
+    {
+      "id": "pot-geotechnical-warning",
+      "sourceDocumentId": "acuerdo-035-2016",
+      "regionKind": "applicability",
+      "physicalPage": 110,
+      "printedPage": "110",
+      "reference": "Artículo 220, parágrafo 2",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "extractedToken": "se acogerán todos los lineamientos y requerimientos de la NSR-10, en particular del Título H en lo referido a los aspectos geotécnicos y el decreto 932 de 2011",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Título H",
+        "aspectos geotécnicos",
+        "decreto 932 de 2011"
+      ]
+    },
+    {
+      "id": "cap-approval-row",
+      "sourceDocumentId": "cap-acta-201",
+      "regionKind": "row",
+      "physicalPage": 4,
+      "printedPage": null,
+      "reference": "Numeral 7, Pereira",
+      "parentCitationId": "cap-approval-table",
+      "rect": {
+        "left": 0.08,
+        "top": 0.28,
+        "width": 0.84,
+        "height": 0.25
+      },
+      "extractedToken": "la Comisión en pleno aprueba el estudio de microzonificación sísmica del municipio de Pereira",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Comisión",
+        "aprueba",
+        "Pereira"
+      ]
+    },
+    {
+      "id": "cap-approval-table",
+      "sourceDocumentId": "cap-acta-201",
+      "regionKind": "table",
+      "physicalPage": 4,
+      "printedPage": null,
+      "reference": "Numeral 7. Microzonificaciones sísmicas",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "extractedToken": "Microzonificaciones sísmicas Pereira la Comisión en pleno aprueba el estudio de microzonificación sísmica del municipio de Pereira",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Microzonificaciones sísmicas",
+        "Pereira"
+      ]
+    },
+    {
+      "id": "cap-approval-cell",
+      "sourceDocumentId": "cap-acta-201",
+      "regionKind": "cell",
+      "physicalPage": 4,
+      "printedPage": null,
+      "reference": "Numeral 7, aprobación técnica de Pereira",
+      "parentCitationId": "cap-approval-row",
+      "rect": {
+        "left": 0.08,
+        "top": 0.36,
+        "width": 0.84,
+        "height": 0.09
+      },
+      "extractedToken": "la Comisión en pleno aprueba el estudio de microzonificación sísmica del municipio de Pereira",
+      "normalizedValue": "la Comisión en pleno aprueba el estudio de microzonificación sísmica del municipio de Pereira",
+      "unit": null,
+      "transformation": "text identity",
+      "requiredTokens": [
+        "aprueba",
+        "Pereira"
+      ]
+    },
+    {
+      "id": "cap-date",
+      "sourceDocumentId": "cap-acta-201",
+      "regionKind": "applicability",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Fecha del Acta 201",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "extractedToken": "Viernes 13 de diciembre de 2024",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "13 de diciembre de 2024"
+      ]
+    }
+  ],
+  "applicabilityCitationIds": [
+    "pot-legacy-until-new",
+    "pot-geotechnical-warning",
+    "cap-date"
+  ],
+  "coverage": {
+    "optionIds": [
+      "pereira-citywide"
+    ],
+    "hazardIds": [
+      "regulatory-status"
+    ],
+    "fieldIds": [
+      "cap-approval-status"
+    ]
+  },
+  "values": [
+    {
+      "id": "value-pereira-cap-approval",
+      "optionId": "pereira-citywide",
+      "hazardId": "regulatory-status",
+      "fieldId": "cap-approval-status",
+      "value": "la Comisión en pleno aprueba el estudio de microzonificación sísmica del municipio de Pereira",
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cap-approval-cell"
+      ],
+      "transformation": "text identity"
+    }
+  ],
+  "rawRows": [
+    {
+      "id": "raw-pereira-regulatory-status",
+      "rowKey": "pereira-citywide/regulatory-status",
+      "sourceDocumentId": "cap-acta-201",
+      "optionId": "pereira-citywide",
+      "hazardId": "regulatory-status",
+      "citationIds": [
+        "cap-approval-cell"
+      ],
+      "fields": {
+        "cap-approval-status": "la Comisión en pleno aprueba el estudio de microzonificación sísmica del municipio de Pereira"
+      }
+    }
+  ],
+  "canonicalRows": [
+    {
+      "id": "canonical-pereira-regulatory-status",
+      "rowKey": "pereira-citywide/regulatory-status",
+      "sourceDocumentId": "cap-acta-201",
+      "optionId": "pereira-citywide",
+      "hazardId": "regulatory-status",
+      "citationIds": [
+        "cap-approval-cell"
+      ],
+      "fields": {
+        "cap-approval-status": "la Comisión en pleno aprueba el estudio de microzonificación sísmica del municipio de Pereira"
+      },
+      "sourceRowIds": [
+        "raw-pereira-regulatory-status"
+      ]
+    }
+  ],
+  "overrides": []
+}
