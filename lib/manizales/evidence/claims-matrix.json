@@ -57,7 +57,7 @@
     {
       "id": "hazard-return",
       "kind": "direct",
-      "statement": "El unico periodo de retorno cuantificado para el espectro de amenaza uniforme es 475 anos.",
+      "statement": "La amenaza uniforme superficial/de diseno que el articulo bloqueado de 2015 documenta para el modelo rasterizado usa 475 anos de periodo de retorno.",
       "citation": {
         "sourceDocumentId": "manizales-update-2015",
         "physicalPage": 1,

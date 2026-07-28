@@ -13,7 +13,7 @@ Tampoco se recupero un instrumento primario que pruebe la adopcion y vigencia de
 | Capa | Modelo | Uso permitido en este paquete |
 |---|---|---|
 | Uniandes 2002 | Tres zonas de diseno: A (ceniza), B (rellenos), C (roca/suelo delgado) | Historia solamente. El PDF oficial original no pudo bloquearse y no se activa. |
-| Armonizacion 2014 / publicacion 2015 | 1.275 nodos; Fa/Fv por ubicacion; salida rasterizada; retorno de 475 anos | Candidato tecnico gobernante, pero no computable ni seleccionable manualmente con las fuentes disponibles. |
+| Armonizacion 2014 / publicacion 2015 | 1.275 nodos; Fa/Fv por ubicacion; salida superficial/de diseno rasterizada documentada a 475 anos | Candidato tecnico gobernante, pero no computable ni seleccionable manualmente con las fuentes disponibles. |
 | Sitio web de referencia | Cualquier representacion o valor que muestre | Solo comparacion. Nunca fuente de coeficientes, formulas, derecho, redondeo o advertencias. |
 
 La publicacion de 2015 fija `Aa=0.25g`, `Av=0.25g` e `I=1` para el procedimiento de ajuste, y trata Fa/Fv como parametros libres por nodo. Afirma compatibilidad tecnica con la NSR-10 para edificaciones nuevas una vez definido el espectro del sitio. Esa afirmacion no prueba adopcion municipal.
@@ -29,7 +29,7 @@ El informe original 2002, la armonizacion completa 2014 y el eventual acto de ad
 - Matriz exacta: 1 opcion tecnica x 1 amenaza x 5 campos numericos, todos con celda y atestacion directa. La naturaleza raster y Fa/Fv se cubren como aplicabilidad textual porque F3 solo admite normalizacion numerica directa.
 - Inventario de formulas: 4/4 asuntos clasificados, pero cobertura operacional 0%; ese cero es un bloqueo, no un vacio oculto.
 - Advertencias y aplicabilidad: 100% de las afirmaciones aceptadas tienen cita o disposicion explicita de bloqueo.
-- Amenaza: solo se acepta el retorno de 475 anos publicado. No se infieren otros niveles ni amortiguamiento.
+- Amenaza: esta matriz solo normaliza la salida superficial/de diseno de 475 anos documentada por el articulo bloqueado de 2015. No afirma que el corpus completo carezca de otros UHS en roca, ni infiere otros niveles o amortiguamiento.
 - Sitio especifico: el modelo depende de ubicacion y datos espaciales ausentes. No se interpolan nodos ni se crean zonas manuales.
 - Edificaciones: existe una declaracion tecnica de compatibilidad NSR-10, condicionada a definir el espectro local; no autoriza calculo ni sustituye la verificacion legal.
 
