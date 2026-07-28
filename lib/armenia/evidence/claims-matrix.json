@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "regulatoryStatusMatrix": {
+    "options": 1,
+    "hazards": 1,
+    "fields": 1,
+    "exactCoveredPairs": 1,
+    "exactCoveredFieldValues": 1,
+    "coveragePercent": 100
+  },
+  "proposedSpectrumMatrix": {
+    "selectableOptions": 0,
+    "hazards": 0,
+    "fields": 0,
+    "exactCoveredPairs": 0,
+    "exactCoveredFieldValues": 0,
+    "coverageStatus": "not-applicable-no-approved-matrix"
+  },
+  "claimCoverage": {
+    "applicability": {
+      "expected": 4,
+      "cited": 4,
+      "coveragePercent": 100
+    },
+    "warnings": {
+      "expected": 4,
+      "cited": 4,
+      "coveragePercent": 100
+    }
+  },
+  "claims": [
+    {
+      "id": "legacy-instrument-basis",
+      "kind": "applicability",
+      "claim": "Decreto 079 de 2000 was framed as a substitute for NSR-98 sections A.2.4 and A.2.6, not as an NSR-10-harmonized instrument.",
+      "citation": {
+        "sourceDocumentId": "armenia-pot-volume-4b-2009",
+        "physicalPage": 81,
+        "rect": {
+          "left": 0.08,
+          "top": 0.77,
+          "width": 0.4,
+          "height": 0.09
+        },
+        "attestationId": "attest-pot-decree-079-origin",
+        "statementSha256": "baf5838a052171e37fa8beb82caa267a0194fbf4c8bfa483755ce18399a3696c"
+      }
+    },
+    {
+      "id": "harmonization-required",
+      "kind": "applicability",
+      "claim": "The national advisory commission told Armenia that prior studies must be updated and harmonized with the current NSR-10 under A.2.9.5.",
+      "citation": {
+        "sourceDocumentId": "armenia-cap-acta-153-2019",
+        "physicalPage": 17,
+        "rect": {
+          "left": 0.08,
+          "top": 0.32,
+          "width": 0.84,
+          "height": 0.27
+        },
+        "attestationId": "attest-acta-153-harmonization",
+        "statementSha256": "63712fe3359e05934d017fcf8222e1889490ca66af97074d2c7ff34dc81d024f"
+      }
+    },
+    {
+      "id": "new-study-pending",
+      "kind": "applicability",
+      "claim": "At official delivery in December 2025, the new study still required Commission approval and municipal decree adoption.",
+      "citation": {
+        "sourceDocumentId": "quindio-armenia-delivery-2025",
+        "physicalPage": 1,
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        },
+        "attestationId": "attest-delivery-pending",
+        "statementSha256": "26bda04df98cd3e89045761be1845e633e9c69b49e9f9c169c3a1db8a9473865"
+      }
+    },
+    {
+      "id": "current-index-corroboration",
+      "kind": "applicability",
+      "claim": "The official decree index snapshot retrieved 2026-07-25 contains no microzonation term or Decreto 079 entry; this is non-exhaustive corroboration only.",
+      "citation": {
+        "sourceDocumentId": "armenia-decree-index-2026-07-25",
+        "physicalPage": 1,
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        },
+        "attestationId": "attest-decree-index-audit",
+        "statementSha256": "bb9c4448ec2051971d6ab564fbf644391e17e69cb79e19f455c3a1c7638b05a9"
+      }
+    },
+    {
+      "id": "warning-no-municipal-activation",
+      "kind": "warning",
+      "claim": "Do not activate any Armenia municipal zone or hazard until an adopted, current, source-locked package is obtained.",
+      "citation": {
+        "sourceDocumentId": "quindio-armenia-delivery-2025",
+        "physicalPage": 1,
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        },
+        "attestationId": "attest-delivery-pending",
+        "statementSha256": "26bda04df98cd3e89045761be1845e633e9c69b49e9f9c169c3a1db8a9473865"
+      }
+    },
+    {
+      "id": "warning-professional-validation",
+      "kind": "warning",
+      "claim": "Any future manual zone selection must be verified against the adopted instrument by the responsible professional; no map/GIS inference is authorized.",
+      "citation": {
+        "sourceDocumentId": "armenia-acuerdo-019-2009",
+        "physicalPage": 47,
+        "rect": {
+          "left": 0.15,
+          "top": 0.62,
+          "width": 0.75,
+          "height": 0.07
+        },
+        "attestationId": "attest-acuerdo-019-current-code",
+        "statementSha256": "415d4e0a1bf8a73328f7a31413f9a23c296b1d3170240182d3a68d1205fb68db"
+      }
+    },
+    {
+      "id": "warning-fills-site-specific",
+      "kind": "warning",
+      "claim": "Construction over existing artificial fills depends on geotechnical studies; no generic municipal spectrum may erase that requirement.",
+      "citation": {
+        "sourceDocumentId": "armenia-pot-volume-4b-2009",
+        "physicalPage": 81,
+        "rect": {
+          "left": 0.08,
+          "top": 0.56,
+          "width": 0.5,
+          "height": 0.09
+        },
+        "attestationId": "attest-pot-fills",
+        "statementSha256": "c39951bad03d79f01e37c453fc9eaed49a0deb1ad081cca53dae6881e4fc72a4"
+      }
+    },
+    {
+      "id": "warning-building-workflow",
+      "kind": "warning",
+      "claim": "Use the national NSR-10 workflow for buildings; the historical Armenia model is not demonstrated applicable under NSR-10.",
+      "citation": {
+        "sourceDocumentId": "armenia-cap-acta-153-2019",
+        "physicalPage": 17,
+        "rect": {
+          "left": 0.08,
+          "top": 0.32,
+          "width": 0.84,
+          "height": 0.27
+        },
+        "attestationId": "attest-acta-153-harmonization",
+        "statementSha256": "63712fe3359e05934d017fcf8222e1889490ca66af97074d2c7ff34dc81d024f"
+      }
+    }
+  ]
+}

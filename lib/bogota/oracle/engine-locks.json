@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "oracle": "Python decimal.Decimal, precision 50",
+  "comparisonTolerance": {
+    "absoluteG": "1e-12",
+    "relative": "1e-12",
+    "boundaryEpsilonSeconds": "1e-9"
+  },
+  "files": {
+    "canonical": {
+      "path": "lib/bogota/data/canonical.json",
+      "sha256": "f00035b9b584706c3bc613471d010a42ad53e4b6b70654c934be9cfac89832dd"
+    },
+    "oracleInput": {
+      "path": "lib/bogota/oracle/oracle-input.json",
+      "sha256": "ef06d6f1e1f65a555ae72f4e39fca2e27b1edc9818c8fc6a9294f329ea7ed431"
+    },
+    "oracleProgram": {
+      "path": "lib/bogota/oracle/generate_oracle.py",
+      "sha256": "ccff5835bb3dd77a9af3f5f761be9e4dfc92cc4b62145a434cf9daaa74811325"
+    },
+    "oracleOutput": {
+      "path": "lib/bogota/oracle/oracle.json",
+      "sha256": "92d81a4f46634d9c409a06b2b6842d10bc30b01f440a21d2967ea228fbacf8c7"
+    }
+  }
+}

@@ -1,0 +1,255 @@
+{
+  "schemaVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "renderer": "Poppler pdftoppm",
+    "renderDpi": 144,
+    "textExtractor": "pdfplumber word extraction",
+    "ocrUsed": false,
+    "coordinateSystem": "normalized PDF page coordinates, top-left origin",
+    "cropEncoding": "PNG RGB, Pillow compress_level=9, optimize=false"
+  },
+  "sourceLocks": [
+    {
+      "sourceDocumentId": "manizales-update-2015",
+      "sha256": "55a8458cc211c83b3e13cf5feb7670dbd120535542c779512f1d2a86bd6628e3",
+      "pageCount": 10,
+      "byteLength": 1229511
+    },
+    {
+      "sourceDocumentId": "manizales-management-report-2016-2019",
+      "sha256": "6345925e0afb5ba03d0f713a2a87e0c8ec6fa7da8128849f6095e26cefd6a373",
+      "pageCount": 151,
+      "byteLength": 3871932
+    },
+    {
+      "sourceDocumentId": "manizales-pot-status-2025",
+      "sha256": "13790747a041c6f7d80ae9229336174f3b18f6bcfc6cdde18b406b6ac643a2d8",
+      "pageCount": 2,
+      "byteLength": 563357
+    }
+  ],
+  "regions": [
+    {
+      "citationId": "table-update-basis",
+      "sourceDocumentId": "manizales-update-2015",
+      "physicalPage": 1,
+      "rect": {
+        "left": 0.1,
+        "top": 0.43,
+        "width": 0.82,
+        "height": 0.19
+      },
+      "tokenSha256": "9645eb998def35492053d05774174acb5449d17ec26f80e3c5ce06b89f74cacb",
+      "pngCropSha256": "acb00f71896725abda004a6f45ccf72887e7cec1fe6d6aae772eb6b75a2c3cd5"
+    },
+    {
+      "citationId": "row-update-basis",
+      "sourceDocumentId": "manizales-update-2015",
+      "physicalPage": 1,
+      "rect": {
+        "left": 0.115,
+        "top": 0.445,
+        "width": 0.795,
+        "height": 0.17
+      },
+      "tokenSha256": "0c538b5855f5ec6b79349f564d11b5107346ebf334f3471972d3279048c11f38",
+      "pngCropSha256": "39600e5377f1869297d6ad4c213c255935ad9212622f388938bf825f92c17c68"
+    },
+    {
+      "citationId": "cell-node-count",
+      "sourceDocumentId": "manizales-update-2015",
+      "physicalPage": 1,
+      "rect": {
+        "left": 0.413159,
+        "top": 0.469315,
+        "width": 0.036014,
+        "height": 0.016412
+      },
+      "tokenSha256": "a1bb364ad3761439e83376289d6656aaabf8b99014a8a7ff937e37c53611d885",
+      "pngCropSha256": "668f878c9b83214666d8b6aa0d6f532976b7192d3394ff72c904db7471e98033"
+    },
+    {
+      "citationId": "cell-return-period",
+      "sourceDocumentId": "manizales-update-2015",
+      "physicalPage": 1,
+      "rect": {
+        "left": 0.165538,
+        "top": 0.545087,
+        "width": 0.028574,
+        "height": 0.016412
+      },
+      "tokenSha256": "b1585fdb272b31401eaac5dd46a936c1c09b4861e53e23f12ac72fc077b3c82c",
+      "pngCropSha256": "d61241fb81e00468e4e0964e7fd29fef74267bb4e49cf451bd92db4eaaaf9946"
+    },
+    {
+      "citationId": "cell-spatial-model",
+      "sourceDocumentId": "manizales-update-2015",
+      "physicalPage": 1,
+      "rect": {
+        "left": 0.202766,
+        "top": 0.595685,
+        "width": 0.073904,
+        "height": 0.016412
+      },
+      "tokenSha256": "97ed62b7af75059238de7187e5beaeb166ac77f4a7610813eac996f683f928cc",
+      "pngCropSha256": "afb4d66d619b50d485b123d649448286b7e0d0302b8ad7c97a65688413f345d5"
+    },
+    {
+      "citationId": "app-original-three-zones",
+      "sourceDocumentId": "manizales-update-2015",
+      "physicalPage": 2,
+      "rect": {
+        "left": 0.1,
+        "top": 0.19,
+        "width": 0.82,
+        "height": 0.13
+      },
+      "tokenSha256": "626256db0c50905fd6bccaa03e0fd04fb4d70bd8c5bb8b138f9cfc4bfc33bcb1",
+      "pngCropSha256": "0e355a3eb9be930c81cb85cfee01e1c1e48cb9847e210d31679e709823815a43"
+    },
+    {
+      "citationId": "table-update-parameters",
+      "sourceDocumentId": "manizales-update-2015",
+      "physicalPage": 8,
+      "rect": {
+        "left": 0.1,
+        "top": 0.445,
+        "width": 0.82,
+        "height": 0.105
+      },
+      "tokenSha256": "efbfa412a2c94a383f46e54d19af4c407c3c6ea3ae23671964868cd0da537d39",
+      "pngCropSha256": "8e4506bbfc87a52de57fc45a2cee2b9689bfb309c6c5ed3156bef7d01b6d7b7f"
+    },
+    {
+      "citationId": "row-update-parameters",
+      "sourceDocumentId": "manizales-update-2015",
+      "physicalPage": 8,
+      "rect": {
+        "left": 0.115,
+        "top": 0.46,
+        "width": 0.795,
+        "height": 0.08
+      },
+      "tokenSha256": "3982489b2aa8b7a35940c8b99ea902a63ed1e1bf207c5bb6c6a6e91b86345222",
+      "pngCropSha256": "eacc67c855d92d64a67e684b214828c7fe90edf3a709a01c9602b46b7f7b7814"
+    },
+    {
+      "citationId": "cell-aa",
+      "sourceDocumentId": "manizales-update-2015",
+      "physicalPage": 8,
+      "rect": {
+        "left": 0.184572,
+        "top": 0.493125,
+        "width": 0.072316,
+        "height": 0.016412
+      },
+      "tokenSha256": "a30a043314fa89294fa2c1c989a01fbb5329e5c085a5c5a8d27317656de24ae0",
+      "pngCropSha256": "f2959765948ec40534e6632cb20271c5de0e268f296a352e00d0bc4929e42a33"
+    },
+    {
+      "citationId": "cell-av",
+      "sourceDocumentId": "manizales-update-2015",
+      "physicalPage": 8,
+      "rect": {
+        "left": 0.265144,
+        "top": 0.493125,
+        "width": 0.075158,
+        "height": 0.016412
+      },
+      "tokenSha256": "a30a043314fa89294fa2c1c989a01fbb5329e5c085a5c5a8d27317656de24ae0",
+      "pngCropSha256": "f86c1a2be08d6980965140cb0142ed746e377ac6278da8fda4f7a040a2cdd973"
+    },
+    {
+      "citationId": "cell-importance-fit",
+      "sourceDocumentId": "manizales-update-2015",
+      "physicalPage": 8,
+      "rect": {
+        "left": 0.57889,
+        "top": 0.493125,
+        "width": 0.038617,
+        "height": 0.016412
+      },
+      "tokenSha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "pngCropSha256": "b549f7bc5770786682317046f89fb83cbefa5ae711eae9d6d77e7b4dd01792f9"
+    },
+    {
+      "citationId": "cell-soil-parameters",
+      "sourceDocumentId": "manizales-update-2015",
+      "physicalPage": 8,
+      "rect": {
+        "left": 0.682595,
+        "top": 0.467952,
+        "width": 0.058289,
+        "height": 0.016412
+      },
+      "tokenSha256": "9c56a986a0638e15c64edacc8e933e161b1a108a1f2b68fcb7ef8882f94894f1",
+      "pngCropSha256": "95a3ffc64e0a7544eff43cdae444a6f30ee060a8f44d573046890ea1e2eb385e"
+    },
+    {
+      "citationId": "warning-raster-not-zones",
+      "sourceDocumentId": "manizales-update-2015",
+      "physicalPage": 9,
+      "rect": {
+        "left": 0.13,
+        "top": 0.55,
+        "width": 0.78,
+        "height": 0.08
+      },
+      "tokenSha256": "37363e4edf253a11f056376ffc9804f7b0b7b541a47accde2c29ccde5291c48b",
+      "pngCropSha256": "3c4e83f99f73d58ed231477e0b42f3962e603d5590c605598158d7b8444cacdb"
+    },
+    {
+      "citationId": "app-building-compatibility",
+      "sourceDocumentId": "manizales-update-2015",
+      "physicalPage": 9,
+      "rect": {
+        "left": 0.13,
+        "top": 0.69,
+        "width": 0.78,
+        "height": 0.1
+      },
+      "tokenSha256": "06341b5aad29c6a5b97957c5b30fb8af26507825d18ddf6531462c413bbebab3",
+      "pngCropSha256": "b746259dddc2f7223ebe48cbc560933676800c2ebce92800febac7b2d1bc93b1"
+    },
+    {
+      "citationId": "warning-adoption-pending-2019",
+      "sourceDocumentId": "manizales-management-report-2016-2019",
+      "physicalPage": 65,
+      "rect": {
+        "left": 0.12,
+        "top": 0.47,
+        "width": 0.78,
+        "height": 0.32
+      },
+      "tokenSha256": "e2188410ef07bd7242c04dab85c643b2443db5c26cdcf5a38037e7493b256971",
+      "pngCropSha256": "8b588e9cdc9c7214a98bfa238f805cc5eb7423263da4b0be074684625ea2814b"
+    },
+    {
+      "citationId": "app-pot-current-2025",
+      "sourceDocumentId": "manizales-pot-status-2025",
+      "physicalPage": 1,
+      "rect": {
+        "left": 0.12,
+        "top": 0.34,
+        "width": 0.7,
+        "height": 0.08
+      },
+      "tokenSha256": "c5ddef12a92216187741123d11489c7d52c658270b7dcdd4252e2a0f2bedf78d",
+      "pngCropSha256": "96e2e8fb591f5ceb639ee55b400d298a4430e33fba3ed2bf3df157dca84177fe"
+    }
+  ],
+  "manualReview": {
+    "status": "complete",
+    "ocrUsed": false,
+    "reviewedPages": [
+      "manizales-update-2015:1",
+      "manizales-update-2015:2",
+      "manizales-update-2015:8",
+      "manizales-update-2015:9",
+      "manizales-management-report-2016-2019:65",
+      "manizales-pot-status-2025:1"
+    ]
+  },
+  "payloadSha256": "3321febecf2ead099e9ca706bb0188b1d8ecab0098bbfac432c9b705c212a763"
+}

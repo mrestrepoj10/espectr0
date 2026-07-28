@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "decree-079-vs-nsr10",
+      "status": "resolved-for-product",
+      "officialEvidence": [
+        "legacy-instrument-basis",
+        "harmonization-required"
+      ],
+      "resolution": "Do not activate the NSR-98-era model under NSR-10."
+    },
+    {
+      "id": "legacy-model-vs-2025-study",
+      "status": "resolved-for-product",
+      "officialEvidence": [
+        "new-study-pending"
+      ],
+      "resolution": "Do not mix the historical model with the delivered but unadopted 2025 study."
+    },
+    {
+      "id": "reference-site-model-vs-official-chain",
+      "status": "resolved-for-product",
+      "officialEvidence": [
+        "harmonization-required",
+        "new-study-pending"
+      ],
+      "resolution": "Treat any reference-site Armenia zone model as UX-only and unsupported for coefficients, formulas or legal status."
+    }
+  ]
+}

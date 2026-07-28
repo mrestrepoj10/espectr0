@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "sourceDocumentId": "cali-decree-0158-2014",
+  "method": "embedded-JPEG-manual-transcription",
+  "pageImage": {
+    "width": 1280,
+    "height": 2080,
+    "colorSpace": "RGB"
+  },
+  "hashing": {
+    "embeddedImageBytes": "sha256",
+    "cropPixels": "sha256(raw RGB bytes)",
+    "rectangles": "normalized coordinates rounded to image pixels"
+  },
+  "ocrUsed": false
+}

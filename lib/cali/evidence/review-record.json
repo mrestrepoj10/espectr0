@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "transcription": {
+    "method": "manual-double-entry-with-deterministic-image-crop-hashes",
+    "author": "Codex research pass",
+    "date": "2026-07-25",
+    "status": "complete"
+  },
+  "independentReview": {
+    "reviewer": null,
+    "date": null,
+    "status": "pending"
+  },
+  "activationDecision": "blocked-missing-damage-inputs-and-independent-review"
+}

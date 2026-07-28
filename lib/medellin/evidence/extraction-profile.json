@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "coordinateSystem": "normalized top-left [0,1]",
+  "tableSource": "medellin-dap-2011-support",
+  "tablePhysicalPage": 22,
+  "renderedAtDpi": 180,
+  "renderedPixelSize": {
+    "width": 1530,
+    "height": 1980
+  },
+  "method": "Human-verified transcription against Poppler rendering; source PDF text extraction used only as a cross-check.",
+  "ocr": {
+    "used": false,
+    "note": "The source letter is scanned, but no canonical numeric value comes from OCR."
+  }
+}

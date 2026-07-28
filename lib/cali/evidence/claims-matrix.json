@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "directMatrix": {
+    "expectedFieldValues": 156,
+    "exactCoveredFieldValues": 156,
+    "coveragePercent": 100,
+    "distinctAttestedCells": 144
+  },
+  "ancillaryMinimumTable": {
+    "expectedFieldValues": 52,
+    "exactCoveredFieldValues": 52,
+    "coveragePercent": 100,
+    "distinctAttestedCells": 52,
+    "relation": "design-lower-bound-not-hazard"
+  },
+  "ancillaryPgaTable": {
+    "expectedFieldValues": 10,
+    "exactCoveredFieldValues": 10,
+    "coveragePercent": 100,
+    "distinctAttestedCells": 10,
+    "relation": "surface-design-pga-not-hazard"
+  },
+  "claims": [
+    {
+      "id": "adoption",
+      "kind": "applicability",
+      "statement": "El Decreto 0158 de 2014 adopta la microzonificación sísmica y entra en vigencia con su expedición y publicación.",
+      "citation": {
+        "sourceDocumentId": "cali-decree-0158-2014",
+        "physicalPage": 20,
+        "printedPage": "21",
+        "reference": "Artículos 11 y 12"
+      }
+    },
+    {
+      "id": "pot-continuity",
+      "kind": "applicability",
+      "statement": "El POT ordena promover y vigilar la aplicación del Decreto 0158 y gestionar su actualización cuando exista nueva información.",
+      "citation": {
+        "sourceDocumentId": "cali-pot-0373-2014",
+        "physicalPage": 51,
+        "printedPage": "51/435",
+        "reference": "Artículo 55"
+      }
+    },
+    {
+      "id": "return-periods",
+      "kind": "applicability",
+      "statement": "La NSR-10 define períodos medios de retorno aproximados de 475, 225 y 31 años para diseño, seguridad limitada y umbral de daño.",
+      "citation": {
+        "sourceDocumentId": "nsr10-title-a-2017",
+        "physicalPage": 151,
+        "printedPage": "A-137",
+        "reference": "Definiciones"
+      }
+    },
+    {
+      "id": "concurrent-curves",
+      "kind": "warning",
+      "statement": "En zonas con doble curva, ambas curvas y sus derivas se verifican independientemente.",
+      "citation": {
+        "sourceDocumentId": "cali-decree-0158-2014",
+        "physicalPage": 15,
+        "printedPage": "16",
+        "reference": "Artículo 5, numeral 6"
+      }
+    },
+    {
+      "id": "boundary-band",
+      "kind": "warning",
+      "statement": "En una franja de 200 m a cada lado de un límite se promedian espectros adyacentes período a período, salvo reclasificación mediante estudio geotécnico.",
+      "citation": {
+        "sourceDocumentId": "cali-decree-0158-2014",
+        "physicalPage": 15,
+        "printedPage": "16",
+        "reference": "Artículo 5, numeral 5"
+      }
+    },
+    {
+      "id": "fill-colluvium",
+      "kind": "warning",
+      "statement": "Rellenos no controlados mayores a 3 m y depósitos coluviales requieren aumentar Fa y Fv en 20%, salvo estudio específico, sin bajar de la zona.",
+      "citation": {
+        "sourceDocumentId": "cali-decree-0158-2014",
+        "physicalPage": 16,
+        "printedPage": "17",
+        "reference": "Artículo 5, numerales 10 y 11"
+      }
+    },
+    {
+      "id": "long-period",
+      "kind": "warning",
+      "statement": "Para períodos estructurales mayores a 2.5 s se exige estudio de respuesta sísmica local.",
+      "citation": {
+        "sourceDocumentId": "cali-decree-0158-2014",
+        "physicalPage": 17,
+        "printedPage": "18",
+        "reference": "Artículo 5, numeral 12"
+      }
+    },
+    {
+      "id": "liquefaction-spreading",
+      "kind": "warning",
+      "statement": "El decreto exige evaluaciones de licuación y de corrimiento lateral en las áreas indicadas, incluida la franja de 300 m asociada a ríos y canales.",
+      "citation": {
+        "sourceDocumentId": "cali-decree-0158-2014",
+        "physicalPage": 16,
+        "printedPage": "17",
+        "reference": "Artículo 5, numerales 8 y 9"
+      }
+    },
+    {
+      "id": "site-specific-floor",
+      "kind": "warning",
+      "statement": "Una curva de respuesta local alternativa no puede ser menor que la curva mínima de la Tabla 6.",
+      "citation": {
+        "sourceDocumentId": "cali-decree-0158-2014",
+        "physicalPage": 18,
+        "printedPage": "19",
+        "reference": "Artículo 7"
+      }
+    },
+    {
+      "id": "historical-threshold",
+      "kind": "lineage",
+      "statement": "El estudio de 2005 usó Ad=0.05 y retorno de 10 años; el Decreto 0158 armonizado con NSR-10 adopta después Ad=0.09.",
+      "citation": {
+        "sourceDocumentId": "cali-ingeominas-dagma-2005-tomo6",
+        "physicalPage": 147,
+        "printedPage": "136",
+        "scanMarker": "747",
+        "reference": "Numeral 8; pie interno 136; marcador manuscrito 747",
+        "rect": {
+          "left": 0.16,
+          "top": 0.56,
+          "width": 0.72,
+          "height": 0.29
+        },
+        "extractedToken": "Ad = 0.05g, el cual se calculó probabilísticamente para un periodo de retorno de 10 años",
+        "requiredTokens": [
+          "Ad = 0.05g",
+          "periodo de retorno de 10 años"
+        ],
+        "regionAttestationId": "historical-threshold-p147"
+      }
+    }
+  ]
+}
