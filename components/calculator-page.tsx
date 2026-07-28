@@ -5,12 +5,14 @@ import {
 	ChevronDownIcon,
 	CodeXmlIcon,
 	DownloadIcon,
+	ExternalLinkIcon,
 	FileDownIcon,
 	FileJsonIcon,
 	FileTextIcon,
 	ImageIcon,
 	LandmarkIcon,
 	LoaderCircleIcon,
+	ShieldAlertIcon,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -58,6 +60,16 @@ import {
 	FieldGroup,
 	FieldTitle,
 } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectLabel,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import {
 	copyChartPng,
@@ -65,6 +77,12 @@ import {
 	copyTextToClipboard,
 } from "@/lib/chart-export";
 import { capabilityUiState } from "@/lib/calculator-shell";
+import { adaptBogotaSpectrum, bogotaCanonical } from "@/lib/bogota";
+import {
+	calculationModes,
+	isSourceBlockedMode,
+	sourceBlockedModes,
+} from "@/lib/municipal-mode-catalog";
 import { hazardLevelDetails } from "@/lib/nsr10";
 import {
 	adaptNsr10Spectrum,
@@ -75,6 +93,10 @@ import {
 	spectrumExportFilename,
 } from "@/lib/spectra";
 
+import type {
+	BogotaHazardId,
+} from "@/lib/bogota";
+import type { CalculatorModeId } from "@/lib/municipal-mode-catalog";
 import type {
 	HazardLevel,
 	ImportanceGroup,
@@ -90,15 +112,6 @@ import type {
 
 type NormalizedSpectrumOk = Extract<NormalizedSpectrumResult, { status: "ok" }>;
 
-const calculationModes = [
-	{
-		id: "nsr10-national",
-		label: "NSR-10 Nacional",
-		description:
-			"Espectro elástico nacional para edificaciones, con los tres niveles de amenaza ya soportados.",
-	},
-] as const;
-
 const branchLabels: Record<SpectrumBranch, string> = {
 	"rising-A.2.6-7": "Ascendente · A.2.6-7",
 	"plateau-A.2.6-3": "Meseta · A.2.6-3",
@@ -109,6 +122,25 @@ const branchLabels: Record<SpectrumBranch, string> = {
 	"inverse-T-A.12.3-1": "1/T · A.12.3-1",
 	"inverse-T2-A.12.3-6": "1/T² · A.12.3-6",
 };
+
+const bogotaBranchLabels: Record<string, string> = {
+	"design-plateau": "Meseta · D. 523/2010",
+	"design-decay": "1/T · D. 523/2010",
+	"design-long": "1/T² · D. 523/2010",
+	"limited-plateau": "Meseta · seguridad limitada",
+	"limited-decay": "1/T · seguridad limitada",
+	"limited-long": "1/T² · seguridad limitada",
+	"damage-ramp": "Ascendente · umbral de daño",
+	"damage-plateau": "Meseta · umbral de daño",
+	"damage-decay": "1/T · umbral de daño",
+	"damage-long": "1/T² · umbral de daño",
+};
+
+function optionalNonnegativeNumber(rawValue: string) {
+	if (rawValue.trim() === "") return null;
+	const value = Number(rawValue);
+	return Number.isFinite(value) && value >= 0 ? value : Number.NaN;
+}
 
 const metricPresentation = {
 	aa: { digits: 2 },
@@ -210,6 +242,207 @@ function ParameterRail({
 				<p className="text-muted-foreground text-xs">
 					{hazardDetails.section} · amortiguamiento crítico del{" "}
 					{hazardDetails.dampingRatio * 100} %. {hazardNotice}
+				</p>
+			</CardFooter>
+		</Card>
+	);
+}
+
+function BogotaParameterRail({
+	zoneId,
+	hazardId,
+	importanceFactor,
+	fillThickness,
+	rigidBasePeriod,
+	onZoneIdChange,
+	onHazardIdChange,
+	onImportanceFactorChange,
+	onFillThicknessChange,
+	onRigidBasePeriodChange,
+}: {
+	zoneId: string;
+	hazardId: BogotaHazardId;
+	importanceFactor: number;
+	fillThickness: string;
+	rigidBasePeriod: string;
+	onZoneIdChange: (value: string) => void;
+	onHazardIdChange: (value: BogotaHazardId) => void;
+	onImportanceFactorChange: (value: number) => void;
+	onFillThicknessChange: (value: string) => void;
+	onRigidBasePeriodChange: (value: string) => void;
+}) {
+	return (
+		<Card className="self-start" size="sm">
+			<CardHeader>
+				<CardTitle>Parámetros de Bogotá</CardTitle>
+				<CardDescription>
+					Selección manual de zona; no se usan mapas, coordenadas ni geocodificación.
+				</CardDescription>
+			</CardHeader>
+			<CardContent>
+				<FieldGroup className="gap-5">
+					<Field>
+						<FieldTitle>Zona de respuesta sísmica</FieldTitle>
+						<Select
+							items={bogotaCanonical.options.map((option) => ({
+								label: option.sourceLabel,
+								value: option.id,
+							}))}
+							onValueChange={(value) => value && onZoneIdChange(value)}
+							value={zoneId}
+						>
+							<SelectTrigger aria-label="Zona de respuesta sísmica" className="w-full">
+								<SelectValue />
+							</SelectTrigger>
+							<SelectContent alignItemWithTrigger={false}>
+								<SelectGroup>
+									<SelectLabel>16 zonas del estudio</SelectLabel>
+									{bogotaCanonical.options.map((option) => (
+										<SelectItem key={option.id} value={option.id}>
+											{option.sourceLabel}
+										</SelectItem>
+									))}
+								</SelectGroup>
+							</SelectContent>
+						</Select>
+						<FieldDescription>Validación de la zona a cargo del profesional responsable.</FieldDescription>
+					</Field>
+
+					<Field>
+						<FieldTitle>Nivel de amenaza</FieldTitle>
+						<Select
+							items={bogotaCanonical.hazards.map((hazard) => ({
+								label: hazard.label,
+								value: hazard.id,
+							}))}
+							onValueChange={(value) => value && onHazardIdChange(value as BogotaHazardId)}
+							value={hazardId}
+						>
+							<SelectTrigger aria-label="Nivel de amenaza de Bogotá" className="w-full">
+								<SelectValue />
+							</SelectTrigger>
+							<SelectContent alignItemWithTrigger={false}>
+								<SelectGroup>
+									<SelectLabel>Curvas adoptadas</SelectLabel>
+									{bogotaCanonical.hazards.map((hazard) => (
+										<SelectItem key={hazard.id} value={hazard.id}>
+											{hazard.label}
+										</SelectItem>
+									))}
+								</SelectGroup>
+							</SelectContent>
+						</Select>
+					</Field>
+
+					<Field>
+						<FieldTitle>Factor de importancia I</FieldTitle>
+						<Select
+							items={[1, 1.1, 1.2, 1.5].map((value) => ({ label: value.toFixed(1), value: String(value) }))}
+							onValueChange={(value) => value && onImportanceFactorChange(Number(value))}
+							value={String(importanceFactor)}
+						>
+							<SelectTrigger aria-label="Factor de importancia" className="w-full">
+								<SelectValue />
+							</SelectTrigger>
+							<SelectContent alignItemWithTrigger={false}>
+								<SelectGroup>
+									<SelectLabel>Factor I</SelectLabel>
+									{[1, 1.1, 1.2, 1.5].map((value) => (
+										<SelectItem key={value} value={String(value)}>{value.toFixed(1)}</SelectItem>
+									))}
+								</SelectGroup>
+							</SelectContent>
+						</Select>
+					</Field>
+
+					<Field>
+						<FieldTitle>Espesor de relleno (m)</FieldTitle>
+						<Input
+							aria-label="Espesor de relleno en metros"
+							inputMode="decimal"
+							min="0"
+							onChange={(event) => onFillThicknessChange(event.currentTarget.value)}
+							placeholder="No informado"
+							step="any"
+							type="number"
+							value={fillThickness}
+						/>
+						<FieldDescription>Activa la regla explícita de estudio específico cuando aplica.</FieldDescription>
+					</Field>
+
+					<Field>
+						<FieldTitle>Período en base rígida (s)</FieldTitle>
+						<Input
+							aria-label="Período en base rígida en segundos"
+							inputMode="decimal"
+							min="0"
+							onChange={(event) => onRigidBasePeriodChange(event.currentTarget.value)}
+							placeholder="No informado"
+							step="any"
+							type="number"
+							value={rigidBasePeriod}
+						/>
+					</Field>
+				</FieldGroup>
+			</CardContent>
+			<CardFooter className="flex-col items-stretch gap-3">
+				<Separator />
+				<p className="text-muted-foreground text-xs">
+					Decreto 523 de 2010 · compilación vigente: Decreto 670 de 2025 · 5 % de amortiguamiento.
+				</p>
+			</CardFooter>
+		</Card>
+	);
+}
+
+function SourceBlockedRail({ modeId }: { modeId: keyof typeof sourceBlockedModes }) {
+	const mode = sourceBlockedModes[modeId];
+	return (
+		<Card className="self-start" size="sm">
+			<CardHeader>
+				<CardTitle>Estado de la fuente</CardTitle>
+				<CardDescription>{mode.status}</CardDescription>
+			</CardHeader>
+			<CardContent className="space-y-4">
+				<div className="rounded-xl border bg-muted/30 p-3">
+					<p className="text-muted-foreground text-xs">Fuente rectora auditada</p>
+					<p className="mt-1 text-sm font-medium">{mode.sourceTitle}</p>
+				</div>
+				<Button render={<a href={mode.sourceUrl} rel="noreferrer" target="_blank" />} variant="outline">
+					<ExternalLinkIcon data-icon="inline-start" />
+					Abrir publicación oficial
+				</Button>
+			</CardContent>
+		</Card>
+	);
+}
+
+function SourceBlockedResult({ modeId }: { modeId: keyof typeof sourceBlockedModes }) {
+	const mode = sourceBlockedModes[modeId];
+	return (
+		<Card variant="elevated">
+			<CalculatorResultHeader
+				applicability="unsupported"
+				description={mode.description}
+				highlight="Fuente bloqueada"
+				title={`${mode.label} · sin cálculo`}
+			/>
+			<CardContent>
+				<div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
+					<div className="flex items-start gap-3">
+						<ShieldAlertIcon className="mt-0.5 size-5 shrink-0 text-amber-700 dark:text-amber-400" />
+						<div>
+							<p className="font-medium">No se completan vacíos por analogía</p>
+							<ul className="mt-3 space-y-2 text-muted-foreground text-sm">
+								{mode.blockers.map((blocker) => <li key={blocker}>— {blocker}</li>)}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</CardContent>
+			<CardFooter>
+				<p className="text-muted-foreground text-xs">
+					Mientras estos bloqueos sigan abiertos, usa NSR-10 Nacional cuando sea el flujo aplicable y documenta la revisión profesional.
 				</p>
 			</CardFooter>
 		</Card>
@@ -452,11 +685,16 @@ function chartDescription(hazardLevel: HazardLevel) {
 
 export function CalculatorPage() {
 	const [calculationMode, setCalculationMode] =
-		useState<(typeof calculationModes)[number]["id"]>("nsr10-national");
+		useState<CalculatorModeId>("nsr10-national");
 	const [municipio, setMunicipio] = useState<Municipio>(defaultMunicipio);
 	const [soilProfile, setSoilProfile] = useState<SoilProfile>("D");
 	const [importanceGroup, setImportanceGroup] = useState<ImportanceGroup>("I");
 	const [hazardLevel, setHazardLevel] = useState<HazardLevel>("design");
+	const [bogotaZoneId, setBogotaZoneId] = useState(bogotaCanonical.options[0].id);
+	const [bogotaHazardId, setBogotaHazardId] = useState<BogotaHazardId>("design");
+	const [bogotaImportanceFactor, setBogotaImportanceFactor] = useState(1);
+	const [bogotaFillThickness, setBogotaFillThickness] = useState("");
+	const [bogotaRigidBasePeriod, setBogotaRigidBasePeriod] = useState("");
 	const [traceabilityOpen, setTraceabilityOpen] = useState(false);
 	const chartContainerRef = useRef<HTMLDivElement>(null);
 
@@ -481,19 +719,47 @@ export function CalculatorPage() {
 			soilProfile,
 		],
 	);
-	const result = useMemo(
+	const nsr10Result = useMemo(
 		() => adaptNsr10Spectrum(spectrumParams, { municipality: municipio }),
 		[spectrumParams, municipio],
 	);
+	const bogotaResult = useMemo(
+		() =>
+			adaptBogotaSpectrum({
+				zoneId: bogotaZoneId,
+				hazardId: bogotaHazardId,
+				importanceFactor: bogotaImportanceFactor,
+				fillThicknessMeters: optionalNonnegativeNumber(bogotaFillThickness),
+				rigidBasePeriodSeconds: optionalNonnegativeNumber(bogotaRigidBasePeriod),
+			}),
+		[
+			bogotaFillThickness,
+			bogotaHazardId,
+			bogotaImportanceFactor,
+			bogotaRigidBasePeriod,
+			bogotaZoneId,
+		],
+	);
+	const result =
+		calculationMode === "nsr10-national"
+			? nsr10Result
+			: calculationMode === "bogota-microzonation"
+				? bogotaResult
+				: null;
 	const evaluatePeriod = useCallback(
 		(periodSeconds: number) => {
+			if (!result) {
+				return { status: "unavailable" as const, message: "Este modo no tiene un motor activo." };
+			}
 			const ordinate = result.saAt(periodSeconds);
 			return ordinate.status === "ok"
 				? {
 						status: "ok" as const,
 						saG: ordinate.point.saG,
 						branchLabel:
-							branchLabels[ordinate.point.branchId as SpectrumBranch] ??
+							(calculationMode === "bogota-microzonation"
+								? bogotaBranchLabels[ordinate.point.branchId]
+								: branchLabels[ordinate.point.branchId as SpectrumBranch]) ??
 							ordinate.point.branchId,
 					}
 				: {
@@ -501,12 +767,14 @@ export function CalculatorPage() {
 						message: ordinate.applicability.message,
 					};
 		},
-		[result],
+		[calculationMode, result],
 	);
 
-	const traceability = capabilityUiState(result.capabilities.traceabilityViewer);
+	const traceability = result
+		? capabilityUiState(result.capabilities.traceabilityViewer)
+		: { enabled: false, reason: "Este modo no tiene un resultado trazable activo." };
 	const resultActions =
-		result.status === "ok" ? (
+		result?.status === "ok" ? (
 			<>
 				<Button
 					disabled={!traceability.enabled}
@@ -525,78 +793,103 @@ export function CalculatorPage() {
 				/>
 			</>
 		) : null;
+	const inputPanel =
+		calculationMode === "nsr10-national" ? (
+			<ParameterRail
+				hazardLevel={hazardLevel}
+				importanceGroup={importanceGroup}
+				municipio={municipio}
+				onHazardLevelChange={setHazardLevel}
+				onImportanceGroupChange={setImportanceGroup}
+				onMunicipioChange={setMunicipio}
+				onSoilProfileChange={setSoilProfile}
+				soilProfile={soilProfile}
+			/>
+		) : calculationMode === "bogota-microzonation" ? (
+			<BogotaParameterRail
+				fillThickness={bogotaFillThickness}
+				hazardId={bogotaHazardId}
+				importanceFactor={bogotaImportanceFactor}
+				onFillThicknessChange={setBogotaFillThickness}
+				onHazardIdChange={setBogotaHazardId}
+				onImportanceFactorChange={setBogotaImportanceFactor}
+				onRigidBasePeriodChange={setBogotaRigidBasePeriod}
+				onZoneIdChange={setBogotaZoneId}
+				rigidBasePeriod={bogotaRigidBasePeriod}
+				zoneId={bogotaZoneId}
+			/>
+		) : isSourceBlockedMode(calculationMode) ? (
+			<SourceBlockedRail modeId={calculationMode} />
+		) : null;
+	const isBogota = calculationMode === "bogota-microzonation";
+	const activeHazardLabel = result?.hazard?.label ?? "";
+	const maximumMetric = result?.status === "ok"
+		? result.metrics.find((metric) => metric.id === (isBogota ? "sa-plateau" : "saMax"))?.value ?? 0
+		: 0;
 
 	return (
 		<div className="flex flex-col gap-5">
-			<TraceabilitySheet
-				onOpenChange={setTraceabilityOpen}
-				open={traceabilityOpen}
-				result={result}
-				scenarioEvidenceKey={result.scenarioEvidenceKey}
-			/>
+			{result ? (
+				<TraceabilitySheet
+					onOpenChange={setTraceabilityOpen}
+					open={traceabilityOpen}
+					result={result}
+					scenarioEvidenceKey={result.scenarioEvidenceKey}
+				/>
+			) : null}
 			<p className="text-muted-foreground text-sm">
-				Espectro elástico NSR-10 calculado localmente, sin envío de datos.
+				Calculadora unificada con selección manual y trazabilidad de fuente; no usa mapas ni envía datos.
 			</p>
 
 			<CalculatorShell
-				inputPanel={
-					<ParameterRail
-						hazardLevel={hazardLevel}
-						importanceGroup={importanceGroup}
-						municipio={municipio}
-						onHazardLevelChange={setHazardLevel}
-						onImportanceGroupChange={setImportanceGroup}
-						onMunicipioChange={setMunicipio}
-						onSoilProfileChange={setSoilProfile}
-						soilProfile={soilProfile}
-					/>
-				}
+				inputPanel={inputPanel}
 				modes={calculationModes}
 				onValueChange={(nextMode) => {
-					if (nextMode === "nsr10-national") setCalculationMode(nextMode);
+					setTraceabilityOpen(false);
+					setCalculationMode(nextMode as CalculatorModeId);
 				}}
 				value={calculationMode}
 			>
-				{result.status === "ok" ? (
+				{result?.status === "ok" ? (
 					<>
 						<SharedSpectrumChart
 							actions={resultActions}
-							description={chartDescription(hazardLevel)}
+							description={isBogota
+								? "Curva adoptada por zona de respuesta sísmica, evaluada con selección manual."
+								: chartDescription(hazardLevel)}
 							highlight={`Sa máx ${formatDecimal(
-								result.metrics.find((metric) => metric.id === "saMax")?.value ?? 0,
+								maximumMetric,
 								3,
 							)} g`}
 							ref={chartContainerRef}
 							result={result}
-							title={`Espectro elástico · ${result.hazard.label} (Sa vs. T)`}
-							transitionMetrics={[
-								{
-									id: "tc",
-									label: hazardLevel === "damage-threshold" ? "TCd" : "TC",
-								},
-								{
-									id: "tl",
-									label: hazardLevel === "damage-threshold" ? "TLd" : "TL",
-								},
-							]}
+							title={`Espectro elástico · ${activeHazardLabel} (Sa vs. T)`}
+							transitionMetrics={isBogota
+								? [{ id: "transition_end", label: "Tc" }, { id: "long_period", label: "TL" }]
+								: [
+									{ id: "tc", label: hazardLevel === "damage-threshold" ? "TCd" : "TC" },
+									{ id: "tl", label: hazardLevel === "damage-threshold" ? "TLd" : "TL" },
+								]}
 						/>
 						<SharedSpectrumNotices warnings={result.warnings} />
 						<SpectrumPeriodLookup evaluate={evaluatePeriod} />
 						<SharedSpectrumMetrics
 							metrics={result.metrics}
-							presentation={damageMetricPresentation(hazardLevel)}
+							presentation={isBogota ? metricPresentation : damageMetricPresentation(hazardLevel)}
 						/>
 						<SharedSpectrumTable
-							branchLabels={branchLabels}
+							branchLabels={isBogota ? bogotaBranchLabels : branchLabels}
 							points={result.points}
 						/>
 					</>
-				) : (
+				) : result ? (
 					<SiteSpecificStudyNotice
 						onTraceabilityOpen={() => setTraceabilityOpen(true)}
 						result={result}
 					/>
-				)}
+				) : isSourceBlockedMode(calculationMode) ? (
+					<SourceBlockedResult modeId={calculationMode} />
+				) : null}
 			</CalculatorShell>
 		</div>
 	);

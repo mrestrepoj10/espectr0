@@ -243,3 +243,44 @@ describe("unified calculator NSR-10 mode", () => {
 		expect(container.textContent).not.toContain("Exportar");
 	});
 });
+
+describe("unified municipal mode selector", () => {
+	async function chooseMode(label: string) {
+		const trigger = container.querySelector<HTMLButtonElement>(
+			"#calculation-mode-trigger",
+		);
+		expect(trigger).toBeTruthy();
+		await act(async () => {
+			trigger?.click();
+		});
+		const option = await waitForElement('[role="option"]', label);
+		await act(async () => {
+			option.click();
+		});
+	}
+
+	it("activates the normalized Bogotá engine with manual zone selection", async () => {
+		await chooseMode("Bogotá D. C.");
+
+		await vi.waitFor(() => {
+			const shell = container.querySelector<HTMLElement>(
+				"[data-slot='calculator-shell']",
+			);
+			expect(shell?.dataset.calculationMode).toBe("bogota-microzonation");
+		});
+		expect(container.textContent).toContain("Parámetros de Bogotá");
+		expect(container.textContent).toContain("Decreto 523 de 2010");
+		expect(container.textContent).toContain("Datos del espectro");
+	});
+
+	it("keeps CCP-14 inspectable while failing closed on official-source gaps", async () => {
+		await chooseMode("CCP-14 · Puentes");
+
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain("CCP-14 · Puentes · sin cálculo");
+		});
+		expect(container.textContent).toContain("PGA, Ss y S1");
+		expect(container.textContent).toContain("T₀ = 0,2·Ts");
+		expect(container.textContent).not.toContain("Exportar");
+	});
+});
