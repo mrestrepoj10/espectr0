@@ -21,6 +21,10 @@
 /lib/pereira/**/*.md text eol=lf
 /lib/pereira/**/*.mjs text eol=lf
 /lib/pereira/**/*.py text eol=lf
+/lib/santa-rosa/**/*.json text eol=lf
+/lib/santa-rosa/**/*.md text eol=lf
+/lib/santa-rosa/**/*.mjs text eol=lf
+/lib/santa-rosa/**/*.py text eol=lf
 /lib/manizales/data/*.json text eol=lf
 /lib/manizales/evidence/*.json text eol=lf
 /lib/manizales/evidence/*.mjs text eol=lf
