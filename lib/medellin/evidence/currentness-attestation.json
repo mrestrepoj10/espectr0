@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "profile": {
+    "renderer": "Poppler pdftoppm",
+    "renderDpi": 144,
+    "textExtractor": "pypdf",
+    "ocrUsed": false,
+    "coordinateSystem": "normalized PDF page coordinates, top-left origin",
+    "cropHashing": "sha256(raw RGB bytes)"
+  },
+  "sources": [
+    {
+      "sourceDocumentId": "medellin-pot-inputs-2026-v3",
+      "sha256": "a1b8f55760917cbb84fe27094f58b1366df573d4f344cabc477ea64534da1b38",
+      "byteLength": 44842400,
+      "pageCount": 1043
+    },
+    {
+      "sourceDocumentId": "medellin-pot-draft-agreement-2026-v3",
+      "sha256": "596b6aabf59576ad1c336c1a7eef0df98436950fa23a478494015f240bde509b",
+      "byteLength": 13785296,
+      "pageCount": 1499
+    }
+  ],
+  "regions": [
+    {
+      "citationId": "applicability-2026-v3-not-adopted",
+      "sourceDocumentId": "medellin-pot-inputs-2026-v3",
+      "physicalPage": 202,
+      "printedPage": "175",
+      "rect": {
+        "left": 0.13,
+        "top": 0.68,
+        "width": 0.74,
+        "height": 0.12
+      },
+      "requiredTokens": [
+        "Decreto",
+        "no ha sido adoptado"
+      ],
+      "extractedTokenSha256": "5ddd5dcae82f0e78e3b15f52d8a09ec721c75cbde96a4292a5308f12e85ba9bb",
+      "renderedWidth": 1224,
+      "renderedHeight": 1584,
+      "rawRgbCropSha256": "f1a1f71bc764a25422a72d6028b93e1575d0d5c6f3dd8deb0bb7a73c8aa7acfa"
+    },
+    {
+      "citationId": "applicability-2026-proposed-separate-act",
+      "sourceDocumentId": "medellin-pot-draft-agreement-2026-v3",
+      "physicalPage": 1345,
+      "printedPage": "1345",
+      "rect": {
+        "left": 0.51,
+        "top": 0.78,
+        "width": 0.47,
+        "height": 0.12
+      },
+      "requiredTokens": [
+        "deberán ser adoptados mediante acto administrativo",
+        "previo aval",
+        "Comisión Asesora Permanente"
+      ],
+      "extractedTokenSha256": "a0ff4ce5faab8d01b2c8c3eb503025f07d96e29e8e4538bd303c3b96aadcf4b3",
+      "renderedWidth": 2016,
+      "renderedHeight": 1224,
+      "rawRgbCropSha256": "caf0c051cb06e933041a1c691bdf43cd1f9ab699e74cabbc2a1aab771f2640e4"
+    },
+    {
+      "citationId": "applicability-2026-proposed-nsr-purpose",
+      "sourceDocumentId": "medellin-pot-draft-agreement-2026-v3",
+      "physicalPage": 1346,
+      "printedPage": "1346",
+      "rect": {
+        "left": 0.51,
+        "top": 0,
+        "width": 0.47,
+        "height": 0.16
+      },
+      "requiredTokens": [
+        "Resistentes",
+        "nuevas edificaciones",
+        "NSR -10"
+      ],
+      "extractedTokenSha256": "0aa6bdf3b568160aa1a04869ae51e000ced609821f62960bc416172077c3a011",
+      "renderedWidth": 2016,
+      "renderedHeight": 1224,
+      "rawRgbCropSha256": "d9adec3cdfc4beb1b0ee3ba66798408bd68d19dc026b0212b539c5aab9d00cc4"
+    }
+  ],
+  "manualReview": {
+    "status": "complete",
+    "ocrUsed": false,
+    "reviewedOn": "2026-07-25",
+    "reviewedPages": [
+      "medellin-pot-inputs-2026-v3:202/175",
+      "medellin-pot-draft-agreement-2026-v3:1345",
+      "medellin-pot-draft-agreement-2026-v3:1346"
+    ]
+  },
+  "payloadSha256": "952ba6eb0ba41208deb237044b96c97f4fec735b48d426ea1b2fec7592c1e0bf"
+}

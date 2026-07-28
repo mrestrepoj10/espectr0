@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "status": "incomplete-blocks-activation",
+  "independentVariable": "period T (s)",
+  "output": "spectral acceleration",
+  "inventoryCoverage": {
+    "expectedItems": 4,
+    "dispositionedItems": 4,
+    "coveragePercent": 100,
+    "operationalFormulaCoveragePercent": 0
+  },
+  "formulas": [
+    {
+      "id": "nsr10-design-spectrum-shape",
+      "status": "blocked-formula-not-published",
+      "finding": "La fuente indica que ajusta una forma NSR-10 con Aa, Av, I, Fa y Fv, pero no imprime la ecuacion por tramos.",
+      "citation": {
+        "sourceDocumentId": "manizales-update-2015",
+        "physicalPage": 8,
+        "printedPage": null,
+        "reference": "Seccion 5.1",
+        "rect": {
+          "left": 0.1,
+          "top": 0.42,
+          "width": 0.82,
+          "height": 0.16
+        }
+      }
+    },
+    {
+      "id": "branch-limits",
+      "status": "blocked-limits-not-published",
+      "finding": "No se publican limites de rama ni politica de frontera para el espectro operacional.",
+      "citation": {
+        "sourceDocumentId": "manizales-update-2015",
+        "physicalPage": 8,
+        "printedPage": null,
+        "reference": "Seccion 5.1",
+        "rect": {
+          "left": 0.1,
+          "top": 0.42,
+          "width": 0.82,
+          "height": 0.16
+        }
+      }
+    },
+    {
+      "id": "fa-fv-node-fit",
+      "status": "method-only-no-node-table",
+      "finding": "Fa y Fv se ajustan como parametros libres mediante algoritmo genetico para cada nodo; el articulo no tabula los 1275 resultados.",
+      "citation": {
+        "sourceDocumentId": "manizales-update-2015",
+        "physicalPage": 8,
+        "printedPage": null,
+        "reference": "Secciones 5.1 y 5.2",
+        "rect": {
+          "left": 0.1,
+          "top": 0.45,
+          "width": 0.82,
+          "height": 0.46
+        }
+      }
+    },
+    {
+      "id": "spectrum-damping",
+      "status": "blocked-output-damping-not-stated",
+      "finding": "No se identifica en la publicacion el amortiguamiento del espectro de amenaza uniforme o del espectro de diseno entregado; no se confunde con amortiguamiento interno del modelo de suelo.",
+      "citation": {
+        "sourceDocumentId": "manizales-update-2015",
+        "physicalPage": 1,
+        "printedPage": null,
+        "reference": "Resumen",
+        "rect": {
+          "left": 0.1,
+          "top": 0.37,
+          "width": 0.82,
+          "height": 0.26
+        }
+      }
+    }
+  ]
+}

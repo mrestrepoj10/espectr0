@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "sourceDocumentId": "cali-ingeominas-dagma-2005-tomo6",
+    "sha256": "c6d45337349043f6b816146952b79d3d4c27e6f414e9d692d2bd30566de378e1",
+    "byteLength": 13469947,
+    "pageCount": 159
+  },
+  "claim": {
+    "claimId": "historical-threshold",
+    "extractedToken": "Ad = 0.05g, el cual se calculó probabilísticamente para un periodo de retorno de 10 años",
+    "requiredTokens": [
+      "Ad = 0.05g",
+      "periodo de retorno de 10 años"
+    ],
+    "reference": "Numeral 8; pie interno 136; marcador manuscrito 747"
+  },
+  "positiveLocator": {
+    "physicalPage": 147,
+    "printedFooter": "136",
+    "scanMarker": "747",
+    "imageWidth": 1272,
+    "imageHeight": 1644,
+    "embeddedImageByteLength": 171684,
+    "embeddedImageSha256": "61902eeba00af7dc6cc4412a30d1b7d5bb36a6b299c5e21337491926d218afce",
+    "rawRgbImageSha256": "4af1edd7277107a2e3a9a7dbfefbed7b7b383d9ab50aadaf298cc572fa65102a",
+    "regions": [
+      {
+        "id": "historical-threshold-p147",
+        "rect": {
+          "left": 0.16,
+          "top": 0.56,
+          "width": 0.72,
+          "height": 0.29
+        },
+        "pixelBox": [
+          204,
+          921,
+          1119,
+          1397
+        ],
+        "rawRgbCropSha256": "e5f8ef3b75f7388dbd107c8e5aea9a90601f3fc0c4b753ecea9c0bf738d011f2"
+      },
+      {
+        "id": "scan-marker-747",
+        "rect": {
+          "left": 0.89,
+          "top": 0,
+          "width": 0.1,
+          "height": 0.07
+        },
+        "pixelBox": [
+          1132,
+          0,
+          1259,
+          115
+        ],
+        "rawRgbCropSha256": "75ea04661d5e44e32a69b1d9f85d2128a1c91609403310817a9d6cf753a9cce1"
+      },
+      {
+        "id": "printed-footer-136",
+        "rect": {
+          "left": 0.82,
+          "top": 0.87,
+          "width": 0.09,
+          "height": 0.06
+        },
+        "pixelBox": [
+          1043,
+          1430,
+          1158,
+          1529
+        ],
+        "rawRgbCropSha256": "4e3630a6ae1b7fc4eeb39eff27aa28da56b09bf7031f69387838c9f96dd3b090"
+      }
+    ]
+  },
+  "rejectedLocator": {
+    "physicalPage": 136,
+    "printedFooter": "125",
+    "scanMarker": "736",
+    "imageWidth": 1274,
+    "imageHeight": 1647,
+    "embeddedImageByteLength": 151426,
+    "embeddedImageSha256": "be733f9c9852d9d297fbe7c2708c3cdb88fc445693c8030e83bc8e1b7e71f34e",
+    "rawRgbImageSha256": "80ae6d0198d38fa5dc8993e4c1ce67154b394d8b2e5e757873790dc1e3e258a4",
+    "regions": [
+      {
+        "id": "rejected-claim-region-p136",
+        "rect": {
+          "left": 0.16,
+          "top": 0.56,
+          "width": 0.72,
+          "height": 0.29
+        },
+        "pixelBox": [
+          204,
+          922,
+          1121,
+          1400
+        ],
+        "rawRgbCropSha256": "7dbf6f6831095e8f5e5eb135cdb85487207aa78b4bd841ea1cf52ba7f66b3ee1"
+      },
+      {
+        "id": "scan-marker-736",
+        "rect": {
+          "left": 0.89,
+          "top": 0,
+          "width": 0.1,
+          "height": 0.07
+        },
+        "pixelBox": [
+          1134,
+          0,
+          1261,
+          115
+        ],
+        "rawRgbCropSha256": "8f059e4906814970ddae98a49dcbcc2e60493245de8bcb9a2d466f290351d98c"
+      },
+      {
+        "id": "printed-footer-125",
+        "rect": {
+          "left": 0.82,
+          "top": 0.87,
+          "width": 0.09,
+          "height": 0.06
+        },
+        "pixelBox": [
+          1045,
+          1433,
+          1159,
+          1532
+        ],
+        "rawRgbCropSha256": "9057f70b93fbde6f62c18bed533da03edf848cab3c9018a27de8a4fa20d72ea7"
+      }
+    ],
+    "reason": "La página muestra 7.1.8 Zona 4E: Abanico de Pance y la Figura 7.9; no contiene el numeral 8 sobre Ad=0.05g/10 años."
+  },
+  "manualReview": {
+    "method": "visual comparison plus deterministic embedded-image region hashes",
+    "ocrUsed": false,
+    "status": "complete",
+    "reviewedOn": "2026-07-25"
+  },
+  "payloadSha256": "e2a6ffe0d869912c888afc087f7f31948d726923327a4f590ec12facd63b5fd1"
+}
