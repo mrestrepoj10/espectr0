@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "historical-vs-adopted-damage",
+      "issue": "El estudio técnico 2005 usa Ad=0.05/10 años; el decreto adoptado usa Ad=0.09 y la NSR-10 identifica 31 años.",
+      "resolution": "El Decreto 0158 de 2014 y la NSR-10 gobiernan el producto; el estudio queda como linaje histórico.",
+      "status": "resolved-for-research"
+    },
+    {
+      "id": "six-macrozones-ten-labels",
+      "issue": "La publicación resume seis macrozonas, mientras las tablas enumeran diez etiquetas de respuesta (1,2,3,4A–4E,5,6).",
+      "resolution": "Conservar diez opciones geográficas y trece componentes de curva; 4B, 4C y 5 emparejan dos curvas concurrentes.",
+      "status": "resolved-for-research"
+    },
+    {
+      "id": "damage-missing-a0d-fa",
+      "issue": "La gráfica exige A0d y Fa, ausentes de la Tabla 4.",
+      "resolution": "No resolver por analogía; bloquear la activación de la curva completa.",
+      "status": "unresolved-blocker"
+    }
+  ]
+}
