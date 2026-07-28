@@ -1,0 +1,359 @@
+{
+  "schemaVersion": 1,
+  "studyId": "santa-rosa-de-cabal-microzonation",
+  "title": "Santa Rosa de Cabal regulatory-status dossier — spectrum activation blocked",
+  "sources": [
+    {
+      "id": "acuerdo-028-2000",
+      "issuingAuthority": "Concejo Municipal de Santa Rosa de Cabal",
+      "officialTitle": "Acuerdo 028 del 10 de diciembre de 2000 — Plan de Ordenamiento Territorial",
+      "edition": "Acuerdo 028 de 2000",
+      "revision": null,
+      "adoptionInstrument": "Acuerdo Municipal 028 de 2000; incorpora integralmente el Acuerdo 012 de 2000",
+      "amendmentsAndErrata": [
+        {
+          "kind": "amendment",
+          "reference": "Acuerdo 076 de 2013 — modificación excepcional de norma urbanística",
+          "issuedOn": "2013-12-13",
+          "officialUrl": "https://www.carder.gov.co/download/1-pbot-santa-rosa-de-cabal-acuerdo-076-de-2013-revision-excepcional/?wpdmdl=5003"
+        }
+      ],
+      "legalStatus": "active",
+      "applicabilityStatus": "conditional",
+      "officialUrl": "https://tramites1.suit.gov.co/registro-web/suit_descargar_archivo?A=78028",
+      "retrievedOn": "2026-07-25",
+      "redistribution": {
+        "decision": "external-only",
+        "rationale": "No se localizó licencia expresa de redistribución; se conserva URL y huella."
+      },
+      "mediaType": "application/pdf",
+      "pageCount": 110,
+      "sha256": "e3fb9f146c9a00cfecd1faf6f12f61cb44863ffd626e45e3c4121342e15212f8",
+      "pages": [
+        {
+          "physicalPage": 69,
+          "printedPage": "69",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "physicalPage": 70,
+          "printedPage": "70",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "physicalPage": 71,
+          "printedPage": "71",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "acuerdo-076-2013",
+      "issuingAuthority": "Concejo Municipal de Santa Rosa de Cabal",
+      "officialTitle": "Acuerdo 076 de 2013 — modificación excepcional de norma urbanística al PBOT",
+      "edition": "13 de diciembre de 2013",
+      "revision": null,
+      "adoptionInstrument": "Acuerdo Municipal 076 de 2013",
+      "amendmentsAndErrata": [],
+      "legalStatus": "active",
+      "applicabilityStatus": "conditional",
+      "officialUrl": "https://www.carder.gov.co/download/1-pbot-santa-rosa-de-cabal-acuerdo-076-de-2013-revision-excepcional/?wpdmdl=5003",
+      "retrievedOn": "2026-07-25",
+      "redistribution": {
+        "decision": "external-only",
+        "rationale": "No se localizó licencia expresa de redistribución; se conserva URL y huella."
+      },
+      "mediaType": "application/pdf",
+      "pageCount": 14,
+      "sha256": "16d0c00b293a337d49e51132fc88068a26ec6aad74334c84a2c758e8cd45a346",
+      "pages": [
+        {
+          "physicalPage": 1,
+          "printedPage": null,
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "physicalPage": 2,
+          "printedPage": null,
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "incorporation",
+      "sourceDocumentId": "acuerdo-028-2000",
+      "regionKind": "applicability",
+      "physicalPage": 69,
+      "printedPage": "69",
+      "reference": "Artículo 80",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "extractedToken": "Incorpórase integralmente como parte del POT, el acuerdo No 012 del 10 de Marzo de 2000, mediante el cual se adoptó la micro zonificación sísmica para Santa Rosa de Cabal",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "acuerdo No 012",
+        "micro zonificación sísmica"
+      ]
+    },
+    {
+      "id": "zones-and-transition",
+      "sourceDocumentId": "acuerdo-028-2000",
+      "regionKind": "applicability",
+      "physicalPage": 70,
+      "printedPage": "70",
+      "reference": "Artículos 81 y 82.1",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "extractedToken": "Zona 1 Zona 2 Zona 3 Zona 3 A Zona 3 B Zona 4 Zona 5 ... franja de transición de unos 200m a cada lado ... aceleración de diseño más exigente",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Zona 3 A",
+        "200m",
+        "más exigente"
+      ]
+    },
+    {
+      "id": "geotechnical-and-aa-av",
+      "sourceDocumentId": "acuerdo-028-2000",
+      "regionKind": "applicability",
+      "physicalPage": 70,
+      "printedPage": "70",
+      "reference": "Artículo 82, numerales 2, 5 y 6",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "extractedToken": "en ningún caso reemplazará la investigación Geotécnica ... NSR-98 ... Aa y Av ... no son válidos ... deben utilizarse ... Am y An",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "investigación Geotécnica",
+        "NSR-98",
+        "Aa",
+        "Av",
+        "Am",
+        "An"
+      ]
+    },
+    {
+      "id": "professional-warning",
+      "sourceDocumentId": "acuerdo-028-2000",
+      "regionKind": "applicability",
+      "physicalPage": 71,
+      "printedPage": "71",
+      "reference": "Artículo 82, numerales 7 a 11",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "extractedToken": "La mitigación del riesgo sísmico ... no es responsabilidad exclusiva de los ingenieros estructurales ... diversos profesionales y tomadores de decisiones",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "no es responsabilidad exclusiva",
+        "diversos profesionales"
+      ]
+    },
+    {
+      "id": "revision-2013-adoption",
+      "sourceDocumentId": "acuerdo-076-2013",
+      "regionKind": "applicability",
+      "physicalPage": 1,
+      "printedPage": null,
+      "reference": "Artículos 1 y 2",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "extractedToken": "Adóptese ... la Modificación Excepcional de Norma Urbanística ... Acuerdo 028 del 2000 ... las demás disposiciones continuaran vigentes",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Modificación Excepcional",
+        "Acuerdo 028 del 2000",
+        "continuaran vigentes"
+      ]
+    },
+    {
+      "id": "compatibility-table",
+      "sourceDocumentId": "acuerdo-076-2013",
+      "regionKind": "table",
+      "physicalPage": 2,
+      "printedPage": null,
+      "reference": "Artículo 65, numerales 5.9, 6.9 y 8.9",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "extractedToken": "NRS-10 microzonificación sísmica cumplimiento del código de sismo resistencia NRS-10 de acuerdo a la zonificación de suelos definida en la microzonificación sísmica de Santa de Rosa de Cabal",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "NRS-10",
+        "microzonificación sísmica"
+      ]
+    },
+    {
+      "id": "compatibility-row",
+      "sourceDocumentId": "acuerdo-076-2013",
+      "regionKind": "row",
+      "physicalPage": 2,
+      "printedPage": null,
+      "reference": "Artículo 65, requisito de altura",
+      "parentCitationId": "compatibility-table",
+      "rect": {
+        "left": 0.05,
+        "top": 0.05,
+        "width": 0.9,
+        "height": 0.9
+      },
+      "extractedToken": "cumplimiento del código de sismo resistencia NRS-10 de acuerdo a la zonificación de suelos definida en la microzonificación sísmica de Santa de Rosa de Cabal",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "NRS-10",
+        "zonificación de suelos"
+      ]
+    },
+    {
+      "id": "compatibility-cell",
+      "sourceDocumentId": "acuerdo-076-2013",
+      "regionKind": "cell",
+      "physicalPage": 2,
+      "printedPage": null,
+      "reference": "Artículo 65, requisito sísmico",
+      "parentCitationId": "compatibility-row",
+      "rect": {
+        "left": 0.08,
+        "top": 0.08,
+        "width": 0.84,
+        "height": 0.25
+      },
+      "extractedToken": "cumplimiento del código de sismo resistencia NRS-10 de acuerdo a la zonificación de suelos definida en la microzonificación sísmica de Santa de Rosa de Cabal",
+      "normalizedValue": "cumplimiento del código de sismo resistencia NRS-10 de acuerdo a la zonificación de suelos definida en la microzonificación sísmica de Santa de Rosa de Cabal",
+      "unit": null,
+      "transformation": "text identity",
+      "requiredTokens": [
+        "NRS-10",
+        "Santa de Rosa de Cabal"
+      ]
+    }
+  ],
+  "applicabilityCitationIds": [
+    "incorporation",
+    "zones-and-transition",
+    "geotechnical-and-aa-av",
+    "professional-warning",
+    "revision-2013-adoption"
+  ],
+  "coverage": {
+    "optionIds": [
+      "santa-rosa-citywide"
+    ],
+    "hazardIds": [
+      "regulatory-status"
+    ],
+    "fieldIds": [
+      "compatibility-status"
+    ]
+  },
+  "values": [
+    {
+      "id": "value-santa-rosa-compatibility",
+      "optionId": "santa-rosa-citywide",
+      "hazardId": "regulatory-status",
+      "fieldId": "compatibility-status",
+      "value": "cumplimiento del código de sismo resistencia NRS-10 de acuerdo a la zonificación de suelos definida en la microzonificación sísmica de Santa de Rosa de Cabal",
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "compatibility-cell"
+      ],
+      "transformation": "text identity"
+    }
+  ],
+  "rawRows": [
+    {
+      "id": "raw-santa-rosa-status",
+      "rowKey": "santa-rosa-citywide/regulatory-status",
+      "sourceDocumentId": "acuerdo-076-2013",
+      "optionId": "santa-rosa-citywide",
+      "hazardId": "regulatory-status",
+      "citationIds": [
+        "compatibility-cell"
+      ],
+      "fields": {
+        "compatibility-status": "cumplimiento del código de sismo resistencia NRS-10 de acuerdo a la zonificación de suelos definida en la microzonificación sísmica de Santa de Rosa de Cabal"
+      }
+    }
+  ],
+  "canonicalRows": [
+    {
+      "id": "canonical-santa-rosa-status",
+      "rowKey": "santa-rosa-citywide/regulatory-status",
+      "sourceDocumentId": "acuerdo-076-2013",
+      "optionId": "santa-rosa-citywide",
+      "hazardId": "regulatory-status",
+      "citationIds": [
+        "compatibility-cell"
+      ],
+      "fields": {
+        "compatibility-status": "cumplimiento del código de sismo resistencia NRS-10 de acuerdo a la zonificación de suelos definida en la microzonificación sísmica de Santa de Rosa de Cabal"
+      },
+      "sourceRowIds": [
+        "raw-santa-rosa-status"
+      ]
+    }
+  ],
+  "overrides": []
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "status": "unavailable-blocks-activation",
+  "proposedProductionFormulas": [],
+  "coverage": {
+    "expected": 0,
+    "cited": 0,
+    "rationale": "No production model is proposed."
+  },
+  "missingForActivation": [
+    "Am and An values",
+    "piecewise equations",
+    "branch bounds and inclusivity",
+    "hazard/return-period/damping semantics"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "status": "negative-oracle-activation-blocked",
+  "cases": [
+    {
+      "id": "calculate-from-zone-label",
+      "reason": "official label exists but coefficient/formula matrix is unavailable",
+      "outcome": "reject"
+    },
+    {
+      "id": "substitute-aa-av",
+      "reason": "Acuerdo 028 says Aa/Av are not valid with municipal spectra",
+      "outcome": "reject"
+    },
+    {
+      "id": "infer-harmonized-nsr10",
+      "reason": "2013 NRS-10 reference does not republish a harmonized technical model",
+      "outcome": "reject"
+    },
+    {
+      "id": "automatic-zone",
+      "reason": "GIS automation is excluded and professional manual validation is required",
+      "outcome": "reject"
+    }
+  ],
+  "inputSha256": "6329160fc97097d6e31d5deea1cee646202abcf5066be66442d927399f3554e1"
+}

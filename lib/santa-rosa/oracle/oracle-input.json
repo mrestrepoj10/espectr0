@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "status": "blocked-missing-complete-current-primary-calculation-model",
+  "cases": [
+    { "id": "calculate-from-zone-label", "reason": "official label exists but coefficient/formula matrix is unavailable" },
+    { "id": "substitute-aa-av", "reason": "Acuerdo 028 says Aa/Av are not valid with municipal spectra" },
+    { "id": "infer-harmonized-nsr10", "reason": "2013 NRS-10 reference does not republish a harmonized technical model" },
+    { "id": "automatic-zone", "reason": "GIS automation is excluded and professional manual validation is required" }
+  ]
+}

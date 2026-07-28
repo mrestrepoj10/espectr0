@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "externalOnly": true,
+  "sourceHashes": {
+    "acuerdo-028-2000": "e3fb9f146c9a00cfecd1faf6f12f61cb44863ffd626e45e3c4121342e15212f8",
+    "acuerdo-076-2013": "16d0c00b293a337d49e51132fc88068a26ec6aad74334c84a2c758e8cd45a346"
+  },
+  "coverage": {
+    "regulatoryStatusValues": 1,
+    "proposedSpectrumValues": 0,
+    "applicabilityClaims": 5,
+    "warningClaims": 5,
+    "percent": 100
+  },
+  "attestations": [
+    {
+      "citationId": "incorporation",
+      "sourceDocumentId": "acuerdo-028-2000",
+      "physicalPage": 69,
+      "textSha256": "b0fa05b85b024cae07107f20babd3c57199838639a830d02b623e2cd109ff4d0"
+    },
+    {
+      "citationId": "zones-and-transition",
+      "sourceDocumentId": "acuerdo-028-2000",
+      "physicalPage": 70,
+      "textSha256": "c62f1c4f1db8ae3bbecae770c492c184e8b52a17817a9da3d4cebbf51a060d3a"
+    },
+    {
+      "citationId": "geotechnical-and-aa-av",
+      "sourceDocumentId": "acuerdo-028-2000",
+      "physicalPage": 70,
+      "textSha256": "bd9865e3b400a95716b65dc6e0fa55272f7e348603b66f810d4547b277e25f63"
+    },
+    {
+      "citationId": "professional-warning",
+      "sourceDocumentId": "acuerdo-028-2000",
+      "physicalPage": 71,
+      "textSha256": "e2a36877c5aced9a662cedb36e49fd54463d97ad068911d997f2e67768c7513e"
+    },
+    {
+      "citationId": "revision-2013-adoption",
+      "sourceDocumentId": "acuerdo-076-2013",
+      "physicalPage": 1,
+      "textSha256": "5411e542d03bf8537e305af962d382e847747b104e6c0ff677a3a6476100c1bc"
+    },
+    {
+      "citationId": "compatibility-cell",
+      "sourceDocumentId": "acuerdo-076-2013",
+      "physicalPage": 2,
+      "textSha256": "449fe07855c9949c9360b58bffb92c0b8784c737766720768b97b7dae9fc4c68"
+    }
+  ],
+  "nonInference": "The later instrument preserves the microzonation reference but does not supply a complete current calculation model.",
+  "payloadSha256": "4560dd3ac0fbfba2876498655cf1faf9060272453d89922002a1c351f845f2c7"
+}
