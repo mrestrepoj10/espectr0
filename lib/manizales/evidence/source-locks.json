@@ -27,6 +27,48 @@
       "redistributionDecision": "external-only"
     }
   ],
+  "indexSearches": [
+    {
+      "id": "manizales-public-decree-title-index-2026-07-28",
+      "officialLandingUrl": "https://manizales.gov.co/transparencia-y-acceso-informacion-publica/normatividad/decretos/",
+      "publicShareUrl": "https://alcaldiamanizales-my.sharepoint.com/:f:/g/personal/sjpublicaciones_manizales_gov_co/EouBlNQTwMJFshvyWZ3-lwABwKhi6lVzDo0tgaKC7NnS-A?e=Mf9ZYl",
+      "observedOn": "2026-07-28T20:05:39Z",
+      "accessMethod": "anonymous public SharePoint session plus REST folder enumeration",
+      "anonymousAccess": true,
+      "scope": "All files exposed under the public DECRETOS folder at observation time; non-empty year folders 2004 and 2013-2025.",
+      "totalFiles": 2523,
+      "folderFileCounts": {
+        "DECRETOS 2004": 6,
+        "DECRETOS 2021": 386,
+        "DECRETOS 2022": 435,
+        "DECRETOS 2023": 340,
+        "DECRETOS 2024": 68,
+        "DECRETOS 2025": 1,
+        "Decretos 2013": 74,
+        "Decretos 2014": 212,
+        "Decretos 2015": 156,
+        "Decretos 2016": 176,
+        "Decretos 2017": 165,
+        "Decretos 2018": 172,
+        "Decretos 2019": 105,
+        "Decretos 2020": 227
+      },
+      "targetTitleQuery": "accent-insensitive filename regex: microzon|sism",
+      "targetTitleMatches": [],
+      "contextTitleQuery": "accent-insensitive filename regex: armoniz|geotecn",
+      "contextTitleMatches": [
+        "PDEC_0482_28092016 AJUSTE AREA TRATAMIENTO GEOTECNICO.pdf",
+        "PDEC_0601_05122016 AJUSTE AREA TTO GEOTECNICO 404 Y PIP5-3.pdf",
+        "DEC_ 0474 14072020 POR EL CUAL SE ARMONIZA EL PRESUPUESTO CON EL PLAN DE DESARROLLO - MANIZALES + GRANDE Y SE MODIFICA EL DECRETO DE LIQUIDACION.PDF",
+        "DEC_ 0504 30072020 POR EL CUAL SE ARMONIZA EL PRESUPUESTO CON EL PLAN DE DESARROLLO MANIZALES +GRANDE Y SE MODIFICA EL DEC.PDF",
+        "DEC_ 0615 24092020 POR EL CUAL SE ARMONIZA EL PRESUPUESTO CON EL PLAN DE DESARROLLO MANIZALES+GRANDE.PDF"
+      ],
+      "snapshotSha256": "e54b068618563f954df8aa1de5234ad695a8effe5fde152191408a44d06a51fc",
+      "snapshotCanonicalization": "serverRelativeUrl<TAB>length<TAB>timeLastModified, sorted by serverRelativeUrl, LF joined",
+      "limitation": "A filename search is not a document-content search or proof of nonexistence. The public collection appears incomplete for currentness (only one file in 2025 and no 2026 folder at observation time).",
+      "verifier": "verify_decree_index.py"
+    }
+  ],
   "unavailableSources": [
     {
       "id": "manizales-uniandes-2002",
@@ -47,7 +89,7 @@
       "officialUrl": "https://manizales.gov.co/transparencia-y-acceso-informacion-publica/normatividad/decretos/",
       "expectedTitle": "Acto de adopcion o certificacion oficial de inexistencia",
       "status": "not-retrieved-material-blocker",
-      "reason": "La coleccion oficial enlaza a un SharePoint con autenticacion y no se recupero un decreto de adopcion, modificacion o derogatoria."
+      "reason": "La coleccion publica se enumero anonimamente: 2523 archivos y cero titulos con microzon/sism al 2026-07-28. La busqueda por nombre no revisa contenido ni prueba inexistencia, y el indice no parece completo para vigencia actual; no se recupero el acto de adopcion, modificacion o derogatoria."
     }
   ]
 }

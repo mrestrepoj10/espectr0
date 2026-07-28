@@ -22,7 +22,7 @@ La publicacion de 2015 fija `Aa=0.25g`, `Av=0.25g` e `I=1` para el procedimiento
 
 Se bloquearon tres PDFs primarios mediante URL, SHA-256, longitud y paginacion: la publicacion tecnica de 2015 alojada por la Universitat Politecnica de Catalunya, el informe de gestion municipal 2016-2019 y una respuesta oficial de Planeacion de 2025. Todos son `external-only`; no se versionan PDFs, imagenes ni recortes.
 
-El informe original 2002, la armonizacion completa 2014 y el eventual acto de adopcion figuran como fuentes no recuperadas. El repositorio UNGRD redirigio los dos primeros a un endpoint inaccesible desde el entorno. La coleccion municipal de decretos redirigio a un SharePoint que exige autenticacion. No se asignaron huellas ficticias ni se convirtio la ausencia de resultado de busqueda en una afirmacion de inexistencia.
+El informe original 2002, la armonizacion completa 2014 y el eventual acto de adopcion figuran como fuentes no recuperadas. El repositorio UNGRD redirigio los dos primeros a un endpoint inaccesible desde el entorno. La coleccion municipal de decretos si es publica: el 28 de julio de 2026 se abrio anonimamente y se enumeraron 2.523 archivos en las carpetas expuestas de 2004 y 2013-2025. La busqueda reproducible de titulos no encontro nombres con `microzon` o `sism`; cinco coincidencias contextuales con `armoniz` o `geotecn` correspondieron a presupuesto o ajustes de tratamiento geotecnico, no a un acto identificado de adopcion. Este resultado por nombre no revisa el contenido de cada decreto, no prueba inexistencia y tampoco acredita vigencia: la coleccion solo exponia un archivo de 2025 y ninguna carpeta de 2026 al observarla. No se asignaron huellas ficticias ni se convirtio la ausencia de coincidencias en una afirmacion de inexistencia.
 
 ## Cobertura y limites
 
@@ -38,6 +38,7 @@ El informe original 2002, la armonizacion completa 2014 y el eventual acto de ad
 - `data/canonical.json`: canon de investigacion, siempre inactivable.
 - `evidence/manifest.json`: contrato F3 con cobertura exacta y regiones.
 - `evidence/source-locks.json`: fuentes bloqueadas y fuentes faltantes sin datos inventados.
+- `evidence/verify_decree_index.py`: reproduce la enumeracion publica de titulos y detecta cambios frente a la instantanea bloqueada; requiere red.
 - `evidence/extraction-attestation.json`: huellas de texto y recortes temporales, enlazadas a los locks.
 - `evidence/verify_official_pdf.py`: reproduce hashes, paginas y recortes cuando el revisor aporta los tres PDFs externos y `pdftoppm`.
 - `evidence/formula-inventory.json`, `claims-matrix.json`, `uncertainty-ledger.json`, `conflict-ledger.json`: trazabilidad de formulas, afirmaciones y bloqueos.
