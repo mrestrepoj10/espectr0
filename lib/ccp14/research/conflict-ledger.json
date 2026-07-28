@@ -3,6 +3,11 @@
     {
       "activationImpact": "block",
       "id": "t0-definition",
+      "ministerialCorroboration": {
+        "figureLocator": "MinTransporte reconstructed PDF physical page 117, printed 3-67, Figure 3.10.4.1-1: T0 = 0.2 Ts",
+        "sourceSha256": "084c6223291dd2db9458210ae675693b001a7aa790f92fa7163112442621c5bb",
+        "textLocator": "MinTransporte reconstructed PDF physical page 118, printed 3-68: T0 equals 0.2 seconds"
+      },
       "officialResolutionSearch": "No CCP-14 erratum, circular, amendment, later official edition, or adopted correction resolving this passage was located in INVÍAS, MinTransporte, or SUIN searches on 2026-07-22.",
       "passageA": {
         "locator": "Section 3 PDF physical page 60, printed 3-56, Figure 3.10.4.1-1",
@@ -32,8 +37,17 @@
     {
       "activationImpact": "block-location-selection",
       "id": "missing-location-dataset",
+      "ministerialArchiveEvidence": "The three official RAR volumes reconstruct one scanned PDF. Physical page 107 repeats the CD/web promise, but the PDF has no embedded files, file annotations, or URI annotations and the multipart payload contains no separate dataset.",
       "officialArchiveEvidence": "The 16-entry official ZIP contains only PDFs. No CD image, spreadsheet, CSV, database, web-tool export, or municipality/locality table is present.",
       "officialText": "Commentary C3.10.2.1 says PGA, Ss, and S1 values would be available on a CD and web tools.",
+      "status": "unresolved"
+    },
+    {
+      "activationImpact": "block-source-authority-reconciliation",
+      "id": "ministerial-scan-vs-invias-technical-zip",
+      "inviasPublication": "Later official technical ZIP: 16 PDFs, 1,503 total pages, 40,260,753 bytes, SHA-256 e6d71cd1a0efffb8b8be95f8e3c42a7fd180485c704f0761e07faf6af28fbd8d.",
+      "issue": "The official MinTransporte package reconstructs a 1,551-page scanned resolution-and-annex PDF, while the later INVÍAS publication is a 1,503-page technical ZIP with different bytes, pagination, and revision presentation. No authoritative reconciliation identifies which differences belong to the adopted annex or later editorial publication.",
+      "ministerialPublication": "Three official RAR volumes reconstruct a 60,041,340-byte PDF, 1,551 pages, SHA-256 084c6223291dd2db9458210ae675693b001a7aa790f92fa7163112442621c5bb.",
       "status": "unresolved"
     },
     {

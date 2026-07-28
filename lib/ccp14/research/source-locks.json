@@ -1,5 +1,6 @@
 {
   "retrievedOn": "2026-07-22",
+  "updatedOn": "2026-07-28",
   "sources": [
     {
       "archiveCapture": "https://web.archive.org/web/20210515075336id_/https://www.invias.gov.co/index.php/archivo-y-documentos/bibilioteca-virtual/resoluciones-circulares-y-otros/3610-resolucion-no-108-del-26-de-enero-de-2015/file",
@@ -10,6 +11,47 @@
       "redistribution": "external-only",
       "sha256": "e17c4aa764716c5533cb82499984f87e4eda032888c91544fab10b804d5a753a",
       "transportNote": "Wayback supplied transport for bytes originally published by INVÍAS; it is not treated as the issuing authority."
+    },
+    {
+      "bytes": 18874368,
+      "id": "mintransporte-resolution-108-part1-rar",
+      "officialUrl": "https://www.mintransporte.gov.co/loader.php?idFile=12013&lFuncion=descargar&lServicio=Tools2&lTipo=descargas",
+      "redistribution": "external-only",
+      "sha256": "1677010ae143926ccefb0281c503f980104604b4566ae86c234d6a2cdb96bf37"
+    },
+    {
+      "bytes": 18874368,
+      "id": "mintransporte-resolution-108-part2-rar",
+      "officialUrl": "https://www.mintransporte.gov.co/loader.php?idFile=12014&lFuncion=descargar&lServicio=Tools2&lTipo=descargas",
+      "redistribution": "external-only",
+      "sha256": "270194845a2f5c52091e1077e8115fdc619137c5de33df043328e5ee7e07f589"
+    },
+    {
+      "bytes": 16382292,
+      "id": "mintransporte-resolution-108-part3-rar",
+      "officialUrl": "https://www.mintransporte.gov.co/loader.php?idFile=12015&lFuncion=descargar&lServicio=Tools2&lTipo=descargas",
+      "redistribution": "external-only",
+      "sha256": "c22be4408dc498b067366864febcdf4900350e22decfa409e006b996b0fc9a52"
+    },
+    {
+      "bytes": 60041340,
+      "derivedFrom": [
+        "mintransporte-resolution-108-part1-rar",
+        "mintransporte-resolution-108-part2-rar",
+        "mintransporte-resolution-108-part3-rar"
+      ],
+      "embeddedContentAudit": "1551 distinct scanned-page images; no EmbeddedFiles, AF, JavaScript, file annotations, or URI annotations",
+      "id": "mintransporte-resolution-108-multipart-pdf",
+      "metadata": {
+        "creationDate": "2015-01-28T09:35:05-05:00",
+        "creator": "Smart Touch 1.7",
+        "producer": "Eastman Kodak Company",
+        "title": "RESOLUCION 0000108 -2015"
+      },
+      "pageCount": 1551,
+      "reconstruction": "7z x RESOLUCION 0000108 -2015.part1.rar",
+      "redistribution": "external-only",
+      "sha256": "084c6223291dd2db9458210ae675693b001a7aa790f92fa7163112442621c5bb"
     },
     {
       "archiveCapture": "https://web.archive.org/web/20220305150428id_/https://www.invias.gov.co/index.php/archivo-y-documentos/documentos-tecnicos/3709-norma-colombiana-de-diseno-de-puentes-ccp14/file",

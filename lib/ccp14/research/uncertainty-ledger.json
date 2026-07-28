@@ -1,6 +1,11 @@
 {
   "items": [
     {
+      "id": "ministerial-vs-invias-publication-reconciliation",
+      "mitigation": "Keep both official packages hash-locked and fail closed until INVÍAS or MinTransporte identifies their normative/editorial relationship and the controlling text for any difference.",
+      "severity": "critical"
+    },
+    {
       "id": "current-official-url-404",
       "mitigation": "Retain original official URL, archived transport timestamp, byte size, and SHA-256; do not call the archive host the authority.",
       "severity": "medium"

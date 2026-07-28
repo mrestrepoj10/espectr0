@@ -1,7 +1,7 @@
 {
   "activationDecision": "do-not-activate",
   "authorReview": {
-    "date": "2026-07-22",
+    "date": "2026-07-28",
     "reviewer": "Codex research agent",
     "status": "complete",
     "verified": [
@@ -11,7 +11,10 @@
       "R-factor cells",
       "formula transcription",
       "visual T0 conflict",
-      "official ZIP contents"
+      "official ZIP contents",
+      "official MinTransporte multipart hashes and PDF reconstruction",
+      "ministerial physical pages 107, 117, and 118",
+      "ministerial-versus-INVÍAS publication mismatch"
     ]
   },
   "independentDomainReview": {
@@ -19,5 +22,5 @@
     "reviewer": null,
     "status": "pending"
   },
-  "mergeDecision": "draft-only; no merge until an authoritative T0 resolution, official selectable location dataset, and independent review are recorded"
+  "mergeDecision": "draft-only; no merge until the ministerial/INVÍAS publication relationship, authoritative T0 resolution, official selectable location dataset, and independent review are recorded"
 }
