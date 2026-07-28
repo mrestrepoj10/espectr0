@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "status": "incomplete-blocks-activation",
+  "independentVariable": "T (s)",
+  "output": "spectral acceleration (g)",
+  "formulas": [
+    {
+      "id": "design-safety-minimum-plateau",
+      "appliesTo": [
+        "design",
+        "safety-limited",
+        "site-specific-design-minimum"
+      ],
+      "range": "T ≤ Tc",
+      "equation": "Sa = 2.5 A Fa I",
+      "status": "complete",
+      "citation": {
+        "sourceDocumentId": "cali-decree-0158-2014",
+        "physicalPage": 11,
+        "printedPage": "12",
+        "reference": "Gráfica de la Tabla 2",
+        "rect": {
+          "left": 0.28,
+          "top": 0.61,
+          "width": 0.22,
+          "height": 0.1
+        }
+      }
+    },
+    {
+      "id": "design-safety-minimum-inverse",
+      "appliesTo": [
+        "design",
+        "safety-limited",
+        "site-specific-design-minimum"
+      ],
+      "range": "Tc < T ≤ TL",
+      "equation": "Sa = 1.2 A Fv I / T",
+      "status": "complete",
+      "citation": {
+        "sourceDocumentId": "cali-decree-0158-2014",
+        "physicalPage": 11,
+        "printedPage": "12",
+        "reference": "Gráfica de la Tabla 2",
+        "rect": {
+          "left": 0.48,
+          "top": 0.67,
+          "width": 0.22,
+          "height": 0.1
+        }
+      }
+    },
+    {
+      "id": "design-safety-minimum-inverse-square",
+      "appliesTo": [
+        "design",
+        "safety-limited",
+        "site-specific-design-minimum"
+      ],
+      "range": "T > TL",
+      "equation": "Sa = 1.2 A Fv TL I / T²",
+      "status": "complete",
+      "citation": {
+        "sourceDocumentId": "cali-decree-0158-2014",
+        "physicalPage": 11,
+        "printedPage": "12",
+        "reference": "Gráfica de la Tabla 2",
+        "rect": {
+          "left": 0.65,
+          "top": 0.72,
+          "width": 0.23,
+          "height": 0.1
+        }
+      }
+    },
+    {
+      "id": "damage-ramp",
+      "appliesTo": [
+        "damage-threshold"
+      ],
+      "range": "T < T0d",
+      "equation": "Sad = A0d + [(3 Ad Fa − A0d) / T0d] T",
+      "status": "blocked-missing-a0d-fa",
+      "citation": {
+        "sourceDocumentId": "cali-decree-0158-2014",
+        "physicalPage": 14,
+        "printedPage": "15",
+        "reference": "Gráfica de umbral de daño",
+        "rect": {
+          "left": 0.24,
+          "top": 0.25,
+          "width": 0.38,
+          "height": 0.18
+        }
+      }
+    },
+    {
+      "id": "damage-plateau",
+      "appliesTo": [
+        "damage-threshold"
+      ],
+      "range": "T0d ≤ T ≤ Tcd",
+      "equation": "Sad = 3 Ad Fa",
+      "status": "blocked-missing-fa",
+      "citation": {
+        "sourceDocumentId": "cali-decree-0158-2014",
+        "physicalPage": 14,
+        "printedPage": "15",
+        "reference": "Gráfica de umbral de daño",
+        "rect": {
+          "left": 0.34,
+          "top": 0.22,
+          "width": 0.2,
+          "height": 0.11
+        }
+      }
+    },
+    {
+      "id": "damage-inverse",
+      "appliesTo": [
+        "damage-threshold"
+      ],
+      "range": "Tcd < T ≤ TLd",
+      "equation": "Sad = 1.5 Ad Fv / T",
+      "status": "complete",
+      "citation": {
+        "sourceDocumentId": "cali-decree-0158-2014",
+        "physicalPage": 14,
+        "printedPage": "15",
+        "reference": "Gráfica de umbral de daño",
+        "rect": {
+          "left": 0.49,
+          "top": 0.27,
+          "width": 0.2,
+          "height": 0.12
+        }
+      }
+    },
+    {
+      "id": "damage-inverse-square",
+      "appliesTo": [
+        "damage-threshold"
+      ],
+      "range": "T > TLd",
+      "equation": "Sad = 1.5 Ad Fv TLd / T²",
+      "status": "complete",
+      "citation": {
+        "sourceDocumentId": "cali-decree-0158-2014",
+        "physicalPage": 14,
+        "printedPage": "15",
+        "reference": "Gráfica de umbral de daño",
+        "rect": {
+          "left": 0.64,
+          "top": 0.33,
+          "width": 0.24,
+          "height": 0.12
+        }
+      }
+    }
+  ],
+  "boundaryPolicy": "Las desigualdades y los Tc/TL/Tcd/TLd tabulados seleccionan la rama; no se sustituyen puntos de quiebre recalculados cuando el redondeo produce pequeños residuos."
+}

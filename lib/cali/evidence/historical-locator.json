@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "sourceDocumentId": "cali-ingeominas-dagma-2005-tomo6",
+  "sourceSha256": "c6d45337349043f6b816146952b79d3d4c27e6f414e9d692d2bd30566de378e1",
+  "claim": {
+    "claimId": "historical-threshold",
+    "physicalPage": 147,
+    "printedFooter": "136",
+    "scanMarker": "747",
+    "reference": "Numeral 8; pie interno 136; marcador manuscrito 747",
+    "rect": {
+      "left": 0.16,
+      "top": 0.56,
+      "width": 0.72,
+      "height": 0.29
+    },
+    "scanMarkerRect": {
+      "left": 0.89,
+      "top": 0,
+      "width": 0.1,
+      "height": 0.07
+    },
+    "printedFooterRect": {
+      "left": 0.82,
+      "top": 0.87,
+      "width": 0.09,
+      "height": 0.06
+    },
+    "extractedToken": "Ad = 0.05g, el cual se calculó probabilísticamente para un periodo de retorno de 10 años",
+    "requiredTokens": [
+      "Ad = 0.05g",
+      "periodo de retorno de 10 años"
+    ],
+    "regionAttestationId": "historical-threshold-p147"
+  },
+  "rejectedLocator": {
+    "physicalPage": 136,
+    "printedFooter": "125",
+    "scanMarker": "736",
+    "reason": "La página muestra 7.1.8 Zona 4E: Abanico de Pance y la Figura 7.9; no contiene el numeral 8 sobre Ad=0.05g/10 años."
+  },
+  "verification": {
+    "method": "embedded-image-and-normalized-region-sha256",
+    "ocrUsed": false,
+    "attestationFile": "historical-locator-attestation.json"
+  }
+}
