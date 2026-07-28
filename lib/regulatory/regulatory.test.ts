@@ -425,18 +425,32 @@ describe("strict aggregate boundary", () => {
 		const aggregate = JSON.parse(first);
 		expect(aggregate.schemaVersion).toBe(1);
 		expect(aggregate.installedStudies).toEqual(
-			expect.arrayContaining(["framework-fixture", "manizales-microzonation", "nsr10"]),
+			expect.arrayContaining([
+				"bogota-microzonation",
+				"framework-fixture",
+				"manizales-microzonation",
+				"nsr10",
+			]),
 		);
 		expect(aggregate.installedStudies).toEqual([...aggregate.installedStudies].sort());
 		expect(new Set(aggregate.installedStudies).size).toBe(aggregate.installedStudies.length);
 		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "framework-fixture")).toMatchObject({
-			studyId: "framework-fixture", coverage: { bundledSources: 1 },
+			studyId: "framework-fixture",
+			coverage: { bundledSources: 1 },
 		});
 		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "nsr10")).toMatchObject({
-			studyId: "nsr10", coverage: { expectedRows: 1_123 },
+			studyId: "nsr10",
+			coverage: { expectedRows: 1_123 },
+		});
+		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "bogota-microzonation")).toMatchObject({
+			studyId: "bogota-microzonation",
+			coverage: { expectedRows: 48, expectedValues: 288 },
+			uncoveredValues: [],
 		});
 		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "manizales-microzonation")).toMatchObject({
-			studyId: "manizales-microzonation", coverage: { expectedRows: 1, expectedValues: 5 }, uncoveredValues: [],
+			studyId: "manizales-microzonation",
+			coverage: { expectedRows: 1, expectedValues: 5 },
+			uncoveredValues: [],
 		});
 	}, 30_000);
 });
@@ -667,6 +681,27 @@ describe("page, hierarchy, and direct evidence", () => {
 });
 
 describe("role-based derived lineage", () => {
+	it("supports equation evidence nested in its source figure and rejects other parents", async () => {
+		const nested = fixture();
+		const equation = nested.citations.find(({ id }) => id === "fixture-formula")!;
+		const figure: EvidenceCitation = {
+			...structuredClone(equation),
+			id: "fixture-figure",
+			regionKind: "figure",
+		};
+		equation.parentCitationId = figure.id;
+		nested.citations.push(figure);
+		await expect(checkEvidenceStudy(nested, { repositoryRoot })).resolves.toMatchObject({
+			studyId: "framework-fixture",
+		});
+
+		const invalid = fixture();
+		invalid.citations.find(({ id }) => id === "fixture-formula")!.parentCitationId = "fixture-row";
+		await expect(checkEvidenceStudy(invalid, { repositoryRoot })).rejects.toThrow(
+			/Equation citation fixture-formula requires a figure parent/,
+		);
+	});
+
 	it("requires a clause/equation formula citation", async () => {
 		const study = fixture();
 		study.citations[3].regionKind = "warning";
