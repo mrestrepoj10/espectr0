@@ -31,7 +31,7 @@ The proposed spectrum matrix is intentionally and exactly empty (`0` options, `0
 
 ## Sources and redistribution
 
-All five sources are official and external-only. Their URL, retrieval date, byte length, page count and SHA-256 are locked. No source bytes or rendered pages are committed because no express redistribution license was found. `extraction-attestation.json` binds six statements/absence checks to source hashes, pages, rectangles or HTML lines and statement digests.
+All five sources are official and external-only. The three PDFs have immutable URL, retrieval date, byte length, page count and SHA-256 locks. The two official HTML pages are dynamic: their 25 July 2026 byte lengths, SHA-256 values and line ranges are retained only as historical observations, while fresh downloads are verified by live full-document required/absent-token assertions. No source bytes or rendered pages are committed because no express redistribution license was found. `extraction-attestation.json` binds six statements/absence checks to PDF locks or HTML observations, pages, rectangles or historical HTML lines, and statement digests.
 
 ## Verification
 

@@ -4,7 +4,7 @@
   "externalOnly": true,
   "extraction": {
     "pdf": "pdfplumber 0.11.10 with pdfminer.six; pypdf 6.14.2 page-count cross-check",
-    "html": "UTF-8 source snapshot; exact paragraph/term matching",
+    "html": "Historical UTF-8 snapshot observation plus live full-document required/absent-token checks; dynamic raw bytes and line numbers are not immutable",
     "ocrUsed": false,
     "coordinateSystem": "normalized top-left [0,1]"
   },
@@ -89,12 +89,14 @@
     {
       "id": "attest-delivery-pending",
       "sourceDocumentId": "quindio-armenia-delivery-2025",
-      "sourceSha256": "ddc685957dd77f0263d45ed84b4928b86edf9c7fbbe2caeede4d607a08de67a8",
+      "verificationPolicy": "live-semantic-dynamic-html",
+      "sourceObservationSha256": "ddc685957dd77f0263d45ed84b4928b86edf9c7fbbe2caeede4d607a08de67a8",
       "physicalPage": 1,
       "htmlLineRange": [
         1243,
         1245
       ],
+      "locatorScope": "historical-snapshot-lines-live-full-document-semantic-check",
       "rect": {
         "left": 0,
         "top": 0,
@@ -113,12 +115,14 @@
     {
       "id": "attest-decree-index-audit",
       "sourceDocumentId": "armenia-decree-index-2026-07-25",
-      "sourceSha256": "d9e82ef0e7cd579afc59eedd6f7bc8f71b9daf8161b51c3b229f6aa313e95a37",
+      "verificationPolicy": "live-semantic-dynamic-html",
+      "sourceObservationSha256": "d9e82ef0e7cd579afc59eedd6f7bc8f71b9daf8161b51c3b229f6aa313e95a37",
       "physicalPage": 1,
       "htmlLineRange": [
         471,
         479
       ],
+      "locatorScope": "historical-snapshot-lines-live-full-document-semantic-check",
       "rect": {
         "left": 0,
         "top": 0,

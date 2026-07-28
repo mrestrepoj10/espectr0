@@ -5,6 +5,7 @@
     {
       "sourceDocumentId": "armenia-cap-acta-153-2019",
       "officialUrl": "https://asosismica.org.co/wp-content/uploads/2019/04/Acta-153-CAP-DEFINITIVA-FDO.pdf",
+      "verificationPolicy": "raw-byte-lock",
       "sha256": "f60b99efe9061922f0f365d7e2635abddfcf60b6350cd01a7ebe9a72fcec46f6",
       "pageCount": 21,
       "byteLength": 558515,
@@ -13,6 +14,7 @@
     {
       "sourceDocumentId": "armenia-acuerdo-019-2009",
       "officialUrl": "https://observatorio.quindio.gov.co/images/POT/Armenia/ACUERDO_019_2009.pdf",
+      "verificationPolicy": "raw-byte-lock",
       "sha256": "a7967cf86a686583b9c7d39fb22488b4444b8de43195ca6ee7de8a04c3d7bc14",
       "pageCount": 417,
       "byteLength": 2256691,
@@ -21,6 +23,7 @@
     {
       "sourceDocumentId": "armenia-pot-volume-4b-2009",
       "officialUrl": "https://observatorio.quindio.gov.co/images/POT/Armenia/VOL_04_B_COMPONENTE_URBANO.pdf",
+      "verificationPolicy": "raw-byte-lock",
       "sha256": "1643056e170f4a901c0084c8fdf21cedd1be79c94fc20ac33e7102a84ad20ee2",
       "pageCount": 303,
       "byteLength": 5197828,
@@ -29,17 +32,21 @@
     {
       "sourceDocumentId": "quindio-armenia-delivery-2025",
       "officialUrl": "https://www.quindio.gov.co/gobernacion-trabaja-intensamente-para-que-quindio-sea-el-primer-departamento-de-colombia-con-estudios-de-microzonificacion-sismica",
-      "sha256": "ddc685957dd77f0263d45ed84b4928b86edf9c7fbbe2caeede4d607a08de67a8",
+      "verificationPolicy": "live-semantic-dynamic-html",
+      "observedOn": "2026-07-25",
+      "observedSnapshotSha256": "ddc685957dd77f0263d45ed84b4928b86edf9c7fbbe2caeede4d607a08de67a8",
+      "observedByteLength": 121014,
       "pageCount": 1,
-      "byteLength": 121014,
       "redistributionDecision": "external-only"
     },
     {
       "sourceDocumentId": "armenia-decree-index-2026-07-25",
       "officialUrl": "https://www.armenia.gov.co/normativa/decretos",
-      "sha256": "d9e82ef0e7cd579afc59eedd6f7bc8f71b9daf8161b51c3b229f6aa313e95a37",
+      "verificationPolicy": "live-semantic-dynamic-html",
+      "observedOn": "2026-07-25",
+      "observedSnapshotSha256": "d9e82ef0e7cd579afc59eedd6f7bc8f71b9daf8161b51c3b229f6aa313e95a37",
+      "observedByteLength": 211175,
       "pageCount": 1,
-      "byteLength": 211175,
       "redistributionDecision": "external-only"
     }
   ]

@@ -7,7 +7,7 @@
     "reviewer": null,
     "reviewedOn": null,
     "requiredReproductions": [
-      "all five external source hashes and page counts",
+      "three external PDF hashes, byte lengths and page counts; live semantic assertions for two dynamic HTML pages",
       "Acta 153 page 17 harmonization statement",
       "POT Volume 4-B page 81 NSR-98 origin and artificial-fill warning",
       "2025 official delivery paragraph and current decree-index absence audit",

@@ -1,7 +1,8 @@
 """Offline verification for the external-only Armenia primary sources.
 
-Supply fresh downloads from the official URLs. The verifier fails closed on bytes,
-page counts, exact required text and the explicitly caveated decree-index absence audit.
+Supply fresh downloads from the official URLs. The verifier fails closed on PDF
+bytes/page counts and on live full-document HTML semantics. The two official HTML
+pages are dynamic, so their historical hashes are observations rather than locks.
 """
 
 from __future__ import annotations
@@ -60,13 +61,32 @@ def main() -> None:
         "armenia-decree-index-2026-07-25": "text/html",
     }
 
+    raw_byte_sources = 0
+    live_semantic_sources = 0
     for source_id, path in paths.items():
         lock = lock_by_id[source_id]
-        if digest(path) != lock["sha256"] or path.stat().st_size != lock["byteLength"]:
-            raise AssertionError(f"source bytes differ: {source_id}")
-        if media_types[source_id] == "application/pdf":
+        policy = lock["verificationPolicy"]
+        if policy == "raw-byte-lock":
+            raw_byte_sources += 1
+            if digest(path) != lock["sha256"] or path.stat().st_size != lock["byteLength"]:
+                raise AssertionError(f"source bytes differ: {source_id}")
+            if media_types[source_id] != "application/pdf":
+                raise AssertionError(f"raw-byte policy is restricted to PDFs: {source_id}")
             if len(pypdf.PdfReader(path).pages) != lock["pageCount"]:
                 raise AssertionError(f"page count differs: {source_id}")
+        elif policy == "live-semantic-dynamic-html":
+            live_semantic_sources += 1
+            if media_types[source_id] != "text/html":
+                raise AssertionError(f"live-semantic policy is restricted to HTML: {source_id}")
+            print(
+                f"live HTML observation {source_id}: "
+                f"bytes={path.stat().st_size} sha256={digest(path)}"
+            )
+        else:
+            raise AssertionError(f"unknown verification policy: {source_id}/{policy}")
+
+    if raw_byte_sources != 3 or live_semantic_sources != 2:
+        raise AssertionError("expected 3 raw-byte PDFs and 2 live-semantic HTML sources")
 
     cache: dict[tuple[str, int], str] = {}
     for item in ATTESTATION["attestations"]:
@@ -84,7 +104,7 @@ def main() -> None:
             if re.search(re.escape(token), text, flags=re.IGNORECASE):
                 raise AssertionError(f"formerly absent token is now present: {item['id']}/{token}")
 
-    print("verified 5 external Armenia sources and 6 extraction attestations")
+    print("verified 3 raw-byte PDFs, 2 live-semantic dynamic HTML sources, and 6 extraction attestations")
 
 
 if __name__ == "__main__":
