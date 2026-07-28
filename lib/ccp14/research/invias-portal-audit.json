@@ -18,7 +18,9 @@
       "finding": "Byte-identical to the previously locked official INVÍAS ZIP."
     },
     {
-      "id": "invias-resolution-108-2015",
+      "id": "mintransporte-resolution-108-2015-invias-copy",
+      "issuingAuthority": "Ministerio de Transporte de Colombia",
+      "currentPublicationCarrier": "Instituto Nacional de Vías (INVÍAS)",
       "portalFileIds": [29585, 27516, 18745],
       "catalogCategoryId": 818,
       "filename": "3610-resolucion-no-108-del-26-de-enero-de-2015.pdf",
@@ -40,9 +42,10 @@
   },
   "productSourceDecision": {
     "controllingTechnicalPublication": "invias-ccp14-official-zip",
-    "controllingAdoptionSource": "invias-resolution-108-2015",
-    "mintransporteRole": "corroborating-provenance-only",
-    "effect": "The ministerial-scan versus INVÍAS-ZIP mismatch is not a product activation blocker. No MinTransporte-only value may enter the calculator."
+    "controllingAdoptionSource": "mintransporte-resolution-108-2015-invias-copy",
+    "legalAdoptionAuthority": "Ministerio de Transporte de Colombia",
+    "multipartScanRole": "corroborating-provenance-only",
+    "effect": "The MinTransporte multipart-scan versus INVÍAS-ZIP mismatch is not a product activation blocker. Product values come only from the current INVÍAS technical ZIP."
   },
   "offlineVerifier": "verify_current_invias_portal.py",
   "remainingActivationBlockers": [

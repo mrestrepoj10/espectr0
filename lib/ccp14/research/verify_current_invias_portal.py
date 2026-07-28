@@ -33,7 +33,7 @@ def main() -> None:
     args = parser.parse_args()
 
     by_id = {source["id"]: source for source in LOCKS["sources"]}
-    resolution_lock = by_id["invias-resolution-108-2015"]
+    resolution_lock = by_id["mintransporte-resolution-108-2015-invias-copy"]
     archive_lock = by_id["invias-ccp14-official-zip"]
     section_lock = by_id["invias-ccp14-section-3"]
     preface_lock = by_id["invias-ccp14-preface"]
