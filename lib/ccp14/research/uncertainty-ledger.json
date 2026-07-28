@@ -1,14 +1,14 @@
 {
   "items": [
     {
-      "id": "ministerial-vs-invias-publication-reconciliation",
-      "mitigation": "Keep both official packages hash-locked and fail closed until INVÍAS or MinTransporte identifies their normative/editorial relationship and the controlling text for any difference.",
-      "severity": "critical"
+      "id": "ministerial-vs-invias-publication-provenance",
+      "mitigation": "Use only the current INVÍAS ZIP for product values. Keep the MinTransporte scan hash-locked as corroborating provenance and disclose the unexplained editorial difference.",
+      "severity": "medium"
     },
     {
-      "id": "current-official-url-404",
-      "mitigation": "Retain original official URL, archived transport timestamp, byte size, and SHA-256; do not call the archive host the authority.",
-      "severity": "medium"
+      "id": "invias-portal-migration",
+      "mitigation": "Use current INVÍAS file IDs 29584 and 29585. Preserve legacy URLs and archived captures only as provenance; replay current downloads against byte locks.",
+      "severity": "low"
     },
     {
       "id": "redistribution-rights",

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "auditedOn": "2026-07-28",
+  "authority": "Instituto Nacional de Vías (INVÍAS)",
+  "portal": "https://www.invias.gov.co/",
+  "catalogSearch": "https://www.invias.gov.co/documentos/buscar/?q=norma%20puentes",
+  "controllingAssets": [
+    {
+      "id": "invias-ccp14-official-zip",
+      "portalFileId": 29584,
+      "catalogCategoryId": 816,
+      "catalogLabel": "Norma Colombiana de Diseño de Puentes CCP14",
+      "filename": "3709-norma-colombiana-de-diseno-de-puentes-ccp14.zip",
+      "bytes": 40260753,
+      "sha256": "e6d71cd1a0efffb8b8be95f8e3c42a7fd180485c704f0761e07faf6af28fbd8d",
+      "archiveEntries": 16,
+      "totalPdfPages": 1503,
+      "finding": "Byte-identical to the previously locked official INVÍAS ZIP."
+    },
+    {
+      "id": "invias-resolution-108-2015",
+      "portalFileIds": [29585, 27516, 18745],
+      "catalogCategoryId": 818,
+      "filename": "3610-resolucion-no-108-del-26-de-enero-de-2015.pdf",
+      "bytes": 564302,
+      "pageCount": 2,
+      "sha256": "e17c4aa764716c5533cb82499984f87e4eda032888c91544fab10b804d5a753a",
+      "finding": "All three current catalog records serve identical bytes matching the locked adoption resolution."
+    }
+  ],
+  "currentness": {
+    "adoptedSection3ReplacementFound": false,
+    "adoptedSection3ErratumFound": false,
+    "proposal": {
+      "url": "https://www.invias.gov.co/publicaciones/5339/con-el-liderazgo-de-invias-ingenieros-proponen-ajustes-para-actualizar-la-norma-colombiana-de-diseno-de-puentes-ccp-14/",
+      "publishedOn": "2024-05-28",
+      "status": "expert-panel-proposal-not-adopted",
+      "finding": "INVÍAS describes future updating work and confirms Resolution 108/2015 as the adoption instrument; it publishes no replacement technical text."
+    }
+  },
+  "productSourceDecision": {
+    "controllingTechnicalPublication": "invias-ccp14-official-zip",
+    "controllingAdoptionSource": "invias-resolution-108-2015",
+    "mintransporteRole": "corroborating-provenance-only",
+    "effect": "The ministerial-scan versus INVÍAS-ZIP mismatch is not a product activation blocker. No MinTransporte-only value may enter the calculator."
+  },
+  "offlineVerifier": "verify_current_invias_portal.py",
+  "remainingActivationBlockers": [
+    "The controlling INVÍAS Section 3 page states both T0 = 0.2 Ts and T0 = 0.2 seconds.",
+    "The current INVÍAS publication supplies maps but no finite locality-to-PGA/Ss/S1 dataset for a no-GIS selector."
+  ]
+}

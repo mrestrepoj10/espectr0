@@ -14,7 +14,9 @@
       "official ZIP contents",
       "official MinTransporte multipart hashes and PDF reconstruction",
       "ministerial physical pages 107, 117, and 118",
-      "ministerial-versus-INVÍAS publication mismatch"
+      "ministerial-versus-INVÍAS publication mismatch",
+      "current INVÍAS portal file IDs 29584 and 29585 reproduce the locked ZIP and resolution bytes",
+      "offline current-portal verifier reproduces 2 files, 16 PDFs, and 1,503 pages"
     ]
   },
   "independentDomainReview": {
@@ -22,5 +24,5 @@
     "reviewer": null,
     "status": "pending"
   },
-  "mergeDecision": "draft-only; no merge until the ministerial/INVÍAS publication relationship, authoritative T0 resolution, official selectable location dataset, and independent review are recorded"
+  "mergeDecision": "draft-only pending exact re-review; no activation until authoritative T0 resolution and an official selectable dataset or separately approved expert-input policy are recorded"
 }
