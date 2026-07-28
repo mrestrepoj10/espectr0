@@ -425,10 +425,16 @@ describe("strict aggregate boundary", () => {
 		expect(first.endsWith("\n")).toBe(true);
 		const aggregate = JSON.parse(first);
 		expect(aggregate.schemaVersion).toBe(1);
-		expect(aggregate.installedStudies).toEqual([...aggregate.installedStudies].sort());
 		expect(aggregate.installedStudies).toEqual(
-			expect.arrayContaining(["ccp14-seismic-research", "framework-fixture", "nsr10"]),
+			expect.arrayContaining([
+				"bogota-microzonation",
+				"ccp14-seismic-research",
+				"framework-fixture",
+				"nsr10",
+			]),
 		);
+		expect(aggregate.installedStudies).toEqual([...aggregate.installedStudies].sort());
+		expect(new Set(aggregate.installedStudies).size).toBe(aggregate.installedStudies.length);
 		const studies = Object.fromEntries(
 			aggregate.studies.map((study: { studyId: string }) => [study.studyId, study]),
 		) as Record<string, EvidenceCheckReport>;
@@ -437,6 +443,10 @@ describe("strict aggregate boundary", () => {
 		});
 		expect(studies["framework-fixture"]).toMatchObject({ coverage: { bundledSources: 1 } });
 		expect(studies.nsr10).toMatchObject({ coverage: { expectedRows: 1_123 } });
+		expect(studies["bogota-microzonation"]).toMatchObject({
+			coverage: { expectedRows: 48, expectedValues: 288 },
+			uncoveredValues: [],
+		});
 	}, 30_000);
 });
 
@@ -666,6 +676,27 @@ describe("page, hierarchy, and direct evidence", () => {
 });
 
 describe("role-based derived lineage", () => {
+	it("supports equation evidence nested in its source figure and rejects other parents", async () => {
+		const nested = fixture();
+		const equation = nested.citations.find(({ id }) => id === "fixture-formula")!;
+		const figure: EvidenceCitation = {
+			...structuredClone(equation),
+			id: "fixture-figure",
+			regionKind: "figure",
+		};
+		equation.parentCitationId = figure.id;
+		nested.citations.push(figure);
+		await expect(checkEvidenceStudy(nested, { repositoryRoot })).resolves.toMatchObject({
+			studyId: "framework-fixture",
+		});
+
+		const invalid = fixture();
+		invalid.citations.find(({ id }) => id === "fixture-formula")!.parentCitationId = "fixture-row";
+		await expect(checkEvidenceStudy(invalid, { repositoryRoot })).rejects.toThrow(
+			/Equation citation fixture-formula requires a figure parent/,
+		);
+	});
+
 	it("requires a clause/equation formula citation", async () => {
 		const study = fixture();
 		study.citations[3].regionKind = "warning";
