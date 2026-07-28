@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "comparison": "Dosquebradas versus any reference municipality",
+  "materialDifferences": [
+    "Distinct 2024 POT adoption chain",
+    "Five local zones and six tabulated fields",
+    "Explicit pending NSR-10 harmonization",
+    "Formula and Av gap"
+  ],
+  "nonInference": "No formula, coefficient, warning or legal effect from Pereira, Santa Rosa de Cabal, Bogotá or NSR-10 is imported."
+}

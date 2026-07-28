@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "extractor": {
+    "engine": "pdfplumber",
+    "version": "0.11.10",
+    "parameters": {
+      "xTolerance": 2,
+      "yTolerance": 2,
+      "useTextFlow": false,
+      "keepBlankChars": false
+    }
+  },
+  "renderer": {
+    "engine": "pypdfium2",
+    "purpose": "visual confirmation of scan and embedded figure"
+  },
+  "coordinateSystem": "normalized top-left on 612×792 point pages",
+  "normalization": "Unicode NFC; whitespace collapse; decimal parse preserves printed token",
+  "table": {
+    "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+    "physicalPage": 111,
+    "citationId": "table-27",
+    "optionCount": 5,
+    "fieldCount": 6,
+    "directCellCount": 30
+  }
+}
