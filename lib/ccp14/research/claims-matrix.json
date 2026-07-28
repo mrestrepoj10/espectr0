@@ -19,7 +19,14 @@
       "id": "ministerial-package-provenance",
       "locator": "MinTransporte files 12013-12015; reconstructed PDF physical pages 1-1551; INVÍAS ZIP central directory",
       "source": "mintransporte-resolution-108-multipart-pdf",
-      "status": "verified-primary-reconciliation-required"
+      "status": "verified-corroborating-outside-controlling-product-source"
+    },
+    {
+      "claim": "The current INVÍAS portal serves the exact locked CCP-14 ZIP and Resolution 108/2015 bytes.",
+      "id": "current-invias-publication",
+      "locator": "INVÍAS current file IDs 29584 and 29585; catalog categories 816 and 818; audit dated 2026-07-28",
+      "source": "invias-portal-audit",
+      "status": "verified-primary-current-portal"
     },
     {
       "claim": "The general design hazard is 7% probability of exceedance in 75 years, approximately a 1000-year mean return period, at 5% damping.",
@@ -159,9 +166,9 @@
     {
       "claim": "An adopted Section 3 amendment or erratum supersedes the recovered passages.",
       "id": "currentness",
-      "locator": "INVÍAS/MinTransporte/SUIN official searches through 2026-07-22",
-      "source": "official-search-ledger",
-      "status": "not-found"
+      "locator": "Current INVÍAS catalog and publications audit through 2026-07-28",
+      "source": "invias-portal-audit",
+      "status": "not-found-current-invias-portal"
     },
     {
       "claim": "The April 2026 Section 13 consultation is an adopted amendment affecting Section 3.",
@@ -172,8 +179,8 @@
     }
   ],
   "summary": {
-    "activationBlockingClaims": 3,
-    "normativeClaimsWithPrimarySupport": 20,
-    "totalClaims": 24
+    "activationBlockingClaims": 2,
+    "normativeClaimsWithPrimarySupport": 21,
+    "totalClaims": 25
   }
 }

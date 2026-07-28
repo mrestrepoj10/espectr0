@@ -16,7 +16,7 @@
     "machineReadableLocationDatasetPresent": false,
     "municipalityOrLocalityTablePresent": false
   },
-  "reason": "The official CCP-14 ZIP contains maps but no finite locality registry or exact locality-to-PGA/Ss/S1 table. Commentary C3.10.2.1 says values would be available on a CD and web tools. The official MinTransporte multipart resolution-and-annex scan repeats that promise on physical page 107, printed 3-57, but reconstructs only one image-based PDF with no embedded files or URI annotations. Neither official package supplies the promised dataset. A reference-site count, map digitization, coordinates, GIS inference, or a secondary table cannot be substituted for the missing official selectable dataset.",
-  "requiredResolution": "Obtain and hash-lock the official CCP-14 CD/web dataset, or obtain an authoritative INVÍAS/MinTransporte clarification defining the finite location set and exact values.",
+  "reason": "The current INVÍAS CCP-14 asset (portal file ID 29584) contains the three official maps but no finite locality registry or exact locality-to-PGA/Ss/S1 table. Commentary C3.10.2.1 says values would be available on a CD and web tools, but the current 16-file publication contains PDFs only. A reference-site count, map digitization, coordinates, GIS inference, or a secondary table cannot be substituted for the missing official selectable dataset.",
+  "requiredResolution": "Obtain and hash-lock an official INVÍAS CCP-14 CD/web dataset or locality table, or define a separately reviewed expert-input workflow that accepts professionally determined PGA/Ss/S1 without claiming automatic location selection.",
   "verifiedSelectableLocations": []
 }

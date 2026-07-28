@@ -8,7 +8,7 @@
         "sourceSha256": "084c6223291dd2db9458210ae675693b001a7aa790f92fa7163112442621c5bb",
         "textLocator": "MinTransporte reconstructed PDF physical page 118, printed 3-68: T0 equals 0.2 seconds"
       },
-      "officialResolutionSearch": "No CCP-14 erratum, circular, amendment, later official edition, or adopted correction resolving this passage was located in INVÍAS, MinTransporte, or SUIN searches on 2026-07-22.",
+      "officialResolutionSearch": "The current INVÍAS portal was audited on 2026-07-28. It republishes the locked 2015 resolution and technical ZIP and contains no adopted Section 3 erratum, circular, amendment, or later edition resolving this passage. The 2024 INVÍAS expert-panel publication is a proposal, not an adopted correction.",
       "passageA": {
         "locator": "Section 3 PDF physical page 60, printed 3-56, Figure 3.10.4.1-1",
         "reading": "T0 = 0.2 Ts",
@@ -38,17 +38,19 @@
       "activationImpact": "block-location-selection",
       "id": "missing-location-dataset",
       "ministerialArchiveEvidence": "The three official RAR volumes reconstruct one scanned PDF. Physical page 107 repeats the CD/web promise, but the PDF has no embedded files, file annotations, or URI annotations and the multipart payload contains no separate dataset.",
-      "officialArchiveEvidence": "The 16-entry official ZIP contains only PDFs. No CD image, spreadsheet, CSV, database, web-tool export, or municipality/locality table is present.",
+      "officialArchiveEvidence": "Current INVÍAS portal file ID 29584 reproduces the locked 16-entry ZIP exactly. It contains only PDFs: no CD image, spreadsheet, CSV, database, web-tool export, or municipality/locality table.",
       "officialText": "Commentary C3.10.2.1 says PGA, Ss, and S1 values would be available on a CD and web tools.",
       "status": "unresolved"
     },
     {
-      "activationImpact": "block-source-authority-reconciliation",
+      "activationImpact": "none-under-product-source-authority-policy",
       "id": "ministerial-scan-vs-invias-technical-zip",
-      "inviasPublication": "Later official technical ZIP: 16 PDFs, 1,503 total pages, 40,260,753 bytes, SHA-256 e6d71cd1a0efffb8b8be95f8e3c42a7fd180485c704f0761e07faf6af28fbd8d.",
+      "inviasPublication": "Current INVÍAS portal file ID 29584: 16 PDFs, 1,503 total pages, 40,260,753 bytes, SHA-256 e6d71cd1a0efffb8b8be95f8e3c42a7fd180485c704f0761e07faf6af28fbd8d.",
       "issue": "The official MinTransporte package reconstructs a 1,551-page scanned resolution-and-annex PDF, while the later INVÍAS publication is a 1,503-page technical ZIP with different bytes, pagination, and revision presentation. No authoritative reconciliation identifies which differences belong to the adopted annex or later editorial publication.",
       "ministerialPublication": "Three official RAR volumes reconstruct a 60,041,340-byte PDF, 1,551 pages, SHA-256 084c6223291dd2db9458210ae675693b001a7aa790f92fa7163112442621c5bb.",
-      "status": "unresolved"
+      "productResolution": "The calculator follows the technical asset currently published by INVÍAS. MinTransporte is corroborating provenance only, and no MinTransporte-only value may be used.",
+      "residualCaveat": "The inter-agency editorial relationship remains unexplained but does not block a product whose declared source authority is the current INVÍAS publication.",
+      "status": "resolved-for-product-invias-controls"
     },
     {
       "activationImpact": "none-currently",
