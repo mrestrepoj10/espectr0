@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "authorRole": "research agent R7",
-  "preparedOn": "2026-07-25",
+  "authorRole": "engine implementation",
+  "preparedOn": "2026-07-29",
   "independentReview": {
     "status": "pending",
     "reviewer": null,
     "reviewedOn": null,
     "scope": [
-      "source re-fetch",
       "30-cell transcription",
-      "adoption/currentness",
-      "formula and Av gaps"
+      "NSR-10 equation regions",
+      "Av derivation",
+      "T >= To branch arithmetic"
     ]
   },
-  "activationDecision": "blocked-missing-adopted-complete-calculation-model",
-  "mergeDecision": "no-merge-for-production-activation"
+  "activationDecision": "calculation-supported-for-t-greater-or-equal-to-to-with-localized-warnings",
+  "mergeDecision": "draft-pr-pending-independent-review"
 }

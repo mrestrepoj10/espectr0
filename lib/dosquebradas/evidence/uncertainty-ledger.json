@@ -1,36 +1,30 @@
 {
   "schemaVersion": 1,
-  "blocking": true,
+  "blocking": false,
   "entries": [
     {
-      "id": "blocker-1",
-      "severity": "blocker",
-      "issue": "No adopted formula or branch inclusivity was found in the official POT package.",
-      "disposition": "No activation until an official primary source resolves this item."
+      "id": "limitation-1",
+      "severity": "localized-warning",
+      "issue": "T < To has no attested entrance equation and returns a typed unsupported result.",
+      "disposition": "Return typed unsupported only for T < To."
     },
     {
-      "id": "blocker-2",
-      "severity": "blocker",
-      "issue": "Av is defined but not tabulated in Table 27.",
-      "disposition": "No activation until an official primary source resolves this item."
+      "id": "limitation-2",
+      "severity": "localized-warning",
+      "issue": "The municipal table does not state return period; 475 years is NSR-10 context metadata.",
+      "disposition": "Expose the supported calculation with this warning."
     },
     {
-      "id": "blocker-3",
-      "severity": "blocker",
-      "issue": "The POT requires NSR-10 adjustment and harmonization within 24 months.",
-      "disposition": "No activation until an official primary source resolves this item."
+      "id": "limitation-3",
+      "severity": "localized-warning",
+      "issue": "The POT orders adjustment and harmonization with NSR-10.",
+      "disposition": "Expose the supported calculation with this warning."
     },
     {
-      "id": "blocker-4",
-      "severity": "blocker",
-      "issue": "Return period/probability is not stated beside Table 27.",
-      "disposition": "No activation until an official primary source resolves this item."
-    },
-    {
-      "id": "blocker-5",
-      "severity": "blocker",
-      "issue": "No automatic GIS selection is authorized.",
-      "disposition": "No activation until an official primary source resolves this item."
+      "id": "limitation-4",
+      "severity": "localized-warning",
+      "issue": "Automatic GIS selection is not implemented.",
+      "disposition": "Expose the supported calculation with this warning."
     }
   ]
 }

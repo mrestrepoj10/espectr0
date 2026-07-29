@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "comparison": "Dosquebradas versus any reference municipality",
+  "comparison": "Dosquebradas versus EspectroCol (UX/behavior only)",
   "materialDifferences": [
-    "Distinct 2024 POT adoption chain",
-    "Five local zones and six tabulated fields",
-    "Explicit pending NSR-10 harmonization",
-    "Formula and Av gap"
+    "Both expose five Dosquebradas zones with broadly matching descriptions",
+    "The reference site exposes three hazards not demonstrated by the official Table 27 package",
+    "This engine exposes only the official design hazard",
+    "This engine returns typed unsupported below To"
   ],
-  "nonInference": "No formula, coefficient, warning or legal effect from Pereira, Santa Rosa de Cabal, Bogotá or NSR-10 is imported."
+  "nonInference": "No coefficient, formula, hazard or legal effect is imported from EspectroCol. It is used only to compare discoverability and behavior."
 }

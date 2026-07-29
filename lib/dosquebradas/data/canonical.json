@@ -1,18 +1,22 @@
 {
   "schemaVersion": 1,
   "studyId": "dosquebradas-microzonation",
-  "status": "research-only-activation-blocked",
+  "status": "calculation-supported-from-to",
   "municipality": "Dosquebradas",
   "controllingInstrument": "acuerdo-007-2024",
   "technicalSource": "pot-2024-diagnostico-amenazas",
+  "calculationAnchor": "nsr10-title-a-2017",
   "selectionMode": "manual-zone-only",
   "dampingRatio": 0.05,
   "hazards": [
     {
       "id": "design",
-      "label": "Diseño",
-      "returnPeriodYears": null,
-      "probability": null,
+      "label": "Diseño — anclaje NSR-10 10%/50 años",
+      "returnPeriodYears": 475,
+      "probability": {
+        "exceedance": 0.1,
+        "years": 50
+      },
       "dampingRatio": 0.05
     }
   ],
@@ -125,16 +129,16 @@
       }
     }
   ],
-  "blockers": [
-    "No adopted formula or branch inclusivity was found in the official POT package.",
-    "Av is defined but not tabulated in Table 27.",
-    "The POT requires NSR-10 adjustment and harmonization within 24 months.",
-    "Return period/probability is not stated beside Table 27.",
-    "No automatic GIS selection is authorized."
+  "localizedLimitations": [
+    "T < To has no attested entrance equation and returns a typed unsupported result.",
+    "The municipal table does not state return period; 475 years is NSR-10 context metadata.",
+    "The POT orders adjustment and harmonization with NSR-10.",
+    "Automatic GIS selection is not implemented."
   ],
   "capabilities": {
     "traceabilityViewer": true,
-    "municipalSpectrumCalculation": false,
+    "municipalSpectrumCalculation": true,
+    "supportedInterval": "T >= To",
     "automaticZoneSelection": false
   }
 }

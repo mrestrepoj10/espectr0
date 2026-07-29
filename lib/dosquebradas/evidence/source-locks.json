@@ -31,6 +31,16 @@
       "sha256": "2060d4626bcd2b94af6e2a7401a2a3075b8d750e01397bf18a1d372d6cb24d15",
       "mediaType": "application/pdf",
       "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "nsr10-title-a-2017",
+      "officialUrl": "https://iisee.kenken.go.jp/worldlist/11_Colombia/Colombia%20Titulo%20A-NSR-10-Ver-2017.pdf",
+      "retrievedOn": "2026-07-25",
+      "byteLength": 3486413,
+      "pageCount": 206,
+      "sha256": "47207abe1e832f5feb5fb8448af884b8d539fddaf89b6b21ab466765dd8524b0",
+      "mediaType": "application/pdf",
+      "redistributionDecision": "external-only"
     }
   ]
 }

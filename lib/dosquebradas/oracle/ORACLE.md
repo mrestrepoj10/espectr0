@@ -1,5 +1,5 @@
-# Independent oracle
+# Independent Decimal spectrum oracle
 
-`oracle-input.json` is a second, manually typed transcription of Table 27. The Python program uses `Decimal` parsing and compares through the dossier gate with the separately generated canonical matrix.
+`oracle-input.json` is a second, manually typed transcription of Table 27. The Python program uses `Decimal` arithmetic, derives `Av` by algebraically inverting NSR-10 A.2.6-2, and evaluates just-left/exact/right witnesses for `To`, `Tc`, and `TL`.
 
-The oracle intentionally contains no spectrum equation. Its three negative cases must reject calculation, assumed `Av`, and automatic zone selection.
+The oracle does not import or read the TypeScript engine. Values below `To` are emitted as typed unsupported cases.

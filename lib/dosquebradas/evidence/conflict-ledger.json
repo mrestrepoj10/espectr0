@@ -5,19 +5,19 @@
       "id": "remain-versus-harmonize",
       "status": "resolved-for-product",
       "issue": "The same current POT preserves the CARDER supports and orders NSR-10 harmonization.",
-      "resolution": "Preserve direct table provenance; block calculation and activation."
+      "resolution": "Use direct Table 27 parameters with cited NSR-10 equations and display the harmonization warning."
     },
     {
       "id": "av-defined-not-tabulated",
       "status": "resolved-for-product",
-      "issue": "Page 112 defines Av while Table 27 omits its value.",
-      "resolution": "Do not derive or assume Av."
+      "issue": "Table 27 omits Av.",
+      "resolution": "Derive Av by algebraically inverting cited equation A.2.6-2; never assume Av=Aa."
     },
     {
-      "id": "legacy-formulas",
-      "status": "resolved-for-product",
-      "issue": "Unofficial copies may show legacy formulas.",
-      "resolution": "Do not use secondary mirrors for normative calculation."
+      "id": "entrance-branch",
+      "status": "localized-unsupported",
+      "issue": "No T < To entrance equation is attested.",
+      "resolution": "Do not invent it; return typed unsupported below the tabulated To."
     }
   ]
 }
