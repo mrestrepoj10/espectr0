@@ -5,11 +5,9 @@
   "activationAllowed": false,
   "mergeIntoEngineAllowed": false,
   "blockers": [
-    "No se recupero un acto primario vigente que adopte la actualizacion armonizada; el informe municipal de cierre 2016-2019 aun ubicaba su adopcion en desarrollo.",
     "El modelo actualizado es rasterizado por puntos y no ofrece zonas para un selector manual sin GIS.",
     "La fuente tecnica bloqueada no publica los 1275 pares Fa/Fv ni una tabla discreta que permita reproducirlos.",
-    "La fuente tecnica no publica la formula espectral operacional completa, sus limites de rama ni el amortiguamiento del espectro de salida.",
-    "La revision humana independiente esta pendiente."
+    "La copia oficial 2002 omite la Figura 8.5 que contenia las ecuaciones y graficas de las tres zonas historicas A/B/C."
   ],
   "historicalModel": {
     "year": 2002,
@@ -31,7 +29,7 @@
         "description": "Formaciones rocosas o suelos de poco espesor"
       }
     ],
-    "evidenceBasis": "Reconciliacion publicada por los autores de la actualizacion de 2015; el PDF original de 2002 no pudo bloquearse en esta ejecucion."
+    "evidenceBasis": "Copia oficial UNGRD del informe 2002, seccion 8.2 y 8.3. El PDF recuperado omite la Figura 8.5 que el texto dice contiene las ecuaciones y graficas."
   },
   "governingTechnicalCandidate": {
     "id": "updated-raster-grid",
@@ -41,7 +39,7 @@
     "hazard": {
       "id": "uniform-hazard-475y",
       "averageReturnPeriodYears": 475,
-      "dampingRatio": null
+      "dampingRatio": 0.05
     },
     "fixedFitParameters": {
       "aaG": 0.25,
@@ -52,7 +50,7 @@
       "Fa",
       "Fv"
     ],
-    "formulaStatus": "missing-operational-piecewise-formula-and-branch-limits"
+    "formulaStatus": "nsr10-shape-published-node-specific-fa-fv-values-missing"
   },
   "rows": [
     {

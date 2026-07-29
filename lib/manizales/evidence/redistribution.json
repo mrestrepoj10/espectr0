@@ -4,6 +4,24 @@
   "committedSourceBytes": false,
   "sources": [
     {
+      "sourceDocumentId": "manizales-uniandes-2002",
+      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/19861/MicrozonificacionSismicaManizales%28UAndes_2002%29.pdf?isAllowed=y&sequence=1",
+      "decision": "external-only",
+      "rationale": "La copia oficial de UNGRD permite consulta, pero no se incorporan sus bytes al repositorio."
+    },
+    {
+      "sourceDocumentId": "manizales-harmonization-2014",
+      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/36862/CMASRSL001.ArmonizacionNormasNSR10.pdf?isAllowed=y&sequence=1",
+      "decision": "external-only",
+      "rationale": "La copia oficial de UNGRD permite consulta, pero no se incorporan sus bytes al repositorio."
+    },
+    {
+      "sourceDocumentId": "manizales-harmonization-presentation-2014",
+      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/36863/CMASRSL003.Presentacion.Micro.pdf?isAllowed=y&sequence=1",
+      "decision": "external-only",
+      "rationale": "La copia oficial de UNGRD permite consulta, pero no se incorporan sus bytes al repositorio."
+    },
+    {
       "sourceDocumentId": "manizales-update-2015",
       "officialUrl": "https://upcommons.upc.edu/bitstreams/3355be9f-7fb3-475e-bf7a-46462cff7add/download",
       "decision": "external-only",

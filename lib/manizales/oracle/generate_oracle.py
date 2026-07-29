@@ -52,10 +52,10 @@ def build(source: dict) -> dict:
             "missingInputs": source["requiredForSpectrum"],
         }],
         "negativeCases": [
-            {"case": "activation", "expected": "reject-missing-adoption-formula-node-values-damping-review"},
+            {"case": "activation", "expected": "reject-missing-node-values-location-rule"},
             {"case": "manual-zone-selector", "expected": "reject-updated-model-is-raster-not-zones"},
             {"case": "zone-a-b-or-c-as-current", "expected": "reject-historical-model-substitution"},
-            {"case": "spectrum-at-any-period", "expected": "reject-missing-node-fa-fv-formula-branches-damping"},
+            {"case": "spectrum-at-any-period", "expected": "reject-missing-node-fa-fv-and-location-rule"},
             {"case": "unknown-node-or-location", "expected": "reject"},
         ],
     }

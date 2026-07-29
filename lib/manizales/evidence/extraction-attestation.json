@@ -11,6 +11,24 @@
   },
   "sourceLocks": [
     {
+      "sourceDocumentId": "manizales-uniandes-2002",
+      "sha256": "2e8c2c752f657899bf0240292f9e390f70c41fc87af8355b65f3a12fdfb3a799",
+      "pageCount": 160,
+      "byteLength": 868103
+    },
+    {
+      "sourceDocumentId": "manizales-harmonization-2014",
+      "sha256": "35a1a22ed5a6e17f72ca4718d22e8c3a1f9ab0211afd9b175da3ce680e79aadc",
+      "pageCount": 89,
+      "byteLength": 6998062
+    },
+    {
+      "sourceDocumentId": "manizales-harmonization-presentation-2014",
+      "sha256": "8734ec360b735d002e38535718a305038de5856d9ad4bad334beccf010758f91",
+      "pageCount": 54,
+      "byteLength": 8340619
+    },
+    {
       "sourceDocumentId": "manizales-update-2015",
       "sha256": "55a8458cc211c83b3e13cf5feb7670dbd120535542c779512f1d2a86bd6628e3",
       "pageCount": 10,
@@ -30,6 +48,45 @@
     }
   ],
   "regions": [
+    {
+      "citationId": "source-2002-three-zone-selector",
+      "sourceDocumentId": "manizales-uniandes-2002",
+      "physicalPage": 152,
+      "rect": {
+        "left": 0.1,
+        "top": 0.13,
+        "width": 0.82,
+        "height": 0.48
+      },
+      "tokenSha256": "9c41c3c573d164ff25e6331f2a11b1fd53198ea7a670f1cdc59be7604adbb784",
+      "pngCropSha256": "0bd8b50aca4218e8b4ccc4808623a37256ca4488efabb8894dd3c810a19e19e4"
+    },
+    {
+      "citationId": "source-2014-node-model",
+      "sourceDocumentId": "manizales-harmonization-2014",
+      "physicalPage": 50,
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "tokenSha256": "6b27091b6d062305a6b3be44779676a06e9d71091f9836e0db3e3fb1dc3a18ea",
+      "pngCropSha256": "2ccd14b956175cb014f193e010de0bf1e45513434e1d31fea74ff5367ed66c5a"
+    },
+    {
+      "citationId": "source-2014-spectrum-shape",
+      "sourceDocumentId": "manizales-harmonization-presentation-2014",
+      "physicalPage": 44,
+      "rect": {
+        "left": 0.1,
+        "top": 0.48,
+        "width": 0.82,
+        "height": 0.42
+      },
+      "tokenSha256": "54688ae08f4d78a75e4efbd1c99406259c57c4c2141f129a74db44c74791012d",
+      "pngCropSha256": "c8417eca8bc641306d1ced3f7670f0460d7c43e595a598f6fbd871fab1a7ac3a"
+    },
     {
       "citationId": "table-update-basis",
       "sourceDocumentId": "manizales-update-2015",
@@ -243,6 +300,17 @@
     "status": "complete",
     "ocrUsed": false,
     "reviewedPages": [
+      "manizales-uniandes-2002:152",
+      "manizales-uniandes-2002:154",
+      "manizales-uniandes-2002:155",
+      "manizales-harmonization-2014:50",
+      "manizales-harmonization-2014:86",
+      "manizales-harmonization-2014:87",
+      "manizales-harmonization-presentation-2014:3",
+      "manizales-harmonization-presentation-2014:44",
+      "manizales-harmonization-presentation-2014:45",
+      "manizales-harmonization-presentation-2014:46",
+      "manizales-harmonization-presentation-2014:47",
       "manizales-update-2015:1",
       "manizales-update-2015:2",
       "manizales-update-2015:8",
@@ -251,5 +319,5 @@
       "manizales-pot-status-2025:1"
     ]
   },
-  "payloadSha256": "3321febecf2ead099e9ca706bb0188b1d8ecab0098bbfac432c9b705c212a763"
+  "payloadSha256": "5c7c49ffd8f6112394a034037bd34825e17adcdae332aa0e1516d15a26325aa6"
 }

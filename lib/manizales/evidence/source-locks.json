@@ -1,7 +1,31 @@
 {
   "schemaVersion": 1,
-  "retrievedOn": "2026-07-25",
+  "retrievedOn": "2026-07-29",
   "locks": [
+    {
+      "sourceDocumentId": "manizales-uniandes-2002",
+      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/19861/MicrozonificacionSismicaManizales%28UAndes_2002%29.pdf?isAllowed=y&sequence=1",
+      "sha256": "2e8c2c752f657899bf0240292f9e390f70c41fc87af8355b65f3a12fdfb3a799",
+      "pageCount": 160,
+      "byteLength": 868103,
+      "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "manizales-harmonization-2014",
+      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/36862/CMASRSL001.ArmonizacionNormasNSR10.pdf?isAllowed=y&sequence=1",
+      "sha256": "35a1a22ed5a6e17f72ca4718d22e8c3a1f9ab0211afd9b175da3ce680e79aadc",
+      "pageCount": 89,
+      "byteLength": 6998062,
+      "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "manizales-harmonization-presentation-2014",
+      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/36863/CMASRSL003.Presentacion.Micro.pdf?isAllowed=y&sequence=1",
+      "sha256": "8734ec360b735d002e38535718a305038de5856d9ad4bad334beccf010758f91",
+      "pageCount": 54,
+      "byteLength": 8340619,
+      "redistributionDecision": "external-only"
+    },
     {
       "sourceDocumentId": "manizales-update-2015",
       "officialUrl": "https://upcommons.upc.edu/bitstreams/3355be9f-7fb3-475e-bf7a-46462cff7add/download",
@@ -71,25 +95,11 @@
   ],
   "unavailableSources": [
     {
-      "id": "manizales-uniandes-2002",
-      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/handle/20.500.11762/19861",
-      "expectedTitle": "Microzonificacion Sismica de la Ciudad de Manizales",
-      "status": "unavailable-for-byte-lock",
-      "reason": "El repositorio oficial redirigio la descarga a un puerto no accesible desde el entorno; no se inventa SHA-256, longitud ni paginacion."
-    },
-    {
-      "id": "manizales-harmonization-2014",
-      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/handle/20.500.11762/36862",
-      "expectedTitle": "Armonizacion de la microzonificacion sismica con las normas NSR-10",
-      "status": "unavailable-for-byte-lock",
-      "reason": "La descarga primaria no fue recuperable desde el entorno; la publicacion de 2015 se usa como unica fuente tecnica bloqueada de la actualizacion."
-    },
-    {
       "id": "manizales-adoption-instrument",
       "officialUrl": "https://manizales.gov.co/transparencia-y-acceso-informacion-publica/normatividad/decretos/",
       "expectedTitle": "Acto de adopcion o certificacion oficial de inexistencia",
-      "status": "not-retrieved-material-blocker",
-      "reason": "La coleccion publica se enumero anonimamente: 2523 archivos y cero titulos con microzon/sism al 2026-07-28. La busqueda por nombre no revisa contenido ni prueba inexistencia, y el indice no parece completo para vigencia actual; no se recupero el acto de adopcion, modificacion o derogatoria."
+      "status": "not-retrieved-context-warning",
+      "reason": "La coleccion publica se enumero anonimamente: 2523 archivos y cero titulos con microzon/sism al 2026-07-28. La busqueda por nombre no revisa contenido ni prueba inexistencia, y el indice no parece completo para vigencia actual; se conserva como advertencia localizada, no como sustituto de los datos tecnicos faltantes."
     }
   ]
 }

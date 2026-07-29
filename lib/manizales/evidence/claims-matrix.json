@@ -18,7 +18,7 @@
       "expected": 4,
       "dispositioned": 4,
       "coveragePercent": 100,
-      "operationalFormulaCoveragePercent": 0
+      "operationalFormulaCoveragePercent": 50
     },
     "warning": {
       "expected": 6,

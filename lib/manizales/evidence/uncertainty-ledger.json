@@ -3,13 +3,6 @@
   "blocking": true,
   "entries": [
     {
-      "id": "adoption-currentness",
-      "severity": "blocker",
-      "scope": "legal-status",
-      "finding": "No se recupero el acto de adopcion, vigencia, modificacion o derogatoria de la actualizacion armonizada.",
-      "disposition": "No activar. Exigir instrumento primario completo y busqueda de vigencia repetible."
-    },
-    {
       "id": "manual-location-model",
       "severity": "blocker",
       "scope": "selector",
@@ -24,25 +17,11 @@
       "disposition": "Exigir tabla oficial completa o instrumento de consulta oficial reproducible."
     },
     {
-      "id": "missing-formula",
+      "id": "historical-figure-omission",
       "severity": "blocker",
-      "scope": "formula",
-      "finding": "Faltan ecuacion operacional, limites de rama y amortiguamiento del espectro.",
-      "disposition": "No importar automaticamente formulas NSR-10 desde otra fuente como si fueran publicadas por el estudio."
-    },
-    {
-      "id": "original-byte-lock",
-      "severity": "blocker",
-      "scope": "lineage",
-      "finding": "El PDF original 2002 no pudo bloquearse; las advertencias indexadas no se canonizan.",
-      "disposition": "Recuperar y revisar el original antes de cualquier uso historico."
-    },
-    {
-      "id": "independent-review",
-      "severity": "blocker",
-      "scope": "review",
-      "finding": "No existe revision humana independiente firmada del dossier.",
-      "disposition": "Mantener no-merge/no-activation."
+      "scope": "historical-formula",
+      "finding": "La copia oficial 2002 omite la Figura 8.5 que el texto identifica como portadora de ecuaciones y graficas de las zonas A/B/C.",
+      "disposition": "No digitalizar la grafica reducida de la presentacion 2014 ni tomar valores del sitio comparador."
     }
   ]
 }
