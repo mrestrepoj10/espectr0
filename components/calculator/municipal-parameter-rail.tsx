@@ -347,3 +347,225 @@ export function CaliParameterRail({
     </Card>
   )
 }
+
+export function Ccp14ParameterRail({
+  distanceToActiveFaultKm,
+  enhancedHazardRequiredByImportance,
+  longDurationEarthquakesExpected,
+  onDistanceToActiveFaultChange,
+  onEnhancedHazardChange,
+  onLongDurationChange,
+  onPgaChange,
+  onS1Change,
+  onSoilClassChange,
+  onSsChange,
+  onT0InterpretationChange,
+  pgaG,
+  s1G,
+  soilClass,
+  ssG,
+  t0Interpretation,
+}: {
+  distanceToActiveFaultKm: number | null
+  enhancedHazardRequiredByImportance: boolean | null
+  longDurationEarthquakesExpected: boolean | null
+  onDistanceToActiveFaultChange: (value: number | null) => void
+  onEnhancedHazardChange: (value: boolean) => void
+  onLongDurationChange: (value: boolean) => void
+  onPgaChange: (value: number | null) => void
+  onS1Change: (value: number | null) => void
+  onSoilClassChange: (value: string) => void
+  onSsChange: (value: number | null) => void
+  onT0InterpretationChange: (value: string) => void
+  pgaG: number | null
+  s1G: number | null
+  soilClass: string | null
+  ssG: number | null
+  t0Interpretation: string | null
+}) {
+  const durationOptions = [
+    { id: "no", label: "No se esperan" },
+    { id: "yes", label: "Si se esperan" },
+  ]
+  const enhancedHazardOptions = [
+    { id: "no", label: "No se requiere" },
+    { id: "yes", label: "Si se requiere" },
+  ]
+
+  return (
+    <Card className="self-start" size="sm">
+      <CardHeader>
+        <CardTitle>Parámetros CCP-14</CardTitle>
+        <CardDescription>
+          Valores del proyecto declarados manualmente; no se asignan por ciudad.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <FieldGroup className="gap-5">
+          <NumericInput
+            description="Aceleración pico efectiva obtenida de la base oficial del proyecto."
+            id="ccp14-pga"
+            label="PGA (g)"
+            nullable
+            onValueChange={onPgaChange}
+            value={pgaG}
+          />
+          <NumericInput
+            description="Aceleración espectral para periodo corto declarada para el proyecto."
+            id="ccp14-ss"
+            label="Ss (g)"
+            nullable
+            onValueChange={onSsChange}
+            value={ssG}
+          />
+          <NumericInput
+            description="Aceleración espectral para un segundo declarada para el proyecto."
+            id="ccp14-s1"
+            label="S1 (g)"
+            nullable
+            onValueChange={onS1Change}
+            value={s1G}
+          />
+          <MunicipalSelect
+            description="Clase de sitio confirmada por la información geotécnica del proyecto."
+            id="ccp14-soil-trigger"
+            label="Clase de suelo"
+            onValueChange={onSoilClassChange}
+            options={["A", "B", "C", "D", "E", "F"].map((id) => ({ id, label: `Suelo ${id}` }))}
+            value={soilClass}
+          />
+          <MunicipalSelect
+            description="La publicación oficial contiene dos lecturas incompatibles; elige explícitamente cuál documentar."
+            id="ccp14-t0-trigger"
+            label="Interpretación de T₀"
+            onValueChange={onT0InterpretationChange}
+            options={[
+              { id: "figure-0.2-ts", label: "Figura: T₀ = 0,2·Ts" },
+              { id: "definition-0.2-seconds", label: "Definición: T₀ = 0,2 s" },
+            ]}
+            value={t0Interpretation}
+          />
+          <NumericInput
+            description="Distancia confirmada a la falla activa más cercana; menos de 10 km exige estudio específico."
+            id="ccp14-fault-distance"
+            label="Distancia a falla activa (km)"
+            nullable
+            onValueChange={onDistanceToActiveFaultChange}
+            value={distanceToActiveFaultKm}
+          />
+          <MunicipalSelect
+            description="Confirma si se esperan sismos de larga duración en el sitio."
+            id="ccp14-long-duration-trigger"
+            label="¿Sismos de larga duración?"
+            onValueChange={(value) => onLongDurationChange(value === "yes")}
+            options={durationOptions}
+            value={longDurationEarthquakesExpected === null ? null : longDurationEarthquakesExpected ? "yes" : "no"}
+          />
+          <MunicipalSelect
+            description="Confirma si la importancia del puente exige menor probabilidad de excedencia o mayor periodo de retorno."
+            id="ccp14-enhanced-hazard-trigger"
+            label="¿Amenaza reforzada por importancia?"
+            onValueChange={(value) => onEnhancedHazardChange(value === "yes")}
+            options={enhancedHazardOptions}
+            value={enhancedHazardRequiredByImportance === null ? null : enhancedHazardRequiredByImportance ? "yes" : "no"}
+          />
+          <Alert>
+            <ShieldAlertIcon />
+            <AlertTitle>Entradas manuales y conflicto T₀</AlertTitle>
+            <AlertDescription>
+              Verifica PGA, Ss y S1 en los documentos oficiales del proyecto. La
+              selección de T₀ registra una interpretación; no resuelve la
+              contradicción de la publicación de INVÍAS.
+            </AlertDescription>
+          </Alert>
+        </FieldGroup>
+      </CardContent>
+      <CardFooter className="flex-col items-stretch gap-3">
+        <Separator />
+        <a
+          className="text-muted-foreground text-xs underline underline-offset-4"
+          href="https://www.invias.gov.co/index.php/archivo-y-documentos/documentos-tecnicos/3709-norma-colombiana-de-diseno-de-puentes-ccp-14"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Publicación oficial CCP-14 de INVÍAS
+        </a>
+      </CardFooter>
+    </Card>
+  )
+}
+
+export function DosquebradasParameterRail({
+  importanceFactor,
+  onImportanceFactorChange,
+  onZoneChange,
+  zoneId,
+  zoneOptions,
+}: {
+  importanceFactor: number
+  onImportanceFactorChange: (value: number) => void
+  onZoneChange: (value: string) => void
+  zoneId: string | null
+  zoneOptions: readonly SelectOption[]
+}) {
+  return (
+    <Card className="self-start" size="sm">
+      <CardHeader>
+        <CardTitle>Parámetros de Dosquebradas</CardTitle>
+        <CardDescription>
+          Una zona manual y el único escenario de diseño soportado.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <FieldGroup className="gap-5">
+          <MunicipalSelect
+            description="Cinco zonas publicadas en la Tabla 27 del POT 2024."
+            id="dosquebradas-zone-trigger"
+            label="Zona de respuesta"
+            onValueChange={onZoneChange}
+            options={zoneOptions}
+            value={zoneId}
+          />
+          <Field>
+            <FieldLabel>Nivel de amenaza</FieldLabel>
+            <Input disabled value="Diseño" />
+            <FieldDescription>
+              Escenario único; la tabla municipal no declara periodo de retorno.
+            </FieldDescription>
+          </Field>
+          <NumericInput
+            description="Factor declarado para el proyecto."
+            id="dosquebradas-importance-factor"
+            label="Factor de importancia I"
+            min={0.01}
+            onValueChange={(value) => onImportanceFactorChange(value ?? 0)}
+            value={importanceFactor}
+          />
+          <ManualZoneWarning />
+          <Alert>
+            <ShieldAlertIcon />
+            <AlertTitle>Intervalo publicado</AlertTitle>
+            <AlertDescription>
+              El cálculo y la gráfica cubren To ≤ T ≤ TL. Las consultas fuera
+              de ese intervalo devuelven una advertencia localizada.
+            </AlertDescription>
+          </Alert>
+        </FieldGroup>
+      </CardContent>
+      <CardFooter className="flex-col items-stretch gap-3">
+        <Separator />
+        <p className="text-muted-foreground text-xs">
+          Sin mapas, coordenadas ni detección automática de zona.
+        </p>
+        <a
+          className="text-muted-foreground text-xs underline underline-offset-4"
+          href="https://pot.dosquebradas.gov.co/repositorio/pot-2024-1/3.Diagnostico/3.1%20AMBIENTAL/3.1.2%20Diagnostico%20Amenazas%20origen%20natural%20e%20instrumentos%20de%20GRD.pdf"
+          rel="noreferrer"
+          target="_blank"
+        >
+          POT 2024 de Dosquebradas · Tabla 27
+        </a>
+      </CardFooter>
+    </Card>
+  )
+}

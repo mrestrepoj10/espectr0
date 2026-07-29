@@ -488,14 +488,80 @@ describe("unified municipal mode selector", () => {
 		expect(interactiveText).not.toMatch(/mapa|gis|coordenad|ubicación automática/);
 	});
 
-	it("keeps CCP-14 inspectable while failing closed on official-source gaps", async () => {
+	it("activates CCP-14 only after every manual input and applicability check", async () => {
 		await chooseMode("CCP-14 · Puentes");
+		expect(container.textContent).toContain("Parámetros CCP-14");
+		expect(container.textContent).toContain("Interpretación de T₀");
+		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
+		expect(container.textContent).toContain("Completa los datos manuales de CCP-14");
+		expect(container.textContent).not.toContain("Datos del espectro");
+		expect(container.querySelector("#ccp14-city-trigger")).toBeNull();
+
+		await setNumberInput("ccp14-pga", "0.25");
+		await setNumberInput("ccp14-ss", "0.5");
+		await setNumberInput("ccp14-s1", "0.2");
+		await chooseSelectOption("ccp14-soil-trigger", "Suelo D");
+		await chooseSelectOption("ccp14-t0-trigger", "Figura: T₀ = 0,2·Ts");
+		await setNumberInput("ccp14-fault-distance", "12");
+		await chooseSelectOption("ccp14-long-duration-trigger", "No se esperan");
+		await chooseSelectOption("ccp14-enhanced-hazard-trigger", "No se requiere");
+
+		await vi.waitFor(() => expect(container.textContent).toContain("Datos del espectro"));
+		expect(container.textContent).toContain("PGA, Ss and S1 are manual engineering inputs");
+		expect(chartAnnotationText()).toContain("T0");
+		expect(chartAnnotationText()).toContain("Ts");
+		expect(container.textContent).toContain("Exportar");
+	});
+
+	it("keeps CCP-14 site-specific triggers localized to the entered scenario", async () => {
+		await chooseMode("CCP-14 · Puentes");
+		await setNumberInput("ccp14-pga", "0.25");
+		await setNumberInput("ccp14-ss", "0.5");
+		await setNumberInput("ccp14-s1", "0.2");
+		await chooseSelectOption("ccp14-soil-trigger", "Suelo F");
+		await chooseSelectOption("ccp14-t0-trigger", "Figura: T₀ = 0,2·Ts");
+		await setNumberInput("ccp14-fault-distance", "12");
+		await chooseSelectOption("ccp14-long-duration-trigger", "No se esperan");
+		await chooseSelectOption("ccp14-enhanced-hazard-trigger", "No se requiere");
 
 		await vi.waitFor(() => {
-			expect(container.textContent).toContain("CCP-14 · Puentes · sin cálculo");
+			expect(container.textContent).toContain("Estudio de respuesta sísmica particular requerido");
 		});
-		expect(container.textContent).toContain("PGA, Ss y S1");
-		expect(container.textContent).toContain("T₀ = 0,2·Ts");
-		expect(container.textContent).not.toContain("Exportar");
+		expect(container.textContent).toContain("soil class F");
+		expect(container.textContent).not.toContain("Datos del espectro");
+	});
+
+	it("activates one Dosquebradas scenario and localizes unsupported periods", async () => {
+		await chooseMode("Dosquebradas");
+		expect(container.textContent).toContain("Selecciona la zona de Dosquebradas");
+		expect(container.textContent).toContain("To ≤ T ≤ TL");
+		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
+		expect(container.textContent).not.toContain("Datos del espectro");
+
+		const zoneTrigger = document.querySelector<HTMLButtonElement>("#dosquebradas-zone-trigger");
+		await act(async () => zoneTrigger?.click());
+		await waitForElement('[role="option"]', "Zona 1");
+		expect(
+			[...document.querySelectorAll<HTMLElement>('[role="option"]')].filter(
+				(option) => option.textContent?.trim().startsWith("Zona "),
+			),
+		).toHaveLength(5);
+		await act(async () => {
+			[...document.querySelectorAll<HTMLElement>('[role="option"]')]
+				.find((option) => option.textContent?.includes("Zona 1"))
+				?.click();
+		});
+
+		await vi.waitFor(() => expect(container.textContent).toContain("Datos del espectro"));
+		expect(container.textContent).toContain("To=0.05 s");
+		expect(container.textContent).toContain("TL=2.5 s");
+		expect(chartAnnotationText()).toContain("To");
+		expect(chartAnnotationText()).toContain("Tc");
+		expect(chartAnnotationText()).toContain("TL");
+
+		await setNumberInput("period-lookup-input", "0.01");
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain("no publica una rama de entrada verificable");
+		});
 	});
 });

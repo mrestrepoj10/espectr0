@@ -30,13 +30,17 @@ describe("municipal calculator mode catalog", () => {
       expect(isSourceBlockedMode(mode.id)).toBe(true)
     }
     expect(isSourceBlockedMode("nsr10-national")).toBe(false)
+	expect(isSourceBlockedMode("ccp14")).toBe(false)
 	expect(isSourceBlockedMode("bogota-microzonation")).toBe(false)
 	expect(isSourceBlockedMode("cali-microzonation")).toBe(false)
+	expect(isSourceBlockedMode("dosquebradas-microzonation")).toBe(false)
   })
 
   it("keeps active municipal engines out of the source-blocked record", () => {
     expect(Object.keys(sourceBlockedModes)).not.toContain("bogota-microzonation")
     expect(Object.keys(sourceBlockedModes)).not.toContain("cali-microzonation")
+	expect(Object.keys(sourceBlockedModes)).not.toContain("ccp14")
+	expect(Object.keys(sourceBlockedModes)).not.toContain("dosquebradas-microzonation")
     expect(calculationModes.find(({ id }) => id === "bogota-microzonation")?.description)
       .toContain("Cálculo manual")
     expect(calculationModes.find(({ id }) => id === "cali-microzonation")?.description)

@@ -25,6 +25,8 @@ import {
 import {
 	BogotaParameterRail,
 	CaliParameterRail,
+	Ccp14ParameterRail,
+	DosquebradasParameterRail,
 } from "@/components/calculator/municipal-parameter-rail";
 import {
 	defaultMunicipio,
@@ -78,6 +80,9 @@ import {
 	adaptCaliSpectrum,
 	caliCanonical,
 } from "@/lib/cali";
+import { adaptCcp14Spectrum } from "@/lib/ccp14";
+import { adaptDosquebradasSpectrum } from "@/lib/dosquebradas/adapter";
+import { dosquebradasRows } from "@/lib/dosquebradas/schema";
 import { capabilityUiState } from "@/lib/calculator-shell";
 import {
 	calculationModes,
@@ -95,6 +100,10 @@ import {
 } from "@/lib/spectra";
 
 import type { CalculatorModeId } from "@/lib/municipal-mode-catalog";
+import type {
+	Ccp14SoilClass,
+	Ccp14T0Interpretation,
+} from "@/lib/ccp14";
 import type {
 	HazardLevel,
 	ImportanceGroup,
@@ -137,12 +146,28 @@ const municipalBranchLabels: Readonly<Record<string, string>> = {
 	"bogota-damage-long": "Periodo largo de umbral de daño",
 };
 
+const activatedBranchLabels: Readonly<Record<string, string>> = {
+	"initial-linear": "Ascendente CCP-14",
+	"inverse-period": "Descendente CCP-14",
+	"dosquebradas-plateau": "Meseta de Dosquebradas",
+	"dosquebradas-inverse": "Descendente de Dosquebradas",
+};
+
 const allBranchLabels: Readonly<Record<string, string>> = {
 	...branchLabels,
 	...municipalBranchLabels,
+	...activatedBranchLabels,
 };
 
 const metricPresentation = {
+	as: { label: "As", digits: 3 },
+	sds: { label: "SDS", digits: 3 },
+	sd1: { label: "SD1", digits: 3 },
+	ts: { label: "Ts", digits: 3 },
+	performanceZone: { label: "Zona de desempeño", digits: 0 },
+	to: { label: "To", digits: 3 },
+	importanceFactor: { label: "I", digits: 2 },
+	avDerived: { label: "Av derivado", digits: 3 },
 	aa: { digits: 2 },
 	av: { digits: 2 },
 	ae: { digits: 2 },
@@ -602,6 +627,10 @@ const caliHazardOptions = caliCanonical.hazards.map((hazard) => ({
 	id: hazard.id,
 	label: caliHazardLabels[hazard.id] ?? hazard.id,
 }));
+const dosquebradasZoneOptions = dosquebradasRows.map(({ optionId }) => ({
+	id: optionId,
+	label: `Zona ${optionId.at(-1)}`,
+}));
 
 function municipalHazardDescription(
 	hazard:
@@ -647,6 +676,12 @@ function activeChartDescription(
 	mode: CalculatorModeId,
 	nsrHazardLevel: HazardLevel,
 ) {
+	if (mode === "ccp14") {
+		return "Curva CCP-14 emitida con los valores y comprobaciones declarados manualmente para el proyecto.";
+	}
+	if (mode === "dosquebradas-microzonation") {
+		return "Curva municipal emitida solo en el intervalo soportado To ≤ T ≤ TL para la zona manual.";
+	}
 	if (mode === "nsr10-national") return chartDescription(nsrHazardLevel);
 	if (mode === "bogota-microzonation") {
 		return "Curva emitida por el motor distrital para la zona y amenaza seleccionadas manualmente.";
@@ -655,6 +690,19 @@ function activeChartDescription(
 }
 
 function transitionMetrics(mode: CalculatorModeId, hazardId: string) {
+	if (mode === "ccp14") {
+		return [
+			{ id: "t0", label: "T0" },
+			{ id: "ts", label: "Ts" },
+		];
+	}
+	if (mode === "dosquebradas-microzonation") {
+		return [
+			{ id: "to", label: "To" },
+			{ id: "tc", label: "Tc" },
+			{ id: "tl", label: "TL" },
+		];
+	}
 	if (mode === "bogota-microzonation") {
 		if (hazardId === "damage-threshold") {
 			return [
@@ -683,6 +731,19 @@ function transitionMetrics(mode: CalculatorModeId, hazardId: string) {
 export function CalculatorPage() {
 	const [calculationMode, setCalculationMode] =
 		useState<CalculatorModeId>("nsr10-national");
+	const [ccp14PgaG, setCcp14PgaG] = useState<number | null>(null);
+	const [ccp14SsG, setCcp14SsG] = useState<number | null>(null);
+	const [ccp14S1G, setCcp14S1G] = useState<number | null>(null);
+	const [ccp14SoilClass, setCcp14SoilClass] =
+		useState<Ccp14SoilClass | null>(null);
+	const [ccp14T0Interpretation, setCcp14T0Interpretation] =
+		useState<Ccp14T0Interpretation | null>(null);
+	const [ccp14FaultDistance, setCcp14FaultDistance] =
+		useState<number | null>(null);
+	const [ccp14LongDuration, setCcp14LongDuration] =
+		useState<boolean | null>(null);
+	const [ccp14EnhancedHazard, setCcp14EnhancedHazard] =
+		useState<boolean | null>(null);
 	const [municipio, setMunicipio] = useState<Municipio>(defaultMunicipio);
 	const [soilProfile, setSoilProfile] = useState<SoilProfile>("D");
 	const [importanceGroup, setImportanceGroup] = useState<ImportanceGroup>("I");
@@ -704,6 +765,10 @@ export function CalculatorPage() {
 	const [caliImportanceFactor, setCaliImportanceFactor] = useState(1);
 	const [caliFillThickness, setCaliFillThickness] = useState<number | null>(null);
 	const [caliColluvialDeposit, setCaliColluvialDeposit] = useState(false);
+	const [dosquebradasZoneId, setDosquebradasZoneId] =
+		useState<string | null>(null);
+	const [dosquebradasImportanceFactor, setDosquebradasImportanceFactor] =
+		useState(1);
 	const [traceabilityOpen, setTraceabilityOpen] = useState(false);
 	const chartContainerRef = useRef<HTMLDivElement>(null);
 
@@ -732,6 +797,39 @@ export function CalculatorPage() {
 		() => adaptNsr10Spectrum(spectrumParams, { municipality: municipio }),
 		[spectrumParams, municipio],
 	);
+	const ccp14Result = useMemo(() => {
+		if (
+			calculationMode !== "ccp14" ||
+			ccp14PgaG === null ||
+			ccp14SsG === null ||
+			ccp14S1G === null ||
+			ccp14SoilClass === null ||
+			ccp14T0Interpretation === null ||
+			ccp14FaultDistance === null ||
+			ccp14LongDuration === null ||
+			ccp14EnhancedHazard === null
+		) return null;
+		return adaptCcp14Spectrum({
+			pgaG: ccp14PgaG,
+			ssG: ccp14SsG,
+			s1G: ccp14S1G,
+			soilClass: ccp14SoilClass,
+			t0Interpretation: ccp14T0Interpretation,
+			distanceToActiveFaultKm: ccp14FaultDistance,
+			longDurationEarthquakesExpected: ccp14LongDuration,
+			enhancedHazardRequiredByImportance: ccp14EnhancedHazard,
+		});
+	}, [
+		calculationMode,
+		ccp14EnhancedHazard,
+		ccp14FaultDistance,
+		ccp14LongDuration,
+		ccp14PgaG,
+		ccp14S1G,
+		ccp14SoilClass,
+		ccp14SsG,
+		ccp14T0Interpretation,
+	]);
 	const bogotaResult = useMemo(
 		() => {
 			if (
@@ -783,13 +881,32 @@ export function CalculatorPage() {
 			caliOptionId,
 		],
 	);
+	const dosquebradasResult = useMemo(() => {
+		if (
+			calculationMode !== "dosquebradas-microzonation" ||
+			dosquebradasZoneId === null
+		) return null;
+		return adaptDosquebradasSpectrum({
+			zoneId: dosquebradasZoneId,
+			hazardId: "design",
+			importanceFactor: dosquebradasImportanceFactor,
+		});
+	}, [
+		calculationMode,
+		dosquebradasImportanceFactor,
+		dosquebradasZoneId,
+	]);
 	const result =
 		calculationMode === "nsr10-national"
 			? nsr10Result
+			: calculationMode === "ccp14"
+				? ccp14Result
 			: calculationMode === "bogota-microzonation"
 				? bogotaResult
 				: calculationMode === "cali-microzonation"
 					? caliResult
+					: calculationMode === "dosquebradas-microzonation"
+						? dosquebradasResult
 					: null;
 	const evaluatePeriod = useCallback(
 		(periodSeconds: number) => {
@@ -848,6 +965,29 @@ export function CalculatorPage() {
 				onSoilProfileChange={setSoilProfile}
 				soilProfile={soilProfile}
 			/>
+		) : calculationMode === "ccp14" ? (
+			<Ccp14ParameterRail
+				distanceToActiveFaultKm={ccp14FaultDistance}
+				enhancedHazardRequiredByImportance={ccp14EnhancedHazard}
+				longDurationEarthquakesExpected={ccp14LongDuration}
+				onDistanceToActiveFaultChange={setCcp14FaultDistance}
+				onEnhancedHazardChange={setCcp14EnhancedHazard}
+				onLongDurationChange={setCcp14LongDuration}
+				onPgaChange={setCcp14PgaG}
+				onS1Change={setCcp14S1G}
+				onSoilClassChange={(value) =>
+					setCcp14SoilClass(value as Ccp14SoilClass)
+				}
+				onSsChange={setCcp14SsG}
+				onT0InterpretationChange={(value) =>
+					setCcp14T0Interpretation(value as Ccp14T0Interpretation)
+				}
+				pgaG={ccp14PgaG}
+				s1G={ccp14S1G}
+				soilClass={ccp14SoilClass}
+				ssG={ccp14SsG}
+				t0Interpretation={ccp14T0Interpretation}
+			/>
 		) : calculationMode === "bogota-microzonation" ? (
 			<BogotaParameterRail
 				fillThicknessMeters={bogotaFillThickness}
@@ -892,6 +1032,14 @@ export function CalculatorPage() {
 				zoneId={caliZoneId}
 				zoneOptions={caliZoneOptions}
 			/>
+		) : calculationMode === "dosquebradas-microzonation" ? (
+			<DosquebradasParameterRail
+				importanceFactor={dosquebradasImportanceFactor}
+				onImportanceFactorChange={setDosquebradasImportanceFactor}
+				onZoneChange={setDosquebradasZoneId}
+				zoneId={dosquebradasZoneId}
+				zoneOptions={dosquebradasZoneOptions}
+			/>
 		) : isSourceBlockedMode(calculationMode) ? (
 			<SourceBlockedRail modeId={calculationMode} />
 		) : null;
@@ -902,7 +1050,18 @@ export function CalculatorPage() {
 			Math.max(...result.points.map(({ saG }) => saG))
 		: 0;
 	const manualSelectionNotice =
-		calculationMode === "bogota-microzonation" && bogotaZoneId === null ? (
+		calculationMode === "ccp14" && ccp14Result === null ? (
+			<ManualSelectionNotice
+				description="Declara PGA, Ss, S1, suelo, interpretación de T₀ y las tres comprobaciones de aplicabilidad."
+				title="Completa los datos manuales de CCP-14"
+			/>
+		) : calculationMode === "dosquebradas-microzonation" &&
+			dosquebradasZoneId === null ? (
+			<ManualSelectionNotice
+				description="Elige manualmente una de las cinco zonas publicadas en la Tabla 27."
+				title="Selecciona la zona de Dosquebradas"
+			/>
+		) : calculationMode === "bogota-microzonation" && bogotaZoneId === null ? (
 			<ManualSelectionNotice
 				description="Elige una zona de respuesta de la publicación oficial."
 				title="Selecciona la zona de Bogotá"
