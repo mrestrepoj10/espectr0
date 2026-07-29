@@ -61,6 +61,7 @@ function manifestCitation(citation: ManifestCitation): SpectrumEvidenceCitation 
     citation.id.includes(`-${id}-column-`),
   )
   const columnId = citation.id.match(/(column-\d+)$/)?.[1]
+  const isBaseAcceleration = citation.id === `base-${hazard?.id ?? ""}`
   const fieldSemantics = canonicalJson.fieldSemantics as Record<
     string,
     Record<string, string>
@@ -75,8 +76,13 @@ function manifestCitation(citation: ManifestCitation): SpectrumEvidenceCitation 
       ? (parent?.reference ?? citation.reference).split(",")[0]
       : null,
     row: component ? `Microzona ${component.sourceLabel}` : parent?.reference ?? null,
-    cell:
-      citation.regionKind === "cell"
+    cell: isBaseAcceleration
+      ? hazard?.id === "design"
+        ? "Aa = Av"
+        : hazard?.id === "safety-limited"
+          ? "Ae"
+          : "Ad"
+      : citation.regionKind === "cell"
         ? hazard && columnId
           ? fieldSemantics[hazard.id]?.[columnId] ?? null
           : null
@@ -159,7 +165,7 @@ function caliEvidence(
   const stepById = new Map(traceSteps.map((step) => [step.id, step]))
   const component = canonicalJson.curveComponents.find(({ id }) => id === key.optionId)
   const directSteps = traceSteps.filter(
-    (step) => step.classification === "direct-source" && step.id.includes("-column-"),
+    (step) => step.classification === "direct-source",
   )
   const directValues = directSteps.map((step) => {
     const citationId = Array.isArray(step.citationIds) ? step.citationIds[0] : null

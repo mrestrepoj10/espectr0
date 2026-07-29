@@ -327,8 +327,8 @@ function assertEvidenceView(
       throw new Error(`Direct evidence value has no cell citation: ${value.id}`)
     }
     const citation = view.citations.find(({ id }) => id === value.citationId)
-    if (citation?.kind !== "cell") {
-      throw new Error(`Direct evidence value citation is not a cell: ${value.id}`)
+    if (!citation?.rect) {
+      throw new Error(`Direct evidence value citation has no exact source region: ${value.id}`)
     }
     if (value.normalizedInputPath) {
       let boundInput: NormalizedInputValue | undefined = result.normalizedInputs

@@ -404,6 +404,28 @@
       ]
     },
     {
+      "id": "base-design",
+      "sourceDocumentId": "cali-decree-0158-2014",
+      "regionKind": "applicability",
+      "physicalPage": 11,
+      "printedPage": "12",
+      "reference": "Tabla 2, aceleración base",
+      "rect": {
+        "left": 0.16,
+        "top": 0.209,
+        "width": 0.66,
+        "height": 0.056384615384615394
+      },
+      "extractedToken": "0.25",
+      "unit": "g",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.25"
+      ],
+      "normalizedValue": 0.25,
+      "normalizedNumericValue": 0.25
+    },
+    {
       "id": "row-design-zone-1",
       "sourceDocumentId": "cali-decree-0158-2014",
       "regionKind": "row",
@@ -1891,6 +1913,28 @@
       "requiredTokens": [
         "Tabla 3. Coeficientes y curvas de seguridad limitada"
       ]
+    },
+    {
+      "id": "base-safety-limited",
+      "sourceDocumentId": "cali-decree-0158-2014",
+      "regionKind": "applicability",
+      "physicalPage": 12,
+      "printedPage": "13",
+      "reference": "Tabla 3, aceleración base",
+      "rect": {
+        "left": 0.185,
+        "top": 0.438,
+        "width": 0.605,
+        "height": 0.040365384615384636
+      },
+      "extractedToken": "0.15",
+      "unit": "g",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.15"
+      ],
+      "normalizedValue": 0.15,
+      "normalizedNumericValue": 0.15
     },
     {
       "id": "row-safety-limited-zone-1",
@@ -3382,6 +3426,28 @@
       ]
     },
     {
+      "id": "base-damage-threshold",
+      "sourceDocumentId": "cali-decree-0158-2014",
+      "regionKind": "applicability",
+      "physicalPage": 13,
+      "printedPage": "14",
+      "reference": "Tabla 4, aceleración base",
+      "rect": {
+        "left": 0.215,
+        "top": 0.634,
+        "width": 0.575,
+        "height": 0.04051923076923081
+      },
+      "extractedToken": "0.09",
+      "unit": "g",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.09"
+      ],
+      "normalizedValue": 0.09,
+      "normalizedNumericValue": 0.09
+    },
+    {
       "id": "row-damage-threshold-zone-1",
       "sourceDocumentId": "cali-decree-0158-2014",
       "regionKind": "row",
@@ -4855,7 +4921,10 @@
     "app-decree-adoption",
     "app-pot-art55",
     "app-nsr-return-periods",
-    "app-study-historical"
+    "app-study-historical",
+    "base-design",
+    "base-safety-limited",
+    "base-damage-threshold"
   ],
   "coverage": {
     "optionIds": [

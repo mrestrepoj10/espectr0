@@ -157,8 +157,12 @@ describe("Cali normalized spectrum adapter", () => {
       "cali-ingeominas-dagma-2005-tomo6",
       "nsr10-title-a-2017",
     ])
-    expect(evidence.directValues).toHaveLength(4)
+    expect(evidence.directValues).toHaveLength(5)
     expect(evidence.directValues.every(({ traceStepId }) => traceStepId !== null)).toBe(true)
+    expect(evidence.directValues.find(({ id }) => id === "cali-base-acceleration")).toMatchObject({
+      value: 0.25,
+      citationId: "base-design",
+    })
     expect(evidence.citations[0]).toMatchObject({
       table: "Tabla 2",
       row: "Microzona 3",
