@@ -23,6 +23,10 @@ import {
 	SpectrumPeriodLookup,
 } from "@/components/calculator-shell";
 import {
+	BogotaParameterRail,
+	CaliParameterRail,
+} from "@/components/calculator/municipal-parameter-rail";
+import {
 	defaultMunicipio,
 	getHazardNotice,
 	getMunicipalityCoefficients,
@@ -66,6 +70,14 @@ import {
 	copyChartSvg,
 	copyTextToClipboard,
 } from "@/lib/chart-export";
+import {
+	adaptBogotaSpectrum,
+	bogotaCanonical,
+} from "@/lib/bogota";
+import {
+	adaptCaliSpectrum,
+	caliCanonical,
+} from "@/lib/cali";
 import { capabilityUiState } from "@/lib/calculator-shell";
 import {
 	calculationModes,
@@ -109,6 +121,27 @@ const branchLabels: Record<SpectrumBranch, string> = {
 	"inverse-T2-A.12.3-6": "1/T² · A.12.3-6",
 };
 
+const municipalBranchLabels: Readonly<Record<string, string>> = {
+	plateau: "Meseta",
+	inverse: "Descendente",
+	"inverse-square": "Periodo largo",
+	"bogota-design-plateau": "Meseta de diseño",
+	"bogota-design-decay": "Descendente de diseño",
+	"bogota-design-long": "Periodo largo de diseño",
+	"bogota-limited-plateau": "Meseta de seguridad limitada",
+	"bogota-limited-decay": "Descendente de seguridad limitada",
+	"bogota-limited-long": "Periodo largo de seguridad limitada",
+	"bogota-damage-ramp": "Ascendente de umbral de daño",
+	"bogota-damage-plateau": "Meseta de umbral de daño",
+	"bogota-damage-decay": "Descendente de umbral de daño",
+	"bogota-damage-long": "Periodo largo de umbral de daño",
+};
+
+const allBranchLabels: Readonly<Record<string, string>> = {
+	...branchLabels,
+	...municipalBranchLabels,
+};
+
 const metricPresentation = {
 	aa: { digits: 2 },
 	av: { digits: 2 },
@@ -123,6 +156,15 @@ const metricPresentation = {
 	tl: { digits: 2 },
 	saMax: { label: "Sa máx", digits: 3 },
 	pga: { digits: 3 },
+	a: { digits: 3 },
+	a0: { label: "A₀", digits: 3 },
+	ground_peak: { label: "A₀", digits: 3 },
+	transition_start: { label: "T₀", digits: 3 },
+	transition_end: { label: "Tc", digits: 3 },
+	long_period: { label: "TL", digits: 2 },
+	"sa-plateau": { label: "Sa meseta", digits: 3 },
+	faEffective: { label: "Fa efectivo", digits: 3 },
+	fvEffective: { label: "Fv efectivo", digits: 3 },
 } as const;
 
 function damageMetricPresentation(hazardLevel: HazardLevel) {
@@ -505,6 +547,126 @@ function chartDescription(hazardLevel: HazardLevel) {
 	return "A.2.6 general: meseta desde T = 0 hasta TC, seguida por ramas 1/T y 1/T².";
 }
 
+function ManualSelectionNotice({
+	description,
+	title,
+}: {
+	description: string;
+	title: string;
+}) {
+	return (
+		<Card>
+			<CalculatorResultHeader
+				applicability="invalid-input"
+				description={description}
+				title={title}
+			/>
+			<CardContent>
+				<p className="text-muted-foreground text-sm">
+					No se calcula ni exporta ningún espectro hasta completar la selección
+					 manual.
+				</p>
+			</CardContent>
+		</Card>
+	);
+}
+
+const bogotaZoneOptions = bogotaCanonical.options.map((option) => ({
+	id: option.id,
+	label: option.sourceLabel,
+}));
+const bogotaHazardOptions = bogotaCanonical.hazards.map((hazard) => ({
+	id: hazard.id,
+	label: hazard.label,
+}));
+const caliZoneOptions = [
+	...new Map(
+		caliCanonical.curveComponents.map((option) => {
+			const id = option.concurrentGroup ?? option.id;
+			return [
+				id,
+				{
+					id,
+					label: option.label.split(" — ")[0],
+				},
+			] as const;
+		}),
+	).values(),
+];
+const caliHazardLabels: Readonly<Record<string, string>> = {
+	design: "Diseño",
+	"safety-limited": "Seguridad limitada",
+	"damage-threshold": "Umbral de daño",
+};
+const caliHazardOptions = caliCanonical.hazards.map((hazard) => ({
+	id: hazard.id,
+	label: caliHazardLabels[hazard.id] ?? hazard.id,
+}));
+
+function municipalHazardDescription(
+	hazard:
+		| (typeof bogotaCanonical.hazards)[number]
+		| (typeof caliCanonical.hazards)[number]
+		| undefined,
+) {
+	if (!hazard) return "Nivel no disponible en la fuente canónica.";
+	const returnPeriodYears = "returnPeriodYears" in hazard
+		? hazard.returnPeriodYears
+		: hazard.averageReturnPeriodYears;
+	return `TR ${returnPeriodYears} años · amortiguamiento crítico del ${hazard.dampingRatio * 100} %.`;
+}
+
+function caliComponentOptions(zoneId: string | null) {
+	if (!zoneId) return [];
+	return caliCanonical.curveComponents
+		.filter(({ concurrentGroup }) => concurrentGroup === zoneId)
+		.map((component) => ({
+			id: component.id,
+			label: component.label.split(" — ")[1] ?? component.label,
+		}));
+}
+
+function resolvedCaliOptionId(
+	zoneId: string | null,
+	componentId: string | null,
+) {
+	if (!zoneId) return null;
+	const direct = caliCanonical.curveComponents.find(
+		(component) => component.id === zoneId && component.concurrentGroup === null,
+	);
+	if (direct) return direct.id;
+	return caliCanonical.curveComponents.some(
+		(component) =>
+			component.concurrentGroup === zoneId && component.id === componentId,
+	)
+		? componentId
+		: null;
+}
+
+function activeChartDescription(
+	mode: CalculatorModeId,
+	nsrHazardLevel: HazardLevel,
+) {
+	if (mode === "nsr10-national") return chartDescription(nsrHazardLevel);
+	if (mode === "bogota-microzonation") {
+		return "Curva emitida por el motor distrital para la zona y amenaza seleccionadas manualmente.";
+	}
+	return "Curva mínima emitida por el motor municipal para el componente y amenaza seleccionados manualmente.";
+}
+
+function transitionMetrics(mode: CalculatorModeId) {
+	if (mode === "bogota-microzonation") {
+		return [
+			{ id: "transition_end", label: "Tc" },
+			{ id: "long_period", label: "TL" },
+		];
+	}
+	return [
+		{ id: "tc", label: "TC" },
+		{ id: "tl", label: "TL" },
+	];
+}
+
 export function CalculatorPage() {
 	const [calculationMode, setCalculationMode] =
 		useState<CalculatorModeId>("nsr10-national");
@@ -512,6 +674,23 @@ export function CalculatorPage() {
 	const [soilProfile, setSoilProfile] = useState<SoilProfile>("D");
 	const [importanceGroup, setImportanceGroup] = useState<ImportanceGroup>("I");
 	const [hazardLevel, setHazardLevel] = useState<HazardLevel>("design");
+	const [bogotaZoneId, setBogotaZoneId] = useState<string | null>(null);
+	const [bogotaHazardId, setBogotaHazardId] = useState(
+		bogotaHazardOptions[0].id,
+	);
+	const [bogotaImportanceFactor, setBogotaImportanceFactor] = useState(1);
+	const [bogotaFillThickness, setBogotaFillThickness] = useState<number | null>(
+		null,
+	);
+	const [bogotaRigidBasePeriod, setBogotaRigidBasePeriod] = useState<
+		number | null
+	>(null);
+	const [caliZoneId, setCaliZoneId] = useState<string | null>(null);
+	const [caliComponentId, setCaliComponentId] = useState<string | null>(null);
+	const [caliHazardId, setCaliHazardId] = useState(caliHazardOptions[0].id);
+	const [caliImportanceFactor, setCaliImportanceFactor] = useState(1);
+	const [caliFillThickness, setCaliFillThickness] = useState<number | null>(null);
+	const [caliColluvialDeposit, setCaliColluvialDeposit] = useState(false);
 	const [traceabilityOpen, setTraceabilityOpen] = useState(false);
 	const chartContainerRef = useRef<HTMLDivElement>(null);
 
@@ -540,10 +719,65 @@ export function CalculatorPage() {
 		() => adaptNsr10Spectrum(spectrumParams, { municipality: municipio }),
 		[spectrumParams, municipio],
 	);
+	const bogotaResult = useMemo(
+		() => {
+			if (
+				calculationMode !== "bogota-microzonation" ||
+				bogotaZoneId === null
+			) return null;
+			return adaptBogotaSpectrum({
+				zoneId: bogotaZoneId,
+				hazardId: bogotaHazardId,
+				importanceFactor: bogotaImportanceFactor,
+				fillThicknessMeters: bogotaFillThickness,
+				rigidBasePeriodSeconds: bogotaRigidBasePeriod,
+			});
+		},
+		[
+			calculationMode,
+			bogotaFillThickness,
+			bogotaHazardId,
+			bogotaImportanceFactor,
+			bogotaRigidBasePeriod,
+			bogotaZoneId,
+		],
+	);
+	const activeCaliComponentOptions = useMemo(
+		() => caliComponentOptions(caliZoneId),
+		[caliZoneId],
+	);
+	const caliOptionId = resolvedCaliOptionId(caliZoneId, caliComponentId);
+	const caliResult = useMemo(
+		() => {
+			if (
+				calculationMode !== "cali-microzonation" ||
+				caliOptionId === null
+			) return null;
+			return adaptCaliSpectrum({
+				optionId: caliOptionId,
+				hazardId: caliHazardId,
+				importanceFactor: caliImportanceFactor,
+				uncontrolledFillThicknessMeters: caliFillThickness,
+				colluvialDeposit: caliColluvialDeposit,
+			});
+		},
+		[
+			calculationMode,
+			caliColluvialDeposit,
+			caliFillThickness,
+			caliHazardId,
+			caliImportanceFactor,
+			caliOptionId,
+		],
+	);
 	const result =
 		calculationMode === "nsr10-national"
 			? nsr10Result
-			: null;
+			: calculationMode === "bogota-microzonation"
+				? bogotaResult
+				: calculationMode === "cali-microzonation"
+					? caliResult
+					: null;
 	const evaluatePeriod = useCallback(
 		(periodSeconds: number) => {
 			if (!result) {
@@ -555,7 +789,7 @@ export function CalculatorPage() {
 						status: "ok" as const,
 						saG: ordinate.point.saG,
 						branchLabel:
-							branchLabels[ordinate.point.branchId as SpectrumBranch] ??
+							allBranchLabels[ordinate.point.branchId] ??
 							ordinate.point.branchId,
 					}
 				: {
@@ -601,13 +835,76 @@ export function CalculatorPage() {
 				onSoilProfileChange={setSoilProfile}
 				soilProfile={soilProfile}
 			/>
+		) : calculationMode === "bogota-microzonation" ? (
+			<BogotaParameterRail
+				fillThicknessMeters={bogotaFillThickness}
+				hazardDescription={municipalHazardDescription(
+					bogotaCanonical.hazards.find(({ id }) => id === bogotaHazardId),
+				)}
+				hazardId={bogotaHazardId}
+				hazardOptions={bogotaHazardOptions}
+				importanceFactor={bogotaImportanceFactor}
+				onFillThicknessChange={setBogotaFillThickness}
+				onHazardChange={(value) =>
+					setBogotaHazardId(value as typeof bogotaHazardId)
+				}
+				onImportanceFactorChange={setBogotaImportanceFactor}
+				onRigidBasePeriodChange={setBogotaRigidBasePeriod}
+				onZoneChange={setBogotaZoneId}
+				rigidBasePeriodSeconds={bogotaRigidBasePeriod}
+				zoneId={bogotaZoneId}
+				zoneOptions={bogotaZoneOptions}
+			/>
+		) : calculationMode === "cali-microzonation" ? (
+			<CaliParameterRail
+				colluvialDeposit={caliColluvialDeposit}
+				componentId={caliComponentId}
+				componentOptions={activeCaliComponentOptions}
+				fillThicknessMeters={caliFillThickness}
+				hazardDescription={municipalHazardDescription(
+					caliCanonical.hazards.find(({ id }) => id === caliHazardId),
+				)}
+				hazardId={caliHazardId}
+				hazardOptions={caliHazardOptions}
+				importanceFactor={caliImportanceFactor}
+				onColluvialDepositChange={setCaliColluvialDeposit}
+				onFillThicknessChange={setCaliFillThickness}
+				onHazardChange={setCaliHazardId}
+				onImportanceFactorChange={setCaliImportanceFactor}
+				onComponentChange={setCaliComponentId}
+				onZoneChange={(value) => {
+					setCaliZoneId(value);
+					setCaliComponentId(null);
+				}}
+				zoneId={caliZoneId}
+				zoneOptions={caliZoneOptions}
+			/>
 		) : isSourceBlockedMode(calculationMode) ? (
 			<SourceBlockedRail modeId={calculationMode} />
 		) : null;
 	const activeHazardLabel = result?.hazard?.label ?? "";
 	const maximumMetric = result?.status === "ok"
-		? result.metrics.find((metric) => metric.id === "saMax")?.value ?? 0
+		? result.metrics.find((metric) => metric.id === "saMax")?.value ??
+			result.metrics.find((metric) => metric.id === "sa-plateau")?.value ??
+			Math.max(...result.points.map(({ saG }) => saG))
 		: 0;
+	const manualSelectionNotice =
+		calculationMode === "bogota-microzonation" && bogotaZoneId === null ? (
+			<ManualSelectionNotice
+				description="Elige una zona de respuesta de la publicación oficial."
+				title="Selecciona la zona de Bogotá"
+			/>
+		) : calculationMode === "cali-microzonation" && caliZoneId === null ? (
+			<ManualSelectionNotice
+				description="Elige una de las diez zonas geográficas publicadas."
+				title="Selecciona la zona de Cali"
+			/>
+		) : calculationMode === "cali-microzonation" && caliOptionId === null ? (
+			<ManualSelectionNotice
+				description="Esta zona tiene dos curvas concurrentes; selecciona Tc o TL y verifica ambas por separado."
+				title="Selecciona el componente de curva"
+			/>
+		) : null;
 
 	return (
 		<div className="flex flex-col gap-5">
@@ -620,7 +917,8 @@ export function CalculatorPage() {
 				/>
 			) : null}
 			<p className="text-muted-foreground text-sm">
-				Calculadora unificada con selección manual y trazabilidad de fuente; no usa mapas ni envía datos.
+				Calculadora unificada con selección manual y trazabilidad de fuente;
+				 no usa mapas, coordenadas, GIS ni envía datos.
 			</p>
 
 			<CalculatorShell
@@ -636,7 +934,10 @@ export function CalculatorPage() {
 					<>
 						<SharedSpectrumChart
 							actions={resultActions}
-							description={chartDescription(hazardLevel)}
+							description={activeChartDescription(
+								calculationMode,
+								hazardLevel,
+							)}
 							highlight={`Sa máx ${formatDecimal(
 								maximumMetric,
 								3,
@@ -644,19 +945,20 @@ export function CalculatorPage() {
 							ref={chartContainerRef}
 							result={result}
 							title={`Espectro elástico · ${activeHazardLabel} (Sa vs. T)`}
-							transitionMetrics={[
-									{ id: "tc", label: hazardLevel === "damage-threshold" ? "TCd" : "TC" },
-									{ id: "tl", label: hazardLevel === "damage-threshold" ? "TLd" : "TL" },
-								]}
+							transitionMetrics={transitionMetrics(calculationMode)}
 						/>
 						<SharedSpectrumNotices warnings={result.warnings} />
 						<SpectrumPeriodLookup evaluate={evaluatePeriod} />
 						<SharedSpectrumMetrics
 							metrics={result.metrics}
-							presentation={damageMetricPresentation(hazardLevel)}
+							presentation={
+								calculationMode === "nsr10-national"
+									? damageMetricPresentation(hazardLevel)
+									: metricPresentation
+							}
 						/>
 						<SharedSpectrumTable
-							branchLabels={branchLabels}
+							branchLabels={allBranchLabels}
 							points={result.points}
 						/>
 					</>
@@ -667,7 +969,7 @@ export function CalculatorPage() {
 					/>
 				) : isSourceBlockedMode(calculationMode) ? (
 					<SourceBlockedResult modeId={calculationMode} />
-				) : null}
+				) : manualSelectionNotice}
 			</CalculatorShell>
 		</div>
 	);

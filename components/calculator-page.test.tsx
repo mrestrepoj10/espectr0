@@ -69,6 +69,31 @@ async function waitForElement(
 	throw new Error(`Could not find ${selector} containing “${text}”.`);
 }
 
+async function chooseSelectOption(triggerId: string, label: string) {
+	const trigger = document.querySelector<HTMLButtonElement>(`#${triggerId}`);
+	expect(trigger).toBeTruthy();
+	await act(async () => {
+		trigger?.click();
+	});
+	const option = await waitForElement('[role="option"]', label);
+	await act(async () => {
+		option.click();
+	});
+}
+
+async function setNumberInput(id: string, value: string) {
+	const input = document.querySelector<HTMLInputElement>(`#${id}`);
+	expect(input).toBeTruthy();
+	await act(async () => {
+		const setter = Object.getOwnPropertyDescriptor(
+			HTMLInputElement.prototype,
+			"value",
+		)?.set;
+		setter?.call(input, value);
+		input?.dispatchEvent(new Event("input", { bubbles: true }));
+	});
+}
+
 beforeAll(() => {
 	Object.assign(globalThis, {
 		IS_REACT_ACT_ENVIRONMENT: true,
@@ -246,20 +271,10 @@ describe("unified calculator NSR-10 mode", () => {
 
 describe("unified municipal mode selector", () => {
 	async function chooseMode(label: string) {
-		const trigger = container.querySelector<HTMLButtonElement>(
-			"#calculation-mode-trigger",
-		);
-		expect(trigger).toBeTruthy();
-		await act(async () => {
-			trigger?.click();
-		});
-		const option = await waitForElement('[role="option"]', label);
-		await act(async () => {
-			option.click();
-		});
+		await chooseSelectOption("calculation-mode-trigger", label);
 	}
 
-	it("keeps Bogotá inspectable without bypassing its evidence-review gate", async () => {
+	it("switches NSR, Bogotá, and Cali while preserving independent active results", async () => {
 		await chooseMode("Bogotá D. C.");
 
 		await vi.waitFor(() => {
@@ -268,11 +283,143 @@ describe("unified municipal mode selector", () => {
 			);
 			expect(shell?.dataset.calculationMode).toBe("bogota-microzonation");
 		});
-		expect(container.textContent).toContain("Bogotá D. C. · sin cálculo");
-		expect(container.textContent).toContain("research-only-not-activated");
-		expect(container.textContent).toContain("revisión independiente");
+		expect(container.textContent).toContain("Parámetros de Bogotá");
+		expect(container.textContent).toContain("Seleccione…");
+		expect(container.textContent).toContain("Selecciona la zona de Bogotá");
+		expect(container.textContent).not.toContain("Datos del espectro");
+		await chooseSelectOption("bogota-zone-trigger", "CERROS");
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain("Datos del espectro");
+		});
+		expect(container.textContent).toContain("Datos del espectro");
+		expect(container.textContent).toContain("Validación profesional obligatoria");
+		expect(container.textContent).toContain("CERROS");
+
+		await chooseMode("Cali");
+		await vi.waitFor(() => {
+			expect(
+				container.querySelector<HTMLElement>("[data-slot='calculator-shell']")
+					?.dataset.calculationMode,
+			).toBe("cali-microzonation");
+		});
+		expect(container.textContent).toContain("Parámetros de Cali");
+		expect(container.textContent).toContain("Selecciona la zona de Cali");
+		expect(container.textContent).not.toContain("Datos del espectro");
+		await chooseSelectOption("cali-zone-trigger", "Zona 1");
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain("Datos del espectro");
+		});
+
+		await chooseMode("NSR-10 Nacional");
+		await vi.waitFor(() => {
+			expect(container.querySelector("#period-lookup-input")).toBeTruthy();
+		});
+		expect(container.textContent).toContain("Parámetros del sitio");
+	});
+
+	it("renders Bogotá typed site-specific and invalid outcomes from the adapter", async () => {
+		await chooseMode("Bogotá D. C.");
+		await chooseSelectOption("bogota-zone-trigger", "CERROS");
+		await setNumberInput("bogota-fill-thickness", "3.1");
+
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain(
+				"Estudio de respuesta sísmica particular requerido",
+			);
+		});
+		expect(container.textContent).toContain("supera 3 m");
+		expect(container.querySelector("#period-lookup-input")).toBeNull();
+
+		await setNumberInput("bogota-fill-thickness", "");
+		await setNumberInput("bogota-importance-factor", "0");
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain("Resultado no disponible");
+		});
+		expect(container.textContent).toContain("Entrada inválida");
+	});
+
+	it("keeps Cali damage threshold visible as a localized unsupported result", async () => {
+		await chooseMode("Cali");
+		await chooseSelectOption("cali-zone-trigger", "Zona 1");
+		await chooseSelectOption("cali-hazard-trigger", "Umbral de daño");
+
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain("Resultado no disponible");
+		});
+		expect(container.textContent).toContain("no publica A0d ni Fa");
+		expect(container.textContent).toContain("Validación profesional obligatoria");
 		expect(container.textContent).not.toContain("Datos del espectro");
 		expect(container.textContent).not.toContain("Exportar");
+	});
+
+	it("uses result capability metadata to gate Bogotá and enable Cali actions", async () => {
+		await chooseMode("Bogotá D. C.");
+		await chooseSelectOption("bogota-zone-trigger", "CERROS");
+		const bogotaTrace = await waitForElement("button", "Ver trazabilidad");
+		expect(bogotaTrace).toHaveProperty("disabled", true);
+		expect(bogotaTrace.title).toContain("resolvedor del visor");
+
+		const bogotaExport = await waitForElement("button", "Exportar");
+		await act(async () => {
+			bogotaExport.click();
+		});
+		const bogotaPdf = await waitForElement(
+			'[role="menuitem"]',
+			"Descargar memoria PDF",
+		);
+		expect(bogotaPdf.getAttribute("aria-disabled")).toBe("true");
+		expect(bogotaPdf.title).toContain("renderizador PDF");
+
+		await act(async () => {
+			document.body.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+		});
+		await chooseMode("Cali");
+		await chooseSelectOption("cali-zone-trigger", "Zona 1");
+		const caliTrace = await waitForElement("button", "Ver trazabilidad");
+		expect(caliTrace).not.toHaveProperty("disabled", true);
+	});
+
+	it("presents ten Cali zones and requires a curve choice for concurrent zones", async () => {
+		await chooseMode("Cali");
+		const trigger = document.querySelector<HTMLButtonElement>("#cali-zone-trigger");
+		await act(async () => {
+			trigger?.click();
+		});
+		await waitForElement('[role="option"]', "Zona 1");
+		const zoneOptions = [
+			...document.querySelectorAll<HTMLElement>('[role="option"]'),
+		].filter((option) => option.textContent?.trim().startsWith("Zona "));
+		expect(zoneOptions.length).toBe(10);
+		const zone4b = zoneOptions
+			.find((option) => option.textContent?.trim() === "Zona 4B");
+		expect(zone4b).toBeTruthy();
+		await act(async () => {
+			zone4b?.click();
+		});
+
+		expect(container.textContent).toContain("Comprobación concurrente");
+		expect(container.textContent).toContain("verificar independientemente");
+		expect(container.textContent).toContain("Selecciona el componente de curva");
+		expect(container.textContent).not.toContain("Datos del espectro");
+		await chooseSelectOption("cali-component-trigger", "componente Tc");
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain("Datos del espectro");
+		});
+	});
+
+	it("exposes keyboard-labelled manual selectors and no map or GIS controls", async () => {
+		await chooseMode("Bogotá D. C.");
+		for (const id of ["bogota-zone-trigger", "bogota-hazard-trigger"]) {
+			const trigger = document.querySelector<HTMLElement>(`#${id}`);
+			expect(trigger?.getAttribute("role")).toBe("combobox");
+			expect(trigger?.getAttribute("tabindex")).not.toBe("-1");
+		}
+		expect(container.querySelector("[data-slot='manual-zone-warning']")).toBeTruthy();
+		const interactiveText = [...container.querySelectorAll("button, input")]
+			.map((element) => element.textContent ?? element.getAttribute("aria-label") ?? "")
+			.join(" ")
+			.toLowerCase();
+		expect(interactiveText).not.toMatch(/mapa|gis|coordenad|ubicación automática/);
 	});
 
 	it("keeps CCP-14 inspectable while failing closed on official-source gaps", async () => {
