@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "studyId": "dosquebradas-microzonation",
-  "title": "Dosquebradas POT 2024 — direct spectral table, activation blocked",
+  "title": "Dosquebradas POT 2024 Table 27 — normalized To ≤ T ≤ TL spectrum with NSR-10 lineage",
   "sources": [
     {
       "id": "acuerdo-007-2024",
@@ -123,6 +123,61 @@
           }
         }
       ]
+    },
+    {
+      "id": "nsr10-title-a-2017",
+      "issuingAuthority": "Comisión Asesora Permanente para el Régimen de Construcciones Sismo Resistentes",
+      "officialTitle": "NSR-10 Título A — versión consolidada 2017",
+      "edition": "2017",
+      "revision": null,
+      "adoptionInstrument": "Decreto 926 de 2010 y modificaciones",
+      "amendmentsAndErrata": [],
+      "legalStatus": "active",
+      "applicabilityStatus": "conditional",
+      "officialUrl": "https://iisee.kenken.go.jp/worldlist/11_Colombia/Colombia%20Titulo%20A-NSR-10-Ver-2017.pdf",
+      "retrievedOn": "2026-07-25",
+      "redistribution": {
+        "decision": "external-only",
+        "rationale": "Se reutiliza la huella del corpus NSR-10 instalado; este dossier no duplica los bytes."
+      },
+      "mediaType": "application/pdf",
+      "pageCount": 206,
+      "sha256": "47207abe1e832f5feb5fb8448af884b8d539fddaf89b6b21ab466765dd8524b0",
+      "pages": [
+        {
+          "physicalPage": 30,
+          "printedPage": "A-16",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "physicalPage": 42,
+          "printedPage": "A-28",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "physicalPage": 43,
+          "printedPage": "A-29",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ]
     }
   ],
   "citations": [
@@ -209,6 +264,113 @@
         "Variables",
         "Zona 1",
         "Fv"
+      ]
+    },
+    {
+      "id": "nsr10-design-probability",
+      "sourceDocumentId": "nsr10-title-a-2017",
+      "regionKind": "applicability",
+      "physicalPage": 30,
+      "printedPage": "A-16",
+      "reference": "A.2.2.1",
+      "rect": {
+        "left": 0.065359,
+        "top": 0.656566,
+        "width": 0.866013,
+        "height": 0.113636
+      },
+      "extractedToken": "probabilidad del diez por ciento de ser excedidos en un lapso de cincuenta años",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "diez por ciento",
+        "cincuenta años"
+      ]
+    },
+    {
+      "id": "nsr10-a.2.5-1",
+      "sourceDocumentId": "nsr10-title-a-2017",
+      "regionKind": "applicability",
+      "physicalPage": 42,
+      "printedPage": "A-28",
+      "reference": "Tabla A.2.5-1",
+      "rect": {
+        "left": 0.351307,
+        "top": 0.530303,
+        "width": 0.294118,
+        "height": 0.145202
+      },
+      "extractedToken": "Valores del coeficiente de importancia I IV 1.50 III 1.25 II 1.10 I 1.00",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "1.50",
+        "1.25",
+        "1.10",
+        "1.00"
+      ]
+    },
+    {
+      "id": "nsr10-a.2.6-1",
+      "sourceDocumentId": "nsr10-title-a-2017",
+      "regionKind": "applicability",
+      "physicalPage": 42,
+      "printedPage": "A-28",
+      "reference": "Ecuación A.2.6-1",
+      "rect": {
+        "left": 0.122549,
+        "top": 0.782828,
+        "width": 0.661765,
+        "height": 0.050505
+      },
+      "extractedToken": "Sa = 1.2 Av Fv I / T (A.2.6-1)",
+      "unit": "g",
+      "transformation": null,
+      "requiredTokens": [
+        "1.2",
+        "A.2.6-1"
+      ]
+    },
+    {
+      "id": "nsr10-a.2.6-2",
+      "sourceDocumentId": "nsr10-title-a-2017",
+      "regionKind": "applicability",
+      "physicalPage": 42,
+      "printedPage": "A-28",
+      "reference": "Ecuación A.2.6-2",
+      "rect": {
+        "left": 0.122549,
+        "top": 0.871212,
+        "width": 0.661765,
+        "height": 0.063131
+      },
+      "extractedToken": "Tc = 0.48 Av Fv / (Aa Fa) (A.2.6-2)",
+      "unit": "s",
+      "transformation": null,
+      "requiredTokens": [
+        "0.48",
+        "A.2.6-2"
+      ]
+    },
+    {
+      "id": "nsr10-a.2.6-3",
+      "sourceDocumentId": "nsr10-title-a-2017",
+      "regionKind": "applicability",
+      "physicalPage": 43,
+      "printedPage": "A-29",
+      "reference": "Ecuación A.2.6-3",
+      "rect": {
+        "left": 0.122549,
+        "top": 0.044192,
+        "width": 0.661765,
+        "height": 0.056818
+      },
+      "extractedToken": "Sa = 2.5 Aa Fa I (A.2.6-3)",
+      "unit": "g",
+      "transformation": null,
+      "requiredTokens": [
+        "2.5",
+        "A.2.6-3"
       ]
     },
     {
@@ -1040,7 +1202,12 @@
   "applicabilityCitationIds": [
     "adoption-2024",
     "currentness-and-harmonization",
-    "damping-five-percent"
+    "damping-five-percent",
+    "nsr10-design-probability",
+    "nsr10-a.2.5-1",
+    "nsr10-a.2.6-1",
+    "nsr10-a.2.6-2",
+    "nsr10-a.2.6-3"
   ],
   "coverage": {
     "optionIds": [

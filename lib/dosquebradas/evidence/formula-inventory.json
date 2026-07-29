@@ -1,17 +1,57 @@
 {
   "schemaVersion": 1,
-  "status": "unavailable-blocks-activation",
-  "proposedProductionFormulas": [],
-  "unresolvedRequiredInputs": [
-    "Av",
-    "piecewise equations",
-    "branch inclusivity",
-    "importance-factor placement"
+  "status": "supported-partial-interval",
+  "supportedInterval": "To <= T <= TL",
+  "formulas": [
+    {
+      "id": "derive-av",
+      "expression": "Av = Tc × Aa × Fa / (0.48 × Fv)",
+      "citationId": "nsr10-a.2.6-2",
+      "dependencies": [
+        "tc",
+        "aa",
+        "fa",
+        "fv"
+      ]
+    },
+    {
+      "id": "plateau",
+      "condition": "To <= T <= Tc",
+      "expression": "Sa = 2.5 × Aa × Fa × I",
+      "citationId": "nsr10-a.2.6-3",
+      "dependencies": [
+        "aa",
+        "fa",
+        "importanceFactor"
+      ]
+    },
+    {
+      "id": "inverse",
+      "condition": "Tc < T <= TL",
+      "expression": "Sa = 1.2 × Av × Fv × I / T",
+      "citationId": "nsr10-a.2.6-1",
+      "dependencies": [
+        "derive-av",
+        "fv",
+        "importanceFactor",
+        "T"
+      ]
+    }
+  ],
+  "unsupportedIntervals": [
+    {
+      "condition": "T < To",
+      "reason": "No entrance equation is attested in the installed municipal package."
+    },
+    {
+      "condition": "T > TL",
+      "reason": "No long-period equation is attested in the installed municipal package."
+    }
   ],
   "coverage": {
-    "expectedForActivation": 4,
-    "cited": 0,
-    "percent": 0
+    "supportedBranches": 2,
+    "cited": 2,
+    "percent": 100
   },
-  "decision": "Table 27 may be displayed with traceability but cannot drive a municipal spectrum calculator."
+  "decision": "Calculate the normalized municipal spectrum only for To <= T <= TL; return typed unsupported outside that interval."
 }

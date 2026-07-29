@@ -9,9 +9,11 @@
     ["zona-4", "0.05", "0.32", "1.6", "0.25", "1.76", "1.17"],
     ["zona-5", "0.1", "0.8", "4", "0.25", "1.60", "2.67"]
   ],
-  "negativeCases": [
-    { "id": "calculate-spectrum", "reason": "official adopted formula unavailable" },
-    { "id": "assume-av", "reason": "Av is defined but not tabulated" },
-    { "id": "automatic-zone", "reason": "GIS automation is out of scope and unsupported" }
-  ]
+  "importanceFactor": "1",
+  "boundaryEpsilon": "0.000001",
+  "formulas": {
+    "deriveAv": "tc*aa*fa/(0.48*fv)",
+    "plateau": "2.5*aa*fa*i",
+    "inverse": "1.2*av*fv*i/t"
+  }
 }

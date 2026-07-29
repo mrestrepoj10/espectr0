@@ -4,13 +4,15 @@
   "sourceHashes": {
     "acuerdo-007-2024": "d32475535e6065d2d99663ce95f046cde066c3c8e9b880e215dcd23ce9e3f047",
     "pot-2024-diagnostico-amenazas": "cf4608f280c14e430eee91da224c5e61e9601a09103ad3f4b8767d5cd632ad66",
-    "pot-2024-dts-general": "2060d4626bcd2b94af6e2a7401a2a3075b8d750e01397bf18a1d372d6cb24d15"
+    "pot-2024-dts-general": "2060d4626bcd2b94af6e2a7401a2a3075b8d750e01397bf18a1d372d6cb24d15",
+    "nsr10-title-a-2017": "47207abe1e832f5feb5fb8448af884b8d539fddaf89b6b21ab466765dd8524b0"
   },
   "coverage": {
-    "tables": 1,
+    "tables": 2,
     "optionRows": 5,
     "directCells": 30,
-    "applicabilityClaims": 3,
+    "formulaRegions": 3,
+    "applicabilityClaims": 4,
     "percent": 100
   },
   "table": {
@@ -233,8 +235,13 @@
       "citationId": "damping-five-percent",
       "method": "rendered embedded figure inspected at original resolution",
       "observed": "β=5%"
+    },
+    {
+      "citationId": "nsr10-a.2.6-1",
+      "method": "rendered NSR-10 pages A-28/A-29 inspected at original resolution",
+      "observed": "Equations A.2.6-1, A.2.6-2 and A.2.6-3"
     }
   ],
-  "nonInference": "The attestation binds only printed table values and the printed damping label. It does not infer Av, return period, formula or branch policy.",
-  "payloadSha256": "5c7e452fa6a7780029c0e95a8077d3e6b2d0bd1af5e2e382836e97b0eee9544a"
+  "nonInference": "The attestation binds the 30 printed municipal cells and three printed NSR-10 equations. Av is derived only by algebraically inverting A.2.6-2; it is never assumed equal to Aa. Both T < To and T > TL remain unsupported because their municipal equations are unattested.",
+  "payloadSha256": "ff5bbc1966d2e128b4b066f8f3f7777ddb01f0cb4fd9e1acbcc413be40805959"
 }

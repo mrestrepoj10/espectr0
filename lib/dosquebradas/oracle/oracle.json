@@ -1,6 +1,7 @@
 {
-  "schemaVersion": 1,
-  "status": "table-transcription-verified-calculation-blocked",
+  "schemaVersion": 2,
+  "status": "normalized-spectrum-supported-from-to",
+  "importanceFactor": "1",
   "records": [
     {
       "optionId": "zona-1",
@@ -20,7 +21,64 @@
         "aa": "0.25",
         "fa": "1.60",
         "fv": "1.67"
-      }
+      },
+      "derivedAv": "0.2495009980039920159680638723",
+      "boundaryCases": [
+        {
+          "period": "0.049999",
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
+        },
+        {
+          "period": "0.05",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1"
+        },
+        {
+          "period": "0.050001",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1"
+        },
+        {
+          "period": "0.499999",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1"
+        },
+        {
+          "period": "0.5",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1"
+        },
+        {
+          "period": "0.500001",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "0.9999980000039999920000160004"
+        },
+        {
+          "period": "2.499999",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "0.2000000800000320000128000052"
+        },
+        {
+          "period": "2.5",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "0.2000000000000000000000000001"
+        },
+        {
+          "period": "2.500001",
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
+        }
+      ]
     },
     {
       "optionId": "zona-2",
@@ -40,7 +98,64 @@
         "aa": "0.25",
         "fa": "1.76",
         "fv": "2.57"
-      }
+      },
+      "derivedAv": "0.249675745784695201037613489",
+      "boundaryCases": [
+        {
+          "period": "0.049999",
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
+        },
+        {
+          "period": "0.05",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.050001",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.699999",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.7",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.700001",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "1.099998428573673466180762599"
+        },
+        {
+          "period": "3.499999",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "0.2200000628571608163316618091"
+        },
+        {
+          "period": "3.5",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "0.22"
+        },
+        {
+          "period": "3.500001",
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
+        }
+      ]
     },
     {
       "optionId": "zona-3",
@@ -60,7 +175,64 @@
         "aa": "0.25",
         "fa": "1.76",
         "fv": "2.93"
-      }
+      },
+      "derivedAv": "0.2502844141069397042093287827",
+      "boundaryCases": [
+        {
+          "period": "0.049999",
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
+        },
+        {
+          "period": "0.05",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.050001",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.799999",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.8",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.800001",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "1.099998625001718747851565185"
+        },
+        {
+          "period": "3.999999",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "0.2200000550000137500034375008"
+        },
+        {
+          "period": "4",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "0.22"
+        },
+        {
+          "period": "4.000001",
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
+        }
+      ]
     },
     {
       "optionId": "zona-4",
@@ -80,7 +252,64 @@
         "aa": "0.25",
         "fa": "1.76",
         "fv": "1.17"
-      }
+      },
+      "derivedAv": "0.2507122507122507122507122507",
+      "boundaryCases": [
+        {
+          "period": "0.049999",
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
+        },
+        {
+          "period": "0.05",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.050001",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.319999",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.32",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.320001",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "1.099996562510742153930768966"
+        },
+        {
+          "period": "1.599999",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "0.220000137500085937553710971"
+        },
+        {
+          "period": "1.6",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "0.2199999999999999999999999999"
+        },
+        {
+          "period": "1.600001",
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
+        }
+      ]
     },
     {
       "optionId": "zona-5",
@@ -100,25 +329,75 @@
         "aa": "0.25",
         "fa": "1.60",
         "fv": "2.67"
-      }
+      },
+      "derivedAv": "0.2496878901373283395755305868",
+      "boundaryCases": [
+        {
+          "period": "0.099999",
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
+        },
+        {
+          "period": "0.1",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1"
+        },
+        {
+          "period": "0.100001",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1"
+        },
+        {
+          "period": "0.799999",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1"
+        },
+        {
+          "period": "0.8",
+          "status": "ok",
+          "branch": "dosquebradas-plateau",
+          "saG": "1"
+        },
+        {
+          "period": "0.800001",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "0.9999987500015624980468774417"
+        },
+        {
+          "period": "3.999999",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "0.2000000500000125000031250008"
+        },
+        {
+          "period": "4",
+          "status": "ok",
+          "branch": "dosquebradas-inverse",
+          "saG": "0.2"
+        },
+        {
+          "period": "4.000001",
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
+        }
+      ]
     }
   ],
-  "negativeCases": [
+  "unsupportedIntervals": [
     {
-      "id": "calculate-spectrum",
-      "reason": "official adopted formula unavailable",
-      "outcome": "reject"
+      "condition": "T < To",
+      "outcome": "unsupported"
     },
     {
-      "id": "assume-av",
-      "reason": "Av is defined but not tabulated",
-      "outcome": "reject"
-    },
-    {
-      "id": "automatic-zone",
-      "reason": "GIS automation is out of scope and unsupported",
-      "outcome": "reject"
+      "condition": "T > TL",
+      "outcome": "unsupported"
     }
   ],
-  "inputSha256": "db8c869cb8d84e86942b507e522c7a15ec3c0d3e9acecada00746066194b6019"
+  "inputSha256": "24b42bccf6f2cea73032de6677a469686f1f4a62b6579538907e3b34392053e3"
 }

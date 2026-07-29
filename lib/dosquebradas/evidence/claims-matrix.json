@@ -47,8 +47,28 @@
       "citationId": "damping-five-percent"
     },
     {
-      "id": "formula-gap",
-      "statement": "No formula is asserted by this dossier; Table 27 alone is insufficient for calculation.",
+      "id": "importance-anchor",
+      "statement": "The user-supplied importance factor follows NSR-10 Table A.2.5-1.",
+      "citationId": "nsr10-a.2.5-1"
+    },
+    {
+      "id": "inverse-formula",
+      "statement": "The inverse branch uses NSR-10 equation A.2.6-1.",
+      "citationId": "nsr10-a.2.6-1"
+    },
+    {
+      "id": "av-derivation",
+      "statement": "Av is derived by algebraically inverting NSR-10 equation A.2.6-2.",
+      "citationId": "nsr10-a.2.6-2"
+    },
+    {
+      "id": "plateau-formula",
+      "statement": "The plateau branch uses NSR-10 equation A.2.6-3.",
+      "citationId": "nsr10-a.2.6-3"
+    },
+    {
+      "id": "entrance-gap",
+      "statement": "The installed municipal evidence does not attest the T < To entrance branch.",
       "citationId": "table-27"
     }
   ]
