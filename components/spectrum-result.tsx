@@ -67,6 +67,12 @@ export type MetricPresentation = {
   digits?: number
 }
 
+export function formatSpectrumReturnPeriod(returnPeriodYears: number | null) {
+  return returnPeriodYears === null
+    ? "TR no declarado"
+    : `TR ${returnPeriodYears} años`
+}
+
 function formatDecimal(value: number, digits: number) {
   const factor = 10 ** digits
   const rounded = Math.round((value + Number.EPSILON) * factor) / factor
@@ -197,9 +203,7 @@ export const SharedSpectrumChart = forwardRef<
       </CardContent>
       <CardFooter>
         <p className="text-muted-foreground text-xs">
-          {result.hazard.returnPeriodYears === null
-            ? "TR no declarado"
-            : `TR ${result.hazard.returnPeriodYears} años`} · amortiguamiento crítico del{" "}
+          {formatSpectrumReturnPeriod(result.hazard.returnPeriodYears)} · amortiguamiento crítico del{" "}
           {result.hazard.dampingRatio * 100} % · aceleraciones como fracción de g.
         </p>
       </CardFooter>
