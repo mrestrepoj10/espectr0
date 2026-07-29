@@ -42,8 +42,8 @@ describe("municipal calculator mode catalog", () => {
       expect.arrayContaining([
         expect.stringContaining("revisión humana independiente"),
         expect.stringContaining("no publica A0d ni Fa"),
-        expect.stringContaining("visor y la memoria PDF"),
       ]),
     )
+    expect(cali.blockers.join(" ")).not.toContain("visor y la memoria PDF")
   })
 })

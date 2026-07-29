@@ -68,9 +68,7 @@ export const caliCapabilities = spectrumCapabilitiesSchema.parse({
   comparison: unsupportedCapability(
     "El comparador actual todavía no consume escenarios municipales normalizados.",
   ),
-  contextualPdf: unsupportedCapability(
-    "La memoria PDF municipal genérica todavía no está instalada para Cali.",
-  ),
+  contextualPdf: supportedCapability(),
   csvExport: supportedCapability(),
   etabsExport: supportedCapability(),
   jsonExport: supportedCapability(),
@@ -84,9 +82,7 @@ export const caliCapabilities = spectrumCapabilitiesSchema.parse({
   bridgeRFactorWorkflow: unsupportedCapability(
     "El estudio municipal de edificaciones no define el flujo de puentes CCP-14.",
   ),
-  traceabilityViewer: unsupportedCapability(
-    "El visor municipal se habilitará cuando pueda resolver las regiones del PDF oficial.",
-  ),
+  traceabilityViewer: supportedCapability(),
 })
 
 const engineIdentity = {

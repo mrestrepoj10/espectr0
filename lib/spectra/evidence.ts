@@ -18,7 +18,7 @@ import {
   type ScenarioEvidenceKey,
 } from "./types"
 
-export const SPECTRUM_EVIDENCE_VIEW_SCHEMA_VERSION = 2 as const
+export const SPECTRUM_EVIDENCE_VIEW_SCHEMA_VERSION = 3 as const
 
 const idSchema = z.string().trim().min(1)
 const nullableTextSchema = z.string().trim().min(1).nullable()
@@ -103,12 +103,22 @@ export const spectrumDirectValueSchema = z
     id: idSchema,
     label: idSchema,
     value: normalizedInputValueSchema,
-    normalizedInputPath: z.array(idSchema).min(1),
+    normalizedInputPath: z.array(idSchema).min(1).nullable(),
+    traceStepId: idSchema.nullable(),
     unit: spectrumUnitSchema.nullable(),
     provenance: z.literal("direct-source"),
     citationId: idSchema,
   })
   .strict()
+  .superRefine((value, context) => {
+    if ((value.normalizedInputPath === null) === (value.traceStepId === null)) {
+      context.addIssue({
+        code: "custom",
+        message: "Direct evidence must bind to exactly one normalized input or trace step",
+        path: ["normalizedInputPath"],
+      })
+    }
+  })
 
 export const spectrumMetricLineageSchema = z
   .object({
@@ -282,20 +292,27 @@ function assertEvidenceView(
     if (citation?.kind !== "cell") {
       throw new Error(`Direct evidence value citation is not a cell: ${value.id}`)
     }
-    let boundInput: NormalizedInputValue | undefined = result.normalizedInputs
-    for (const segment of value.normalizedInputPath) {
-      if (
-        boundInput === null ||
-        typeof boundInput !== "object" ||
-        Array.isArray(boundInput) ||
-        !(segment in boundInput)
-      ) {
-        throw new Error(`Direct evidence input path does not resolve: ${value.id}`)
+    if (value.normalizedInputPath) {
+      let boundInput: NormalizedInputValue | undefined = result.normalizedInputs
+      for (const segment of value.normalizedInputPath) {
+        if (
+          boundInput === null ||
+          typeof boundInput !== "object" ||
+          Array.isArray(boundInput) ||
+          !(segment in boundInput)
+        ) {
+          throw new Error(`Direct evidence input path does not resolve: ${value.id}`)
+        }
+        boundInput = boundInput[segment]
       }
-      boundInput = boundInput[segment]
-    }
-    if (JSON.stringify(boundInput) !== JSON.stringify(value.value)) {
-      throw new Error(`Direct evidence value does not match normalized input: ${value.id}`)
+      if (JSON.stringify(boundInput) !== JSON.stringify(value.value)) {
+        throw new Error(`Direct evidence value does not match normalized input: ${value.id}`)
+      }
+    } else {
+      const step = result.trace?.data.steps.find(({ id }) => id === value.traceStepId)
+      if (!step || JSON.stringify(step.value) !== JSON.stringify(value.value)) {
+        throw new Error(`Direct evidence value does not match trace step: ${value.id}`)
+      }
     }
   }
 
@@ -489,6 +506,7 @@ function nsr10Evidence(
     label,
     value: entry.value,
     normalizedInputPath: [field],
+    traceStepId: null,
     unit: "g" as const,
     provenance: "direct-source" as const,
     citationId: nsr10CitationId(optionId, field),

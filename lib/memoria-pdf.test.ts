@@ -16,6 +16,8 @@ import {
   renderNormalizedSpectrumMemoriaPdf,
 } from "./memoria-pdf-renderer"
 import { adaptNsr10Spectrum } from "./spectra"
+import { adaptCaliSpectrum } from "./cali"
+import { municipalMemoriaFilename } from "./municipal-memoria-pdf-renderer"
 
 function caliTrace() {
   const municipality = lookupMunicipioByCode("76001")
@@ -120,6 +122,28 @@ describe("calculation memoria PDF helpers", () => {
 
     expect(source.startsWith("%PDF-")).toBe(true)
     expect(source.match(/\/Type \/Page\b/g)).toHaveLength(5)
+    expect(bytes.byteLength).toBeGreaterThan(20_000)
+  }, 30_000)
+
+  it("renders a source-traceable municipal Cali memory without recalculating ordinates", async () => {
+    const result = adaptCaliSpectrum({
+      optionId: "zone-3",
+      hazardId: "design",
+      importanceFactor: 1,
+      uncontrolledFillThicknessMeters: 3.01,
+      colluvialDeposit: false,
+    })
+    expect(result.status).toBe("ok")
+    expect(result.capabilities.contextualPdf.supported).toBe(true)
+    expect(result.capabilities.traceabilityViewer.supported).toBe(true)
+    expect(municipalMemoriaFilename(result)).toBe(
+      "espectr0-memoria-cali-microzonation-zone-3-design.pdf",
+    )
+    const blob = await renderNormalizedSpectrumMemoriaPdf(result)
+    const bytes = Buffer.from(await blob.arrayBuffer())
+    const source = bytes.toString("latin1")
+    expect(source.startsWith("%PDF-")).toBe(true)
+    expect(source.match(/\/Type \/Page\b/g)?.length).toBeGreaterThanOrEqual(4)
     expect(bytes.byteLength).toBeGreaterThan(20_000)
   }, 30_000)
 

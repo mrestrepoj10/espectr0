@@ -130,7 +130,6 @@ export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> 
     blockers: [
       "La curva de umbral de daño no se calcula: el decreto no publica A0d ni Fa para sus ramas iniciales.",
       "El registro canónico de evidencia conserva pendiente la revisión humana independiente y bloquea la activación.",
-      "La interfaz no se activará hasta que el visor y la memoria PDF municipales resuelvan las citas oficiales del contrato normalizado.",
     ],
   },
   "medellin-microzonation": {

@@ -37,7 +37,7 @@ describe("normalized scenario evidence", () => {
       hazardId: "design",
     })
     expect(evidence).toMatchObject({
-      schemaVersion: 2,
+      schemaVersion: 3,
       status: "partial",
       study: { id: "nsr10-national", version: "NSR-10-2010" },
       selection: {

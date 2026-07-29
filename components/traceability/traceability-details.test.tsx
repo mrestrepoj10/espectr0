@@ -12,6 +12,7 @@ vi.mock("next/dynamic", () => ({
 }));
 
 import { adaptNsr10Spectrum, resolveSpectrumEvidence } from "@/lib/spectra";
+import { adaptCaliSpectrum } from "@/lib/cali";
 
 import { EvidenceDocument, TraceabilityDetails } from "./traceability-details";
 
@@ -92,6 +93,34 @@ describe("generic traceability details", () => {
 			"no declara una ubicación o zona verificable",
 		);
 		expect(container.textContent).not.toContain("Transcripción accesible");
+	});
+
+	it("renders Cali municipal cells, formulas, warnings, and official source links", async () => {
+		const result = adaptCaliSpectrum({
+			optionId: "zone-3",
+			hazardId: "design",
+			importanceFactor: 1,
+			uncontrolledFillThicknessMeters: 3.01,
+			colluvialDeposit: false,
+		});
+		expect(result.status).toBe("ok");
+		await act(async () => {
+			root.render(
+				<TraceabilityDetails
+					result={result}
+					scenarioEvidenceKey={result.scenarioEvidenceKey}
+				/>,
+			);
+		});
+
+		expect(container.textContent).toContain("Microzonificación sísmica de Santiago de Cali");
+		expect(container.textContent).toContain("Zona");
+		expect(container.textContent).toContain("Fa efectivo");
+		expect(container.textContent).toContain("Sa(T) por rama");
+		expect(container.textContent).toContain("Decreto Municipal 411.0.20.0158 de 2014");
+		expect(container.textContent).toContain("Tabla 2, 3");
+		expect(container.textContent).toContain("Columna 1");
+		expect(container.textContent).toContain("Abrir enlace oficial");
 	});
 
 	it("renders one accessible source viewer per physical page", async () => {
