@@ -30,20 +30,16 @@ describe("municipal calculator mode catalog", () => {
       expect(isSourceBlockedMode(mode.id)).toBe(true)
     }
     expect(isSourceBlockedMode("nsr10-national")).toBe(false)
-    expect(isSourceBlockedMode("bogota-microzonation")).toBe(true)
+	expect(isSourceBlockedMode("bogota-microzonation")).toBe(false)
+	expect(isSourceBlockedMode("cali-microzonation")).toBe(false)
   })
 
-  it("reports the merged Cali core without claiming UI activation", () => {
-    const cali = sourceBlockedModes["cali-microzonation"]
-    expect(cali).toMatchObject({
-      status: "Motor normalizado verificado · interfaz municipal bloqueada",
-    })
-    expect(cali.blockers).toEqual(
-      expect.arrayContaining([
-        expect.stringContaining("revisión humana independiente"),
-        expect.stringContaining("no publica A0d ni Fa"),
-      ]),
-    )
-    expect(cali.blockers.join(" ")).not.toContain("visor y la memoria PDF")
+  it("keeps active municipal engines out of the source-blocked record", () => {
+    expect(Object.keys(sourceBlockedModes)).not.toContain("bogota-microzonation")
+    expect(Object.keys(sourceBlockedModes)).not.toContain("cali-microzonation")
+    expect(calculationModes.find(({ id }) => id === "bogota-microzonation")?.description)
+      .toContain("Cálculo manual")
+    expect(calculationModes.find(({ id }) => id === "cali-microzonation")?.description)
+      .toContain("Cálculo manual")
   })
 })

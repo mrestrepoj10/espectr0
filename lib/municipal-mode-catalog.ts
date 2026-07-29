@@ -12,7 +12,7 @@ export type CalculatorModeId =
 
 export type SourceBlockedModeId = Exclude<
   CalculatorModeId,
-  "nsr10-national"
+  "nsr10-national" | "bogota-microzonation" | "cali-microzonation"
 >
 
 export type SourceBlockedMode = {
@@ -42,7 +42,7 @@ export const calculationModes = [
     id: "bogota-microzonation",
     label: "Bogotá D. C.",
     description:
-      "Microzonificación FOPAE 2010, adoptada por el Decreto 523 de 2010 y compilada actualmente por el Decreto 670 de 2025.",
+      "Cálculo manual por zona con la microzonificación FOPAE 2010, adoptada por el Decreto 523 de 2010 y compilada por el Decreto 670 de 2025.",
   },
   {
     id: "medellin-microzonation",
@@ -54,7 +54,7 @@ export const calculationModes = [
     id: "cali-microzonation",
     label: "Cali",
     description:
-      "Microzonificación INGEOMINAS–DAGMA 2005 adoptada mediante el Decreto 0158 de 2014.",
+      "Cálculo manual por zona o componente con la microzonificación INGEOMINAS–DAGMA 2005 adoptada mediante el Decreto 0158 de 2014.",
   },
   {
     id: "manizales-microzonation",
@@ -104,32 +104,6 @@ export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> 
     blockers: [
       "No se localizó en la publicación oficial un registro finito verificable de PGA, Ss y S1 por localidad.",
       "La misma edición imprime T₀ = 0,2·Ts en la figura y T₀ = 0,2 s en la definición; no se escogerá una de las dos sin aclaración oficial.",
-    ],
-  },
-  "bogota-microzonation": {
-    id: "bogota-microzonation",
-    label: "Bogotá D. C.",
-    description:
-      "La matriz y el motor están reconstruidos, pero el expediente aún no autoriza su activación productiva.",
-    sourceTitle: "FOPAE 2010 · Decreto Distrital 523 de 2010 · compilación Decreto 670 de 2025",
-    sourceUrl: "https://www.alcaldiabogota.gov.co/sisjur/normas/Norma1.jsp?i=40984",
-    status: "Motor verificado · revisión independiente de evidencia pendiente",
-    blockers: [
-      "El canon aprobado conserva el estado research-only-not-activated.",
-      "El registro de revisión de evidencia declara pendiente la revisión independiente y bloquea explícitamente la activación.",
-    ],
-  },
-  "cali-microzonation": {
-    id: "cali-microzonation",
-    label: "Cali",
-    description:
-      "Las curvas de diseño y seguridad limitada ya tienen motor y contrato trazable; la activación municipal completa sigue cerrada.",
-    sourceTitle: "Alcaldía de Cali · Decreto 411.0.20.0158 de 2014 e INGEOMINAS–DAGMA 2005",
-    sourceUrl: "https://www.cali.gov.co/planeacion/publicaciones/107480/microzonificacion-sismica-de-santiago-de-cali/",
-    status: "Motor normalizado verificado · interfaz municipal bloqueada",
-    blockers: [
-      "La curva de umbral de daño no se calcula: el decreto no publica A0d ni Fa para sus ramas iniciales.",
-      "El registro canónico de evidencia conserva pendiente la revisión humana independiente y bloquea la activación.",
     ],
   },
   "medellin-microzonation": {
