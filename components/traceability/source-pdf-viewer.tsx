@@ -84,20 +84,22 @@ export function SourcePdfViewer({
 						renderTextLayer={false}
 						width={900}
 					/>
-					{citations.map((citation) => (
-						<div
-							aria-hidden="true"
-							className={cn(
-								"pointer-events-none absolute rounded-[2px] opacity-0 ring-1 ring-inset transition-opacity duration-200 motion-reduce:transition-none data-[visible=true]:opacity-100",
-								citation.kind === "cell"
-									? "bg-yellow-300/60 ring-yellow-700/70 delay-75"
-									: "bg-yellow-300/25 ring-yellow-600/50",
-							)}
-							data-visible={pageRendered}
-							key={citation.id}
-							style={rectStyle(citation.rect)}
-						/>
-					))}
+					{citations.map((citation) =>
+						citation.rect ? (
+							<div
+								aria-hidden="true"
+								className={cn(
+									"pointer-events-none absolute rounded-[2px] opacity-0 ring-1 ring-inset transition-opacity duration-200 motion-reduce:transition-none data-[visible=true]:opacity-100",
+									citation.kind === "cell"
+										? "bg-yellow-300/60 ring-yellow-700/70 delay-75"
+										: "bg-yellow-300/25 ring-yellow-600/50",
+								)}
+								data-visible={pageRendered}
+								key={citation.id}
+								style={rectStyle(citation.rect)}
+							/>
+						) : null,
+					)}
 				</div>
 			</Document>
 		</div>

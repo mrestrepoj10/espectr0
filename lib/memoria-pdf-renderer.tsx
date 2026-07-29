@@ -22,10 +22,15 @@ import {
   selectRepresentativeBoundaryPoints,
 } from "./memoria-pdf"
 import {
+  municipalMemoriaFilename,
+  renderMunicipalMemoriaPdf,
+} from "./municipal-memoria-pdf-renderer"
+import {
   NSR10_ENGINE_ID,
   parseNsr10TraceEnvelope,
   spectrumResultData,
 } from "./spectra"
+import { CALI_ENGINE_ID } from "./cali"
 
 import type { CalculationStep, CalculationTrace } from "./nsr10"
 import type { SiteCoefficientInterpolationTrace } from "./nsr10/site-coefficients"
@@ -703,6 +708,10 @@ export const contextualPdfRendererRegistry = new ContextualPdfRendererRegistry()
     if (result.status !== "ok") throw new Error("Expected an applicable NSR result")
     return calculationMemoriaFilename(parseNsr10TraceEnvelope(result.trace))
   },
+}).register({
+  engineId: CALI_ENGINE_ID,
+  render: renderMunicipalMemoriaPdf,
+  filename: municipalMemoriaFilename,
 })
 
 export async function renderNormalizedSpectrumMemoriaPdf(

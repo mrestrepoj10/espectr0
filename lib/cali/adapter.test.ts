@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest"
 
-import { formatSpectrumCsv, formatSpectrumJson, spectrumResultData } from "../spectra"
+import {
+  formatSpectrumCsv,
+  formatSpectrumJson,
+  resolveSpectrumEvidence,
+  spectrumResultData,
+} from "../spectra"
 import { adaptCaliSpectrum } from "./adapter"
 
 describe("Cali normalized spectrum adapter", () => {
@@ -124,6 +129,57 @@ describe("Cali normalized spectrum adapter", () => {
       expect(ordinate.status).toBe("ok")
       if (ordinate.status === "ok") expect(ordinate.point.saG).toBeCloseTo(expected, 12)
     }
+  })
+
+  it("resolves source cells, formulas, claims, documents, and trace lineage generically", () => {
+    const result = adaptCaliSpectrum({
+      optionId: "zone-3",
+      hazardId: "design",
+      importanceFactor: 1,
+      uncontrolledFillThicknessMeters: 3.01,
+      colluvialDeposit: false,
+    })
+    expect(result.status).toBe("ok")
+    if (result.status !== "ok") return
+    const evidence = resolveSpectrumEvidence(spectrumResultData(result))
+    expect(evidence).toMatchObject({
+      schemaVersion: 3,
+      status: "available",
+      study: { id: "cali-microzonation" },
+      selection: {
+        location: "Santiago de Cali",
+        zone: "3",
+        hazardId: "design",
+      },
+    })
+    expect(evidence.documents.map(({ sourceId }) => sourceId)).toEqual([
+      "cali-decree-0158-2014",
+      "cali-ingeominas-dagma-2005-tomo6",
+      "nsr10-title-a-2017",
+    ])
+    expect(evidence.directValues).toHaveLength(5)
+    expect(evidence.directValues.every(({ traceStepId }) => traceStepId !== null)).toBe(true)
+    expect(evidence.directValues.find(({ id }) => id === "cali-base-acceleration")).toMatchObject({
+      value: 0.25,
+      citationId: "base-design",
+    })
+    expect(evidence.citations[0]).toMatchObject({
+      table: "Tabla 2",
+      row: "Microzona 3",
+      cell: "Tc",
+    })
+    expect(
+      evidence.citations
+        .filter(({ kind }) => kind !== "row" && kind !== "cell")
+        .some(({ rect }) => rect === null),
+    ).toBe(true)
+    expect(evidence.citations.map(({ id }) => id)).toEqual(result.citationIds)
+    expect(evidence.metricLineage.map(({ id }) => id)).toEqual(
+      result.metrics.filter(({ formulaId }) => formulaId !== null).map(({ id }) => id),
+    )
+    expect(evidence.branchLineage.map(({ branchId }) => branchId)).toEqual(
+      result.branches.map(({ id }) => id),
+    )
   })
 
   it("preserves both concurrent curve components as separate manual options", () => {

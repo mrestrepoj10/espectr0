@@ -68,9 +68,7 @@ export const caliCapabilities = spectrumCapabilitiesSchema.parse({
   comparison: unsupportedCapability(
     "El comparador actual todavía no consume escenarios municipales normalizados.",
   ),
-  contextualPdf: unsupportedCapability(
-    "La memoria PDF municipal genérica todavía no está instalada para Cali.",
-  ),
+  contextualPdf: supportedCapability(),
   csvExport: supportedCapability(),
   etabsExport: supportedCapability(),
   jsonExport: supportedCapability(),
@@ -84,9 +82,7 @@ export const caliCapabilities = spectrumCapabilitiesSchema.parse({
   bridgeRFactorWorkflow: unsupportedCapability(
     "El estudio municipal de edificaciones no define el flujo de puentes CCP-14.",
   ),
-  traceabilityViewer: unsupportedCapability(
-    "El visor municipal se habilitará cuando pueda resolver las regiones del PDF oficial.",
-  ),
+  traceabilityViewer: supportedCapability(),
 })
 
 const engineIdentity = {
@@ -106,6 +102,7 @@ const formulaByBranch: Record<CaliBranchId, string> = {
 const formulaCitation = (formulaId: string) => `formula-${formulaId}`
 const cellCitation = (hazardId: string, optionId: string, column: number) =>
   `cell-${hazardId}-${optionId}-column-${column}`
+const baseAccelerationCitation = (hazardId: string) => `base-${hazardId}`
 
 function citationResolves(citationId: string) {
   if (manifestCitationIds.has(citationId)) return true
@@ -380,7 +377,7 @@ function successResult(input: z.infer<typeof caliComputationInputSchema>): Norma
       value: acceleration,
       unit: "g",
       dependencies: [],
-      citationIds: Object.values(formulaByBranch).map(formulaCitation),
+      citationIds: [baseAccelerationCitation(hazardId)],
     },
     ...[1, 2, 3, 4].map((column) => ({
       id: `cali-${hazardId}-${input.optionId}-column-${column}`,
@@ -524,12 +521,12 @@ function successResult(input: z.infer<typeof caliComputationInputSchema>): Norma
     normalizePoint(input.optionId, hazardId, period, input.importanceFactor, siteCoefficientMultiplier),
   )
   const directMetrics = [
-    { id: "tc", label: "Tc", value: tc, unit: "s" as const, citation: 1 },
-    { id: "fa", label: "Fa", value: fa, unit: "dimensionless" as const, citation: 2 },
-    { id: "tl", label: "TL", value: tl, unit: "s" as const, citation: 3 },
-    { id: "fv", label: "Fv", value: fv, unit: "dimensionless" as const, citation: 4 },
-    { id: "a", label: "A", value: acceleration, unit: "g" as const, citation: null },
-    { id: "i", label: "I", value: input.importanceFactor, unit: "dimensionless" as const, citation: null },
+    { id: "tc", label: "Tc", value: tc, unit: "s" as const, citationId: cellCitation(hazardId, input.optionId, 1) },
+    { id: "fa", label: "Fa", value: fa, unit: "dimensionless" as const, citationId: cellCitation(hazardId, input.optionId, 2) },
+    { id: "tl", label: "TL", value: tl, unit: "s" as const, citationId: cellCitation(hazardId, input.optionId, 3) },
+    { id: "fv", label: "Fv", value: fv, unit: "dimensionless" as const, citationId: cellCitation(hazardId, input.optionId, 4) },
+    { id: "a", label: "A", value: acceleration, unit: "g" as const, citationId: baseAccelerationCitation(hazardId) },
+    { id: "i", label: "I", value: input.importanceFactor, unit: "dimensionless" as const, citationId: null },
   ].map((metric) => ({
     id: metric.id,
     label: metric.label,
@@ -537,8 +534,7 @@ function successResult(input: z.infer<typeof caliComputationInputSchema>): Norma
     unit: metric.unit,
     formulaId: null,
     dependencyIds: [],
-    citationIds:
-      metric.citation === null ? [] : [cellCitation(hazardId, input.optionId, metric.citation)],
+    citationIds: metric.citationId === null ? [] : [metric.citationId],
   }))
   const plateauFormula = formulaByBranch.plateau
   const plateauStep = formulaSteps.find(({ id }) => id === plateauFormula)
@@ -576,6 +572,7 @@ function successResult(input: z.infer<typeof caliComputationInputSchema>): Norma
   const citationIds = [
     ...new Set([
       ...[1, 2, 3, 4].map((column) => cellCitation(hazardId, input.optionId, column)),
+      baseAccelerationCitation(hazardId),
       ...Object.values(formulaByBranch).map(formulaCitation),
       ...warnings.flatMap((warning) => warning.citationIds),
       "claim-return-periods",

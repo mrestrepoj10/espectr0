@@ -8,6 +8,10 @@ import {
   assertNsr10LineageResolves,
   parseNsr10TraceEnvelope,
 } from "./nsr10-evidence"
+import {
+  CALI_ENGINE_ID,
+  assertCaliLineageResolves,
+} from "../cali/adapter"
 
 import type {
   NormalizedSpectrumResult,
@@ -28,6 +32,8 @@ export function spectrumResultData(
     if (parsed.status === "ok") parseNsr10TraceEnvelope(parsed.trace)
     else if (parsed.trace) parseNsr10TraceEnvelope(parsed.trace)
     assertNsr10LineageResolves(parsed)
+  } else if (parsed.engine.id === CALI_ENGINE_ID) {
+    assertCaliLineageResolves(parsed)
   }
   return parsed
 }

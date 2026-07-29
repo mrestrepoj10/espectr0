@@ -18,6 +18,7 @@ export {
   caliComputationInputSchema,
   caliSpectrumEngine,
 } from "./adapter"
+export { caliEvidenceResolver } from "./evidence-resolver"
 
 export type {
   CaliBranchId,

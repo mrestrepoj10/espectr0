@@ -4,7 +4,9 @@ import {
   spectrumStudyRelationRegistry,
   type SpectrumStudyRelationValidator,
 } from "../spectra/types"
+import { spectrumEvidenceResolverRegistry } from "../spectra/evidence"
 import canonicalJson from "./data/canonical.json"
+import { caliEvidenceResolver } from "./evidence-resolver"
 
 const optionIds = new Set(canonicalJson.curveComponents.map(({ id }) => id))
 const hazardIds = new Set(canonicalJson.hazards.map(({ id }) => id))
@@ -51,3 +53,4 @@ export const caliStudyRelationValidator: SpectrumStudyRelationValidator = {
 }
 
 spectrumStudyRelationRegistry.register(caliStudyRelationValidator)
+spectrumEvidenceResolverRegistry.register(caliEvidenceResolver)
