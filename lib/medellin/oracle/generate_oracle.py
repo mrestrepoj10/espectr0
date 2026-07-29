@@ -95,7 +95,7 @@ def build() -> dict:
         "schemaVersion": 1,
         "studyId": source["studyId"],
         "decimalPrecision": getcontext().prec,
-        "status": "partial-oracle-activation-blocked",
+        "status": "partial-oracle-localized-coverage",
         "recordCount": len(records),
         "records": records,
         "negativeCases": [
@@ -103,11 +103,11 @@ def build() -> dict:
             {"case": "unknown-hazard", "expected": "reject"},
             {"case": "T<0", "expected": "reject"},
             {"case": "T>4", "expected": "reject-or-outside-source-domain"},
-            {"case": "0<T<T0", "expected": "blocked-missing-equation"},
-            {"case": "activation", "expected": "blocked-no-adopted-decree"},
+            {"case": "0<T<T0", "expected": "unsupported-localized-missing-equation"},
+            {"case": "return-period", "expected": "unknown-null"},
         ],
         "declaredBinary64Tolerance": source["declaredBinary64Tolerance"],
-        "blockers": source["blockedBranches"] + source["blockedMetadata"],
+        "localizedLimitations": source["localizedBranches"] + source["unknownMetadata"],
     }
 
 

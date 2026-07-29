@@ -219,7 +219,7 @@ function SummaryPage({ result, evidence }: { result: SuccessfulResult; evidence:
       <Text style={styles.eyebrow}>Memoria reproducible · estudio municipal</Text>
       <Text style={styles.title}>{clean(evidence.study.label)}</Text>
       <Text style={styles.subtitle}>
-        {clean(evidence.selection.zone ? `Zona ${evidence.selection.zone}` : "Zona no declarada")} · {clean(result.hazard.label)} · {result.hazard.returnPeriodYears} años · amortiguamiento {number(result.hazard.dampingRatio * 100)} %
+        {clean(evidence.selection.zone ? `Zona ${evidence.selection.zone}` : "Zona no declarada")} · {clean(result.hazard.label)} · {result.hazard.returnPeriodYears === null ? "período de retorno no declarado" : `${result.hazard.returnPeriodYears} años`} · amortiguamiento {number(result.hazard.dampingRatio * 100)} %
       </Text>
       <View style={styles.notice}>
         <Text style={styles.noticeTitle}>Selección manual y alcance</Text>

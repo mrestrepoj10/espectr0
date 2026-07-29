@@ -80,9 +80,6 @@ const engineIdentity = {
   scenarioType: "municipal-study" as const,
 }
 
-// The shared v2 contract requires a positive integer. The historical table
-// states no return periods; 475 is carried only as explicit NSR-10 context.
-const CONTRACT_CONTEXT_RETURN_PERIOD_YEARS = 475
 const directFields = [
   "ground_peak",
   "short_amplification",
@@ -97,8 +94,8 @@ function hazardMetadata(hazardId: string) {
   return hazard
     ? {
         id: hazard.id,
-        label: `${hazard.label} · período municipal no declarado (475 años solo como contexto contractual NSR-10)`,
-        returnPeriodYears: CONTRACT_CONTEXT_RETURN_PERIOD_YEARS,
+        label: hazard.label,
+        returnPeriodYears: null,
         dampingRatio: hazard.dampingRatio,
       }
     : null
@@ -351,7 +348,7 @@ function successResult(input: MedellinComputationInput): NormalizedSpectrumResul
       severity: "info" as const,
       code: "historical-return-period-unknown",
       message:
-        "La fuente oficial fijada no declara el período de retorno de esta familia histórica. El valor de 475 años satisface únicamente el campo numérico obligatorio del contrato y no se atribuye al estudio municipal.",
+        "La fuente oficial fijada no declara el período de retorno de esta familia histórica; el resultado lo conserva como desconocido y no lo sustituye con un valor nacional o de referencia.",
       citationIds: ["table-historical-coefficients"],
     },
     {
@@ -365,6 +362,13 @@ function successResult(input: MedellinComputationInput): NormalizedSpectrumResul
       code: "source-period-domain",
       message: `El dominio publicado termina en ${MEDELLIN_MAX_PERIOD_SECONDS} s; períodos mayores se devuelven como no soportados.`,
       citationIds: ["warning-period-domain"],
+    },
+    {
+      severity: "warning" as const,
+      code: "site-specific-method-unavailable-for-affected-sites",
+      message:
+        "Los rellenos y franjas de transición remiten a un método detallado del artículo cuarto que no está en el paquete oficial fijado. Si esas condiciones aplican al predio, este motor no inventa el método y se requiere evaluación específica.",
+      citationIds: ["warning-fills", "warning-transition"],
     },
   ]
   const citationIds = [
@@ -448,6 +452,10 @@ function successResult(input: MedellinComputationInput): NormalizedSpectrumResul
         {
           id: "municipal-return-period",
           reason: "La fuente oficial no declara período de retorno o probabilidad para las dos familias históricas.",
+        },
+        {
+          id: "site-specific-method-for-affected-sites",
+          reason: "El método detallado referido para rellenos y franjas de transición no está presente en el paquete oficial fijado.",
         },
       ],
     },

@@ -10,11 +10,11 @@ The engine implements only what the locked official technical support states:
 - `Sa = Smax` for `T0 ≤ T ≤ Tc`;
 - `Sa = Smax × (Tc/T)^α` for `Tc < T ≤ 4 s`.
 
-For `T < T0`, `saAt` returns a typed, localized unsupported result because the figure does not print the rising-branch equation. Periods above 4 seconds are likewise outside the published domain. The two municipal return periods remain unknown; the normalized contract's required numeric field is explicitly labeled as contextual and is not attributed to the study.
+For `T < T0`, `saAt` returns a typed, localized unsupported result because the figure does not print the rising-branch equation. Periods above 4 seconds are likewise outside the published domain. The two municipal return periods remain machine-readable `null`; no national or reference-site value is substituted.
 
-## Governing conclusion
+## Administrative adoption context
 
-The locked official record does not support activating a Medellín municipal spectrum in a general building calculator:
+The locked official record does not establish current adoption as a general municipal substitute for the national building workflow. This factual finding does not gate calculation of the explicitly published technical branches:
 
 - The 1999 study produced 14 homogeneous zones and two curve families.
 - Decreto 638 de 1999 attempted to require the study, but the official 2014 POT evaluation says Decreto 143 de 2000 partially repealed it because it lacked approval from the Comisión Asesora Permanente.

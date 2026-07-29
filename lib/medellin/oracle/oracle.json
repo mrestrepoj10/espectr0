@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "studyId": "medellin-microzonation",
   "decimalPrecision": 50,
-  "status": "partial-oracle-activation-blocked",
+  "status": "partial-oracle-localized-coverage",
   "recordCount": 28,
   "records": [
     {
@@ -3553,18 +3553,18 @@
     },
     {
       "case": "0<T<T0",
-      "expected": "blocked-missing-equation"
+      "expected": "unsupported-localized-missing-equation"
     },
     {
-      "case": "activation",
-      "expected": "blocked-no-adopted-decree"
+      "case": "return-period",
+      "expected": "unknown-null"
     }
   ],
   "declaredBinary64Tolerance": "1e-12",
-  "blockers": [
+  "localizedLimitations": [
     "0<T<T0 rising branch: equation absent from locked primary source",
+    "T>4: outside the published period domain",
     "return period for each historical hazard",
-    "general legal applicability",
-    "adoption of the 2019 harmonization"
+    "referenced site-specific method for affected sites"
   ]
 }

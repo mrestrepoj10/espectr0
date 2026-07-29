@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "studyId": "medellin-microzonation",
-  "status": "historical-input-not-approved-for-production",
+  "status": "official-historical-technical-input",
   "transcriptionMethod": "Independent manual transcription from DAP May 2011 Table 0, physical PDF page 22; this file does not read generated canonical data.",
   "fields": ["ground_peak", "short_amplification", "plateau_per_importance", "plateau_start", "decay_start", "decay_exponent"],
   "hazards": {
@@ -48,6 +48,6 @@
   },
   "options": ["zone-01","zone-02","zone-03","zone-04","zone-05","zone-06","zone-07","zone-08","zone-09","zone-10","zone-11","zone-12","zone-13","zone-14"],
   "declaredBinary64Tolerance": "1e-12",
-  "blockedBranches": ["0<T<T0 rising branch: equation absent from locked primary source"],
-  "blockedMetadata": ["return period for each historical hazard", "general legal applicability", "adoption of the 2019 harmonization"]
+  "localizedBranches": ["0<T<T0 rising branch: equation absent from locked primary source", "T>4: outside the published period domain"],
+  "unknownMetadata": ["return period for each historical hazard", "referenced site-specific method for affected sites"]
 }

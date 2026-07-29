@@ -6,6 +6,7 @@ import {
   createMedellinScenario,
   medellinSpectrumEngine,
 } from "./adapter"
+import { createSpectrumExport } from "../spectra"
 import type { MedellinHazardId, MedellinZoneId } from "./schema"
 
 type OracleRecord = {
@@ -45,6 +46,7 @@ describe("Medellín normalized adapter", () => {
       expect(result.hazard.dampingRatio).toBe(
         record.hazardId === "design" ? 0.05 : 0.02,
       )
+      expect(result.hazard.returnPeriodYears).toBeNull()
       expect(result.evidenceAvailability.status).toBe("partial")
       expect(result.warnings.map(({ code }) => code)).toEqual(
         expect.arrayContaining([
@@ -118,6 +120,18 @@ describe("Medellín normalized adapter", () => {
     expect(result.warnings.map(({ code }) => code)).toContain(
       "source-equation-controls-rounded-display",
     )
+  })
+
+  it("exports the unknown municipal return period as null", () => {
+    const result = adaptMedellinSpectrum({
+      zoneId: "zone-01",
+      hazardId: "damage-control",
+      importanceFactor: 1,
+    })
+    const exported = createSpectrumExport(result)
+    expect(exported.result.status).toBe("ok")
+    if (exported.result.status !== "ok") return
+    expect(exported.result.hazard.returnPeriodYears).toBeNull()
   })
 
   it.each([

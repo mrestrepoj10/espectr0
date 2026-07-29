@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "incomplete-blocks-activation",
+  "status": "calculation-supported-with-localized-gap",
   "formulas": [
     {
       "id": "plateau-ordinate",
@@ -76,8 +76,8 @@
           "height": 0.29
         }
       },
-      "status": "blocked-equation-absent",
-      "issue": "The figure draws a rising line from aSmax at T=0 to Smax at T0 but supplies no equation; linear interpolation is not silently assumed."
+      "status": "localized-unsupported-equation-absent",
+      "issue": "The figure draws a rising line from aSmax at T=0 to Smax at T0 but supplies no equation; T < T0 is returned as unsupported and linear interpolation is not silently assumed."
     },
     {
       "id": "rc-short-period",

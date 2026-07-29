@@ -57,7 +57,7 @@ export type SharedSpectrumResult = {
   warnings: readonly SpectrumWarning[]
   hazard: {
     label: string
-    returnPeriodYears: number
+    returnPeriodYears: number | null
     dampingRatio: number
   }
 }
@@ -197,7 +197,9 @@ export const SharedSpectrumChart = forwardRef<
       </CardContent>
       <CardFooter>
         <p className="text-muted-foreground text-xs">
-          TR {result.hazard.returnPeriodYears} años · amortiguamiento crítico del{" "}
+          {result.hazard.returnPeriodYears === null
+            ? "TR no declarado"
+            : `TR ${result.hazard.returnPeriodYears} años`} · amortiguamiento crítico del{" "}
           {result.hazard.dampingRatio * 100} % · aceleraciones como fracción de g.
         </p>
       </CardFooter>
