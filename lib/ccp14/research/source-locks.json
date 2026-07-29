@@ -1,0 +1,111 @@
+{
+  "historicalRetrievalOn": "2026-07-22",
+  "retrievedOn": "2026-07-28",
+  "updatedOn": "2026-07-28",
+  "sourceAuthorityPolicy": {
+    "controllingAdoptionSource": "mintransporte-resolution-108-2015-invias-copy",
+    "legalAdoptionAuthority": "Ministerio de Transporte de Colombia",
+    "controllingTechnicalPublication": "invias-ccp14-official-zip",
+    "corroboratingOnly": [
+      "mintransporte-resolution-108-part1-rar",
+      "mintransporte-resolution-108-part2-rar",
+      "mintransporte-resolution-108-part3-rar",
+      "mintransporte-resolution-108-multipart-pdf"
+    ],
+    "rationale": "MinTransporte Resolution 108/2015 controls legal adoption. The product uses the technical asset currently published in the official INVÍAS catalog. Only the separate MinTransporte multipart scan is corroborating provenance and it does not override the INVÍAS technical ZIP.",
+    "verifiedOn": "2026-07-28"
+  },
+  "sources": [
+    {
+      "archiveCapture": "https://web.archive.org/web/20210515075336id_/https://www.invias.gov.co/index.php/archivo-y-documentos/bibilioteca-virtual/resoluciones-circulares-y-otros/3610-resolucion-no-108-del-26-de-enero-de-2015/file",
+      "bytes": 564302,
+      "catalogUrl": "https://www.invias.gov.co/documentos/buscar/?q=norma%20puentes&id=818",
+      "currentPortalDuplicateFileIds": [29585, 27516, 18745],
+      "currentPortalVerifiedOn": "2026-07-28",
+      "id": "mintransporte-resolution-108-2015-invias-copy",
+      "issuingAuthority": "Ministerio de Transporte de Colombia",
+      "currentPublicationCarrier": "Instituto Nacional de Vías (INVÍAS)",
+      "legacyOfficialUrl": "https://www.invias.gov.co/index.php/archivo-y-documentos/bibilioteca-virtual/resoluciones-circulares-y-otros/3610-resolucion-no-108-del-26-de-enero-de-2015/file",
+      "officialUrl": "https://www.invias.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=29585",
+      "pageCount": 2,
+      "redistribution": "external-only",
+      "sha256": "e17c4aa764716c5533cb82499984f87e4eda032888c91544fab10b804d5a753a",
+      "transportNote": "The current INVÍAS portal serves bytes identical to the historical locked copy; archived transport is retained only as provenance."
+    },
+    {
+      "bytes": 18874368,
+      "id": "mintransporte-resolution-108-part1-rar",
+      "officialUrl": "https://www.mintransporte.gov.co/loader.php?idFile=12013&lFuncion=descargar&lServicio=Tools2&lTipo=descargas",
+      "redistribution": "external-only",
+      "sha256": "1677010ae143926ccefb0281c503f980104604b4566ae86c234d6a2cdb96bf37"
+    },
+    {
+      "bytes": 18874368,
+      "id": "mintransporte-resolution-108-part2-rar",
+      "officialUrl": "https://www.mintransporte.gov.co/loader.php?idFile=12014&lFuncion=descargar&lServicio=Tools2&lTipo=descargas",
+      "redistribution": "external-only",
+      "sha256": "270194845a2f5c52091e1077e8115fdc619137c5de33df043328e5ee7e07f589"
+    },
+    {
+      "bytes": 16382292,
+      "id": "mintransporte-resolution-108-part3-rar",
+      "officialUrl": "https://www.mintransporte.gov.co/loader.php?idFile=12015&lFuncion=descargar&lServicio=Tools2&lTipo=descargas",
+      "redistribution": "external-only",
+      "sha256": "c22be4408dc498b067366864febcdf4900350e22decfa409e006b996b0fc9a52"
+    },
+    {
+      "bytes": 60041340,
+      "derivedFrom": [
+        "mintransporte-resolution-108-part1-rar",
+        "mintransporte-resolution-108-part2-rar",
+        "mintransporte-resolution-108-part3-rar"
+      ],
+      "embeddedContentAudit": "1551 distinct scanned-page images; no EmbeddedFiles, AF, JavaScript, file annotations, or URI annotations",
+      "id": "mintransporte-resolution-108-multipart-pdf",
+      "metadata": {
+        "creationDate": "2015-01-28T09:35:05-05:00",
+        "creator": "Smart Touch 1.7",
+        "producer": "Eastman Kodak Company",
+        "title": "RESOLUCION 0000108 -2015"
+      },
+      "pageCount": 1551,
+      "reconstruction": "7z x RESOLUCION 0000108 -2015.part1.rar",
+      "redistribution": "external-only",
+      "sha256": "084c6223291dd2db9458210ae675693b001a7aa790f92fa7163112442621c5bb"
+    },
+    {
+      "archiveCapture": "https://web.archive.org/web/20220305150428id_/https://www.invias.gov.co/index.php/archivo-y-documentos/documentos-tecnicos/3709-norma-colombiana-de-diseno-de-puentes-ccp14/file",
+      "bytes": 40260753,
+      "catalogCategory": "Norma Colombiana de Diseño de Puentes CCP14",
+      "catalogUrl": "https://www.invias.gov.co/documentos/buscar/?q=norma%20puentes&id=816",
+      "centralDirectoryEntryCount": 16,
+      "currentPortalFileId": 29584,
+      "currentPortalRecordPublishedOn": "2025-12-23",
+      "currentPortalVerifiedOn": "2026-07-28",
+      "id": "invias-ccp14-official-zip",
+      "legacyOfficialUrl": "https://www.invias.gov.co/index.php/archivo-y-documentos/documentos-tecnicos/3709-norma-colombiana-de-diseno-de-puentes-ccp14",
+      "officialUrl": "https://www.invias.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=29584",
+      "redistribution": "external-only",
+      "sha256": "e6d71cd1a0efffb8b8be95f8e3c42a7fd180485c704f0761e07faf6af28fbd8d",
+      "transportNote": "The current INVÍAS portal serves the exact 40,260,753-byte locked ZIP; archived transport is retained only as provenance."
+    },
+    {
+      "archiveMember": "SECCIÓN 3 - CARGAS Y FACTORES DE CARGA.pdf",
+      "bytes": 5153318,
+      "id": "invias-ccp14-section-3",
+      "pageCount": 140,
+      "parentArchive": "invias-ccp14-official-zip",
+      "redistribution": "external-only",
+      "sha256": "55f53d68dfc568a930b726b0c7dba510ea608128490353bf604f827a27ffc8ca"
+    },
+    {
+      "archiveMember": "PREFACIO.pdf",
+      "bytes": 448341,
+      "id": "invias-ccp14-preface",
+      "pageCount": 7,
+      "parentArchive": "invias-ccp14-official-zip",
+      "redistribution": "external-only",
+      "sha256": "a6c4eea8837580438585aa1b43b6167c3b626aa6d49373595ccc3b43be7a6fdf"
+    }
+  ]
+}

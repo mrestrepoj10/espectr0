@@ -1,0 +1,68 @@
+{
+  "conflicts": [
+    {
+      "activationImpact": "block",
+      "id": "t0-definition",
+      "ministerialCorroboration": {
+        "figureLocator": "MinTransporte reconstructed PDF physical page 117, printed 3-67, Figure 3.10.4.1-1: T0 = 0.2 Ts",
+        "sourceSha256": "084c6223291dd2db9458210ae675693b001a7aa790f92fa7163112442621c5bb",
+        "textLocator": "MinTransporte reconstructed PDF physical page 118, printed 3-68: T0 equals 0.2 seconds"
+      },
+      "officialResolutionSearch": "The current INVÍAS portal was audited on 2026-07-28. It republishes the locked 2015 resolution and technical ZIP and contains no adopted Section 3 erratum, circular, amendment, or later edition resolving this passage. The 2024 INVÍAS expert-panel publication is a proposal, not an adopted correction.",
+      "passageA": {
+        "locator": "Section 3 PDF physical page 60, printed 3-56, Figure 3.10.4.1-1",
+        "reading": "T0 = 0.2 Ts",
+        "region": {
+          "height": 0.08,
+          "left": 0.22,
+          "top": 0.34,
+          "width": 0.24
+        },
+        "renderedRegionSha256": "39f90d52cb6879395948701750757b8eee2c51848c63a082e0ffd01ffebe872a"
+      },
+      "passageB": {
+        "locator": "Section 3 PDF physical page 60, printed 3-56, T0 definition",
+        "reading": "T0 is equal to 0.2 seconds",
+        "region": {
+          "height": 0.1,
+          "left": 0.04,
+          "top": 0.82,
+          "width": 0.44
+        },
+        "renderedRegionSha256": "455bc9f9b643b4ea8ca099c0853ccfe85bd8416a56eb42ae862130081ea835d3"
+      },
+      "sourceSha256": "55f53d68dfc568a930b726b0c7dba510ea608128490353bf604f827a27ffc8ca",
+      "status": "unresolved"
+    },
+    {
+      "activationImpact": "block-location-selection",
+      "id": "missing-location-dataset",
+      "ministerialArchiveEvidence": "The three official RAR volumes reconstruct one scanned PDF. Physical page 107 repeats the CD/web promise, but the PDF has no embedded files, file annotations, or URI annotations and the multipart payload contains no separate dataset.",
+      "officialArchiveEvidence": "Current INVÍAS portal file ID 29584 reproduces the locked 16-entry ZIP exactly. It contains only PDFs: no CD image, spreadsheet, CSV, database, web-tool export, or municipality/locality table.",
+      "officialText": "Commentary C3.10.2.1 says PGA, Ss, and S1 values would be available on a CD and web tools.",
+      "status": "unresolved"
+    },
+    {
+      "activationImpact": "none-under-product-source-authority-policy",
+      "id": "ministerial-scan-vs-invias-technical-zip",
+      "inviasPublication": "Current INVÍAS portal file ID 29584: 16 PDFs, 1,503 total pages, 40,260,753 bytes, SHA-256 e6d71cd1a0efffb8b8be95f8e3c42a7fd180485c704f0761e07faf6af28fbd8d.",
+      "issue": "The official MinTransporte package reconstructs a 1,551-page scanned resolution-and-annex PDF, while the later INVÍAS publication is a 1,503-page technical ZIP with different bytes, pagination, and revision presentation. No authoritative reconciliation identifies which differences belong to the adopted annex or later editorial publication.",
+      "ministerialPublication": "Three official RAR volumes reconstruct a 60,041,340-byte PDF, 1,551 pages, SHA-256 084c6223291dd2db9458210ae675693b001a7aa790f92fa7163112442621c5bb.",
+      "productResolution": "MinTransporte Resolution 108/2015 remains the legal adoption authority. The calculator follows the technical asset currently published by INVÍAS; the separate MinTransporte multipart scan is corroborating provenance only, and no value unique to that scan may be used.",
+      "residualCaveat": "The inter-agency editorial relationship remains unexplained but does not block a product whose declared source authority is the current INVÍAS publication.",
+      "status": "resolved-for-product-invias-controls"
+    },
+    {
+      "activationImpact": "none-currently",
+      "id": "section-13-2026-proposal",
+      "issue": "MinTransporte listed a 9-24 April 2026 consultation proposal to modify CCP-2014 Section 13 (barriers). It is a proposal, not an adopted amendment, and it does not modify Section 3.",
+      "status": "nonbinding-proposal"
+    },
+    {
+      "activationImpact": "review-required",
+      "id": "critical-bridge-hazard",
+      "issue": "The preface discusses a 2% in 50 years / about 2500-year objective for critical bridges, while normative 3.10.2 routes lower exceedance probability/longer return period to a site-specific procedure. No official 2500-year selectable map/value dataset was found.",
+      "status": "do-not-expose-as-tabulated-hazard"
+    }
+  ]
+}

@@ -57,3 +57,10 @@
 /lib/bogota/oracle/*.py text eol=lf
 /lib/bogota/*.md text eol=lf
 /lib/bogota/oracle/*.md text eol=lf
+/lib/ccp14/data/*.json text eol=lf
+/lib/ccp14/evidence/*.mjs text eol=lf
+/lib/ccp14/oracle/*.json text eol=lf
+/lib/ccp14/oracle/*.py text eol=lf
+/lib/ccp14/research/*.json text eol=lf
+/lib/ccp14/research/*.md text eol=lf
+/lib/ccp14/research/*.mjs text eol=lf

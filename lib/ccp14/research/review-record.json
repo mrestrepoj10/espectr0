@@ -1,0 +1,28 @@
+{
+  "activationDecision": "do-not-activate",
+  "authorReview": {
+    "date": "2026-07-28",
+    "reviewer": "Codex research agent",
+    "status": "complete",
+    "verified": [
+      "source hashes and byte counts",
+      "adoption scope",
+      "site-factor cells",
+      "R-factor cells",
+      "formula transcription",
+      "visual T0 conflict",
+      "official ZIP contents",
+      "official MinTransporte multipart hashes and PDF reconstruction",
+      "ministerial physical pages 107, 117, and 118",
+      "ministerial-versus-INVÍAS publication mismatch",
+      "current INVÍAS portal file IDs 29584 and 29585 reproduce the locked ZIP and resolution bytes",
+      "offline current-portal verifier reproduces 2 files, 16 PDFs, and 1,503 pages"
+    ]
+  },
+  "independentDomainReview": {
+    "requiredExpertise": "Colombian bridge seismic design and CCP-14 regulatory application",
+    "reviewer": null,
+    "status": "pending"
+  },
+  "mergeDecision": "draft-only pending exact re-review; no activation until authoritative T0 resolution and an official selectable dataset or separately approved expert-input policy are recorded"
+}

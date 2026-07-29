@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "id": "ministerial-vs-invias-publication-provenance",
+      "mitigation": "Use only the current INVÍAS ZIP for product values. Keep the MinTransporte scan hash-locked as corroborating provenance and disclose the unexplained editorial difference.",
+      "severity": "medium"
+    },
+    {
+      "id": "invias-portal-migration",
+      "mitigation": "Use current INVÍAS file IDs 29584 and 29585. Preserve legacy URLs and archived captures only as provenance; replay current downloads against byte locks.",
+      "severity": "low"
+    },
+    {
+      "id": "redistribution-rights",
+      "mitigation": "Keep all official PDFs/ZIP external-only; commit no copied source bytes.",
+      "severity": "medium"
+    },
+    {
+      "id": "no-independent-domain-review",
+      "mitigation": "Keep the PR draft and block activation/merge until an independent bridge-seismic reviewer signs the review record.",
+      "severity": "high"
+    },
+    {
+      "id": "continuous-map-not-finite-registry",
+      "mitigation": "Do not claim an exact selectable location count or synthesize one from municipal references, GIS, coordinates, or contours.",
+      "severity": "critical"
+    }
+  ]
+}
