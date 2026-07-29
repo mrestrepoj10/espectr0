@@ -14,7 +14,6 @@
   "formulas": {
     "deriveAv": "tc*aa*fa/(0.48*fv)",
     "plateau": "2.5*aa*fa*i",
-    "inverse": "1.2*av*fv*i/t",
-    "inverseSquare": "1.2*av*fv*tl*i/t^2"
+    "inverse": "1.2*av*fv*i/t"
   }
 }

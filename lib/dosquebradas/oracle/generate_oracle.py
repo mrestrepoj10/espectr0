@@ -34,8 +34,7 @@ for row in data["rows"]:
             branch = "dosquebradas-inverse"
             sa = Decimal("1.2") * av * values["fv"] * importance / period
         else:
-            branch = "dosquebradas-inverse-square"
-            sa = Decimal("1.2") * av * values["fv"] * values["tl"] * importance / (period * period)
+            return {"period": decimal_text(period), "status": "unsupported", "branch": None, "saG": None}
         return {"period": decimal_text(period), "status": "ok", "branch": branch, "saG": decimal_text(sa)}
 
     periods = [
@@ -56,7 +55,10 @@ result = {
     "status": "normalized-spectrum-supported-from-to",
     "importanceFactor": decimal_text(importance),
     "records": records,
-    "unsupportedIntervals": [{"condition": "T < To", "outcome": "unsupported"}],
+    "unsupportedIntervals": [
+        {"condition": "T < To", "outcome": "unsupported"},
+        {"condition": "T > TL", "outcome": "unsupported"},
+    ],
     "inputSha256": hashlib.sha256(INPUT.read_bytes()).hexdigest(),
 }
 expected = stable(result)

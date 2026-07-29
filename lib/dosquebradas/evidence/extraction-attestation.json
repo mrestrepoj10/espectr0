@@ -11,7 +11,7 @@
     "tables": 2,
     "optionRows": 5,
     "directCells": 30,
-    "formulaRegions": 4,
+    "formulaRegions": 3,
     "applicabilityClaims": 4,
     "percent": 100
   },
@@ -239,9 +239,9 @@
     {
       "citationId": "nsr10-a.2.6-1",
       "method": "rendered NSR-10 pages A-28/A-29 inspected at original resolution",
-      "observed": "Equations A.2.6-1, A.2.6-2, A.2.6-3 and A.2.6-5"
+      "observed": "Equations A.2.6-1, A.2.6-2 and A.2.6-3"
     }
   ],
-  "nonInference": "The attestation binds the 30 printed municipal cells and four printed NSR-10 equations. Av is derived only by algebraically inverting A.2.6-2; it is never assumed equal to Aa. The T < To entrance branch remains unsupported.",
-  "payloadSha256": "6264fba8f652f4377e8ece06926b6077c5fdbb02f959d56e42ff4bb8cadc6271"
+  "nonInference": "The attestation binds the 30 printed municipal cells and three printed NSR-10 equations. Av is derived only by algebraically inverting A.2.6-2; it is never assumed equal to Aa. Both T < To and T > TL remain unsupported because their municipal equations are unattested.",
+  "payloadSha256": "ff5bbc1966d2e128b4b066f8f3f7777ddb01f0cb4fd9e1acbcc413be40805959"
 }

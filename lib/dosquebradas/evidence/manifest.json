@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "studyId": "dosquebradas-microzonation",
-  "title": "Dosquebradas POT 2024 Table 27 — normalized T ≥ To spectrum with NSR-10 lineage",
+  "title": "Dosquebradas POT 2024 Table 27 — normalized To ≤ T ≤ TL spectrum with NSR-10 lineage",
   "sources": [
     {
       "id": "acuerdo-007-2024",
@@ -371,27 +371,6 @@
       "requiredTokens": [
         "2.5",
         "A.2.6-3"
-      ]
-    },
-    {
-      "id": "nsr10-a.2.6-5",
-      "sourceDocumentId": "nsr10-title-a-2017",
-      "regionKind": "applicability",
-      "physicalPage": 43,
-      "printedPage": "A-29",
-      "reference": "Ecuación A.2.6-5",
-      "rect": {
-        "left": 0.122549,
-        "top": 0.157828,
-        "width": 0.661765,
-        "height": 0.069444
-      },
-      "extractedToken": "Sa = 1.2 Av Fv TL I / T2 (A.2.6-5)",
-      "unit": "g",
-      "transformation": null,
-      "requiredTokens": [
-        "1.2",
-        "A.2.6-5"
       ]
     },
     {
@@ -1228,8 +1207,7 @@
     "nsr10-a.2.5-1",
     "nsr10-a.2.6-1",
     "nsr10-a.2.6-2",
-    "nsr10-a.2.6-3",
-    "nsr10-a.2.6-5"
+    "nsr10-a.2.6-3"
   ],
   "coverage": {
     "optionIds": [

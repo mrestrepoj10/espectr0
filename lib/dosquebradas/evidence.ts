@@ -21,7 +21,6 @@ export const dosquebradasFormulaCitation = {
   av: "nsr10-a.2.6-2",
   plateau: "nsr10-a.2.6-3",
   inverse: "nsr10-a.2.6-1",
-  "inverse-square": "nsr10-a.2.6-5",
 } as const
 
 export function dosquebradasCellCitation(zoneId: string, fieldId: string) {

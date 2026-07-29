@@ -1,10 +1,10 @@
 # Dosquebradas seismic-microzonation research dossier
 
-Status: **five-zone normalized calculation supported for `T >= To`; entrance branch localized as unsupported**.
+Status: **five-zone normalized calculation supported for `To <= T <= TL`; both outside intervals localized as unsupported**.
 
 The official 2024 POT package publishes Table 27 with exact `To`, `Tc`, `TL`, `Aa`, `Fa`, and `Fv` values for five manually selected zones, and its figure states `β=5%`. The same current POT says the CARDER supports remain in force while ordering the municipality to adjust and harmonize the model with NSR-10 within 24 months.
 
-The engine uses the 30 direct Table 27 cells and the installed NSR-10 equations A.2.6-1, A.2.6-2, A.2.6-3 and A.2.6-5. Because Table 27 omits `Av`, the engine derives it by algebraically inverting A.2.6-2; it never assumes `Av=Aa`. Plateau, inverse and inverse-square branches are available from the tabulated `To` onward. The official package does not attest the entrance branch, so `saAt(T)` returns a typed, localized unsupported outcome for `T < To`.
+The engine uses the 30 direct Table 27 cells and the installed NSR-10 equations A.2.6-1, A.2.6-2 and A.2.6-3. Because Table 27 omits `Av`, the engine derives it by algebraically inverting A.2.6-2; it never assumes `Av=Aa`. Plateau and inverse branches are available only from the tabulated `To` through `TL`. The official package does not attest equations for either outside interval, so `saAt(T)` returns a typed, localized unsupported outcome for `T < To` and `T > TL`. No inverse-square or flat extrapolation is inferred from the figure.
 
 Zone selection is manual and carries a professional-validation warning. No map, coordinate lookup, GIS asset, shared registry or UI integration is included. The official package demonstrates one design hazard; the three-hazard behavior seen on EspectroCol is recorded only as a UX discrepancy and is not imported.
 

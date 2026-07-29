@@ -3,12 +3,10 @@ import { findDosquebradasRow, type DosquebradasZoneId } from "./schema"
 export type DosquebradasBranchId =
   | "dosquebradas-plateau"
   | "dosquebradas-inverse"
-  | "dosquebradas-inverse-square"
 
 export type DosquebradasFormulaId =
   | "dosquebradas-nsr10-a.2.6-3"
   | "dosquebradas-nsr10-a.2.6-1"
-  | "dosquebradas-nsr10-a.2.6-5"
 
 export const dosquebradasFormulaByBranch: Record<
   DosquebradasBranchId,
@@ -16,7 +14,6 @@ export const dosquebradasFormulaByBranch: Record<
 > = {
   "dosquebradas-plateau": "dosquebradas-nsr10-a.2.6-3",
   "dosquebradas-inverse": "dosquebradas-nsr10-a.2.6-1",
-  "dosquebradas-inverse-square": "dosquebradas-nsr10-a.2.6-5",
 }
 
 export type DosquebradasOrdinate =
@@ -81,8 +78,10 @@ export function evaluateDosquebradasOrdinate(input: {
     branchId = "dosquebradas-inverse"
     saG = (1.2 * av * fv * importanceFactor) / tSeconds
   } else {
-    branchId = "dosquebradas-inverse-square"
-    saG = (1.2 * av * fv * tl * importanceFactor) / tSeconds ** 2
+    return {
+      status: "unsupported",
+      message: `La Tabla 27 fija TL=${tl} s, pero el paquete oficial no publica una ecuación verificable para T > TL.`,
+    }
   }
   if (!Number.isFinite(saG) || saG < 0) {
     return {

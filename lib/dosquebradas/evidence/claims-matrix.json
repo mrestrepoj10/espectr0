@@ -67,11 +67,6 @@
       "citationId": "nsr10-a.2.6-3"
     },
     {
-      "id": "inverse-square-formula",
-      "statement": "The inverse-square branch uses NSR-10 equation A.2.6-5.",
-      "citationId": "nsr10-a.2.6-5"
-    },
-    {
       "id": "entrance-gap",
       "statement": "The installed municipal evidence does not attest the T < To entrance branch.",
       "citationId": "table-27"

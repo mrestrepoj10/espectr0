@@ -74,9 +74,9 @@
         },
         {
           "period": "2.500001",
-          "status": "ok",
-          "branch": "dosquebradas-inverse-square",
-          "saG": "0.1999998400000959999488000256"
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
         }
       ]
     },
@@ -151,9 +151,9 @@
         },
         {
           "period": "3.500001",
-          "status": "ok",
-          "branch": "dosquebradas-inverse-square",
-          "saG": "0.2199998742857681632447813484"
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
         }
       ]
     },
@@ -228,9 +228,9 @@
         },
         {
           "period": "4.000001",
-          "status": "ok",
-          "branch": "dosquebradas-inverse-square",
-          "saG": "0.2199998900000412499862500043"
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
         }
       ]
     },
@@ -305,9 +305,9 @@
         },
         {
           "period": "1.600001",
-          "status": "ok",
-          "branch": "dosquebradas-inverse-square",
-          "saG": "0.2199997250002578122851564178"
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
         }
       ]
     },
@@ -382,9 +382,9 @@
         },
         {
           "period": "4.000001",
-          "status": "ok",
-          "branch": "dosquebradas-inverse-square",
-          "saG": "0.199999900000037499987500004"
+          "status": "unsupported",
+          "branch": null,
+          "saG": null
         }
       ]
     }
@@ -393,7 +393,11 @@
     {
       "condition": "T < To",
       "outcome": "unsupported"
+    },
+    {
+      "condition": "T > TL",
+      "outcome": "unsupported"
     }
   ],
-  "inputSha256": "c70938f4634fffacbaedc1b872d6fcb2aa9c07a3a985b6424cf03b499a146cec"
+  "inputSha256": "24b42bccf6f2cea73032de6677a469686f1f4a62b6579538907e3b34392053e3"
 }

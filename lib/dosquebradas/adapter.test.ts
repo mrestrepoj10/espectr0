@@ -37,6 +37,9 @@ describe("Dosquebradas normalized adapter", () => {
       expect(result.points[0].tSeconds).toBe(
         result.metrics.find(({ id }) => id === "to")?.value,
       )
+      expect(result.points.at(-1)?.tSeconds).toBe(
+        result.metrics.find(({ id }) => id === "tl")?.value,
+      )
       expect(result.evidenceAvailability.status).toBe("partial")
       expect(result.warnings.map(({ code }) => code)).toContain(
         "professional-zone-validation-required",
@@ -79,7 +82,23 @@ describe("Dosquebradas normalized adapter", () => {
       status: "unsupported",
       applicability: {
         reasonCode: "dosquebradas-entrance-branch-unavailable",
-        citationIds: ["table-27"],
+        citationIds: ["cell-zona-5-to"],
+      },
+    })
+  })
+
+  it("returns a typed localized warning above TL", () => {
+    const result = adaptDosquebradasSpectrum({
+      zoneId: "zona-4",
+      hazardId: "design",
+      importanceFactor: 1,
+    })
+    const ordinate = result.saAt(1.601)
+    expect(ordinate).toMatchObject({
+      status: "unsupported",
+      applicability: {
+        reasonCode: "dosquebradas-long-period-branch-unavailable",
+        citationIds: ["cell-zona-4-tl"],
       },
     })
   })

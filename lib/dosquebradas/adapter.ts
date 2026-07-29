@@ -76,6 +76,10 @@ const engineIdentity = {
   scenarioType: "municipal-study" as const,
 }
 
+// The normalized shared contract requires a positive integer. This is NSR-10
+// context only and is explicitly not asserted as municipal Table 27 metadata.
+const NSR10_CONTEXT_RETURN_PERIOD_YEARS = 475
+
 const validZoneIds = new Set(["zona-1", "zona-2", "zona-3", "zona-4", "zona-5"])
 
 function invalidInputs(input: unknown): NormalizedInputs {
@@ -124,8 +128,8 @@ function invalidResult(input: unknown, message: string): NormalizedSpectrumResul
       key.hazardId === "design"
         ? {
             id: "design",
-            label: "Diseño - anclaje NSR-10 10%/50 años",
-            returnPeriodYears: 475,
+            label: "Diseño - contexto NSR-10 no declarado por la Tabla 27",
+            returnPeriodYears: NSR10_CONTEXT_RETURN_PERIOD_YEARS,
             dampingRatio: 0.05,
           }
         : null,
@@ -174,22 +178,28 @@ function normalizedPoint(
     })
   }
   if (ordinate.status === "unsupported") {
+    const row = findDosquebradasRow(input.zoneId)
+    const belowTo = row ? tSeconds < row.fields.to : true
     return normalizedSpectrumOrdinateSchema.parse({
       status: "unsupported",
       applicability: {
         status: "unsupported",
-        reasonCode: "dosquebradas-entrance-branch-unavailable",
+        reasonCode: belowTo
+          ? "dosquebradas-entrance-branch-unavailable"
+          : "dosquebradas-long-period-branch-unavailable",
         message: ordinate.message,
-        citationIds: ["table-27"],
+        citationIds: [
+          row
+            ? dosquebradasCellCitation(input.zoneId, belowTo ? "to" : "tl")
+            : "table-27",
+        ],
       },
     })
   }
   const formulaCitation =
     ordinate.point.branchId === "dosquebradas-plateau"
       ? dosquebradasFormulaCitation.plateau
-      : ordinate.point.branchId === "dosquebradas-inverse"
-        ? dosquebradasFormulaCitation.inverse
-        : dosquebradasFormulaCitation["inverse-square"]
+      : dosquebradasFormulaCitation.inverse
   return {
     ...ordinate.point,
     citationIds: [formulaCitation],
@@ -245,21 +255,8 @@ function successResult(input: DosquebradasComputationInput): NormalizedSpectrumR
     expression: "Av = Tc × Aa × Fa / (0.48 × Fv)",
     substitution: `Av = ${tc} × ${aa} × ${fa} / (0.48 × ${fv}) = ${av}`,
   }
-  const longPeriodStep = {
-    id: "dosquebradas-representative-long-period",
-    classification: "derived",
-    label: "T representativo largo",
-    value: 2 * tl,
-    unit: "s",
-    dependencies: [`dosquebradas-${input.zoneId}-tl`],
-    citationIds: [dosquebradasFormulaCitation["inverse-square"]],
-    expression: "T = 2 × TL (punto representativo de la rama T > TL)",
-    substitution: `T = 2 × ${tl} = ${2 * tl} s`,
-  }
   const plateauValue = 2.5 * aa * fa * input.importanceFactor
   const inverseValue = (1.2 * av * fv * input.importanceFactor) / tl
-  const longValue =
-    (1.2 * av * fv * tl * input.importanceFactor) / (2 * tl) ** 2
   const formulaSteps = [
     {
       id: dosquebradasFormulaByBranch["dosquebradas-plateau"],
@@ -292,34 +289,16 @@ function successResult(input: DosquebradasComputationInput): NormalizedSpectrumR
       expression: "Sa = 1.2 × Av × Fv × I / T",
       substitution: `Sa(TL) = 1.2 × ${av} × ${fv} × ${input.importanceFactor} / ${tl} = ${inverseValue} g`,
     },
-    {
-      id: dosquebradasFormulaByBranch["dosquebradas-inverse-square"],
-      classification: "derived",
-      label: "Sa 1/T²",
-      value: longValue,
-      unit: "g",
-      dependencies: [
-        "dosquebradas-derived-av",
-        `dosquebradas-${input.zoneId}-fv`,
-        `dosquebradas-${input.zoneId}-tl`,
-        "dosquebradas-input-importance",
-        "dosquebradas-representative-long-period",
-      ],
-      citationIds: [dosquebradasFormulaCitation["inverse-square"]],
-      expression: "Sa = 1.2 × Av × Fv × TL × I / T²",
-      substitution: `Sa(2TL) = 1.2 × ${av} × ${fv} × ${tl} × ${input.importanceFactor} / ${2 * tl}² = ${longValue} g`,
-    },
   ]
   const branches = [
     ["dosquebradas-plateau", dosquebradasFormulaCitation.plateau],
     ["dosquebradas-inverse", dosquebradasFormulaCitation.inverse],
-    ["dosquebradas-inverse-square", dosquebradasFormulaCitation["inverse-square"]],
   ].map(([id, citationId]) => ({
     id: id as DosquebradasBranchId,
     formulaId: dosquebradasFormulaByBranch[id as DosquebradasBranchId],
     citationIds: [citationId],
   }))
-  const endPeriod = Math.max(5, tl + 1)
+  const endPeriod = tl
   const sampledPeriods = Array.from(
     { length: Math.floor((endPeriod - to) / 0.01) + 1 },
     (_, index) => Number((to + index * 0.01).toFixed(8)),
@@ -332,7 +311,6 @@ function successResult(input: DosquebradasComputationInput): NormalizedSpectrumR
     ...directSteps,
     inputStep,
     avStep,
-    longPeriodStep,
     ...formulaSteps,
   ]
   const metrics = [
@@ -393,6 +371,12 @@ function successResult(input: DosquebradasComputationInput): NormalizedSpectrumR
       citationIds: [dosquebradasCellCitation(input.zoneId, "to")],
     },
     {
+      severity: "warning" as const,
+      code: "long-period-branch-unavailable",
+      message: `La curva normalizada termina en TL=${tl} s; para T > TL la ordenada se reporta como no soportada porque el paquete oficial no atestigua esa rama.`,
+      citationIds: [dosquebradasCellCitation(input.zoneId, "tl")],
+    },
+    {
       severity: "info" as const,
       code: "nsr10-harmonization-pending",
       message:
@@ -403,7 +387,7 @@ function successResult(input: DosquebradasComputationInput): NormalizedSpectrumR
       severity: "info" as const,
       code: "return-period-nsr10-context",
       message:
-        "La Tabla 27 no declara el período de retorno; el metadato de 475 años representa el anclaje NSR-10 de 10% de excedencia en 50 años.",
+        "La Tabla 27 no declara el período de retorno. El campo numérico obligatorio del contrato usa 475 años solo como contexto NSR-10 de 10% de excedencia en 50 años; no se presenta como valor municipal.",
       citationIds: ["nsr10-design-probability"],
     },
   ]
@@ -416,7 +400,13 @@ function successResult(input: DosquebradasComputationInput): NormalizedSpectrumR
   ]
   const trace = {
     schemaVersion: DOSQUEBRADAS_TRACE_SCHEMA_VERSION,
-    context: { ...input, derivedAv: av, supportedFromSeconds: to },
+    context: {
+      ...input,
+      derivedAv: av,
+      supportedFromSeconds: to,
+      supportedThroughSeconds: tl,
+      municipalReturnPeriodYears: null,
+    },
     steps: traceSteps,
     branches: branches.map(({ id, formulaId }) => ({ id, formulaId })),
   }
@@ -439,8 +429,8 @@ function successResult(input: DosquebradasComputationInput): NormalizedSpectrumR
     branches,
     hazard: {
       id: "design",
-      label: "Diseño - anclaje NSR-10 10%/50 años",
-      returnPeriodYears: 475,
+      label: "Diseño - contexto NSR-10 no declarado por la Tabla 27",
+      returnPeriodYears: NSR10_CONTEXT_RETURN_PERIOD_YEARS,
       dampingRatio: 0.05,
     },
     warnings,
@@ -453,6 +443,10 @@ function successResult(input: DosquebradasComputationInput): NormalizedSpectrumR
         {
           id: "entrance-branch-below-to",
           reason: "El paquete oficial no atestigua la ecuación aplicable para T < To.",
+        },
+        {
+          id: "long-period-branch-above-tl",
+          reason: "El paquete oficial no atestigua la ecuación aplicable para T > TL.",
         },
         {
           id: "municipal-return-period",

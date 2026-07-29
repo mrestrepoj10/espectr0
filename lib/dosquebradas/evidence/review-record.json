@@ -10,9 +10,9 @@
       "30-cell transcription",
       "NSR-10 equation regions",
       "Av derivation",
-      "T >= To branch arithmetic"
+      "To <= T <= TL branch arithmetic"
     ]
   },
-  "activationDecision": "calculation-supported-for-t-greater-or-equal-to-to-with-localized-warnings",
+  "activationDecision": "calculation-supported-only-between-to-and-tl-with-localized-warnings",
   "mergeDecision": "draft-pr-pending-independent-review"
 }

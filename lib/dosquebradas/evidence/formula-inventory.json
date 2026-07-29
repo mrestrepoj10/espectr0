@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "status": "supported-partial-interval",
-  "supportedInterval": "T >= To",
+  "supportedInterval": "To <= T <= TL",
   "formulas": [
     {
       "id": "derive-av",
@@ -36,31 +36,22 @@
         "importanceFactor",
         "T"
       ]
-    },
-    {
-      "id": "inverse-square",
-      "condition": "T > TL",
-      "expression": "Sa = 1.2 × Av × Fv × TL × I / T²",
-      "citationId": "nsr10-a.2.6-5",
-      "dependencies": [
-        "derive-av",
-        "fv",
-        "tl",
-        "importanceFactor",
-        "T"
-      ]
     }
   ],
   "unsupportedIntervals": [
     {
       "condition": "T < To",
       "reason": "No entrance equation is attested in the installed municipal package."
+    },
+    {
+      "condition": "T > TL",
+      "reason": "No long-period equation is attested in the installed municipal package."
     }
   ],
   "coverage": {
-    "supportedBranches": 3,
-    "cited": 3,
+    "supportedBranches": 2,
+    "cited": 2,
     "percent": 100
   },
-  "decision": "Calculate the normalized municipal spectrum for T >= To; return typed unsupported below To."
+  "decision": "Calculate the normalized municipal spectrum only for To <= T <= TL; return typed unsupported outside that interval."
 }

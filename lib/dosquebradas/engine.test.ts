@@ -88,6 +88,16 @@ describe("Dosquebradas pure spectrum engine", () => {
     expect(result.status === "unsupported" && result.message).toContain("T < To")
   })
 
+  it("localizes the unattested T > TL interval instead of extrapolating it", () => {
+    const result = evaluateDosquebradasOrdinate({
+      zoneId: "zona-1",
+      tSeconds: 2.501,
+      importanceFactor: 1,
+    })
+    expect(result).toMatchObject({ status: "unsupported" })
+    expect(result.status === "unsupported" && result.message).toContain("T > TL")
+  })
+
   it("rejects invalid periods and importance factors", () => {
     for (const tSeconds of [-1, Number.NaN, Number.POSITIVE_INFINITY]) {
       expect(
