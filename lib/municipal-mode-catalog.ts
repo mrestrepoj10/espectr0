@@ -15,6 +15,7 @@ export type SourceBlockedModeId = Exclude<
   | "nsr10-national"
   | "ccp14"
   | "bogota-microzonation"
+  | "medellin-microzonation"
   | "cali-microzonation"
   | "dosquebradas-microzonation"
 >
@@ -52,7 +53,7 @@ export const calculationModes = [
     id: "medellin-microzonation",
     label: "Medellín",
     description:
-      "Estudio AMVA/UNAL 1998–2011; disponible como expediente histórico, no como espectro municipal vigente.",
+      "Cálculo manual en 14 zonas con las familias históricas de diseño (5 %) y control de daños (2 %), limitado a T0 ≤ T ≤ 4 s.",
   },
   {
     id: "cali-microzonation",
@@ -97,19 +98,6 @@ export const calculationModes = [
 }[]
 
 export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> = {
-  "medellin-microzonation": {
-    id: "medellin-microzonation",
-    label: "Medellín",
-    description:
-      "La tabla histórica de 14 zonas está transcrita, pero no constituye por sí sola una regla municipal vigente y completa.",
-    sourceTitle: "Alcaldía de Medellín · soporte de microzonificación sísmica",
-    sourceUrl: "https://www.medellin.gov.co/es/wp-content/uploads/2026/07/3_Tomo_III_A_InsTec_REst_SPyC.pdf",
-    status: "Expediente histórico completo · activación bloqueada",
-    blockers: [
-      "La fuente oficial de 2026 indica que el decreto de armonización de 2019 todavía no ha sido adoptado.",
-      "Faltan el período de retorno, la ecuación de la rama ascendente y el método de sitio específico referenciado.",
-    ],
-  },
   "manizales-microzonation": {
     id: "manizales-microzonation",
     label: "Manizales",

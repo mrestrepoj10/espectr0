@@ -569,3 +569,99 @@ export function DosquebradasParameterRail({
     </Card>
   )
 }
+
+export function MedellinParameterRail({
+  hazardDescription,
+  hazardId,
+  hazardOptions,
+  importanceFactor,
+  onHazardChange,
+  onImportanceFactorChange,
+  onZoneChange,
+  zoneId,
+  zoneOptions,
+}: {
+  hazardDescription: string
+  hazardId: string | null
+  hazardOptions: readonly SelectOption[]
+  importanceFactor: number
+  onHazardChange: (value: string) => void
+  onImportanceFactorChange: (value: number) => void
+  onZoneChange: (value: string) => void
+  zoneId: string | null
+  zoneOptions: readonly SelectOption[]
+}) {
+  return (
+    <Card className="self-start" size="sm">
+      <CardHeader>
+        <CardTitle>Parámetros de Medellín</CardTitle>
+        <CardDescription>
+          Zona y familia histórica declaradas manualmente; no se infieren por
+          dirección ni coordenadas.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <FieldGroup className="gap-5">
+          <MunicipalSelect
+            description="Catorce zonas homogéneas publicadas en el soporte técnico DAP."
+            id="medellin-zone-trigger"
+            label="Zona homogénea"
+            onValueChange={onZoneChange}
+            options={zoneOptions}
+            value={zoneId}
+          />
+          <MunicipalSelect
+            description={hazardDescription}
+            id="medellin-hazard-trigger"
+            label="Familia de amenaza"
+            onValueChange={onHazardChange}
+            options={hazardOptions}
+            value={hazardId}
+          />
+          <NumericInput
+            description="Factor declarado para el proyecto."
+            id="medellin-importance-factor"
+            label="Factor de importancia I"
+            min={0.01}
+            onValueChange={(value) => onImportanceFactorChange(value ?? 0)}
+            value={importanceFactor}
+          />
+          <ManualZoneWarning />
+          <Alert>
+            <ShieldAlertIcon />
+            <AlertTitle>Intervalo técnico publicado</AlertTitle>
+            <AlertDescription>
+              La gráfica cubre T0 ≤ T ≤ 4 s. Para T &lt; T0 o T &gt; 4 s, la
+              consulta puntual devuelve una advertencia localizada sin inventar
+              la rama faltante.
+            </AlertDescription>
+          </Alert>
+          <Alert>
+            <ShieldAlertIcon />
+            <AlertTitle>Contexto administrativo visible</AlertTitle>
+            <AlertDescription>
+              El historial de adopción se conserva como contexto y este cálculo
+              no se presenta como sustituto del flujo nacional. No bloquea las
+              ramas técnicas que la fuente publica explícitamente.
+            </AlertDescription>
+          </Alert>
+        </FieldGroup>
+      </CardContent>
+      <CardFooter className="flex-col items-stretch gap-3">
+        <Separator />
+        <p className="text-muted-foreground text-xs">
+          Período de retorno municipal no declarado · sin mapas, GIS,
+          coordenadas ni detección automática.
+        </p>
+        <a
+          className="text-muted-foreground text-xs underline underline-offset-4"
+          href="https://www.medellin.gov.co/irj/go/km/docs/wpccontent/Sites/Subportal%20del%20Ciudadano/Plan%20de%20Desarrollo/Secciones/Informaci%C3%B3n%20General/Documentos/POT/Recomendaciones%20Microzonificaci%C3%B3n%20S%C3%ADsmica/Microzonificaci%C3%B3n%20s%C3%ADsmica%20del%20%C3%A1rea%20urbana%20de%20Medell%C3%ADn.pdf"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Soporte técnico oficial DAP · Medellín
+        </a>
+      </CardFooter>
+    </Card>
+  )
+}
