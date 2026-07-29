@@ -4,6 +4,7 @@ import { adaptNsr10Spectrum } from "./nsr10-adapter"
 import {
   SpectrumEvidenceResolverRegistry,
   nsr10EvidenceResolver,
+  parseSpectrumEvidenceView,
   resolveSpectrumEvidence,
 } from "./evidence"
 
@@ -136,6 +137,25 @@ describe("normalized scenario evidence", () => {
     ])
   })
 
+  it("migrates serialized v2 evidence views without changing their input bindings", () => {
+    const current = resolveSpectrumEvidence(adaptNsr10Spectrum(params, cali))
+    const legacy = {
+      ...current,
+      schemaVersion: 2,
+      directValues: current.directValues.map((value) => ({
+        id: value.id,
+        label: value.label,
+        value: value.value,
+        normalizedInputPath: value.normalizedInputPath,
+        unit: value.unit,
+        provenance: value.provenance,
+        citationId: value.citationId,
+      })),
+    }
+
+    expect(parseSpectrumEvidenceView(legacy)).toEqual(current)
+  })
+
   it("rejects duplicate providers and provider views with orphan direct values", () => {
     const result = adaptNsr10Spectrum(params, cali)
     const canonical = resolveSpectrumEvidence(result)
@@ -198,7 +218,7 @@ describe("normalized scenario evidence", () => {
         view: {
           ...canonical,
           citations: canonical.citations.map((citation, index) =>
-            index === 0
+            index === 0 && citation.rect
               ? { ...citation, rect: { ...citation.rect, width: 0 } }
               : citation,
           ),
@@ -209,7 +229,7 @@ describe("normalized scenario evidence", () => {
         view: {
           ...canonical,
           citations: canonical.citations.map((citation, index) =>
-            index === 0
+            index === 0 && citation.rect
               ? {
                   ...citation,
                   rect: { ...citation.rect, left: 0.9, width: 0.2 },

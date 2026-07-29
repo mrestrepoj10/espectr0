@@ -161,9 +161,14 @@ describe("Cali normalized spectrum adapter", () => {
     expect(evidence.directValues.every(({ traceStepId }) => traceStepId !== null)).toBe(true)
     expect(evidence.citations[0]).toMatchObject({
       table: "Tabla 2",
-      row: "Tabla 2, 3",
-      cell: "Columna 1",
+      row: "Microzona 3",
+      cell: "Tc",
     })
+    expect(
+      evidence.citations
+        .filter(({ kind }) => kind !== "row" && kind !== "cell")
+        .some(({ rect }) => rect === null),
+    ).toBe(true)
     expect(evidence.citations.map(({ id }) => id)).toEqual(result.citationIds)
     expect(evidence.metricLineage.map(({ id }) => id)).toEqual(
       result.metrics.filter(({ formulaId }) => formulaId !== null).map(({ id }) => id),

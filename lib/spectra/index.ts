@@ -18,8 +18,10 @@ export {
 } from "./export"
 export {
   SPECTRUM_EVIDENCE_VIEW_SCHEMA_VERSION,
+  SPECTRUM_EVIDENCE_VIEW_LEGACY_SCHEMA_VERSION,
   SpectrumEvidenceResolverRegistry,
   nsr10EvidenceResolver,
+  parseSpectrumEvidenceView,
   resolveSpectrumEvidence,
   spectrumBranchLineageSchema,
   spectrumDirectValueSchema,

@@ -119,7 +119,7 @@ describe("generic traceability details", () => {
 		expect(container.textContent).toContain("Sa(T) por rama");
 		expect(container.textContent).toContain("Decreto Municipal 411.0.20.0158 de 2014");
 		expect(container.textContent).toContain("Tabla 2, 3");
-		expect(container.textContent).toContain("Columna 1");
+		expect(container.textContent).toContain("Celda:Tc");
 		expect(container.textContent).toContain("Abrir enlace oficial");
 	});
 

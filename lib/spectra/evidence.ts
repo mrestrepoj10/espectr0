@@ -19,6 +19,7 @@ import {
 } from "./types"
 
 export const SPECTRUM_EVIDENCE_VIEW_SCHEMA_VERSION = 3 as const
+export const SPECTRUM_EVIDENCE_VIEW_LEGACY_SCHEMA_VERSION = 2 as const
 
 const idSchema = z.string().trim().min(1)
 const nullableTextSchema = z.string().trim().min(1).nullable()
@@ -93,10 +94,19 @@ export const spectrumEvidenceCitationSchema = z
     row: nullableTextSchema,
     cell: nullableTextSchema,
     reference: idSchema,
-    rect: spectrumEvidenceRectSchema,
+    rect: spectrumEvidenceRectSchema.nullable(),
     transcription: idSchema,
   })
   .strict()
+  .superRefine((citation, context) => {
+    if ((citation.kind === "row" || citation.kind === "cell") && !citation.rect) {
+      context.addIssue({
+        code: "custom",
+        message: `${citation.kind} evidence requires an attested source region`,
+        path: ["rect"],
+      })
+    }
+  })
 
 export const spectrumDirectValueSchema = z
   .object({
@@ -212,6 +222,34 @@ export type SpectrumDirectValue = z.infer<typeof spectrumDirectValueSchema>
 export type SpectrumMetricLineage = z.infer<typeof spectrumMetricLineageSchema>
 export type SpectrumBranchLineage = z.infer<typeof spectrumBranchLineageSchema>
 export type SpectrumEvidenceView = z.infer<typeof spectrumEvidenceViewSchema>
+
+/**
+ * Parses the current evidence contract and migrates serialized v2 views.
+ * Version 2 bound direct values only to normalized inputs; migration preserves
+ * that binding and adds the mutually exclusive trace-step field introduced in v3.
+ */
+export function parseSpectrumEvidenceView(input: unknown): SpectrumEvidenceView {
+  let candidate = input
+  if (
+    typeof input === "object" &&
+    input !== null &&
+    "schemaVersion" in input &&
+    input.schemaVersion === SPECTRUM_EVIDENCE_VIEW_LEGACY_SCHEMA_VERSION &&
+    "directValues" in input &&
+    Array.isArray(input.directValues)
+  ) {
+    candidate = {
+      ...input,
+      schemaVersion: SPECTRUM_EVIDENCE_VIEW_SCHEMA_VERSION,
+      directValues: input.directValues.map((value) =>
+        typeof value === "object" && value !== null
+          ? { ...value, traceStepId: null }
+          : value,
+      ),
+    }
+  }
+  return spectrumEvidenceViewSchema.parse(candidate)
+}
 
 export type SpectrumEvidenceResolver = {
   engineId: string
@@ -629,7 +667,7 @@ export class SpectrumEvidenceResolverRegistry {
       throw new Error("Scenario evidence key does not match the normalized result")
     }
     const resolver = this.#resolvers.get(result.engine.id)
-    const view = spectrumEvidenceViewSchema.parse(
+    const view = parseSpectrumEvidenceView(
       resolver
         ? resolver.resolve(result, key)
         : unavailableResolverView(result, key),
@@ -645,7 +683,7 @@ function assertCanonicalNsr10EvidenceView(
   key: ScenarioEvidenceKey,
   view: SpectrumEvidenceView,
 ) {
-  const expected = spectrumEvidenceViewSchema.parse(nsr10Evidence(result, key))
+  const expected = parseSpectrumEvidenceView(nsr10Evidence(result, key))
   if (JSON.stringify(view) !== JSON.stringify(expected)) {
     throw new Error(
       "NSR-10 evidence view does not match its installed source and trace model",

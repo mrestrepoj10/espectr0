@@ -5,7 +5,7 @@ import evidenceManifest from "./evidence/manifest.json"
 
 import {
   SPECTRUM_EVIDENCE_VIEW_SCHEMA_VERSION,
-  spectrumEvidenceViewSchema,
+  parseSpectrumEvidenceView,
   type SpectrumBranchLineage,
   type SpectrumEvidenceCitation,
   type SpectrumEvidenceDocument,
@@ -20,7 +20,6 @@ import type {
 } from "../spectra/types"
 
 const CALI_ENGINE_ID = "cali-spectrum"
-const FULL_PAGE = { left: 0, top: 0, width: 1, height: 1 } as const
 
 type ManifestCitation = (typeof evidenceManifest.citations)[number]
 type FormulaEvidence = (typeof formulaInventory.formulas)[number]
@@ -55,19 +54,32 @@ function manifestCitation(citation: ManifestCitation): SpectrumEvidenceCitation 
   const parentId =
     "parentCitationId" in citation ? citation.parentCitationId ?? null : null
   const parent = parentId ? manifestCitations.get(parentId) : null
+  const hazard = canonicalJson.hazards.find(({ id }) =>
+    citation.id.startsWith(`cell-${id}-`),
+  )
+  const component = canonicalJson.curveComponents.find(({ id }) =>
+    citation.id.includes(`-${id}-column-`),
+  )
+  const columnId = citation.id.match(/(column-\d+)$/)?.[1]
+  const fieldSemantics = canonicalJson.fieldSemantics as Record<
+    string,
+    Record<string, string>
+  >
   return {
     id: citation.id,
     sourceId: citation.sourceDocumentId,
     kind: citation.regionKind === "cell" ? "cell" : citation.regionKind === "row" ? "row" : "applicability",
     physicalPage: citation.physicalPage,
     printedPage: citation.printedPage,
-    table: citation.reference.startsWith("Tabla ")
-      ? citation.reference.split(",")[0]
+    table: (parent?.reference ?? citation.reference).startsWith("Tabla ")
+      ? (parent?.reference ?? citation.reference).split(",")[0]
       : null,
-    row: parent?.reference ?? null,
+    row: component ? `Microzona ${component.sourceLabel}` : parent?.reference ?? null,
     cell:
       citation.regionKind === "cell"
-        ? `Columna ${citation.id.split("-").at(-1) ?? "?"}`
+        ? hazard && columnId
+          ? fieldSemantics[hazard.id]?.[columnId] ?? null
+          : null
         : null,
     reference: citation.reference,
     rect: citation.rect,
@@ -89,7 +101,7 @@ function formulaCitation(
     row: formula.range,
     cell: null,
     reference: formula.citation.reference,
-    rect: "rect" in formula.citation ? formula.citation.rect : FULL_PAGE,
+    rect: "rect" in formula.citation ? formula.citation.rect : null,
     transcription: formula.equation,
   }
 }
@@ -108,7 +120,7 @@ function claimCitation(id: string, claim: ClaimEvidence): SpectrumEvidenceCitati
     rect:
       "rect" in claim.citation && claim.citation.rect
         ? claim.citation.rect
-        : FULL_PAGE,
+        : null,
     transcription: claim.statement,
   }
 }
@@ -212,7 +224,7 @@ function caliEvidence(
     })
   }
 
-  return spectrumEvidenceViewSchema.parse({
+  return parseSpectrumEvidenceView({
     schemaVersion: SPECTRUM_EVIDENCE_VIEW_SCHEMA_VERSION,
     key,
     status: result.evidenceAvailability.status,
