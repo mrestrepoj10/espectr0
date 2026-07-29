@@ -243,3 +243,46 @@ describe("unified calculator NSR-10 mode", () => {
 		expect(container.textContent).not.toContain("Exportar");
 	});
 });
+
+describe("unified municipal mode selector", () => {
+	async function chooseMode(label: string) {
+		const trigger = container.querySelector<HTMLButtonElement>(
+			"#calculation-mode-trigger",
+		);
+		expect(trigger).toBeTruthy();
+		await act(async () => {
+			trigger?.click();
+		});
+		const option = await waitForElement('[role="option"]', label);
+		await act(async () => {
+			option.click();
+		});
+	}
+
+	it("keeps Bogotá inspectable without bypassing its evidence-review gate", async () => {
+		await chooseMode("Bogotá D. C.");
+
+		await vi.waitFor(() => {
+			const shell = container.querySelector<HTMLElement>(
+				"[data-slot='calculator-shell']",
+			);
+			expect(shell?.dataset.calculationMode).toBe("bogota-microzonation");
+		});
+		expect(container.textContent).toContain("Bogotá D. C. · sin cálculo");
+		expect(container.textContent).toContain("research-only-not-activated");
+		expect(container.textContent).toContain("revisión independiente");
+		expect(container.textContent).not.toContain("Datos del espectro");
+		expect(container.textContent).not.toContain("Exportar");
+	});
+
+	it("keeps CCP-14 inspectable while failing closed on official-source gaps", async () => {
+		await chooseMode("CCP-14 · Puentes");
+
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain("CCP-14 · Puentes · sin cálculo");
+		});
+		expect(container.textContent).toContain("PGA, Ss y S1");
+		expect(container.textContent).toContain("T₀ = 0,2·Ts");
+		expect(container.textContent).not.toContain("Exportar");
+	});
+});

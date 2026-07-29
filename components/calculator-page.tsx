@@ -5,12 +5,14 @@ import {
 	ChevronDownIcon,
 	CodeXmlIcon,
 	DownloadIcon,
+	ExternalLinkIcon,
 	FileDownIcon,
 	FileJsonIcon,
 	FileTextIcon,
 	ImageIcon,
 	LandmarkIcon,
 	LoaderCircleIcon,
+	ShieldAlertIcon,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -65,6 +67,11 @@ import {
 	copyTextToClipboard,
 } from "@/lib/chart-export";
 import { capabilityUiState } from "@/lib/calculator-shell";
+import {
+	calculationModes,
+	isSourceBlockedMode,
+	sourceBlockedModes,
+} from "@/lib/municipal-mode-catalog";
 import { hazardLevelDetails } from "@/lib/nsr10";
 import {
 	adaptNsr10Spectrum,
@@ -75,6 +82,7 @@ import {
 	spectrumExportFilename,
 } from "@/lib/spectra";
 
+import type { CalculatorModeId } from "@/lib/municipal-mode-catalog";
 import type {
 	HazardLevel,
 	ImportanceGroup,
@@ -89,15 +97,6 @@ import type {
 } from "@/lib/spectra";
 
 type NormalizedSpectrumOk = Extract<NormalizedSpectrumResult, { status: "ok" }>;
-
-const calculationModes = [
-	{
-		id: "nsr10-national",
-		label: "NSR-10 Nacional",
-		description:
-			"Espectro elástico nacional para edificaciones, con los tres niveles de amenaza ya soportados.",
-	},
-] as const;
 
 const branchLabels: Record<SpectrumBranch, string> = {
 	"rising-A.2.6-7": "Ascendente · A.2.6-7",
@@ -216,6 +215,60 @@ function ParameterRail({
 	);
 }
 
+function SourceBlockedRail({ modeId }: { modeId: keyof typeof sourceBlockedModes }) {
+	const mode = sourceBlockedModes[modeId];
+	return (
+		<Card className="self-start" size="sm">
+			<CardHeader>
+				<CardTitle>Estado de la fuente</CardTitle>
+				<CardDescription>{mode.status}</CardDescription>
+			</CardHeader>
+			<CardContent className="space-y-4">
+				<div className="rounded-xl border bg-muted/30 p-3">
+					<p className="text-muted-foreground text-xs">Fuente rectora auditada</p>
+					<p className="mt-1 text-sm font-medium">{mode.sourceTitle}</p>
+				</div>
+				<Button render={<a href={mode.sourceUrl} rel="noreferrer" target="_blank" />} variant="outline">
+					<ExternalLinkIcon data-icon="inline-start" />
+					Abrir publicación oficial
+				</Button>
+			</CardContent>
+		</Card>
+	);
+}
+
+function SourceBlockedResult({ modeId }: { modeId: keyof typeof sourceBlockedModes }) {
+	const mode = sourceBlockedModes[modeId];
+	return (
+		<Card variant="elevated">
+			<CalculatorResultHeader
+				applicability="unsupported"
+				description={mode.description}
+				highlight="Fuente bloqueada"
+				title={`${mode.label} · sin cálculo`}
+			/>
+			<CardContent>
+				<div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
+					<div className="flex items-start gap-3">
+						<ShieldAlertIcon className="mt-0.5 size-5 shrink-0 text-amber-700 dark:text-amber-400" />
+						<div>
+							<p className="font-medium">No se completan vacíos por analogía</p>
+							<ul className="mt-3 space-y-2 text-muted-foreground text-sm">
+								{mode.blockers.map((blocker) => <li key={blocker}>— {blocker}</li>)}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</CardContent>
+			<CardFooter>
+				<p className="text-muted-foreground text-xs">
+					Mientras estos bloqueos sigan abiertos, usa NSR-10 Nacional cuando sea el flujo aplicable y documenta la revisión profesional.
+				</p>
+			</CardFooter>
+		</Card>
+	);
+}
+
 function SiteSpecificStudyNotice({
 	result,
 	onTraceabilityOpen,
@@ -228,7 +281,9 @@ function SiteSpecificStudyNotice({
 	);
 	const title =
 		result.status === "site-specific-study-required"
-			? "Perfil F: análisis específico requerido"
+			? result.study.id === "nsr10-national"
+				? "Perfil F: análisis específico requerido"
+				: "Estudio de respuesta sísmica particular requerido"
 			: "Resultado no disponible";
 
 	return (
@@ -452,7 +507,7 @@ function chartDescription(hazardLevel: HazardLevel) {
 
 export function CalculatorPage() {
 	const [calculationMode, setCalculationMode] =
-		useState<(typeof calculationModes)[number]["id"]>("nsr10-national");
+		useState<CalculatorModeId>("nsr10-national");
 	const [municipio, setMunicipio] = useState<Municipio>(defaultMunicipio);
 	const [soilProfile, setSoilProfile] = useState<SoilProfile>("D");
 	const [importanceGroup, setImportanceGroup] = useState<ImportanceGroup>("I");
@@ -481,12 +536,19 @@ export function CalculatorPage() {
 			soilProfile,
 		],
 	);
-	const result = useMemo(
+	const nsr10Result = useMemo(
 		() => adaptNsr10Spectrum(spectrumParams, { municipality: municipio }),
 		[spectrumParams, municipio],
 	);
+	const result =
+		calculationMode === "nsr10-national"
+			? nsr10Result
+			: null;
 	const evaluatePeriod = useCallback(
 		(periodSeconds: number) => {
+			if (!result) {
+				return { status: "unavailable" as const, message: "Este modo no tiene un motor activo." };
+			}
 			const ordinate = result.saAt(periodSeconds);
 			return ordinate.status === "ok"
 				? {
@@ -504,9 +566,11 @@ export function CalculatorPage() {
 		[result],
 	);
 
-	const traceability = capabilityUiState(result.capabilities.traceabilityViewer);
+	const traceability = result
+		? capabilityUiState(result.capabilities.traceabilityViewer)
+		: { enabled: false, reason: "Este modo no tiene un resultado trazable activo." };
 	const resultActions =
-		result.status === "ok" ? (
+		result?.status === "ok" ? (
 			<>
 				<Button
 					disabled={!traceability.enabled}
@@ -525,60 +589,65 @@ export function CalculatorPage() {
 				/>
 			</>
 		) : null;
+	const inputPanel =
+		calculationMode === "nsr10-national" ? (
+			<ParameterRail
+				hazardLevel={hazardLevel}
+				importanceGroup={importanceGroup}
+				municipio={municipio}
+				onHazardLevelChange={setHazardLevel}
+				onImportanceGroupChange={setImportanceGroup}
+				onMunicipioChange={setMunicipio}
+				onSoilProfileChange={setSoilProfile}
+				soilProfile={soilProfile}
+			/>
+		) : isSourceBlockedMode(calculationMode) ? (
+			<SourceBlockedRail modeId={calculationMode} />
+		) : null;
+	const activeHazardLabel = result?.hazard?.label ?? "";
+	const maximumMetric = result?.status === "ok"
+		? result.metrics.find((metric) => metric.id === "saMax")?.value ?? 0
+		: 0;
 
 	return (
 		<div className="flex flex-col gap-5">
-			<TraceabilitySheet
-				onOpenChange={setTraceabilityOpen}
-				open={traceabilityOpen}
-				result={result}
-				scenarioEvidenceKey={result.scenarioEvidenceKey}
-			/>
+			{result ? (
+				<TraceabilitySheet
+					onOpenChange={setTraceabilityOpen}
+					open={traceabilityOpen}
+					result={result}
+					scenarioEvidenceKey={result.scenarioEvidenceKey}
+				/>
+			) : null}
 			<p className="text-muted-foreground text-sm">
-				Espectro elástico NSR-10 calculado localmente, sin envío de datos.
+				Calculadora unificada con selección manual y trazabilidad de fuente; no usa mapas ni envía datos.
 			</p>
 
 			<CalculatorShell
-				inputPanel={
-					<ParameterRail
-						hazardLevel={hazardLevel}
-						importanceGroup={importanceGroup}
-						municipio={municipio}
-						onHazardLevelChange={setHazardLevel}
-						onImportanceGroupChange={setImportanceGroup}
-						onMunicipioChange={setMunicipio}
-						onSoilProfileChange={setSoilProfile}
-						soilProfile={soilProfile}
-					/>
-				}
+				inputPanel={inputPanel}
 				modes={calculationModes}
 				onValueChange={(nextMode) => {
-					if (nextMode === "nsr10-national") setCalculationMode(nextMode);
+					setTraceabilityOpen(false);
+					setCalculationMode(nextMode as CalculatorModeId);
 				}}
 				value={calculationMode}
 			>
-				{result.status === "ok" ? (
+				{result?.status === "ok" ? (
 					<>
 						<SharedSpectrumChart
 							actions={resultActions}
 							description={chartDescription(hazardLevel)}
 							highlight={`Sa máx ${formatDecimal(
-								result.metrics.find((metric) => metric.id === "saMax")?.value ?? 0,
+								maximumMetric,
 								3,
 							)} g`}
 							ref={chartContainerRef}
 							result={result}
-							title={`Espectro elástico · ${result.hazard.label} (Sa vs. T)`}
+							title={`Espectro elástico · ${activeHazardLabel} (Sa vs. T)`}
 							transitionMetrics={[
-								{
-									id: "tc",
-									label: hazardLevel === "damage-threshold" ? "TCd" : "TC",
-								},
-								{
-									id: "tl",
-									label: hazardLevel === "damage-threshold" ? "TLd" : "TL",
-								},
-							]}
+									{ id: "tc", label: hazardLevel === "damage-threshold" ? "TCd" : "TC" },
+									{ id: "tl", label: hazardLevel === "damage-threshold" ? "TLd" : "TL" },
+								]}
 						/>
 						<SharedSpectrumNotices warnings={result.warnings} />
 						<SpectrumPeriodLookup evaluate={evaluatePeriod} />
@@ -591,12 +660,14 @@ export function CalculatorPage() {
 							points={result.points}
 						/>
 					</>
-				) : (
+				) : result ? (
 					<SiteSpecificStudyNotice
 						onTraceabilityOpen={() => setTraceabilityOpen(true)}
 						result={result}
 					/>
-				)}
+				) : isSourceBlockedMode(calculationMode) ? (
+					<SourceBlockedResult modeId={calculationMode} />
+				) : null}
 			</CalculatorShell>
 		</div>
 	);
