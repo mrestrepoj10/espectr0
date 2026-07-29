@@ -654,11 +654,24 @@ function activeChartDescription(
 	return "Curva mínima emitida por el motor municipal para el componente y amenaza seleccionados manualmente.";
 }
 
-function transitionMetrics(mode: CalculatorModeId) {
+function transitionMetrics(mode: CalculatorModeId, hazardId: string) {
 	if (mode === "bogota-microzonation") {
+		if (hazardId === "damage-threshold") {
+			return [
+				{ id: "transition_start", label: "T0d" },
+				{ id: "transition_end", label: "TCd" },
+				{ id: "long_period", label: "TLd" },
+			];
+		}
 		return [
 			{ id: "transition_end", label: "Tc" },
 			{ id: "long_period", label: "TL" },
+		];
+	}
+	if (mode === "nsr10-national" && hazardId === "damage-threshold") {
+		return [
+			{ id: "tc", label: "TCd" },
+			{ id: "tl", label: "TLd" },
 		];
 	}
 	return [
@@ -945,7 +958,10 @@ export function CalculatorPage() {
 							ref={chartContainerRef}
 							result={result}
 							title={`Espectro elástico · ${activeHazardLabel} (Sa vs. T)`}
-							transitionMetrics={transitionMetrics(calculationMode)}
+							transitionMetrics={transitionMetrics(
+								calculationMode,
+								result.hazard.id,
+							)}
 						/>
 						<SharedSpectrumNotices warnings={result.warnings} />
 						<SpectrumPeriodLookup evaluate={evaluatePeriod} />

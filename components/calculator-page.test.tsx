@@ -4,6 +4,8 @@ import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
+import type { ComponentProps } from "react";
+
 const {
 	adaptNsr10SpectrumMock,
 	downloadNormalizedSpectrumMemoriaPdf,
@@ -27,6 +29,31 @@ vi.mock("@/lib/spectra", async (importOriginal) => {
 	) => unknown;
 	adaptNsr10SpectrumMock.mockImplementation(spectrumMockState.actualAdapter);
 	return { ...actual, adaptNsr10Spectrum: adaptNsr10SpectrumMock };
+});
+
+vi.mock("@/components/spectrum-result", async (importOriginal) => {
+	const actual = await importOriginal<
+		typeof import("@/components/spectrum-result")
+	>();
+	const { forwardRef } = await import("react");
+	const SharedSpectrumChart = forwardRef<
+		HTMLDivElement,
+		ComponentProps<typeof actual.SharedSpectrumChart>
+	>(function SharedSpectrumChartStub(
+		{ actions, title, transitionMetrics = [] },
+		ref,
+	) {
+		return (
+			<div data-slot="shared-spectrum-chart" ref={ref}>
+				<span>{title}</span>
+				<span data-slot="chart-transition-labels">
+					{transitionMetrics.map(({ label }) => label).join(" · ")}
+				</span>
+				{actions}
+			</div>
+		);
+	});
+	return { ...actual, SharedSpectrumChart };
 });
 
 vi.mock("sonner", () => ({
@@ -92,6 +119,11 @@ async function setNumberInput(id: string, value: string) {
 		setter?.call(input, value);
 		input?.dispatchEvent(new Event("input", { bubbles: true }));
 	});
+}
+
+function chartAnnotationText() {
+	return container.querySelector<HTMLElement>("[data-slot='chart-transition-labels']")
+		?.textContent ?? "";
 }
 
 beforeAll(() => {
@@ -267,6 +299,28 @@ describe("unified calculator NSR-10 mode", () => {
 		);
 		expect(container.textContent).not.toContain("Exportar");
 	});
+
+	it("labels NSR-10 damage chart transitions as TCd and TLd", async () => {
+		const hazardTrigger = container.querySelector<HTMLButtonElement>(
+			'button[aria-label="Nivel de amenaza"]',
+		);
+		expect(hazardTrigger).toBeTruthy();
+		await act(async () => {
+			hazardTrigger?.click();
+		});
+		const damageOption = await waitForElement(
+			'[role="option"]',
+			"Umbral de daño",
+		);
+		await act(async () => {
+			damageOption.click();
+		});
+
+		await vi.waitFor(() => {
+			expect(chartAnnotationText()).toContain("TCd");
+			expect(chartAnnotationText()).toContain("TLd");
+		});
+	});
 });
 
 describe("unified municipal mode selector", () => {
@@ -336,6 +390,18 @@ describe("unified municipal mode selector", () => {
 			expect(container.textContent).toContain("Resultado no disponible");
 		});
 		expect(container.textContent).toContain("Entrada inválida");
+	});
+
+	it("labels Bogotá damage chart transitions as T0d, TCd, and TLd", async () => {
+		await chooseMode("Bogotá D. C.");
+		await chooseSelectOption("bogota-zone-trigger", "CERROS");
+		await chooseSelectOption("bogota-hazard-trigger", "Umbral de daño");
+
+		await vi.waitFor(() => {
+			expect(chartAnnotationText()).toContain("T0d");
+			expect(chartAnnotationText()).toContain("TCd");
+			expect(chartAnnotationText()).toContain("TLd");
+		});
 	});
 
 	it("keeps Cali damage threshold visible as a localized unsupported result", async () => {
