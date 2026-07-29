@@ -49,11 +49,12 @@ function evaluateSupportedOrdinate(
   row: CanonicalRow,
   hazardId: CaliSupportedHazardId,
   importanceFactor: number,
+  siteCoefficientMultiplier: number,
 ): CaliEnginePoint {
   const tc = row.fields["column-1"]
-  const fa = row.fields["column-2"]
+  const fa = row.fields["column-2"] * siteCoefficientMultiplier
   const tl = row.fields["column-3"]
-  const fv = row.fields["column-4"]
+  const fv = row.fields["column-4"] * siteCoefficientMultiplier
   const acceleration = baseAcceleration.get(hazardId)
 
   if (acceleration === undefined) {
@@ -92,14 +93,17 @@ export function evaluateCaliOrdinate(input: {
   hazardId: CaliHazardId
   tSeconds: number
   importanceFactor?: number
+  siteCoefficientMultiplier?: 1 | 1.2
 }): CaliSpectrumResult {
   const importanceFactor = input.importanceFactor ?? 1
+  const siteCoefficientMultiplier = input.siteCoefficientMultiplier ?? 1
   if (
     !input.optionId ||
     !Number.isFinite(input.tSeconds) ||
     input.tSeconds < 0 ||
     !Number.isFinite(importanceFactor) ||
-    importanceFactor <= 0
+    importanceFactor <= 0 ||
+    (siteCoefficientMultiplier !== 1 && siteCoefficientMultiplier !== 1.2)
   ) {
     return {
       status: "invalid-input",
@@ -139,6 +143,7 @@ export function evaluateCaliOrdinate(input: {
     row,
     input.hazardId,
     importanceFactor,
+    siteCoefficientMultiplier,
   )
   if (!Number.isFinite(point.saG) || point.saG < 0) {
     return {

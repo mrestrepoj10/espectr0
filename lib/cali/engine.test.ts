@@ -60,6 +60,24 @@ describe("Cali source-complete spectrum engine", () => {
     })
   })
 
+  it("applies the decree's 20% Fa/Fv increase as a coefficient multiplier", () => {
+    const baseline = evaluateCaliOrdinate({
+      optionId: "zone-1",
+      hazardId: "design",
+      tSeconds: 1,
+    })
+    const amplified = evaluateCaliOrdinate({
+      optionId: "zone-1",
+      hazardId: "design",
+      tSeconds: 1,
+      siteCoefficientMultiplier: 1.2,
+    })
+    expect(baseline.status).toBe("ok")
+    expect(amplified.status).toBe("ok")
+    if (baseline.status !== "ok" || amplified.status !== "ok") return
+    expect(amplified.point.saG).toBeCloseTo(baseline.point.saG * 1.2, 12)
+  })
+
   it.each([
     { optionId: "unknown", hazardId: "design" as const, tSeconds: 1 },
     { optionId: "zone-1", hazardId: "design" as const, tSeconds: -1 },
@@ -69,6 +87,18 @@ describe("Cali source-complete spectrum engine", () => {
       hazardId: "design" as const,
       tSeconds: 1,
       importanceFactor: 0,
+    },
+    {
+      optionId: "zone-1",
+      hazardId: "design" as const,
+      tSeconds: 1,
+      siteCoefficientMultiplier: 0 as 1,
+    },
+    {
+      optionId: "zone-1",
+      hazardId: "design" as const,
+      tSeconds: 1,
+      siteCoefficientMultiplier: 1.1 as 1,
     },
   ])("fails closed for invalid input %#", (input) => {
     expect(evaluateCaliOrdinate(input).status).toBe("invalid-input")
