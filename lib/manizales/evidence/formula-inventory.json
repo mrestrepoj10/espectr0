@@ -7,74 +7,74 @@
     "expectedItems": 4,
     "dispositionedItems": 4,
     "coveragePercent": 100,
-    "operationalFormulaCoveragePercent": 0
+    "operationalFormulaCoveragePercent": 50
   },
   "formulas": [
     {
       "id": "nsr10-design-spectrum-shape",
-      "status": "blocked-formula-not-published",
-      "finding": "La fuente indica que ajusta una forma NSR-10 con Aa, Av, I, Fa y Fv, pero no imprime la ecuacion por tramos.",
+      "status": "published-shape",
+      "finding": "La presentacion oficial de 2014 imprime la forma NSR-10 por tramos con Aa, Av, I, Fa y Fv y declara 5% de amortiguamiento.",
       "citation": {
-        "sourceDocumentId": "manizales-update-2015",
-        "physicalPage": 8,
-        "printedPage": null,
-        "reference": "Seccion 5.1",
+        "sourceDocumentId": "manizales-harmonization-presentation-2014",
+        "physicalPage": 44,
+        "printedPage": 44,
+        "reference": "Armonizacion con la NSR-10",
         "rect": {
           "left": 0.1,
-          "top": 0.42,
+          "top": 0.5,
           "width": 0.82,
-          "height": 0.16
+          "height": 0.4
         }
       }
     },
     {
       "id": "branch-limits",
-      "status": "blocked-limits-not-published",
-      "finding": "No se publican limites de rama ni politica de frontera para el espectro operacional.",
+      "status": "published-symbolic-limits",
+      "finding": "La presentacion oficial identifica T0, Tc y TL en la forma espectral; sus valores se derivan de los Fa/Fv de cada sitio, que no estan tabulados.",
       "citation": {
-        "sourceDocumentId": "manizales-update-2015",
-        "physicalPage": 8,
-        "printedPage": null,
-        "reference": "Seccion 5.1",
+        "sourceDocumentId": "manizales-harmonization-presentation-2014",
+        "physicalPage": 44,
+        "printedPage": 44,
+        "reference": "Armonizacion con la NSR-10",
         "rect": {
           "left": 0.1,
-          "top": 0.42,
+          "top": 0.5,
           "width": 0.82,
-          "height": 0.16
+          "height": 0.4
         }
       }
     },
     {
       "id": "fa-fv-node-fit",
       "status": "method-only-no-node-table",
-      "finding": "Fa y Fv se ajustan como parametros libres mediante algoritmo genetico para cada nodo; el articulo no tabula los 1275 resultados.",
+      "finding": "Fa y Fv se ajustan como parametros libres para cada nodo. Las fuentes oficiales muestran mapas rasterizados, pero no tabulan los 1275 pares.",
       "citation": {
-        "sourceDocumentId": "manizales-update-2015",
-        "physicalPage": 8,
-        "printedPage": null,
-        "reference": "Secciones 5.1 y 5.2",
+        "sourceDocumentId": "manizales-harmonization-presentation-2014",
+        "physicalPage": 46,
+        "printedPage": 46,
+        "reference": "Mapas de factores Fa y Fv",
         "rect": {
-          "left": 0.1,
-          "top": 0.45,
-          "width": 0.82,
-          "height": 0.46
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
         }
       }
     },
     {
       "id": "spectrum-damping",
-      "status": "blocked-output-damping-not-stated",
-      "finding": "No se identifica en la publicacion el amortiguamiento del espectro de amenaza uniforme o del espectro de diseno entregado; no se confunde con amortiguamiento interno del modelo de suelo.",
+      "status": "published-5-percent",
+      "finding": "La forma espectral publicada esta definida para 5% del amortiguamiento critico.",
       "citation": {
-        "sourceDocumentId": "manizales-update-2015",
-        "physicalPage": 1,
-        "printedPage": null,
-        "reference": "Resumen",
+        "sourceDocumentId": "manizales-harmonization-presentation-2014",
+        "physicalPage": 44,
+        "printedPage": 44,
+        "reference": "Nota de amortiguamiento",
         "rect": {
           "left": 0.1,
-          "top": 0.37,
+          "top": 0.5,
           "width": 0.82,
-          "height": 0.26
+          "height": 0.4
         }
       }
     }

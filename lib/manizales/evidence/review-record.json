@@ -8,10 +8,8 @@
   },
   "activationDecision": "blocked-no-merge-no-activation",
   "reasons": [
-    "No se recupero un acto primario vigente que adopte la actualizacion armonizada; el informe municipal de cierre 2016-2019 aun ubicaba su adopcion en desarrollo.",
     "El modelo actualizado es rasterizado por puntos y no ofrece zonas para un selector manual sin GIS.",
     "La fuente tecnica bloqueada no publica los 1275 pares Fa/Fv ni una tabla discreta que permita reproducirlos.",
-    "La fuente tecnica no publica la formula espectral operacional completa, sus limites de rama ni el amortiguamiento del espectro de salida.",
-    "La revision humana independiente esta pendiente."
+    "La copia oficial 2002 omite la Figura 8.5 que contenia las ecuaciones y graficas de las tres zonas historicas A/B/C."
   ]
 }

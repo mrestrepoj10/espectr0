@@ -26,17 +26,14 @@
       "missingInputs": [
         "node-specific Fa",
         "node-specific Fv",
-        "piecewise spectrum formula",
-        "branch limits",
-        "spectrum damping",
-        "adoption instrument"
+        "official manual-location rule or spatial lookup"
       ]
     }
   ],
   "negativeCases": [
     {
       "case": "activation",
-      "expected": "reject-missing-adoption-formula-node-values-damping-review"
+      "expected": "reject-missing-node-values-location-rule"
     },
     {
       "case": "manual-zone-selector",
@@ -47,8 +44,12 @@
       "expected": "reject-historical-model-substitution"
     },
     {
+      "case": "historical-2002-period-at-or-above-2s",
+      "expected": "reject-special-seismic-analysis-outside-2002-recommendations"
+    },
+    {
       "case": "spectrum-at-any-period",
-      "expected": "reject-missing-node-fa-fv-formula-branches-damping"
+      "expected": "reject-missing-node-fa-fv-and-location-rule"
     },
     {
       "case": "unknown-node-or-location",

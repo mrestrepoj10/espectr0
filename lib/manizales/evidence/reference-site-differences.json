@@ -4,9 +4,9 @@
   "inspectedForRegulatoryValues": false,
   "differences": [
     {
-      "id": "historical-zone-selector",
-      "status": "do-not-reproduce",
-      "finding": "Cualquier selector A/B/C representa el modelo historico 2002 y contradice el modelo raster actualizado si se presenta como vigente."
+      "id": "reference-five-vs-primary-three",
+      "status": "unreconciled-do-not-reproduce",
+      "finding": "El comparador expone cinco opciones para Manizales; el informe oficial 2002 define tres zonas de diseno A/B/C y la armonizacion 2014 usa 1275 sitios, no cinco zonas. No existe una correspondencia primaria 5-a-3 o 5-a-1275."
     },
     {
       "id": "coefficients-or-formulas",

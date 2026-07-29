@@ -64,6 +64,9 @@ def verify_source(path: Path, source: dict, lock: dict) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--original", type=Path, required=True)
+    parser.add_argument("--harmonization", type=Path, required=True)
+    parser.add_argument("--presentation", type=Path, required=True)
     parser.add_argument("--article", type=Path, required=True)
     parser.add_argument("--report", type=Path, required=True)
     parser.add_argument("--pot", type=Path, required=True)
@@ -77,6 +80,9 @@ def main() -> None:
     sources = {source["id"]: source for source in manifest["sources"]}
     locks = {lock["sourceDocumentId"]: lock for lock in locks_file["locks"]}
     paths = {
+        "manizales-uniandes-2002": args.original.resolve(),
+        "manizales-harmonization-2014": args.harmonization.resolve(),
+        "manizales-harmonization-presentation-2014": args.presentation.resolve(),
         "manizales-update-2015": args.article.resolve(),
         "manizales-management-report-2016-2019": args.report.resolve(),
         "manizales-pot-status-2025": args.pot.resolve(),

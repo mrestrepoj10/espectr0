@@ -20,9 +20,6 @@
   "requiredForSpectrum": [
     "node-specific Fa",
     "node-specific Fv",
-    "piecewise spectrum formula",
-    "branch limits",
-    "spectrum damping",
-    "adoption instrument"
+    "official manual-location rule or spatial lookup"
   ]
 }
