@@ -57,7 +57,7 @@ export type SharedSpectrumResult = {
   warnings: readonly SpectrumWarning[]
   hazard: {
     label: string
-    returnPeriodYears: number
+    returnPeriodYears: number | null
     dampingRatio: number
   }
 }
@@ -65,6 +65,12 @@ export type SharedSpectrumResult = {
 export type MetricPresentation = {
   label?: string
   digits?: number
+}
+
+export function formatSpectrumReturnPeriod(returnPeriodYears: number | null) {
+  return returnPeriodYears === null
+    ? "TR no declarado"
+    : `TR ${returnPeriodYears} años`
 }
 
 function formatDecimal(value: number, digits: number) {
@@ -197,7 +203,7 @@ export const SharedSpectrumChart = forwardRef<
       </CardContent>
       <CardFooter>
         <p className="text-muted-foreground text-xs">
-          TR {result.hazard.returnPeriodYears} años · amortiguamiento crítico del{" "}
+          {formatSpectrumReturnPeriod(result.hazard.returnPeriodYears)} · amortiguamiento crítico del{" "}
           {result.hazard.dampingRatio * 100} % · aceleraciones como fracción de g.
         </p>
       </CardFooter>

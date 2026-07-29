@@ -143,6 +143,15 @@ describe("engine-neutral spectrum contract", () => {
     ).toBe(false)
   })
 
+  it("preserves an officially unknown hazard return period as null", () => {
+    const data = successfulData()
+    data.hazard.returnPeriodYears = null
+    const parsed = normalizedSpectrumResultDataSchema.parse(data)
+    expect(parsed.status).toBe("ok")
+    if (parsed.status !== "ok") return
+    expect(parsed.hazard.returnPeriodYears).toBeNull()
+  })
+
   it("rejects empty success and scenario/study identity contradictions", () => {
     expectContradiction((data) => {
       data.points = []

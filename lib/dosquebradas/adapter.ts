@@ -76,11 +76,15 @@ const engineIdentity = {
   scenarioType: "municipal-study" as const,
 }
 
-// The normalized shared contract requires a positive integer. This is NSR-10
-// context only and is explicitly not asserted as municipal Table 27 metadata.
-const NSR10_CONTEXT_RETURN_PERIOD_YEARS = 475
-
 const validZoneIds = new Set(["zona-1", "zona-2", "zona-3", "zona-4", "zona-5"])
+
+const unknownMunicipalReturnPeriodWarning = {
+  severity: "info" as const,
+  code: "municipal-return-period-unknown",
+  message:
+    "La Tabla 27 no declara período de retorno o probabilidad. El resultado conserva este metadato como desconocido y no lo sustituye con un valor nacional o de referencia.",
+  citationIds: ["table-27"],
+}
 
 function invalidInputs(input: unknown): NormalizedInputs {
   const record = input && typeof input === "object" ? (input as Record<string, unknown>) : {}
@@ -128,15 +132,15 @@ function invalidResult(input: unknown, message: string): NormalizedSpectrumResul
       key.hazardId === "design"
         ? {
             id: "design",
-            label: "Diseño - contexto NSR-10 no declarado por la Tabla 27",
-            returnPeriodYears: NSR10_CONTEXT_RETURN_PERIOD_YEARS,
+            label: "Diseño · período de retorno municipal no declarado",
+            returnPeriodYears: null,
             dampingRatio: 0.05,
           }
         : null,
-    warnings: [],
+    warnings: key.hazardId === "design" ? [unknownMunicipalReturnPeriodWarning] : [],
     applicability,
     sourceIds: [...dosquebradasSourceIds],
-    citationIds: [],
+    citationIds: key.hazardId === "design" ? ["table-27"] : [],
     evidenceAvailability: {
       status: "unavailable",
       reason: "La entrada no resuelve una fila manual de la Tabla 27.",
@@ -383,13 +387,7 @@ function successResult(input: DosquebradasComputationInput): NormalizedSpectrumR
         "El POT 2024 mantiene vigentes los soportes CARDER y ordena ajustar y armonizar el modelo con NSR-10.",
       citationIds: ["currentness-and-harmonization"],
     },
-    {
-      severity: "info" as const,
-      code: "return-period-nsr10-context",
-      message:
-        "La Tabla 27 no declara el período de retorno. El campo numérico obligatorio del contrato usa 475 años solo como contexto NSR-10 de 10% de excedencia en 50 años; no se presenta como valor municipal.",
-      citationIds: ["nsr10-design-probability"],
-    },
+    unknownMunicipalReturnPeriodWarning,
   ]
   const citationIds = [
     ...new Set([
@@ -429,8 +427,8 @@ function successResult(input: DosquebradasComputationInput): NormalizedSpectrumR
     branches,
     hazard: {
       id: "design",
-      label: "Diseño - contexto NSR-10 no declarado por la Tabla 27",
-      returnPeriodYears: NSR10_CONTEXT_RETURN_PERIOD_YEARS,
+      label: "Diseño · período de retorno municipal no declarado",
+      returnPeriodYears: null,
       dampingRatio: 0.05,
     },
     warnings,

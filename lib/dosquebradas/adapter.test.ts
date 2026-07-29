@@ -6,6 +6,7 @@ import {
   createDosquebradasScenario,
   dosquebradasSpectrumEngine,
 } from "./adapter"
+import { formatSpectrumJson } from "../spectra"
 import { type DosquebradasZoneId } from "./schema"
 
 type OracleRecord = {
@@ -41,8 +42,12 @@ describe("Dosquebradas normalized adapter", () => {
         result.metrics.find(({ id }) => id === "tl")?.value,
       )
       expect(result.evidenceAvailability.status).toBe("partial")
+      expect(result.hazard.returnPeriodYears).toBeNull()
       expect(result.warnings.map(({ code }) => code)).toContain(
         "professional-zone-validation-required",
+      )
+      expect(result.warnings.map(({ code }) => code)).toContain(
+        "municipal-return-period-unknown",
       )
       expect(result.sourceIds).toEqual(
         expect.arrayContaining([
@@ -110,6 +115,33 @@ describe("Dosquebradas normalized adapter", () => {
     [{ zoneId: "zona-1", hazardId: "design" }],
   ])("rejects invalid input %#", (input) => {
     expect(adaptDosquebradasSpectrum(input).status).toBe("invalid-input")
+  })
+
+  it("preserves unknown return-period metadata on a resolved invalid hazard", () => {
+    const result = adaptDosquebradasSpectrum({
+      zoneId: "zona-6",
+      hazardId: "design",
+      importanceFactor: 1,
+    })
+    expect(result.status).toBe("invalid-input")
+    expect(result.hazard).toMatchObject({
+      id: "design",
+      returnPeriodYears: null,
+    })
+    expect(result.warnings.map(({ code }) => code)).toContain(
+      "municipal-return-period-unknown",
+    )
+  })
+
+  it("exports unknown municipal return period as JSON null", () => {
+    const result = adaptDosquebradasSpectrum({
+      zoneId: "zona-2",
+      hazardId: "design",
+      importanceFactor: 1,
+    })
+    const exported = JSON.parse(formatSpectrumJson(result))
+    expect(exported.result.hazard.returnPeriodYears).toBeNull()
+    expect(exported.result.hazard.label).toContain("no declarado")
   })
 
   it("exposes the isolated scenario engine without shared registry integration", () => {

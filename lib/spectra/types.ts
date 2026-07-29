@@ -294,7 +294,7 @@ const hazardSchema = z
   .object({
     id: idSchema,
     label: idSchema,
-    returnPeriodYears: z.number().int().positive(),
+    returnPeriodYears: z.number().int().positive().nullable(),
     dampingRatio: z.number().positive().max(1),
   })
   .strict()

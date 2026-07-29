@@ -44,6 +44,21 @@ def build() -> dict:
                 raise AssertionError(f"Table product mismatch at {hazard_id}/zone-{index + 1:02d}")
             just_right_tc = tc + EPSILON
             tail_right = plateau * (tc / just_right_tc) ** alpha
+            engine_witnesses = []
+            for importance in (ONE,):
+                smax = product * importance
+                engine_witnesses.append({
+                    "importanceFactor": text(importance),
+                    "smax": text(smax),
+                    "cases": [
+                        {"period": text(t0), "status": "ok", "branch": "medellin-plateau", "saG": text(smax)},
+                        {"period": text(tc), "status": "ok", "branch": "medellin-plateau", "saG": text(smax)},
+                        {"period": text(just_right_tc), "status": "ok", "branch": "medellin-power-decay", "saG": text(smax * (tc / just_right_tc) ** alpha)},
+                        {"period": "4", "status": "ok", "branch": "medellin-power-decay", "saG": text(smax * (tc / Decimal(4)) ** alpha)},
+                        {"period": text(t0 - EPSILON), "status": "unsupported", "branch": None, "saG": None},
+                        {"period": text(Decimal(4) + EPSILON), "status": "unsupported", "branch": None, "saG": None},
+                    ],
+                })
             rc_boundary = (t0 + tc) / TWO
             records.append({
                 "optionId": source["options"][index],
@@ -63,6 +78,7 @@ def build() -> dict:
                     {"period": text(just_right_tc), "side": "just-right", "branch": "power-decay", "saPerImportance": text(tail_right)},
                     {"period": "4", "side": "domain-end", "branch": "power-decay", "saPerImportance": text(plateau * (tc / Decimal(4)) ** alpha)},
                 ],
+                "engineWitnesses": engine_witnesses,
                 "rcWitness": {
                     "R": text(R_WITNESS),
                     "boundary": text(rc_boundary),
@@ -79,7 +95,7 @@ def build() -> dict:
         "schemaVersion": 1,
         "studyId": source["studyId"],
         "decimalPrecision": getcontext().prec,
-        "status": "partial-oracle-activation-blocked",
+        "status": "partial-oracle-localized-coverage",
         "recordCount": len(records),
         "records": records,
         "negativeCases": [
@@ -87,11 +103,11 @@ def build() -> dict:
             {"case": "unknown-hazard", "expected": "reject"},
             {"case": "T<0", "expected": "reject"},
             {"case": "T>4", "expected": "reject-or-outside-source-domain"},
-            {"case": "0<T<T0", "expected": "blocked-missing-equation"},
-            {"case": "activation", "expected": "blocked-no-adopted-decree"},
+            {"case": "0<T<T0", "expected": "unsupported-localized-missing-equation"},
+            {"case": "return-period", "expected": "unknown-null"},
         ],
         "declaredBinary64Tolerance": source["declaredBinary64Tolerance"],
-        "blockers": source["blockedBranches"] + source["blockedMetadata"],
+        "localizedLimitations": source["localizedBranches"] + source["unknownMetadata"],
     }
 
 

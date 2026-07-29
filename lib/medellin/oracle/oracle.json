@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "studyId": "medellin-microzonation",
   "decimalPrecision": 50,
-  "status": "partial-oracle-activation-blocked",
+  "status": "partial-oracle-localized-coverage",
   "recordCount": 28,
   "records": [
     {
@@ -58,6 +58,50 @@
           "side": "domain-end",
           "branch": "power-decay",
           "saPerImportance": "0.011757342091768103671757523028474560659496589902675"
+        }
+      ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.2250",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2250"
+            },
+            {
+              "period": "0.50",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2250"
+            },
+            {
+              "period": "0.500000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.22499999935650000156370499642432790792011368429751"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.011501747698468797070197576875681635427768403165661"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
         }
       ],
       "rcWitness": {
@@ -142,6 +186,50 @@
           "saPerImportance": "0.010622930961165349605586555270384268428134432917968"
         }
       ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.2240",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2240"
+            },
+            {
+              "period": "0.30",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2240"
+            },
+            {
+              "period": "0.300000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.22399999912640000315951998887146848311609146671172"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.010816075160459265052960856275300346035918695334658"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
+        }
+      ],
       "rcWitness": {
         "R": "5",
         "boundary": "0.20",
@@ -222,6 +310,50 @@
           "side": "domain-end",
           "branch": "power-decay",
           "saPerImportance": "0.011517728260086728221027849747913589890687918752877"
+        }
+      ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.2499",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2499"
+            },
+            {
+              "period": "0.50",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2499"
+            },
+            {
+              "period": "0.500000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.24989999926029600183446591574403907513335247215889"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.011513121168782693529739438608014424454731643585376"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
         }
       ],
       "rcWitness": {
@@ -306,6 +438,50 @@
           "saPerImportance": "0.011281471311231540315184631757600248093399871455514"
         }
       ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.1800",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.1800"
+            },
+            {
+              "period": "0.60",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.1800"
+            },
+            {
+              "period": "0.600000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.17999999956200000089789999827403666987408185527362"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.011281471311231540315184631757600248093399871455514"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
+        }
+      ],
       "rcWitness": {
         "R": "5",
         "boundary": "0.35",
@@ -386,6 +562,50 @@
           "side": "domain-end",
           "branch": "power-decay",
           "saPerImportance": "0.011482458892140078651778985134882885722134668367032"
+        }
+      ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.2196",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2196"
+            },
+            {
+              "period": "0.50",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2196"
+            },
+            {
+              "period": "0.500000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.21959999937633600150926687655887152120489393845659"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.011461581694154369417866659707364916839003514424546"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
         }
       ],
       "rcWitness": {
@@ -470,6 +690,50 @@
           "saPerImportance": "0.010867459632801684274511813691919403720632841622679"
         }
       ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.1405",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.1405"
+            },
+            {
+              "period": "0.40",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.1405"
+            },
+            {
+              "period": "0.400000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.14049999961011250102832827858491587793968483863657"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.010906271988633118861206498740819115876777958914189"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
+        }
+      ],
       "rcWitness": {
         "R": "5",
         "boundary": "0.25",
@@ -550,6 +814,50 @@
           "side": "domain-end",
           "branch": "power-decay",
           "saPerImportance": "0.011482458892140078651778985134882885722134668367032"
+        }
+      ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.2196",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2196"
+            },
+            {
+              "period": "0.50",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2196"
+            },
+            {
+              "period": "0.500000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.21959999937633600150926687655887152120489393845659"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.011461581694154369417866659707364916839003514424546"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
         }
       ],
       "rcWitness": {
@@ -634,6 +942,50 @@
           "saPerImportance": "0.011370239702194730769732262566074637910010939915958"
         }
       ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.1800",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.1800"
+            },
+            {
+              "period": "0.65",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.1800"
+            },
+            {
+              "period": "0.650000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.17999999957907692389286627071646703942900582149744"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.011370239702194730769732262566074637910010939915958"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
+        }
+      ],
       "rcWitness": {
         "R": "5",
         "boundary": "0.375",
@@ -714,6 +1066,50 @@
           "side": "domain-end",
           "branch": "power-decay",
           "saPerImportance": "0.011264912845474262505937096911161522743029752234913"
+        }
+      ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.2250",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2250"
+            },
+            {
+              "period": "0.40",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2250"
+            },
+            {
+              "period": "0.400000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.22499999926312500212772655663102091424706241285960"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.011020023435790039407981942630484098335572583708068"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
         }
       ],
       "rcWitness": {
@@ -798,6 +1194,50 @@
           "saPerImportance": "0.011167089803774077963906263107984415409432504465200"
         }
       ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.2502",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2502"
+            },
+            {
+              "period": "0.40",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2502"
+            },
+            {
+              "period": "0.400000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.25019999915557500248049843057527521413909551238300"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.011176023475617097226277388118470802941760050468772"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
+        }
+      ],
       "rcWitness": {
         "R": "5",
         "boundary": "0.25",
@@ -878,6 +1318,50 @@
           "side": "domain-end",
           "branch": "power-decay",
           "saPerImportance": "0.011757342091768103671757523028474560659496589902675"
+        }
+      ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.2250",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2250"
+            },
+            {
+              "period": "0.50",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2250"
+            },
+            {
+              "period": "0.500000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.22499999935650000156370499642432790792011368429751"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.011501747698468797070197576875681635427768403165661"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
         }
       ],
       "rcWitness": {
@@ -962,6 +1446,50 @@
           "saPerImportance": "0.012024447451028019118156576552788163267453411623075"
         }
       ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.2496",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2496"
+            },
+            {
+              "period": "0.65",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2496"
+            },
+            {
+              "period": "0.650000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.24959999935872000131709045905962975119792537906893"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.012005208335106374287567526030303702206225486164478"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
+        }
+      ],
       "rcWitness": {
         "R": "5",
         "boundary": "0.375",
@@ -1042,6 +1570,50 @@
           "side": "domain-end",
           "branch": "power-decay",
           "saPerImportance": "0.011167089803774077963906263107984415409432504465200"
+        }
+      ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.2496",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2496"
+            },
+            {
+              "period": "0.40",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.2496"
+            },
+            {
+              "period": "0.400000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.24959999915760000247454999309188126878144780132213"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.011149222460088039439164013087011640344777412458056"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
         }
       ],
       "rcWitness": {
@@ -1126,6 +1698,50 @@
           "saPerImportance": "0.010847442374466132413894978312725924245845621693400"
         }
       ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.1405",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.1405"
+            },
+            {
+              "period": "0.50",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.1405"
+            },
+            {
+              "period": "0.500000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.14049999965437000077075489834030778551024903372656"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.010886183240089225743944603235271373975295070342305"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
+        }
+      ],
       "rcWitness": {
         "R": "5",
         "boundary": "0.30",
@@ -1206,6 +1822,50 @@
           "side": "domain-end",
           "branch": "power-decay",
           "saPerImportance": "0.055088421353205581832084025250982531847870205217495"
+        }
+      ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.7020",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7020"
+            },
+            {
+              "period": "0.60",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7020"
+            },
+            {
+              "period": "0.600000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.70199999843220000305720999432717701025835490674013"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.055245816842786169208747122465985339081721262946688"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
         }
       ],
       "rcWitness": {
@@ -1290,6 +1950,50 @@
           "saPerImportance": "0.054086638031358541684719355969405355860762068904169"
         }
       ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.7990",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7990"
+            },
+            {
+              "period": "0.40",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7990"
+            },
+            {
+              "period": "0.400000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.79899999766292500633931592075364044208269959874943"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.054019029733819343507613456774443599165936116318039"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
+        }
+      ],
       "rcWitness": {
         "R": "5",
         "boundary": "0.25",
@@ -1370,6 +2074,50 @@
           "side": "domain-end",
           "branch": "power-decay",
           "saPerImportance": "0.056559794257181057252475297145418479224125302256751"
+        }
+      ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.7980",
+          "cases": [
+            {
+              "period": "0.20",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7980"
+            },
+            {
+              "period": "0.70",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7980"
+            },
+            {
+              "period": "0.700000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.79799999826720000311903999477189486558251257444456"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.056418394771538104609344108902554933026064989001109"
+            },
+            {
+              "period": "0.199999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
         }
       ],
       "rcWitness": {
@@ -1454,6 +2202,50 @@
           "saPerImportance": "0.054476739926189518051920081781800147500586953200400"
         }
       ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.4991",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.4991"
+            },
+            {
+              "period": "0.65",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.4991"
+            },
+            {
+              "period": "0.650000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.49909999906322769390741116895604609331799510059025"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.054378681794322376919426625634592907235085896684639"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
+        }
+      ],
       "rcWitness": {
         "R": "5",
         "boundary": "0.375",
@@ -1534,6 +2326,50 @@
           "side": "domain-end",
           "branch": "power-decay",
           "saPerImportance": "0.054957407397119234492581343555476046533190265475853"
+        }
+      ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.6000",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.6000"
+            },
+            {
+              "period": "0.60",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.6000"
+            },
+            {
+              "period": "0.600000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.59999999874000000237299999570223334096186915329130"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.054957407397119234492581343555476046533190265475853"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
         }
       ],
       "rcWitness": {
@@ -1618,6 +2454,50 @@
           "saPerImportance": "0.054033576956741574714058195892192852292980603557160"
         }
       ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.5000",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.5000"
+            },
+            {
+              "period": "0.50",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.5000"
+            },
+            {
+              "period": "0.500000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.49999999893000000221489999546683800922498465129173"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.054033576956741574714058195892192852292980603557160"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
+        }
+      ],
       "rcWitness": {
         "R": "5",
         "boundary": "0.30",
@@ -1698,6 +2578,50 @@
           "side": "domain-end",
           "branch": "power-decay",
           "saPerImportance": "0.054957407397119234492581343555476046533190265475853"
+        }
+      ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.6000",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.6000"
+            },
+            {
+              "period": "0.60",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.6000"
+            },
+            {
+              "period": "0.600000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.59999999874000000237299999570223334096186915329130"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.054957407397119234492581343555476046533190265475853"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
         }
       ],
       "rcWitness": {
@@ -1782,6 +2706,50 @@
           "saPerImportance": "0.055510409639291528449364410732693293767179560683530"
         }
       ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.5520",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.5520"
+            },
+            {
+              "period": "0.75",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.5520"
+            },
+            {
+              "period": "0.750000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.55199999899168000159314559761382192703142161526553"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.055712265674343497643725735862630360289969304540562"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
+        }
+      ],
       "rcWitness": {
         "R": "5",
         "boundary": "0.425",
@@ -1862,6 +2830,50 @@
           "side": "domain-end",
           "branch": "power-decay",
           "saPerImportance": "0.055223699054405607391569046478391026554799052385006"
+        }
+      ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.7020",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7020"
+            },
+            {
+              "period": "0.55",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7020"
+            },
+            {
+              "period": "0.550000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.70199999836625454884085420814446171707793450807069"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.055381481051703909126973529468329286630669906820391"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
         }
       ],
       "rcWitness": {
@@ -1946,6 +2958,50 @@
           "saPerImportance": "0.054714685063036976559902670747566430305177320709506"
         }
       ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.7980",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7980"
+            },
+            {
+              "period": "0.50",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7980"
+            },
+            {
+              "period": "0.500000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.79799999794116000471474358965899572618145416798404"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.054577898350379384118502914070697514229414377407732"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
+        }
+      ],
       "rcWitness": {
         "R": "5",
         "boundary": "0.30",
@@ -2026,6 +3082,50 @@
           "side": "domain-end",
           "branch": "power-decay",
           "saPerImportance": "0.055793239164313659651620806443768517625881578795208"
+        }
+      ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.7488",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7488"
+            },
+            {
+              "period": "0.65",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7488"
+            },
+            {
+              "period": "0.650000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.74879999835264000307929599458359730153640921345668"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.055703969981650757796178213153458487997680168269135"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
         }
       ],
       "rcWitness": {
@@ -2110,6 +3210,50 @@
           "saPerImportance": "0.056559794257181057252475297145418479224125302256751"
         }
       ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.7982",
+          "cases": [
+            {
+              "period": "0.15",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7982"
+            },
+            {
+              "period": "0.70",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7982"
+            },
+            {
+              "period": "0.700000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.79819999826676571740553599477058456354381144977650"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.056432534720102399873657227726841287645871020326674"
+            },
+            {
+              "period": "0.149999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
+        }
+      ],
       "rcWitness": {
         "R": "5",
         "boundary": "0.425",
@@ -2190,6 +3334,50 @@
           "side": "domain-end",
           "branch": "power-decay",
           "saPerImportance": "0.054714685063036976559902670747566430305177320709506"
+        }
+      ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.7982",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7982"
+            },
+            {
+              "period": "0.50",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.7982"
+            },
+            {
+              "period": "0.500000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.79819999794064400471592522965640399578701342968028"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.054591577021645143362642889738384405836990671737909"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
         }
       ],
       "rcWitness": {
@@ -2274,6 +3462,50 @@
           "saPerImportance": "0.054387301991788078445239201458487765780058063512520"
         }
       ],
+      "engineWitnesses": [
+        {
+          "importanceFactor": "1",
+          "smax": "0.6000",
+          "cases": [
+            {
+              "period": "0.10",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.6000"
+            },
+            {
+              "period": "0.55",
+              "status": "ok",
+              "branch": "medellin-plateau",
+              "saG": "0.6000"
+            },
+            {
+              "period": "0.550000001",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.59999999868000000265199999484065455532765651022056"
+            },
+            {
+              "period": "4",
+              "status": "ok",
+              "branch": "medellin-power-decay",
+              "saG": "0.054387301991788078445239201458487765780058063512520"
+            },
+            {
+              "period": "0.099999999",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            },
+            {
+              "period": "4.000000001",
+              "status": "unsupported",
+              "branch": null,
+              "saG": null
+            }
+          ]
+        }
+      ],
       "rcWitness": {
         "R": "5",
         "boundary": "0.325",
@@ -2321,18 +3553,18 @@
     },
     {
       "case": "0<T<T0",
-      "expected": "blocked-missing-equation"
+      "expected": "unsupported-localized-missing-equation"
     },
     {
-      "case": "activation",
-      "expected": "blocked-no-adopted-decree"
+      "case": "return-period",
+      "expected": "unknown-null"
     }
   ],
   "declaredBinary64Tolerance": "1e-12",
-  "blockers": [
+  "localizedLimitations": [
     "0<T<T0 rising branch: equation absent from locked primary source",
+    "T>4: outside the published period domain",
     "return period for each historical hazard",
-    "general legal applicability",
-    "adoption of the 2019 harmonization"
+    "referenced site-specific method for affected sites"
   ]
 }

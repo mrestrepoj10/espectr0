@@ -1,41 +1,41 @@
 {
   "schemaVersion": 1,
-  "blocking": true,
+  "blocking": false,
   "entries": [
     {
       "id": "governing-status",
-      "severity": "blocker",
-      "status": "resolved-no-adoption",
+      "severity": "context",
+      "status": "resolved-context-retained",
       "issue": "Whether the 1999/2011 material currently substitutes NSR-10.",
-      "resolution": "Official 2014, June 2026 v3 and July 2026 proposed-POT sources do not establish adoption; activation is prohibited unless the separate district act and prior CAP approval required by the proposed article 547 G are produced."
+      "resolution": "Official 2014, June 2026 v3 and July 2026 proposed-POT sources do not establish adoption. This remains visible context, while source-explicit technical calculation is enabled without claiming substitution of NSR-10."
     },
     {
       "id": "return-periods",
-      "severity": "blocker",
-      "status": "open",
+      "severity": "metadata-gap",
+      "status": "open-localized",
       "issue": "None of the six locked official sources states return periods for the two historical hazards.",
-      "requiredResolution": "Obtain the primary 1999 report or 2019 harmonization report and an adopted instrument explicitly defining probabilities/return periods."
+      "productHandling": "Return period is machine-readable null; no national or reference-site value is substituted."
     },
     {
       "id": "short-period-equation",
-      "severity": "blocker",
-      "status": "open",
+      "severity": "interval-gap",
+      "status": "open-localized",
       "issue": "The rising branch 0 < T < T0 is drawn but not defined algebraically.",
-      "requiredResolution": "Obtain a primary source with the exact equation and branch inclusivity; do not infer linearity from the drawing."
+      "productHandling": "T < T0 returns a typed unsupported result; T0 through 4 seconds remains calculable."
     },
     {
       "id": "directive-currentness",
-      "severity": "blocker",
-      "status": "open",
+      "severity": "context",
+      "status": "open-context",
       "issue": "The 2011 letter is scoped to public entities and its current administrative effect is not established.",
-      "requiredResolution": "Obtain a current legal determination; it cannot support a general building calculator."
+      "productHandling": "Retain the scope finding as context; do not use it as a whole-study computation gate."
     },
     {
       "id": "site-specific-method",
-      "severity": "blocker",
-      "status": "open",
+      "severity": "applicability-gap",
+      "status": "open-localized",
       "issue": "The fill and transition clauses require a detailed/site-specific study under the ‘artículo cuarto del presente decreto’, but that article and its method are absent from the locked 24-page support package.",
-      "requiredResolution": "Obtain and lock the complete governing instrument or adopted technical annex containing the referenced method and acceptance criteria."
+      "productHandling": "Warn affected sites and do not fabricate the absent method; ordinary manual-zone calculation remains available."
     }
   ]
 }

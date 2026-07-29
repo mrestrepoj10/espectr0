@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
   "studyId": "medellin-microzonation",
-  "status": "research-only-activation-blocked",
-  "governingConclusion": "No municipal substitute to NSR-10 is demonstrated as adopted as of the July 2026 official POT records.",
-  "controllingBuildingStandard": "NSR-10 national workflow; historical Medellín coefficients must not replace A.2.4/A.2.6 in this product.",
+  "status": "calculation-supported-with-localized-limitations",
+  "governingConclusion": "The official record does not establish current municipal adoption; that history is retained as context and does not block source-explicit technical calculation.",
+  "controllingBuildingStandard": "NSR-10 remains the national building workflow; the historical Medellín curves are available as a separately identified technical study.",
   "historicalTechnicalEdition": "1999 study as republished in DAP support dated May 2011",
-  "blockers": [
-    "no-adopted-decree",
+  "localizedLimitations": [
     "return-periods-not-stated-in-locked-primary-sources",
-    "rising-branch-equation-not-stated",
-    "referenced-site-specific-method-not-present"
+    "rising-branch-equation-not-stated-below-t0",
+    "published-domain-ends-at-4-seconds",
+    "referenced-site-specific-method-not-present-for-affected-sites"
   ],
   "options": [
     {
