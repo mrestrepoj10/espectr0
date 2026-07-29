@@ -124,6 +124,18 @@ describe("CCP-14 pure spectrum engine", () => {
     })
   })
 
+  it("fails closed when the 0.2 s reading would put T0 after Ts", () => {
+    expect(computeCcp14Spectrum({
+      ...ordinaryInput,
+      s1G: 0.01,
+      t0Interpretation: "definition-0.2-seconds",
+    })).toMatchObject({
+      status: "unsupported",
+      reasonCode: "ccp14-t0-order-conflict",
+      citationIds: ["conflict-t0-figure", "conflict-t0-definition", "claim-spectrum-branches"],
+    })
+  })
+
   it("rejects invalid periods", () => {
     const result = computeCcp14Spectrum(ordinaryInput)
     expect(result.status).toBe("ok")

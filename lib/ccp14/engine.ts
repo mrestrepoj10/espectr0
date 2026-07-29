@@ -59,7 +59,7 @@ export type Ccp14EngineSuccess = {
 }
 
 export type Ccp14EngineFailure = {
-  status: "invalid-input" | "site-specific-study-required"
+  status: "invalid-input" | "unsupported" | "site-specific-study-required"
   reasonCode: string
   message: string
   citationIds: string[]
@@ -224,6 +224,14 @@ export function computeCcp14Spectrum(input: unknown): Ccp14EngineResult {
   const sd1 = factors.Fv.value * parsed.data.s1G
   const ts = sd1 / sds
   const t0 = parsed.data.t0Interpretation === "figure-0.2-ts" ? 0.2 * ts : 0.2
+  if (t0 > ts) {
+    return {
+      status: "unsupported",
+      reasonCode: "ccp14-t0-order-conflict",
+      message: "The selected published T0 = 0.2 s reading produces T0 > Ts for these inputs, so the published initial, plateau, and long-period branch intervals overlap and do not define one unambiguous spectrum.",
+      citationIds: ["conflict-t0-figure", "conflict-t0-definition", "claim-spectrum-branches"],
+    }
+  }
 
   const at = (tSeconds: number): Ccp14EnginePoint => {
     if (!Number.isFinite(tSeconds) || tSeconds < 0) {

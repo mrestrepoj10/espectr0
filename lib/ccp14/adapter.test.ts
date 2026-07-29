@@ -101,4 +101,18 @@ describe("CCP-14 normalized adapter", () => {
       evidenceAvailability: { status: "unavailable" },
     })
   })
+
+  it("preserves a localized unsupported outcome for an impossible branch ordering", () => {
+    const result = adaptCcp14Spectrum({
+      ...input,
+      s1G: 0.01,
+      t0Interpretation: "definition-0.2-seconds",
+    })
+    expect(result).toMatchObject({
+      status: "unsupported",
+      applicability: { reasonCode: "ccp14-t0-order-conflict" },
+      hazard: { id: "ccp14-2014-7pct-75y" },
+    })
+    expect(result.saAt(0.1)).toMatchObject({ status: "unsupported" })
+  })
 })

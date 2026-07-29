@@ -143,7 +143,7 @@ function evidenceKey(optionId: string | null, hazardId: string | null) {
 function failedResult(
   input: unknown,
   failure: {
-    status: "invalid-input" | "site-specific-study-required"
+    status: "invalid-input" | "unsupported" | "site-specific-study-required"
     reasonCode: string
     message: string
     citationIds: string[]
