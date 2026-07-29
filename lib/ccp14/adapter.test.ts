@@ -8,7 +8,7 @@ const input = {
   s1G: 0.3,
   soilClass: "D",
   t0Interpretation: "figure-0.2-ts",
-  distanceToActiveFaultKm: null,
+  distanceToActiveFaultKm: 10,
   longDurationEarthquakesExpected: false,
   enhancedHazardRequiredByImportance: false,
 }

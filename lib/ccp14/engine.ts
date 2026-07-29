@@ -15,9 +15,9 @@ export const ccp14ComputationInputSchema = z
     s1G: z.number().finite().positive(),
     soilClass: ccp14SoilClassSchema,
     t0Interpretation: ccp14T0InterpretationSchema,
-    distanceToActiveFaultKm: z.number().finite().nonnegative().nullable().default(null),
-    longDurationEarthquakesExpected: z.boolean().default(false),
-    enhancedHazardRequiredByImportance: z.boolean().default(false),
+    distanceToActiveFaultKm: z.number().finite().nonnegative().nullable(),
+    longDurationEarthquakesExpected: z.boolean(),
+    enhancedHazardRequiredByImportance: z.boolean(),
   })
   .strict()
 
@@ -174,7 +174,15 @@ function siteSpecificReason(input: Ccp14ComputationInput): Ccp14EngineFailure | 
       citationIds: ["claim-soils", "soil-f-and-factor-notes"],
     }
   }
-  if (input.distanceToActiveFaultKm !== null && input.distanceToActiveFaultKm < 10) {
+  if (input.distanceToActiveFaultKm === null) {
+    return {
+      status: "unsupported",
+      reasonCode: "ccp14-active-fault-distance-unknown",
+      message: "The distance to the nearest active fault must be confirmed before the CCP-14 general procedure can be declared applicable; sites less than 10 km away require the site-specific procedure.",
+      citationIds: ["claim-site-specific-triggers"],
+    }
+  }
+  if (input.distanceToActiveFaultKm < 10) {
     return {
       status: "site-specific-study-required",
       reasonCode: "ccp14-active-fault-distance",

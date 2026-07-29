@@ -30,6 +30,10 @@ describe("CCP-14 bridge R-factor metadata", () => {
     expect(lookupCcp14ConnectionR("cable-stayed-tower")).toMatchObject({
       status: "not-tabulated",
     })
+    expect(lookupCcp14SubstructureR("unknown", "single-columns")).toMatchObject({
+      status: "not-tabulated",
+      reason: expect.stringContaining("operational category"),
+    })
   })
 
   it("matches every published R table cell", () => {

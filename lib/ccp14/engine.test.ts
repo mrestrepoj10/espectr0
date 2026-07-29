@@ -14,7 +14,7 @@ const ordinaryInput = {
   s1G: 0.3,
   soilClass: "D" as const,
   t0Interpretation: "figure-0.2-ts" as const,
-  distanceToActiveFaultKm: null,
+  distanceToActiveFaultKm: 10,
   longDurationEarthquakesExpected: false,
   enhancedHazardRequiredByImportance: false,
 }
@@ -101,6 +101,26 @@ describe("CCP-14 pure spectrum engine", () => {
   })
 
   it("returns typed invalid and site-specific outcomes", () => {
+    const missingDistance: Partial<typeof ordinaryInput> = { ...ordinaryInput }
+    delete missingDistance.distanceToActiveFaultKm
+    expect(computeCcp14Spectrum(missingDistance)).toMatchObject({
+      status: "invalid-input",
+      reasonCode: "ccp14-invalid-input",
+    })
+    const missingLongDuration: Partial<typeof ordinaryInput> = { ...ordinaryInput }
+    delete missingLongDuration.longDurationEarthquakesExpected
+    expect(computeCcp14Spectrum(missingLongDuration)).toMatchObject({
+      status: "invalid-input",
+      reasonCode: "ccp14-invalid-input",
+    })
+    expect(computeCcp14Spectrum({
+      ...ordinaryInput,
+      distanceToActiveFaultKm: null,
+    })).toMatchObject({
+      status: "unsupported",
+      reasonCode: "ccp14-active-fault-distance-unknown",
+      citationIds: ["claim-site-specific-triggers"],
+    })
     expect(computeCcp14Spectrum({ ...ordinaryInput, pgaG: -0.1 })).toMatchObject({
       status: "invalid-input",
       reasonCode: "ccp14-invalid-input",

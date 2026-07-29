@@ -26,7 +26,7 @@ const connectionEvidenceRow: Record<Ccp14ConnectionElement, string> = {
 }
 
 export function lookupCcp14SubstructureR(
-  category: Ccp14OperationalCategory,
+  category: string,
   element: string,
   inelasticTimeHistory = false,
 ): Ccp14RFactorResult {
@@ -37,6 +37,13 @@ export function lookupCcp14SubstructureR(
     return {
       status: "not-tabulated",
       reason: "The requested substructure element is not tabulated by CCP-14 Table 3.10.7.1-1.",
+      citationIds: ["claim-r-tables"],
+    }
+  }
+  if (!rFactors.substructure.columns.includes(category as Ccp14OperationalCategory)) {
+    return {
+      status: "not-tabulated",
+      reason: "The requested operational category is not tabulated by CCP-14 Table 3.10.7.1-1.",
       citationIds: ["claim-r-tables"],
     }
   }
