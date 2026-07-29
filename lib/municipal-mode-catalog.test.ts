@@ -32,4 +32,18 @@ describe("municipal calculator mode catalog", () => {
     expect(isSourceBlockedMode("nsr10-national")).toBe(false)
     expect(isSourceBlockedMode("bogota-microzonation")).toBe(true)
   })
+
+  it("reports the merged Cali core without claiming UI activation", () => {
+    const cali = sourceBlockedModes["cali-microzonation"]
+    expect(cali).toMatchObject({
+      status: "Motor normalizado verificado · interfaz municipal bloqueada",
+    })
+    expect(cali.blockers).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining("revisión humana independiente"),
+        expect.stringContaining("no publica A0d ni Fa"),
+        expect.stringContaining("visor y la memoria PDF"),
+      ]),
+    )
+  })
 })
