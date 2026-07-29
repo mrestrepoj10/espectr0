@@ -36,6 +36,13 @@
       "value": "cable-stayed-tower"
     }
   ],
+  "siteFactorCases": [
+    { "factorId": "Fpga", "soilClass": "D", "argument": "0.05" },
+    { "factorId": "Fpga", "soilClass": "D", "argument": "0.35" },
+    { "factorId": "Fa", "soilClass": "E", "argument": "0.625" },
+    { "factorId": "Fv", "soilClass": "E", "argument": "0.25" },
+    { "factorId": "Fv", "soilClass": "C", "argument": "0.75" }
+  ],
   "rLookupCases": [
     {
       "category": "essential",

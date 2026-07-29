@@ -30,6 +30,13 @@
     "0.8",
     "1.0"
   ],
+  "siteFactorLookup": [
+    "1.6",
+    "1.15",
+    "1.45",
+    "3",
+    "1.3"
+  ],
   "spectrumCompetingReadings": {
     "figure-T0-equals-0.2Ts": {
       "T0": "0.12",
