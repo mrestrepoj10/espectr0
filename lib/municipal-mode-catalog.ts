@@ -125,7 +125,7 @@ export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> 
     description:
       "La tabla histórica de 14 zonas está transcrita, pero no constituye por sí sola una regla municipal vigente y completa.",
     sourceTitle: "Alcaldía de Medellín · soporte de microzonificación sísmica",
-    sourceUrl: "https://www.medellin.gov.co/",
+    sourceUrl: "https://www.medellin.gov.co/es/wp-content/uploads/2026/07/3_Tomo_III_A_InsTec_REst_SPyC.pdf",
     status: "Expediente histórico completo · activación bloqueada",
     blockers: [
       "La fuente oficial de 2026 indica que el decreto de armonización de 2019 todavía no ha sido adoptado.",
@@ -138,7 +138,7 @@ export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> 
     description:
       "La actualización técnica reemplaza las antiguas zonas A/B/C por una salida espacial de 1.275 nodos.",
     sourceTitle: "Alcaldía de Manizales · microzonificación sísmica",
-    sourceUrl: "https://manizales.gov.co/",
+    sourceUrl: "https://upcommons.upc.edu/bitstreams/3355be9f-7fb3-475e-bf7a-46462cff7add/download",
     status: "Modelo identificado · cálculo manual no reproducible",
     blockers: [
       "No están publicadas como tabla reproducible las 1.275 parejas Fa/Fv ni la ecuación operacional completa.",
@@ -151,7 +151,7 @@ export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> 
     description:
       "El estudio posterior a 1999 es histórico y la actualización armonizada fue entregada en diciembre de 2025.",
     sourceTitle: "Alcaldía de Armenia · entrega de la actualización de microzonificación",
-    sourceUrl: "https://www.armenia.gov.co/",
+    sourceUrl: "https://www.quindio.gov.co/gobernacion-trabaja-intensamente-para-que-quindio-sea-el-primer-departamento-de-colombia-con-estudios-de-microzonificacion-sismica",
     status: "Actualización entregada · adopción pendiente",
     blockers: [
       "La publicación oficial condiciona su uso a la aprobación de la CAP y a un decreto municipal posterior.",
@@ -177,7 +177,7 @@ export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> 
     description:
       "Los acuerdos municipales prueban la incorporación y siete zonas, pero no aportan el modelo numérico completo.",
     sourceTitle: "Municipio de Santa Rosa de Cabal · Acuerdos 028 y 012 de 2000",
-    sourceUrl: "https://www.santarosadecabal-risaralda.gov.co/",
+    sourceUrl: "https://tramites1.suit.gov.co/registro-web/suit_descargar_archivo?A=78028",
     status: "Cadena de adopción localizada · paquete técnico faltante",
     blockers: [
       "No se localizó el Acuerdo 012 con sus tablas técnicas primarias, valores Am/An y ecuaciones.",
@@ -190,7 +190,7 @@ export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> 
     description:
       "La Tabla 27 del POT 2024 permite verificar cinco zonas y 30 celdas, pero no cerrar el espectro.",
     sourceTitle: "Alcaldía de Dosquebradas · POT 2024, Tabla 27",
-    sourceUrl: "https://www.dosquebradas.gov.co/",
+    sourceUrl: "https://pot.dosquebradas.gov.co/repositorio/pot-2024-1/4.DTS/4.1%20DTS%20GENERAL.pdf",
     status: "Tabla directa verificada · fórmula incompleta",
     blockers: [
       "Faltan la fórmula adoptada completa, la inclusividad de sus ramas, Av y el período de retorno.",
