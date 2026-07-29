@@ -4,6 +4,21 @@ export {
   findCaliRow,
 } from "./engine"
 
+export {
+  CALI_ENGINE_ID,
+  CALI_ENGINE_VERSION,
+  CALI_STUDY_ID,
+  CALI_STUDY_VERSION,
+  CALI_TRACE_SCHEMA_ID,
+  CALI_TRACE_SCHEMA_VERSION,
+  adaptCaliSpectrum,
+  assertCaliLineageResolves,
+  caliCanonical,
+  caliCapabilities,
+  caliComputationInputSchema,
+  caliSpectrumEngine,
+} from "./adapter"
+
 export type {
   CaliBranchId,
   CaliEnginePoint,
