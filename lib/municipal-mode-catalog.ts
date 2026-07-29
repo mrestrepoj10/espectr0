@@ -12,7 +12,11 @@ export type CalculatorModeId =
 
 export type SourceBlockedModeId = Exclude<
   CalculatorModeId,
-  "nsr10-national" | "bogota-microzonation" | "cali-microzonation"
+  | "nsr10-national"
+  | "ccp14"
+  | "bogota-microzonation"
+  | "cali-microzonation"
+  | "dosquebradas-microzonation"
 >
 
 export type SourceBlockedMode = {
@@ -36,7 +40,7 @@ export const calculationModes = [
     id: "ccp14",
     label: "CCP-14 · Puentes",
     description:
-      "Publicaciones oficiales de INVÍAS; visible en estado fuente-bloqueado hasta resolver sus datos normativos.",
+      "Cálculo con PGA, Ss y S1 manuales, clase de suelo y comprobaciones de aplicabilidad declaradas para el proyecto.",
   },
   {
     id: "bogota-microzonation",
@@ -84,7 +88,7 @@ export const calculationModes = [
     id: "dosquebradas-microzonation",
     label: "Dosquebradas",
     description:
-      "Microzonificación CARDER; el POT 2024 publica cinco zonas, pero no la fórmula normativa completa.",
+      "Cálculo manual en cinco zonas de la Tabla 27 del POT 2024, limitado al intervalo soportado To ≤ T ≤ TL.",
   },
 ] as const satisfies readonly {
   id: CalculatorModeId
@@ -93,19 +97,6 @@ export const calculationModes = [
 }[]
 
 export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> = {
-  ccp14: {
-    id: "ccp14",
-    label: "CCP-14 · Puentes",
-    description:
-      "El corpus oficial fue auditado, pero no permite emitir un espectro local sin completar la selección normativa.",
-    sourceTitle: "INVÍAS · Norma Colombiana de Diseño de Puentes CCP-14",
-    sourceUrl: "https://www.invias.gov.co/index.php/archivo-y-documentos/documentos-tecnicos/3709-norma-colombiana-de-diseno-de-puentes-ccp-14",
-    status: "Fuente oficial localizada · cálculo bloqueado",
-    blockers: [
-      "No se localizó en la publicación oficial un registro finito verificable de PGA, Ss y S1 por localidad.",
-      "La misma edición imprime T₀ = 0,2·Ts en la figura y T₀ = 0,2 s en la definición; no se escogerá una de las dos sin aclaración oficial.",
-    ],
-  },
   "medellin-microzonation": {
     id: "medellin-microzonation",
     label: "Medellín",
@@ -169,19 +160,6 @@ export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> 
     blockers: [
       "No se localizó el Acuerdo 012 con sus tablas técnicas primarias, valores Am/An y ecuaciones.",
       "No están demostrados los niveles de amenaza, períodos de retorno, amortiguamiento ni reglas de rama.",
-    ],
-  },
-  "dosquebradas-microzonation": {
-    id: "dosquebradas-microzonation",
-    label: "Dosquebradas",
-    description:
-      "La Tabla 27 del POT 2024 permite verificar cinco zonas y 30 celdas, pero no cerrar el espectro.",
-    sourceTitle: "Alcaldía de Dosquebradas · POT 2024, Tabla 27",
-    sourceUrl: "https://pot.dosquebradas.gov.co/repositorio/pot-2024-1/4.DTS/4.1%20DTS%20GENERAL.pdf",
-    status: "Tabla directa verificada · fórmula incompleta",
-    blockers: [
-      "Faltan la fórmula adoptada completa, la inclusividad de sus ramas, Av y el período de retorno.",
-      "El POT ordena armonizar el modelo con NSR-10; los valores parciales no se completarán por analogía.",
     ],
   },
 }
