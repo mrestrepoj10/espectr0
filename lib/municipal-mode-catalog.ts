@@ -123,13 +123,14 @@ export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> 
     id: "cali-microzonation",
     label: "Cali",
     description:
-      "Las curvas de diseño y seguridad limitada están reconstruidas; la activación del modo completo sigue cerrada hasta integrar su contrato trazable.",
+      "Las curvas de diseño y seguridad limitada ya tienen motor y contrato trazable; la activación municipal completa sigue cerrada.",
     sourceTitle: "Alcaldía de Cali · Decreto 411.0.20.0158 de 2014 e INGEOMINAS–DAGMA 2005",
     sourceUrl: "https://www.cali.gov.co/planeacion/publicaciones/107480/microzonificacion-sismica-de-santiago-de-cali/",
-    status: "Dos curvas computables · integración trazable en curso",
+    status: "Motor normalizado verificado · interfaz municipal bloqueada",
     blockers: [
       "La curva de umbral de daño no se calcula: el decreto no publica A0d ni Fa para sus ramas iniciales.",
-      "Las curvas soportadas deben conservar citas por celda y fórmula en los mismos exportes normalizados antes de activarse en la interfaz.",
+      "El registro canónico de evidencia conserva pendiente la revisión humana independiente y bloquea la activación.",
+      "La interfaz no se activará hasta que el visor y la memoria PDF municipales resuelvan las citas oficiales del contrato normalizado.",
     ],
   },
   "medellin-microzonation": {
