@@ -124,16 +124,16 @@ const branchLabels: Record<SpectrumBranch, string> = {
 };
 
 const bogotaBranchLabels: Record<string, string> = {
-	"design-plateau": "Meseta · D. 523/2010",
-	"design-decay": "1/T · D. 523/2010",
-	"design-long": "1/T² · D. 523/2010",
-	"limited-plateau": "Meseta · seguridad limitada",
-	"limited-decay": "1/T · seguridad limitada",
-	"limited-long": "1/T² · seguridad limitada",
-	"damage-ramp": "Ascendente · umbral de daño",
-	"damage-plateau": "Meseta · umbral de daño",
-	"damage-decay": "1/T · umbral de daño",
-	"damage-long": "1/T² · umbral de daño",
+	"bogota-design-plateau": "Meseta · D. 523/2010",
+	"bogota-design-decay": "1/T · D. 523/2010",
+	"bogota-design-long": "1/T² · D. 523/2010",
+	"bogota-limited-plateau": "Meseta · seguridad limitada",
+	"bogota-limited-decay": "1/T · seguridad limitada",
+	"bogota-limited-long": "1/T² · seguridad limitada",
+	"bogota-damage-ramp": "Ascendente · umbral de daño",
+	"bogota-damage-plateau": "Meseta · umbral de daño",
+	"bogota-damage-decay": "1/T · umbral de daño",
+	"bogota-damage-long": "1/T² · umbral de daño",
 };
 
 function optionalNonnegativeNumber(rawValue: string) {
@@ -271,6 +271,9 @@ function BogotaParameterRail({
 	onFillThicknessChange: (value: string) => void;
 	onRigidBasePeriodChange: (value: string) => void;
 }) {
+	const selectedHazard = bogotaCanonical.hazards.find(
+		(hazard) => hazard.id === hazardId,
+	);
 	return (
 		<Card className="self-start" size="sm">
 			<CardHeader>
@@ -388,7 +391,8 @@ function BogotaParameterRail({
 			<CardFooter className="flex-col items-stretch gap-3">
 				<Separator />
 				<p className="text-muted-foreground text-xs">
-					Decreto 523 de 2010 · compilación vigente: Decreto 670 de 2025 · 5 % de amortiguamiento.
+					Decreto 523 de 2010 · compilación vigente: Decreto 670 de 2025 ·{" "}
+					{(selectedHazard?.dampingRatio ?? 0) * 100} % de amortiguamiento.
 				</p>
 			</CardFooter>
 		</Card>
@@ -461,7 +465,9 @@ function SiteSpecificStudyNotice({
 	);
 	const title =
 		result.status === "site-specific-study-required"
-			? "Perfil F: análisis específico requerido"
+			? result.study.id === "nsr10-national"
+				? "Perfil F: análisis específico requerido"
+				: "Estudio de respuesta sísmica particular requerido"
 			: "Resultado no disponible";
 
 	return (

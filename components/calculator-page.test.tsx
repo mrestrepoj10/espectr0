@@ -271,6 +271,28 @@ describe("unified municipal mode selector", () => {
 		expect(container.textContent).toContain("Parámetros de Bogotá");
 		expect(container.textContent).toContain("Decreto 523 de 2010");
 		expect(container.textContent).toContain("Datos del espectro");
+		expect(container.textContent).toContain("1/T · D. 523/2010");
+		expect(container.textContent).not.toContain("bogota-design-decay");
+		const traceabilityAction = [...container.querySelectorAll<HTMLButtonElement>("button")].find(
+			(button) => button.textContent?.includes("Ver trazabilidad"),
+		);
+		expect(traceabilityAction?.disabled).toBe(true);
+		expect(traceabilityAction?.title).toContain("resolvedor");
+	});
+
+	it("shows the selected Bogotá damping ratio", async () => {
+		await chooseMode("Bogotá D. C.");
+		const hazardTrigger = await waitForElement("button", "Diseño");
+		await act(async () => {
+			hazardTrigger.click();
+		});
+		const damageOption = await waitForElement('[role="option"]', "Umbral de daño");
+		await act(async () => {
+			damageOption.click();
+		});
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain("2 % de amortiguamiento");
+		});
 	});
 
 	it("keeps CCP-14 inspectable while failing closed on official-source gaps", async () => {
