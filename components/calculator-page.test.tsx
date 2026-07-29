@@ -259,7 +259,7 @@ describe("unified municipal mode selector", () => {
 		});
 	}
 
-	it("activates the normalized Bogotá engine with manual zone selection", async () => {
+	it("keeps Bogotá inspectable without bypassing its evidence-review gate", async () => {
 		await chooseMode("Bogotá D. C.");
 
 		await vi.waitFor(() => {
@@ -268,31 +268,11 @@ describe("unified municipal mode selector", () => {
 			);
 			expect(shell?.dataset.calculationMode).toBe("bogota-microzonation");
 		});
-		expect(container.textContent).toContain("Parámetros de Bogotá");
-		expect(container.textContent).toContain("Decreto 523 de 2010");
-		expect(container.textContent).toContain("Datos del espectro");
-		expect(container.textContent).toContain("1/T · D. 523/2010");
-		expect(container.textContent).not.toContain("bogota-design-decay");
-		const traceabilityAction = [...container.querySelectorAll<HTMLButtonElement>("button")].find(
-			(button) => button.textContent?.includes("Ver trazabilidad"),
-		);
-		expect(traceabilityAction?.disabled).toBe(true);
-		expect(traceabilityAction?.title).toContain("resolvedor");
-	});
-
-	it("shows the selected Bogotá damping ratio", async () => {
-		await chooseMode("Bogotá D. C.");
-		const hazardTrigger = await waitForElement("button", "Diseño");
-		await act(async () => {
-			hazardTrigger.click();
-		});
-		const damageOption = await waitForElement('[role="option"]', "Umbral de daño");
-		await act(async () => {
-			damageOption.click();
-		});
-		await vi.waitFor(() => {
-			expect(container.textContent).toContain("2 % de amortiguamiento");
-		});
+		expect(container.textContent).toContain("Bogotá D. C. · sin cálculo");
+		expect(container.textContent).toContain("research-only-not-activated");
+		expect(container.textContent).toContain("revisión independiente");
+		expect(container.textContent).not.toContain("Datos del espectro");
+		expect(container.textContent).not.toContain("Exportar");
 	});
 
 	it("keeps CCP-14 inspectable while failing closed on official-source gaps", async () => {

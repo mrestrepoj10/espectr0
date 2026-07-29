@@ -12,7 +12,7 @@ export type CalculatorModeId =
 
 export type SourceBlockedModeId = Exclude<
   CalculatorModeId,
-  "nsr10-national" | "bogota-microzonation"
+  "nsr10-national"
 >
 
 export type SourceBlockedMode = {
@@ -106,6 +106,19 @@ export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> 
       "La misma edición imprime T₀ = 0,2·Ts en la figura y T₀ = 0,2 s en la definición; no se escogerá una de las dos sin aclaración oficial.",
     ],
   },
+  "bogota-microzonation": {
+    id: "bogota-microzonation",
+    label: "Bogotá D. C.",
+    description:
+      "La matriz y el motor están reconstruidos, pero el expediente aún no autoriza su activación productiva.",
+    sourceTitle: "FOPAE 2010 · Decreto Distrital 523 de 2010 · compilación Decreto 670 de 2025",
+    sourceUrl: "https://www.alcaldiabogota.gov.co/sisjur/normas/Norma1.jsp?i=40984",
+    status: "Motor verificado · revisión independiente de evidencia pendiente",
+    blockers: [
+      "El canon aprobado conserva el estado research-only-not-activated.",
+      "El registro de revisión de evidencia declara pendiente la revisión independiente y bloquea explícitamente la activación.",
+    ],
+  },
   "cali-microzonation": {
     id: "cali-microzonation",
     label: "Cali",
@@ -137,7 +150,7 @@ export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> 
     label: "Manizales",
     description:
       "La actualización técnica reemplaza las antiguas zonas A/B/C por una salida espacial de 1.275 nodos.",
-    sourceTitle: "Alcaldía de Manizales · microzonificación sísmica",
+    sourceTitle: "Universidad de los Andes y AIS · actualización de la microzonificación sísmica de Manizales",
     sourceUrl: "https://upcommons.upc.edu/bitstreams/3355be9f-7fb3-475e-bf7a-46462cff7add/download",
     status: "Modelo identificado · cálculo manual no reproducible",
     blockers: [
@@ -150,7 +163,7 @@ export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> 
     label: "Armenia",
     description:
       "El estudio posterior a 1999 es histórico y la actualización armonizada fue entregada en diciembre de 2025.",
-    sourceTitle: "Alcaldía de Armenia · entrega de la actualización de microzonificación",
+    sourceTitle: "Gobernación del Quindío · entrega de la actualización de microzonificación de Armenia",
     sourceUrl: "https://www.quindio.gov.co/gobernacion-trabaja-intensamente-para-que-quindio-sea-el-primer-departamento-de-colombia-con-estudios-de-microzonificacion-sismica",
     status: "Actualización entregada · adopción pendiente",
     blockers: [

@@ -59,7 +59,9 @@ export const BOGOTA_ENGINE_ID = "bogota-spectrum" as const
 export const BOGOTA_ENGINE_VERSION = "1" as const
 
 export const bogotaCapabilities = spectrumCapabilitiesSchema.parse({
-  comparison: supportedCapability(),
+  comparison: unsupportedCapability(
+    "El comparador actual todavía no consume escenarios municipales normalizados.",
+  ),
   contextualPdf: unsupportedCapability(
     "El renderizador PDF contextual todavía no está instalado para Bogotá.",
   ),
@@ -67,8 +69,12 @@ export const bogotaCapabilities = spectrumCapabilitiesSchema.parse({
   etabsExport: supportedCapability(),
   jsonExport: supportedCapability(),
   svgPngExport: supportedCapability(),
-  buildingBaseShear: supportedCapability(),
-  fheWorkflow: supportedCapability(),
+  buildingBaseShear: unsupportedCapability(
+    "El flujo de cortante basal actual todavía es exclusivo de NSR-10 nacional.",
+  ),
+  fheWorkflow: unsupportedCapability(
+    "El flujo FHE actual todavía es exclusivo de NSR-10 nacional.",
+  ),
   bridgeRFactorWorkflow: unsupportedCapability(
     "Bogotá municipal building spectra do not define the CCP-14 bridge R-factor workflow.",
   ),

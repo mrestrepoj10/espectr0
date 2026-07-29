@@ -30,6 +30,6 @@ describe("municipal calculator mode catalog", () => {
       expect(isSourceBlockedMode(mode.id)).toBe(true)
     }
     expect(isSourceBlockedMode("nsr10-national")).toBe(false)
-    expect(isSourceBlockedMode("bogota-microzonation")).toBe(false)
+    expect(isSourceBlockedMode("bogota-microzonation")).toBe(true)
   })
 })
