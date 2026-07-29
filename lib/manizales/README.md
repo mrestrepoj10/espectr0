@@ -24,6 +24,8 @@ Se bloquearon seis PDFs primarios mediante URL, SHA-256, longitud y paginacion: 
 
 La copia oficial 2002 tiene 160 paginas, pero omite materialmente la Figura 8.5 entre las paginas impresas 149 y 150, aun cuando el texto dice que esa figura contiene las ecuaciones y graficas A/B/C. La presentacion oficial 2014 conserva una grafica reducida del modelo historico, pero no se digitaliza como sustituto de la figura omitida. El eventual acto de adopcion sigue sin recuperarse. La coleccion municipal de decretos si es publica: el 28 de julio de 2026 se abrio anonimamente y se enumeraron 2.523 archivos en las carpetas expuestas de 2004 y 2013-2025. La busqueda reproducible de titulos no encontro nombres con `microzon` o `sism`; este resultado por nombre no revisa el contenido de cada decreto, no prueba inexistencia y tampoco acredita vigencia.
 
+El alcance por periodo del modelo historico tambien queda directo: el informe 2002 presenta los espectros solo hasta 3.0 s y, en su literal 8.3(e), exige analisis sismicos especiales para estructuras con periodo fundamental mayor o igual a 2.0 s. Esta regla pertenece exclusivamente al modelo 2002 y no se proyecta sobre el candidato raster 2014/2015 sin una fuente separada.
+
 ## Cobertura y limites
 
 - Matriz exacta: 1 opcion tecnica x 1 amenaza x 5 campos numericos, todos con celda y atestacion directa. La naturaleza raster y Fa/Fv se cubren como aplicabilidad textual porque F3 solo admite normalizacion numerica directa.

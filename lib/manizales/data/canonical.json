@@ -29,7 +29,18 @@
         "description": "Formaciones rocosas o suelos de poco espesor"
       }
     ],
-    "evidenceBasis": "Copia oficial UNGRD del informe 2002, seccion 8.2 y 8.3. El PDF recuperado omite la Figura 8.5 que el texto dice contiene las ecuaciones y graficas."
+    "evidenceBasis": "Copia oficial UNGRD del informe 2002, seccion 8.2 y 8.3. El PDF recuperado omite la Figura 8.5 que el texto dice contiene las ecuaciones y graficas.",
+    "periodApplicability": {
+      "scope": "historical-2002-only",
+      "spectraPresentedThroughSeconds": 3,
+      "specialSeismicAnalysisRequiredAtOrAboveSeconds": 2,
+      "statement": "El informe 2002 presenta espectros solo hasta 3.0 s y exige analisis sismicos especiales para periodo fundamental mayor o igual a 2.0 s.",
+      "citationIds": [
+        "source-2002-period-presentation-limit",
+        "source-2002-special-analysis-at-2s"
+      ],
+      "notAppliedTo": "updated-raster-grid"
+    }
   },
   "governingTechnicalCandidate": {
     "id": "updated-raster-grid",

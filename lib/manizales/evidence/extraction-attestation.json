@@ -62,6 +62,32 @@
       "pngCropSha256": "0bd8b50aca4218e8b4ccc4808623a37256ca4488efabb8894dd3c810a19e19e4"
     },
     {
+      "citationId": "source-2002-period-presentation-limit",
+      "sourceDocumentId": "manizales-uniandes-2002",
+      "physicalPage": 154,
+      "rect": {
+        "left": 0.1,
+        "top": 0.14,
+        "width": 0.82,
+        "height": 0.28
+      },
+      "tokenSha256": "aa8f0ed1b8c442a431b9945215a592f87f82279eb69a8a8fbd9493a91944c53f",
+      "pngCropSha256": "b9f9c4a40b356420aae2683693d5d01b0976c0b00788609621869350961755e1"
+    },
+    {
+      "citationId": "source-2002-special-analysis-at-2s",
+      "sourceDocumentId": "manizales-uniandes-2002",
+      "physicalPage": 154,
+      "rect": {
+        "left": 0.1,
+        "top": 0.78,
+        "width": 0.82,
+        "height": 0.13
+      },
+      "tokenSha256": "6ce8de548f0e54196a926070965637bc408d2eb34a189b8aebb6d5d5f175f3fb",
+      "pngCropSha256": "cd17011b1d2dcf17a7962303534378065dcbad049fc23e608b33ff7ae6089e34"
+    },
+    {
       "citationId": "source-2014-node-model",
       "sourceDocumentId": "manizales-harmonization-2014",
       "physicalPage": 50,
@@ -319,5 +345,5 @@
       "manizales-pot-status-2025:1"
     ]
   },
-  "payloadSha256": "5c7c49ffd8f6112394a034037bd34825e17adcdae332aa0e1516d15a26325aa6"
+  "payloadSha256": "e5fbc5eeba071cc5c4c083db18d04e39cc4713c152e762c7bed3e0d3d4c04a03"
 }

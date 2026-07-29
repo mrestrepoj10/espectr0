@@ -44,6 +44,10 @@
       "expected": "reject-historical-model-substitution"
     },
     {
+      "case": "historical-2002-period-at-or-above-2s",
+      "expected": "reject-special-seismic-analysis-outside-2002-recommendations"
+    },
+    {
       "case": "spectrum-at-any-period",
       "expected": "reject-missing-node-fa-fv-and-location-rule"
     },

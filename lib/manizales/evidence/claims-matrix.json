@@ -21,13 +21,13 @@
       "operationalFormulaCoveragePercent": 50
     },
     "warning": {
-      "expected": 6,
-      "citedOrExplicitlyBlocked": 6,
+      "expected": 7,
+      "citedOrExplicitlyBlocked": 7,
       "coveragePercent": 100
     },
     "applicability": {
-      "expected": 5,
-      "citedOrExplicitlyBlocked": 5,
+      "expected": 6,
+      "citedOrExplicitlyBlocked": 6,
       "coveragePercent": 100
     }
   },
@@ -41,6 +41,28 @@
         "physicalPage": 2,
         "printedPage": null,
         "reference": "Introduccion"
+      }
+    },
+    {
+      "id": "historical-period-presentation-limit",
+      "kind": "applicability",
+      "statement": "El informe historico 2002 presenta sus espectros unicamente hasta 3.0 s; esta limitacion no se proyecta al candidato raster 2014/2015.",
+      "citation": {
+        "sourceDocumentId": "manizales-uniandes-2002",
+        "physicalPage": 154,
+        "printedPage": "149",
+        "reference": "Seccion 8.3"
+      }
+    },
+    {
+      "id": "historical-special-analysis-at-2s",
+      "kind": "warning",
+      "statement": "Para el modelo historico 2002, estructuras con periodo fundamental mayor o igual a 2.0 s requieren analisis sismicos especiales fuera de esas recomendaciones.",
+      "citation": {
+        "sourceDocumentId": "manizales-uniandes-2002",
+        "physicalPage": 154,
+        "printedPage": "149",
+        "reference": "Seccion 8.3, literal (e)"
       }
     },
     {

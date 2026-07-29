@@ -55,6 +55,7 @@ def build(source: dict) -> dict:
             {"case": "activation", "expected": "reject-missing-node-values-location-rule"},
             {"case": "manual-zone-selector", "expected": "reject-updated-model-is-raster-not-zones"},
             {"case": "zone-a-b-or-c-as-current", "expected": "reject-historical-model-substitution"},
+            {"case": "historical-2002-period-at-or-above-2s", "expected": "reject-special-seismic-analysis-outside-2002-recommendations"},
             {"case": "spectrum-at-any-period", "expected": "reject-missing-node-fa-fv-and-location-rule"},
             {"case": "unknown-node-or-location", "expected": "reject"},
         ],

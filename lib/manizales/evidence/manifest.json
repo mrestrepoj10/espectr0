@@ -345,6 +345,46 @@
       ]
     },
     {
+      "id": "source-2002-period-presentation-limit",
+      "sourceDocumentId": "manizales-uniandes-2002",
+      "regionKind": "applicability",
+      "physicalPage": 154,
+      "printedPage": "149",
+      "reference": "Seccion 8.3: alcance temporal de los espectros historicos",
+      "rect": {
+        "left": 0.1,
+        "top": 0.14,
+        "width": 0.82,
+        "height": 0.28
+      },
+      "extractedToken": "Los espectros de diseno se presentan unicamente hasta periodos estructurales de 3.0 seg",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Los espectros de diseno se presentan unicamente hasta periodos estructurales de 3.0 seg"
+      ]
+    },
+    {
+      "id": "source-2002-special-analysis-at-2s",
+      "sourceDocumentId": "manizales-uniandes-2002",
+      "regionKind": "applicability",
+      "physicalPage": 154,
+      "printedPage": "149",
+      "reference": "Seccion 8.3, literal (e): analisis especial para periodos largos",
+      "rect": {
+        "left": 0.1,
+        "top": 0.78,
+        "width": 0.82,
+        "height": 0.13
+      },
+      "extractedToken": "Para estructuras con periodos de vibracion fundamental mayores o iguales a 2.0 seg deben adelantarse analisis sismicos especiales",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Para estructuras con periodos de vibracion fundamental mayores o iguales a 2.0 seg deben adelantarse analisis sismicos especiales"
+      ]
+    },
+    {
       "id": "source-2014-node-model",
       "sourceDocumentId": "manizales-harmonization-2014",
       "regionKind": "applicability",
@@ -724,6 +764,8 @@
   ],
   "applicabilityCitationIds": [
     "source-2002-three-zone-selector",
+    "source-2002-period-presentation-limit",
+    "source-2002-special-analysis-at-2s",
     "source-2014-node-model",
     "source-2014-spectrum-shape",
     "cell-spatial-model",
