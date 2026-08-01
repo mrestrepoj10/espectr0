@@ -1,9 +1,9 @@
 # Pereira seismic-microzonation research dossier
 
-Status: **CAP approval verified; municipal spectrum activation blocked**.
+Status: **Decreto 932 applicability confirmed; primary numerical package missing**.
 
-The current POT source available to this research says NSR-10 and Decreto Municipal 932 de 2011 remain applicable until issuance of the new microzonation. CAP Acta 201 records technical approval of Pereira's new study on 13 December 2024. CAP approval is not represented as municipal adoption.
+Pereira's official 2016 POT says the NSR-10 requirements and Decreto Municipal 932 de 2011 remain applicable until the municipality harmonizes and adjusts the local microzonation. CAP Acta 201 records technical approval of a later study on 13 December 2024; that later-study process is currentness context and is not treated as a blocker to the historical rule preserved by the POT.
 
-No later municipal adoption instrument, primary technical report, exact zones, hazards, damping, coefficients, formulas, branches, or official primary bytes for the complete Decreto 932 package were located. Secondary mirrors were deliberately excluded.
+The localized calculator gap is the absence of official primary bytes for Decreto 932 and its complete technical annex. Exact zones, coefficients, hazard cases, damping, formulas and branch bounds therefore remain unavailable. Secondary academic tables and EspectroCol are not used as numerical sources; EspectroCol may only inform UX comparison.
 
-The F3 matrix covers one direct regulatory-status statement at 100%; the proposed spectrum matrix is exactly empty. No engine, UI, registry, map, GIS, coordinate lookup, or automatic zone selection is added. Official sources are external-only and locked by URL, length, page count and SHA-256. `verify_official_sources.py` re-checks locally supplied official bytes and the exact adoption-chain statements. Independent review and production activation remain blocked.
+The proposed spectrum matrix remains empty and no engine, UI, registry, map, GIS lookup or automatic zone selection is added. Professional geotechnical verification under NSR-10 Title H remains required.

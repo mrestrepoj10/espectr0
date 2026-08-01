@@ -9,7 +9,7 @@
     "regulatoryStatusValues": 1,
     "proposedSpectrumValues": 0,
     "applicabilityClaims": 3,
-    "warningClaims": 5,
+    "warningClaims": 2,
     "percent": 100
   },
   "attestations": [
@@ -31,9 +31,9 @@
     {
       "id": "cap-date",
       "citationId": "cap-date",
-      "textSha256": "98fe9b3534d1203cc23439f35fbb1c61510e67e25d10818a90d2d99fafc97b43"
+      "textSha256": "8419d6c96dd9b9620f5242c5137ddd9bd9160d5d8aa8c945edecb5cd21746aaa"
     }
   ],
-  "nonInference": "CAP technical approval is not municipal adoption. Missing current adoption and technical bytes block activation.",
-  "payloadSha256": "320d0ab9f5fad93a1f537bb06a5beeef709bcd7237a8d1044211529fefe47627"
+  "nonInference": "The POT confirms Decreto 932 remains applicable until harmonization. Missing primary numerical bytes—not adoption of the later study—blocks calculator output.",
+  "payloadSha256": "34640f36594ac748bf80adc86f6bcd893526e392b949276d650d807351bf7db7"
 }

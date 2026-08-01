@@ -8,7 +8,7 @@
         "legacy-instrument-basis",
         "harmonization-required"
       ],
-      "resolution": "Do not activate the NSR-98-era model under NSR-10."
+      "resolution": "Record NSR-10 harmonization as currentness context; it does not negate the official historical applicability of Decreto 079."
     },
     {
       "id": "legacy-model-vs-2025-study",
@@ -16,7 +16,7 @@
       "officialEvidence": [
         "new-study-pending"
       ],
-      "resolution": "Do not mix the historical model with the delivered but unadopted 2025 study."
+      "resolution": "Keep the historical Decreto 079 model and the delivered 2025 update as separate source lineages."
     },
     {
       "id": "reference-site-model-vs-official-chain",

@@ -4,7 +4,7 @@
   "cases": [
     {
       "id": "calculate-from-zone-label",
-      "reason": "official label exists but coefficient/formula matrix is unavailable",
+      "reason": "five official design zones are documented, with 3A/3B as Zone 3 subareas, but the Am/An coefficient and formula matrix is unavailable",
       "outcome": "reject"
     },
     {
@@ -23,5 +23,5 @@
       "outcome": "reject"
     }
   ],
-  "inputSha256": "6329160fc97097d6e31d5deea1cee646202abcf5066be66442d927399f3554e1"
+  "inputSha256": "bdfa90ba7b62e378590ef0454877223fa48a39f390411fd32586f68bc13e6cff"
 }

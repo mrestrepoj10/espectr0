@@ -5,31 +5,13 @@
     {
       "id": "blocker-1",
       "severity": "blocker",
-      "issue": "No municipal decree adopting the CAP-approved study was located.",
+      "issue": "Primary official bytes for Decreto 932 de 2011 and its complete technical annex were not located.",
       "disposition": "No municipal spectrum activation."
     },
     {
       "id": "blocker-2",
       "severity": "blocker",
-      "issue": "The primary technical report, exact zones, coefficients, hazards, damping and formulas were not located.",
-      "disposition": "No municipal spectrum activation."
-    },
-    {
-      "id": "blocker-3",
-      "severity": "blocker",
-      "issue": "Primary official bytes for Decreto 932 de 2011 and its complete technical annex were not located.",
-      "disposition": "No municipal spectrum activation."
-    },
-    {
-      "id": "blocker-4",
-      "severity": "blocker",
-      "issue": "The 2016 POT preserves Decreto 932 until issuance of the new microzonation.",
-      "disposition": "No municipal spectrum activation."
-    },
-    {
-      "id": "blocker-5",
-      "severity": "blocker",
-      "issue": "Professional geotechnical and current municipal-authority verification is required.",
+      "issue": "The exact historical zones, coefficients, hazards, damping, formulas and branch bounds were not recovered from a primary official source.",
       "disposition": "No municipal spectrum activation."
     }
   ]

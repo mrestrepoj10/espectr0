@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "comparison": "Santa Rosa de Cabal versus Pereira and Dosquebradas",
+  "comparison": "Santa Rosa de Cabal versus Pereira, Dosquebradas and EspectroCol UX",
   "materialDifferences": [
-    "Acuerdo 012/028/076 adoption lineage",
-    "Seven named zones including 3A/3B",
+    "Acuerdo 012/028/076 incorporation lineage",
+    "Five design zones with 3A/3B as Zone 3 subareas",
     "200 m transition and governing-adjacent rule",
-    "Am/An instead of Aa/Av under the legacy clause"
+    "Am/An instead of Aa/Av under the historical clause"
   ],
-  "nonInference": "No neighboring-city coefficient, formula, hazard, or legal effect is imported."
+  "nonInference": "No neighboring-city or reference-site coefficient, formula, hazard, or legal effect is imported."
 }

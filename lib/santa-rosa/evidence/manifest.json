@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "studyId": "santa-rosa-de-cabal-microzonation",
-  "title": "Santa Rosa de Cabal regulatory-status dossier — spectrum activation blocked",
+  "title": "Santa Rosa de Cabal historical applicability and numerical-source dossier",
   "sources": [
     {
       "id": "acuerdo-028-2000",
@@ -99,6 +99,61 @@
         {
           "physicalPage": 2,
           "printedPage": null,
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "carder-pbot-urban-dts-2000",
+      "issuingAuthority": "CARDER / Municipio de Santa Rosa de Cabal",
+      "officialTitle": "PBOT Santa Rosa de Cabal — Documento Técnico de Soporte, componente urbano",
+      "edition": "PBOT 2000",
+      "revision": null,
+      "adoptionInstrument": "Soporte técnico del PBOT adoptado por Acuerdo 028 de 2000",
+      "amendmentsAndErrata": [],
+      "legalStatus": "historical",
+      "applicabilityStatus": "applicable",
+      "officialUrl": "https://www.carder.gov.co/?wpdmdl=30680",
+      "retrievedOn": "2026-07-29",
+      "redistribution": {
+        "decision": "external-only",
+        "rationale": "No se localizó licencia expresa de redistribución; se conserva URL y huella."
+      },
+      "mediaType": "application/pdf",
+      "pageCount": 113,
+      "sha256": "1fe321e2b2daff668b1bb503213458e795ec2e8d9227da3779f5d33517765b43",
+      "pages": [
+        {
+          "physicalPage": 96,
+          "printedPage": "142",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "physicalPage": 97,
+          "printedPage": "143",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "physicalPage": 98,
+          "printedPage": "144",
           "rotationDegrees": 0,
           "crop": {
             "left": 0,
@@ -223,6 +278,51 @@
       ]
     },
     {
+      "id": "urban-dts-five-zones",
+      "sourceDocumentId": "carder-pbot-urban-dts-2000",
+      "regionKind": "applicability",
+      "physicalPage": 96,
+      "printedPage": "142",
+      "reference": "DTS urbano, microzonificación sísmica",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "extractedToken": "se definieron cinco (5) zonas ... Zona 1 ... Zona 2 ... Zona 3 ... Zona 4 ... Zona 5; la Zona 3 comprende las subáreas 3A y 3B",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "cinco (5) zonas",
+        "Zona 1",
+        "Zona 2"
+      ]
+    },
+    {
+      "id": "urban-dts-transition-am-an",
+      "sourceDocumentId": "carder-pbot-urban-dts-2000",
+      "regionKind": "applicability",
+      "physicalPage": 98,
+      "printedPage": "144",
+      "reference": "DTS urbano, reglas de transición y coeficientes",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "extractedToken": "franja de transición de unos 200m a cada lado ... aceleración de diseño más exigente que resulte de los espectros de diseño de las zonas adyacentes ... Aa y Av no son válidos ... aceleración máxima Am y aceleración nominal An",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "200m",
+        "más exigente",
+        "Am",
+        "An"
+      ]
+    },
+    {
       "id": "compatibility-table",
       "sourceDocumentId": "acuerdo-076-2013",
       "regionKind": "table",
@@ -294,7 +394,9 @@
     "zones-and-transition",
     "geotechnical-and-aa-av",
     "professional-warning",
-    "revision-2013-adoption"
+    "revision-2013-adoption",
+    "urban-dts-five-zones",
+    "urban-dts-transition-am-an"
   ],
   "coverage": {
     "optionIds": [

@@ -9,7 +9,7 @@
   "normalization": "Unicode NFC and whitespace collapse",
   "qualityControls": [
     "No coefficient or equation from a secondary mirror is used.",
-    "The seven labels are recorded only as documentary metadata, not selectable calculator options.",
-    "NSR-98/2013 NRS-10 tension is not silently reconciled."
+    "Five design zones are recorded; 3A and 3B are subareas of Zone 3, not additional design zones.",
+    "NSR-98/2013 NRS-10 context is recorded without making it a blanket legal blocker."
   ]
 }

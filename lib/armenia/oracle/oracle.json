@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "studyId": "armenia-microzonation",
   "status": "negative-oracle-activation-blocked",
-  "arithmetic": "none-no-approved-spectrum",
+  "arithmetic": "none-primary-numerical-annex-unavailable",
   "records": [
     {
       "case": "legacy-zone-request",
@@ -11,7 +11,7 @@
         "zone": "any",
         "hazard": "any"
       },
-      "expected": "reject-unharmonized-legacy-model"
+      "expected": "reject-missing-primary-decreto-079-numerical-annex"
     },
     {
       "case": "delivered-2025-study-request",
@@ -20,7 +20,7 @@
         "zone": "any",
         "hazard": "any"
       },
-      "expected": "reject-pending-approval-and-decree"
+      "expected": "reject-new-study-is-context-not-installed-model"
     },
     {
       "case": "unknown-zone-or-hazard",
@@ -29,7 +29,7 @@
         "zone": "user-supplied",
         "hazard": "user-supplied"
       },
-      "expected": "reject-no-approved-option-hazard-matrix"
+      "expected": "reject-no-source-locked-option-hazard-matrix"
     },
     {
       "case": "site-specific-branch-request",
@@ -37,7 +37,7 @@
         "model": "armenia-municipal",
         "siteCondition": "artificial-fill-or-special-site"
       },
-      "expected": "reject-missing-adopted-site-specific-rules"
+      "expected": "reject-missing-primary-site-specific-rules"
     },
     {
       "case": "national-building-workflow",
@@ -50,9 +50,6 @@
   ],
   "blockers": [
     "official-decree-079-bytes-and-technical-annex-not-located",
-    "legacy-study-not-demonstrated-harmonized-with-nsr10",
-    "2025-study-not-demonstrated-cap-approved",
-    "2025-study-not-demonstrated-adopted-by-municipal-decree",
-    "current-zones-hazards-coefficients-formulas-and-site-specific-rules-unavailable"
+    "historical-zones-hazards-coefficients-formulas-and-site-specific-rules-unavailable"
   ]
 }

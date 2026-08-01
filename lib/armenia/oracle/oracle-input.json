@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "studyId": "armenia-microzonation",
-  "status": "primary-source-adoption-gap-blocks-production",
+  "status": "historical-applicability-confirmed-primary-numerical-annex-missing",
   "transcriptionMethod": "Independent regulatory-decision transcription from the locked primary sources; no canonical JSON or production engine is an input.",
   "proposedSpectrumMatrix": {
     "selectableOptions": [],
@@ -10,10 +10,7 @@
   },
   "blockers": [
     "official-decree-079-bytes-and-technical-annex-not-located",
-    "legacy-study-not-demonstrated-harmonized-with-nsr10",
-    "2025-study-not-demonstrated-cap-approved",
-    "2025-study-not-demonstrated-adopted-by-municipal-decree",
-    "current-zones-hazards-coefficients-formulas-and-site-specific-rules-unavailable"
+    "historical-zones-hazards-coefficients-formulas-and-site-specific-rules-unavailable"
   ],
   "cases": [
     {

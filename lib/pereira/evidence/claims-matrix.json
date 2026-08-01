@@ -8,7 +8,7 @@
   "proposedSpectrumMatrix": {
     "expected": 0,
     "cited": 0,
-    "coverageStatus": "not-applicable-no-adopted-complete-matrix"
+    "coverageStatus": "not-applicable-primary-numerical-matrix-unavailable"
   },
   "claimCoverage": {
     "applicability": {
@@ -17,20 +17,20 @@
       "coveragePercent": 100
     },
     "warnings": {
-      "expected": 5,
-      "cited": 5,
+      "expected": 2,
+      "cited": 2,
       "coveragePercent": 100
     }
   },
   "claims": [
     {
       "id": "legacy-rule",
-      "statement": "The 2016 POT points to NSR-10 plus Decreto 932 until the new microzonation is issued.",
-      "citationId": "pot-legacy-until-new"
+      "statement": "The 2016 POT confirms NSR-10 and Decreto 932 remain applicable until the municipality harmonizes and adjusts the local microzonation.",
+      "citationId": "pot-geotechnical-warning"
     },
     {
-      "id": "cap-approval-not-adoption",
-      "statement": "Acta 201 records CAP approval of the study; it does not identify a municipal adoption decree.",
+      "id": "cap-approval-context",
+      "statement": "Acta 201 records CAP approval of a later study; this is currentness context and does not erase the POT's Decreto 932 rule.",
       "citationId": "cap-approval-cell"
     },
     {

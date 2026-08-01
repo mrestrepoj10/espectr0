@@ -4,6 +4,12 @@
   "committedSourceBytes": false,
   "sources": [
     {
+      "sourceDocumentId": "crq-resolution-075-2006",
+      "officialUrl": "https://www.crq.gov.co/wp-content/uploads/2021/03/RESOLUCION075DE2006.pdf",
+      "decision": "external-only",
+      "rationale": "No express redistribution license was located on the official delivery page."
+    },
+    {
       "sourceDocumentId": "armenia-cap-acta-153-2019",
       "officialUrl": "https://asosismica.org.co/wp-content/uploads/2019/04/Acta-153-CAP-DEFINITIVA-FDO.pdf",
       "decision": "external-only",

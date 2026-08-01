@@ -3,13 +3,14 @@
   "externalOnly": true,
   "sourceHashes": {
     "acuerdo-028-2000": "e3fb9f146c9a00cfecd1faf6f12f61cb44863ffd626e45e3c4121342e15212f8",
-    "acuerdo-076-2013": "16d0c00b293a337d49e51132fc88068a26ec6aad74334c84a2c758e8cd45a346"
+    "acuerdo-076-2013": "16d0c00b293a337d49e51132fc88068a26ec6aad74334c84a2c758e8cd45a346",
+    "carder-pbot-urban-dts-2000": "1fe321e2b2daff668b1bb503213458e795ec2e8d9227da3779f5d33517765b43"
   },
   "coverage": {
     "regulatoryStatusValues": 1,
     "proposedSpectrumValues": 0,
-    "applicabilityClaims": 5,
-    "warningClaims": 5,
+    "applicabilityClaims": 7,
+    "warningClaims": 2,
     "percent": 100
   },
   "attestations": [
@@ -44,12 +45,24 @@
       "textSha256": "5411e542d03bf8537e305af962d382e847747b104e6c0ff677a3a6476100c1bc"
     },
     {
+      "citationId": "urban-dts-five-zones",
+      "sourceDocumentId": "carder-pbot-urban-dts-2000",
+      "physicalPage": 96,
+      "textSha256": "07ea793d7a7cd1e6508e758c4009ffb37808b649825e86ccecfc745a542902fa"
+    },
+    {
+      "citationId": "urban-dts-transition-am-an",
+      "sourceDocumentId": "carder-pbot-urban-dts-2000",
+      "physicalPage": 98,
+      "textSha256": "cfc7779a68dde93658b131b2579db4e8d7d8a07262a899942609f66e6252bc02"
+    },
+    {
       "citationId": "compatibility-cell",
       "sourceDocumentId": "acuerdo-076-2013",
       "physicalPage": 2,
       "textSha256": "449fe07855c9949c9360b58bffb92c0b8784c737766720768b97b7dae9fc4c68"
     }
   ],
-  "nonInference": "The later instrument preserves the microzonation reference but does not supply a complete current calculation model.",
-  "payloadSha256": "4560dd3ac0fbfba2876498655cf1faf9060272453d89922002a1c351f845f2c7"
+  "nonInference": "Official PBOT sources confirm incorporation, five design zones, the transition rule and Am/An terminology; only the exact numerical package remains unavailable.",
+  "payloadSha256": "dd2814df34ca41cb74f0a52186fe34d65aa0f2150504fa6ded66bde53cc68ec1"
 }

@@ -21,6 +21,16 @@
       "sha256": "16d0c00b293a337d49e51132fc88068a26ec6aad74334c84a2c758e8cd45a346",
       "mediaType": "application/pdf",
       "redistributionDecision": "external-only"
+    },
+    {
+      "sourceDocumentId": "carder-pbot-urban-dts-2000",
+      "officialUrl": "https://www.carder.gov.co/?wpdmdl=30680",
+      "retrievedOn": "2026-07-29",
+      "byteLength": 809300,
+      "pageCount": 113,
+      "sha256": "1fe321e2b2daff668b1bb503213458e795ec2e8d9227da3779f5d33517765b43",
+      "mediaType": "application/pdf",
+      "redistributionDecision": "external-only"
     }
   ]
 }

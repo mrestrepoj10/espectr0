@@ -3,13 +3,16 @@
   "studyId": "pereira-microzonation",
   "status": "research-only-activation-blocked",
   "municipality": "Pereira",
-  "regulatoryStatus": "cap-approved-municipal-adoption-and-primary-technical-source-unresolved",
+  "regulatoryStatus": "decreto-932-remains-applicable-primary-numerical-source-unavailable",
   "proposedSpectrumMatrix": {
     "selectableOptions": [],
     "hazards": [],
     "rows": []
   },
   "historicalRecord": {
+    "instrument": "Decreto Municipal 932 de 2011",
+    "applicabilityConfirmedByPot": true,
+    "applicableUntilHarmonizedReplacement": true,
     "decree932PrimaryBytesLocated": false,
     "coefficientsCanonicalized": false,
     "formulasCanonicalized": false
@@ -17,13 +20,15 @@
   "newStudy": {
     "capApprovedOn": "2024-12-13",
     "municipalAdoptionInstrumentLocated": false,
-    "primaryTechnicalReportLocated": false
+    "primaryTechnicalReportLocated": false,
+    "role": "currentness-context-not-blocker-to-historical-applicability"
   },
   "blockers": [
-    "No municipal decree adopting the CAP-approved study was located.",
-    "The primary technical report, exact zones, coefficients, hazards, damping and formulas were not located.",
     "Primary official bytes for Decreto 932 de 2011 and its complete technical annex were not located.",
-    "The 2016 POT preserves Decreto 932 until issuance of the new microzonation.",
+    "The exact historical zones, coefficients, hazards, damping, formulas and branch bounds were not recovered from a primary official source."
+  ],
+  "warnings": [
+    "The 2016 POT preserves Decreto 932 until the municipality harmonizes and adjusts the local microzonation.",
     "Professional geotechnical and current municipal-authority verification is required."
   ],
   "capabilities": {

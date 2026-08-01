@@ -10,6 +10,25 @@
   },
   "attestations": [
     {
+      "id": "attest-crq-decree-079-applicable",
+      "sourceDocumentId": "crq-resolution-075-2006",
+      "sourceSha256": "ecfd8e38b405dc6c87ef39f54c5ca16242917f9fa4eb171482ab8eae6ee3c62e",
+      "physicalPage": 3,
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "text": "cartografía de zonificación o amenaza sísmica, a partir del cual es aplicable el Decreto Municipal No. 079 de Septiembre 29/2000 que reglamenta lo relacionado para la ciudad de Armenia",
+      "sha256": "9ce0b1f4d526358864a07351b9b20dafcd8fc6fd3a21da9ca2396d12652e33f9",
+      "requiredTokens": [
+        "es aplicable",
+        "Decreto Municipal No. 079",
+        "Septiembre 29/2000"
+      ]
+    },
+    {
       "id": "attest-acta-153-harmonization",
       "sourceDocumentId": "armenia-cap-acta-153-2019",
       "sourceSha256": "f60b99efe9061922f0f365d7e2635abddfcf60b6350cd01a7ebe9a72fcec46f6",

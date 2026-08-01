@@ -9,7 +9,7 @@
   },
   "historicalFormulaStatus": {
     "exactFormulaCountVerifiedFromLockedPrimarySources": 0,
-    "issue": "The primary official bytes/technical annex for Decreto 079 and the delivered 2025 study were not available in the official repositories inspected.",
-    "resolution": "Do not copy equations from the reference site or third-party mirrors; obtain the adopted primary technical annex."
+    "issue": "The primary official bytes and complete technical annex for Decreto 079 were not available in the official repositories inspected.",
+    "resolution": "Do not copy equations from the reference site or third-party mirrors; obtain the primary Decreto 079 technical annex."
   }
 }

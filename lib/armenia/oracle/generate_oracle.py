@@ -39,13 +39,13 @@ def build() -> dict:
         if case["case"] == "national-building-workflow":
             expected = "use-nsr10-national"
         elif case["case"] == "legacy-zone-request":
-            expected = "reject-unharmonized-legacy-model"
+            expected = "reject-missing-primary-decreto-079-numerical-annex"
         elif case["case"] == "delivered-2025-study-request":
-            expected = "reject-pending-approval-and-decree"
+            expected = "reject-new-study-is-context-not-installed-model"
         elif case["case"] == "unknown-zone-or-hazard":
-            expected = "reject-no-approved-option-hazard-matrix"
+            expected = "reject-no-source-locked-option-hazard-matrix"
         elif case["case"] == "site-specific-branch-request":
-            expected = "reject-missing-adopted-site-specific-rules"
+            expected = "reject-missing-primary-site-specific-rules"
         else:
             raise AssertionError(f"Unexpected oracle case {case['case']}")
         records.append({"case": case["case"], "input": case["input"], "expected": expected})
@@ -53,7 +53,7 @@ def build() -> dict:
         "schemaVersion": 1,
         "studyId": source["studyId"],
         "status": "negative-oracle-activation-blocked",
-        "arithmetic": "none-no-approved-spectrum",
+        "arithmetic": "none-primary-numerical-annex-unavailable",
         "records": records,
         "blockers": source["blockers"],
     }
