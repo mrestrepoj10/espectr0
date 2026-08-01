@@ -40,12 +40,18 @@ vi.mock("@/components/spectrum-result", async (importOriginal) => {
 		HTMLDivElement,
 		ComponentProps<typeof actual.SharedSpectrumChart>
 	>(function SharedSpectrumChartStub(
-		{ actions, title, transitionMetrics = [] },
+		{ actions, result, title, transitionMetrics = [] },
 		ref,
 	) {
 		return (
 			<div data-slot="shared-spectrum-chart" ref={ref}>
 				<span>{title}</span>
+				<span data-slot="chart-return-period">
+					{actual.formatSpectrumReturnPeriod(result.hazard.returnPeriodYears)}
+				</span>
+				<span data-slot="chart-period-domain">
+					{result.points.at(0)?.tSeconds}–{result.points.at(-1)?.tSeconds}
+				</span>
 				<span data-slot="chart-transition-labels">
 					{transitionMetrics.map(({ label }) => label).join(" · ")}
 				</span>
@@ -486,6 +492,107 @@ describe("unified municipal mode selector", () => {
 			.join(" ")
 			.toLowerCase();
 		expect(interactiveText).not.toMatch(/mapa|gis|coordenad|ubicación automática/);
+	});
+
+	it("activates Medellín only after selecting one of 14 zones and an explicit hazard", async () => {
+		await chooseMode("Medellín");
+		expect(container.textContent).toContain("Parámetros de Medellín");
+		expect(container.textContent).toContain("Selecciona la zona de Medellín");
+		expect(container.textContent).not.toContain("Datos del espectro");
+		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
+
+		const zoneTrigger = document.querySelector<HTMLButtonElement>(
+			"#medellin-zone-trigger",
+		);
+		await act(async () => zoneTrigger?.click());
+		await waitForElement('[role="option"]', "Zona homogénea 1");
+		const zoneOptions = [
+			...document.querySelectorAll<HTMLElement>('[role="option"]'),
+		].filter((option) =>
+			option.textContent?.trim().startsWith("Zona homogénea"),
+		);
+		expect(zoneOptions).toHaveLength(14);
+		await act(async () => {
+			zoneOptions
+				.find((option) => option.textContent?.includes("Zona homogénea 12"))
+				?.click();
+		});
+
+		expect(container.textContent).toContain(
+			"Selecciona la familia de amenaza de Medellín",
+		);
+		expect(container.textContent).not.toContain("Datos del espectro");
+		const hazardTrigger = document.querySelector<HTMLButtonElement>(
+			"#medellin-hazard-trigger",
+		);
+		await act(async () => hazardTrigger?.click());
+		await waitForElement('[role="option"]', "Sismo de diseño");
+		const hazardOptions = [
+			...document.querySelectorAll<HTMLElement>('[role="option"]'),
+		].filter((option) => option.textContent?.includes("Sismo de"));
+		expect(hazardOptions).toHaveLength(2);
+		expect(hazardOptions.map((option) => option.textContent)).toEqual(
+			expect.arrayContaining([
+				expect.stringContaining("Sismo de diseño"),
+				expect.stringContaining(
+					"Sismo de control de daños (también llamado de servicio)",
+				),
+			]),
+		);
+		await act(async () => {
+			hazardOptions
+				.find((option) => option.textContent?.includes("control de daños"))
+				?.click();
+		});
+
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("Datos del espectro"),
+		);
+		expect(container.textContent).toContain("amortiguamiento crítico del 2 %");
+		expect(
+			container.querySelector("[data-slot='chart-return-period']")?.textContent,
+		).toBe("TR no declarado");
+		expect(chartAnnotationText()).toContain("T0");
+		expect(chartAnnotationText()).toContain("Tc");
+		expect(container.textContent).toContain("Exportar");
+		expect(container.textContent).toContain("Soporte técnico oficial DAP · Medellín");
+		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
+
+		await chooseSelectOption("medellin-hazard-trigger", "Sismo de diseño");
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain("amortiguamiento crítico del 5 %");
+		});
+		expect(
+			container.querySelector("[data-slot='chart-return-period']")?.textContent,
+		).toBe("TR no declarado");
+	});
+
+	it("keeps Medellín period limitations localized to lookup and charts only T0 through 4 s", async () => {
+		await chooseMode("Medellín");
+		await chooseSelectOption("medellin-zone-trigger", "Zona homogénea 3");
+		await chooseSelectOption("medellin-hazard-trigger", "Sismo de diseño");
+
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("Datos del espectro"),
+		);
+		expect(
+			container.querySelector("[data-slot='chart-period-domain']")?.textContent,
+		).toBe("0.2–4");
+
+		await setNumberInput("period-lookup-input", "0.1");
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain(
+				"no publica la ecuación de la rama ascendente",
+			);
+		});
+		await setNumberInput("period-lookup-input", "4.1");
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain(
+				"limita el espectro publicado a 4 s",
+			);
+		});
+		expect(container.textContent).toContain("La curva normalizada inicia en T0=0.2 s");
+		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
 	});
 
 	it("activates CCP-14 only after every manual input and applicability check", async () => {

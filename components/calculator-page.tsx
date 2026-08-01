@@ -27,6 +27,7 @@ import {
 	CaliParameterRail,
 	Ccp14ParameterRail,
 	DosquebradasParameterRail,
+	MedellinParameterRail,
 } from "@/components/calculator/municipal-parameter-rail";
 import {
 	defaultMunicipio,
@@ -83,6 +84,11 @@ import {
 import { adaptCcp14Spectrum } from "@/lib/ccp14";
 import { adaptDosquebradasSpectrum } from "@/lib/dosquebradas/adapter";
 import { dosquebradasRows } from "@/lib/dosquebradas/schema";
+import {
+	adaptMedellinSpectrum,
+	medellinHazards,
+	medellinOptions,
+} from "@/lib/medellin";
 import { capabilityUiState } from "@/lib/calculator-shell";
 import {
 	calculationModes,
@@ -151,6 +157,8 @@ const activatedBranchLabels: Readonly<Record<string, string>> = {
 	"inverse-period": "Descendente CCP-14",
 	"dosquebradas-plateau": "Meseta de Dosquebradas",
 	"dosquebradas-inverse": "Descendente de Dosquebradas",
+	"medellin-plateau": "Meseta de Medellín",
+	"medellin-power-decay": "Descendente de Medellín",
 };
 
 const allBranchLabels: Readonly<Record<string, string>> = {
@@ -188,6 +196,12 @@ const metricPresentation = {
 	transition_end: { label: "Tc", digits: 3 },
 	long_period: { label: "TL", digits: 2 },
 	"sa-plateau": { label: "Sa meseta", digits: 3 },
+	plateau_start: { label: "T₀", digits: 3 },
+	decay_start: { label: "Tc", digits: 3 },
+	decay_exponent: { label: "α", digits: 2 },
+	short_amplification: { label: "Fa", digits: 2 },
+	plateau_per_importance: { label: "Samax/I publicado", digits: 3 },
+	smax: { label: "Smax calculado", digits: 3 },
 	faEffective: { label: "Fa efectivo", digits: 3 },
 	fvEffective: { label: "Fv efectivo", digits: 3 },
 } as const;
@@ -631,6 +645,22 @@ const dosquebradasZoneOptions = dosquebradasRows.map(({ optionId }) => ({
 	id: optionId,
 	label: `Zona ${optionId.at(-1)}`,
 }));
+const medellinZoneOptions = medellinOptions.map((option) => ({
+	id: option.id,
+	label: `${option.sourceLabel} — ${option.description}`,
+}));
+const medellinHazardOptions = medellinHazards.map((hazard) => ({
+	id: hazard.id,
+	label: hazard.label,
+}));
+
+function medellinHazardDescription(hazardId: string | null) {
+	const hazard = medellinHazards.find(({ id }) => id === hazardId);
+	if (!hazard) {
+		return "Selecciona explícitamente diseño (5 %) o control de daños/servicio (2 %).";
+	}
+	return `Período de retorno no declarado · amortiguamiento crítico del ${hazard.dampingRatio * 100} % según la familia publicada.`;
+}
 
 function municipalHazardDescription(
 	hazard:
@@ -682,6 +712,9 @@ function activeChartDescription(
 	if (mode === "dosquebradas-microzonation") {
 		return "Curva municipal emitida solo en el intervalo soportado To ≤ T ≤ TL para la zona manual.";
 	}
+	if (mode === "medellin-microzonation") {
+		return "Curva técnica histórica emitida solo en el dominio publicado T0 ≤ T ≤ 4 s para la zona y familia seleccionadas manualmente.";
+	}
 	if (mode === "nsr10-national") return chartDescription(nsrHazardLevel);
 	if (mode === "bogota-microzonation") {
 		return "Curva emitida por el motor distrital para la zona y amenaza seleccionadas manualmente.";
@@ -701,6 +734,12 @@ function transitionMetrics(mode: CalculatorModeId, hazardId: string) {
 			{ id: "to", label: "To" },
 			{ id: "tc", label: "Tc" },
 			{ id: "tl", label: "TL" },
+		];
+	}
+	if (mode === "medellin-microzonation") {
+		return [
+			{ id: "plateau_start", label: "T0" },
+			{ id: "decay_start", label: "Tc" },
 		];
 	}
 	if (mode === "bogota-microzonation") {
@@ -759,6 +798,9 @@ export function CalculatorPage() {
 	const [bogotaRigidBasePeriod, setBogotaRigidBasePeriod] = useState<
 		number | null
 	>(null);
+	const [medellinZoneId, setMedellinZoneId] = useState<string | null>(null);
+	const [medellinHazardId, setMedellinHazardId] = useState<string | null>(null);
+	const [medellinImportanceFactor, setMedellinImportanceFactor] = useState(1);
 	const [caliZoneId, setCaliZoneId] = useState<string | null>(null);
 	const [caliComponentId, setCaliComponentId] = useState<string | null>(null);
 	const [caliHazardId, setCaliHazardId] = useState(caliHazardOptions[0].id);
@@ -857,6 +899,23 @@ export function CalculatorPage() {
 		() => caliComponentOptions(caliZoneId),
 		[caliZoneId],
 	);
+	const medellinResult = useMemo(() => {
+		if (
+			calculationMode !== "medellin-microzonation" ||
+			medellinZoneId === null ||
+			medellinHazardId === null
+		) return null;
+		return adaptMedellinSpectrum({
+			zoneId: medellinZoneId,
+			hazardId: medellinHazardId,
+			importanceFactor: medellinImportanceFactor,
+		});
+	}, [
+		calculationMode,
+		medellinHazardId,
+		medellinImportanceFactor,
+		medellinZoneId,
+	]);
 	const caliOptionId = resolvedCaliOptionId(caliZoneId, caliComponentId);
 	const caliResult = useMemo(
 		() => {
@@ -903,6 +962,8 @@ export function CalculatorPage() {
 				? ccp14Result
 			: calculationMode === "bogota-microzonation"
 				? bogotaResult
+				: calculationMode === "medellin-microzonation"
+					? medellinResult
 				: calculationMode === "cali-microzonation"
 					? caliResult
 					: calculationMode === "dosquebradas-microzonation"
@@ -1008,6 +1069,18 @@ export function CalculatorPage() {
 				zoneId={bogotaZoneId}
 				zoneOptions={bogotaZoneOptions}
 			/>
+		) : calculationMode === "medellin-microzonation" ? (
+			<MedellinParameterRail
+				hazardDescription={medellinHazardDescription(medellinHazardId)}
+				hazardId={medellinHazardId}
+				hazardOptions={medellinHazardOptions}
+				importanceFactor={medellinImportanceFactor}
+				onHazardChange={setMedellinHazardId}
+				onImportanceFactorChange={setMedellinImportanceFactor}
+				onZoneChange={setMedellinZoneId}
+				zoneId={medellinZoneId}
+				zoneOptions={medellinZoneOptions}
+			/>
 		) : calculationMode === "cali-microzonation" ? (
 			<CaliParameterRail
 				colluvialDeposit={caliColluvialDeposit}
@@ -1047,6 +1120,7 @@ export function CalculatorPage() {
 	const maximumMetric = result?.status === "ok"
 		? result.metrics.find((metric) => metric.id === "saMax")?.value ??
 			result.metrics.find((metric) => metric.id === "sa-plateau")?.value ??
+			result.metrics.find((metric) => metric.id === "smax")?.value ??
 			Math.max(...result.points.map(({ saG }) => saG))
 		: 0;
 	const manualSelectionNotice =
@@ -1065,6 +1139,18 @@ export function CalculatorPage() {
 			<ManualSelectionNotice
 				description="Elige una zona de respuesta de la publicación oficial."
 				title="Selecciona la zona de Bogotá"
+			/>
+		) : calculationMode === "medellin-microzonation" &&
+			medellinZoneId === null ? (
+			<ManualSelectionNotice
+				description="Elige manualmente una de las 14 zonas homogéneas publicadas."
+				title="Selecciona la zona de Medellín"
+			/>
+		) : calculationMode === "medellin-microzonation" &&
+			medellinHazardId === null ? (
+			<ManualSelectionNotice
+				description="Elige explícitamente la familia de diseño (5 %) o control de daños/servicio (2 %)."
+				title="Selecciona la familia de amenaza de Medellín"
 			/>
 		) : calculationMode === "cali-microzonation" && caliZoneId === null ? (
 			<ManualSelectionNotice

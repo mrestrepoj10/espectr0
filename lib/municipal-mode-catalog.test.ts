@@ -32,12 +32,14 @@ describe("municipal calculator mode catalog", () => {
     expect(isSourceBlockedMode("nsr10-national")).toBe(false)
 	expect(isSourceBlockedMode("ccp14")).toBe(false)
 	expect(isSourceBlockedMode("bogota-microzonation")).toBe(false)
+	expect(isSourceBlockedMode("medellin-microzonation")).toBe(false)
 	expect(isSourceBlockedMode("cali-microzonation")).toBe(false)
 	expect(isSourceBlockedMode("dosquebradas-microzonation")).toBe(false)
   })
 
   it("keeps active municipal engines out of the source-blocked record", () => {
     expect(Object.keys(sourceBlockedModes)).not.toContain("bogota-microzonation")
+    expect(Object.keys(sourceBlockedModes)).not.toContain("medellin-microzonation")
     expect(Object.keys(sourceBlockedModes)).not.toContain("cali-microzonation")
 	expect(Object.keys(sourceBlockedModes)).not.toContain("ccp14")
 	expect(Object.keys(sourceBlockedModes)).not.toContain("dosquebradas-microzonation")
@@ -45,5 +47,7 @@ describe("municipal calculator mode catalog", () => {
       .toContain("Cálculo manual")
     expect(calculationModes.find(({ id }) => id === "cali-microzonation")?.description)
       .toContain("Cálculo manual")
+    expect(calculationModes.find(({ id }) => id === "medellin-microzonation")?.description)
+      .toContain("14 zonas")
   })
 })
