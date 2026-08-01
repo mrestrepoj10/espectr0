@@ -598,6 +598,15 @@ describe("unified municipal mode selector", () => {
 	it("activates CCP-14 only after every manual input and applicability check", async () => {
 		await chooseMode("CCP-14 · Puentes");
 		expect(container.textContent).toContain("Parámetros CCP-14");
+		const officialPublicationLink = container.querySelector<HTMLAnchorElement>(
+			'a[href*="idFile=29584"]',
+		);
+		expect(officialPublicationLink?.textContent).toContain(
+			"Descargar publicación oficial CCP-14 de INVÍAS",
+		);
+		expect(officialPublicationLink?.href).toBe(
+			"https://www.invias.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=29584",
+		);
 		expect(container.textContent).toContain("Interpretación de T₀");
 		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
 		expect(container.textContent).toContain("Completa los datos manuales de CCP-14");

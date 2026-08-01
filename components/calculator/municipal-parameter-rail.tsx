@@ -484,11 +484,11 @@ export function Ccp14ParameterRail({
         <Separator />
         <a
           className="text-muted-foreground text-xs underline underline-offset-4"
-          href="https://www.invias.gov.co/index.php/archivo-y-documentos/documentos-tecnicos/3709-norma-colombiana-de-diseno-de-puentes-ccp-14"
+          href="https://www.invias.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=29584"
           rel="noreferrer"
           target="_blank"
         >
-          Publicación oficial CCP-14 de INVÍAS
+          Descargar publicación oficial CCP-14 de INVÍAS
         </a>
       </CardFooter>
     </Card>
