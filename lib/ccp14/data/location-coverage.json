@@ -1,13 +1,10 @@
 {
-  "activationStatus": "blocked",
+  "activationStatus": "active-reviewed-map-transcription",
   "exactOfficialSelectableLocationCount": null,
+  "mapLabeledCapitalCount": 32,
   "generalProcedure": {
-    "baseValues": [
-      "PGA",
-      "Ss",
-      "S1"
-    ],
-    "method": "read the three national contour maps or contracting-entity-approved special values/maps and linearly interpolate between contours or local extrema",
+    "baseValues": ["PGA", "Ss", "S1"],
+    "method": "read Figures 3.10.2.1-1 through 3.10.2.1-3 and linearly interpolate between contours or local extrema",
     "source": "CCP-14 3.10.2.1"
   },
   "officialArchiveFinding": {
@@ -16,7 +13,13 @@
     "machineReadableLocationDatasetPresent": false,
     "municipalityOrLocalityTablePresent": false
   },
-  "reason": "The current INVÍAS CCP-14 asset (portal file ID 29584) contains the three official maps but no finite locality registry or exact locality-to-PGA/Ss/S1 table. Commentary C3.10.2.1 says values would be available on a CD and web tools, but the current 16-file publication contains PDFs only. A reference-site count, map digitization, coordinates, GIS inference, or a secondary table cannot be substituted for the missing official selectable dataset.",
-  "requiredResolution": "Obtain and hash-lock an official INVÍAS CCP-14 CD/web dataset or locality table, or define a separately reviewed expert-input workflow that accepts professionally determined PGA/Ss/S1 without claiming automatic location selection.",
-  "verifiedSelectableLocations": []
+  "implementedCoverage": {
+    "scope": "the 32 departmental capitals labeled on the three official national hazard maps",
+    "lookup": "reviewed transcription at each labeled capital marker",
+    "implementation": "lib/ccp14/cities.ts",
+    "notSupported": "arbitrary coordinates, addresses, municipalities not included in the reviewed capital list, and project-specific special maps"
+  },
+  "reason": "The official PDF maps are the normative source even though the archive has no machine-readable locality table. This implementation exposes only the finite set of 32 labeled departmental capitals whose PGA, Ss and S1 values were transcribed and reviewed from all three figures; it makes no GIS or arbitrary-location claim.",
+  "requiredResolutionForAdditionalLocations": "Add a separately reviewed map transcription or an approved project-specific value source with provenance before exposing another location.",
+  "verifiedSelectableLocations": 32
 }

@@ -107,6 +107,7 @@ import {
 
 import type { CalculatorModeId } from "@/lib/municipal-mode-catalog";
 import type {
+	Ccp14CityId,
 	Ccp14SoilClass,
 	Ccp14T0Interpretation,
 } from "@/lib/ccp14";
@@ -707,7 +708,7 @@ function activeChartDescription(
 	nsrHazardLevel: HazardLevel,
 ) {
 	if (mode === "ccp14") {
-		return "Curva CCP-14 emitida con los valores y comprobaciones declarados manualmente para el proyecto.";
+		return "Curva CCP-14 con PGA, Ss y S1 obtenidos de los mapas oficiales para la ciudad seleccionada.";
 	}
 	if (mode === "dosquebradas-microzonation") {
 		return "Curva municipal emitida solo en el intervalo soportado To ≤ T ≤ TL para la zona manual.";
@@ -770,9 +771,7 @@ function transitionMetrics(mode: CalculatorModeId, hazardId: string) {
 export function CalculatorPage() {
 	const [calculationMode, setCalculationMode] =
 		useState<CalculatorModeId>("nsr10-national");
-	const [ccp14PgaG, setCcp14PgaG] = useState<number | null>(null);
-	const [ccp14SsG, setCcp14SsG] = useState<number | null>(null);
-	const [ccp14S1G, setCcp14S1G] = useState<number | null>(null);
+	const [ccp14CityId, setCcp14CityId] = useState<Ccp14CityId | null>(null);
 	const [ccp14SoilClass, setCcp14SoilClass] =
 		useState<Ccp14SoilClass | null>(null);
 	const [ccp14T0Interpretation, setCcp14T0Interpretation] =
@@ -842,9 +841,7 @@ export function CalculatorPage() {
 	const ccp14Result = useMemo(() => {
 		if (
 			calculationMode !== "ccp14" ||
-			ccp14PgaG === null ||
-			ccp14SsG === null ||
-			ccp14S1G === null ||
+			ccp14CityId === null ||
 			ccp14SoilClass === null ||
 			ccp14T0Interpretation === null ||
 			ccp14FaultDistance === null ||
@@ -852,9 +849,7 @@ export function CalculatorPage() {
 			ccp14EnhancedHazard === null
 		) return null;
 		return adaptCcp14Spectrum({
-			pgaG: ccp14PgaG,
-			ssG: ccp14SsG,
-			s1G: ccp14S1G,
+			cityId: ccp14CityId,
 			soilClass: ccp14SoilClass,
 			t0Interpretation: ccp14T0Interpretation,
 			distanceToActiveFaultKm: ccp14FaultDistance,
@@ -863,13 +858,11 @@ export function CalculatorPage() {
 		});
 	}, [
 		calculationMode,
+		ccp14CityId,
 		ccp14EnhancedHazard,
 		ccp14FaultDistance,
 		ccp14LongDuration,
-		ccp14PgaG,
-		ccp14S1G,
 		ccp14SoilClass,
-		ccp14SsG,
 		ccp14T0Interpretation,
 	]);
 	const bogotaResult = useMemo(
@@ -1028,25 +1021,21 @@ export function CalculatorPage() {
 			/>
 		) : calculationMode === "ccp14" ? (
 			<Ccp14ParameterRail
+				cityId={ccp14CityId}
 				distanceToActiveFaultKm={ccp14FaultDistance}
 				enhancedHazardRequiredByImportance={ccp14EnhancedHazard}
 				longDurationEarthquakesExpected={ccp14LongDuration}
 				onDistanceToActiveFaultChange={setCcp14FaultDistance}
 				onEnhancedHazardChange={setCcp14EnhancedHazard}
 				onLongDurationChange={setCcp14LongDuration}
-				onPgaChange={setCcp14PgaG}
-				onS1Change={setCcp14S1G}
+				onCityChange={(value) => setCcp14CityId(value as Ccp14CityId)}
 				onSoilClassChange={(value) =>
 					setCcp14SoilClass(value as Ccp14SoilClass)
 				}
-				onSsChange={setCcp14SsG}
 				onT0InterpretationChange={(value) =>
 					setCcp14T0Interpretation(value as Ccp14T0Interpretation)
 				}
-				pgaG={ccp14PgaG}
-				s1G={ccp14S1G}
 				soilClass={ccp14SoilClass}
-				ssG={ccp14SsG}
 				t0Interpretation={ccp14T0Interpretation}
 			/>
 		) : calculationMode === "bogota-microzonation" ? (
@@ -1126,8 +1115,8 @@ export function CalculatorPage() {
 	const manualSelectionNotice =
 		calculationMode === "ccp14" && ccp14Result === null ? (
 			<ManualSelectionNotice
-				description="Declara PGA, Ss, S1, suelo, interpretación de T₀ y las tres comprobaciones de aplicabilidad."
-				title="Completa los datos manuales de CCP-14"
+				description="Selecciona ciudad, suelo, interpretación de T₀ y completa las tres comprobaciones de aplicabilidad."
+				title="Completa los parámetros de CCP-14"
 			/>
 		) : calculationMode === "dosquebradas-microzonation" &&
 			dosquebradasZoneId === null ? (
@@ -1175,8 +1164,8 @@ export function CalculatorPage() {
 				/>
 			) : null}
 			<p className="text-muted-foreground text-sm">
-				Calculadora unificada con selección manual y trazabilidad de fuente;
-				 no usa mapas, coordenadas, GIS ni envía datos.
+				Calculadora unificada con selección trazable de fuente; no usa
+				 coordenadas ni GIS y no envía datos.
 			</p>
 
 			<CalculatorShell

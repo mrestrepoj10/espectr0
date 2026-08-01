@@ -1,12 +1,12 @@
 {
   "algorithm": "sha256",
   "artifacts": [
-    { "bytes": 1360, "path": "lib/ccp14/data/location-coverage.json", "sha256": "93d4c4e80ad87b8c8b021efee0326b756cde5629e1def63f970255732127ddaa" },
+    { "bytes": 1544, "path": "lib/ccp14/data/location-coverage.json", "sha256": "b3f79952aaffeb6d3324c852e28fbfa46122e6cfd7efd8726fafd00fedfd01a9" },
     { "bytes": 1442, "path": "lib/ccp14/data/r-factors.json", "sha256": "c5e87739c083140071c74f522b0950ab794c885d26327051ce6b2913772c55ec" },
     { "bytes": 2658, "path": "lib/ccp14/data/site-factors.json", "sha256": "760718f6c32d628b8054a55963bbe175b930f04847d2aeb9607ccff75046e476" },
     { "bytes": 968, "path": "lib/ccp14/data/soil-classes.json", "sha256": "532aa2b836725a554c8174618d2098532d90c7b38fe575ce6641ba38f0b0f38e" },
-    { "bytes": 1105, "path": "lib/ccp14/oracle/expected-results.json", "sha256": "fd5125aa784735f4fae4d4b3887623499ccf3f5c722d817cd12507eee6b6e5c3" },
-    { "bytes": 1730, "path": "lib/ccp14/oracle/inputs.json", "sha256": "c7233dac9114fb1feb07dddf0864a7f111c9990bd3d09858499b50119d680ce6" },
+    { "bytes": 1202, "path": "lib/ccp14/oracle/expected-results.json", "sha256": "b0bc60b69e51704f4e27ecacd878694fc32a49f9a261258cf79a0ee0f413910d" },
+    { "bytes": 1731, "path": "lib/ccp14/oracle/inputs.json", "sha256": "52df028e6b7a4a2f6a594ef405863c1618d8fc94eaea929337312d00cbfb860a" },
     { "bytes": 8688, "path": "lib/ccp14/research/claims-matrix.json", "sha256": "21b6a02b7d92a4d432f55dbf8b7a94a64565d026fe9957e27c8e7e56fa5047af" },
     { "bytes": 2749, "path": "lib/ccp14/research/invias-portal-audit.json", "sha256": "5eda7523836fa6d0c0b693b2862bdf1ea1c9436e1e2c26c1f4b81d21e56c98bb" },
     { "bytes": 3671, "path": "lib/ccp14/research/formula-inventory.json", "sha256": "4a02a3b8bbef56c28918c52f961a871be4e899412025e67bd248e821b62044b9" }

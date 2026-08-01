@@ -1,4 +1,10 @@
 export {
+  ccp14Cities,
+  ccp14CityIds,
+  ccp14CityIdSchema,
+  resolveCcp14City,
+} from "./cities"
+export {
   CCP14_ENGINE_ID,
   CCP14_ENGINE_VERSION,
   CCP14_HAZARD_ID,
@@ -23,6 +29,10 @@ export {
   lookupCcp14SubstructureR,
 } from "./r-factors"
 
+export type {
+  Ccp14CityHazard,
+  Ccp14CityId,
+} from "./cities"
 export type {
   Ccp14BranchId,
   Ccp14ComputationInput,

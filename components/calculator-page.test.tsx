@@ -595,7 +595,7 @@ describe("unified municipal mode selector", () => {
 		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
 	});
 
-	it("activates CCP-14 only after every manual input and applicability check", async () => {
+	it("resolves CCP-14 hazard values from the selected city", async () => {
 		await chooseMode("CCP-14 · Puentes");
 		expect(container.textContent).toContain("Parámetros CCP-14");
 		const officialPublicationLink = container.querySelector<HTMLAnchorElement>(
@@ -609,13 +609,15 @@ describe("unified municipal mode selector", () => {
 		);
 		expect(container.textContent).toContain("Interpretación de T₀");
 		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
-		expect(container.textContent).toContain("Completa los datos manuales de CCP-14");
+		expect(container.textContent).toContain("Completa los parámetros de CCP-14");
 		expect(container.textContent).not.toContain("Datos del espectro");
-		expect(container.querySelector("#ccp14-city-trigger")).toBeNull();
+		expect(container.querySelector("#ccp14-city-trigger")).not.toBeNull();
+		expect(container.querySelector("#ccp14-pga")).toBeNull();
+		expect(container.querySelector("#ccp14-ss")).toBeNull();
+		expect(container.querySelector("#ccp14-s1")).toBeNull();
 
-		await setNumberInput("ccp14-pga", "0.25");
-		await setNumberInput("ccp14-ss", "0.5");
-		await setNumberInput("ccp14-s1", "0.2");
+		await chooseSelectOption("ccp14-city-trigger", "Arauca");
+		expect(container.textContent).toContain("PGA = 0.20 g · Ss = 0.40 g · S1 = 0.20 g");
 		await chooseSelectOption("ccp14-soil-trigger", "Suelo D");
 		await chooseSelectOption("ccp14-t0-trigger", "Figura: T₀ = 0,2·Ts");
 		await setNumberInput("ccp14-fault-distance", "12");
@@ -623,7 +625,7 @@ describe("unified municipal mode selector", () => {
 		await chooseSelectOption("ccp14-enhanced-hazard-trigger", "No se requiere");
 
 		await vi.waitFor(() => expect(container.textContent).toContain("Datos del espectro"));
-		expect(container.textContent).toContain("PGA, Ss and S1 are manual engineering inputs");
+		expect(container.textContent).not.toContain("manual engineering inputs");
 		expect(chartAnnotationText()).toContain("T0");
 		expect(chartAnnotationText()).toContain("Ts");
 		expect(container.textContent).toContain("Exportar");
@@ -631,9 +633,7 @@ describe("unified municipal mode selector", () => {
 
 	it("keeps CCP-14 site-specific triggers localized to the entered scenario", async () => {
 		await chooseMode("CCP-14 · Puentes");
-		await setNumberInput("ccp14-pga", "0.25");
-		await setNumberInput("ccp14-ss", "0.5");
-		await setNumberInput("ccp14-s1", "0.2");
+		await chooseSelectOption("ccp14-city-trigger", "Arauca");
 		await chooseSelectOption("ccp14-soil-trigger", "Suelo F");
 		await chooseSelectOption("ccp14-t0-trigger", "Figura: T₀ = 0,2·Ts");
 		await setNumberInput("ccp14-fault-distance", "12");

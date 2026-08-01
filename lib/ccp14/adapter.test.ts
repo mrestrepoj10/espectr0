@@ -3,9 +3,7 @@ import { describe, expect, it } from "vitest"
 import { adaptCcp14Spectrum } from "./adapter"
 
 const input = {
-  pgaG: 0.3,
-  ssG: 0.75,
-  s1G: 0.3,
+  cityId: "cali",
   soilClass: "D",
   t0Interpretation: "figure-0.2-ts",
   distanceToActiveFaultKm: 10,
@@ -29,18 +27,18 @@ describe("CCP-14 normalized adapter", () => {
       "invias-ccp14-section-3",
     ])
     expect(result.warnings.map(({ code }) => code)).toEqual([
-      "ccp14-manual-hazard-inputs",
       "ccp14-t0-official-conflict",
     ])
-    expect(result.warnings[1].citationIds).toEqual([
+    expect(result.warnings[0].citationIds).toEqual([
       "conflict-t0-figure",
       "conflict-t0-definition",
     ])
     expect(result.trace.data.steps).toEqual(expect.arrayContaining([
       expect.objectContaining({
         id: "ccp14-input-pga",
-        classification: "user-input",
+        classification: "derived",
         value: 0.3,
+        dependencies: ["ccp14-input-city"],
       }),
       expect.objectContaining({
         id: "ccp14-factor-fpga",
@@ -102,17 +100,4 @@ describe("CCP-14 normalized adapter", () => {
     })
   })
 
-  it("preserves a localized unsupported outcome for an impossible branch ordering", () => {
-    const result = adaptCcp14Spectrum({
-      ...input,
-      s1G: 0.01,
-      t0Interpretation: "definition-0.2-seconds",
-    })
-    expect(result).toMatchObject({
-      status: "unsupported",
-      applicability: { reasonCode: "ccp14-t0-order-conflict" },
-      hazard: { id: "ccp14-2014-7pct-75y" },
-    })
-    expect(result.saAt(0.1)).toMatchObject({ status: "unsupported" })
-  })
 })

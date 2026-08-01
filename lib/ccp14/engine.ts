@@ -1,6 +1,9 @@
 import { z } from "zod"
 
 import siteFactors from "./data/site-factors.json"
+import { ccp14CityIdSchema, resolveCcp14City } from "./cities"
+
+import type { Ccp14CityHazard } from "./cities"
 
 export const ccp14SoilClassSchema = z.enum(["A", "B", "C", "D", "E", "F"])
 export const ccp14T0InterpretationSchema = z.enum([
@@ -10,9 +13,7 @@ export const ccp14T0InterpretationSchema = z.enum([
 
 export const ccp14ComputationInputSchema = z
   .object({
-    pgaG: z.number().finite().positive(),
-    ssG: z.number().finite().positive(),
-    s1G: z.number().finite().positive(),
+    cityId: ccp14CityIdSchema,
     soilClass: ccp14SoilClassSchema,
     t0Interpretation: ccp14T0InterpretationSchema,
     distanceToActiveFaultKm: z.number().finite().nonnegative().nullable(),
@@ -48,6 +49,7 @@ export type Ccp14EnginePoint = {
 export type Ccp14EngineSuccess = {
   status: "ok"
   input: Ccp14ComputationInput
+  city: Ccp14CityHazard
   factors: Record<Ccp14FactorId, Ccp14FactorLookup>
   as: number
   sds: number
@@ -222,14 +224,15 @@ export function computeCcp14Spectrum(input: unknown): Ccp14EngineResult {
   const siteSpecific = siteSpecificReason(parsed.data)
   if (siteSpecific) return siteSpecific
   const soilClass = parsed.data.soilClass as Exclude<Ccp14SoilClass, "F">
+  const city = resolveCcp14City(parsed.data.cityId)
   const factors = {
-    Fpga: lookupCcp14SiteFactor("Fpga", soilClass, parsed.data.pgaG),
-    Fa: lookupCcp14SiteFactor("Fa", soilClass, parsed.data.ssG),
-    Fv: lookupCcp14SiteFactor("Fv", soilClass, parsed.data.s1G),
+    Fpga: lookupCcp14SiteFactor("Fpga", soilClass, city.pgaG),
+    Fa: lookupCcp14SiteFactor("Fa", soilClass, city.ssG),
+    Fv: lookupCcp14SiteFactor("Fv", soilClass, city.s1G),
   }
-  const as = factors.Fpga.value * parsed.data.pgaG
-  const sds = factors.Fa.value * parsed.data.ssG
-  const sd1 = factors.Fv.value * parsed.data.s1G
+  const as = factors.Fpga.value * city.pgaG
+  const sds = factors.Fa.value * city.ssG
+  const sd1 = factors.Fv.value * city.s1G
   const ts = sd1 / sds
   const t0 = parsed.data.t0Interpretation === "figure-0.2-ts" ? 0.2 * ts : 0.2
   if (t0 > ts) {
@@ -259,6 +262,7 @@ export function computeCcp14Spectrum(input: unknown): Ccp14EngineResult {
   return {
     status: "ok",
     input: parsed.data,
+    city,
     factors,
     as,
     sds,

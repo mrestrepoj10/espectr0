@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
+import { ccp14Cities } from "@/lib/ccp14/cities"
 
 type SelectOption = {
   id: string
@@ -349,40 +350,33 @@ export function CaliParameterRail({
 }
 
 export function Ccp14ParameterRail({
+  cityId,
   distanceToActiveFaultKm,
   enhancedHazardRequiredByImportance,
   longDurationEarthquakesExpected,
   onDistanceToActiveFaultChange,
   onEnhancedHazardChange,
   onLongDurationChange,
-  onPgaChange,
-  onS1Change,
+  onCityChange,
   onSoilClassChange,
-  onSsChange,
   onT0InterpretationChange,
-  pgaG,
-  s1G,
   soilClass,
-  ssG,
   t0Interpretation,
 }: {
+  cityId: string | null
   distanceToActiveFaultKm: number | null
   enhancedHazardRequiredByImportance: boolean | null
   longDurationEarthquakesExpected: boolean | null
   onDistanceToActiveFaultChange: (value: number | null) => void
   onEnhancedHazardChange: (value: boolean) => void
   onLongDurationChange: (value: boolean) => void
-  onPgaChange: (value: number | null) => void
-  onS1Change: (value: number | null) => void
+  onCityChange: (value: string) => void
   onSoilClassChange: (value: string) => void
-  onSsChange: (value: number | null) => void
   onT0InterpretationChange: (value: string) => void
-  pgaG: number | null
-  s1G: number | null
   soilClass: string | null
-  ssG: number | null
   t0Interpretation: string | null
 }) {
+  const selectedCity = ccp14Cities.find(({ id }) => id === cityId)
   const durationOptions = [
     { id: "no", label: "No se esperan" },
     { id: "yes", label: "Si se esperan" },
@@ -397,35 +391,27 @@ export function Ccp14ParameterRail({
       <CardHeader>
         <CardTitle>Parámetros CCP-14</CardTitle>
         <CardDescription>
-          Valores del proyecto declarados manualmente; no se asignan por ciudad.
+          PGA, Ss y S1 se asignan desde los mapas oficiales para la ciudad seleccionada.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <FieldGroup className="gap-5">
-          <NumericInput
-            description="Aceleración pico efectiva obtenida de la base oficial del proyecto."
-            id="ccp14-pga"
-            label="PGA (g)"
-            nullable
-            onValueChange={onPgaChange}
-            value={pgaG}
+          <MunicipalSelect
+            description="Capital identificada en las Figuras 3.10.2.1-1 a 3.10.2.1-3."
+            id="ccp14-city-trigger"
+            label="Ciudad"
+            onValueChange={onCityChange}
+            options={ccp14Cities}
+            value={cityId}
           />
-          <NumericInput
-            description="Aceleración espectral para periodo corto declarada para el proyecto."
-            id="ccp14-ss"
-            label="Ss (g)"
-            nullable
-            onValueChange={onSsChange}
-            value={ssG}
-          />
-          <NumericInput
-            description="Aceleración espectral para un segundo declarada para el proyecto."
-            id="ccp14-s1"
-            label="S1 (g)"
-            nullable
-            onValueChange={onS1Change}
-            value={s1G}
-          />
+          {selectedCity ? (
+            <Alert>
+              <AlertTitle>Valores obtenidos de los mapas</AlertTitle>
+              <AlertDescription>
+                PGA = {selectedCity.pgaG.toFixed(2)} g · Ss = {selectedCity.ssG.toFixed(2)} g · S1 = {selectedCity.s1G.toFixed(2)} g
+              </AlertDescription>
+            </Alert>
+          ) : null}
           <MunicipalSelect
             description="Clase de sitio confirmada por la información geotécnica del proyecto."
             id="ccp14-soil-trigger"
@@ -471,11 +457,12 @@ export function Ccp14ParameterRail({
           />
           <Alert>
             <ShieldAlertIcon />
-            <AlertTitle>Entradas manuales y conflicto T₀</AlertTitle>
+            <AlertTitle>Valores cartográficos y conflicto T₀</AlertTitle>
             <AlertDescription>
-              Verifica PGA, Ss y S1 en los documentos oficiales del proyecto. La
-              selección de T₀ registra una interpretación; no resuelve la
-              contradicción de la publicación de INVÍAS.
+              PGA, Ss y S1 provienen de las Figuras 3.10.2.1-1, -2 y -3. Las
+              Tablas 3.10.3.2-1, -2 y -3 suministran Fpga, Fa y Fv según el
+              suelo. La selección de T₀ documenta una interpretación sin
+              resolver la contradicción de la publicación de INVÍAS.
             </AlertDescription>
           </Alert>
         </FieldGroup>

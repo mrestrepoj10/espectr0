@@ -97,13 +97,6 @@ const citationByBranch: Record<Ccp14BranchId, string[]> = {
 const commonWarnings: SpectrumWarning[] = [
   {
     severity: "warning",
-    code: "ccp14-manual-hazard-inputs",
-    message:
-      "PGA, Ss and S1 are manual engineering inputs. They must come from the project's official maps, contracting-entity-approved values, or site-specific CCP-14 basis; this calculator does not assign them by city.",
-    citationIds: ["claim-map-inputs", "claim-exact-locality-count"],
-  },
-  {
-    severity: "warning",
     code: "ccp14-t0-official-conflict",
     message:
       "The official INVÍAS publication is internally inconsistent: Figure 3.10.4.1-1 states T0 = 0.2 Ts, while the definition below the equations states T0 = 0.2 s. This result uses the explicitly selected interpretation and does not present it as an official resolution of the conflict.",
@@ -120,9 +113,7 @@ function normalizedInputs(input: unknown): NormalizedInputs {
       : null
   }
   return {
-    pgaG: scalar("pgaG"),
-    ssG: scalar("ssG"),
-    s1G: scalar("s1G"),
+    cityId: scalar("cityId"),
     soilClass: scalar("soilClass"),
     t0Interpretation: scalar("t0Interpretation"),
     distanceToActiveFaultKm: scalar("distanceToActiveFaultKm"),
@@ -218,12 +209,13 @@ function normalizedPoint(engine: Ccp14EngineSuccess, tSeconds: number): Normaliz
 function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
   const { input } = engine
   const directSteps = [
-    { id: "ccp14-input-pga", label: "PGA", value: input.pgaG, unit: "g", citationIds: ["claim-map-inputs"] },
-    { id: "ccp14-input-ss", label: "Ss", value: input.ssG, unit: "g", citationIds: ["claim-map-inputs"] },
-    { id: "ccp14-input-s1", label: "S1", value: input.s1G, unit: "g", citationIds: ["claim-map-inputs"] },
-    { id: "ccp14-input-soil-class", label: "Soil class", value: input.soilClass, unit: "class", citationIds: ["claim-soils"] },
-    { id: "ccp14-input-t0-interpretation", label: "T0 interpretation", value: input.t0Interpretation, unit: "choice", citationIds: ["conflict-t0-figure", "conflict-t0-definition"] },
-  ].map((step) => ({ ...step, classification: "user-input", dependencies: [] }))
+    { id: "ccp14-input-city", label: "City", value: engine.city.label, unit: "location", citationIds: ["claim-map-inputs"], classification: "user-input", dependencies: [] },
+    { id: "ccp14-input-pga", label: "PGA", value: engine.city.pgaG, unit: "g", citationIds: [engine.city.citationIds[0]], classification: "derived", dependencies: ["ccp14-input-city"] },
+    { id: "ccp14-input-ss", label: "Ss", value: engine.city.ssG, unit: "g", citationIds: [engine.city.citationIds[1]], classification: "derived", dependencies: ["ccp14-input-city"] },
+    { id: "ccp14-input-s1", label: "S1", value: engine.city.s1G, unit: "g", citationIds: [engine.city.citationIds[2]], classification: "derived", dependencies: ["ccp14-input-city"] },
+    { id: "ccp14-input-soil-class", label: "Soil class", value: input.soilClass, unit: "class", citationIds: ["claim-soils"], classification: "user-input", dependencies: [] },
+    { id: "ccp14-input-t0-interpretation", label: "T0 interpretation", value: input.t0Interpretation, unit: "choice", citationIds: ["conflict-t0-figure", "conflict-t0-definition"], classification: "user-input", dependencies: [] },
+  ]
   const factorSteps = (["Fpga", "Fa", "Fv"] as const).map((id) => factorStep(engine, id))
   const derivedSteps = [
     {
@@ -234,7 +226,7 @@ function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
       dependencies: ["ccp14-factor-fpga", "ccp14-input-pga"],
       citationIds: ["claim-as"],
       expression: "As = Fpga × PGA",
-      substitution: `${engine.factors.Fpga.value} × ${input.pgaG} = ${engine.as}`,
+      substitution: `${engine.factors.Fpga.value} × ${engine.city.pgaG} = ${engine.as}`,
     },
     {
       id: "ccp14-sds",
@@ -244,7 +236,7 @@ function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
       dependencies: ["ccp14-factor-fa", "ccp14-input-ss"],
       citationIds: ["claim-sds"],
       expression: "SDS = Fa × Ss",
-      substitution: `${engine.factors.Fa.value} × ${input.ssG} = ${engine.sds}`,
+      substitution: `${engine.factors.Fa.value} × ${engine.city.ssG} = ${engine.sds}`,
     },
     {
       id: "ccp14-sd1",
@@ -254,7 +246,7 @@ function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
       dependencies: ["ccp14-factor-fv", "ccp14-input-s1"],
       citationIds: ["claim-sd1"],
       expression: "SD1 = Fv × S1",
-      substitution: `${engine.factors.Fv.value} × ${input.s1G} = ${engine.sd1}`,
+      substitution: `${engine.factors.Fv.value} × ${engine.city.s1G} = ${engine.sd1}`,
     },
     {
       id: "ccp14-ts",
@@ -358,7 +350,12 @@ function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
     study: { id: CCP14_STUDY_ID, version: CCP14_STUDY_VERSION },
     scenarioEvidenceKey: evidenceKey(input.soilClass, hazard.id),
     scenarioType: "ccp14",
-    normalizedInputs: input,
+    normalizedInputs: {
+      ...input,
+      pgaG: engine.city.pgaG,
+      ssG: engine.city.ssG,
+      s1G: engine.city.s1G,
+    },
     points,
     metrics,
     formulaIds: steps.map(({ id }) => id),
