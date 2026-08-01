@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "status": "blocked-pending-municipal-adoption-and-primary-technical-source",
+  "status": "decreto-932-applicable-primary-numerical-source-unavailable",
   "cases": [
     { "id": "legacy-d932-spectrum", "reason": "primary official decree and complete technical annex unavailable" },
-    { "id": "cap-approved-study-spectrum", "reason": "CAP approval is not municipal adoption and primary technical matrix is unavailable" },
+    { "id": "cap-approved-study-spectrum", "reason": "later-study approval is context; its primary technical matrix is unavailable" },
     { "id": "neighboring-municipality-values", "reason": "municipal legal and technical lineages differ" },
-    { "id": "automatic-zone", "reason": "GIS automation is excluded and no adopted zones are installed" }
+    { "id": "automatic-zone", "reason": "GIS automation is excluded and no source-locked numerical zone matrix is installed" }
   ]
 }

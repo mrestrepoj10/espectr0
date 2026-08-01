@@ -3,28 +3,51 @@
   "studyId": "santa-rosa-de-cabal-microzonation",
   "status": "research-only-activation-blocked",
   "municipality": "Santa Rosa de Cabal",
-  "regulatoryStatus": "legacy-microzonation-preserved-but-complete-current-calculation-model-unavailable",
+  "regulatoryStatus": "historical-microzonation-incorporated-primary-numerical-tables-unavailable",
   "proposedSpectrumMatrix": {
     "selectableOptions": [],
     "hazards": [],
     "rows": []
   },
-  "documentedZoneLabels": [
-    "Zona 1 — La Hermosa",
-    "Zona 2 — Centro Estadio",
-    "Zona 3 — Guacas / occidental Q. San Roque / Monserrate",
-    "Zona 3A — Guacas y Jazmín-El Lembo",
-    "Zona 3B — áreas montañosas este y occidental",
-    "Zona 4 — río San Eugenio y quebrada San Roque",
-    "Zona 5 — Los Andes / Lorencita Villegas"
+  "documentedDesignZones": [
+    {
+      "id": "zone-1",
+      "label": "Zona 1 — La Hermosa",
+      "subareas": []
+    },
+    {
+      "id": "zone-2",
+      "label": "Zona 2 — Centro Estadio",
+      "subareas": []
+    },
+    {
+      "id": "zone-3",
+      "label": "Zona 3 — Guacas / occidental Q. San Roque / Monserrate",
+      "subareas": [
+        "3A",
+        "3B"
+      ]
+    },
+    {
+      "id": "zone-4",
+      "label": "Zona 4 — río San Eugenio y quebrada San Roque",
+      "subareas": []
+    },
+    {
+      "id": "zone-5",
+      "label": "Zona 5 — Los Andes / Lorencita Villegas",
+      "subareas": []
+    }
   ],
-  "transitionRule": "approximately 200 m on each side; use the more demanding adjacent design acceleration",
+  "transitionRule": "approximately 200 m on each side; use the more demanding adjacent design spectrum/acceleration",
+  "coefficientRule": "Am and An replace Aa and Av when the municipal microzonation spectra apply",
   "blockers": [
-    "Primary official bytes for Acuerdo 012 de 2000 and its complete technical annex were not located.",
-    "No primary coefficient tables or Am/An values were located.",
-    "No complete current formulas, branch inclusivity, hazards, return periods or damping were located.",
-    "Acuerdo 028 frames the technical rule under NSR-98 while Acuerdo 076 references NRS-10 for selected urban height provisions without republishing the technical model.",
-    "Zone selection must remain manual and professionally verified; no GIS automation is authorized."
+    "The primary Am/An coefficient table and exact spectrum equations were not recovered from an official source.",
+    "Exact hazards, return periods, damping, piecewise branches and bound inclusivity remain unavailable."
+  ],
+  "warnings": [
+    "The separate official bytes for Acuerdo 012 and its complete technical annex were not recovered; incorporation is proved through Acuerdo 028 and the official PBOT DTS.",
+    "Zone selection remains manual and professionally verified; no GIS automation is authorized."
   ],
   "capabilities": {
     "traceabilityViewer": true,

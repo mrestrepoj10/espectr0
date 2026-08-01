@@ -1,8 +1,41 @@
 {
   "schemaVersion": 1,
   "studyId": "armenia-microzonation",
-  "title": "Armenia seismic-microzonation regulatory-status evidence (activation blocked)",
+  "title": "Armenia historical microzonation applicability and numerical-source evidence",
   "sources": [
+    {
+      "id": "crq-resolution-075-2006",
+      "issuingAuthority": "Corporación Autónoma Regional del Quindío",
+      "officialTitle": "Resolución 075 de 2006",
+      "edition": "2006",
+      "revision": null,
+      "adoptionInstrument": "Resolución CRQ 075 de 2006",
+      "legalStatus": "historical",
+      "applicabilityStatus": "applicable",
+      "officialUrl": "https://www.crq.gov.co/wp-content/uploads/2021/03/RESOLUCION075DE2006.pdf",
+      "mediaType": "application/pdf",
+      "pageCount": 6,
+      "sha256": "ecfd8e38b405dc6c87ef39f54c5ca16242917f9fa4eb171482ab8eae6ee3c62e",
+      "pages": [
+        {
+          "physicalPage": 3,
+          "printedPage": "3",
+          "rotationDegrees": 0,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ],
+      "amendmentsAndErrata": [],
+      "retrievedOn": "2026-07-25",
+      "redistribution": {
+        "decision": "external-only",
+        "rationale": "La página oficial no publica una licencia expresa de redistribución; se conservan URL, tamaño, páginas y SHA-256, no los bytes."
+      }
+    },
     {
       "id": "armenia-cap-acta-153-2019",
       "issuingAuthority": "Comisión Asesora Permanente para el Régimen de Construcciones Sismo Resistentes",
@@ -182,6 +215,28 @@
   ],
   "citations": [
     {
+      "id": "applicability-crq-decree-079",
+      "sourceDocumentId": "crq-resolution-075-2006",
+      "regionKind": "applicability",
+      "physicalPage": 3,
+      "printedPage": "3",
+      "reference": "Considerandos de la Resolución 075 de 2006",
+      "rect": {
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
+      },
+      "extractedToken": "cartografía de zonificación o amenaza sísmica, a partir del cual es aplicable el Decreto Municipal No. 079 de Septiembre 29/2000 que reglamenta lo relacionado para la ciudad de Armenia",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "es aplicable",
+        "Decreto Municipal No. 079",
+        "Septiembre 29/2000"
+      ]
+    },
+    {
       "id": "table-current-regulatory-status",
       "sourceDocumentId": "quindio-armenia-delivery-2025",
       "regionKind": "table",
@@ -360,6 +415,7 @@
     }
   ],
   "applicabilityCitationIds": [
+    "applicability-crq-decree-079",
     "applicability-pot-current-code",
     "applicability-decree-079-nsr98-origin",
     "applicability-cap-harmonization-required",

@@ -5,19 +5,19 @@
       "id": "nsr98-versus-nrs10",
       "status": "resolved-for-product",
       "issue": "Acuerdo 028 names NSR-98; Acuerdo 076 later names NRS-10 in selected height provisions.",
-      "resolution": "Record both exact clauses; do not invent a harmonized equation set."
+      "resolution": "Record both as context; this is not a blanket blocker to the incorporated historical model."
     },
     {
-      "id": "acuerdo012-missing",
+      "id": "acuerdo012-bytes-missing",
       "status": "resolved-for-product",
-      "issue": "Acuerdo 028 incorporates Acuerdo 012, but the latter's complete primary package was not located.",
-      "resolution": "Preserve legal lineage and warnings; ship zero spectrum rows."
+      "issue": "Acuerdo 028 incorporates Acuerdo 012, but separate official bytes for Acuerdo 012 were not located.",
+      "resolution": "Preserve the official incorporation finding; keep only the missing numerical annex as an activation gap."
     },
     {
-      "id": "zone-labels-without-values",
+      "id": "five-zones-versus-seven-labels",
       "status": "resolved-for-product",
-      "issue": "Zone labels are official but coefficient/formula tables are unavailable.",
-      "resolution": "Document labels without making them calculator-selectable."
+      "issue": "Earlier wording counted 3A/3B as separate design zones.",
+      "resolution": "Use five design zones and record 3A/3B as Zone 3 subareas."
     }
   ]
 }

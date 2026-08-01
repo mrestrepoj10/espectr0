@@ -39,6 +39,7 @@ def source_text(path: Path, media_type: str, page: int) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--crq-resolution", type=Path, required=True)
     parser.add_argument("--acta153", type=Path, required=True)
     parser.add_argument("--acuerdo019", type=Path, required=True)
     parser.add_argument("--pot-volume", type=Path, required=True)
@@ -46,6 +47,7 @@ def main() -> None:
     parser.add_argument("--decree-index-html", type=Path, required=True)
     args = parser.parse_args()
     paths = {
+        "crq-resolution-075-2006": args.crq_resolution,
         "armenia-cap-acta-153-2019": args.acta153,
         "armenia-acuerdo-019-2009": args.acuerdo019,
         "armenia-pot-volume-4b-2009": args.pot_volume,
@@ -54,6 +56,7 @@ def main() -> None:
     }
     lock_by_id = {item["sourceDocumentId"]: item for item in LOCKS["locks"]}
     media_types = {
+        "crq-resolution-075-2006": "application/pdf",
         "armenia-cap-acta-153-2019": "application/pdf",
         "armenia-acuerdo-019-2009": "application/pdf",
         "armenia-pot-volume-4b-2009": "application/pdf",
@@ -85,8 +88,8 @@ def main() -> None:
         else:
             raise AssertionError(f"unknown verification policy: {source_id}/{policy}")
 
-    if raw_byte_sources != 3 or live_semantic_sources != 2:
-        raise AssertionError("expected 3 raw-byte PDFs and 2 live-semantic HTML sources")
+    if raw_byte_sources != 4 or live_semantic_sources != 2:
+        raise AssertionError("expected 4 raw-byte PDFs and 2 live-semantic HTML sources")
 
     cache: dict[tuple[str, int], str] = {}
     for item in ATTESTATION["attestations"]:
@@ -104,7 +107,7 @@ def main() -> None:
             if re.search(re.escape(token), text, flags=re.IGNORECASE):
                 raise AssertionError(f"formerly absent token is now present: {item['id']}/{token}")
 
-    print("verified 3 raw-byte PDFs, 2 live-semantic dynamic HTML sources, and 6 extraction attestations")
+    print("verified 4 raw-byte PDFs, 2 live-semantic dynamic HTML sources, and 7 extraction attestations")
 
 
 if __name__ == "__main__":

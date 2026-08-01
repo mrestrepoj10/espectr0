@@ -8,17 +8,17 @@
   "proposedSpectrumMatrix": {
     "expected": 0,
     "cited": 0,
-    "coverageStatus": "not-applicable-no-complete-current-primary-matrix"
+    "coverageStatus": "not-applicable-primary-am-an-table-and-equations-unavailable"
   },
   "claimCoverage": {
     "applicability": {
-      "expected": 5,
-      "cited": 5,
+      "expected": 7,
+      "cited": 7,
       "coveragePercent": 100
     },
     "warnings": {
-      "expected": 5,
-      "cited": 5,
+      "expected": 2,
+      "cited": 2,
       "coveragePercent": 100
     }
   },
@@ -29,9 +29,14 @@
       "citationId": "incorporation"
     },
     {
+      "id": "five-design-zones",
+      "statement": "The official urban DTS defines five design zones; 3A and 3B are subareas of Zone 3.",
+      "citationId": "urban-dts-five-zones"
+    },
+    {
       "id": "transition",
-      "statement": "The transition strip is approximately 200 m each side and uses the more demanding adjacent acceleration.",
-      "citationId": "zones-and-transition"
+      "statement": "The transition strip is approximately 200 m each side and uses the more demanding adjacent spectrum/acceleration.",
+      "citationId": "urban-dts-transition-am-an"
     },
     {
       "id": "geotechnical",
@@ -40,8 +45,8 @@
     },
     {
       "id": "aa-av",
-      "statement": "Aa and Av are not valid with the municipal spectra; the text points to Am and An equivalents.",
-      "citationId": "geotechnical-and-aa-av"
+      "statement": "Aa and Av are not valid with the municipal spectra; Am and An are the identified replacements.",
+      "citationId": "urban-dts-transition-am-an"
     },
     {
       "id": "later-nsr10-reference",

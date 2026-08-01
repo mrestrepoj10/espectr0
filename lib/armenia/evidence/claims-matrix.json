@@ -18,8 +18,8 @@
   },
   "claimCoverage": {
     "applicability": {
-      "expected": 4,
-      "cited": 4,
+      "expected": 5,
+      "cited": 5,
       "coveragePercent": 100
     },
     "warnings": {
@@ -29,6 +29,23 @@
     }
   },
   "claims": [
+    {
+      "id": "legacy-instrument-applicable",
+      "kind": "applicability",
+      "claim": "CRQ Resolution 075 of 2006 expressly says Decreto Municipal 079 of 29 September 2000 is applicable in Armenia.",
+      "citation": {
+        "sourceDocumentId": "crq-resolution-075-2006",
+        "physicalPage": 3,
+        "rect": {
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
+        },
+        "attestationId": "attest-crq-decree-079-applicable",
+        "statementSha256": "9ce0b1f4d526358864a07351b9b20dafcd8fc6fd3a21da9ca2396d12652e33f9"
+      }
+    },
     {
       "id": "legacy-instrument-basis",
       "kind": "applicability",
@@ -100,18 +117,18 @@
     {
       "id": "warning-no-municipal-activation",
       "kind": "warning",
-      "claim": "Do not activate any Armenia municipal zone or hazard until an adopted, current, source-locked package is obtained.",
+      "claim": "Do not calculate a municipal spectrum until the primary Decreto 079 numerical annex, including its complete zones, coefficients and equations, is source-locked.",
       "citation": {
-        "sourceDocumentId": "quindio-armenia-delivery-2025",
-        "physicalPage": 1,
+        "sourceDocumentId": "crq-resolution-075-2006",
+        "physicalPage": 3,
         "rect": {
           "left": 0,
           "top": 0,
           "width": 1,
           "height": 1
         },
-        "attestationId": "attest-delivery-pending",
-        "statementSha256": "26bda04df98cd3e89045761be1845e633e9c69b49e9f9c169c3a1db8a9473865"
+        "attestationId": "attest-crq-decree-079-applicable",
+        "statementSha256": "9ce0b1f4d526358864a07351b9b20dafcd8fc6fd3a21da9ca2396d12652e33f9"
       }
     },
     {
@@ -151,18 +168,18 @@
     {
       "id": "warning-building-workflow",
       "kind": "warning",
-      "claim": "Use the national NSR-10 workflow for buildings; the historical Armenia model is not demonstrated applicable under NSR-10.",
+      "claim": "NSR-10 harmonization and the delivered 2025 update are currentness context; they do not erase the official historical applicability finding for Decreto 079.",
       "citation": {
-        "sourceDocumentId": "armenia-cap-acta-153-2019",
-        "physicalPage": 17,
+        "sourceDocumentId": "crq-resolution-075-2006",
+        "physicalPage": 3,
         "rect": {
-          "left": 0.08,
-          "top": 0.32,
-          "width": 0.84,
-          "height": 0.27
+          "left": 0,
+          "top": 0,
+          "width": 1,
+          "height": 1
         },
-        "attestationId": "attest-acta-153-harmonization",
-        "statementSha256": "63712fe3359e05934d017fcf8222e1889490ca66af97074d2c7ff34dc81d024f"
+        "attestationId": "attest-crq-decree-079-applicable",
+        "statementSha256": "9ce0b1f4d526358864a07351b9b20dafcd8fc6fd3a21da9ca2396d12652e33f9"
       }
     }
   ]

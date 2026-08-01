@@ -9,7 +9,7 @@
     },
     {
       "id": "cap-approved-study-spectrum",
-      "reason": "CAP approval is not municipal adoption and primary technical matrix is unavailable",
+      "reason": "later-study approval is context; its primary technical matrix is unavailable",
       "outcome": "reject"
     },
     {
@@ -19,9 +19,9 @@
     },
     {
       "id": "automatic-zone",
-      "reason": "GIS automation is excluded and no adopted zones are installed",
+      "reason": "GIS automation is excluded and no source-locked numerical zone matrix is installed",
       "outcome": "reject"
     }
   ],
-  "inputSha256": "cb75830778499a3ac2878f596d4747a02f44899b4d054a93fd8844ee70ba0bea"
+  "inputSha256": "ec2941fc678f4c035005fc1efccee5b181ccbe7ccb7b2dc44792a89bcc95c8d0"
 }

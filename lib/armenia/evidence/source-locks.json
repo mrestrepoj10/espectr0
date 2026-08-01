@@ -3,6 +3,15 @@
   "retrievedOn": "2026-07-25",
   "locks": [
     {
+      "sourceDocumentId": "crq-resolution-075-2006",
+      "officialUrl": "https://www.crq.gov.co/wp-content/uploads/2021/03/RESOLUCION075DE2006.pdf",
+      "verificationPolicy": "raw-byte-lock",
+      "sha256": "ecfd8e38b405dc6c87ef39f54c5ca16242917f9fa4eb171482ab8eae6ee3c62e",
+      "pageCount": 6,
+      "byteLength": 989222,
+      "redistributionDecision": "external-only"
+    },
+    {
       "sourceDocumentId": "armenia-cap-acta-153-2019",
       "officialUrl": "https://asosismica.org.co/wp-content/uploads/2019/04/Acta-153-CAP-DEFINITIVA-FDO.pdf",
       "verificationPolicy": "raw-byte-lock",

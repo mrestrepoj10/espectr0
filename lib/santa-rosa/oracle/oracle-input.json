@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "status": "blocked-missing-complete-current-primary-calculation-model",
+  "status": "historical-microzonation-incorporated-primary-numerical-package-unavailable",
   "cases": [
-    { "id": "calculate-from-zone-label", "reason": "official label exists but coefficient/formula matrix is unavailable" },
+    { "id": "calculate-from-zone-label", "reason": "five official design zones are documented, with 3A/3B as Zone 3 subareas, but the Am/An coefficient and formula matrix is unavailable" },
     { "id": "substitute-aa-av", "reason": "Acuerdo 028 says Aa/Av are not valid with municipal spectra" },
     { "id": "infer-harmonized-nsr10", "reason": "2013 NRS-10 reference does not republish a harmonized technical model" },
     { "id": "automatic-zone", "reason": "GIS automation is excluded and professional manual validation is required" }

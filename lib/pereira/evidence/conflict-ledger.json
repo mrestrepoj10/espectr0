@@ -2,16 +2,16 @@
   "schemaVersion": 1,
   "entries": [
     {
-      "id": "cap-versus-adoption",
+      "id": "cap-versus-historical-rule",
       "status": "resolved-for-product",
-      "issue": "CAP approved the study but no municipal adoption instrument was located.",
-      "resolution": "Treat technical approval and legal adoption as distinct; block activation."
+      "issue": "CAP approved a later study while the POT preserves Decreto 932 until harmonization.",
+      "resolution": "Treat CAP approval as currentness context; retain the POT-confirmed historical applicability finding."
     },
     {
       "id": "legacy-versus-new",
       "status": "resolved-for-product",
-      "issue": "POT preserves Decreto 932 until the new microzonation is issued.",
-      "resolution": "Do not silently supersede legacy law with the CAP act."
+      "issue": "POT preserves Decreto 932 until the new microzonation is harmonized and adjusted.",
+      "resolution": "Do not silently supersede Decreto 932 with the CAP act."
     },
     {
       "id": "secondary-d932-copy",

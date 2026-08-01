@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "studyId": "armenia-microzonation",
   "status": "research-only-activation-blocked",
-  "governingConclusion": "No source-locked, CAP-approved and municipally adopted NSR-10-harmonized Armenia spectrum was verified as of 2026-07-25.",
-  "controllingBuildingWorkflow": "NSR-10 national mode only; no Armenia municipal substitute may be selected.",
+  "governingConclusion": "Official CRQ and POT sources confirm Decreto Municipal 079 de 2000 as Armenia's historical microzonation instrument; calculator activation remains unavailable only because its primary numerical annex was not recovered.",
+  "controllingBuildingWorkflow": "Use the applicable historical instrument where required by the competent professional; this product cannot reproduce its spectrum until the primary numerical annex is source-locked.",
   "regulatoryStatusMatrix": {
-    "normalizedDecision": "blocked-pending-commission-approval-and-municipal-decree",
+    "normalizedDecision": "historical-decree-applicable-current-update-context-only-numeric-annex-missing",
     "options": [
       {
         "id": "armenia-citywide",
@@ -33,7 +33,7 @@
     "hazards": [],
     "rows": [],
     "exactOptionHazardPairs": 0,
-    "reason": "The exact current zone model, hazard cases, coefficients and equations are unavailable in an adopted primary-source package."
+    "reason": "The exact historical zone matrix, hazard cases, coefficients and equations are unavailable because the primary Decreto 079 technical annex was not recovered."
   },
   "historicalRecord": {
     "instrument": "Decreto Municipal 079 de 2000",
@@ -42,7 +42,7 @@
     "exactHazardsVerifiedFromLockedPrimarySources": [],
     "coefficientsCanonicalized": false,
     "formulasCanonicalized": false,
-    "applicability": "not-demonstrated-under-nsr10"
+    "applicability": "confirmed-by-crq-resolution-075-2006-and-pot"
   },
   "currentStudy": {
     "deliveredOn": "2025-12-10",
@@ -52,10 +52,7 @@
   },
   "blockers": [
     "official-decree-079-bytes-and-technical-annex-not-located",
-    "legacy-study-not-demonstrated-harmonized-with-nsr10",
-    "2025-study-not-demonstrated-cap-approved",
-    "2025-study-not-demonstrated-adopted-by-municipal-decree",
-    "current-zones-hazards-coefficients-formulas-and-site-specific-rules-unavailable"
+    "historical-zones-hazards-coefficients-formulas-and-site-specific-rules-unavailable"
   ],
   "capabilities": {
     "spectrumCalculation": false,

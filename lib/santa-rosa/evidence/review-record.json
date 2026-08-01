@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
   "authorRole": "research agent R7",
-  "preparedOn": "2026-07-25",
+  "preparedOn": "2026-07-29",
   "independentReview": {
     "status": "pending",
     "reviewer": null,
     "reviewedOn": null,
     "scope": [
       "source locks",
-      "Acuerdo 012/028/076 lineage",
-      "NSR compatibility conflict",
-      "warnings and zero-spectrum decision"
+      "five-zone classification",
+      "transition and Am/An rules",
+      "localized numerical gap"
     ]
   },
-  "activationDecision": "blocked-missing-complete-current-primary-calculation-model",
-  "mergeDecision": "no-merge-for-production-activation"
+  "activationDecision": "blocked-only-by-missing-primary-am-an-table-and-equations",
+  "mergeDecision": "evidence-may-merge-calculation-remains-unavailable"
 }
