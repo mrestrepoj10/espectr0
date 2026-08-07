@@ -8,6 +8,18 @@ const componentLabels = new Map(
   canonical.curveComponents.map((component) => [component.id, component.label]),
 )
 
+/**
+ * A concurrent zone can be selected before its Tc/TL component is, so the
+ * geographic id has to name itself too — otherwise the badge and the caption
+ * print the raw slug. Derived from the component labels, which read
+ * "Zona 4C — componente Tc".
+ */
+for (const component of canonical.curveComponents) {
+  if (!component.concurrentGroup) continue
+  const [zoneLabel] = component.label.split(" — ")
+  if (zoneLabel) componentLabels.set(component.concurrentGroup, zoneLabel)
+}
+
 export const caliMapEvidence: CaliMapEvidence = mapEvidence
 
 /**

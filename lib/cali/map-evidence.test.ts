@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest"
 
 import canonical from "./data/canonical.json"
 import {
+  caliComponentLabel,
   caliLegendZoneBand,
   caliMapEvidence,
   caliZoneOfComponent,
@@ -37,5 +38,18 @@ describe("Cali map evidence", () => {
     // No publisher URL is established; the mirror is what makes it checkable.
     expect(source.officialUrl).toBeNull()
     expect(source.mirrorUrl).toContain("cali.pdf")
+  })
+})
+
+describe("Cali concurrent-zone labels", () => {
+  it("names the geographic zone picked before its component", () => {
+    // The drawer opens on the zone alone, so a bare geographic id must not
+    // reach the badge as a raw slug.
+    expect(caliComponentLabel("zone-4c")).toBe("Zona 4C")
+    expect(caliComponentLabel("zone-4b")).toBe("Zona 4B")
+    expect(caliComponentLabel("zone-5")).toBe("Zona 5")
+    expect(caliComponentLabel("zone-4c-tl")).toBe("Zona 4C — componente TL")
+    // A zone without concurrent curves already had a label.
+    expect(caliComponentLabel("zone-1")).toBe("Zona 1")
   })
 })
