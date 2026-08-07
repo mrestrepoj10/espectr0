@@ -28,10 +28,32 @@ describe("Bogotá evidence resolver", () => {
     expect(report?.issuingAuthority).toContain("FOPAE")
     expect(report?.adoptionInstrument).toContain("Decreto Distrital 523 de 2010")
     expect(report?.sha256).toMatch(/^[a-f0-9]{64}$/)
-    // The official files are external-only, so pages are cited, never shipped.
-    expect(evidence.documents.every(({ localPath }) => localPath === null)).toBe(
-      true,
+    // Only the three coefficient tables of the report are served; the decrees
+    // stay pathless and are cited, never shipped.
+    expect(report?.localPath).toBe("/bogota/fopae-2010-tablas-7.5-7.7.pdf")
+    expect(report?.localPageMap).toEqual({ "155": 1, "156": 2, "157": 3 })
+    for (const decree of ["decreto-distrital-670-2025", "decreto-distrital-523-2010"]) {
+      const document = evidence.documents.find(({ sourceId }) => sourceId === decree)
+      expect(document?.localPath, decree).toBeNull()
+      expect(document?.localPageMap, decree).toBeNull()
+    }
+  })
+
+  it("maps each cited table page onto its page of the extract", () => {
+    const evidence = resolveSpectrumEvidence(adaptBogotaSpectrum(cerros))
+    const report = evidence.documents.find(
+      ({ sourceId }) => sourceId === "fopae-2010-final-report-v1",
     )
+
+    // A citation the extract does not carry must not claim a page in it, or the
+    // viewer would draw an attested rectangle over the wrong table.
+    for (const citation of evidence.citations) {
+      if (citation.sourceId !== report?.sourceId) continue
+      const local = report.localPageMap?.[String(citation.physicalPage)]
+      if (citation.kind === "cell" || citation.kind === "row") {
+        expect(local, citation.id).toBeGreaterThan(0)
+      }
+    }
   })
 
   it("resolves every result citation to an attested page of the report", () => {

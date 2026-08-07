@@ -50,9 +50,21 @@ const optionLabels = new Map(
   canonical.options.map((option) => [option.id, option.sourceLabel]),
 )
 
+/**
+ * Only the three coefficient tables are served, so a citation on any other page
+ * of the report keeps its outbound link and its transcription with no page to
+ * draw on. The extract's own page order is what the viewer needs.
+ */
+const REPORT_TABLE_EXTRACT = {
+  sourceId: "fopae-2010-final-report-v1",
+  path: "/bogota/fopae-2010-tablas-7.5-7.7.pdf",
+  pageMap: { "155": 1, "156": 2, "157": 3 },
+} as const
+
 function documentFor(sourceId: string): SpectrumEvidenceDocument {
   const source = sources.get(sourceId)
   if (!source) throw new Error(`Missing Bogotá evidence source ${sourceId}`)
+  const extract = sourceId === REPORT_TABLE_EXTRACT.sourceId
   return {
     sourceId,
     issuingAuthority: source.issuingAuthority,
@@ -64,7 +76,8 @@ function documentFor(sourceId: string): SpectrumEvidenceDocument {
     officialUrl: source.officialUrl,
     sourceUrl: source.officialUrl,
     sha256: source.sha256,
-    localPath: null,
+    localPath: extract ? REPORT_TABLE_EXTRACT.path : null,
+    localPageMap: extract ? { ...REPORT_TABLE_EXTRACT.pageMap } : null,
   }
 }
 

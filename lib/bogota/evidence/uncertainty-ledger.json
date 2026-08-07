@@ -21,6 +21,12 @@
       "disposition": "Independent reviewer must re-fetch and verify the committed URL/length/SHA-256 locks."
     },
     {
+      "id": "coefficient-table-extract-redistribution",
+      "severity": "medium",
+      "issue": "public/bogota/fopae-2010-tablas-7.5-7.7.pdf serves physical pages 155–157 of the FOPAE report so the drawer can draw the attested cell rectangles on the page. These are rendered source pages of the one document whose cover requires written authorization — a stronger restriction than the cartographic annex, which is an annex of a decree.",
+      "disposition": "Shipped on the product owner's decision, scoped to the three coefficient tables and recorded in redistribution.json. This is the weakest of the two exceptions and the first independent review should revisit; reverting means deleting the extract and setting localPath/localPageMap back to null."
+    },
+    {
       "id": "cartographic-annex-redistribution",
       "severity": "medium",
       "issue": "The two rasters committed under public/bogota render the Mapa No 2 annex sheet, which the study's redistribution policy would otherwise class as a prohibited rendered source page. The sheet is an annex of Decreto Distrital 523 de 2010 rather than the FOPAE report, but redistribution permission was not established.",

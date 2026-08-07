@@ -266,7 +266,13 @@ export function EvidenceDocument({
 	const rowAndCells = citations.filter(
 		(citation) => citation.kind === "row" || citation.kind === "cell",
 	);
-	const citedPages = groupCitationsByPhysicalPage(rowAndCells);
+	// An extract carries only some of the source's pages; a citation outside it
+	// keeps its transcription and its link rather than an empty viewer.
+	const servedPages = groupCitationsByPhysicalPage(rowAndCells).filter(
+		([first]) =>
+			!document.localPageMap ||
+			document.localPageMap[String(first.physicalPage)] !== undefined,
+	);
 	return (
 		<Card size="sm">
 			<CardHeader>
@@ -318,7 +324,7 @@ export function EvidenceDocument({
 					</Button>
 				</div>
 				{document.localPath
-					? citedPages.map((pageCitations) => (
+					? servedPages.map((pageCitations) => (
 						<section
 							aria-label={`Vista de evidencia · ${citationPageLabel(pageCitations[0])}`}
 							key={pageCitations[0].physicalPage}

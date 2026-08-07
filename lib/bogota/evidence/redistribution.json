@@ -12,6 +12,18 @@
     "Downloaded SISJUR HTML",
     "Formula JPEGs"
   ],
+  "coefficientTableExtract": {
+    "sourceDocumentId": "fopae-2010-final-report-v1",
+    "committedArtifacts": [
+      "public/bogota/fopae-2010-tablas-7.5-7.7.pdf"
+    ],
+    "scope": "Physical pages 155–157 (printed 139–141) of the 168-page report — Tablas 7.5, 7.6 and 7.7 with their design curves and parameter keys — extracted so the drawer can draw each attested cell rectangle on the page that states the coefficient. No other page of the report is served, and a citation outside these three keeps its transcription and outbound link with no viewer.",
+    "extractedFrom": "The official SIRE bitstream, re-fetched and verified byte for byte against the committed lock (12386790 bytes, SHA-256 74ba7a6a…) before extracting.",
+    "permissionStatus": "not-established",
+    "ownerDecision": "Ship the three table pages: a cited coefficient the reader cannot see on its own page is a citation they have to take on trust.",
+    "strongerRestrictionThanAnnex": "The report's cover requires written authorization for reproduction, which the cartographic annex of the decree does not. This exception is therefore weaker than the annex one and is the first thing independent review should revisit.",
+    "reviewerAction": "If the report may not be reproduced, delete the extract and set localPath/localPageMap back to null; the transcription, the page coordinates and the outbound link already stand on their own."
+  },
   "cartographicAnnex": {
     "sourceDocumentId": "fopae-2010-mapa-2-zonas-respuesta-sismica",
     "committedArtifacts": [
