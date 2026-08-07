@@ -73,6 +73,13 @@ export const spectrumEvidenceDocumentSchema = z
     sourceUrl: z.string().url(),
     sha256: z.string().regex(/^[a-f0-9]{64}$/i),
     localPath: nullableTextSchema,
+    /**
+     * Where a cited page sits in `localPath`, when what is served is an extract
+     * rather than the whole document. Keyed by physical page of the source, so
+     * citations keep quoting the page the reader would find in the original.
+     * Null means the file is the whole document and the two numbers agree.
+     */
+    localPageMap: z.record(z.string(), z.number().int().positive()).nullable(),
   })
   .strict()
 
@@ -446,6 +453,8 @@ function nsr10Document(
     sourceUrl: source.sourceUrl,
     sha256: source.pdfSha256,
     localPath: source.pdfPath,
+    // The whole Título A is served, so cited pages are the file's own pages.
+    localPageMap: null,
   }
 }
 

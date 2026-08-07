@@ -62,9 +62,7 @@ export const bogotaCapabilities = spectrumCapabilitiesSchema.parse({
   comparison: unsupportedCapability(
     "El comparador actual todavía no consume escenarios municipales normalizados.",
   ),
-  contextualPdf: unsupportedCapability(
-    "El renderizador PDF contextual todavía no está instalado para Bogotá.",
-  ),
+  contextualPdf: supportedCapability(),
   csvExport: supportedCapability(),
   etabsExport: supportedCapability(),
   jsonExport: supportedCapability(),
@@ -78,9 +76,7 @@ export const bogotaCapabilities = spectrumCapabilitiesSchema.parse({
   bridgeRFactorWorkflow: unsupportedCapability(
     "Bogotá municipal building spectra do not define the CCP-14 bridge R-factor workflow.",
   ),
-  traceabilityViewer: unsupportedCapability(
-    "El resolvedor del visor de evidencia todavía no está instalado para Bogotá.",
-  ),
+  traceabilityViewer: supportedCapability(),
 })
 
 const optionIds = new Set<string>(bogotaCanonical.options.map(({ id }) => id))

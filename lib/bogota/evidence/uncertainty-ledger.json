@@ -19,6 +19,24 @@
       "severity": "medium",
       "issue": "Copyright and dynamic-page constraints prevent bundling source bytes.",
       "disposition": "Independent reviewer must re-fetch and verify the committed URL/length/SHA-256 locks."
+    },
+    {
+      "id": "coefficient-table-extract-redistribution",
+      "severity": "medium",
+      "issue": "public/bogota/fopae-2010-tablas-7.5-7.7.pdf serves physical pages 155–157 of the FOPAE report so the drawer can draw the attested cell rectangles on the page. These are rendered source pages of the one document whose cover requires written authorization — a stronger restriction than the cartographic annex, which is an annex of a decree.",
+      "disposition": "Shipped on the product owner's decision, scoped to the three coefficient tables and recorded in redistribution.json. This is the weakest of the two exceptions and the first independent review should revisit; reverting means deleting the extract and setting localPath/localPageMap back to null."
+    },
+    {
+      "id": "cartographic-annex-redistribution",
+      "severity": "medium",
+      "issue": "The two rasters committed under public/bogota render the Mapa No 2 annex sheet, which the study's redistribution policy would otherwise class as a prohibited rendered source page. The sheet is an annex of Decreto Distrital 523 de 2010 rather than the FOPAE report, but redistribution permission was not established.",
+      "disposition": "The product owner decided to ship them: without the sheet the engineer cannot see which of the 16 zones a coefficient came from, which is the point of the traceability drawer. The exception is scoped in redistribution.json and stays open for independent review to revisit; the fallback remains the outbound link to the decree."
+    },
+    {
+      "id": "cartographic-annex-provenance",
+      "severity": "medium",
+      "issue": "No official publisher URL is established for the annex sheet. It is retrievable from the espectrocol.com mirror at https://www.espectrocol.com/mapas/bogota_respuesta.pdf, which returns exactly the locked 3825830 bytes and SHA-256 43f9f58b…, and its embedded metadata (SDP, 2010-12-16, «Respuesta_2010») is consistent with the official sheet — but a mirror is not the publisher.",
+      "disposition": "Kept out of source-locks.json, which stays a three-source manifest of officially-served bytes; the mirror URL and hash live in data/map-evidence.json so a reviewer can reproduce the crops today. Independent review must still locate the publisher URL before activation."
     }
   ]
 }

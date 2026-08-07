@@ -32,6 +32,11 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import {
+  importanceDescriptions,
+  importanceValues,
+} from "@/components/spectrum-controls"
+import type { ImportanceGroup } from "@/lib/nsr10"
+import {
   ccp14CityReading,
   ccp14MapFigure,
   ccp14MapLocations,
@@ -143,32 +148,43 @@ function ManualZoneWarning() {
   )
 }
 
+/**
+ * The four NSR-10 A.2.5 groups, the only importance coefficients the study's
+ * spectra are scaled by. A free number let an unattested I reach the memoria.
+ */
+const BOGOTA_IMPORTANCE_OPTIONS: readonly SelectOption[] = (
+  Object.keys(importanceValues) as ImportanceGroup[]
+).map((group) => ({
+  id: group,
+  label: `${group} — ${importanceDescriptions[group]} (I=${importanceValues[group]})`,
+}))
+
+/**
+ * Fill thickness and rigid-base period are not asked for: neither is a study
+ * input, both describe the site the geotechnical engineer characterises, and
+ * the thresholds that make them matter travel as the site-specific warning the
+ * result already carries.
+ */
 export function BogotaParameterRail({
-  fillThicknessMeters,
   hazardDescription,
   hazardId,
   hazardOptions,
-  importanceFactor,
-  onFillThicknessChange,
+  importanceGroup,
   onHazardChange,
-  onImportanceFactorChange,
-  onRigidBasePeriodChange,
+  onImportanceGroupChange,
+  onTraceabilityOpen,
   onZoneChange,
-  rigidBasePeriodSeconds,
   zoneId,
   zoneOptions,
 }: {
-  fillThicknessMeters: number | null
   hazardDescription: string
   hazardId: string
   hazardOptions: readonly SelectOption[]
-  importanceFactor: number
-  onFillThicknessChange: (value: number | null) => void
+  importanceGroup: ImportanceGroup
   onHazardChange: (value: string) => void
-  onImportanceFactorChange: (value: number) => void
-  onRigidBasePeriodChange: (value: number | null) => void
+  onImportanceGroupChange: (value: ImportanceGroup) => void
+  onTraceabilityOpen: () => void
   onZoneChange: (value: string) => void
-  rigidBasePeriodSeconds: number | null
   zoneId: string | null
   zoneOptions: readonly SelectOption[]
 }) {
@@ -190,6 +206,19 @@ export function BogotaParameterRail({
             options={zoneOptions}
             value={zoneId}
           />
+          {zoneId ? (
+            <Button
+              className="w-full"
+              data-slot="bogota-evidence-trigger"
+              onClick={onTraceabilityOpen}
+              size="sm"
+              type="button"
+              variant="outline"
+            >
+              <LandmarkIcon data-icon="inline-start" />
+              Ver trazabilidad
+            </Button>
+          ) : null}
           <MunicipalSelect
             description={hazardDescription}
             id="bogota-hazard-trigger"
@@ -198,29 +227,13 @@ export function BogotaParameterRail({
             options={hazardOptions}
             value={hazardId}
           />
-          <NumericInput
-            description="Factor declarado para el proyecto."
-            id="bogota-importance-factor"
-            label="Factor de importancia I"
-            min={0.01}
-            onValueChange={(value) => onImportanceFactorChange(value ?? 0)}
-            value={importanceFactor}
-          />
-          <NumericInput
-            description="Opcional; deja el campo vacío si no corresponde."
-            id="bogota-fill-thickness"
-            label="Espesor de relleno (m)"
-            nullable
-            onValueChange={onFillThicknessChange}
-            value={fillThicknessMeters}
-          />
-          <NumericInput
-            description="Opcional; periodo fundamental sobre base rígida."
-            id="bogota-rigid-base-period"
-            label="Periodo en base rígida (s)"
-            nullable
-            onValueChange={onRigidBasePeriodChange}
-            value={rigidBasePeriodSeconds}
+          <MunicipalSelect
+            description="Tabla A.2.5-1 de NSR-10; fija el coeficiente de importancia I que escala el espectro."
+            id="bogota-importance-group-trigger"
+            label="Grupo de uso (NSR-10 A.2.5)"
+            onValueChange={(value) => onImportanceGroupChange(value as ImportanceGroup)}
+            options={BOGOTA_IMPORTANCE_OPTIONS}
+            value={importanceGroup}
           />
           <ManualZoneWarning />
         </FieldGroup>

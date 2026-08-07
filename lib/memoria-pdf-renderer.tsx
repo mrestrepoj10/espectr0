@@ -31,6 +31,7 @@ import {
   parseNsr10TraceEnvelope,
   spectrumResultData,
 } from "./spectra"
+import { BOGOTA_ENGINE_ID } from "./bogota"
 import { CALI_ENGINE_ID } from "./cali"
 import { CCP14_ENGINE_ID } from "./ccp14"
 
@@ -712,6 +713,10 @@ export const contextualPdfRendererRegistry = new ContextualPdfRendererRegistry()
   },
 }).register({
   engineId: CALI_ENGINE_ID,
+  render: renderMunicipalMemoriaPdf,
+  filename: municipalMemoriaFilename,
+}).register({
+  engineId: BOGOTA_ENGINE_ID,
   render: renderMunicipalMemoriaPdf,
   filename: municipalMemoriaFilename,
 }).register({

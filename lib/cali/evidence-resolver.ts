@@ -47,6 +47,7 @@ function documentFor(sourceId: string): SpectrumEvidenceDocument {
     sourceUrl: source.officialUrl,
     sha256: source.sha256,
     localPath: null,
+    localPageMap: null,
   }
 }
 

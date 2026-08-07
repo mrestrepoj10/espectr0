@@ -400,25 +400,40 @@ describe("unified municipal mode selector", () => {
 		expect(container.textContent).toContain("Parámetros del sitio");
 	});
 
-	it("renders Bogotá typed site-specific and invalid outcomes from the adapter", async () => {
+	it("asks Bogotá only for the zone, the hazard and the use group", async () => {
+		await chooseMode("Bogotá D. C.");
+
+		// Fill thickness and rigid-base period describe the site the geotechnical
+		// engineer characterises, not the study; their thresholds travel as the
+		// site-specific warning the result already carries.
+		expect(container.querySelector("#bogota-fill-thickness")).toBeNull();
+		expect(container.querySelector("#bogota-rigid-base-period")).toBeNull();
+		expect(container.querySelector("#bogota-importance-factor")).toBeNull();
+		for (const id of [
+			"bogota-zone-trigger",
+			"bogota-hazard-trigger",
+			"bogota-importance-group-trigger",
+		]) {
+			expect(container.querySelector(`#${id}`), id).not.toBeNull();
+		}
+	});
+
+	it("scales the Bogotá spectrum by the chosen NSR-10 use group", async () => {
 		await chooseMode("Bogotá D. C.");
 		await chooseSelectOption("bogota-zone-trigger", "CERROS");
-		await setNumberInput("bogota-fill-thickness", "3.1");
-
 		await vi.waitFor(() => {
-			expect(container.textContent).toContain(
-				"Estudio de respuesta sísmica particular requerido",
-			);
+			expect(container.textContent).toContain("Datos del espectro");
 		});
-		expect(container.textContent).toContain("supera 3 m");
-		expect(container.querySelector("#period-lookup-input")).toBeNull();
+		const atGroupI = container.textContent ?? "";
 
-		await setNumberInput("bogota-fill-thickness", "");
-		await setNumberInput("bogota-importance-factor", "0");
+		await chooseSelectOption(
+			"bogota-importance-group-trigger",
+			"IV — Edificación indispensable (I=1.50)",
+		);
 		await vi.waitFor(() => {
-			expect(container.textContent).toContain("Resultado no disponible");
+			expect(container.textContent).not.toBe(atGroupI);
 		});
-		expect(container.textContent).toContain("Entrada inválida");
+		expect(container.textContent).toContain("Datos del espectro");
 	});
 
 	it("labels Bogotá damage chart transitions as T0d, TCd, and TLd", async () => {
@@ -447,12 +462,11 @@ describe("unified municipal mode selector", () => {
 		expect(container.textContent).not.toContain("Exportar");
 	});
 
-	it("uses result capability metadata to gate Bogotá and enable Cali actions", async () => {
+	it("enables the Bogotá and Cali result actions from capability metadata", async () => {
 		await chooseMode("Bogotá D. C.");
 		await chooseSelectOption("bogota-zone-trigger", "CERROS");
 		const bogotaTrace = await waitForElement("button", "Ver trazabilidad");
-		expect(bogotaTrace).toHaveProperty("disabled", true);
-		expect(bogotaTrace.title).toContain("resolvedor del visor");
+		expect(bogotaTrace).not.toHaveProperty("disabled", true);
 
 		const bogotaExport = await waitForElement("button", "Exportar");
 		await act(async () => {
@@ -462,8 +476,7 @@ describe("unified municipal mode selector", () => {
 			'[role="menuitem"]',
 			"Descargar memoria PDF",
 		);
-		expect(bogotaPdf.getAttribute("aria-disabled")).toBe("true");
-		expect(bogotaPdf.title).toContain("renderizador PDF");
+		expect(bogotaPdf.getAttribute("aria-disabled")).not.toBe("true");
 
 		await act(async () => {
 			document.body.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
@@ -729,6 +742,64 @@ describe("unified municipal mode selector", () => {
 		expect(images).toContain("/ccp14/figura-3.10.2.1-3.png");
 	});
 
+	it("opens the Bogotá map evidence before anything is calculated", async () => {
+		await chooseMode("Bogotá D. C.");
+		expect(
+			container.querySelector("[data-slot='bogota-evidence-trigger']"),
+		).toBeNull();
+
+		await chooseSelectOption("bogota-zone-trigger", "CERROS");
+		const trigger = container.querySelector<HTMLButtonElement>(
+			"[data-slot='bogota-evidence-trigger']",
+		);
+		expect(trigger).not.toBeNull();
+
+		await act(async () => trigger?.click());
+		await vi.waitFor(() => {
+			expect(document.body.textContent).toContain(
+				"Evidencia cartográfica de la zona",
+			);
+		});
+		// One traceability surface, not a second drawer alongside it.
+		expect(document.querySelectorAll('[role="dialog"]')).toHaveLength(1);
+		expect(document.body.textContent).toContain("Trazabilidad normativa");
+		expect(document.body.textContent).toContain("fila resaltada: CERROS");
+
+		const images = [
+			...document.querySelectorAll<HTMLImageElement>("img[src^='/bogota/']"),
+		].map((image) => image.getAttribute("src"));
+		expect(images).toContain("/bogota/mapa-2-leyenda.png");
+		expect(images).toContain("/bogota/mapa-2-zonas-respuesta-sismica.png");
+	});
+
+	it("splits the drawer into a source panel and a lineage panel", async () => {
+		await chooseMode("Bogotá D. C.");
+		await chooseSelectOption("bogota-zone-trigger", "CERROS");
+		await act(async () =>
+			container
+				.querySelector<HTMLButtonElement>("[data-slot='bogota-evidence-trigger']")
+				?.click(),
+		);
+
+		// Opens on the map, with the lineage one click away rather than six
+		// screens of scroll below it.
+		await vi.waitFor(() => {
+			expect(document.body.textContent).toContain(
+				"Evidencia cartográfica de la zona",
+			);
+		});
+		expect(document.body.textContent).not.toContain("Valores directos de fuente");
+
+		const lineage = await waitForElement("button", "Linaje del resultado");
+		await act(async () => lineage.click());
+		await vi.waitFor(() => {
+			expect(document.body.textContent).toContain("Valores directos de fuente");
+		});
+		expect(document.body.textContent).not.toContain(
+			"Evidencia cartográfica de la zona",
+		);
+	});
+
 	it("lets the engineer override a prefilled coefficient", async () => {
 		await chooseMode("CCP-14 · Puentes");
 		await chooseSelectOption("ccp14-map-location-trigger", "Armenia");
@@ -779,6 +850,9 @@ describe("unified municipal mode selector", () => {
 		expect(trace?.hasAttribute("disabled")).toBe(false);
 		await act(async () => trace?.click());
 
+		// The drawer opens on the source evidence; the lineage is the other panel.
+		const lineage = await waitForElement("button", "Linaje del resultado");
+		await act(async () => lineage.click());
 		await vi.waitFor(() => {
 			expect(document.body.textContent).toContain("Valores directos de fuente");
 		});

@@ -52,17 +52,22 @@ export function SourcePdfViewer({
 	citations: SpectrumEvidenceCitation[];
 }) {
 	const [pageRendered, setPageRendered] = useState(false);
-	const pageNumber = citations[0]?.physicalPage;
-	if (!document.localPath || !pageNumber) return <PdfError />;
+	const citedPage = citations[0]?.physicalPage;
+	if (!document.localPath || !citedPage) return <PdfError />;
 	if (
 		citations.some(
 			(citation) =>
 				citation.sourceId !== document.sourceId ||
-				citation.physicalPage !== pageNumber,
+				citation.physicalPage !== citedPage,
 		)
 	) {
 		throw new Error("PDF evidence viewer requires citations from one source page");
 	}
+	// An extract renumbers its pages, so the cited page maps onto the file's own.
+	const pageNumber = document.localPageMap
+		? document.localPageMap[String(citedPage)]
+		: citedPage;
+	if (!pageNumber) return <PdfError />;
 
 	return (
 		<div className="overflow-hidden rounded-2xl bg-muted shadow-[0_1px_2px_rgb(0_0_0/0.08),0_8px_24px_rgb(0_0_0/0.08)] ring-1 ring-black/10 dark:ring-white/10">

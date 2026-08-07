@@ -1,10 +1,12 @@
 import { z } from "zod"
 
+import { spectrumEvidenceResolverRegistry } from "../spectra/evidence"
 import {
   spectrumStudyRelationRegistry,
   type SpectrumStudyRelationValidator,
 } from "../spectra/types"
 import { BOGOTA_STUDY_ID, bogotaCanonical } from "./schema"
+import { bogotaEvidenceResolver } from "./evidence-resolver"
 
 const optionIds = new Set<string>(bogotaCanonical.options.map(({ id }) => id))
 const hazardIds = new Set<string>(bogotaCanonical.hazards.map(({ id }) => id))
@@ -63,3 +65,5 @@ export const bogotaStudyRelationValidator: SpectrumStudyRelationValidator = {
 }
 
 spectrumStudyRelationRegistry.register(bogotaStudyRelationValidator)
+
+spectrumEvidenceResolverRegistry.register(bogotaEvidenceResolver)

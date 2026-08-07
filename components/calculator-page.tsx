@@ -35,6 +35,7 @@ import {
 	getMunicipalityCoefficients,
 	HazardLevelControl,
 	ImportanceGroupControl,
+	importanceValues,
 	MunicipalityCombobox,
 	SoilProfileControl,
 } from "@/components/spectrum-controls";
@@ -44,6 +45,7 @@ import {
 	SharedSpectrumNotices,
 	SharedSpectrumTable,
 } from "@/components/spectrum-result";
+import { BogotaFigureEvidence } from "@/components/calculator/bogota-figure-evidence";
 import { Ccp14FigureEvidence } from "@/components/calculator/ccp14-figure-evidence";
 import { TraceabilitySheet } from "@/components/traceability/traceability-sheet";
 import { Button } from "@/components/ui/button";
@@ -613,6 +615,14 @@ function ManualSelectionNotice({
 	);
 }
 
+/**
+ * The Bogotá spectra are scaled by the NSR-10 A.2.5 importance coefficient, so
+ * the group the engineer picks is what supplies I.
+ */
+function importanceCoefficient(group: ImportanceGroup) {
+	return Number(importanceValues[group]);
+}
+
 const bogotaZoneOptions = bogotaCanonical.options.map((option) => ({
 	id: option.id,
 	label: option.sourceLabel,
@@ -791,13 +801,8 @@ export function CalculatorPage() {
 	const [bogotaHazardId, setBogotaHazardId] = useState(
 		bogotaHazardOptions[0].id,
 	);
-	const [bogotaImportanceFactor, setBogotaImportanceFactor] = useState(1);
-	const [bogotaFillThickness, setBogotaFillThickness] = useState<number | null>(
-		null,
-	);
-	const [bogotaRigidBasePeriod, setBogotaRigidBasePeriod] = useState<
-		number | null
-	>(null);
+	const [bogotaImportanceGroup, setBogotaImportanceGroup] =
+		useState<ImportanceGroup>("I");
 	const [medellinZoneId, setMedellinZoneId] = useState<string | null>(null);
 	const [medellinHazardId, setMedellinHazardId] = useState<string | null>(null);
 	const [medellinImportanceFactor, setMedellinImportanceFactor] = useState(1);
@@ -873,19 +878,12 @@ export function CalculatorPage() {
 			return adaptBogotaSpectrum({
 				zoneId: bogotaZoneId,
 				hazardId: bogotaHazardId,
-				importanceFactor: bogotaImportanceFactor,
-				fillThicknessMeters: bogotaFillThickness,
-				rigidBasePeriodSeconds: bogotaRigidBasePeriod,
+				importanceFactor: importanceCoefficient(bogotaImportanceGroup),
+				fillThicknessMeters: null,
+				rigidBasePeriodSeconds: null,
 			});
 		},
-		[
-			calculationMode,
-			bogotaFillThickness,
-			bogotaHazardId,
-			bogotaImportanceFactor,
-			bogotaRigidBasePeriod,
-			bogotaZoneId,
-		],
+		[calculationMode, bogotaHazardId, bogotaImportanceGroup, bogotaZoneId],
 	);
 	const activeCaliComponentOptions = useMemo(
 		() => caliComponentOptions(caliZoneId),
@@ -983,6 +981,15 @@ export function CalculatorPage() {
 		[result],
 	);
 
+	/**
+	 * A blocked scenario still has evidence worth reading — the sources and the
+	 * warning that blocks it — so the drawer shows whatever the study can
+	 * resolve, and only a study that declares nothing resolvable drops out.
+	 */
+	const traceableResult =
+		result && result.evidenceAvailability.status !== "unavailable"
+			? result
+			: null;
 	const traceability = result
 		? capabilityUiState(result.capabilities.traceabilityViewer)
 		: { enabled: false, reason: "Este modo no tiene un resultado trazable activo." };
@@ -1056,21 +1063,18 @@ export function CalculatorPage() {
 			/>
 		) : calculationMode === "bogota-microzonation" ? (
 			<BogotaParameterRail
-				fillThicknessMeters={bogotaFillThickness}
 				hazardDescription={municipalHazardDescription(
 					bogotaCanonical.hazards.find(({ id }) => id === bogotaHazardId),
 				)}
 				hazardId={bogotaHazardId}
 				hazardOptions={bogotaHazardOptions}
-				importanceFactor={bogotaImportanceFactor}
-				onFillThicknessChange={setBogotaFillThickness}
+				importanceGroup={bogotaImportanceGroup}
 				onHazardChange={(value) =>
 					setBogotaHazardId(value as typeof bogotaHazardId)
 				}
-				onImportanceFactorChange={setBogotaImportanceFactor}
-				onRigidBasePeriodChange={setBogotaRigidBasePeriod}
+				onImportanceGroupChange={setBogotaImportanceGroup}
+				onTraceabilityOpen={() => setTraceabilityOpen(true)}
 				onZoneChange={setBogotaZoneId}
-				rigidBasePeriodSeconds={bogotaRigidBasePeriod}
 				zoneId={bogotaZoneId}
 				zoneOptions={bogotaZoneOptions}
 			/>
@@ -1171,17 +1175,19 @@ export function CalculatorPage() {
 
 	return (
 		<div className="flex flex-col gap-5">
-			{result || (calculationMode === "ccp14" && ccp14MapLocationId) ? (
+			{result ||
+			(calculationMode === "ccp14" && ccp14MapLocationId) ||
+			(calculationMode === "bogota-microzonation" && bogotaZoneId) ? (
 				<TraceabilitySheet
 					onOpenChange={setTraceabilityOpen}
 					open={traceabilityOpen}
-					result={result?.status === "ok" ? result : null}
-					scenarioEvidenceKey={
-						result?.status === "ok" ? result.scenarioEvidenceKey : null
-					}
+					result={traceableResult}
+					scenarioEvidenceKey={traceableResult?.scenarioEvidenceKey ?? null}
 					sourceEvidence={
 						calculationMode === "ccp14" ? (
 							<Ccp14FigureEvidence locationId={ccp14MapLocationId} />
+						) : calculationMode === "bogota-microzonation" ? (
+							<BogotaFigureEvidence zoneId={bogotaZoneId} />
 						) : null
 					}
 				/>
