@@ -1,6 +1,8 @@
 "use client"
 
-import { ShieldAlertIcon } from "lucide-react"
+import { LandmarkIcon, ShieldAlertIcon } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import {
@@ -30,10 +32,10 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import {
-  ccp14DirectMapValues,
+  ccp14CityReading,
   ccp14MapFigure,
   ccp14MapLocations,
-  resolveCcp14MapLocation,
+  type Ccp14Coefficient,
 } from "@/lib/ccp14"
 
 type SelectOption = {
@@ -354,42 +356,111 @@ export function CaliParameterRail({
   )
 }
 
-function ccp14FigureHint(coefficient: "PGA" | "Ss" | "S1") {
+const CCP14_COEFFICIENTS = [
+  { coefficient: "PGA" as const, label: "PGA (g)", inputId: "ccp14-pga" },
+  { coefficient: "Ss" as const, label: "Ss (g)", inputId: "ccp14-ss" },
+  { coefficient: "S1" as const, label: "S1 (g)", inputId: "ccp14-s1" },
+]
+
+const INTERPOLATE = "interpolar"
+
+/**
+ * The legend states a value for every region, so the reading the engineer takes
+ * off a figure is a region, not a number. Picking one quotes the legend; sites
+ * between contours still need the interpolated value typed, as 3.10.2.1 says.
+ */
+function Ccp14CoefficientField({
+  coefficient,
+  inputId,
+  label,
+  locked,
+  onRegionChange,
+  onValueChange,
+  region,
+  value,
+}: {
+  coefficient: Ccp14Coefficient
+  inputId: string
+  label: string
+  locked: boolean
+  onRegionChange: (region: number | null) => void
+  onValueChange: (value: number | null) => void
+  region: number | null
+  value: number | null
+}) {
   const figure = ccp14MapFigure(coefficient)
-  const regions = figure.regions
-  const [firstRegion, firstValue] = regions[0]
-  const [lastRegion, lastValue] = regions[regions.length - 1]
-  const g = (value: number) => value.toFixed(2).replace(".", ",")
-  return `${figure.id.replace("figura-", "Figura ")} (pág. impresa ${figure.printedPage}): ${regions.length} regiones, de ${g(firstValue)} g (región ${firstRegion}) a ${g(lastValue)} g (región ${lastRegion}). Interpola linealmente entre contornos.`
+  const figureName = figure.id.replace("figura-", "Figura ")
+  const decimals = (v: number) => v.toFixed(2).replace(".", ",")
+  const options = [
+    ...figure.regions.map(([number, regionValue]) => ({
+      id: String(number),
+      label: `Región ${number} — ${coefficient} ${decimals(regionValue)} g`,
+    })),
+    { id: INTERPOLATE, label: "Entre contornos — interpolar" },
+  ]
+
+  return (
+    <FieldGroup className="gap-2">
+      <MunicipalSelect
+        description={
+          locked
+            ? `El recuadro del mapa asigna la región; ${coefficient} se toma de la leyenda de la ${figureName}.`
+            : `Lee la región en la ${figureName} (pág. impresa ${figure.printedPage}) y selecciónala. El valor sale de la leyenda oficial.`
+        }
+        id={`${inputId}-region`}
+        label={`${coefficient} · región leída en el mapa`}
+        onValueChange={(next) =>
+          onRegionChange(next === INTERPOLATE ? null : Number(next))
+        }
+        options={options}
+        value={region === null ? (value === null ? null : INTERPOLATE) : String(region)}
+      />
+      {region === null ? (
+        <NumericInput
+          description={`Valor interpolado linealmente entre contornos de la ${figureName}.`}
+          id={inputId}
+          label={label}
+          nullable
+          onValueChange={onValueChange}
+          value={value}
+        />
+      ) : (
+        <FieldDescription data-slot={`${inputId}-legend-value`}>
+          {label.replace(" (g)", "")} = {decimals(value ?? 0)} g, según la leyenda
+          de la {figureName}.
+        </FieldDescription>
+      )}
+    </FieldGroup>
+  )
 }
 
 export function Ccp14ParameterRail({
   mapLocationId,
   onMapLocationChange,
-  onPgaChange,
-  onS1Change,
+  onRegionChange,
+  onTraceabilityOpen,
   onSoilClassChange,
-  onSsChange,
-  pgaG,
-  s1G,
+  onValueChange,
+  regions,
   soilClass,
-  ssG,
+  values,
 }: {
   mapLocationId: string | null
   onMapLocationChange: (value: string) => void
-  onPgaChange: (value: number | null) => void
-  onS1Change: (value: number | null) => void
+  onRegionChange: (coefficient: Ccp14Coefficient, region: number | null) => void
+  onTraceabilityOpen: () => void
   onSoilClassChange: (value: string) => void
-  onSsChange: (value: number | null) => void
-  pgaG: number | null
-  s1G: number | null
+  onValueChange: (coefficient: Ccp14Coefficient, value: number | null) => void
+  regions: Record<Ccp14Coefficient, number | null>
   soilClass: string | null
-  ssG: number | null
+  values: Record<Ccp14Coefficient, number | null>
 }) {
-  const location = mapLocationId
-    ? resolveCcp14MapLocation(mapLocationId)
-    : null
-  const directValues = mapLocationId ? ccp14DirectMapValues(mapLocationId) : null
+  const reading = ccp14CityReading(mapLocationId)
+  const disputed =
+    reading !== null &&
+    [reading.pgaVerification, reading.ssVerification, reading.s1Verification].includes(
+      "disputed",
+    )
 
   return (
     <Card className="self-start" size="sm">
@@ -411,42 +482,50 @@ export function Ccp14ParameterRail({
             options={ccp14MapLocations.map(({ id, label }) => ({ id, label }))}
             value={mapLocationId}
           />
-          {directValues ? (
-            <Alert data-slot="ccp14-direct-map-values">
+          {reading ? (
+            <Alert data-slot="ccp14-city-reading">
               <ShieldAlertIcon />
-              <AlertTitle>Región asignada por el mapa</AlertTitle>
+              <AlertTitle>
+                {disputed
+                  ? `${reading.label}: lectura en disputa`
+                  : `${reading.label}: valores prellenados de la lectura del mapa`}
+              </AlertTitle>
               <AlertDescription>
-                {location?.label}: el recuadro completo cae en la región 1 de las
-                tres figuras, sin contornos que lo crucen, así que PGA ={" "}
-                {directValues.pgaG} g, Ss = {directValues.ssG} g y S1 ={" "}
-                {directValues.s1G} g se leen directamente de las leyendas.
+                Regiones leídas por espectr0 en las figuras oficiales: PGA{" "}
+                {reading.regions.PGA}, Ss {reading.regions.Ss}, S1{" "}
+                {reading.regions.S1}. El valor de cada región viene de la leyenda
+                impresa; la asignación lugar-a-región es una lectura de mapa, no un
+                dato publicado por INVÍAS. {reading.note} Verifica contra la figura
+                y edita si difiere.
               </AlertDescription>
             </Alert>
           ) : null}
-          <NumericInput
-            description={ccp14FigureHint("PGA")}
-            id="ccp14-pga"
-            label="PGA (g)"
-            nullable
-            onValueChange={onPgaChange}
-            value={pgaG}
-          />
-          <NumericInput
-            description={ccp14FigureHint("Ss")}
-            id="ccp14-ss"
-            label="Ss (g)"
-            nullable
-            onValueChange={onSsChange}
-            value={ssG}
-          />
-          <NumericInput
-            description={ccp14FigureHint("S1")}
-            id="ccp14-s1"
-            label="S1 (g)"
-            nullable
-            onValueChange={onS1Change}
-            value={s1G}
-          />
+          {reading ? (
+            <Button
+              className="w-full"
+              data-slot="ccp14-evidence-trigger"
+              onClick={onTraceabilityOpen}
+              size="sm"
+              type="button"
+              variant="outline"
+            >
+              <LandmarkIcon data-icon="inline-start" />
+              Ver trazabilidad
+            </Button>
+          ) : null}
+          {CCP14_COEFFICIENTS.map(({ coefficient, label, inputId }) => (
+            <Ccp14CoefficientField
+              coefficient={coefficient}
+              inputId={inputId}
+              key={coefficient}
+              label={label}
+              locked={false}
+              onRegionChange={(next) => onRegionChange(coefficient, next)}
+              onValueChange={(next) => onValueChange(coefficient, next)}
+              region={regions[coefficient]}
+              value={values[coefficient]}
+            />
+          ))}
           <MunicipalSelect
             description="Tabla 3.10.3.1-1, confirmado con la información geotécnica del proyecto. Fpga, Fa y Fv salen de las Tablas 3.10.3.2-1 a 3.10.3.2-3."
             id="ccp14-soil-trigger"

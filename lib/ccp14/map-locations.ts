@@ -1,5 +1,6 @@
 import { z } from "zod"
 
+import cityReadings from "./data/city-readings.json"
 import mapLocations from "./data/map-locations.json"
 
 export type Ccp14Coefficient = "PGA" | "Ss" | "S1"
@@ -13,6 +14,15 @@ export type Ccp14MapFigure = {
   mapTitle: string
   /** Legend rows as printed on the figure, ordered by region number. */
   regions: readonly (readonly [region: number, value: number])[]
+  /** Citation of the printed legend table, which states each region's value. */
+  legendCitationId: string
+  /** Rendered cut of the figure, and of its legend table, served from /public. */
+  image: string
+  legendImage: string
+  /** Measured vertical band of each region's row on the legend cut. */
+  legendRowBands: Record<string, { top: number; height: number }>
+  /** Where each labeled place sits on this figure, as a fraction of the image. */
+  positions: Record<string, { x: number; y: number; from: string }>
 }
 
 export type Ccp14MapLocation = {
@@ -25,6 +35,8 @@ export type Ccp14MapLocation = {
    * places, so no coefficient can be read off without tracing the contours.
    */
   directRegion: Record<Ccp14Coefficient, number> | null
+  /** Citation of the attested source region, one per figure, when directRegion is set. */
+  directCitationIds: Record<Ccp14Coefficient, string> | null
 }
 
 export const ccp14MapFigures = mapLocations.figures.map((figure) => ({
@@ -75,7 +87,11 @@ export function ccp14LegendValue(coefficient: Ccp14Coefficient, region: number) 
   return entry[1]
 }
 
-/** The three coefficients where the figure assigns a region at the location itself. */
+/**
+ * Coefficients whose value the figure states at the location itself, with the
+ * citation of the region that states it. Anywhere else the figure marks bands
+ * rather than places and nothing can be read off without tracing contours.
+ */
 export function ccp14DirectMapValues(id: string) {
   const location = resolveCcp14MapLocation(id)
   if (!location.directRegion) return null
@@ -85,6 +101,123 @@ export function ccp14DirectMapValues(id: string) {
     s1G: ccp14LegendValue("S1", location.directRegion.S1),
   }
 }
+
+/**
+ * Direct source backing for a declared reading: present only where the figure
+ * assigns the location a region AND the entered coefficient still equals what
+ * that region's legend row states. An edited value loses its backing rather
+ * than keeping a citation that no longer describes it.
+ */
+/**
+ * Backing for a coefficient the engineer read as a whole region rather than
+ * interpolating. The legend is a printed table, so once the region is asserted
+ * the value is quoted from the publication rather than typed.
+ */
+export function ccp14LegendBacking(
+  coefficient: Ccp14Coefficient,
+  region: number | null,
+  entered: number,
+) {
+  if (region === null) return null
+  const figure = ccp14MapFigure(coefficient)
+  const stated = ccp14LegendValue(coefficient, region)
+  if (entered !== stated) return null
+  return {
+    coefficient,
+    region,
+    value: stated,
+    citationId: figure.legendCitationId,
+    reference: `${figure.id.replace("figura-", "Figura ")}, leyenda, región ${region}`,
+  }
+}
+
+export function ccp14DirectValueBacking(
+  id: string | null,
+  entered: { pgaG: number; ssG: number; s1G: number },
+) {
+  if (!id) return []
+  const location = resolveCcp14MapLocation(id)
+  if (!location.directRegion || !location.directCitationIds) return []
+  const fields = [
+    ["pgaG", "PGA", entered.pgaG],
+    ["ssG", "Ss", entered.ssG],
+    ["s1G", "S1", entered.s1G],
+  ] as const
+  return fields.flatMap(([field, coefficient, value]) => {
+    const region = location.directRegion![coefficient as Ccp14Coefficient]
+    const stated = ccp14LegendValue(coefficient as Ccp14Coefficient, region)
+    if (value !== stated) return []
+    return [{
+      field,
+      coefficient,
+      value: stated,
+      region,
+      citationId: location.directCitationIds![coefficient as Ccp14Coefficient],
+    }]
+  })
+}
+
+export type Ccp14ReadingVerification = "agrees" | "disputed" | "unverified"
+
+export type Ccp14CityReading = {
+  id: string
+  label: string
+  regions: Record<Ccp14Coefficient, number>
+  pgaVerification: Ccp14ReadingVerification
+  ssVerification: Ccp14ReadingVerification
+  s1Verification: Ccp14ReadingVerification
+  note: string
+}
+
+const readingById = new Map(
+  (cityReadings.readings as Ccp14CityReading[]).map((r) => [r.id, r]),
+)
+
+/**
+ * The region each labeled place was read into, and how well that reading holds
+ * up. The value of a region is published; which region a place falls in is not,
+ * so this is an espectr0 map reading and every prefilled value stays editable.
+ */
+export function ccp14CityReading(id: string | null): Ccp14CityReading | null {
+  return id ? readingById.get(id) ?? null : null
+}
+
+export function ccp14CityValues(id: string | null) {
+  const reading = ccp14CityReading(id)
+  if (!reading) return null
+  return {
+    PGA: ccp14LegendValue("PGA", reading.regions.PGA),
+    Ss: ccp14LegendValue("Ss", reading.regions.Ss),
+    S1: ccp14LegendValue("S1", reading.regions.S1),
+  }
+}
+
+/**
+ * Vertical band of one legend row on the legend cut, as image fractions.
+ * Measured from the rendered crop rather than assumed even: the header row is
+ * taller than the data rows, so dividing the image evenly lands the highlight
+ * between values.
+ */
+export function ccp14LegendRowBand(coefficient: Ccp14Coefficient, region: number) {
+  const band = ccp14MapFigure(coefficient).legendRowBands[String(region)]
+  if (!band) {
+    throw new RangeError(
+      `Region ${region} has no measured row on the ${coefficient} legend`,
+    )
+  }
+  return band
+}
+
+export function ccp14FigurePosition(
+  coefficient: Ccp14Coefficient,
+  locationId: string | null,
+) {
+  if (!locationId) return null
+  return ccp14MapFigure(coefficient).positions[locationId] ?? null
+}
+
+export const CCP14_READING_LEGEND = cityReadings.verificationLegend
+export const CCP14_READING_NOTE = cityReadings.note
 
 export const ccp14MapRegionCountConflict =
   mapLocations.appendixC3RegionCountConflict

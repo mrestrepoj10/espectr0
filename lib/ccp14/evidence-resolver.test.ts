@@ -90,6 +90,98 @@ describe("CCP-14 evidence resolver", () => {
     expect(t0Figure?.rect).not.toBeNull()
   })
 
+  it("backs the coefficients the figure states at the location itself", () => {
+    const evidence = resolveSpectrumEvidence(
+      adaptCcp14Spectrum({
+        pgaG: 0.05,
+        ssG: 0.1,
+        s1G: 0.05,
+        soilClass: "B",
+        mapLocationId: "san-andres-y-providencia",
+      }),
+    )
+
+    expect(
+      evidence.directValues
+        .filter(({ unit }) => unit === "g")
+        .map(({ label, value, citationId }) => ({ label, value, citationId })),
+    ).toEqual([
+      { label: "PGA", value: 0.05, citationId: "map-inset-san-andres-pga" },
+      { label: "Ss", value: 0.1, citationId: "map-inset-san-andres-ss" },
+      { label: "S1", value: 0.05, citationId: "map-inset-san-andres-s1" },
+    ])
+    const citation = evidence.citations.find(
+      ({ id }) => id === "map-inset-san-andres-pga",
+    )
+    expect(citation).toMatchObject({ physicalPage: 51, printedPage: "3-47" })
+    // The drawer draws this rectangle over the page, so it has to be attested.
+    expect(citation?.rect).not.toBeNull()
+    expect(citation?.transcription).toContain("región 1")
+  })
+
+  it("drops the backing when the engineer overrides a stated coefficient", () => {
+    const evidence = resolveSpectrumEvidence(
+      adaptCcp14Spectrum({
+        pgaG: 0.08,
+        ssG: 0.1,
+        s1G: 0.05,
+        soilClass: "B",
+        mapLocationId: "san-andres-y-providencia",
+      }),
+    )
+
+    // Ss and S1 still match the legend; the edited PGA no longer does.
+    expect(
+      evidence.directValues.filter(({ unit }) => unit === "g").map(({ label }) => label),
+    ).toEqual(["Ss", "S1"])
+    expect(evidence.citations.map(({ id }) => id)).not.toContain(
+      "map-inset-san-andres-pga",
+    )
+  })
+
+  it("quotes the printed legend for a coefficient read as a whole region", () => {
+    const evidence = resolveSpectrumEvidence(
+      adaptCcp14Spectrum({
+        ...generalProcedureInput,
+        pgaG: 0.3,
+        pgaRegion: 6,
+        ssG: 0.7,
+        ssRegion: 7,
+      }),
+    )
+
+    expect(
+      evidence.directValues
+        .filter(({ unit }) => unit === "g")
+        .map(({ label, value, citationId }) => ({ label, value, citationId })),
+    ).toEqual([
+      { label: "PGA · región 6", value: 0.3, citationId: "map-legend-pga" },
+      { label: "Ss · región 7", value: 0.7, citationId: "map-legend-ss" },
+    ])
+    const legend = evidence.citations.find(({ id }) => id === "map-legend-pga")
+    expect(legend).toMatchObject({ physicalPage: 51, printedPage: "3-47" })
+    expect(legend?.rect).not.toBeNull()
+    expect(legend?.transcription).toContain("no indica en qué región")
+  })
+
+  it("refuses to quote the legend for a region that does not state that value", () => {
+    const evidence = resolveSpectrumEvidence(
+      adaptCcp14Spectrum({ ...generalProcedureInput, pgaG: 0.27, pgaRegion: 6 }),
+    )
+
+    // 0.27 is interpolated between contours, so region 6 does not state it.
+    expect(evidence.directValues.some(({ unit }) => unit === "g")).toBe(false)
+    expect(evidence.citations.map(({ id }) => id)).not.toContain("map-legend-pga")
+  })
+
+  it("claims no map backing for a location the figures only label", () => {
+    const evidence = resolveSpectrumEvidence(
+      adaptCcp14Spectrum({ ...generalProcedureInput, mapLocationId: "neiva" }),
+    )
+
+    expect(evidence.directValues.every(({ unit }) => unit === "dimensionless")).toBe(true)
+  })
+
   it("binds exactly tabulated site factors as direct source values", () => {
     const evidence = resolveSpectrumEvidence(adaptCcp14Spectrum(generalProcedureInput))
 

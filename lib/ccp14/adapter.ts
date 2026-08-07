@@ -25,7 +25,11 @@ import {
   ccp14ComputationInputSchema,
   computeCcp14Spectrum,
 } from "./engine"
-import { resolveCcp14MapLocation } from "./map-locations"
+import {
+  ccp14DirectValueBacking,
+  ccp14LegendBacking,
+  resolveCcp14MapLocation,
+} from "./map-locations"
 import "./study-relations"
 
 import type { SpectrumEngine } from "../spectra/engine"
@@ -140,6 +144,9 @@ function normalizedInputs(input: unknown): NormalizedInputs {
     s1G: scalar("s1G"),
     soilClass: scalar("soilClass"),
     mapLocationId: scalar("mapLocationId"),
+    pgaRegion: scalar("pgaRegion"),
+    ssRegion: scalar("ssRegion"),
+    s1Region: scalar("s1Region"),
     t0Interpretation: scalar("t0Interpretation"),
     distanceToActiveFaultKm: scalar("distanceToActiveFaultKm"),
     longDurationEarthquakesExpected: scalar("longDurationEarthquakesExpected"),
@@ -236,10 +243,32 @@ function normalizedPoint(engine: Ccp14EngineSuccess, tSeconds: number): Normaliz
 
 function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
   const { input } = engine
+  const backing = ccp14DirectValueBacking(input.mapLocationId, {
+    pgaG: input.pgaG,
+    ssG: input.ssG,
+    s1G: input.s1G,
+  })
+  const backingByField = new Map(backing.map((entry) => [entry.field, entry]))
+  const legendByField = {
+    pgaG: ccp14LegendBacking("PGA", input.pgaRegion, input.pgaG),
+    ssG: ccp14LegendBacking("Ss", input.ssRegion, input.ssG),
+    s1G: ccp14LegendBacking("S1", input.s1Region, input.s1G),
+  }
+  /**
+   * A coefficient can be backed twice over: the figure may state it at the
+   * location, and the engineer may also have read it as a whole legend region.
+   * Both citations travel with the value; neither is invented when the number
+   * stops matching what the publication says.
+   */
+  const coefficientCitations = (field: "pgaG" | "ssG" | "s1G") => [
+    ...(backingByField.get(field) ? [backingByField.get(field)!.citationId] : []),
+    ...(legendByField[field] ? [legendByField[field]!.citationId] : []),
+    "claim-map-inputs",
+  ]
   const directSteps = [
-    { id: "ccp14-input-pga", label: "PGA", value: input.pgaG, unit: "g", citationIds: ["claim-map-inputs"] },
-    { id: "ccp14-input-ss", label: "Ss", value: input.ssG, unit: "g", citationIds: ["claim-map-inputs"] },
-    { id: "ccp14-input-s1", label: "S1", value: input.s1G, unit: "g", citationIds: ["claim-map-inputs"] },
+    { id: "ccp14-input-pga", label: "PGA", value: input.pgaG, unit: "g", citationIds: coefficientCitations("pgaG") },
+    { id: "ccp14-input-ss", label: "Ss", value: input.ssG, unit: "g", citationIds: coefficientCitations("ssG") },
+    { id: "ccp14-input-s1", label: "S1", value: input.s1G, unit: "g", citationIds: coefficientCitations("s1G") },
     { id: "ccp14-input-soil-class", label: "Perfil de sitio", value: input.soilClass, unit: "class", citationIds: ["claim-soils"] },
     {
       id: "ccp14-input-map-location",
