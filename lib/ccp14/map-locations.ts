@@ -25,6 +25,8 @@ export type Ccp14MapLocation = {
    * places, so no coefficient can be read off without tracing the contours.
    */
   directRegion: Record<Ccp14Coefficient, number> | null
+  /** Citation of the attested source region, one per figure, when directRegion is set. */
+  directCitationIds: Record<Ccp14Coefficient, string> | null
 }
 
 export const ccp14MapFigures = mapLocations.figures.map((figure) => ({
@@ -75,7 +77,11 @@ export function ccp14LegendValue(coefficient: Ccp14Coefficient, region: number) 
   return entry[1]
 }
 
-/** The three coefficients where the figure assigns a region at the location itself. */
+/**
+ * Coefficients whose value the figure states at the location itself, with the
+ * citation of the region that states it. Anywhere else the figure marks bands
+ * rather than places and nothing can be read off without tracing contours.
+ */
 export function ccp14DirectMapValues(id: string) {
   const location = resolveCcp14MapLocation(id)
   if (!location.directRegion) return null
@@ -84,6 +90,38 @@ export function ccp14DirectMapValues(id: string) {
     ssG: ccp14LegendValue("Ss", location.directRegion.Ss),
     s1G: ccp14LegendValue("S1", location.directRegion.S1),
   }
+}
+
+/**
+ * Direct source backing for a declared reading: present only where the figure
+ * assigns the location a region AND the entered coefficient still equals what
+ * that region's legend row states. An edited value loses its backing rather
+ * than keeping a citation that no longer describes it.
+ */
+export function ccp14DirectValueBacking(
+  id: string | null,
+  entered: { pgaG: number; ssG: number; s1G: number },
+) {
+  if (!id) return []
+  const location = resolveCcp14MapLocation(id)
+  if (!location.directRegion || !location.directCitationIds) return []
+  const fields = [
+    ["pgaG", "PGA", entered.pgaG],
+    ["ssG", "Ss", entered.ssG],
+    ["s1G", "S1", entered.s1G],
+  ] as const
+  return fields.flatMap(([field, coefficient, value]) => {
+    const region = location.directRegion![coefficient as Ccp14Coefficient]
+    const stated = ccp14LegendValue(coefficient as Ccp14Coefficient, region)
+    if (value !== stated) return []
+    return [{
+      field,
+      coefficient,
+      value: stated,
+      region,
+      citationId: location.directCitationIds![coefficient as Ccp14Coefficient],
+    }]
+  })
 }
 
 export const ccp14MapRegionCountConflict =

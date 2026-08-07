@@ -20,7 +20,10 @@ import type {
 } from "../spectra/types"
 
 import { CCP14_ENGINE_ID, CCP14_STUDY_LABEL } from "./constants"
-import { resolveCcp14MapLocation } from "./map-locations"
+import {
+  ccp14DirectValueBacking,
+  resolveCcp14MapLocation,
+} from "./map-locations"
 import { parseCcp14TraceEnvelope, type Ccp14TraceStep } from "./trace"
 
 type StudySource = {
@@ -213,11 +216,37 @@ function ccp14Evidence(
   const trace = parseCcp14TraceEnvelope(result.trace)
   const stepById = new Map(trace.steps.map((step) => [step.id, step]))
   const citations = result.citationIds.map(citationFor)
-  const directValues = (["Fpga", "Fa", "Fv"] as const)
+  /**
+   * A coefficient read straight off a figure that assigns the location its
+   * region, still matching what that region's legend states. This is the same
+   * kind of claim the NSR-10 memoria makes about an Apendice A-4 row: a value,
+   * a page and an attested rectangle you can open and check.
+   */
+  const mapBacked: SpectrumDirectValue[] = ccp14DirectValueBacking(
+    typeof result.normalizedInputs.mapLocationId === "string"
+      ? result.normalizedInputs.mapLocationId
+      : null,
+    {
+      pgaG: Number(result.normalizedInputs.pgaG),
+      ssG: Number(result.normalizedInputs.ssG),
+      s1G: Number(result.normalizedInputs.s1G),
+    },
+  ).map((entry) => ({
+    id: entry.field,
+    label: entry.coefficient,
+    value: entry.value,
+    normalizedInputPath: [entry.field],
+    traceStepId: null,
+    unit: "g" as const,
+    provenance: "direct-source" as const,
+    citationId: entry.citationId,
+  }))
+  const siteFactors = (["Fpga", "Fa", "Fv"] as const)
     .map((factorId) => stepById.get(`ccp14-factor-${factorId.toLowerCase()}`))
     .filter((step): step is Ccp14TraceStep => step !== undefined)
     .map(directValueFor)
     .filter((value): value is SpectrumDirectValue => value !== null)
+  const directValues = [...mapBacked, ...siteFactors]
   const metricLineage: SpectrumMetricLineage[] = result.metrics
     .filter((metric) => metric.formulaId !== null)
     .map((metric) => {

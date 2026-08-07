@@ -90,6 +90,63 @@ describe("CCP-14 evidence resolver", () => {
     expect(t0Figure?.rect).not.toBeNull()
   })
 
+  it("backs the coefficients the figure states at the location itself", () => {
+    const evidence = resolveSpectrumEvidence(
+      adaptCcp14Spectrum({
+        pgaG: 0.05,
+        ssG: 0.1,
+        s1G: 0.05,
+        soilClass: "B",
+        mapLocationId: "san-andres-y-providencia",
+      }),
+    )
+
+    expect(
+      evidence.directValues
+        .filter(({ unit }) => unit === "g")
+        .map(({ label, value, citationId }) => ({ label, value, citationId })),
+    ).toEqual([
+      { label: "PGA", value: 0.05, citationId: "map-inset-san-andres-pga" },
+      { label: "Ss", value: 0.1, citationId: "map-inset-san-andres-ss" },
+      { label: "S1", value: 0.05, citationId: "map-inset-san-andres-s1" },
+    ])
+    const citation = evidence.citations.find(
+      ({ id }) => id === "map-inset-san-andres-pga",
+    )
+    expect(citation).toMatchObject({ physicalPage: 51, printedPage: "3-47" })
+    // The drawer draws this rectangle over the page, so it has to be attested.
+    expect(citation?.rect).not.toBeNull()
+    expect(citation?.transcription).toContain("región 1")
+  })
+
+  it("drops the backing when the engineer overrides a stated coefficient", () => {
+    const evidence = resolveSpectrumEvidence(
+      adaptCcp14Spectrum({
+        pgaG: 0.08,
+        ssG: 0.1,
+        s1G: 0.05,
+        soilClass: "B",
+        mapLocationId: "san-andres-y-providencia",
+      }),
+    )
+
+    // Ss and S1 still match the legend; the edited PGA no longer does.
+    expect(
+      evidence.directValues.filter(({ unit }) => unit === "g").map(({ label }) => label),
+    ).toEqual(["Ss", "S1"])
+    expect(evidence.citations.map(({ id }) => id)).not.toContain(
+      "map-inset-san-andres-pga",
+    )
+  })
+
+  it("claims no map backing for a location the figures only label", () => {
+    const evidence = resolveSpectrumEvidence(
+      adaptCcp14Spectrum({ ...generalProcedureInput, mapLocationId: "neiva" }),
+    )
+
+    expect(evidence.directValues.every(({ unit }) => unit === "dimensionless")).toBe(true)
+  })
+
   it("binds exactly tabulated site factors as direct source values", () => {
     const evidence = resolveSpectrumEvidence(adaptCcp14Spectrum(generalProcedureInput))
 

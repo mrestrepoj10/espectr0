@@ -25,7 +25,10 @@ import {
   ccp14ComputationInputSchema,
   computeCcp14Spectrum,
 } from "./engine"
-import { resolveCcp14MapLocation } from "./map-locations"
+import {
+  ccp14DirectValueBacking,
+  resolveCcp14MapLocation,
+} from "./map-locations"
 import "./study-relations"
 
 import type { SpectrumEngine } from "../spectra/engine"
@@ -236,10 +239,20 @@ function normalizedPoint(engine: Ccp14EngineSuccess, tSeconds: number): Normaliz
 
 function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
   const { input } = engine
+  const backing = ccp14DirectValueBacking(input.mapLocationId, {
+    pgaG: input.pgaG,
+    ssG: input.ssG,
+    s1G: input.s1G,
+  })
+  const backingByField = new Map(backing.map((entry) => [entry.field, entry]))
+  const coefficientCitations = (field: "pgaG" | "ssG" | "s1G") => {
+    const entry = backingByField.get(field)
+    return entry ? [entry.citationId, "claim-map-inputs"] : ["claim-map-inputs"]
+  }
   const directSteps = [
-    { id: "ccp14-input-pga", label: "PGA", value: input.pgaG, unit: "g", citationIds: ["claim-map-inputs"] },
-    { id: "ccp14-input-ss", label: "Ss", value: input.ssG, unit: "g", citationIds: ["claim-map-inputs"] },
-    { id: "ccp14-input-s1", label: "S1", value: input.s1G, unit: "g", citationIds: ["claim-map-inputs"] },
+    { id: "ccp14-input-pga", label: "PGA", value: input.pgaG, unit: "g", citationIds: coefficientCitations("pgaG") },
+    { id: "ccp14-input-ss", label: "Ss", value: input.ssG, unit: "g", citationIds: coefficientCitations("ssG") },
+    { id: "ccp14-input-s1", label: "S1", value: input.s1G, unit: "g", citationIds: coefficientCitations("s1G") },
     { id: "ccp14-input-soil-class", label: "Perfil de sitio", value: input.soilClass, unit: "class", citationIds: ["claim-soils"] },
     {
       id: "ccp14-input-map-location",

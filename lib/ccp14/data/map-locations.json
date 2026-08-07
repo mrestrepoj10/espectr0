@@ -197,145 +197,169 @@
       "id": "arauca",
       "label": "Arauca",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "armenia",
       "label": "Armenia",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "barranquilla",
       "label": "Barranquilla",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "bogota",
       "label": "Bogotá",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "bucaramanga",
       "label": "Bucaramanga",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "cali",
       "label": "Cali",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "cartagena",
       "label": "Cartagena",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "cucuta",
       "label": "Cúcuta",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "florencia",
       "label": "Florencia",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "ibague",
       "label": "Ibagué",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "leticia",
       "label": "Leticia",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "manizales",
       "label": "Manizales",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "medellin",
       "label": "Medellín",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "mitu",
       "label": "Mitú",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "mocoa",
       "label": "Mocoa",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "monteria",
       "label": "Montería",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "neiva",
       "label": "Neiva",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "pasto",
       "label": "Pasto",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "pereira",
       "label": "Pereira",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "popayan",
       "label": "Popayán",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "puerto-carreno",
       "label": "Puerto Carreño",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "puerto-inirida",
       "label": "Puerto Inírida",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "quibdo",
       "label": "Quibdó",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "riohacha",
       "label": "Riohacha",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "san-andres-y-providencia",
@@ -345,49 +369,61 @@
         "PGA": 1,
         "Ss": 1,
         "S1": 1
+      },
+      "directCitationIds": {
+        "PGA": "map-inset-san-andres-pga",
+        "Ss": "map-inset-san-andres-ss",
+        "S1": "map-inset-san-andres-s1"
       }
     },
     {
       "id": "san-jose-del-guaviare",
       "label": "San José del Guaviare",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "santa-marta",
       "label": "Santa Marta",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "sincelejo",
       "label": "Sincelejo",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "tunja",
       "label": "Tunja",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "valledupar",
       "label": "Valledupar",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "villavicencio",
       "label": "Villavicencio",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     },
     {
       "id": "yopal",
       "label": "Yopal",
       "inset": false,
-      "directRegion": null
+      "directRegion": null,
+      "directCitationIds": null
     }
   ]
 }
