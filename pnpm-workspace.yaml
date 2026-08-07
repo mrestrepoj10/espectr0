@@ -1,4 +1,7 @@
 allowBuilds:
+  # The npm tarball already carries every platform binary, so the postinstall
+  # only chmods one it can already see. Denying it keeps installs offline.
+  agent-browser: false
   sharp: true
   unrs-resolver: true
 ignoredBuiltDependencies:
