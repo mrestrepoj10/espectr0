@@ -7,18 +7,13 @@ import manifest from "./evidence/manifest.json"
 
 type Rect = { left: number; top: number; width: number; height: number }
 
-/** Equations and applicability regions live outside the manifest here. */
+/**
+ * Equations and applicability regions live outside the manifest here, and the
+ * claims matrix repeats the equation ids. The formula entries come last so they
+ * win the lookup: they carry the attested rectangle and the transcribed
+ * equation that a claim label would replace with a short phrase.
+ */
 const extraCitations = [
-  ...formulaInventory.formulas.map(({ citation, expression }) => ({
-    id: citation.citationId,
-    sourceDocumentId: citation.sourceDocumentId,
-    regionKind: citation.regionKind,
-    physicalPage: citation.physicalPage,
-    printedPage: citation.printedPage,
-    reference: citation.reference,
-    rect: citation.rect as Rect | null,
-    extractedToken: expression ?? citation.reference,
-  })),
   ...claimsMatrix.claims.map((claim) => ({
     id: claim.citation.citationId,
     sourceDocumentId: claim.citation.sourceDocumentId,
@@ -28,6 +23,16 @@ const extraCitations = [
     reference: claim.claim,
     rect: null,
     extractedToken: claim.claim,
+  })),
+  ...formulaInventory.formulas.map(({ citation, expression }) => ({
+    id: citation.citationId,
+    sourceDocumentId: citation.sourceDocumentId,
+    regionKind: citation.regionKind,
+    physicalPage: citation.physicalPage,
+    printedPage: citation.printedPage,
+    reference: citation.reference,
+    rect: citation.rect as Rect | null,
+    extractedToken: expression ?? citation.reference,
   })),
 ]
 

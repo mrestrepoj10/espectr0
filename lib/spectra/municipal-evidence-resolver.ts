@@ -48,7 +48,10 @@ type FormulaEntry = {
   id: string
   /** Null where the inventory records a formula it could not transcribe. */
   expression: string | null
+  /** The inventories spell the branch range either way. */
   domain?: string | null
+  condition?: string | null
+  citationId?: string | null
   citation?: { reference?: string | null } | null
 }
 
@@ -105,7 +108,27 @@ export function createMunicipalEvidenceResolver(
       citation,
     ]),
   )
-  const formulas = new Map(config.formulas.map((formula) => [formula.id, formula]))
+  /**
+   * Indexed by inventory id and by the citation it carries: a branch names its
+   * formula either way across the studies, and a miss silently empties the
+   * branch's expression and range instead of failing.
+   */
+  const formulas = new Map<string, FormulaEntry>()
+  for (const formula of config.formulas) {
+    formulas.set(formula.id, formula)
+    if (formula.citationId) formulas.set(formula.citationId, formula)
+  }
+  function formulaFor(formulaId: string) {
+    return (
+      formulas.get(formulaId) ??
+      [...formulas.values()].find(
+        (formula) =>
+          formula.citationId !== undefined &&
+          formula.citationId !== null &&
+          formulaId.endsWith(formula.citationId),
+      )
+    )
+  }
 
   function documentFor(sourceId: string): SpectrumEvidenceDocument {
     const source = sources.get(sourceId)
@@ -189,6 +212,21 @@ export function createMunicipalEvidenceResolver(
       },
     }
 
+    // Nothing may accompany an unavailable view — assertEvidenceView rejects
+    // documents, citations and lineage alike on one.
+    if (result.evidenceAvailability.status === "unavailable") {
+      return {
+        ...base,
+        status: "unavailable",
+        documents: [],
+        directValues: [],
+        citations: [],
+        metricLineage: [],
+        branchLineage: [],
+        unavailableClaims: unavailableClaims(result),
+      }
+    }
+
     // A blocked scenario still has sources and the warnings that block it; only
     // the lineage of a spectrum that was never computed drops out.
     if (result.status !== "ok") {
@@ -230,7 +268,7 @@ export function createMunicipalEvidenceResolver(
       .filter((metric) => metric.formulaId !== null)
       .map((metric) => {
         const step = metric.formulaId ? stepById.get(metric.formulaId) : undefined
-        const formula = metric.formulaId ? formulas.get(metric.formulaId) : undefined
+        const formula = metric.formulaId ? formulaFor(metric.formulaId) : undefined
         const expression = (step as { expression?: string } | undefined)?.expression
         const citedReference = metric.citationIds
           .map((id) => citationById.get(id))
@@ -255,7 +293,7 @@ export function createMunicipalEvidenceResolver(
       if (points.length === 0) {
         throw new Error(`Spectrum branch has no normalized points: ${branch.id}`)
       }
-      const formula = formulas.get(branch.formulaId)
+      const formula = formulaFor(branch.formulaId)
       const citedReference = branch.citationIds
         .map((id) => citationById.get(id))
         .find(Boolean)?.reference
@@ -263,7 +301,7 @@ export function createMunicipalEvidenceResolver(
         branchId: branch.id,
         formulaId: branch.formulaId,
         formula: formula?.expression ?? null,
-        condition: formula?.domain ?? null,
+        condition: formula?.condition ?? formula?.domain ?? null,
         reference: formula?.citation?.reference ?? citedReference ?? null,
         citationIds: [...branch.citationIds],
         periodRangeSeconds: {
@@ -296,6 +334,7 @@ export function createMunicipalEvidenceResolver(
           `${studyLabel} evidence view does not match its installed source and trace model`,
         )
       }
+      if (view.status === "unavailable") return
       const seen = new Set(view.citations.map(({ id }) => id))
       for (const citationId of result.citationIds) {
         if (!seen.has(citationId)) {
