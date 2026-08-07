@@ -153,6 +153,7 @@ export function BogotaParameterRail({
   onHazardChange,
   onImportanceFactorChange,
   onRigidBasePeriodChange,
+  onTraceabilityOpen,
   onZoneChange,
   rigidBasePeriodSeconds,
   zoneId,
@@ -167,6 +168,7 @@ export function BogotaParameterRail({
   onHazardChange: (value: string) => void
   onImportanceFactorChange: (value: number) => void
   onRigidBasePeriodChange: (value: number | null) => void
+  onTraceabilityOpen: () => void
   onZoneChange: (value: string) => void
   rigidBasePeriodSeconds: number | null
   zoneId: string | null
@@ -190,6 +192,19 @@ export function BogotaParameterRail({
             options={zoneOptions}
             value={zoneId}
           />
+          {zoneId ? (
+            <Button
+              className="w-full"
+              data-slot="bogota-evidence-trigger"
+              onClick={onTraceabilityOpen}
+              size="sm"
+              type="button"
+              variant="outline"
+            >
+              <LandmarkIcon data-icon="inline-start" />
+              Ver trazabilidad
+            </Button>
+          ) : null}
           <MunicipalSelect
             description={hazardDescription}
             id="bogota-hazard-trigger"

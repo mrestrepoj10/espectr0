@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "id": "fopae-2010-mapa-2-zonas-respuesta-sismica",
+    "title": "Mapa No 2 — Zonas de Respuesta Sísmica, anexo cartográfico de la microzonificación sísmica de Bogotá D.C.",
+    "issuingAuthority": "Alcaldía Mayor de Bogotá D.C. — Secretaría Distrital de Planeación / FOPAE",
+    "adoptionInstrument": "Anexo del Decreto Distrital 523 de 2010, compilado en el Decreto Distrital 670 de 2025",
+    "date": "Diciembre de 2010",
+    "scale": "1:40.000",
+    "sha256": "43f9f58b695a4fb43399c979326a832062af4f837f57c4acedbb0198424b991f",
+    "byteLength": 3825830,
+    "pageCount": 1,
+    "officialUrl": null,
+    "embeddedMetadata": {
+      "title": "Respuesta_2010",
+      "author": "SDP",
+      "creationDate": "2010-12-16T11:51:58-05:00"
+    },
+    "note": "Hoja cartográfica que dibuja las 16 zonas de respuesta sísmica y su leyenda. Los recortes servidos desde /bogota se renderizan de este PDF. La hoja llegó como archivo, no descargada de una URL oficial, así que su SHA-256 no está respaldado por un lock de recuperación como las tres fuentes de source-locks.json; ver la entrada cartographic-annex-provenance del registro de incertidumbre."
+  },
+  "image": "/bogota/mapa-2-zonas-respuesta-sismica.png",
+  "legendImage": "/bogota/mapa-2-leyenda.png",
+  "legendRowBands": {
+    "cerros": {
+      "top": 0.12451,
+      "height": 0.03988
+    },
+    "piedemonte-a": {
+      "top": 0.17802,
+      "height": 0.03988
+    },
+    "piedemonte-b": {
+      "top": 0.22957,
+      "height": 0.03988
+    },
+    "piedemonte-c": {
+      "top": 0.28307,
+      "height": 0.03891
+    },
+    "lacustre-50": {
+      "top": 0.3356,
+      "height": 0.03988
+    },
+    "lacustre-100": {
+      "top": 0.38813,
+      "height": 0.03988
+    },
+    "lacustre-200": {
+      "top": 0.44066,
+      "height": 0.03988
+    },
+    "lacustre-300": {
+      "top": 0.49319,
+      "height": 0.03988
+    },
+    "lacustre-500": {
+      "top": 0.54669,
+      "height": 0.03891
+    },
+    "lacustre-aluvial-200": {
+      "top": 0.59825,
+      "height": 0.03988
+    },
+    "lacustre-aluvial-300": {
+      "top": 0.65078,
+      "height": 0.03988
+    },
+    "aluvial-50": {
+      "top": 0.70428,
+      "height": 0.03891
+    },
+    "aluvial-100": {
+      "top": 0.75681,
+      "height": 0.03988
+    },
+    "aluvial-200": {
+      "top": 0.80934,
+      "height": 0.03891
+    },
+    "aluvial-300": {
+      "top": 0.86187,
+      "height": 0.03891
+    },
+    "deposito-ladera": {
+      "top": 0.9144,
+      "height": 0.03988
+    }
+  }
+}

@@ -19,6 +19,18 @@
       "severity": "medium",
       "issue": "Copyright and dynamic-page constraints prevent bundling source bytes.",
       "disposition": "Independent reviewer must re-fetch and verify the committed URL/length/SHA-256 locks."
+    },
+    {
+      "id": "cartographic-annex-redistribution",
+      "severity": "medium",
+      "issue": "The two rasters committed under public/bogota render the Mapa No 2 annex sheet, which the study's redistribution policy would otherwise class as a prohibited rendered source page. The sheet is an annex of Decreto Distrital 523 de 2010 rather than the FOPAE report, but redistribution permission was not established.",
+      "disposition": "Shipped so the traceability drawer can show which zone was read, with the exception recorded in redistribution.json. Independent review decides whether to keep the rasters or fall back to the outbound link to the decree."
+    },
+    {
+      "id": "cartographic-annex-provenance",
+      "severity": "medium",
+      "issue": "The annex sheet was supplied as a file rather than fetched from an official URL, so no URL lock backs its SHA-256 (43f9f58b…) the way the three locked sources are backed. Its embedded metadata (SDP, 2010-12-16, «Respuesta_2010») is consistent with the official sheet but is not a substitute for a retrieval lock.",
+      "disposition": "Kept out of source-locks.json, which stays a three-source manifest of URL-verified bytes. Independent review must locate the official URL and add the lock before activation."
     }
   ]
 }

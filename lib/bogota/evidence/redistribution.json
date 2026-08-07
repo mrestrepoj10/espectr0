@@ -11,5 +11,16 @@
     "Rendered source pages",
     "Downloaded SISJUR HTML",
     "Formula JPEGs"
-  ]
+  ],
+  "cartographicAnnex": {
+    "sourceDocumentId": "fopae-2010-mapa-2-zonas-respuesta-sismica",
+    "committedArtifacts": [
+      "public/bogota/mapa-2-zonas-respuesta-sismica.png",
+      "public/bogota/mapa-2-leyenda.png"
+    ],
+    "scope": "Screen-resolution rasters of the one-sheet Mapa No 2 annex and a crop of its printed legend, shown in the traceability drawer so the engineer can see which zone was selected.",
+    "distinctFromLockedSources": "This sheet is the cartographic annex of Decreto Distrital 523 de 2010 — D670 Article 1525 preserves the maps as annexes — not the FOPAE final report. The report, whose cover requires written authorization, is still never rendered or bundled; the three locked sources remain pathless.",
+    "permissionStatus": "not-established",
+    "reviewerAction": "Independent review must settle whether the annex sheet may be redistributed. If it may not, drop the two PNGs and fall back to the outbound link to the decree."
+  }
 }

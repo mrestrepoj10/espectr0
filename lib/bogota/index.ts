@@ -70,3 +70,9 @@ export type {
   BogotaNormalizedInputs,
   BogotaScenario,
 } from "./schema"
+export { bogotaEvidenceResolver } from "./evidence-resolver"
+export {
+  bogotaLegendRowBand,
+  bogotaMapEvidence,
+  bogotaZoneLabel,
+} from "./map-evidence"

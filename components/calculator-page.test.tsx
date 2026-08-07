@@ -447,12 +447,11 @@ describe("unified municipal mode selector", () => {
 		expect(container.textContent).not.toContain("Exportar");
 	});
 
-	it("uses result capability metadata to gate Bogotá and enable Cali actions", async () => {
+	it("enables the Bogotá and Cali result actions from capability metadata", async () => {
 		await chooseMode("Bogotá D. C.");
 		await chooseSelectOption("bogota-zone-trigger", "CERROS");
 		const bogotaTrace = await waitForElement("button", "Ver trazabilidad");
-		expect(bogotaTrace).toHaveProperty("disabled", true);
-		expect(bogotaTrace.title).toContain("resolvedor del visor");
+		expect(bogotaTrace).not.toHaveProperty("disabled", true);
 
 		const bogotaExport = await waitForElement("button", "Exportar");
 		await act(async () => {
@@ -462,8 +461,7 @@ describe("unified municipal mode selector", () => {
 			'[role="menuitem"]',
 			"Descargar memoria PDF",
 		);
-		expect(bogotaPdf.getAttribute("aria-disabled")).toBe("true");
-		expect(bogotaPdf.title).toContain("renderizador PDF");
+		expect(bogotaPdf.getAttribute("aria-disabled")).not.toBe("true");
 
 		await act(async () => {
 			document.body.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
@@ -727,6 +725,36 @@ describe("unified municipal mode selector", () => {
 		expect(images).toContain("/ccp14/figura-3.10.2.1-1-leyenda.png");
 		expect(images).toContain("/ccp14/figura-3.10.2.1-1.png");
 		expect(images).toContain("/ccp14/figura-3.10.2.1-3.png");
+	});
+
+	it("opens the Bogotá map evidence before anything is calculated", async () => {
+		await chooseMode("Bogotá D. C.");
+		expect(
+			container.querySelector("[data-slot='bogota-evidence-trigger']"),
+		).toBeNull();
+
+		await chooseSelectOption("bogota-zone-trigger", "CERROS");
+		const trigger = container.querySelector<HTMLButtonElement>(
+			"[data-slot='bogota-evidence-trigger']",
+		);
+		expect(trigger).not.toBeNull();
+
+		await act(async () => trigger?.click());
+		await vi.waitFor(() => {
+			expect(document.body.textContent).toContain(
+				"Evidencia cartográfica de la zona",
+			);
+		});
+		// One traceability surface, not a second drawer alongside it.
+		expect(document.querySelectorAll('[role="dialog"]')).toHaveLength(1);
+		expect(document.body.textContent).toContain("Trazabilidad normativa");
+		expect(document.body.textContent).toContain("fila resaltada: CERROS");
+
+		const images = [
+			...document.querySelectorAll<HTMLImageElement>("img[src^='/bogota/']"),
+		].map((image) => image.getAttribute("src"));
+		expect(images).toContain("/bogota/mapa-2-leyenda.png");
+		expect(images).toContain("/bogota/mapa-2-zonas-respuesta-sismica.png");
 	});
 
 	it("lets the engineer override a prefilled coefficient", async () => {

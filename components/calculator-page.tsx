@@ -44,6 +44,7 @@ import {
 	SharedSpectrumNotices,
 	SharedSpectrumTable,
 } from "@/components/spectrum-result";
+import { BogotaFigureEvidence } from "@/components/calculator/bogota-figure-evidence";
 import { Ccp14FigureEvidence } from "@/components/calculator/ccp14-figure-evidence";
 import { TraceabilitySheet } from "@/components/traceability/traceability-sheet";
 import { Button } from "@/components/ui/button";
@@ -1069,6 +1070,7 @@ export function CalculatorPage() {
 				}
 				onImportanceFactorChange={setBogotaImportanceFactor}
 				onRigidBasePeriodChange={setBogotaRigidBasePeriod}
+				onTraceabilityOpen={() => setTraceabilityOpen(true)}
 				onZoneChange={setBogotaZoneId}
 				rigidBasePeriodSeconds={bogotaRigidBasePeriod}
 				zoneId={bogotaZoneId}
@@ -1171,7 +1173,9 @@ export function CalculatorPage() {
 
 	return (
 		<div className="flex flex-col gap-5">
-			{result || (calculationMode === "ccp14" && ccp14MapLocationId) ? (
+			{result ||
+			(calculationMode === "ccp14" && ccp14MapLocationId) ||
+			(calculationMode === "bogota-microzonation" && bogotaZoneId) ? (
 				<TraceabilitySheet
 					onOpenChange={setTraceabilityOpen}
 					open={traceabilityOpen}
@@ -1182,6 +1186,8 @@ export function CalculatorPage() {
 					sourceEvidence={
 						calculationMode === "ccp14" ? (
 							<Ccp14FigureEvidence locationId={ccp14MapLocationId} />
+						) : calculationMode === "bogota-microzonation" ? (
+							<BogotaFigureEvidence zoneId={bogotaZoneId} />
 						) : null
 					}
 				/>
