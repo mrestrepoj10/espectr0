@@ -77,6 +77,36 @@ describe("Bogotá evidence resolver", () => {
     expect(plateau?.reference).toContain("Tabla 7.5")
   })
 
+  it("keeps the formula of a metric derived from the graphical origin", () => {
+    const evidence = resolveSpectrumEvidence(adaptBogotaSpectrum(cerros))
+
+    // T0 is derived per row, so it is keyed by its value-evidence id and is
+    // absent from the production formula inventory; its expression lives on the
+    // trace step. Reading only the inventory reported it as unavailable.
+    const t0 = evidence.metricLineage.find(({ id }) => id === "transition_start")
+    expect(t0?.formulaId).toBe("value-design-cerros-transition_start")
+    expect(t0?.formula).not.toBeNull()
+    expect(t0?.reference).not.toBeNull()
+    for (const metric of evidence.metricLineage) {
+      expect(metric.formula, metric.id).not.toBeNull()
+    }
+  })
+
+  it("still resolves the sources and warning of a blocked scenario", () => {
+    const result = adaptBogotaSpectrum({ ...cerros, fillThicknessMeters: 4 })
+    expect(result.status).toBe("site-specific-study-required")
+
+    const evidence = resolveSpectrumEvidence(result)
+    expect(evidence.documents.length).toBe(3)
+    expect(evidence.citations.map(({ id }) => id)).toContain(
+      "warning-site-specific",
+    )
+    // Nothing was computed, so no lineage may be advertised.
+    expect(evidence.metricLineage).toHaveLength(0)
+    expect(evidence.branchLineage).toHaveLength(0)
+    expect(evidence.directValues).toHaveLength(0)
+  })
+
   it("measures one legend row per published zone, in printed order", () => {
     const bands = bogotaCanonical.options.map(({ id }) => ({
       id,

@@ -189,39 +189,55 @@ function bogotaEvidence(
     },
   }
 
+  const citations = result.citationIds.map(citationFor)
+
+  /**
+   * A blocked scenario still has sources and cited warnings — they are the whole
+   * explanation of why it is blocked — so only the lineage of a spectrum that
+   * was never computed drops out.
+   */
   if (result.status !== "ok") {
     return {
       ...base,
-      status: "unavailable",
-      documents: [],
+      status: result.evidenceAvailability.status,
+      documents: result.sourceIds.map(documentFor),
       directValues: [],
-      citations: [],
+      citations,
       metricLineage: [],
       branchLineage: [],
-      unavailableClaims: [
-        ...unavailableClaims(result),
-        { id: "scenario-applicability", reason: result.applicability.message },
-      ],
+      // The framework forbids an available view from declaring unavailable
+      // claims; the blocking reason travels on the applicability citation.
+      unavailableClaims: unavailableClaims(result),
     }
   }
 
+  const citationById = new Map(citations.map((citation) => [citation.id, citation]))
   const steps = result.trace?.data.steps ?? []
   const stepById = new Map(steps.map((step) => [step.id as string, step]))
   const metricLineage: SpectrumMetricLineage[] = result.metrics
     .filter((metric) => metric.formulaId !== null)
     .map((metric) => {
       const step = metric.formulaId ? stepById.get(metric.formulaId) : undefined
+      /**
+       * A derived row value carries its own expression on the trace step and is
+       * keyed by its value-evidence id, so it is absent from the production
+       * formula inventory; the inventory answers for the curve formulas.
+       */
       const formula = metric.formulaId ? formulas.get(metric.formulaId) : undefined
+      const expression = (step as { expression?: string } | undefined)?.expression
+      const citedReference = metric.citationIds
+        .map((id) => citationById.get(id))
+        .find(Boolean)?.reference
       return {
         id: metric.id,
         label: metric.label,
         value: metric.value,
         unit: metric.unit as SpectrumUnit,
         formulaId: metric.formulaId,
-        formula: formula?.expression ?? null,
+        formula: expression ?? formula?.expression ?? null,
         substitution:
           (step as { substitution?: string } | undefined)?.substitution ?? null,
-        reference: formula?.citation.reference ?? null,
+        reference: formula?.citation.reference ?? citedReference ?? null,
         dependencyIds: [...metric.dependencyIds],
         citationIds: [...metric.citationIds],
       }
@@ -252,7 +268,7 @@ function bogotaEvidence(
     status: result.evidenceAvailability.status,
     documents: result.sourceIds.map(documentFor),
     directValues: directValuesFor(result, key),
-    citations: result.citationIds.map(citationFor),
+    citations,
     metricLineage,
     branchLineage,
     unavailableClaims: unavailableClaims(result),
@@ -270,11 +286,18 @@ function validateBogotaRelations(
       "Bogotá evidence view does not match its installed source and trace model",
     )
   }
-  if (view.status === "unavailable") return
+  // Every citation resolves whether or not a spectrum came out of the scenario:
+  // a blocked one is explained by the warnings it cites.
   const seen = new Set(view.citations.map(({ id }) => id))
   for (const citationId of result.citationIds) {
     if (!seen.has(citationId)) {
       throw new Error(`Bogotá evidence view omits result citation ${citationId}`)
+    }
+  }
+  // Derived metrics carry their expression on the trace step, not the inventory.
+  for (const metric of view.metricLineage) {
+    if (metric.formula === null) {
+      throw new Error(`Bogotá metric lineage has no formula: ${metric.id}`)
     }
   }
   // Each tabulated coefficient must still resolve to the cell that states it.

@@ -984,6 +984,15 @@ export function CalculatorPage() {
 		[result],
 	);
 
+	/**
+	 * A blocked scenario still has evidence worth reading — the sources and the
+	 * warning that blocks it — so the drawer shows whatever the study can
+	 * resolve, and only a study that declares nothing resolvable drops out.
+	 */
+	const traceableResult =
+		result && result.evidenceAvailability.status !== "unavailable"
+			? result
+			: null;
 	const traceability = result
 		? capabilityUiState(result.capabilities.traceabilityViewer)
 		: { enabled: false, reason: "Este modo no tiene un resultado trazable activo." };
@@ -1179,10 +1188,8 @@ export function CalculatorPage() {
 				<TraceabilitySheet
 					onOpenChange={setTraceabilityOpen}
 					open={traceabilityOpen}
-					result={result?.status === "ok" ? result : null}
-					scenarioEvidenceKey={
-						result?.status === "ok" ? result.scenarioEvidenceKey : null
-					}
+					result={traceableResult}
+					scenarioEvidenceKey={traceableResult?.scenarioEvidenceKey ?? null}
 					sourceEvidence={
 						calculationMode === "ccp14" ? (
 							<Ccp14FigureEvidence locationId={ccp14MapLocationId} />
