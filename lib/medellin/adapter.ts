@@ -51,9 +51,7 @@ export const medellinCapabilities = spectrumCapabilitiesSchema.parse({
   comparison: unsupportedCapability(
     "El comparador todavía no consume escenarios municipales normalizados de Medellín.",
   ),
-  contextualPdf: unsupportedCapability(
-    "El renderizador PDF contextual todavía no está instalado para Medellín.",
-  ),
+  contextualPdf: supportedCapability(),
   csvExport: supportedCapability(),
   etabsExport: supportedCapability(),
   jsonExport: supportedCapability(),
@@ -67,9 +65,7 @@ export const medellinCapabilities = spectrumCapabilitiesSchema.parse({
   bridgeRFactorWorkflow: unsupportedCapability(
     "El estudio municipal no define el flujo de puentes de CCP-14.",
   ),
-  traceabilityViewer: unsupportedCapability(
-    "El resolvedor visual de evidencia todavía no está instalado para Medellín.",
-  ),
+  traceabilityViewer: supportedCapability(),
 })
 
 const engineIdentity = {

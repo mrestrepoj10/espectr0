@@ -48,6 +48,7 @@ import {
 import { BogotaFigureEvidence } from "@/components/calculator/bogota-figure-evidence";
 import { CaliFigureEvidence } from "@/components/calculator/cali-figure-evidence";
 import { Ccp14FigureEvidence } from "@/components/calculator/ccp14-figure-evidence";
+import { MedellinFigureEvidence } from "@/components/calculator/medellin-figure-evidence";
 import { TraceabilitySheet } from "@/components/traceability/traceability-sheet";
 import { Button } from "@/components/ui/button";
 import {
@@ -1084,6 +1085,7 @@ export function CalculatorPage() {
 			/>
 		) : calculationMode === "medellin-microzonation" ? (
 			<MedellinParameterRail
+				onTraceabilityOpen={() => setTraceabilityOpen(true)}
 				hazardDescription={medellinHazardDescription(medellinHazardId)}
 				hazardId={medellinHazardId}
 				hazardOptions={medellinHazardOptions}
@@ -1121,6 +1123,7 @@ export function CalculatorPage() {
 			/>
 		) : calculationMode === "dosquebradas-microzonation" ? (
 			<DosquebradasParameterRail
+				onTraceabilityOpen={() => setTraceabilityOpen(true)}
 				importanceGroup={dosquebradasImportanceGroup}
 				onImportanceGroupChange={setDosquebradasImportanceGroup}
 				onZoneChange={setDosquebradasZoneId}
@@ -1183,7 +1186,9 @@ export function CalculatorPage() {
 			{result ||
 			(calculationMode === "ccp14" && ccp14MapLocationId) ||
 			(calculationMode === "bogota-microzonation" && bogotaZoneId) ||
-			(calculationMode === "cali-microzonation" && caliZoneId) ? (
+			(calculationMode === "cali-microzonation" && caliZoneId) ||
+			(calculationMode === "medellin-microzonation" && medellinZoneId) ||
+			(calculationMode === "dosquebradas-microzonation" && dosquebradasZoneId) ? (
 				<TraceabilitySheet
 					onOpenChange={setTraceabilityOpen}
 					open={traceabilityOpen}
@@ -1196,6 +1201,8 @@ export function CalculatorPage() {
 							<BogotaFigureEvidence zoneId={bogotaZoneId} />
 						) : calculationMode === "cali-microzonation" ? (
 							<CaliFigureEvidence componentId={caliOptionId ?? caliZoneId} />
+						) : calculationMode === "medellin-microzonation" ? (
+							<MedellinFigureEvidence zoneId={medellinZoneId} />
 						) : null
 					}
 				/>

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "id": "medellin-pot-mapa-zonas-homogeneas",
+    "title": "Plan de Ordenamiento Territorial — Diagnóstico, microzonificación sísmica, zonas homogéneas",
+    "issuingAuthority": "Departamento Administrativo de Planeación, Municipio de Medellín",
+    "adoptionInstrument": "Plancha de diagnóstico del POT; los coeficientes provienen del soporte técnico DAP de 2011",
+    "date": "Sin fecha impresa en la plancha",
+    "scale": "Escala gráfica",
+    "sha256": "e4361ae4bfd724b8955c40bd9361483c4abeb2053d387a1bb4da5c5fb1a3da2e",
+    "byteLength": 8904902,
+    "pageCount": 1,
+    "officialUrl": null,
+    "mirrorUrl": "https://www.espectrocol.com/mapas/medellin.pdf",
+    "mirrorRetrievedOn": "2026-08-07",
+    "note": "Plancha del POT que dibuja las catorce zonas homogéneas y su convención. La única copia recuperable es el espejo de espectrocol.com, que no es la entidad publicadora."
+  },
+  "image": "/medellin/pot-zonas-homogeneas.png",
+  "legendImage": "/medellin/pot-zonas-homogeneas-leyenda.png",
+  "legendZoneBands": {
+    "zone-01": {
+      "left": 0.0,
+      "top": 0.04833,
+      "width": 0.80972,
+      "height": 0.05667
+    },
+    "zone-02": {
+      "left": 0.0,
+      "top": 0.11333,
+      "width": 0.80972,
+      "height": 0.05667
+    },
+    "zone-03": {
+      "left": 0.0,
+      "top": 0.1775,
+      "width": 0.80972,
+      "height": 0.05667
+    },
+    "zone-04": {
+      "left": 0.0,
+      "top": 0.24083,
+      "width": 0.80972,
+      "height": 0.05667
+    },
+    "zone-05": {
+      "left": 0.0,
+      "top": 0.30333,
+      "width": 0.80972,
+      "height": 0.05667
+    },
+    "zone-06": {
+      "left": 0.0,
+      "top": 0.36833,
+      "width": 0.80972,
+      "height": 0.05667
+    },
+    "zone-07": {
+      "left": 0.0,
+      "top": 0.4325,
+      "width": 0.80972,
+      "height": 0.05667
+    },
+    "zone-08": {
+      "left": 0.0,
+      "top": 0.49667,
+      "width": 0.80972,
+      "height": 0.05667
+    },
+    "zone-09": {
+      "left": 0.0,
+      "top": 0.56083,
+      "width": 0.80972,
+      "height": 0.05667
+    },
+    "zone-10": {
+      "left": 0.0,
+      "top": 0.62333,
+      "width": 0.80972,
+      "height": 0.05667
+    },
+    "zone-11": {
+      "left": 0.0,
+      "top": 0.6875,
+      "width": 0.80972,
+      "height": 0.05667
+    },
+    "zone-12": {
+      "left": 0.0,
+      "top": 0.75167,
+      "width": 0.80972,
+      "height": 0.05667
+    },
+    "zone-13": {
+      "left": 0.0,
+      "top": 0.81583,
+      "width": 0.80972,
+      "height": 0.05667
+    },
+    "zone-14": {
+      "left": 0.0,
+      "top": 0.88,
+      "width": 0.80972,
+      "height": 0.05667
+    }
+  },
+  "rowMatching": "ordinal",
+  "rowMatchingNote": "La convención de la plancha nombra las zonas 2 y 3 por litología (neis, granodiorita) mientras el soporte técnico DAP las nombra por sector (centro occidental, suroccidental). Las catorce filas coinciden una a una en orden con las catorce opciones canónicas, y el sitio de referencia enumera las mismas catorce en el mismo orden, pero el emparejamiento es posicional, no por rótulo."
+}

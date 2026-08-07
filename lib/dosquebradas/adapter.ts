@@ -47,9 +47,7 @@ export const dosquebradasCapabilities = spectrumCapabilitiesSchema.parse({
   comparison: unsupportedCapability(
     "El comparador todavía no consume escenarios municipales normalizados de Dosquebradas.",
   ),
-  contextualPdf: unsupportedCapability(
-    "El renderizador PDF contextual todavía no está instalado para Dosquebradas.",
-  ),
+  contextualPdf: supportedCapability(),
   csvExport: supportedCapability(),
   etabsExport: supportedCapability(),
   jsonExport: supportedCapability(),
@@ -63,9 +61,7 @@ export const dosquebradasCapabilities = spectrumCapabilitiesSchema.parse({
   bridgeRFactorWorkflow: unsupportedCapability(
     "El estudio municipal no define el flujo de puentes de CCP-14.",
   ),
-  traceabilityViewer: unsupportedCapability(
-    "El resolvedor visual de evidencia todavía no está instalado para Dosquebradas.",
-  ),
+  traceabilityViewer: supportedCapability(),
 })
 
 const engineIdentity = {
