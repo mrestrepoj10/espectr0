@@ -418,6 +418,54 @@ describe("unified municipal mode selector", () => {
 		}
 	});
 
+	it("asks every municipal mode for the zone, the hazard and the use group", async () => {
+		// The published studies tabulate coefficients per zone and hazard; the
+		// rest of the site is what the geotechnical engineer characterises, and
+		// its thresholds travel as the site-specific warning each result carries.
+		const modes = [
+			{ mode: "Cali", prefix: "cali", zone: "cali-zone-trigger" },
+			{ mode: "Medellín", prefix: "medellin", zone: "medellin-zone-trigger" },
+			{
+				mode: "Dosquebradas",
+				prefix: "dosquebradas",
+				zone: "dosquebradas-zone-trigger",
+			},
+		];
+
+		for (const { mode, prefix, zone } of modes) {
+			await chooseMode(mode);
+			expect(
+				container.querySelector(`#${prefix}-importance-factor`),
+				mode,
+			).toBeNull();
+			expect(
+				container.querySelector(`#${prefix}-importance-group-trigger`),
+				mode,
+			).not.toBeNull();
+			expect(container.querySelector(`#${zone}`), mode).not.toBeNull();
+		}
+
+		// Cali keeps two more: unmanaged fill and colluvial deposit are not
+		// cosmetic site description there, they raise Fa and Fv by a cited 20%.
+		await chooseMode("Cali");
+		expect(container.querySelector("#cali-fill-thickness")).not.toBeNull();
+		expect(container.querySelector("#cali-colluvial-deposit")).not.toBeNull();
+	});
+
+	it("keeps Cali's cited 20% amplification reachable from the form", async () => {
+		await chooseMode("Cali");
+		await chooseSelectOption("cali-zone-trigger", "Zona 1");
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("Datos del espectro"),
+		);
+		expect(container.textContent).not.toContain("aumentaron Fa y Fv en 20%");
+
+		await setNumberInput("cali-fill-thickness", "4");
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("aumentaron Fa y Fv en 20%"),
+		);
+	});
+
 	it("scales the Bogotá spectrum by the chosen NSR-10 use group", async () => {
 		await chooseMode("Bogotá D. C.");
 		await chooseSelectOption("bogota-zone-trigger", "CERROS");

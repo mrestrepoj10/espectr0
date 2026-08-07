@@ -805,17 +805,19 @@ export function CalculatorPage() {
 		useState<ImportanceGroup>("I");
 	const [medellinZoneId, setMedellinZoneId] = useState<string | null>(null);
 	const [medellinHazardId, setMedellinHazardId] = useState<string | null>(null);
-	const [medellinImportanceFactor, setMedellinImportanceFactor] = useState(1);
+	const [medellinImportanceGroup, setMedellinImportanceGroup] =
+		useState<ImportanceGroup>("I");
 	const [caliZoneId, setCaliZoneId] = useState<string | null>(null);
 	const [caliComponentId, setCaliComponentId] = useState<string | null>(null);
 	const [caliHazardId, setCaliHazardId] = useState(caliHazardOptions[0].id);
-	const [caliImportanceFactor, setCaliImportanceFactor] = useState(1);
+	const [caliImportanceGroup, setCaliImportanceGroup] =
+		useState<ImportanceGroup>("I");
 	const [caliFillThickness, setCaliFillThickness] = useState<number | null>(null);
 	const [caliColluvialDeposit, setCaliColluvialDeposit] = useState(false);
 	const [dosquebradasZoneId, setDosquebradasZoneId] =
 		useState<string | null>(null);
-	const [dosquebradasImportanceFactor, setDosquebradasImportanceFactor] =
-		useState(1);
+	const [dosquebradasImportanceGroup, setDosquebradasImportanceGroup] =
+		useState<ImportanceGroup>("I");
 	const [traceabilityOpen, setTraceabilityOpen] = useState(false);
 	const chartContainerRef = useRef<HTMLDivElement>(null);
 
@@ -898,12 +900,12 @@ export function CalculatorPage() {
 		return adaptMedellinSpectrum({
 			zoneId: medellinZoneId,
 			hazardId: medellinHazardId,
-			importanceFactor: medellinImportanceFactor,
+			importanceFactor: importanceCoefficient(medellinImportanceGroup),
 		});
 	}, [
 		calculationMode,
 		medellinHazardId,
-		medellinImportanceFactor,
+		medellinImportanceGroup,
 		medellinZoneId,
 	]);
 	const caliOptionId = resolvedCaliOptionId(caliZoneId, caliComponentId);
@@ -916,17 +918,18 @@ export function CalculatorPage() {
 			return adaptCaliSpectrum({
 				optionId: caliOptionId,
 				hazardId: caliHazardId,
-				importanceFactor: caliImportanceFactor,
+				importanceFactor: importanceCoefficient(caliImportanceGroup),
 				uncontrolledFillThicknessMeters: caliFillThickness,
 				colluvialDeposit: caliColluvialDeposit,
 			});
 		},
 		[
 			calculationMode,
+
+			caliHazardId,
 			caliColluvialDeposit,
 			caliFillThickness,
-			caliHazardId,
-			caliImportanceFactor,
+			caliImportanceGroup,
 			caliOptionId,
 		],
 	);
@@ -938,11 +941,11 @@ export function CalculatorPage() {
 		return adaptDosquebradasSpectrum({
 			zoneId: dosquebradasZoneId,
 			hazardId: "design",
-			importanceFactor: dosquebradasImportanceFactor,
+			importanceFactor: importanceCoefficient(dosquebradasImportanceGroup),
 		});
 	}, [
 		calculationMode,
-		dosquebradasImportanceFactor,
+		dosquebradasImportanceGroup,
 		dosquebradasZoneId,
 	]);
 	const result =
@@ -1083,9 +1086,9 @@ export function CalculatorPage() {
 				hazardDescription={medellinHazardDescription(medellinHazardId)}
 				hazardId={medellinHazardId}
 				hazardOptions={medellinHazardOptions}
-				importanceFactor={medellinImportanceFactor}
+				importanceGroup={medellinImportanceGroup}
 				onHazardChange={setMedellinHazardId}
-				onImportanceFactorChange={setMedellinImportanceFactor}
+				onImportanceGroupChange={setMedellinImportanceGroup}
 				onZoneChange={setMedellinZoneId}
 				zoneId={medellinZoneId}
 				zoneOptions={medellinZoneOptions}
@@ -1093,19 +1096,19 @@ export function CalculatorPage() {
 		) : calculationMode === "cali-microzonation" ? (
 			<CaliParameterRail
 				colluvialDeposit={caliColluvialDeposit}
+				fillThicknessMeters={caliFillThickness}
+				onColluvialDepositChange={setCaliColluvialDeposit}
+				onFillThicknessChange={setCaliFillThickness}
 				componentId={caliComponentId}
 				componentOptions={activeCaliComponentOptions}
-				fillThicknessMeters={caliFillThickness}
 				hazardDescription={municipalHazardDescription(
 					caliCanonical.hazards.find(({ id }) => id === caliHazardId),
 				)}
 				hazardId={caliHazardId}
 				hazardOptions={caliHazardOptions}
-				importanceFactor={caliImportanceFactor}
-				onColluvialDepositChange={setCaliColluvialDeposit}
-				onFillThicknessChange={setCaliFillThickness}
+				importanceGroup={caliImportanceGroup}
 				onHazardChange={setCaliHazardId}
-				onImportanceFactorChange={setCaliImportanceFactor}
+				onImportanceGroupChange={setCaliImportanceGroup}
 				onComponentChange={setCaliComponentId}
 				onZoneChange={(value) => {
 					setCaliZoneId(value);
@@ -1116,8 +1119,8 @@ export function CalculatorPage() {
 			/>
 		) : calculationMode === "dosquebradas-microzonation" ? (
 			<DosquebradasParameterRail
-				importanceFactor={dosquebradasImportanceFactor}
-				onImportanceFactorChange={setDosquebradasImportanceFactor}
+				importanceGroup={dosquebradasImportanceGroup}
+				onImportanceGroupChange={setDosquebradasImportanceGroup}
 				onZoneChange={setDosquebradasZoneId}
 				zoneId={dosquebradasZoneId}
 				zoneOptions={dosquebradasZoneOptions}

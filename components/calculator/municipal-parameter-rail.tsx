@@ -134,6 +134,39 @@ function NumericInput({
   )
 }
 
+/**
+ * The four NSR-10 A.2.5 groups, the only importance coefficients these
+ * municipal spectra are scaled by. A free number let an unattested I reach the
+ * memoria beside coefficients whose whole point is that they are cited.
+ */
+const IMPORTANCE_GROUP_OPTIONS: readonly SelectOption[] = (
+  Object.keys(importanceValues) as ImportanceGroup[]
+).map((group) => ({
+  id: group,
+  label: `${group} — ${importanceDescriptions[group]} (I=${importanceValues[group]})`,
+}))
+
+function ImportanceGroupField({
+  idPrefix,
+  value,
+  onValueChange,
+}: {
+  idPrefix: string
+  value: ImportanceGroup
+  onValueChange: (value: ImportanceGroup) => void
+}) {
+  return (
+    <MunicipalSelect
+      description="Tabla A.2.5-1 de NSR-10; fija el coeficiente de importancia I que escala el espectro."
+      id={`${idPrefix}-importance-group-trigger`}
+      label="Grupo de uso (NSR-10 A.2.5)"
+      onValueChange={(next) => onValueChange(next as ImportanceGroup)}
+      options={IMPORTANCE_GROUP_OPTIONS}
+      value={value}
+    />
+  )
+}
+
 function ManualZoneWarning() {
   return (
     <Alert data-slot="manual-zone-warning">
@@ -147,17 +180,6 @@ function ManualZoneWarning() {
     </Alert>
   )
 }
-
-/**
- * The four NSR-10 A.2.5 groups, the only importance coefficients the study's
- * spectra are scaled by. A free number let an unattested I reach the memoria.
- */
-const BOGOTA_IMPORTANCE_OPTIONS: readonly SelectOption[] = (
-  Object.keys(importanceValues) as ImportanceGroup[]
-).map((group) => ({
-  id: group,
-  label: `${group} — ${importanceDescriptions[group]} (I=${importanceValues[group]})`,
-}))
 
 /**
  * Fill thickness and rigid-base period are not asked for: neither is a study
@@ -227,12 +249,9 @@ export function BogotaParameterRail({
             options={hazardOptions}
             value={hazardId}
           />
-          <MunicipalSelect
-            description="Tabla A.2.5-1 de NSR-10; fija el coeficiente de importancia I que escala el espectro."
-            id="bogota-importance-group-trigger"
-            label="Grupo de uso (NSR-10 A.2.5)"
-            onValueChange={(value) => onImportanceGroupChange(value as ImportanceGroup)}
-            options={BOGOTA_IMPORTANCE_OPTIONS}
+          <ImportanceGroupField
+            idPrefix="bogota"
+            onValueChange={onImportanceGroupChange}
             value={importanceGroup}
           />
           <ManualZoneWarning />
@@ -248,17 +267,23 @@ export function BogotaParameterRail({
   )
 }
 
+/**
+ * Unlike the other municipal rails, this one still asks for two site
+ * conditions: unmanaged fill over 3 m or a colluvial deposit raise Fa and Fv by
+ * the cited 20%, so dropping them would not simplify the form — it would
+ * silently under-predict those sites.
+ */
 export function CaliParameterRail({
   colluvialDeposit,
   fillThicknessMeters,
   hazardDescription,
   hazardId,
   hazardOptions,
-  importanceFactor,
+  importanceGroup,
   onColluvialDepositChange,
   onFillThicknessChange,
   onHazardChange,
-  onImportanceFactorChange,
+  onImportanceGroupChange,
   onComponentChange,
   onZoneChange,
   componentId,
@@ -271,11 +296,11 @@ export function CaliParameterRail({
   hazardDescription: string
   hazardId: string
   hazardOptions: readonly SelectOption[]
-  importanceFactor: number
+  importanceGroup: ImportanceGroup
   onColluvialDepositChange: (value: boolean) => void
   onFillThicknessChange: (value: number | null) => void
   onHazardChange: (value: string) => void
-  onImportanceFactorChange: (value: number) => void
+  onImportanceGroupChange: (value: ImportanceGroup) => void
   onComponentChange: (value: string) => void
   onZoneChange: (value: string) => void
   componentId: string | null
@@ -330,16 +355,13 @@ export function CaliParameterRail({
             options={hazardOptions}
             value={hazardId}
           />
-          <NumericInput
-            description="Factor declarado para el proyecto."
-            id="cali-importance-factor"
-            label="Factor de importancia I"
-            min={0.01}
-            onValueChange={(value) => onImportanceFactorChange(value ?? 0)}
-            value={importanceFactor}
+          <ImportanceGroupField
+            idPrefix="cali"
+            onValueChange={onImportanceGroupChange}
+            value={importanceGroup}
           />
           <NumericInput
-            description="Opcional; espesor declarado para el proyecto."
+            description="Sobre 3 m, el estudio aumenta Fa y Fv en 20%. Déjalo vacío si no aplica."
             id="cali-fill-thickness"
             label="Relleno no controlado (m)"
             nullable
@@ -356,6 +378,10 @@ export function CaliParameterRail({
               onCheckedChange={onColluvialDepositChange}
             />
           </Field>
+          <FieldDescription>
+            Cualquiera de las dos condiciones aplica el factor 1,2 citado sobre
+            Fa y Fv; el resultado lo declara como advertencia.
+          </FieldDescription>
           <ManualZoneWarning />
         </FieldGroup>
       </CardContent>
@@ -593,14 +619,14 @@ export function Ccp14ParameterRail({
 }
 
 export function DosquebradasParameterRail({
-  importanceFactor,
-  onImportanceFactorChange,
+  importanceGroup,
+  onImportanceGroupChange,
   onZoneChange,
   zoneId,
   zoneOptions,
 }: {
-  importanceFactor: number
-  onImportanceFactorChange: (value: number) => void
+  importanceGroup: ImportanceGroup
+  onImportanceGroupChange: (value: ImportanceGroup) => void
   onZoneChange: (value: string) => void
   zoneId: string | null
   zoneOptions: readonly SelectOption[]
@@ -630,13 +656,10 @@ export function DosquebradasParameterRail({
               Escenario único; la tabla municipal no declara periodo de retorno.
             </FieldDescription>
           </Field>
-          <NumericInput
-            description="Factor declarado para el proyecto."
-            id="dosquebradas-importance-factor"
-            label="Factor de importancia I"
-            min={0.01}
-            onValueChange={(value) => onImportanceFactorChange(value ?? 0)}
-            value={importanceFactor}
+          <ImportanceGroupField
+            idPrefix="dosquebradas"
+            onValueChange={onImportanceGroupChange}
+            value={importanceGroup}
           />
           <ManualZoneWarning />
           <Alert>
@@ -671,9 +694,9 @@ export function MedellinParameterRail({
   hazardDescription,
   hazardId,
   hazardOptions,
-  importanceFactor,
+  importanceGroup,
   onHazardChange,
-  onImportanceFactorChange,
+  onImportanceGroupChange,
   onZoneChange,
   zoneId,
   zoneOptions,
@@ -681,9 +704,9 @@ export function MedellinParameterRail({
   hazardDescription: string
   hazardId: string | null
   hazardOptions: readonly SelectOption[]
-  importanceFactor: number
+  importanceGroup: ImportanceGroup
   onHazardChange: (value: string) => void
-  onImportanceFactorChange: (value: number) => void
+  onImportanceGroupChange: (value: ImportanceGroup) => void
   onZoneChange: (value: string) => void
   zoneId: string | null
   zoneOptions: readonly SelectOption[]
@@ -715,13 +738,10 @@ export function MedellinParameterRail({
             options={hazardOptions}
             value={hazardId}
           />
-          <NumericInput
-            description="Factor declarado para el proyecto."
-            id="medellin-importance-factor"
-            label="Factor de importancia I"
-            min={0.01}
-            onValueChange={(value) => onImportanceFactorChange(value ?? 0)}
-            value={importanceFactor}
+          <ImportanceGroupField
+            idPrefix="medellin"
+            onValueChange={onImportanceGroupChange}
+            value={importanceGroup}
           />
           <ManualZoneWarning />
           <Alert>
