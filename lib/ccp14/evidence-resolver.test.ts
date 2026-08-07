@@ -140,6 +140,17 @@ describe("CCP-14 evidence resolver", () => {
     ])
   })
 
+  it("resolves lineage when a published branch falls outside the sample", () => {
+    const result = adaptCcp14Spectrum({ ...generalProcedureInput, ssG: 0.001 })
+    expect(result.status).toBe("ok")
+
+    const evidence = resolveSpectrumEvidence(result)
+    expect(evidence.branchLineage.map(({ branchId }) => branchId)).toEqual([
+      "initial-linear",
+    ])
+    expect(evidence.branchLineage[0].pointCount).toBe(501)
+  })
+
   it("exposes no lineage when the scenario routes to a site-specific study", () => {
     const evidence = resolveSpectrumEvidence(
       adaptCcp14Spectrum({ ...generalProcedureInput, soilClass: "F" }),

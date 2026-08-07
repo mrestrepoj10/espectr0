@@ -49,6 +49,14 @@ describe("CCP-14 memoria PDF", () => {
     expect(blob.size).toBeGreaterThan(1000)
   }, 30_000)
 
+  it("renders when a published branch falls outside the sampled window", async () => {
+    const result = adaptCcp14Spectrum({ ...generalProcedureInput, ssG: 0.001 })
+    expect(result.status).toBe("ok")
+
+    const blob = await renderNormalizedSpectrumMemoriaPdf(result)
+    expect(blob.size).toBeGreaterThan(1000)
+  }, 30_000)
+
   it("prints the official sources, hashes and cited pages", () => {
     const result = adaptCcp14Spectrum(generalProcedureInput)
     if (result.status !== "ok") throw new Error("Expected an applicable result")

@@ -63,6 +63,71 @@ describe("CCP-14 normalized adapter", () => {
     ])
   })
 
+  it("declares only the branches the sampled curve actually carries", () => {
+    // Ss this small pushes Ts to 337 s, so the whole 0-5 s sample is the
+    // ascending branch and the other two published branches have no ordinate.
+    const result = adaptCcp14Spectrum({ ...input, ssG: 0.001 })
+    expect(result.status).toBe("ok")
+    if (result.status !== "ok") return
+    expect(result.metrics.find(({ id }) => id === "ts")?.value).toBeCloseTo(337.5, 6)
+    expect(result.branches.map(({ id }) => id)).toEqual(["initial-linear"])
+    for (const branch of result.branches) {
+      expect(
+        result.points.filter(({ branchId }) => branchId === branch.id).length,
+      ).toBeGreaterThan(0)
+    }
+    // The formulas of the unsampled branches stay documented in the trace.
+    expect(result.trace.data.steps.map(({ id }) => id)).toEqual(
+      expect.arrayContaining(["ccp14-csm-plateau", "ccp14-csm-inverse"]),
+    )
+  })
+
+  it("does not attribute the defaulted T0 reading to the engineer", () => {
+    const defaulted = adaptCcp14Spectrum({
+      pgaG: 0.3,
+      ssG: 0.75,
+      s1G: 0.3,
+      soilClass: "D",
+    })
+    expect(defaulted.status).toBe("ok")
+    if (defaulted.status !== "ok") return
+    expect(
+      defaulted.trace.data.steps.find(
+        ({ id }) => id === "ccp14-input-t0-interpretation",
+      ),
+    ).toMatchObject({
+      classification: "engine-default",
+      label: "Lectura de T₀ aplicada por defecto",
+      value: "figure-0.2-ts",
+    })
+
+    const declared = adaptCcp14Spectrum(input)
+    expect(declared.status).toBe("ok")
+    if (declared.status !== "ok") return
+    expect(
+      declared.trace.data.steps.find(
+        ({ id }) => id === "ccp14-input-t0-interpretation",
+      ),
+    ).toMatchObject({
+      classification: "user-input",
+      label: "Lectura de T₀ declarada",
+    })
+  })
+
+  it("keeps every warning inside the documents the result declares", () => {
+    const result = adaptCcp14Spectrum(input)
+    expect(result.status).toBe("ok")
+    if (result.status !== "ok") return
+    // The product locks no AASHTO source, so no warning may lean on one.
+    for (const warning of result.warnings) {
+      expect(warning.message).not.toContain("AASHTO")
+      expect(warning.citationIds.length).toBeGreaterThan(0)
+      for (const citationId of warning.citationIds) {
+        expect(result.citationIds).toContain(citationId)
+      }
+    }
+  })
+
   it("keeps saAt exactly aligned with sampled points", () => {
     const result = adaptCcp14Spectrum(input)
     expect(result.status).toBe("ok")

@@ -60,9 +60,17 @@ export type Ccp14EnginePoint = {
   branchId: Ccp14BranchId
 }
 
+export type Ccp14T0InterpretationSource = "declared" | "engine-default"
+
 export type Ccp14EngineSuccess = {
   status: "ok"
   input: Ccp14ComputationInput
+  /**
+   * Whether the caller chose the T0 reading or the schema default supplied it.
+   * The two published readings conflict, so the trace must not present the
+   * default as an engineering selection that never happened.
+   */
+  t0InterpretationSource: Ccp14T0InterpretationSource
   factors: Record<Ccp14FactorId, Ccp14FactorLookup>
   as: number
   sds: number
@@ -229,6 +237,12 @@ export function computeCcp14Spectrum(input: unknown): Ccp14EngineResult {
       citationIds: [],
     }
   }
+  const t0InterpretationSource: Ccp14T0InterpretationSource =
+    typeof input === "object" &&
+    input !== null &&
+    (input as Record<string, unknown>).t0Interpretation !== undefined
+      ? "declared"
+      : "engine-default"
   const siteSpecific = siteSpecificReason(parsed.data)
   if (siteSpecific) return siteSpecific
   const soilClass = parsed.data.soilClass as Exclude<Ccp14SoilClass, "F">
@@ -269,6 +283,7 @@ export function computeCcp14Spectrum(input: unknown): Ccp14EngineResult {
   return {
     status: "ok",
     input: parsed.data,
+    t0InterpretationSource,
     factors,
     as,
     sds,

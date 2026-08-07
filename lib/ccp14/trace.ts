@@ -9,7 +9,7 @@ const idSchema = z.string().trim().min(1)
 const ccp14TraceStepSchema = z
   .object({
     id: idSchema,
-    classification: z.enum(["user-input", "derived"]),
+    classification: z.enum(["user-input", "engine-default", "derived"]),
     label: idSchema,
     value: z.union([z.number().finite(), z.string(), z.boolean()]),
     unit: spectrumUnitSchema.or(z.enum(["class", "choice"])),

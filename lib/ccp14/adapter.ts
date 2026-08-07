@@ -114,7 +114,7 @@ const commonWarnings: SpectrumWarning[] = [
     severity: "warning",
     code: "ccp14-t0-official-conflict",
     message:
-      "La publicación oficial de INVÍAS es internamente inconsistente: la Figura 3.10.4.1-1 indica T0 = 0,2·Ts mientras la definición bajo las ecuaciones indica T0 = 0,2 s. El resultado aplica la lectura de la figura, que es la vigente en la AASHTO LRFD de la que deriva el articulado, y no la presenta como una resolución oficial del conflicto.",
+      "La publicación oficial de INVÍAS es internamente inconsistente: la Figura 3.10.4.1-1 indica T0 = 0,2·Ts mientras la definición bajo las ecuaciones indica T0 = 0,2 s. Salvo que se declare otra lectura, el resultado aplica la de la figura, que es la única compatible con la forma espectral dibujada y la única que mantiene T0 ≤ Ts para todo dato válido. Esto no resuelve oficialmente la contradicción.",
     citationIds: ["conflict-t0-figure", "conflict-t0-definition"],
   },
   {
@@ -250,8 +250,20 @@ function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
       unit: "choice",
       citationIds: ["claim-map-location-labels"],
     },
-    { id: "ccp14-input-t0-interpretation", label: "Lectura de T₀", value: input.t0Interpretation, unit: "choice", citationIds: ["conflict-t0-figure", "conflict-t0-definition"] },
   ].map((step) => ({ ...step, classification: "user-input", dependencies: [] }))
+  const t0InterpretationStep = {
+    id: "ccp14-input-t0-interpretation",
+    classification:
+      engine.t0InterpretationSource === "declared" ? "user-input" : "engine-default",
+    label:
+      engine.t0InterpretationSource === "declared"
+        ? "Lectura de T₀ declarada"
+        : "Lectura de T₀ aplicada por defecto",
+    value: input.t0Interpretation,
+    unit: "choice",
+    dependencies: [],
+    citationIds: ["conflict-t0-figure", "conflict-t0-definition"],
+  }
   const factorSteps = (["Fpga", "Fa", "Fv"] as const).map((id) => factorStep(engine, id))
   const derivedSteps = [
     {
@@ -344,14 +356,29 @@ function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
       substitution: `Csm(${t} s) = ${value}`,
     }
   })
-  const steps = [...directSteps, ...factorSteps, ...derivedSteps, ...branchSteps]
-  const branches = (Object.keys(formulaByBranch) as Ccp14BranchId[]).map((id) => ({
-    id,
-    formulaId: formulaByBranch[id],
-    citationIds: citationByBranch[id],
-  }))
+  const steps = [
+    ...directSteps,
+    t0InterpretationStep,
+    ...factorSteps,
+    ...derivedSteps,
+    ...branchSteps,
+  ]
   const periods = Array.from({ length: 501 }, (_, index) => Number((index * 0.01).toFixed(8)))
   const points = periods.map((period) => normalizedPoint(engine, period))
+  /**
+   * Extreme but valid coefficients can push T0 or Ts past the sampled 0-5 s
+   * window, leaving a published branch with no ordinate in this result. The
+   * curve declares only the branches it actually carries; the formulas for the
+   * others stay in the trace steps.
+   */
+  const sampledBranchIds = new Set(points.map(({ branchId }) => branchId))
+  const branches = (Object.keys(formulaByBranch) as Ccp14BranchId[])
+    .filter((id) => sampledBranchIds.has(id))
+    .map((id) => ({
+      id,
+      formulaId: formulaByBranch[id],
+      citationIds: citationByBranch[id],
+    }))
   const metricDefinitions = [
     ["as", "As", engine.as, "g", "ccp14-as"],
     ["sds", "SDS", engine.sds, "g", "ccp14-sds"],
