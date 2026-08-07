@@ -17,6 +17,13 @@
       "disposition": "Repetir búsqueda de vigencia en la fecha de una futura activación."
     },
     {
+      "id": "map-sheet-provenance",
+      "severity": "monitor",
+      "scope": "evidence",
+      "finding": "La plancha MZSC-R02 no aparece en el Tomo 6 bloqueado, cuyas 159 páginas son todas tamaño carta frente a los 2466×3770 pt de la plancha. La única copia recuperable devuelve exactamente 3 100 744 bytes y SHA-256 9749f92f… desde el espejo de espectrocol.com, que no es la entidad publicadora.",
+      "disposition": "Se conserva la huella y la URL del espejo en data/map-evidence.json para que un revisor reproduzca los recortes; falta localizar la URL del publicador antes de la activación."
+    },
+    {
       "id": "independent-review",
       "severity": "blocker",
       "scope": "merge/activation",

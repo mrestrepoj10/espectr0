@@ -820,6 +820,36 @@ describe("unified municipal mode selector", () => {
 		expect(images).toContain("/bogota/mapa-2-zonas-respuesta-sismica.png");
 	});
 
+	it("shows the Cali sheet with the selected zone highlighted", async () => {
+		await chooseMode("Cali");
+		expect(
+			container.querySelector("[data-slot='cali-evidence-trigger']"),
+		).toBeNull();
+
+		await chooseSelectOption("cali-zone-trigger", "Zona 4C");
+		await act(async () =>
+			container
+				.querySelector<HTMLButtonElement>("[data-slot='cali-evidence-trigger']")
+				?.click(),
+		);
+		await vi.waitFor(() => {
+			expect(document.body.textContent).toContain(
+				"Evidencia cartográfica de la zona",
+			);
+		});
+		expect(document.body.textContent).toContain("MZSC-R02");
+		// The sheet prints its own coefficients, and they disagree with the
+		// adopted decree in one cell; the panel has to say which governs.
+		expect(document.body.textContent).toContain("gobierna el decreto");
+
+		const images = [
+			...document.querySelectorAll<HTMLImageElement>("img[src^='/cali/']"),
+		].map((image) => image.getAttribute("src"));
+		expect(images).toContain("/cali/mapa-mzsc-r02-leyenda.png");
+		expect(images).toContain("/cali/mapa-mzsc-r02.png");
+		expect(images).toContain("/cali/mapa-mzsc-r02-coeficientes.png");
+	});
+
 	it("splits the drawer into a source panel and a lineage panel", async () => {
 		await chooseMode("Bogotá D. C.");
 		await chooseSelectOption("bogota-zone-trigger", "CERROS");

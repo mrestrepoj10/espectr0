@@ -284,6 +284,7 @@ export function CaliParameterRail({
   onFillThicknessChange,
   onHazardChange,
   onImportanceGroupChange,
+  onTraceabilityOpen,
   onComponentChange,
   onZoneChange,
   componentId,
@@ -301,6 +302,7 @@ export function CaliParameterRail({
   onFillThicknessChange: (value: number | null) => void
   onHazardChange: (value: string) => void
   onImportanceGroupChange: (value: ImportanceGroup) => void
+  onTraceabilityOpen: () => void
   onComponentChange: (value: string) => void
   onZoneChange: (value: string) => void
   componentId: string | null
@@ -326,6 +328,19 @@ export function CaliParameterRail({
             options={zoneOptions}
             value={zoneId}
           />
+          {zoneId ? (
+            <Button
+              className="w-full"
+              data-slot="cali-evidence-trigger"
+              onClick={onTraceabilityOpen}
+              size="sm"
+              type="button"
+              variant="outline"
+            >
+              <LandmarkIcon data-icon="inline-start" />
+              Ver trazabilidad
+            </Button>
+          ) : null}
           {componentOptions.length > 0 ? (
             <>
               <MunicipalSelect

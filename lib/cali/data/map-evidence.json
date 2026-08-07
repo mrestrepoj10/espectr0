@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "id": "ingeominas-2005-mapa-mzsc-r02",
+    "title": "Mapa de Microzonificación Sísmica de Santiago de Cali — plancha MZSC-R02",
+    "issuingAuthority": "INGEOMINAS — Instituto Colombiano de Geología y Minería · DAGMA, Municipio de Cali",
+    "adoptionInstrument": "Producto del Proyecto Microzonificación Sísmica de Cali, Convenio 002 de 2002; los coeficientes vigentes los adopta el Decreto 411.0.20.0158 de 2014",
+    "date": "Bogotá, diciembre de 2005",
+    "scale": "1:25.000",
+    "sha256": "9749f92fc8c338f83440bf1b135aab64c7bdb0b662d46bcd820667f443d22989",
+    "byteLength": 3100744,
+    "pageCount": 1,
+    "officialUrl": null,
+    "mirrorUrl": "https://www.espectrocol.com/mapas/cali.pdf",
+    "mirrorRetrievedOn": "2026-08-07",
+    "note": "Hoja cartográfica que dibuja las diez zonas de respuesta y su leyenda temática, y que imprime su propia tabla de coeficientes espectrales de diseño. No aparece en el Tomo 6 bloqueado, cuyas 159 páginas son todas tamaño carta; la única copia recuperable es el espejo de espectrocol.com, que no es la entidad publicadora. Ver la entrada map-sheet-provenance del registro de incertidumbre."
+  },
+  "image": "/cali/mapa-mzsc-r02.png",
+  "legendImage": "/cali/mapa-mzsc-r02-leyenda.png",
+  "coefficientTableImage": "/cali/mapa-mzsc-r02-coeficientes.png",
+  "legendZoneBands": {
+    "zone-1": {
+      "left": 0.02917,
+      "top": 0.17029,
+      "width": 0.48333,
+      "height": 0.08323
+    },
+    "zone-2": {
+      "left": 0.02917,
+      "top": 0.26761,
+      "width": 0.48333,
+      "height": 0.08323
+    },
+    "zone-3": {
+      "left": 0.02917,
+      "top": 0.36364,
+      "width": 0.48333,
+      "height": 0.08323
+    },
+    "zone-4a": {
+      "left": 0.02917,
+      "top": 0.45967,
+      "width": 0.48333,
+      "height": 0.08323
+    },
+    "zone-4b": {
+      "left": 0.02917,
+      "top": 0.5557,
+      "width": 0.48333,
+      "height": 0.08323
+    },
+    "zone-4c": {
+      "left": 0.02917,
+      "top": 0.65173,
+      "width": 0.48333,
+      "height": 0.08323
+    },
+    "zone-4d": {
+      "left": 0.02917,
+      "top": 0.74904,
+      "width": 0.48333,
+      "height": 0.08323
+    },
+    "zone-4e": {
+      "left": 0.02917,
+      "top": 0.84507,
+      "width": 0.48333,
+      "height": 0.08323
+    },
+    "zone-5": {
+      "left": 0.52417,
+      "top": 0.17029,
+      "width": 0.4725,
+      "height": 0.08323
+    },
+    "zone-6": {
+      "left": 0.52417,
+      "top": 0.26761,
+      "width": 0.4725,
+      "height": 0.08323
+    }
+  }
+}
