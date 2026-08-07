@@ -636,12 +636,14 @@ export function Ccp14ParameterRail({
 export function DosquebradasParameterRail({
   importanceGroup,
   onImportanceGroupChange,
+  onTraceabilityOpen,
   onZoneChange,
   zoneId,
   zoneOptions,
 }: {
   importanceGroup: ImportanceGroup
   onImportanceGroupChange: (value: ImportanceGroup) => void
+  onTraceabilityOpen: () => void
   onZoneChange: (value: string) => void
   zoneId: string | null
   zoneOptions: readonly SelectOption[]
@@ -664,6 +666,19 @@ export function DosquebradasParameterRail({
             options={zoneOptions}
             value={zoneId}
           />
+          {zoneId ? (
+            <Button
+              className="w-full"
+              data-slot="dosquebradas-evidence-trigger"
+              onClick={onTraceabilityOpen}
+              size="sm"
+              type="button"
+              variant="outline"
+            >
+              <LandmarkIcon data-icon="inline-start" />
+              Ver trazabilidad
+            </Button>
+          ) : null}
           <Field>
             <FieldLabel>Nivel de amenaza</FieldLabel>
             <Input disabled value="Diseño" />
@@ -712,6 +727,7 @@ export function MedellinParameterRail({
   importanceGroup,
   onHazardChange,
   onImportanceGroupChange,
+  onTraceabilityOpen,
   onZoneChange,
   zoneId,
   zoneOptions,
@@ -722,6 +738,7 @@ export function MedellinParameterRail({
   importanceGroup: ImportanceGroup
   onHazardChange: (value: string) => void
   onImportanceGroupChange: (value: ImportanceGroup) => void
+  onTraceabilityOpen: () => void
   onZoneChange: (value: string) => void
   zoneId: string | null
   zoneOptions: readonly SelectOption[]
@@ -745,6 +762,19 @@ export function MedellinParameterRail({
             options={zoneOptions}
             value={zoneId}
           />
+          {zoneId ? (
+            <Button
+              className="w-full"
+              data-slot="medellin-evidence-trigger"
+              onClick={onTraceabilityOpen}
+              size="sm"
+              type="button"
+              variant="outline"
+            >
+              <LandmarkIcon data-icon="inline-start" />
+              Ver trazabilidad
+            </Button>
+          ) : null}
           <MunicipalSelect
             description={hazardDescription}
             id="medellin-hazard-trigger"

@@ -33,6 +33,8 @@ import {
 } from "./spectra"
 import { BOGOTA_ENGINE_ID } from "./bogota"
 import { CALI_ENGINE_ID } from "./cali"
+import { DOSQUEBRADAS_ENGINE_ID } from "./dosquebradas/adapter"
+import { MEDELLIN_ENGINE_ID } from "./medellin"
 import { CCP14_ENGINE_ID } from "./ccp14"
 
 import type { CalculationStep, CalculationTrace } from "./nsr10"
@@ -717,6 +719,14 @@ export const contextualPdfRendererRegistry = new ContextualPdfRendererRegistry()
   filename: municipalMemoriaFilename,
 }).register({
   engineId: BOGOTA_ENGINE_ID,
+  render: renderMunicipalMemoriaPdf,
+  filename: municipalMemoriaFilename,
+}).register({
+  engineId: MEDELLIN_ENGINE_ID,
+  render: renderMunicipalMemoriaPdf,
+  filename: municipalMemoriaFilename,
+}).register({
+  engineId: DOSQUEBRADAS_ENGINE_ID,
   render: renderMunicipalMemoriaPdf,
   filename: municipalMemoriaFilename,
 }).register({

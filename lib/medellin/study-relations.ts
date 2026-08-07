@@ -1,5 +1,7 @@
 import { z } from "zod"
 
+import { spectrumEvidenceResolverRegistry } from "../spectra/evidence"
+import { medellinEvidenceResolver } from "./evidence-resolver"
 import {
   spectrumStudyRelationRegistry,
   type SpectrumStudyRelationValidator,
@@ -47,3 +49,5 @@ export const medellinStudyRelationValidator: SpectrumStudyRelationValidator = {
 }
 
 spectrumStudyRelationRegistry.register(medellinStudyRelationValidator)
+
+spectrumEvidenceResolverRegistry.register(medellinEvidenceResolver)

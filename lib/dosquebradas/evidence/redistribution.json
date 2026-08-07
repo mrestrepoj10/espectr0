@@ -7,5 +7,16 @@
     "source PDFs",
     "rendered pages",
     "map/GIS layers"
-  ]
+  ],
+  "tableExtractException": {
+    "sourceDocumentId": "pot-2024-diagnostico-amenazas",
+    "committedArtifacts": [
+      "public/dosquebradas/pot-2024-tabla-27.pdf"
+    ],
+    "scope": "Páginas físicas 111 y 112 del diagnóstico — la Tabla 27 con sus coeficientes y la Figura 16 que la acompaña — para que el cajón dibuje cada rectángulo atestado sobre la página que enuncia el valor.",
+    "extractedFrom": "El PDF oficial del repositorio del POT, re-descargado y verificado byte a byte contra el lock (26453877 bytes, SHA-256 cf4608f2…) antes de extraer.",
+    "permissionStatus": "not-established",
+    "ownerDecision": "Publicar las dos páginas de la tabla: un coeficiente citado que el lector no puede ver en su página es una cita que debe creer sin verla.",
+    "reviewerAction": "Si el diagnóstico no puede reproducirse, borrar el extracto y devolver localPath/localPageMap a null."
+  }
 }

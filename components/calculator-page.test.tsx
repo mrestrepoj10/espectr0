@@ -850,6 +850,40 @@ describe("unified municipal mode selector", () => {
 		expect(images).toContain("/cali/mapa-mzsc-r02-coeficientes.png");
 	});
 
+	it("opens traceability for Medellín and Dosquebradas", async () => {
+		await chooseMode("Medellín");
+		expect(
+			container.querySelector("[data-slot='medellin-evidence-trigger']"),
+		).toBeNull();
+		await chooseSelectOption("medellin-zone-trigger", "Zona homogénea 1");
+		await act(async () =>
+			container
+				.querySelector<HTMLButtonElement>(
+					"[data-slot='medellin-evidence-trigger']",
+				)
+				?.click(),
+		);
+		await vi.waitFor(() => {
+			expect(document.body.textContent).toContain(
+				"Evidencia cartográfica de la zona",
+			);
+		});
+		// The sheet labels zones 2 and 3 by lithology where the study labels them
+		// by sector, so the panel has to say the row is matched by position.
+		expect(document.body.textContent).toContain("por posición");
+		await act(async () =>
+			document
+				.querySelector<HTMLButtonElement>('[role="dialog"] button')
+				?.click(),
+		);
+
+		await chooseMode("Dosquebradas");
+		await chooseSelectOption("dosquebradas-zone-trigger", "Zona 1");
+		expect(
+			container.querySelector("[data-slot='dosquebradas-evidence-trigger']"),
+		).not.toBeNull();
+	});
+
 	it("splits the drawer into a source panel and a lineage panel", async () => {
 		await chooseMode("Bogotá D. C.");
 		await chooseSelectOption("bogota-zone-trigger", "CERROS");

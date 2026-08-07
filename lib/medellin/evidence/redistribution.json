@@ -39,5 +39,17 @@
       "rationale": "No express redistribution license located on the official delivery page."
     }
   ],
-  "committedSourceBytes": false
+  "committedSourceBytes": false,
+  "mapSheetException": {
+    "sourceDocumentId": "medellin-pot-mapa-zonas-homogeneas",
+    "committedArtifacts": [
+      "public/medellin/pot-zonas-homogeneas.png",
+      "public/medellin/pot-zonas-homogeneas-leyenda.png"
+    ],
+    "scope": "Rásteres a resolución de pantalla de la plancha de zonas homogéneas del POT y de su convención, mostrados en el cajón de trazabilidad para ubicar la zona.",
+    "distinctFromLockedSources": "La plancha no es ninguna de las seis fuentes fijadas en source-locks.json, que siguen sin bytes en el repositorio.",
+    "permissionStatus": "not-established",
+    "ownerDecision": "Publicarla: sin la plancha el ingeniero no puede comprobar en qué zona homogénea cae el predio.",
+    "reviewerAction": "Si la plancha no puede republicarse, borrar los dos PNG y dejar solo el enlace saliente."
+  }
 }

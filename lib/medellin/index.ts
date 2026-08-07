@@ -35,3 +35,8 @@ export {
   type MedellinScenario,
   type MedellinZoneId,
 } from "./schema"
+export {
+  medellinLegendZoneBand,
+  medellinMapEvidence,
+  medellinZoneLabel,
+} from "./map-evidence"
