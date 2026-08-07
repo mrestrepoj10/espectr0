@@ -445,10 +445,25 @@ describe("unified municipal mode selector", () => {
 			expect(container.querySelector(`#${zone}`), mode).not.toBeNull();
 		}
 
-		// Cali's two site conditions are gone with them.
+		// Cali keeps two more: unmanaged fill and colluvial deposit are not
+		// cosmetic site description there, they raise Fa and Fv by a cited 20%.
 		await chooseMode("Cali");
-		expect(container.querySelector("#cali-fill-thickness")).toBeNull();
-		expect(container.querySelector("#cali-colluvial-deposit")).toBeNull();
+		expect(container.querySelector("#cali-fill-thickness")).not.toBeNull();
+		expect(container.querySelector("#cali-colluvial-deposit")).not.toBeNull();
+	});
+
+	it("keeps Cali's cited 20% amplification reachable from the form", async () => {
+		await chooseMode("Cali");
+		await chooseSelectOption("cali-zone-trigger", "Zona 1");
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("Datos del espectro"),
+		);
+		expect(container.textContent).not.toContain("aumentaron Fa y Fv en 20%");
+
+		await setNumberInput("cali-fill-thickness", "4");
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("aumentaron Fa y Fv en 20%"),
+		);
 	});
 
 	it("scales the Bogotá spectrum by the chosen NSR-10 use group", async () => {

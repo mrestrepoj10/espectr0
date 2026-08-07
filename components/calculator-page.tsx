@@ -812,6 +812,8 @@ export function CalculatorPage() {
 	const [caliHazardId, setCaliHazardId] = useState(caliHazardOptions[0].id);
 	const [caliImportanceGroup, setCaliImportanceGroup] =
 		useState<ImportanceGroup>("I");
+	const [caliFillThickness, setCaliFillThickness] = useState<number | null>(null);
+	const [caliColluvialDeposit, setCaliColluvialDeposit] = useState(false);
 	const [dosquebradasZoneId, setDosquebradasZoneId] =
 		useState<string | null>(null);
 	const [dosquebradasImportanceGroup, setDosquebradasImportanceGroup] =
@@ -917,14 +919,16 @@ export function CalculatorPage() {
 				optionId: caliOptionId,
 				hazardId: caliHazardId,
 				importanceFactor: importanceCoefficient(caliImportanceGroup),
-				uncontrolledFillThicknessMeters: null,
-				colluvialDeposit: false,
+				uncontrolledFillThicknessMeters: caliFillThickness,
+				colluvialDeposit: caliColluvialDeposit,
 			});
 		},
 		[
 			calculationMode,
 
 			caliHazardId,
+			caliColluvialDeposit,
+			caliFillThickness,
 			caliImportanceGroup,
 			caliOptionId,
 		],
@@ -1091,6 +1095,10 @@ export function CalculatorPage() {
 			/>
 		) : calculationMode === "cali-microzonation" ? (
 			<CaliParameterRail
+				colluvialDeposit={caliColluvialDeposit}
+				fillThicknessMeters={caliFillThickness}
+				onColluvialDepositChange={setCaliColluvialDeposit}
+				onFillThicknessChange={setCaliFillThickness}
 				componentId={caliComponentId}
 				componentOptions={activeCaliComponentOptions}
 				hazardDescription={municipalHazardDescription(

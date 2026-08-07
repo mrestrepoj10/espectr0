@@ -30,6 +30,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
+import { Switch } from "@/components/ui/switch"
 import {
   importanceDescriptions,
   importanceValues,
@@ -267,16 +268,20 @@ export function BogotaParameterRail({
 }
 
 /**
- * Unmanaged fill and colluvial deposit are not asked for: neither is a study
- * input, both describe the site the geotechnical engineer characterises, and
- * the thresholds that make them matter travel as the site-specific warning the
- * result already carries.
+ * Unlike the other municipal rails, this one still asks for two site
+ * conditions: unmanaged fill over 3 m or a colluvial deposit raise Fa and Fv by
+ * the cited 20%, so dropping them would not simplify the form — it would
+ * silently under-predict those sites.
  */
 export function CaliParameterRail({
+  colluvialDeposit,
+  fillThicknessMeters,
   hazardDescription,
   hazardId,
   hazardOptions,
   importanceGroup,
+  onColluvialDepositChange,
+  onFillThicknessChange,
   onHazardChange,
   onImportanceGroupChange,
   onComponentChange,
@@ -286,10 +291,14 @@ export function CaliParameterRail({
   zoneId,
   zoneOptions,
 }: {
+  colluvialDeposit: boolean
+  fillThicknessMeters: number | null
   hazardDescription: string
   hazardId: string
   hazardOptions: readonly SelectOption[]
   importanceGroup: ImportanceGroup
+  onColluvialDepositChange: (value: boolean) => void
+  onFillThicknessChange: (value: number | null) => void
   onHazardChange: (value: string) => void
   onImportanceGroupChange: (value: ImportanceGroup) => void
   onComponentChange: (value: string) => void
@@ -351,6 +360,28 @@ export function CaliParameterRail({
             onValueChange={onImportanceGroupChange}
             value={importanceGroup}
           />
+          <NumericInput
+            description="Sobre 3 m, el estudio aumenta Fa y Fv en 20%. Déjalo vacío si no aplica."
+            id="cali-fill-thickness"
+            label="Relleno no controlado (m)"
+            nullable
+            onValueChange={onFillThicknessChange}
+            value={fillThicknessMeters}
+          />
+          <Field orientation="horizontal">
+            <FieldLabel htmlFor="cali-colluvial-deposit">
+              Depósito coluvial
+            </FieldLabel>
+            <Switch
+              checked={colluvialDeposit}
+              id="cali-colluvial-deposit"
+              onCheckedChange={onColluvialDepositChange}
+            />
+          </Field>
+          <FieldDescription>
+            Cualquiera de las dos condiciones aplica el factor 1,2 citado sobre
+            Fa y Fv; el resultado lo declara como advertencia.
+          </FieldDescription>
           <ManualZoneWarning />
         </FieldGroup>
       </CardContent>
