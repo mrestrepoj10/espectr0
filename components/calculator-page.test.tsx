@@ -418,6 +418,39 @@ describe("unified municipal mode selector", () => {
 		}
 	});
 
+	it("asks every municipal mode for the zone, the hazard and the use group", async () => {
+		// The published studies tabulate coefficients per zone and hazard; the
+		// rest of the site is what the geotechnical engineer characterises, and
+		// its thresholds travel as the site-specific warning each result carries.
+		const modes = [
+			{ mode: "Cali", prefix: "cali", zone: "cali-zone-trigger" },
+			{ mode: "Medellín", prefix: "medellin", zone: "medellin-zone-trigger" },
+			{
+				mode: "Dosquebradas",
+				prefix: "dosquebradas",
+				zone: "dosquebradas-zone-trigger",
+			},
+		];
+
+		for (const { mode, prefix, zone } of modes) {
+			await chooseMode(mode);
+			expect(
+				container.querySelector(`#${prefix}-importance-factor`),
+				mode,
+			).toBeNull();
+			expect(
+				container.querySelector(`#${prefix}-importance-group-trigger`),
+				mode,
+			).not.toBeNull();
+			expect(container.querySelector(`#${zone}`), mode).not.toBeNull();
+		}
+
+		// Cali's two site conditions are gone with them.
+		await chooseMode("Cali");
+		expect(container.querySelector("#cali-fill-thickness")).toBeNull();
+		expect(container.querySelector("#cali-colluvial-deposit")).toBeNull();
+	});
+
 	it("scales the Bogotá spectrum by the chosen NSR-10 use group", async () => {
 		await chooseMode("Bogotá D. C.");
 		await chooseSelectOption("bogota-zone-trigger", "CERROS");

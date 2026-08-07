@@ -30,7 +30,6 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
-import { Switch } from "@/components/ui/switch"
 import {
   importanceDescriptions,
   importanceValues,
@@ -134,6 +133,39 @@ function NumericInput({
   )
 }
 
+/**
+ * The four NSR-10 A.2.5 groups, the only importance coefficients these
+ * municipal spectra are scaled by. A free number let an unattested I reach the
+ * memoria beside coefficients whose whole point is that they are cited.
+ */
+const IMPORTANCE_GROUP_OPTIONS: readonly SelectOption[] = (
+  Object.keys(importanceValues) as ImportanceGroup[]
+).map((group) => ({
+  id: group,
+  label: `${group} — ${importanceDescriptions[group]} (I=${importanceValues[group]})`,
+}))
+
+function ImportanceGroupField({
+  idPrefix,
+  value,
+  onValueChange,
+}: {
+  idPrefix: string
+  value: ImportanceGroup
+  onValueChange: (value: ImportanceGroup) => void
+}) {
+  return (
+    <MunicipalSelect
+      description="Tabla A.2.5-1 de NSR-10; fija el coeficiente de importancia I que escala el espectro."
+      id={`${idPrefix}-importance-group-trigger`}
+      label="Grupo de uso (NSR-10 A.2.5)"
+      onValueChange={(next) => onValueChange(next as ImportanceGroup)}
+      options={IMPORTANCE_GROUP_OPTIONS}
+      value={value}
+    />
+  )
+}
+
 function ManualZoneWarning() {
   return (
     <Alert data-slot="manual-zone-warning">
@@ -147,17 +179,6 @@ function ManualZoneWarning() {
     </Alert>
   )
 }
-
-/**
- * The four NSR-10 A.2.5 groups, the only importance coefficients the study's
- * spectra are scaled by. A free number let an unattested I reach the memoria.
- */
-const BOGOTA_IMPORTANCE_OPTIONS: readonly SelectOption[] = (
-  Object.keys(importanceValues) as ImportanceGroup[]
-).map((group) => ({
-  id: group,
-  label: `${group} — ${importanceDescriptions[group]} (I=${importanceValues[group]})`,
-}))
 
 /**
  * Fill thickness and rigid-base period are not asked for: neither is a study
@@ -227,12 +248,9 @@ export function BogotaParameterRail({
             options={hazardOptions}
             value={hazardId}
           />
-          <MunicipalSelect
-            description="Tabla A.2.5-1 de NSR-10; fija el coeficiente de importancia I que escala el espectro."
-            id="bogota-importance-group-trigger"
-            label="Grupo de uso (NSR-10 A.2.5)"
-            onValueChange={(value) => onImportanceGroupChange(value as ImportanceGroup)}
-            options={BOGOTA_IMPORTANCE_OPTIONS}
+          <ImportanceGroupField
+            idPrefix="bogota"
+            onValueChange={onImportanceGroupChange}
             value={importanceGroup}
           />
           <ManualZoneWarning />
@@ -248,17 +266,19 @@ export function BogotaParameterRail({
   )
 }
 
+/**
+ * Unmanaged fill and colluvial deposit are not asked for: neither is a study
+ * input, both describe the site the geotechnical engineer characterises, and
+ * the thresholds that make them matter travel as the site-specific warning the
+ * result already carries.
+ */
 export function CaliParameterRail({
-  colluvialDeposit,
-  fillThicknessMeters,
   hazardDescription,
   hazardId,
   hazardOptions,
-  importanceFactor,
-  onColluvialDepositChange,
-  onFillThicknessChange,
+  importanceGroup,
   onHazardChange,
-  onImportanceFactorChange,
+  onImportanceGroupChange,
   onComponentChange,
   onZoneChange,
   componentId,
@@ -266,16 +286,12 @@ export function CaliParameterRail({
   zoneId,
   zoneOptions,
 }: {
-  colluvialDeposit: boolean
-  fillThicknessMeters: number | null
   hazardDescription: string
   hazardId: string
   hazardOptions: readonly SelectOption[]
-  importanceFactor: number
-  onColluvialDepositChange: (value: boolean) => void
-  onFillThicknessChange: (value: number | null) => void
+  importanceGroup: ImportanceGroup
   onHazardChange: (value: string) => void
-  onImportanceFactorChange: (value: number) => void
+  onImportanceGroupChange: (value: ImportanceGroup) => void
   onComponentChange: (value: string) => void
   onZoneChange: (value: string) => void
   componentId: string | null
@@ -330,32 +346,11 @@ export function CaliParameterRail({
             options={hazardOptions}
             value={hazardId}
           />
-          <NumericInput
-            description="Factor declarado para el proyecto."
-            id="cali-importance-factor"
-            label="Factor de importancia I"
-            min={0.01}
-            onValueChange={(value) => onImportanceFactorChange(value ?? 0)}
-            value={importanceFactor}
+          <ImportanceGroupField
+            idPrefix="cali"
+            onValueChange={onImportanceGroupChange}
+            value={importanceGroup}
           />
-          <NumericInput
-            description="Opcional; espesor declarado para el proyecto."
-            id="cali-fill-thickness"
-            label="Relleno no controlado (m)"
-            nullable
-            onValueChange={onFillThicknessChange}
-            value={fillThicknessMeters}
-          />
-          <Field orientation="horizontal">
-            <FieldLabel htmlFor="cali-colluvial-deposit">
-              Depósito coluvial
-            </FieldLabel>
-            <Switch
-              checked={colluvialDeposit}
-              id="cali-colluvial-deposit"
-              onCheckedChange={onColluvialDepositChange}
-            />
-          </Field>
           <ManualZoneWarning />
         </FieldGroup>
       </CardContent>
@@ -593,14 +588,14 @@ export function Ccp14ParameterRail({
 }
 
 export function DosquebradasParameterRail({
-  importanceFactor,
-  onImportanceFactorChange,
+  importanceGroup,
+  onImportanceGroupChange,
   onZoneChange,
   zoneId,
   zoneOptions,
 }: {
-  importanceFactor: number
-  onImportanceFactorChange: (value: number) => void
+  importanceGroup: ImportanceGroup
+  onImportanceGroupChange: (value: ImportanceGroup) => void
   onZoneChange: (value: string) => void
   zoneId: string | null
   zoneOptions: readonly SelectOption[]
@@ -630,13 +625,10 @@ export function DosquebradasParameterRail({
               Escenario único; la tabla municipal no declara periodo de retorno.
             </FieldDescription>
           </Field>
-          <NumericInput
-            description="Factor declarado para el proyecto."
-            id="dosquebradas-importance-factor"
-            label="Factor de importancia I"
-            min={0.01}
-            onValueChange={(value) => onImportanceFactorChange(value ?? 0)}
-            value={importanceFactor}
+          <ImportanceGroupField
+            idPrefix="dosquebradas"
+            onValueChange={onImportanceGroupChange}
+            value={importanceGroup}
           />
           <ManualZoneWarning />
           <Alert>
@@ -671,9 +663,9 @@ export function MedellinParameterRail({
   hazardDescription,
   hazardId,
   hazardOptions,
-  importanceFactor,
+  importanceGroup,
   onHazardChange,
-  onImportanceFactorChange,
+  onImportanceGroupChange,
   onZoneChange,
   zoneId,
   zoneOptions,
@@ -681,9 +673,9 @@ export function MedellinParameterRail({
   hazardDescription: string
   hazardId: string | null
   hazardOptions: readonly SelectOption[]
-  importanceFactor: number
+  importanceGroup: ImportanceGroup
   onHazardChange: (value: string) => void
-  onImportanceFactorChange: (value: number) => void
+  onImportanceGroupChange: (value: ImportanceGroup) => void
   onZoneChange: (value: string) => void
   zoneId: string | null
   zoneOptions: readonly SelectOption[]
@@ -715,13 +707,10 @@ export function MedellinParameterRail({
             options={hazardOptions}
             value={hazardId}
           />
-          <NumericInput
-            description="Factor declarado para el proyecto."
-            id="medellin-importance-factor"
-            label="Factor de importancia I"
-            min={0.01}
-            onValueChange={(value) => onImportanceFactorChange(value ?? 0)}
-            value={importanceFactor}
+          <ImportanceGroupField
+            idPrefix="medellin"
+            onValueChange={onImportanceGroupChange}
+            value={importanceGroup}
           />
           <ManualZoneWarning />
           <Alert>
