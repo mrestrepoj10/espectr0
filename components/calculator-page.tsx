@@ -81,7 +81,12 @@ import {
 	adaptCaliSpectrum,
 	caliCanonical,
 } from "@/lib/cali";
-import { adaptCcp14Spectrum, ccp14DirectMapValues } from "@/lib/ccp14";
+import {
+	adaptCcp14Spectrum,
+	ccp14DirectMapValues,
+	ccp14LegendValue,
+	resolveCcp14MapLocation,
+} from "@/lib/ccp14";
 import { adaptDosquebradasSpectrum } from "@/lib/dosquebradas/adapter";
 import { dosquebradasRows } from "@/lib/dosquebradas/schema";
 import {
@@ -106,7 +111,7 @@ import {
 } from "@/lib/spectra";
 
 import type { CalculatorModeId } from "@/lib/municipal-mode-catalog";
-import type { Ccp14SoilClass } from "@/lib/ccp14";
+import type { Ccp14Coefficient, Ccp14SoilClass } from "@/lib/ccp14";
 import type {
 	HazardLevel,
 	ImportanceGroup,
@@ -767,9 +772,12 @@ function transitionMetrics(mode: CalculatorModeId, hazardId: string) {
 export function CalculatorPage() {
 	const [calculationMode, setCalculationMode] =
 		useState<CalculatorModeId>("nsr10-national");
-	const [ccp14PgaG, setCcp14PgaG] = useState<number | null>(null);
-	const [ccp14SsG, setCcp14SsG] = useState<number | null>(null);
-	const [ccp14S1G, setCcp14S1G] = useState<number | null>(null);
+	const [ccp14Values, setCcp14Values] = useState<
+		Record<Ccp14Coefficient, number | null>
+	>({ PGA: null, Ss: null, S1: null });
+	const [ccp14Regions, setCcp14Regions] = useState<
+		Record<Ccp14Coefficient, number | null>
+	>({ PGA: null, Ss: null, S1: null });
 	const [ccp14SoilClass, setCcp14SoilClass] =
 		useState<Ccp14SoilClass | null>(null);
 	const [ccp14MapLocationId, setCcp14MapLocationId] =
@@ -833,25 +841,27 @@ export function CalculatorPage() {
 	const ccp14Result = useMemo(() => {
 		if (
 			calculationMode !== "ccp14" ||
-			ccp14PgaG === null ||
-			ccp14SsG === null ||
-			ccp14S1G === null ||
+			ccp14Values.PGA === null ||
+			ccp14Values.Ss === null ||
+			ccp14Values.S1 === null ||
 			ccp14SoilClass === null
 		) return null;
 		return adaptCcp14Spectrum({
-			pgaG: ccp14PgaG,
-			ssG: ccp14SsG,
-			s1G: ccp14S1G,
+			pgaG: ccp14Values.PGA,
+			ssG: ccp14Values.Ss,
+			s1G: ccp14Values.S1,
 			soilClass: ccp14SoilClass,
 			mapLocationId: ccp14MapLocationId,
+			pgaRegion: ccp14Regions.PGA,
+			ssRegion: ccp14Regions.Ss,
+			s1Region: ccp14Regions.S1,
 		});
 	}, [
 		calculationMode,
 		ccp14MapLocationId,
-		ccp14PgaG,
-		ccp14S1G,
+		ccp14Regions,
 		ccp14SoilClass,
-		ccp14SsG,
+		ccp14Values,
 	]);
 	const bogotaResult = useMemo(
 		() => {
@@ -1012,23 +1022,39 @@ export function CalculatorPage() {
 				mapLocationId={ccp14MapLocationId}
 				onMapLocationChange={(value) => {
 					setCcp14MapLocationId(value);
+					const location = resolveCcp14MapLocation(value);
 					const direct = ccp14DirectMapValues(value);
-					if (direct) {
-						setCcp14PgaG(direct.pgaG);
-						setCcp14SsG(direct.ssG);
-						setCcp14S1G(direct.s1G);
+					if (direct && location.directRegion) {
+						setCcp14Values({
+							PGA: direct.pgaG,
+							Ss: direct.ssG,
+							S1: direct.s1G,
+						});
+						setCcp14Regions({ ...location.directRegion });
 					}
 				}}
-				onPgaChange={setCcp14PgaG}
-				onS1Change={setCcp14S1G}
+				onRegionChange={(coefficient, region) => {
+					setCcp14Regions((current) => ({
+						...current,
+						[coefficient]: region,
+					}));
+					setCcp14Values((current) => ({
+						...current,
+						[coefficient]:
+							region === null
+								? null
+								: ccp14LegendValue(coefficient, region),
+					}));
+				}}
 				onSoilClassChange={(value) =>
 					setCcp14SoilClass(value as Ccp14SoilClass)
 				}
-				onSsChange={setCcp14SsG}
-				pgaG={ccp14PgaG}
-				s1G={ccp14S1G}
+				onValueChange={(coefficient, value) =>
+					setCcp14Values((current) => ({ ...current, [coefficient]: value }))
+				}
+				regions={ccp14Regions}
 				soilClass={ccp14SoilClass}
-				ssG={ccp14SsG}
+				values={ccp14Values}
 			/>
 		) : calculationMode === "bogota-microzonation" ? (
 			<BogotaParameterRail
@@ -1107,7 +1133,7 @@ export function CalculatorPage() {
 	const manualSelectionNotice =
 		calculationMode === "ccp14" && ccp14Result === null ? (
 			<ManualSelectionNotice
-				description="Declara PGA, Ss y S1 leídos de las Figuras 3.10.2.1-1 a 3.10.2.1-3 y el perfil de sitio del proyecto."
+				description="Selecciona la región que leas para PGA, Ss y S1 en las Figuras 3.10.2.1-1 a 3.10.2.1-3, y el perfil de sitio del proyecto."
 				title="Completa los datos de CCP-14"
 			/>
 		) : calculationMode === "dosquebradas-microzonation" &&

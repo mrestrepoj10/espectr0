@@ -13,6 +13,8 @@ export type Ccp14MapFigure = {
   mapTitle: string
   /** Legend rows as printed on the figure, ordered by region number. */
   regions: readonly (readonly [region: number, value: number])[]
+  /** Citation of the printed legend table, which states each region's value. */
+  legendCitationId: string
 }
 
 export type Ccp14MapLocation = {
@@ -98,6 +100,29 @@ export function ccp14DirectMapValues(id: string) {
  * that region's legend row states. An edited value loses its backing rather
  * than keeping a citation that no longer describes it.
  */
+/**
+ * Backing for a coefficient the engineer read as a whole region rather than
+ * interpolating. The legend is a printed table, so once the region is asserted
+ * the value is quoted from the publication rather than typed.
+ */
+export function ccp14LegendBacking(
+  coefficient: Ccp14Coefficient,
+  region: number | null,
+  entered: number,
+) {
+  if (region === null) return null
+  const figure = ccp14MapFigure(coefficient)
+  const stated = ccp14LegendValue(coefficient, region)
+  if (entered !== stated) return null
+  return {
+    coefficient,
+    region,
+    value: stated,
+    citationId: figure.legendCitationId,
+    reference: `${figure.id.replace("figura-", "Figura ")}, leyenda, región ${region}`,
+  }
+}
+
 export function ccp14DirectValueBacking(
   id: string | null,
   entered: { pgaG: number; ssG: number; s1G: number },

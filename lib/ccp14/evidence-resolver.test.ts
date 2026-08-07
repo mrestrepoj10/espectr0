@@ -139,6 +139,41 @@ describe("CCP-14 evidence resolver", () => {
     )
   })
 
+  it("quotes the printed legend for a coefficient read as a whole region", () => {
+    const evidence = resolveSpectrumEvidence(
+      adaptCcp14Spectrum({
+        ...generalProcedureInput,
+        pgaG: 0.3,
+        pgaRegion: 6,
+        ssG: 0.7,
+        ssRegion: 7,
+      }),
+    )
+
+    expect(
+      evidence.directValues
+        .filter(({ unit }) => unit === "g")
+        .map(({ label, value, citationId }) => ({ label, value, citationId })),
+    ).toEqual([
+      { label: "PGA · región 6", value: 0.3, citationId: "map-legend-pga" },
+      { label: "Ss · región 7", value: 0.7, citationId: "map-legend-ss" },
+    ])
+    const legend = evidence.citations.find(({ id }) => id === "map-legend-pga")
+    expect(legend).toMatchObject({ physicalPage: 51, printedPage: "3-47" })
+    expect(legend?.rect).not.toBeNull()
+    expect(legend?.transcription).toContain("no indica en qué región")
+  })
+
+  it("refuses to quote the legend for a region that does not state that value", () => {
+    const evidence = resolveSpectrumEvidence(
+      adaptCcp14Spectrum({ ...generalProcedureInput, pgaG: 0.27, pgaRegion: 6 }),
+    )
+
+    // 0.27 is interpolated between contours, so region 6 does not state it.
+    expect(evidence.directValues.some(({ unit }) => unit === "g")).toBe(false)
+    expect(evidence.citations.map(({ id }) => id)).not.toContain("map-legend-pga")
+  })
+
   it("claims no map backing for a location the figures only label", () => {
     const evidence = resolveSpectrumEvidence(
       adaptCcp14Spectrum({ ...generalProcedureInput, mapLocationId: "neiva" }),

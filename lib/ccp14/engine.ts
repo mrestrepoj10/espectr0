@@ -13,7 +13,11 @@ export const ccp14T0InterpretationSchema = z.enum([
  * The general procedure of 3.10.2.1 needs only the three mapped coefficients and
  * the site class. `mapLocationId` records which of the places labeled on Figuras
  * 3.10.2.1-1 a 3.10.2.1-3 the reading belongs to; it documents the site and never
- * supplies a coefficient. The remaining fields describe the 3.10.2.2 routing
+ * supplies a coefficient. `pgaRegion`, `ssRegion` and `s1Region` record that the
+ * engineer read a whole legend region off a figure rather than interpolating
+ * between contours, which lets the result quote the printed legend for that
+ * coefficient instead of treating it as a typed number. The remaining fields
+ * describe the 3.10.2.2 routing
  * conditions that the designer confirms outside the calculator, so they carry the
  * general-procedure defaults and stay optional at the boundary.
  */
@@ -24,6 +28,9 @@ export const ccp14ComputationInputSchema = z
     s1G: z.number().finite().positive(),
     soilClass: ccp14SoilClassSchema,
     mapLocationId: ccp14MapLocationIdSchema.nullable().default(null),
+    pgaRegion: z.number().int().positive().nullable().default(null),
+    ssRegion: z.number().int().positive().nullable().default(null),
+    s1Region: z.number().int().positive().nullable().default(null),
     t0Interpretation: ccp14T0InterpretationSchema.default("figure-0.2-ts"),
     distanceToActiveFaultKm: z
       .number()

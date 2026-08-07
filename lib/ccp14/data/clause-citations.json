@@ -220,6 +220,51 @@
       },
       "reference": "CCP-14 Figura 3.10.2.1-3 — recuadro de San Andrés y Providencia",
       "transcription": "El recuadro rotulado «San Andrés y Providencia» lleva un único marcador de región 1 y ningún contorno lo cruza, de modo que todo el recuadro pertenece a la región 1. Según la leyenda de la figura, la región 1 corresponde a S1 = 0.05 g."
+    },
+    {
+      "id": "map-legend-pga",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "clause",
+      "physicalPage": 51,
+      "printedPage": "3-47",
+      "rect": {
+        "left": 0.682,
+        "top": 0.121,
+        "width": 0.158,
+        "height": 0.19
+      },
+      "reference": "CCP-14 Figura 3.10.2.1-1 — leyenda Región/PGA",
+      "transcription": "Tabla de leyenda impresa sobre la Figura 3.10.2.1-1: asigna un valor de PGA a cada región del mapa. 11 regiones, de 0.05 g (región 1) a 0.55 g (región 11), en pasos de 0.05 g. La leyenda define el valor de una región; no indica en qué región queda un lugar, lo cual debe leerse siguiendo los contornos del mapa."
+    },
+    {
+      "id": "map-legend-ss",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "clause",
+      "physicalPage": 52,
+      "printedPage": "3-48",
+      "rect": {
+        "left": 0.682,
+        "top": 0.121,
+        "width": 0.158,
+        "height": 0.216
+      },
+      "reference": "CCP-14 Figura 3.10.2.1-2 — leyenda Región/Ss",
+      "transcription": "Tabla de leyenda impresa sobre la Figura 3.10.2.1-2: asigna un valor de Ss a cada región del mapa. 13 regiones, de 0.10 g (región 1) a 1.30 g (región 13), en pasos de 0.10 g. La leyenda define el valor de una región; no indica en qué región queda un lugar, lo cual debe leerse siguiendo los contornos del mapa."
+    },
+    {
+      "id": "map-legend-s1",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "clause",
+      "physicalPage": 53,
+      "printedPage": "3-49",
+      "rect": {
+        "left": 0.682,
+        "top": 0.121,
+        "width": 0.158,
+        "height": 0.231
+      },
+      "reference": "CCP-14 Figura 3.10.2.1-3 — leyenda Región/S1",
+      "transcription": "Tabla de leyenda impresa sobre la Figura 3.10.2.1-3: asigna un valor de S1 a cada región del mapa. 14 regiones, de 0.05 g (región 1) a 0.70 g (región 14), en pasos de 0.05 g. La leyenda define el valor de una región; no indica en qué región queda un lugar, lo cual debe leerse siguiendo los contornos del mapa."
     }
   ]
 }

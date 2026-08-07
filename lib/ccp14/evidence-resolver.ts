@@ -22,7 +22,9 @@ import type {
 import { CCP14_ENGINE_ID, CCP14_STUDY_LABEL } from "./constants"
 import {
   ccp14DirectValueBacking,
+  ccp14LegendBacking,
   resolveCcp14MapLocation,
+  type Ccp14Coefficient,
 } from "./map-locations"
 import { parseCcp14TraceEnvelope, type Ccp14TraceStep } from "./trace"
 
@@ -241,12 +243,43 @@ function ccp14Evidence(
     provenance: "direct-source" as const,
     citationId: entry.citationId,
   }))
+  /**
+   * A coefficient the engineer read as a whole legend region. The value is then
+   * quoted from the printed Region/value table rather than typed, so it carries
+   * that table as its source region.
+   */
+  const legendBacked: SpectrumDirectValue[] = (
+    [
+      ["pgaG", "PGA", "pgaRegion"],
+      ["ssG", "Ss", "ssRegion"],
+      ["s1G", "S1", "s1Region"],
+    ] as const
+  ).flatMap(([field, coefficient, regionField]) => {
+    if (mapBacked.some((value) => value.id === field)) return []
+    const region = result.normalizedInputs[regionField]
+    const backing = ccp14LegendBacking(
+      coefficient as Ccp14Coefficient,
+      typeof region === "number" ? region : null,
+      Number(result.normalizedInputs[field]),
+    )
+    if (!backing) return []
+    return [{
+      id: field,
+      label: `${backing.coefficient} · región ${backing.region}`,
+      value: backing.value,
+      normalizedInputPath: [field],
+      traceStepId: null,
+      unit: "g" as const,
+      provenance: "direct-source" as const,
+      citationId: backing.citationId,
+    }]
+  })
   const siteFactors = (["Fpga", "Fa", "Fv"] as const)
     .map((factorId) => stepById.get(`ccp14-factor-${factorId.toLowerCase()}`))
     .filter((step): step is Ccp14TraceStep => step !== undefined)
     .map(directValueFor)
     .filter((value): value is SpectrumDirectValue => value !== null)
-  const directValues = [...mapBacked, ...siteFactors]
+  const directValues = [...mapBacked, ...legendBacked, ...siteFactors]
   const metricLineage: SpectrumMetricLineage[] = result.metrics
     .filter((metric) => metric.formulaId !== null)
     .map((metric) => {

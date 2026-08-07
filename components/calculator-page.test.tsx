@@ -595,93 +595,90 @@ describe("unified municipal mode selector", () => {
 		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
 	});
 
-	it("activates CCP-14 from the four general-procedure inputs only", async () => {
+	it("asks for the region read off each figure, not the value", async () => {
 		await chooseMode("CCP-14 · Puentes");
 		expect(container.textContent).toContain("Parámetros CCP-14");
 		const officialPublicationLink = container.querySelector<HTMLAnchorElement>(
 			'a[href*="idFile=29584"]',
-		);
-		expect(officialPublicationLink?.textContent).toContain(
-			"Descargar publicación oficial CCP-14 de INVÍAS",
 		);
 		expect(officialPublicationLink?.href).toBe(
 			"https://www.invias.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=29584",
 		);
 		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
 		expect(container.textContent).toContain("Completa los datos de CCP-14");
-		expect(container.textContent).not.toContain("Datos del espectro");
-		expect(container.querySelector("#ccp14-city-trigger")).toBeNull();
 		expect(container.querySelector("#ccp14-t0-trigger")).toBeNull();
 		expect(container.querySelector("#ccp14-fault-distance")).toBeNull();
-		expect(container.querySelector("#ccp14-long-duration-trigger")).toBeNull();
-		expect(container.querySelector("#ccp14-enhanced-hazard-trigger")).toBeNull();
-		expect(container.textContent).toContain(
-			"no publica una tabla de PGA, Ss y S1 por municipio",
-		);
-		expect(container.textContent).toContain(
-			"Figura 3.10.2.1-1 (pág. impresa 3-47): 11 regiones",
-		);
-		expect(container.textContent).toContain(
-			"Figura 3.10.2.1-3 (pág. impresa 3-49): 14 regiones",
-		);
+		// The legend states each region's value, so the form asks for the region.
+		expect(container.querySelector("#ccp14-pga-region")).not.toBeNull();
+		expect(container.querySelector("#ccp14-ss-region")).not.toBeNull();
+		expect(container.querySelector("#ccp14-s1-region")).not.toBeNull();
 
-		await setNumberInput("ccp14-pga", "0.25");
-		await setNumberInput("ccp14-ss", "0.5");
-		await setNumberInput("ccp14-s1", "0.2");
-		await chooseSelectOption("ccp14-soil-trigger", "Perfil D");
-
-		await vi.waitFor(() => expect(container.textContent).toContain("Datos del espectro"));
-		expect(container.textContent).toContain(
-			"la calculadora no asigna estos valores por ciudad",
-		);
-		expect(container.textContent).toContain(
-			"obliga al Procedimiento Particular de Sitio",
-		);
-		expect(chartAnnotationText()).toContain("T0");
-		expect(chartAnnotationText()).toContain("Ts");
-		expect(container.textContent).toContain("Exportar");
-	});
-
-	it("records a mapped location and only auto-fills the one the map assigns", async () => {
-		await chooseMode("CCP-14 · Puentes");
-		await chooseSelectOption("ccp14-map-location-trigger", "Neiva");
-		// Neiva sits between contours, so the figures assign it nothing.
-		expect(
-			document.querySelector<HTMLInputElement>("#ccp14-pga")?.value,
-		).toBe("");
-		expect(
-			document.querySelector("[data-slot='ccp14-direct-map-values']"),
-		).toBeNull();
-
-		await chooseSelectOption(
-			"ccp14-map-location-trigger",
-			"San Andrés y Providencia",
-		);
+		await chooseSelectOption("ccp14-pga-region", "Región 6 — PGA 0,30 g");
+		await chooseSelectOption("ccp14-ss-region", "Región 7 — Ss 0,70 g");
+		await chooseSelectOption("ccp14-s1-region", "Región 6 — S1 0,30 g");
 		await vi.waitFor(() => {
-			expect(container.textContent).toContain("Región asignada por el mapa");
+			expect(container.textContent).toContain("según la leyenda");
 		});
-		expect(
-			document.querySelector<HTMLInputElement>("#ccp14-pga")?.value,
-		).toBe("0.05");
-		expect(
-			document.querySelector<HTMLInputElement>("#ccp14-ss")?.value,
-		).toBe("0.1");
-		expect(
-			document.querySelector<HTMLInputElement>("#ccp14-s1")?.value,
-		).toBe("0.05");
+		// Picking a region quotes the legend instead of asking for a number.
+		expect(container.querySelector("#ccp14-pga")).toBeNull();
 
-		await chooseSelectOption("ccp14-soil-trigger", "Perfil B");
+		await chooseSelectOption("ccp14-soil-trigger", "Perfil D");
 		await vi.waitFor(() =>
 			expect(container.textContent).toContain("Datos del espectro"),
 		);
-		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
+		expect(chartAnnotationText()).toContain("Ts");
+	});
+
+	it("still accepts an interpolated value between contours", async () => {
+		await chooseMode("CCP-14 · Puentes");
+		await chooseSelectOption("ccp14-pga-region", "Entre contornos — interpolar");
+		await vi.waitFor(() =>
+			expect(container.querySelector("#ccp14-pga")).not.toBeNull(),
+		);
+		await setNumberInput("ccp14-pga", "0.27");
+		await chooseSelectOption("ccp14-ss-region", "Región 7 — Ss 0,70 g");
+		await chooseSelectOption("ccp14-s1-region", "Región 6 — S1 0,30 g");
+		await chooseSelectOption("ccp14-soil-trigger", "Perfil D");
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("Datos del espectro"),
+		);
+	});
+
+	it("shows the source backing each value in the traceability drawer", async () => {
+		await chooseMode("CCP-14 · Puentes");
+		await chooseSelectOption("ccp14-pga-region", "Región 6 — PGA 0,30 g");
+		await chooseSelectOption("ccp14-ss-region", "Región 7 — Ss 0,70 g");
+		await chooseSelectOption("ccp14-s1-region", "Región 6 — S1 0,30 g");
+		await chooseSelectOption("ccp14-soil-trigger", "Perfil D");
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("Datos del espectro"),
+		);
+
+		const trace = [...container.querySelectorAll("button")].find((button) =>
+			button.textContent?.includes("Ver trazabilidad"),
+		);
+		expect(trace).toBeTruthy();
+		expect(trace?.hasAttribute("disabled")).toBe(false);
+		await act(async () => trace?.click());
+
+		await vi.waitFor(() => {
+			expect(document.body.textContent).toContain("Valores directos de fuente");
+		});
+		const drawer = document.body.textContent ?? "";
+		expect(drawer).toContain("PGA · región 6");
+		expect(drawer).toContain("map-legend-pga");
+		expect(drawer).toContain("Fpga");
+		expect(drawer).toContain("Instituto Nacional de Vías (INVÍAS)");
+		expect(drawer).toContain(
+			"55f53d68dfc568a930b726b0c7dba510ea608128490353bf604f827a27ffc8ca",
+		);
 	});
 
 	it("keeps CCP-14 site-specific triggers localized to the entered scenario", async () => {
 		await chooseMode("CCP-14 · Puentes");
-		await setNumberInput("ccp14-pga", "0.25");
-		await setNumberInput("ccp14-ss", "0.5");
-		await setNumberInput("ccp14-s1", "0.2");
+		await chooseSelectOption("ccp14-pga-region", "Región 5 — PGA 0,25 g");
+		await chooseSelectOption("ccp14-ss-region", "Región 5 — Ss 0,50 g");
+		await chooseSelectOption("ccp14-s1-region", "Región 4 — S1 0,20 g");
 		await chooseSelectOption("ccp14-soil-trigger", "Perfil F");
 
 		await vi.waitFor(() => {
