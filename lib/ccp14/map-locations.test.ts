@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest"
 
 import {
   ccp14DirectMapValues,
+  ccp14LegendRowBand,
   ccp14LegendValue,
   ccp14MapFigure,
   ccp14MapFigures,
@@ -40,6 +41,35 @@ describe("CCP-14 hazard map locations", () => {
 
     expect(ccp14LegendValue("PGA", 4)).toBe(0.2)
     expect(() => ccp14LegendValue("Ss", 14)).toThrow(RangeError)
+  })
+
+  it("measures a distinct, ordered legend row band for every region", () => {
+    for (const figure of ccp14MapFigures) {
+      const bands = figure.regions.map(([region]) =>
+        ccp14LegendRowBand(figure.coefficient, region),
+      )
+      bands.forEach((band, index) => {
+        expect(band.top).toBeGreaterThan(0)
+        expect(band.top + band.height).toBeLessThanOrEqual(1)
+        if (index > 0) {
+          const previous = bands[index - 1]
+          // Ordered top to bottom and never overlapping, so a highlight cannot
+          // straddle two values the way an evenly divided image does.
+          expect(band.top).toBeGreaterThan(previous.top + previous.height)
+        }
+      })
+      expect(() => ccp14LegendRowBand(figure.coefficient, 0)).toThrow(RangeError)
+      expect(() =>
+        ccp14LegendRowBand(figure.coefficient, figure.regions.length + 1),
+      ).toThrow(RangeError)
+    }
+  })
+
+  it("places the PGA 0,25 g row where the legend prints it", () => {
+    // Region 5 is the fifth of eleven data rows, below the taller header.
+    const band = ccp14LegendRowBand("PGA", 5)
+    expect(band.top).toBeGreaterThan(0.33)
+    expect(band.top + band.height).toBeLessThan(0.45)
   })
 
   it("records that Apéndice C3 disagrees with the printed legends", () => {

@@ -712,6 +712,9 @@ describe("unified municipal mode selector", () => {
 				"Evidencia de la lectura del mapa",
 			);
 		});
+		// One traceability surface, not a second drawer alongside it.
+		expect(document.querySelectorAll('[role="dialog"]')).toHaveLength(1);
+		expect(document.body.textContent).toContain("Trazabilidad normativa");
 		const sheet = document.body.textContent ?? "";
 		expect(sheet).toContain("PGA = 0,25 g");
 		expect(sheet).toContain("Ss = 0,60 g");

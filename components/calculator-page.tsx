@@ -44,6 +44,7 @@ import {
 	SharedSpectrumNotices,
 	SharedSpectrumTable,
 } from "@/components/spectrum-result";
+import { Ccp14FigureEvidence } from "@/components/calculator/ccp14-figure-evidence";
 import { TraceabilitySheet } from "@/components/traceability/traceability-sheet";
 import { Button } from "@/components/ui/button";
 import {
@@ -1029,6 +1030,7 @@ export function CalculatorPage() {
 						setCcp14Values(values);
 					}
 				}}
+				onTraceabilityOpen={() => setTraceabilityOpen(true)}
 				onRegionChange={(coefficient, region) => {
 					setCcp14Regions((current) => ({
 						...current,
@@ -1169,12 +1171,19 @@ export function CalculatorPage() {
 
 	return (
 		<div className="flex flex-col gap-5">
-			{result ? (
+			{result || (calculationMode === "ccp14" && ccp14MapLocationId) ? (
 				<TraceabilitySheet
 					onOpenChange={setTraceabilityOpen}
 					open={traceabilityOpen}
-					result={result}
-					scenarioEvidenceKey={result.scenarioEvidenceKey}
+					result={result?.status === "ok" ? result : null}
+					scenarioEvidenceKey={
+						result?.status === "ok" ? result.scenarioEvidenceKey : null
+					}
+					sourceEvidence={
+						calculationMode === "ccp14" ? (
+							<Ccp14FigureEvidence locationId={ccp14MapLocationId} />
+						) : null
+					}
 				/>
 			) : null}
 			<p className="text-muted-foreground text-sm">

@@ -10,6 +10,7 @@ import {
 	SheetTitle,
 } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
+import type { ReactNode } from "react";
 import type {
 	NormalizedSpectrumResultData,
 	ScenarioEvidenceKey,
@@ -44,36 +45,52 @@ function TraceabilityDetailsLoading() {
 	);
 }
 
+/**
+ * The single traceability surface. `result` is optional so the drawer can open
+ * on a selection that has not been calculated yet, showing whatever source
+ * evidence already exists for it.
+ */
 export function TraceabilitySheet({
 	result,
 	scenarioEvidenceKey,
+	sourceEvidence,
 	open,
 	onOpenChange,
 }: {
-	result: NormalizedSpectrumResultData;
-	scenarioEvidenceKey: ScenarioEvidenceKey;
+	result?: NormalizedSpectrumResultData | null;
+	scenarioEvidenceKey?: ScenarioEvidenceKey | null;
+	sourceEvidence?: ReactNode;
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
 }) {
 	return (
 		<Sheet onOpenChange={onOpenChange} open={open}>
 			<SheetContent
-				className="h-dvh overflow-hidden border-0 data-[side=right]:w-screen data-[side=right]:max-w-none data-[side=right]:sm:w-[52vw] data-[side=right]:sm:min-w-[36rem] data-[side=right]:sm:max-w-none data-[side=right]:sm:border-l"
+				className="h-dvh overflow-hidden border-0 data-[side=right]:w-screen data-[side=right]:max-w-none data-[side=right]:sm:w-[68vw] data-[side=right]:sm:min-w-[44rem] data-[side=right]:sm:max-w-none data-[side=right]:sm:border-l data-[side=right]:xl:w-[62vw]"
 				side="right"
 			>
 				<SheetHeader className="border-b pr-16">
 					<SheetTitle>Trazabilidad normativa</SheetTitle>
 					<SheetDescription>
-						Fuentes, regiones y linaje del resultado normalizado activo.
+						{result
+							? "Fuentes, regiones y linaje del resultado normalizado activo."
+							: "Fuentes y regiones de la selección actual; el linaje aparece al calcular."}
 					</SheetDescription>
 				</SheetHeader>
-				{open && (
-					<TraceabilityDetails
-						key={Object.values(scenarioEvidenceKey).join(":")}
-						result={result}
-						scenarioEvidenceKey={scenarioEvidenceKey}
-					/>
-				)}
+				{open ? (
+					<div className="min-h-0 flex-1 overflow-y-auto">
+						{sourceEvidence ? (
+							<div className="flex flex-col gap-4 p-4 sm:p-6">{sourceEvidence}</div>
+						) : null}
+						{result && scenarioEvidenceKey ? (
+							<TraceabilityDetails
+								key={Object.values(scenarioEvidenceKey).join(":")}
+								result={result}
+								scenarioEvidenceKey={scenarioEvidenceKey}
+							/>
+						) : null}
+					</div>
+				) : null}
 			</SheetContent>
 		</Sheet>
 	);

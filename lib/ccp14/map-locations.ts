@@ -19,8 +19,8 @@ export type Ccp14MapFigure = {
   /** Rendered cut of the figure, and of its legend table, served from /public. */
   image: string
   legendImage: string
-  /** Header plus one band per region, so a row can be highlighted on the cut. */
-  legendRowCount: number
+  /** Measured vertical band of each region's row on the legend cut. */
+  legendRowBands: Record<string, { top: number; height: number }>
   /** Where each labeled place sits on this figure, as a fraction of the image. */
   positions: Record<string, { x: number; y: number; from: string }>
 }
@@ -192,11 +192,20 @@ export function ccp14CityValues(id: string | null) {
   }
 }
 
-/** Vertical band of one legend row on the legend cut, as image fractions. */
+/**
+ * Vertical band of one legend row on the legend cut, as image fractions.
+ * Measured from the rendered crop rather than assumed even: the header row is
+ * taller than the data rows, so dividing the image evenly lands the highlight
+ * between values.
+ */
 export function ccp14LegendRowBand(coefficient: Ccp14Coefficient, region: number) {
-  const figure = ccp14MapFigure(coefficient)
-  const height = 1 / figure.legendRowCount
-  return { top: region * height, height }
+  const band = ccp14MapFigure(coefficient).legendRowBands[String(region)]
+  if (!band) {
+    throw new RangeError(
+      `Region ${region} has no measured row on the ${coefficient} legend`,
+    )
+  }
+  return band
 }
 
 export function ccp14FigurePosition(

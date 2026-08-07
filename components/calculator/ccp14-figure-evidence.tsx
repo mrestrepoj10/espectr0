@@ -5,13 +5,6 @@ import { ExternalLinkIcon } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet"
-import {
   ccp14CityReading,
   ccp14FigurePosition,
   ccp14LegendRowBand,
@@ -66,7 +59,7 @@ function FigureEvidence({
         </span>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)]">
         <figure className="flex flex-col gap-1">
           <div className="relative overflow-hidden rounded-lg bg-white ring-1 ring-black/10">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -119,72 +112,51 @@ function FigureEvidence({
   )
 }
 
-export function Ccp14EvidenceSheet({
-  locationId,
-  onOpenChange,
-  open,
-}: {
-  locationId: string | null
-  onOpenChange: (open: boolean) => void
-  open: boolean
-}) {
+export function Ccp14FigureEvidence({ locationId }: { locationId: string | null }) {
   const reading = ccp14CityReading(locationId)
+  if (!reading || !locationId) return null
 
   return (
-    <Sheet onOpenChange={onOpenChange} open={open}>
-      <SheetContent
-        className="w-full gap-0 overflow-y-auto sm:max-w-3xl"
-        side="right"
+    <section
+      aria-labelledby="ccp14-figure-evidence"
+      className="flex flex-col gap-5"
+      data-slot="ccp14-figure-evidence"
+    >
+      <div className="flex flex-wrap items-center gap-2">
+        <h2 className="font-heading font-medium" id="ccp14-figure-evidence">
+          Evidencia de la lectura del mapa
+        </h2>
+        <Badge variant="outline">{reading.label}</Badge>
+        <Badge variant="secondary">
+          {VERIFICATION_LABEL[reading.pgaVerification] ?? reading.pgaVerification}
+        </Badge>
+      </div>
+      <p className="text-muted-foreground text-sm">
+        El valor de cada región lo publica la leyenda de su figura. La asignación
+        lugar-a-región es una lectura de mapa hecha por espectr0, no un dato
+        publicado por INVÍAS: verifícala contra la figura y edita el valor si
+        difiere. {reading.note}
+      </p>
+
+      {COEFFICIENTS.map((coefficient) => (
+        <FigureEvidence
+          coefficient={coefficient}
+          key={coefficient}
+          locationId={locationId}
+          region={reading.regions[coefficient]}
+        />
+      ))}
+
+      <Button
+        className="self-start"
+        nativeButton={false}
+        render={<a href={SECTION3_URL} rel="noreferrer" target="_blank" />}
+        size="sm"
+        variant="outline"
       >
-        <SheetHeader>
-          <SheetTitle>Evidencia de la lectura del mapa</SheetTitle>
-          <SheetDescription>
-            Recortes de las figuras oficiales que respaldan PGA, Ss y S1 antes de
-            calcular.
-          </SheetDescription>
-        </SheetHeader>
-
-        {reading && locationId ? (
-          <div className="flex flex-col gap-6 px-4 pb-8">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="font-medium">{reading.label}</span>
-              <Badge variant="outline">
-                {VERIFICATION_LABEL[reading.pgaVerification] ??
-                  reading.pgaVerification}
-              </Badge>
-            </div>
-            <p className="text-muted-foreground text-sm">
-              El valor de cada región lo publica la leyenda de su figura. La
-              asignación lugar-a-región es una lectura de mapa hecha por espectr0,
-              no un dato publicado por INVÍAS: verifícala contra la figura y edita
-              el valor si difiere. {reading.note}
-            </p>
-
-            {COEFFICIENTS.map((coefficient) => (
-              <FigureEvidence
-                coefficient={coefficient}
-                key={coefficient}
-                locationId={locationId}
-                region={reading.regions[coefficient]}
-              />
-            ))}
-
-            <Button
-              nativeButton={false}
-              render={<a href={SECTION3_URL} rel="noreferrer" target="_blank" />}
-              size="sm"
-              variant="outline"
-            >
-              Abrir la Sección 3 oficial de INVÍAS
-              <ExternalLinkIcon data-icon="inline-end" />
-            </Button>
-          </div>
-        ) : (
-          <p className="text-muted-foreground px-4 pb-8 text-sm">
-            Selecciona un lugar rotulado en los mapas para ver su evidencia.
-          </p>
-        )}
-      </SheetContent>
-    </Sheet>
+        Abrir la Sección 3 oficial de INVÍAS
+        <ExternalLinkIcon data-icon="inline-end" />
+      </Button>
+    </section>
   )
 }

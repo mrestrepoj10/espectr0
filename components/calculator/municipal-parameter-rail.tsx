@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { LandmarkIcon, ShieldAlertIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -32,7 +31,6 @@ import {
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
-import { Ccp14EvidenceSheet } from "@/components/calculator/ccp14-evidence-sheet"
 import {
   ccp14CityReading,
   ccp14MapFigure,
@@ -440,6 +438,7 @@ export function Ccp14ParameterRail({
   mapLocationId,
   onMapLocationChange,
   onRegionChange,
+  onTraceabilityOpen,
   onSoilClassChange,
   onValueChange,
   regions,
@@ -449,13 +448,13 @@ export function Ccp14ParameterRail({
   mapLocationId: string | null
   onMapLocationChange: (value: string) => void
   onRegionChange: (coefficient: Ccp14Coefficient, region: number | null) => void
+  onTraceabilityOpen: () => void
   onSoilClassChange: (value: string) => void
   onValueChange: (coefficient: Ccp14Coefficient, value: number | null) => void
   regions: Record<Ccp14Coefficient, number | null>
   soilClass: string | null
   values: Record<Ccp14Coefficient, number | null>
 }) {
-  const [evidenceOpen, setEvidenceOpen] = useState(false)
   const reading = ccp14CityReading(mapLocationId)
   const disputed =
     reading !== null &&
@@ -505,20 +504,15 @@ export function Ccp14ParameterRail({
             <Button
               className="w-full"
               data-slot="ccp14-evidence-trigger"
-              onClick={() => setEvidenceOpen(true)}
+              onClick={onTraceabilityOpen}
               size="sm"
               type="button"
               variant="outline"
             >
               <LandmarkIcon data-icon="inline-start" />
-              Ver evidencia de la lectura
+              Ver trazabilidad
             </Button>
           ) : null}
-          <Ccp14EvidenceSheet
-            locationId={mapLocationId}
-            onOpenChange={setEvidenceOpen}
-            open={evidenceOpen}
-          />
           {CCP14_COEFFICIENTS.map(({ coefficient, label, inputId }) => (
             <Ccp14CoefficientField
               coefficient={coefficient}
