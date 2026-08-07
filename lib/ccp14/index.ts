@@ -19,6 +19,16 @@ export {
   lookupCcp14SiteFactor,
 } from "./engine"
 export { CCP14_STUDY_LABEL } from "./constants"
+export {
+  ccp14DirectMapValues,
+  ccp14LegendValue,
+  ccp14MapFigure,
+  ccp14MapFigures,
+  ccp14MapLocationIdSchema,
+  ccp14MapLocations,
+  ccp14MapRegionCountConflict,
+  resolveCcp14MapLocation,
+} from "./map-locations"
 export { ccp14EvidenceResolver } from "./evidence-resolver"
 export {
   lookupCcp14ConnectionR,
@@ -37,6 +47,12 @@ export type {
   Ccp14SoilClass,
   Ccp14T0Interpretation,
 } from "./engine"
+export type {
+  Ccp14Coefficient,
+  Ccp14MapFigure as Ccp14MapFigureType,
+  Ccp14MapLocation,
+  Ccp14MapLocationId,
+} from "./map-locations"
 export type {
   Ccp14ConnectionElement,
   Ccp14OperationalCategory,

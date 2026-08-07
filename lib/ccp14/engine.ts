@@ -1,6 +1,7 @@
 import { z } from "zod"
 
 import siteFactors from "./data/site-factors.json"
+import { ccp14MapLocationIdSchema } from "./map-locations"
 
 export const ccp14SoilClassSchema = z.enum(["A", "B", "C", "D", "E", "F"])
 export const ccp14T0InterpretationSchema = z.enum([
@@ -10,8 +11,10 @@ export const ccp14T0InterpretationSchema = z.enum([
 
 /**
  * The general procedure of 3.10.2.1 needs only the three mapped coefficients and
- * the site class. The remaining fields describe the 3.10.2.2 routing conditions
- * that the designer confirms outside the calculator, so they carry the
+ * the site class. `mapLocationId` records which of the places labeled on Figuras
+ * 3.10.2.1-1 a 3.10.2.1-3 the reading belongs to; it documents the site and never
+ * supplies a coefficient. The remaining fields describe the 3.10.2.2 routing
+ * conditions that the designer confirms outside the calculator, so they carry the
  * general-procedure defaults and stay optional at the boundary.
  */
 export const ccp14ComputationInputSchema = z
@@ -20,6 +23,7 @@ export const ccp14ComputationInputSchema = z
     ssG: z.number().finite().positive(),
     s1G: z.number().finite().positive(),
     soilClass: ccp14SoilClassSchema,
+    mapLocationId: ccp14MapLocationIdSchema.nullable().default(null),
     t0Interpretation: ccp14T0InterpretationSchema.default("figure-0.2-ts"),
     distanceToActiveFaultKm: z
       .number()

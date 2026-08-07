@@ -29,6 +29,12 @@ import {
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
+import {
+  ccp14DirectMapValues,
+  ccp14MapFigure,
+  ccp14MapLocations,
+  resolveCcp14MapLocation,
+} from "@/lib/ccp14"
 
 type SelectOption = {
   id: string
@@ -348,7 +354,18 @@ export function CaliParameterRail({
   )
 }
 
+function ccp14FigureHint(coefficient: "PGA" | "Ss" | "S1") {
+  const figure = ccp14MapFigure(coefficient)
+  const regions = figure.regions
+  const [firstRegion, firstValue] = regions[0]
+  const [lastRegion, lastValue] = regions[regions.length - 1]
+  const g = (value: number) => value.toFixed(2).replace(".", ",")
+  return `${figure.id.replace("figura-", "Figura ")} (pág. impresa ${figure.printedPage}): ${regions.length} regiones, de ${g(firstValue)} g (región ${firstRegion}) a ${g(lastValue)} g (región ${lastRegion}). Interpola linealmente entre contornos.`
+}
+
 export function Ccp14ParameterRail({
+  mapLocationId,
+  onMapLocationChange,
   onPgaChange,
   onS1Change,
   onSoilClassChange,
@@ -358,6 +375,8 @@ export function Ccp14ParameterRail({
   soilClass,
   ssG,
 }: {
+  mapLocationId: string | null
+  onMapLocationChange: (value: string) => void
   onPgaChange: (value: number | null) => void
   onS1Change: (value: number | null) => void
   onSoilClassChange: (value: string) => void
@@ -367,6 +386,11 @@ export function Ccp14ParameterRail({
   soilClass: string | null
   ssG: number | null
 }) {
+  const location = mapLocationId
+    ? resolveCcp14MapLocation(mapLocationId)
+    : null
+  const directValues = mapLocationId ? ccp14DirectMapValues(mapLocationId) : null
+
   return (
     <Card className="self-start" size="sm">
       <CardHeader>
@@ -379,8 +403,28 @@ export function Ccp14ParameterRail({
       </CardHeader>
       <CardContent>
         <FieldGroup className="gap-5">
+          <MunicipalSelect
+            description="Los 32 lugares que rotulan las Figuras 3.10.2.1-1 a 3.10.2.1-3. Queda registrado en la memoria; salvo San Andrés y Providencia, no fija los coeficientes."
+            id="ccp14-map-location-trigger"
+            label="Lugar rotulado en los mapas"
+            onValueChange={onMapLocationChange}
+            options={ccp14MapLocations.map(({ id, label }) => ({ id, label }))}
+            value={mapLocationId}
+          />
+          {directValues ? (
+            <Alert data-slot="ccp14-direct-map-values">
+              <ShieldAlertIcon />
+              <AlertTitle>Región asignada por el mapa</AlertTitle>
+              <AlertDescription>
+                {location?.label}: el recuadro completo cae en la región 1 de las
+                tres figuras, sin contornos que lo crucen, así que PGA ={" "}
+                {directValues.pgaG} g, Ss = {directValues.ssG} g y S1 ={" "}
+                {directValues.s1G} g se leen directamente de las leyendas.
+              </AlertDescription>
+            </Alert>
+          ) : null}
           <NumericInput
-            description="Figura 3.10.2.1-1 o valores especiales aprobados por la entidad contratante. Los mapas están en milésimos de g: divide entre 1000."
+            description={ccp14FigureHint("PGA")}
             id="ccp14-pga"
             label="PGA (g)"
             nullable
@@ -388,7 +432,7 @@ export function Ccp14ParameterRail({
             value={pgaG}
           />
           <NumericInput
-            description="Figura 3.10.2.1-2, coeficiente espectral para 0,2 s en roca (perfil tipo B)."
+            description={ccp14FigureHint("Ss")}
             id="ccp14-ss"
             label="Ss (g)"
             nullable
@@ -396,7 +440,7 @@ export function Ccp14ParameterRail({
             value={ssG}
           />
           <NumericInput
-            description="Figura 3.10.2.1-3, coeficiente espectral para 1,0 s en roca (perfil tipo B)."
+            description={ccp14FigureHint("S1")}
             id="ccp14-s1"
             label="S1 (g)"
             nullable
@@ -430,9 +474,10 @@ export function Ccp14ParameterRail({
       <CardFooter className="flex-col items-stretch gap-3">
         <Separator />
         <p className="text-muted-foreground text-xs">
-          CCP-14 publica la amenaza solo como mapas de contornos: no existe una
-          tabla oficial de PGA, Ss y S1 por municipio, así que estos tres valores
-          se declaran manualmente.
+          Los mapas rotulan lugares, pero los números circulados marcan bandas
+          entre contornos, no ciudades: la norma no publica una tabla de PGA, Ss
+          y S1 por municipio, así que los tres valores se leen de las figuras y
+          se declaran aquí.
         </p>
         <a
           className="text-muted-foreground text-xs underline underline-offset-4"

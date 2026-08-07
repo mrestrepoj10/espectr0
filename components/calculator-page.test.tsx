@@ -616,7 +616,13 @@ describe("unified municipal mode selector", () => {
 		expect(container.querySelector("#ccp14-long-duration-trigger")).toBeNull();
 		expect(container.querySelector("#ccp14-enhanced-hazard-trigger")).toBeNull();
 		expect(container.textContent).toContain(
-			"no existe una tabla oficial de PGA, Ss y S1 por municipio",
+			"no publica una tabla de PGA, Ss y S1 por municipio",
+		);
+		expect(container.textContent).toContain(
+			"Figura 3.10.2.1-1 (pág. impresa 3-47): 11 regiones",
+		);
+		expect(container.textContent).toContain(
+			"Figura 3.10.2.1-3 (pág. impresa 3-49): 14 regiones",
 		);
 
 		await setNumberInput("ccp14-pga", "0.25");
@@ -634,6 +640,41 @@ describe("unified municipal mode selector", () => {
 		expect(chartAnnotationText()).toContain("T0");
 		expect(chartAnnotationText()).toContain("Ts");
 		expect(container.textContent).toContain("Exportar");
+	});
+
+	it("records a mapped location and only auto-fills the one the map assigns", async () => {
+		await chooseMode("CCP-14 · Puentes");
+		await chooseSelectOption("ccp14-map-location-trigger", "Neiva");
+		// Neiva sits between contours, so the figures assign it nothing.
+		expect(
+			document.querySelector<HTMLInputElement>("#ccp14-pga")?.value,
+		).toBe("");
+		expect(
+			document.querySelector("[data-slot='ccp14-direct-map-values']"),
+		).toBeNull();
+
+		await chooseSelectOption(
+			"ccp14-map-location-trigger",
+			"San Andrés y Providencia",
+		);
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain("Región asignada por el mapa");
+		});
+		expect(
+			document.querySelector<HTMLInputElement>("#ccp14-pga")?.value,
+		).toBe("0.05");
+		expect(
+			document.querySelector<HTMLInputElement>("#ccp14-ss")?.value,
+		).toBe("0.1");
+		expect(
+			document.querySelector<HTMLInputElement>("#ccp14-s1")?.value,
+		).toBe("0.05");
+
+		await chooseSelectOption("ccp14-soil-trigger", "Perfil B");
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("Datos del espectro"),
+		);
+		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
 	});
 
 	it("keeps CCP-14 site-specific triggers localized to the entered scenario", async () => {

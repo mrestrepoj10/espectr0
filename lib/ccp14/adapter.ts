@@ -25,6 +25,7 @@ import {
   ccp14ComputationInputSchema,
   computeCcp14Spectrum,
 } from "./engine"
+import { resolveCcp14MapLocation } from "./map-locations"
 import "./study-relations"
 
 import type { SpectrumEngine } from "../spectra/engine"
@@ -138,6 +139,7 @@ function normalizedInputs(input: unknown): NormalizedInputs {
     ssG: scalar("ssG"),
     s1G: scalar("s1G"),
     soilClass: scalar("soilClass"),
+    mapLocationId: scalar("mapLocationId"),
     t0Interpretation: scalar("t0Interpretation"),
     distanceToActiveFaultKm: scalar("distanceToActiveFaultKm"),
     longDurationEarthquakesExpected: scalar("longDurationEarthquakesExpected"),
@@ -239,6 +241,15 @@ function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
     { id: "ccp14-input-ss", label: "Ss", value: input.ssG, unit: "g", citationIds: ["claim-map-inputs"] },
     { id: "ccp14-input-s1", label: "S1", value: input.s1G, unit: "g", citationIds: ["claim-map-inputs"] },
     { id: "ccp14-input-soil-class", label: "Perfil de sitio", value: input.soilClass, unit: "class", citationIds: ["claim-soils"] },
+    {
+      id: "ccp14-input-map-location",
+      label: "Lugar rotulado en los mapas",
+      value: input.mapLocationId === null
+        ? "no declarado"
+        : resolveCcp14MapLocation(input.mapLocationId).label,
+      unit: "choice",
+      citationIds: ["claim-map-location-labels"],
+    },
     { id: "ccp14-input-t0-interpretation", label: "Lectura de T₀", value: input.t0Interpretation, unit: "choice", citationIds: ["conflict-t0-figure", "conflict-t0-definition"] },
   ].map((step) => ({ ...step, classification: "user-input", dependencies: [] }))
   const factorSteps = (["Fpga", "Fa", "Fv"] as const).map((id) => factorStep(engine, id))
@@ -363,6 +374,9 @@ function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
   const citationIds = [...new Set([
     "adoption-resolution-article-1",
     "claim-hazard",
+    "claim-map-figure-pga",
+    "claim-map-figure-ss",
+    "claim-map-figure-s1",
     "claim-site-factor-tables",
     ...steps.flatMap(({ citationIds }) => citationIds),
     ...branches.flatMap(({ citationIds }) => citationIds),

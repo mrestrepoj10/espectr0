@@ -35,6 +35,36 @@ describe("CCP-14 evidence resolver", () => {
     expect(evidence.documents.every(({ localPath }) => localPath === null)).toBe(true)
   })
 
+  it("records the declared map location and cites the three figures", () => {
+    const evidence = resolveSpectrumEvidence(
+      adaptCcp14Spectrum({ ...generalProcedureInput, mapLocationId: "neiva" }),
+    )
+
+    expect(evidence.selection.location).toBe("Neiva")
+    expect(evidence.selection.zone).toBe("Perfil de sitio D")
+    expect(
+      evidence.citations
+        .filter(({ id }) => id.startsWith("claim-map-figure-"))
+        .map(({ id, physicalPage, printedPage }) => [id, physicalPage, printedPage]),
+    ).toEqual([
+      ["claim-map-figure-pga", 51, "3-47"],
+      ["claim-map-figure-ss", 52, "3-48"],
+      ["claim-map-figure-s1", 53, "3-49"],
+    ])
+    expect(
+      evidence.citations.find(({ id }) => id === "claim-map-location-labels")
+        ?.transcription,
+    ).toContain("Rotular un lugar no le asigna un coeficiente")
+  })
+
+  it("leaves the location null when none was declared", () => {
+    const evidence = resolveSpectrumEvidence(
+      adaptCcp14Spectrum(generalProcedureInput),
+    )
+
+    expect(evidence.selection.location).toBeNull()
+  })
+
   it("resolves every result citation to an attested page of the publication", () => {
     const result = adaptCcp14Spectrum(generalProcedureInput)
     const evidence = resolveSpectrumEvidence(result)

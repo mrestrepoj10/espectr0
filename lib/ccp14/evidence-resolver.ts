@@ -20,6 +20,7 @@ import type {
 } from "../spectra/types"
 
 import { CCP14_ENGINE_ID, CCP14_STUDY_LABEL } from "./constants"
+import { resolveCcp14MapLocation } from "./map-locations"
 import { parseCcp14TraceEnvelope, type Ccp14TraceStep } from "./trace"
 
 type StudySource = {
@@ -151,6 +152,12 @@ function directValueFor(step: Ccp14TraceStep): SpectrumDirectValue | null {
   }
 }
 
+/** The place the reading was declared for, as printed on Figuras 3.10.2.1-1 a -3. */
+function mapLocationLabel(result: NormalizedSpectrumResultData) {
+  const id = result.normalizedInputs.mapLocationId
+  return typeof id === "string" ? resolveCcp14MapLocation(id).label : null
+}
+
 function unavailableClaims(result: NormalizedSpectrumResultData) {
   if (result.evidenceAvailability.status === "partial") {
     return result.evidenceAvailability.unavailableClaims
@@ -177,7 +184,7 @@ function ccp14Evidence(
     },
     selection: {
       optionId: key.optionId,
-      location: null,
+      location: mapLocationLabel(result),
       zone: key.optionId ? `Perfil de sitio ${key.optionId}` : null,
       hazardId: key.hazardId,
       hazardLabel: result.hazard?.label ?? null,

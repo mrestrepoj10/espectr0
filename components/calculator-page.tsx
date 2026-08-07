@@ -81,7 +81,7 @@ import {
 	adaptCaliSpectrum,
 	caliCanonical,
 } from "@/lib/cali";
-import { adaptCcp14Spectrum } from "@/lib/ccp14";
+import { adaptCcp14Spectrum, ccp14DirectMapValues } from "@/lib/ccp14";
 import { adaptDosquebradasSpectrum } from "@/lib/dosquebradas/adapter";
 import { dosquebradasRows } from "@/lib/dosquebradas/schema";
 import {
@@ -772,6 +772,8 @@ export function CalculatorPage() {
 	const [ccp14S1G, setCcp14S1G] = useState<number | null>(null);
 	const [ccp14SoilClass, setCcp14SoilClass] =
 		useState<Ccp14SoilClass | null>(null);
+	const [ccp14MapLocationId, setCcp14MapLocationId] =
+		useState<string | null>(null);
 	const [municipio, setMunicipio] = useState<Municipio>(defaultMunicipio);
 	const [soilProfile, setSoilProfile] = useState<SoilProfile>("D");
 	const [importanceGroup, setImportanceGroup] = useState<ImportanceGroup>("I");
@@ -841,9 +843,11 @@ export function CalculatorPage() {
 			ssG: ccp14SsG,
 			s1G: ccp14S1G,
 			soilClass: ccp14SoilClass,
+			mapLocationId: ccp14MapLocationId,
 		});
 	}, [
 		calculationMode,
+		ccp14MapLocationId,
 		ccp14PgaG,
 		ccp14S1G,
 		ccp14SoilClass,
@@ -1005,6 +1009,16 @@ export function CalculatorPage() {
 			/>
 		) : calculationMode === "ccp14" ? (
 			<Ccp14ParameterRail
+				mapLocationId={ccp14MapLocationId}
+				onMapLocationChange={(value) => {
+					setCcp14MapLocationId(value);
+					const direct = ccp14DirectMapValues(value);
+					if (direct) {
+						setCcp14PgaG(direct.pgaG);
+						setCcp14SsG(direct.ssG);
+						setCcp14S1G(direct.s1G);
+					}
+				}}
 				onPgaChange={setCcp14PgaG}
 				onS1Change={setCcp14S1G}
 				onSoilClassChange={(value) =>
