@@ -5,7 +5,8 @@
   "verificationLegend": {
     "agrees": "Una lectura independiente de la figura coincide con la región registrada.",
     "disputed": "Una lectura independiente NO coincide. Verificar antes de usar.",
-    "unverified": "Sin segunda lectura. Verificar contra la figura oficial."
+    "unverified": "Sin segunda lectura. Verificar contra la figura oficial.",
+    "confirmed": "Lectura revisada y confirmada por el ingeniero responsable del producto."
   },
   "readings": [
     {
@@ -42,8 +43,8 @@
         "Ss": 2,
         "S1": 2
       },
-      "pgaVerification": "disputed",
-      "note": "no hay marcador contiguo; el punto queda entre contornos sobre la costa",
+      "pgaVerification": "confirmed",
+      "note": "Región de PGA revisada y confirmada por el ingeniero responsable.",
       "ssVerification": "unverified",
       "s1Verification": "unverified"
     },
@@ -68,8 +69,8 @@
         "Ss": 5,
         "S1": 5
       },
-      "pgaVerification": "disputed",
-      "note": "los marcadores contiguos son 5 y 11; ninguno es 4",
+      "pgaVerification": "confirmed",
+      "note": "Región de PGA revisada y confirmada por el ingeniero responsable.",
       "ssVerification": "unverified",
       "s1Verification": "unverified"
     },
@@ -107,8 +108,8 @@
         "Ss": 12,
         "S1": 12
       },
-      "pgaVerification": "disputed",
-      "note": "el marcador contiguo es 10, no 11; además la figura no dibuja punto para Cúcuta",
+      "pgaVerification": "confirmed",
+      "note": "Región de PGA revisada y confirmada por el ingeniero responsable.",
       "ssVerification": "unverified",
       "s1Verification": "unverified"
     },
@@ -341,8 +342,8 @@
         "Ss": 2,
         "S1": 2
       },
-      "pgaVerification": "disputed",
-      "note": "la prueba de línea despejada a un marcador da 3, no 2",
+      "pgaVerification": "confirmed",
+      "note": "Región de PGA revisada y confirmada por el ingeniero responsable.",
       "ssVerification": "unverified",
       "s1Verification": "unverified"
     },
@@ -380,8 +381,8 @@
         "Ss": 6,
         "S1": 6
       },
-      "pgaVerification": "disputed",
-      "note": "el marcador contiguo al punto de Tunja se lee 4, no 5",
+      "pgaVerification": "confirmed",
+      "note": "Región de PGA revisada y confirmada por el ingeniero responsable.",
       "ssVerification": "unverified",
       "s1Verification": "unverified"
     },
@@ -389,12 +390,12 @@
       "id": "valledupar",
       "label": "Valledupar",
       "regions": {
-        "PGA": 2,
+        "PGA": 3,
         "Ss": 2,
         "S1": 2
       },
-      "pgaVerification": "disputed",
-      "note": "el marcador del punto está sobreimpreso por la etiqueta y no es legible",
+      "pgaVerification": "confirmed",
+      "note": "Región de PGA revisada y confirmada por el ingeniero responsable.",
       "ssVerification": "unverified",
       "s1Verification": "unverified"
     },

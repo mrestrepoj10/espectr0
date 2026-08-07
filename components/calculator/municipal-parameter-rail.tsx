@@ -1,6 +1,9 @@
 "use client"
 
-import { ShieldAlertIcon } from "lucide-react"
+import { useState } from "react"
+import { LandmarkIcon, ShieldAlertIcon } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import {
@@ -29,6 +32,7 @@ import {
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
+import { Ccp14EvidenceSheet } from "@/components/calculator/ccp14-evidence-sheet"
 import {
   ccp14CityReading,
   ccp14MapFigure,
@@ -451,6 +455,7 @@ export function Ccp14ParameterRail({
   soilClass: string | null
   values: Record<Ccp14Coefficient, number | null>
 }) {
+  const [evidenceOpen, setEvidenceOpen] = useState(false)
   const reading = ccp14CityReading(mapLocationId)
   const disputed =
     reading !== null &&
@@ -496,6 +501,24 @@ export function Ccp14ParameterRail({
               </AlertDescription>
             </Alert>
           ) : null}
+          {reading ? (
+            <Button
+              className="w-full"
+              data-slot="ccp14-evidence-trigger"
+              onClick={() => setEvidenceOpen(true)}
+              size="sm"
+              type="button"
+              variant="outline"
+            >
+              <LandmarkIcon data-icon="inline-start" />
+              Ver evidencia de la lectura
+            </Button>
+          ) : null}
+          <Ccp14EvidenceSheet
+            locationId={mapLocationId}
+            onOpenChange={setEvidenceOpen}
+            open={evidenceOpen}
+          />
           {CCP14_COEFFICIENTS.map(({ coefficient, label, inputId }) => (
             <Ccp14CoefficientField
               coefficient={coefficient}

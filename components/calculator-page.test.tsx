@@ -677,14 +677,53 @@ describe("unified municipal mode selector", () => {
 		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
 	});
 
-	it("flags a city whose reading an independent pass disputes", async () => {
+	it("shows the reviewed status of a confirmed reading", async () => {
 		await chooseMode("CCP-14 · Puentes");
 		await chooseSelectOption("ccp14-map-location-trigger", "Cúcuta");
 
 		await vi.waitFor(() => {
-			expect(container.textContent).toContain("lectura en disputa");
+			expect(
+				container.querySelector("[data-slot='ccp14-city-reading']"),
+			).not.toBeNull();
 		});
-		expect(container.textContent).toContain("el marcador contiguo es 10");
+		expect(container.textContent).toContain(
+			"revisada y confirmada por el ingeniero",
+		);
+		expect(container.textContent).toContain("PGA = 0,55 g, según la leyenda");
+	});
+
+	it("opens the figure evidence before anything is calculated", async () => {
+		await chooseMode("CCP-14 · Puentes");
+		expect(
+			container.querySelector("[data-slot='ccp14-evidence-trigger']"),
+		).toBeNull();
+
+		await chooseSelectOption("ccp14-map-location-trigger", "Tunja");
+		const trigger = container.querySelector<HTMLButtonElement>(
+			"[data-slot='ccp14-evidence-trigger']",
+		);
+		expect(trigger).not.toBeNull();
+		// No soil profile chosen, so no spectrum exists yet.
+		expect(container.textContent).toContain("Completa los datos de CCP-14");
+
+		await act(async () => trigger?.click());
+		await vi.waitFor(() => {
+			expect(document.body.textContent).toContain(
+				"Evidencia de la lectura del mapa",
+			);
+		});
+		const sheet = document.body.textContent ?? "";
+		expect(sheet).toContain("PGA = 0,25 g");
+		expect(sheet).toContain("Ss = 0,60 g");
+		expect(sheet).toContain("S1 = 0,30 g");
+		expect(sheet).toContain("fila resaltada: región 5");
+		// The cuts of the official figure are rendered, not just described.
+		const images = [
+			...document.querySelectorAll<HTMLImageElement>("img[src^='/ccp14/']"),
+		].map((image) => image.getAttribute("src"));
+		expect(images).toContain("/ccp14/figura-3.10.2.1-1-leyenda.png");
+		expect(images).toContain("/ccp14/figura-3.10.2.1-1.png");
+		expect(images).toContain("/ccp14/figura-3.10.2.1-3.png");
 	});
 
 	it("lets the engineer override a prefilled coefficient", async () => {

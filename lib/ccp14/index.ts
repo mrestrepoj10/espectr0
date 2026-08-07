@@ -25,6 +25,8 @@ export {
   ccp14CityReading,
   ccp14CityValues,
   ccp14DirectMapValues,
+  ccp14FigurePosition,
+  ccp14LegendRowBand,
   ccp14LegendValue,
   ccp14MapFigure,
   ccp14MapFigures,

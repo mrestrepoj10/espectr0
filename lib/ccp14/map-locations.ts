@@ -16,6 +16,13 @@ export type Ccp14MapFigure = {
   regions: readonly (readonly [region: number, value: number])[]
   /** Citation of the printed legend table, which states each region's value. */
   legendCitationId: string
+  /** Rendered cut of the figure, and of its legend table, served from /public. */
+  image: string
+  legendImage: string
+  /** Header plus one band per region, so a row can be highlighted on the cut. */
+  legendRowCount: number
+  /** Where each labeled place sits on this figure, as a fraction of the image. */
+  positions: Record<string, { x: number; y: number; from: string }>
 }
 
 export type Ccp14MapLocation = {
@@ -183,6 +190,21 @@ export function ccp14CityValues(id: string | null) {
     Ss: ccp14LegendValue("Ss", reading.regions.Ss),
     S1: ccp14LegendValue("S1", reading.regions.S1),
   }
+}
+
+/** Vertical band of one legend row on the legend cut, as image fractions. */
+export function ccp14LegendRowBand(coefficient: Ccp14Coefficient, region: number) {
+  const figure = ccp14MapFigure(coefficient)
+  const height = 1 / figure.legendRowCount
+  return { top: region * height, height }
+}
+
+export function ccp14FigurePosition(
+  coefficient: Ccp14Coefficient,
+  locationId: string | null,
+) {
+  if (!locationId) return null
+  return ccp14MapFigure(coefficient).positions[locationId] ?? null
 }
 
 export const CCP14_READING_LEGEND = cityReadings.verificationLegend
