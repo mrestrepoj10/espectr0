@@ -388,17 +388,17 @@ export function TraceabilityDetails({
 	scenarioEvidenceKey: ScenarioEvidenceKey;
 }) {
 	const evidence = resolveSpectrumEvidence(result, scenarioEvidenceKey);
+	// Plain content, not a scroll container: the drawer owns the one scrollport,
+	// and a second one here traps the wheel partway down the source evidence.
 	return (
-		<div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-			<div className="flex flex-col gap-6 p-4 sm:p-6">
-				<StudyAndSelection evidence={evidence} />
-				<EvidenceNotices evidence={evidence} />
-				<DirectValues evidence={evidence} />
-				<Separator />
-				<Lineage evidence={evidence} />
-				<Separator />
-				<Documents evidence={evidence} />
-			</div>
+		<div className="flex flex-col gap-6 p-4 sm:p-6">
+			<StudyAndSelection evidence={evidence} />
+			<EvidenceNotices evidence={evidence} />
+			<DirectValues evidence={evidence} />
+			<Separator />
+			<Lineage evidence={evidence} />
+			<Separator />
+			<Documents evidence={evidence} />
 		</div>
 	);
 }

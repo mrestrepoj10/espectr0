@@ -1,7 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { ListTreeIcon, MapIcon } from "lucide-react";
+import { useState } from "react";
 
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
 	Sheet,
 	SheetContent,
@@ -29,11 +32,7 @@ const TraceabilityDetails = dynamic(
 
 function TraceabilityDetailsLoading() {
 	return (
-		<div
-			aria-live="polite"
-			className="min-h-0 flex-1 overflow-y-auto"
-			role="status"
-		>
+		<div aria-live="polite" role="status">
 			<div className="flex flex-col gap-4 p-4 sm:p-6">
 				<Skeleton className="h-5 w-48" />
 				<Skeleton className="h-24 w-full rounded-2xl" />
@@ -44,6 +43,8 @@ function TraceabilityDetailsLoading() {
 		</div>
 	);
 }
+
+type EvidencePanel = "fuente" | "linaje";
 
 /**
  * The single traceability surface. `result` is optional so the drawer can open
@@ -63,32 +64,69 @@ export function TraceabilitySheet({
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
 }) {
+	const details =
+		result && scenarioEvidenceKey ? (
+			<TraceabilityDetails
+				key={Object.values(scenarioEvidenceKey).join(":")}
+				result={result}
+				scenarioEvidenceKey={scenarioEvidenceKey}
+			/>
+		) : null;
+	/**
+	 * Stacking the map cut on top of the lineage made one scrollport six screens
+	 * deep, so the two are separate panels the reader switches between. With only
+	 * one of them present there is nothing to switch and the panel stands alone.
+	 */
+	const [panel, setPanel] = useState<EvidencePanel>("fuente");
+	const activePanel = !sourceEvidence ? "linaje" : !details ? "fuente" : panel;
+
 	return (
 		<Sheet onOpenChange={onOpenChange} open={open}>
 			<SheetContent
 				className="h-dvh overflow-hidden border-0 data-[side=right]:w-screen data-[side=right]:max-w-none data-[side=right]:sm:w-[68vw] data-[side=right]:sm:min-w-[44rem] data-[side=right]:sm:max-w-none data-[side=right]:sm:border-l data-[side=right]:xl:w-[62vw]"
 				side="right"
 			>
-				<SheetHeader className="border-b pr-16">
-					<SheetTitle>Trazabilidad normativa</SheetTitle>
-					<SheetDescription>
-						{result
-							? "Fuentes, regiones y linaje del resultado normalizado activo."
-							: "Fuentes y regiones de la selección actual; el linaje aparece al calcular."}
-					</SheetDescription>
+				<SheetHeader className="gap-3 border-b pr-16">
+					<div className="flex flex-col gap-1">
+						<SheetTitle>Trazabilidad normativa</SheetTitle>
+						<SheetDescription>
+							{result
+								? "Fuentes, regiones y linaje del resultado normalizado activo."
+								: "Fuentes y regiones de la selección actual; el linaje aparece al calcular."}
+						</SheetDescription>
+					</div>
+					{sourceEvidence && details ? (
+						<ToggleGroup
+							aria-label="Sección de evidencia"
+							className="w-full max-w-md"
+							onValueChange={(values) => {
+								const next = values[0] as EvidencePanel | undefined;
+								if (next) setPanel(next);
+							}}
+							size="default"
+							value={[activePanel]}
+							variant="contrast"
+						>
+							<ToggleGroupItem className="flex-1" value="fuente">
+								<MapIcon data-icon="inline-start" />
+								Evidencia de la fuente
+							</ToggleGroupItem>
+							<ToggleGroupItem className="flex-1" value="linaje">
+								<ListTreeIcon data-icon="inline-start" />
+								Linaje del resultado
+							</ToggleGroupItem>
+						</ToggleGroup>
+					) : null}
 				</SheetHeader>
 				{open ? (
-					<div className="min-h-0 flex-1 overflow-y-auto">
-						{sourceEvidence ? (
+					<div
+						className="min-h-0 flex-1 overflow-y-auto overscroll-contain"
+						key={activePanel}
+					>
+						{activePanel === "fuente" && sourceEvidence ? (
 							<div className="flex flex-col gap-4 p-4 sm:p-6">{sourceEvidence}</div>
 						) : null}
-						{result && scenarioEvidenceKey ? (
-							<TraceabilityDetails
-								key={Object.values(scenarioEvidenceKey).join(":")}
-								result={result}
-								scenarioEvidenceKey={scenarioEvidenceKey}
-							/>
-						) : null}
+						{activePanel === "linaje" ? details : null}
 					</div>
 				) : null}
 			</SheetContent>

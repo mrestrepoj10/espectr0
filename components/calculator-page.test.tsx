@@ -772,6 +772,34 @@ describe("unified municipal mode selector", () => {
 		expect(images).toContain("/bogota/mapa-2-zonas-respuesta-sismica.png");
 	});
 
+	it("splits the drawer into a source panel and a lineage panel", async () => {
+		await chooseMode("Bogotá D. C.");
+		await chooseSelectOption("bogota-zone-trigger", "CERROS");
+		await act(async () =>
+			container
+				.querySelector<HTMLButtonElement>("[data-slot='bogota-evidence-trigger']")
+				?.click(),
+		);
+
+		// Opens on the map, with the lineage one click away rather than six
+		// screens of scroll below it.
+		await vi.waitFor(() => {
+			expect(document.body.textContent).toContain(
+				"Evidencia cartográfica de la zona",
+			);
+		});
+		expect(document.body.textContent).not.toContain("Valores directos de fuente");
+
+		const lineage = await waitForElement("button", "Linaje del resultado");
+		await act(async () => lineage.click());
+		await vi.waitFor(() => {
+			expect(document.body.textContent).toContain("Valores directos de fuente");
+		});
+		expect(document.body.textContent).not.toContain(
+			"Evidencia cartográfica de la zona",
+		);
+	});
+
 	it("lets the engineer override a prefilled coefficient", async () => {
 		await chooseMode("CCP-14 · Puentes");
 		await chooseSelectOption("ccp14-map-location-trigger", "Armenia");
@@ -822,6 +850,9 @@ describe("unified municipal mode selector", () => {
 		expect(trace?.hasAttribute("disabled")).toBe(false);
 		await act(async () => trace?.click());
 
+		// The drawer opens on the source evidence; the lineage is the other panel.
+		const lineage = await waitForElement("button", "Linaje del resultado");
+		await act(async () => lineage.click());
 		await vi.waitFor(() => {
 			expect(document.body.textContent).toContain("Valores directos de fuente");
 		});
