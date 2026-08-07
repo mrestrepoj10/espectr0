@@ -27,3 +27,9 @@ export type {
   CaliSpectrumResult,
   CaliSupportedHazardId,
 } from "./engine"
+export {
+  caliComponentLabel,
+  caliLegendZoneBand,
+  caliMapEvidence,
+  caliZoneOfComponent,
+} from "./map-evidence"

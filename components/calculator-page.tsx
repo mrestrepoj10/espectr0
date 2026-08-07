@@ -46,6 +46,7 @@ import {
 	SharedSpectrumTable,
 } from "@/components/spectrum-result";
 import { BogotaFigureEvidence } from "@/components/calculator/bogota-figure-evidence";
+import { CaliFigureEvidence } from "@/components/calculator/cali-figure-evidence";
 import { Ccp14FigureEvidence } from "@/components/calculator/ccp14-figure-evidence";
 import { TraceabilitySheet } from "@/components/traceability/traceability-sheet";
 import { Button } from "@/components/ui/button";
@@ -1095,6 +1096,7 @@ export function CalculatorPage() {
 			/>
 		) : calculationMode === "cali-microzonation" ? (
 			<CaliParameterRail
+				onTraceabilityOpen={() => setTraceabilityOpen(true)}
 				colluvialDeposit={caliColluvialDeposit}
 				fillThicknessMeters={caliFillThickness}
 				onColluvialDepositChange={setCaliColluvialDeposit}
@@ -1180,7 +1182,8 @@ export function CalculatorPage() {
 		<div className="flex flex-col gap-5">
 			{result ||
 			(calculationMode === "ccp14" && ccp14MapLocationId) ||
-			(calculationMode === "bogota-microzonation" && bogotaZoneId) ? (
+			(calculationMode === "bogota-microzonation" && bogotaZoneId) ||
+			(calculationMode === "cali-microzonation" && caliZoneId) ? (
 				<TraceabilitySheet
 					onOpenChange={setTraceabilityOpen}
 					open={traceabilityOpen}
@@ -1191,6 +1194,8 @@ export function CalculatorPage() {
 							<Ccp14FigureEvidence locationId={ccp14MapLocationId} />
 						) : calculationMode === "bogota-microzonation" ? (
 							<BogotaFigureEvidence zoneId={bogotaZoneId} />
+						) : calculationMode === "cali-microzonation" ? (
+							<CaliFigureEvidence componentId={caliOptionId ?? caliZoneId} />
 						) : null
 					}
 				/>

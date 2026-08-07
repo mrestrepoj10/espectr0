@@ -18,6 +18,12 @@
       "issue": "La gráfica exige A0d y Fa, ausentes de la Tabla 4.",
       "resolution": "No resolver por analogía; bloquear la activación de la curva completa.",
       "status": "unresolved-blocker"
+    },
+    {
+      "id": "map-sheet-tl-zone-4c-tl",
+      "issue": "La plancha MZSC-R02 de 2005 imprime TL = 2,0 s para la zona 4C en su componente ETL, mientras la Tabla 2 del Decreto 0158 de 2014 imprime 2,10 s para la misma fila (4c TL: 1.50 · 1.04 · 2.10 · 3.25). Las otras doce combinaciones zona-componente coinciden entre las dos fuentes, y la fila ETC de la misma zona 4C coincide en 2,00 s.",
+      "resolution": "Gobierna el decreto adoptado, como en historical-vs-adopted-damage: la plancha es el estudio de 2005 y queda como linaje histórico. Ambas lecturas se verificaron sobre el píxel de cada fuente antes de registrar el conflicto.",
+      "status": "resolved-for-research"
     }
   ]
 }

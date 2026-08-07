@@ -3,5 +3,18 @@
   "decision": "external-only-all-sources",
   "committedSourceBytes": false,
   "rationale": "Las cuatro fuentes se fijan por URL oficial, tamaño, páginas y SHA-256; no se encontró licencia expresa que autorice republicación dentro de este dossier.",
-  "localVerification": "verify_official_pdf.py acepta una copia oficial del Decreto 0158 suministrada localmente y valida huellas de página y recortes."
+  "localVerification": "verify_official_pdf.py acepta una copia oficial del Decreto 0158 suministrada localmente y valida huellas de página y recortes.",
+  "mapSheetException": {
+    "sourceDocumentId": "ingeominas-2005-mapa-mzsc-r02",
+    "committedArtifacts": [
+      "public/cali/mapa-mzsc-r02.png",
+      "public/cali/mapa-mzsc-r02-leyenda.png",
+      "public/cali/mapa-mzsc-r02-coeficientes.png"
+    ],
+    "scope": "Rásteres a resolución de pantalla de la plancha MZSC-R02, de su leyenda temática y de su tabla impresa de coeficientes espectrales, mostrados en el cajón de trazabilidad para ubicar la zona y contrastar los valores adoptados.",
+    "distinctFromLockedSources": "La plancha no es ninguna de las cuatro fuentes fijadas en source-locks.json, que siguen sin bytes en el repositorio.",
+    "permissionStatus": "not-established",
+    "ownerDecision": "Publicarla: sin la plancha el ingeniero no puede comprobar en qué zona cae el predio, que es lo único que la cita no puede respaldar.",
+    "reviewerAction": "Si la plancha no puede republicarse, borrar los tres PNG y dejar solo el enlace saliente."
+  }
 }
