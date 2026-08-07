@@ -30,10 +30,9 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
 import {
-  ccp14DirectMapValues,
+  ccp14CityReading,
   ccp14MapFigure,
   ccp14MapLocations,
-  resolveCcp14MapLocation,
   type Ccp14Coefficient,
 } from "@/lib/ccp14"
 
@@ -452,10 +451,12 @@ export function Ccp14ParameterRail({
   soilClass: string | null
   values: Record<Ccp14Coefficient, number | null>
 }) {
-  const location = mapLocationId
-    ? resolveCcp14MapLocation(mapLocationId)
-    : null
-  const directValues = mapLocationId ? ccp14DirectMapValues(mapLocationId) : null
+  const reading = ccp14CityReading(mapLocationId)
+  const disputed =
+    reading !== null &&
+    [reading.pgaVerification, reading.ssVerification, reading.s1Verification].includes(
+      "disputed",
+    )
 
   return (
     <Card className="self-start" size="sm">
@@ -477,15 +478,21 @@ export function Ccp14ParameterRail({
             options={ccp14MapLocations.map(({ id, label }) => ({ id, label }))}
             value={mapLocationId}
           />
-          {directValues ? (
-            <Alert data-slot="ccp14-direct-map-values">
+          {reading ? (
+            <Alert data-slot="ccp14-city-reading">
               <ShieldAlertIcon />
-              <AlertTitle>Región asignada por el mapa</AlertTitle>
+              <AlertTitle>
+                {disputed
+                  ? `${reading.label}: lectura en disputa`
+                  : `${reading.label}: valores prellenados de la lectura del mapa`}
+              </AlertTitle>
               <AlertDescription>
-                {location?.label}: el recuadro completo cae en la región 1 de las
-                tres figuras, sin contornos que lo crucen, así que PGA ={" "}
-                {directValues.pgaG} g, Ss = {directValues.ssG} g y S1 ={" "}
-                {directValues.s1G} g se leen directamente de las leyendas.
+                Regiones leídas por espectr0 en las figuras oficiales: PGA{" "}
+                {reading.regions.PGA}, Ss {reading.regions.Ss}, S1{" "}
+                {reading.regions.S1}. El valor de cada región viene de la leyenda
+                impresa; la asignación lugar-a-región es una lectura de mapa, no un
+                dato publicado por INVÍAS. {reading.note} Verifica contra la figura
+                y edita si difiere.
               </AlertDescription>
             </Alert>
           ) : null}
@@ -495,7 +502,7 @@ export function Ccp14ParameterRail({
               inputId={inputId}
               key={coefficient}
               label={label}
-              locked={directValues !== null}
+              locked={false}
               onRegionChange={(next) => onRegionChange(coefficient, next)}
               onValueChange={(next) => onValueChange(coefficient, next)}
               region={regions[coefficient]}

@@ -20,6 +20,10 @@ export {
 } from "./engine"
 export { CCP14_STUDY_LABEL } from "./constants"
 export {
+  CCP14_READING_LEGEND,
+  CCP14_READING_NOTE,
+  ccp14CityReading,
+  ccp14CityValues,
   ccp14DirectMapValues,
   ccp14LegendValue,
   ccp14MapFigure,
@@ -48,7 +52,9 @@ export type {
   Ccp14T0Interpretation,
 } from "./engine"
 export type {
+  Ccp14CityReading,
   Ccp14Coefficient,
+  Ccp14ReadingVerification,
   Ccp14MapFigure as Ccp14MapFigureType,
   Ccp14MapLocation,
   Ccp14MapLocationId,

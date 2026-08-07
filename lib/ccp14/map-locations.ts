@@ -1,5 +1,6 @@
 import { z } from "zod"
 
+import cityReadings from "./data/city-readings.json"
 import mapLocations from "./data/map-locations.json"
 
 export type Ccp14Coefficient = "PGA" | "Ss" | "S1"
@@ -148,6 +149,44 @@ export function ccp14DirectValueBacking(
     }]
   })
 }
+
+export type Ccp14ReadingVerification = "agrees" | "disputed" | "unverified"
+
+export type Ccp14CityReading = {
+  id: string
+  label: string
+  regions: Record<Ccp14Coefficient, number>
+  pgaVerification: Ccp14ReadingVerification
+  ssVerification: Ccp14ReadingVerification
+  s1Verification: Ccp14ReadingVerification
+  note: string
+}
+
+const readingById = new Map(
+  (cityReadings.readings as Ccp14CityReading[]).map((r) => [r.id, r]),
+)
+
+/**
+ * The region each labeled place was read into, and how well that reading holds
+ * up. The value of a region is published; which region a place falls in is not,
+ * so this is an espectr0 map reading and every prefilled value stays editable.
+ */
+export function ccp14CityReading(id: string | null): Ccp14CityReading | null {
+  return id ? readingById.get(id) ?? null : null
+}
+
+export function ccp14CityValues(id: string | null) {
+  const reading = ccp14CityReading(id)
+  if (!reading) return null
+  return {
+    PGA: ccp14LegendValue("PGA", reading.regions.PGA),
+    Ss: ccp14LegendValue("Ss", reading.regions.Ss),
+    S1: ccp14LegendValue("S1", reading.regions.S1),
+  }
+}
+
+export const CCP14_READING_LEGEND = cityReadings.verificationLegend
+export const CCP14_READING_NOTE = cityReadings.note
 
 export const ccp14MapRegionCountConflict =
   mapLocations.appendixC3RegionCountConflict

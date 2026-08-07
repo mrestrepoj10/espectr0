@@ -1,0 +1,428 @@
+{
+  "schemaVersion": 1,
+  "provenance": "espectr0 digitization",
+  "note": "Región leída para cada lugar rotulado en las Figuras 3.10.2.1-1 a 3.10.2.1-3. El valor de cada región proviene de la leyenda impresa en la figura; la asignación lugar-a-región es una lectura de mapa hecha por espectr0, NO un dato publicado por INVÍAS. La norma no publica ninguna tabla de coeficientes por municipio. Cada valor prellenado es editable y debe verificarse contra la figura oficial.",
+  "verificationLegend": {
+    "agrees": "Una lectura independiente de la figura coincide con la región registrada.",
+    "disputed": "Una lectura independiente NO coincide. Verificar antes de usar.",
+    "unverified": "Sin segunda lectura. Verificar contra la figura oficial."
+  },
+  "readings": [
+    {
+      "id": "arauca",
+      "label": "Arauca",
+      "regions": {
+        "PGA": 4,
+        "Ss": 4,
+        "S1": 4
+      },
+      "pgaVerification": "unverified",
+      "note": "Sin lectura independiente en esta revisión.",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "armenia",
+      "label": "Armenia",
+      "regions": {
+        "PGA": 5,
+        "Ss": 6,
+        "S1": 6
+      },
+      "pgaVerification": "agrees",
+      "note": "Lectura independiente de la Figura 3.10.2.1-1 coincide (región 5).",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "barranquilla",
+      "label": "Barranquilla",
+      "regions": {
+        "PGA": 2,
+        "Ss": 2,
+        "S1": 2
+      },
+      "pgaVerification": "disputed",
+      "note": "no hay marcador contiguo; el punto queda entre contornos sobre la costa",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "bogota",
+      "label": "Bogotá D.C.",
+      "regions": {
+        "PGA": 5,
+        "Ss": 6,
+        "S1": 6
+      },
+      "pgaVerification": "unverified",
+      "note": "Sin lectura independiente en esta revisión.",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "bucaramanga",
+      "label": "Bucaramanga",
+      "regions": {
+        "PGA": 4,
+        "Ss": 5,
+        "S1": 5
+      },
+      "pgaVerification": "disputed",
+      "note": "los marcadores contiguos son 5 y 11; ninguno es 4",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "cali",
+      "label": "Cali",
+      "regions": {
+        "PGA": 6,
+        "Ss": 6,
+        "S1": 6
+      },
+      "pgaVerification": "unverified",
+      "note": "Sin lectura independiente en esta revisión.",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "cartagena",
+      "label": "Cartagena",
+      "regions": {
+        "PGA": 2,
+        "Ss": 2,
+        "S1": 2
+      },
+      "pgaVerification": "agrees",
+      "note": "Lectura independiente de la Figura 3.10.2.1-1 coincide (región 2).",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "cucuta",
+      "label": "Cúcuta",
+      "regions": {
+        "PGA": 11,
+        "Ss": 12,
+        "S1": 12
+      },
+      "pgaVerification": "disputed",
+      "note": "el marcador contiguo es 10, no 11; además la figura no dibuja punto para Cúcuta",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "florencia",
+      "label": "Florencia",
+      "regions": {
+        "PGA": 4,
+        "Ss": 5,
+        "S1": 5
+      },
+      "pgaVerification": "unverified",
+      "note": "Sin lectura independiente en esta revisión.",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "ibague",
+      "label": "Ibagué",
+      "regions": {
+        "PGA": 5,
+        "Ss": 6,
+        "S1": 6
+      },
+      "pgaVerification": "unverified",
+      "note": "Sin lectura independiente en esta revisión.",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "leticia",
+      "label": "Leticia",
+      "regions": {
+        "PGA": 1,
+        "Ss": 1,
+        "S1": 1
+      },
+      "pgaVerification": "unverified",
+      "note": "Sin lectura independiente en esta revisión.",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "manizales",
+      "label": "Manizales",
+      "regions": {
+        "PGA": 5,
+        "Ss": 6,
+        "S1": 6
+      },
+      "pgaVerification": "agrees",
+      "note": "Lectura independiente de la Figura 3.10.2.1-1 coincide (región 5).",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "medellin",
+      "label": "Medellín",
+      "regions": {
+        "PGA": 4,
+        "Ss": 5,
+        "S1": 5
+      },
+      "pgaVerification": "unverified",
+      "note": "Sin lectura independiente en esta revisión.",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "mitu",
+      "label": "Mitú",
+      "regions": {
+        "PGA": 1,
+        "Ss": 1,
+        "S1": 1
+      },
+      "pgaVerification": "agrees",
+      "note": "Lectura independiente de la Figura 3.10.2.1-1 coincide (región 1).",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "mocoa",
+      "label": "Mocoa",
+      "regions": {
+        "PGA": 8,
+        "Ss": 9,
+        "S1": 8
+      },
+      "pgaVerification": "unverified",
+      "note": "Sin lectura independiente en esta revisión.",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "monteria",
+      "label": "Montería",
+      "regions": {
+        "PGA": 3,
+        "Ss": 3,
+        "S1": 4
+      },
+      "pgaVerification": "agrees",
+      "note": "Lectura independiente de la Figura 3.10.2.1-1 coincide (región 3).",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "neiva",
+      "label": "Neiva",
+      "regions": {
+        "PGA": 7,
+        "Ss": 8,
+        "S1": 8
+      },
+      "pgaVerification": "unverified",
+      "note": "Sin lectura independiente en esta revisión.",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "pasto",
+      "label": "Pasto",
+      "regions": {
+        "PGA": 6,
+        "Ss": 7,
+        "S1": 7
+      },
+      "pgaVerification": "agrees",
+      "note": "Lectura independiente de la Figura 3.10.2.1-1 coincide (región 6).",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "pereira",
+      "label": "Pereira",
+      "regions": {
+        "PGA": 5,
+        "Ss": 6,
+        "S1": 6
+      },
+      "pgaVerification": "agrees",
+      "note": "Lectura independiente de la Figura 3.10.2.1-1 coincide (región 5).",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "popayan",
+      "label": "Popayán",
+      "regions": {
+        "PGA": 6,
+        "Ss": 6,
+        "S1": 6
+      },
+      "pgaVerification": "unverified",
+      "note": "Sin lectura independiente en esta revisión.",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "puerto-carreno",
+      "label": "Puerto Carreño",
+      "regions": {
+        "PGA": 1,
+        "Ss": 1,
+        "S1": 1
+      },
+      "pgaVerification": "unverified",
+      "note": "Sin lectura independiente en esta revisión.",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "puerto-inirida",
+      "label": "Puerto Inírida",
+      "regions": {
+        "PGA": 1,
+        "Ss": 1,
+        "S1": 1
+      },
+      "pgaVerification": "unverified",
+      "note": "Sin lectura independiente en esta revisión.",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "quibdo",
+      "label": "Quibdó",
+      "regions": {
+        "PGA": 8,
+        "Ss": 9,
+        "S1": 10
+      },
+      "pgaVerification": "agrees",
+      "note": "Lectura independiente de la Figura 3.10.2.1-1 coincide (región 8).",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "riohacha",
+      "label": "Riohacha",
+      "regions": {
+        "PGA": 3,
+        "Ss": 3,
+        "S1": 3
+      },
+      "pgaVerification": "agrees",
+      "note": "Lectura independiente de la Figura 3.10.2.1-1 coincide (región 3).",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "san-andres-y-providencia",
+      "label": "San Andrés",
+      "regions": {
+        "PGA": 1,
+        "Ss": 1,
+        "S1": 1
+      },
+      "pgaVerification": "agrees",
+      "note": "Lectura independiente de la Figura 3.10.2.1-1 coincide (región 1).",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "san-jose-del-guaviare",
+      "label": "San José del Guaviare",
+      "regions": {
+        "PGA": 2,
+        "Ss": 2,
+        "S1": 2
+      },
+      "pgaVerification": "disputed",
+      "note": "la prueba de línea despejada a un marcador da 3, no 2",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "santa-marta",
+      "label": "Santa Marta",
+      "regions": {
+        "PGA": 4,
+        "Ss": 4,
+        "S1": 4
+      },
+      "pgaVerification": "agrees",
+      "note": "Lectura independiente de la Figura 3.10.2.1-1 coincide (región 4).",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "sincelejo",
+      "label": "Sincelejo",
+      "regions": {
+        "PGA": 2,
+        "Ss": 2,
+        "S1": 3
+      },
+      "pgaVerification": "agrees",
+      "note": "Lectura independiente de la Figura 3.10.2.1-1 coincide (región 2).",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "tunja",
+      "label": "Tunja",
+      "regions": {
+        "PGA": 5,
+        "Ss": 6,
+        "S1": 6
+      },
+      "pgaVerification": "disputed",
+      "note": "el marcador contiguo al punto de Tunja se lee 4, no 5",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "valledupar",
+      "label": "Valledupar",
+      "regions": {
+        "PGA": 2,
+        "Ss": 2,
+        "S1": 2
+      },
+      "pgaVerification": "disputed",
+      "note": "el marcador del punto está sobreimpreso por la etiqueta y no es legible",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "villavicencio",
+      "label": "Villavicencio",
+      "regions": {
+        "PGA": 9,
+        "Ss": 10,
+        "S1": 9
+      },
+      "pgaVerification": "agrees",
+      "note": "Lectura independiente de la Figura 3.10.2.1-1 coincide (región 9).",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    },
+    {
+      "id": "yopal",
+      "label": "Yopal",
+      "regions": {
+        "PGA": 8,
+        "Ss": 9,
+        "S1": 9
+      },
+      "pgaVerification": "unverified",
+      "note": "Sin lectura independiente en esta revisión.",
+      "ssVerification": "unverified",
+      "s1Verification": "unverified"
+    }
+  ]
+}

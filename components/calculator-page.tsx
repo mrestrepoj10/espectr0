@@ -83,9 +83,9 @@ import {
 } from "@/lib/cali";
 import {
 	adaptCcp14Spectrum,
-	ccp14DirectMapValues,
+	ccp14CityReading,
+	ccp14CityValues,
 	ccp14LegendValue,
-	resolveCcp14MapLocation,
 } from "@/lib/ccp14";
 import { adaptDosquebradasSpectrum } from "@/lib/dosquebradas/adapter";
 import { dosquebradasRows } from "@/lib/dosquebradas/schema";
@@ -1022,15 +1022,11 @@ export function CalculatorPage() {
 				mapLocationId={ccp14MapLocationId}
 				onMapLocationChange={(value) => {
 					setCcp14MapLocationId(value);
-					const location = resolveCcp14MapLocation(value);
-					const direct = ccp14DirectMapValues(value);
-					if (direct && location.directRegion) {
-						setCcp14Values({
-							PGA: direct.pgaG,
-							Ss: direct.ssG,
-							S1: direct.s1G,
-						});
-						setCcp14Regions({ ...location.directRegion });
+					const reading = ccp14CityReading(value);
+					const values = ccp14CityValues(value);
+					if (reading && values) {
+						setCcp14Regions({ ...reading.regions });
+						setCcp14Values(values);
 					}
 				}}
 				onRegionChange={(coefficient, region) => {

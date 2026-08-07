@@ -102,15 +102,38 @@ async function waitForElement(
 	throw new Error(`Could not find ${selector} containing “${text}”.`);
 }
 
+/**
+ * Scoped to the listbox this trigger opened. Several selects on the page share
+ * option labels - a city name that is also a calculator mode, a region number
+ * that appears on more than one figure - so a document-wide search silently
+ * clicks the wrong list.
+ */
 async function chooseSelectOption(triggerId: string, label: string) {
 	const trigger = document.querySelector<HTMLButtonElement>(`#${triggerId}`);
 	expect(trigger).toBeTruthy();
 	await act(async () => {
 		trigger?.click();
 	});
-	const option = await waitForElement('[role="option"]', label);
+	const deadline = Date.now() + 2_000;
+	let option: HTMLElement | undefined;
+	while (Date.now() < deadline && !option) {
+		// A closed popup keeps its listbox mounted under a hidden ancestor.
+		const open = [
+			...document.querySelectorAll<HTMLElement>('[role="listbox"]'),
+		].filter((box) => !box.closest("[hidden]"));
+		option = open
+			.flatMap((box) => [...box.querySelectorAll<HTMLElement>('[role="option"]')])
+			.find((candidate) => candidate.textContent?.includes(label));
+		if (option) break;
+		await act(async () => {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		});
+	}
+	if (!option) {
+		throw new Error(`Could not find option “${label}” in the list opened by #${triggerId}.`);
+	}
 	await act(async () => {
-		option.click();
+		option?.click();
 	});
 }
 
@@ -627,6 +650,59 @@ describe("unified municipal mode selector", () => {
 			expect(container.textContent).toContain("Datos del espectro"),
 		);
 		expect(chartAnnotationText()).toContain("Ts");
+	});
+
+	it("prefills PGA, Ss and S1 from the map reading when a city is picked", async () => {
+		await chooseMode("CCP-14 · Puentes");
+		await chooseSelectOption("ccp14-map-location-trigger", "Armenia");
+
+		await vi.waitFor(() => {
+			expect(
+				container.querySelector("[data-slot='ccp14-city-reading']"),
+			).not.toBeNull();
+		});
+		// Armenia was read into PGA region 5, Ss region 6 and S1 region 6.
+		expect(container.textContent).toContain("PGA = 0,25 g, según la leyenda");
+		expect(container.textContent).toContain("Ss = 0,60 g, según la leyenda");
+		expect(container.textContent).toContain("S1 = 0,30 g, según la leyenda");
+		expect(container.textContent).toContain(
+			"no un dato publicado por INVÍAS",
+		);
+
+		// Only the soil profile is left to choose.
+		await chooseSelectOption("ccp14-soil-trigger", "Perfil C");
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("Datos del espectro"),
+		);
+		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
+	});
+
+	it("flags a city whose reading an independent pass disputes", async () => {
+		await chooseMode("CCP-14 · Puentes");
+		await chooseSelectOption("ccp14-map-location-trigger", "Cúcuta");
+
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain("lectura en disputa");
+		});
+		expect(container.textContent).toContain("el marcador contiguo es 10");
+	});
+
+	it("lets the engineer override a prefilled coefficient", async () => {
+		await chooseMode("CCP-14 · Puentes");
+		await chooseSelectOption("ccp14-map-location-trigger", "Armenia");
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("PGA = 0,25 g, según la leyenda"),
+		);
+
+		await chooseSelectOption("ccp14-pga-region", "Entre contornos — interpolar");
+		await vi.waitFor(() =>
+			expect(document.querySelector("#ccp14-pga")).not.toBeNull(),
+		);
+		await setNumberInput("ccp14-pga", "0.27");
+		await chooseSelectOption("ccp14-soil-trigger", "Perfil C");
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("Datos del espectro"),
+		);
 	});
 
 	it("still accepts an interpolated value between contours", async () => {
