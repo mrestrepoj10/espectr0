@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "step": "contour-extraction-and-band-closure",
+  "figure": {
+    "id": "figura-3.10.2.1-1",
+    "coefficient": "PGA",
+    "physicalPage": 51
+  },
+  "source": {
+    "id": "invias-ccp14-section-3",
+    "sha256": "55f53d68dfc568a930b726b0c7dba510ea608128490353bf604f827a27ffc8ca"
+  },
+  "strokeExtraction": {
+    "method": "hysteresis on grey level, seeded below 230 and grown to 252, with a 3 px collar around black features discarded, then the graticule inpainted from its flanking pixels",
+    "stroke_pixels": 581342,
+    "stroke_components": 508,
+    "free_ends": 302
+  },
+  "markerDetection": {
+    "ring_candidates": 41,
+    "transcribed": 45,
+    "transcribed_with_value": 44
+  },
+  "bandClosure": {
+    "bands_found": 308,
+    "markers_used": 44,
+    "distinct_bands_carrying_markers": 8,
+    "marker_value_conflicts": 30,
+    "largest_band_share_of_free_space_percent": 98.7292345615141
+  },
+  "conclusion": "Stroke extraction succeeds. Band closure does not: the contour field retains roughly a thousand free ends where lettering, city dots and the regi\u00f3n markers overprint the contours, and the fill leaks through them into one region spanning almost the whole map. Assigning a coefficient to a city needs those occlusions reconstructed first."
+}

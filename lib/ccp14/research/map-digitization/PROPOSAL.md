@@ -100,9 +100,66 @@ Reading this:
 
 **Georeferencing is not where the risk lives.** Steps 2–5 are.
 
+## Measured outcome of steps 2 and 3
+
+`extract_contours.py` runs the extraction and then tests it. Measured output
+(`extraction-report.json`), on the PGA figure:
+
+| Quantity | Value |
+| --- | --- |
+| Contour stroke pixels recovered | 581,342 |
+| Stroke components | 508 |
+| Free stroke ends after gap bridging | 302 |
+| Región markers confirmed and transcribed | 44 |
+| Bands produced by the fill | 308 |
+| **Markers of conflicting value sharing a band** | **30** |
+| **Largest band as a share of free map space** | **98.7 %** |
+
+**Step 2 works. Step 3 does not.**
+
+Extraction is sound. A single grey threshold shatters the strokes — they are
+thin and light enough that antialiasing pushes much of each line past any fixed
+cut — but hysteresis, seeding on the stroke core and growing to the faint limit,
+recovers them: stroke components fell from about 5,000 to 508. Inpainting the
+graticule from its flanking pixels, rather than deleting it, keeps contours
+continuous where they cross a rule.
+
+Closure fails, and the región markers prove it rather than merely suggesting it.
+Each marker states the value of the band it sits in, so a correct fill puts
+markers of one value in each band. Instead 30 markers of differing value share a
+band, and one band covers 98.7 % of the free space. The contour field still has
+about 300 free ends — every place a city label, a city dot or a marker circle is
+drawn over a contour — and the fill escapes through them.
+
+Ray-crossing parity was tried as an alternative that does not need closed bands:
+count the contour crossings between a city and each nearby marker, and keep the
+value consistent with the most markers. Validated leave-one-out against the 44
+markers it scored **6.8 %**, and **31.8 %** after erasing marker rings and taking
+the median over parallel offset rays. Both are far below usable. The crossings
+are undercounted for the same reason the fill leaks: the rays pass through the
+gaps.
+
+### What this means for the remaining work
+
+The blocking step is not extraction and not georeferencing. It is
+**reconstructing the contours where the map's own lettering hides them**:
+pairing stroke endpoints across each occlusion and interpolating the curve
+between them. That is tractable — the occlusions are small and the incoming
+tangents are well defined — but every reconstructed segment is an inference
+about what the publication would have shown, and it decides which side of a
+line a city falls on. It needs its own validation, and the 44 transcribed
+markers are the obvious test set: reconstruct, refill, and require zero marker
+conflicts before any value is read off.
+
+Until that holds, no coefficient is derivable from these figures by this
+pipeline, and none is shipped.
+
 ## Acceptance criteria
 
-Ship nothing unless all of these hold:
+Ship nothing unless all of these hold. Criterion 0 is now the live blocker.
+
+0. The fill produces **zero marker-value conflicts** and no band spanning an
+   implausible share of the map. Currently 30 conflicts and 98.7 %.
 
 1. Every extracted contour carries a legend value derived from at least one
    legible región marker, with the propagation path recorded.

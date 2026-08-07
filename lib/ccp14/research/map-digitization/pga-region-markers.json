@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 1,
+  "figure": {
+    "id": "figura-3.10.2.1-1",
+    "coefficient": "PGA",
+    "physicalPage": 51,
+    "printedPage": "3-47"
+  },
+  "source": {
+    "id": "invias-ccp14-section-3",
+    "sha256": "55f53d68dfc568a930b726b0c7dba510ea608128490353bf604f827a27ffc8ca"
+  },
+  "renderScale": 5.0,
+  "note": "Region markers located by ring correlation on the render, then read by eye from a contact sheet of the 45 detections. Pixel coordinates are centres in the scale-5 render. region null marks a detection that proved to be a false positive on inspection.",
+  "legend": {
+    "regions": 11,
+    "from": 0.05,
+    "to": 0.55,
+    "step": 0.05
+  },
+  "markers": [
+    {
+      "y": 479,
+      "x": 1744,
+      "region": 4
+    },
+    {
+      "y": 908,
+      "x": 1438,
+      "region": 3
+    },
+    {
+      "y": 1042,
+      "x": 1120,
+      "region": 3
+    },
+    {
+      "y": 1048,
+      "x": 1491,
+      "region": 4
+    },
+    {
+      "y": 1101,
+      "x": 1629,
+      "region": 10
+    },
+    {
+      "y": 1266,
+      "x": 805,
+      "region": 11
+    },
+    {
+      "y": 1265,
+      "x": 895,
+      "region": 10
+    },
+    {
+      "y": 1261,
+      "x": 987,
+      "region": 8
+    },
+    {
+      "y": 1256,
+      "x": 1315,
+      "region": 5
+    },
+    {
+      "y": 1377,
+      "x": 943,
+      "region": 9
+    },
+    {
+      "y": 1334,
+      "x": 1490,
+      "region": 5
+    },
+    {
+      "y": 1348,
+      "x": 1586,
+      "region": 5
+    },
+    {
+      "y": 1413,
+      "x": 1622,
+      "region": 7
+    },
+    {
+      "y": 1338,
+      "x": 1710,
+      "region": 11
+    },
+    {
+      "y": 1398,
+      "x": 1749,
+      "region": 9
+    },
+    {
+      "y": 1420,
+      "x": 1777,
+      "region": 6
+    },
+    {
+      "y": 1345,
+      "x": 1851,
+      "region": 4
+    },
+    {
+      "y": 1558,
+      "x": 1096,
+      "region": 6
+    },
+    {
+      "y": 1459,
+      "x": 1569,
+      "region": 6
+    },
+    {
+      "y": 1493,
+      "x": 1598,
+      "region": 8
+    },
+    {
+      "y": 1502,
+      "x": 1655,
+      "region": 10
+    },
+    {
+      "y": 1533,
+      "x": 1683,
+      "region": null
+    },
+    {
+      "y": 1501,
+      "x": 1706,
+      "region": 8
+    },
+    {
+      "y": 1462,
+      "x": 1737,
+      "region": 7
+    },
+    {
+      "y": 1583,
+      "x": 926,
+      "region": 8
+    },
+    {
+      "y": 1563,
+      "x": 1418,
+      "region": 4
+    },
+    {
+      "y": 1667,
+      "x": 1503,
+      "region": 9
+    },
+    {
+      "y": 1717,
+      "x": 920,
+      "region": 7
+    },
+    {
+      "y": 1750,
+      "x": 999,
+      "region": 6
+    },
+    {
+      "y": 1725,
+      "x": 1554,
+      "region": 4
+    },
+    {
+      "y": 1899,
+      "x": 1104,
+      "region": 4
+    },
+    {
+      "y": 1914,
+      "x": 1451,
+      "region": 3
+    },
+    {
+      "y": 2100,
+      "x": 639,
+      "region": 10
+    },
+    {
+      "y": 2053,
+      "x": 851,
+      "region": 5
+    },
+    {
+      "y": 2151,
+      "x": 1110,
+      "region": 6
+    },
+    {
+      "y": 2044,
+      "x": 1158,
+      "region": 9
+    },
+    {
+      "y": 2142,
+      "x": 1172,
+      "region": 4
+    },
+    {
+      "y": 2099,
+      "x": 1445,
+      "region": 2
+    },
+    {
+      "y": 2229,
+      "x": 621,
+      "region": 8
+    },
+    {
+      "y": 2246,
+      "x": 672,
+      "region": 7
+    },
+    {
+      "y": 2237,
+      "x": 759,
+      "region": 6
+    },
+    {
+      "y": 2173,
+      "x": 948,
+      "region": 7
+    },
+    {
+      "y": 2226,
+      "x": 1004,
+      "region": 7
+    },
+    {
+      "y": 2213,
+      "x": 1067,
+      "region": 5
+    },
+    {
+      "y": 2163,
+      "x": 1819,
+      "region": 1
+    }
+  ]
+}
