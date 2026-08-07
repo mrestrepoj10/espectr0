@@ -11,12 +11,14 @@
     "byteLength": 3825830,
     "pageCount": 1,
     "officialUrl": null,
+    "mirrorUrl": "https://www.espectrocol.com/mapas/bogota_respuesta.pdf",
+    "mirrorRetrievedOn": "2026-08-07",
     "embeddedMetadata": {
       "title": "Respuesta_2010",
       "author": "SDP",
       "creationDate": "2010-12-16T11:51:58-05:00"
     },
-    "note": "Hoja cartográfica que dibuja las 16 zonas de respuesta sísmica y su leyenda. Los recortes servidos desde /bogota se renderizan de este PDF. La hoja llegó como archivo, no descargada de una URL oficial, así que su SHA-256 no está respaldado por un lock de recuperación como las tres fuentes de source-locks.json; ver la entrada cartographic-annex-provenance del registro de incertidumbre."
+    "note": "Hoja cartográfica que dibuja las 16 zonas de respuesta sísmica y su leyenda. Los recortes servidos desde /bogota se renderizan de este PDF. El espejo de espectrocol.com devuelve exactamente estos 3 825 830 bytes y este SHA-256, así que la hoja es recuperable y verificable; espectrocol.com no es la entidad publicadora, de modo que sigue faltando la URL oficial y la hoja no entra en source-locks.json. Ver la entrada cartographic-annex-provenance del registro de incertidumbre."
   },
   "image": "/bogota/mapa-2-zonas-respuesta-sismica.png",
   "legendImage": "/bogota/mapa-2-leyenda.png",

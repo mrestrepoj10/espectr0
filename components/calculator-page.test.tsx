@@ -400,25 +400,40 @@ describe("unified municipal mode selector", () => {
 		expect(container.textContent).toContain("Parámetros del sitio");
 	});
 
-	it("renders Bogotá typed site-specific and invalid outcomes from the adapter", async () => {
+	it("asks Bogotá only for the zone, the hazard and the use group", async () => {
+		await chooseMode("Bogotá D. C.");
+
+		// Fill thickness and rigid-base period describe the site the geotechnical
+		// engineer characterises, not the study; their thresholds travel as the
+		// site-specific warning the result already carries.
+		expect(container.querySelector("#bogota-fill-thickness")).toBeNull();
+		expect(container.querySelector("#bogota-rigid-base-period")).toBeNull();
+		expect(container.querySelector("#bogota-importance-factor")).toBeNull();
+		for (const id of [
+			"bogota-zone-trigger",
+			"bogota-hazard-trigger",
+			"bogota-importance-group-trigger",
+		]) {
+			expect(container.querySelector(`#${id}`), id).not.toBeNull();
+		}
+	});
+
+	it("scales the Bogotá spectrum by the chosen NSR-10 use group", async () => {
 		await chooseMode("Bogotá D. C.");
 		await chooseSelectOption("bogota-zone-trigger", "CERROS");
-		await setNumberInput("bogota-fill-thickness", "3.1");
-
 		await vi.waitFor(() => {
-			expect(container.textContent).toContain(
-				"Estudio de respuesta sísmica particular requerido",
-			);
+			expect(container.textContent).toContain("Datos del espectro");
 		});
-		expect(container.textContent).toContain("supera 3 m");
-		expect(container.querySelector("#period-lookup-input")).toBeNull();
+		const atGroupI = container.textContent ?? "";
 
-		await setNumberInput("bogota-fill-thickness", "");
-		await setNumberInput("bogota-importance-factor", "0");
+		await chooseSelectOption(
+			"bogota-importance-group-trigger",
+			"IV — Edificación indispensable (I=1.50)",
+		);
 		await vi.waitFor(() => {
-			expect(container.textContent).toContain("Resultado no disponible");
+			expect(container.textContent).not.toBe(atGroupI);
 		});
-		expect(container.textContent).toContain("Entrada inválida");
+		expect(container.textContent).toContain("Datos del espectro");
 	});
 
 	it("labels Bogotá damage chart transitions as T0d, TCd, and TLd", async () => {

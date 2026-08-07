@@ -35,6 +35,7 @@ import {
 	getMunicipalityCoefficients,
 	HazardLevelControl,
 	ImportanceGroupControl,
+	importanceValues,
 	MunicipalityCombobox,
 	SoilProfileControl,
 } from "@/components/spectrum-controls";
@@ -614,6 +615,14 @@ function ManualSelectionNotice({
 	);
 }
 
+/**
+ * The Bogotá spectra are scaled by the NSR-10 A.2.5 importance coefficient, so
+ * the group the engineer picks is what supplies I.
+ */
+function importanceCoefficient(group: ImportanceGroup) {
+	return Number(importanceValues[group]);
+}
+
 const bogotaZoneOptions = bogotaCanonical.options.map((option) => ({
 	id: option.id,
 	label: option.sourceLabel,
@@ -792,13 +801,8 @@ export function CalculatorPage() {
 	const [bogotaHazardId, setBogotaHazardId] = useState(
 		bogotaHazardOptions[0].id,
 	);
-	const [bogotaImportanceFactor, setBogotaImportanceFactor] = useState(1);
-	const [bogotaFillThickness, setBogotaFillThickness] = useState<number | null>(
-		null,
-	);
-	const [bogotaRigidBasePeriod, setBogotaRigidBasePeriod] = useState<
-		number | null
-	>(null);
+	const [bogotaImportanceGroup, setBogotaImportanceGroup] =
+		useState<ImportanceGroup>("I");
 	const [medellinZoneId, setMedellinZoneId] = useState<string | null>(null);
 	const [medellinHazardId, setMedellinHazardId] = useState<string | null>(null);
 	const [medellinImportanceFactor, setMedellinImportanceFactor] = useState(1);
@@ -874,19 +878,12 @@ export function CalculatorPage() {
 			return adaptBogotaSpectrum({
 				zoneId: bogotaZoneId,
 				hazardId: bogotaHazardId,
-				importanceFactor: bogotaImportanceFactor,
-				fillThicknessMeters: bogotaFillThickness,
-				rigidBasePeriodSeconds: bogotaRigidBasePeriod,
+				importanceFactor: importanceCoefficient(bogotaImportanceGroup),
+				fillThicknessMeters: null,
+				rigidBasePeriodSeconds: null,
 			});
 		},
-		[
-			calculationMode,
-			bogotaFillThickness,
-			bogotaHazardId,
-			bogotaImportanceFactor,
-			bogotaRigidBasePeriod,
-			bogotaZoneId,
-		],
+		[calculationMode, bogotaHazardId, bogotaImportanceGroup, bogotaZoneId],
 	);
 	const activeCaliComponentOptions = useMemo(
 		() => caliComponentOptions(caliZoneId),
@@ -1066,22 +1063,18 @@ export function CalculatorPage() {
 			/>
 		) : calculationMode === "bogota-microzonation" ? (
 			<BogotaParameterRail
-				fillThicknessMeters={bogotaFillThickness}
 				hazardDescription={municipalHazardDescription(
 					bogotaCanonical.hazards.find(({ id }) => id === bogotaHazardId),
 				)}
 				hazardId={bogotaHazardId}
 				hazardOptions={bogotaHazardOptions}
-				importanceFactor={bogotaImportanceFactor}
-				onFillThicknessChange={setBogotaFillThickness}
+				importanceGroup={bogotaImportanceGroup}
 				onHazardChange={(value) =>
 					setBogotaHazardId(value as typeof bogotaHazardId)
 				}
-				onImportanceFactorChange={setBogotaImportanceFactor}
-				onRigidBasePeriodChange={setBogotaRigidBasePeriod}
+				onImportanceGroupChange={setBogotaImportanceGroup}
 				onTraceabilityOpen={() => setTraceabilityOpen(true)}
 				onZoneChange={setBogotaZoneId}
-				rigidBasePeriodSeconds={bogotaRigidBasePeriod}
 				zoneId={bogotaZoneId}
 				zoneOptions={bogotaZoneOptions}
 			/>
