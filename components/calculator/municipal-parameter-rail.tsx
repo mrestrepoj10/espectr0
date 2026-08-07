@@ -29,6 +29,12 @@ import {
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
+import {
+  ccp14DirectMapValues,
+  ccp14MapFigure,
+  ccp14MapLocations,
+  resolveCcp14MapLocation,
+} from "@/lib/ccp14"
 
 type SelectOption = {
   id: string
@@ -348,62 +354,77 @@ export function CaliParameterRail({
   )
 }
 
+function ccp14FigureHint(coefficient: "PGA" | "Ss" | "S1") {
+  const figure = ccp14MapFigure(coefficient)
+  const regions = figure.regions
+  const [firstRegion, firstValue] = regions[0]
+  const [lastRegion, lastValue] = regions[regions.length - 1]
+  const g = (value: number) => value.toFixed(2).replace(".", ",")
+  return `${figure.id.replace("figura-", "Figura ")} (pág. impresa ${figure.printedPage}): ${regions.length} regiones, de ${g(firstValue)} g (región ${firstRegion}) a ${g(lastValue)} g (región ${lastRegion}). Interpola linealmente entre contornos.`
+}
+
 export function Ccp14ParameterRail({
-  distanceToActiveFaultKm,
-  enhancedHazardRequiredByImportance,
-  longDurationEarthquakesExpected,
-  onDistanceToActiveFaultChange,
-  onEnhancedHazardChange,
-  onLongDurationChange,
+  mapLocationId,
+  onMapLocationChange,
   onPgaChange,
   onS1Change,
   onSoilClassChange,
   onSsChange,
-  onT0InterpretationChange,
   pgaG,
   s1G,
   soilClass,
   ssG,
-  t0Interpretation,
 }: {
-  distanceToActiveFaultKm: number | null
-  enhancedHazardRequiredByImportance: boolean | null
-  longDurationEarthquakesExpected: boolean | null
-  onDistanceToActiveFaultChange: (value: number | null) => void
-  onEnhancedHazardChange: (value: boolean) => void
-  onLongDurationChange: (value: boolean) => void
+  mapLocationId: string | null
+  onMapLocationChange: (value: string) => void
   onPgaChange: (value: number | null) => void
   onS1Change: (value: number | null) => void
   onSoilClassChange: (value: string) => void
   onSsChange: (value: number | null) => void
-  onT0InterpretationChange: (value: string) => void
   pgaG: number | null
   s1G: number | null
   soilClass: string | null
   ssG: number | null
-  t0Interpretation: string | null
 }) {
-  const durationOptions = [
-    { id: "no", label: "No se esperan" },
-    { id: "yes", label: "Si se esperan" },
-  ]
-  const enhancedHazardOptions = [
-    { id: "no", label: "No se requiere" },
-    { id: "yes", label: "Si se requiere" },
-  ]
+  const location = mapLocationId
+    ? resolveCcp14MapLocation(mapLocationId)
+    : null
+  const directValues = mapLocationId ? ccp14DirectMapValues(mapLocationId) : null
 
   return (
     <Card className="self-start" size="sm">
       <CardHeader>
         <CardTitle>Parámetros CCP-14</CardTitle>
         <CardDescription>
-          Valores del proyecto declarados manualmente; no se asignan por ciudad.
+          Procedimiento General de 3.10.2.1: los tres coeficientes mapeados y el
+          perfil de sitio. Todo lo demás lo deriva el motor de la publicación
+          oficial.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <FieldGroup className="gap-5">
+          <MunicipalSelect
+            description="Los 32 lugares que rotulan las Figuras 3.10.2.1-1 a 3.10.2.1-3. Queda registrado en la memoria; salvo San Andrés y Providencia, no fija los coeficientes."
+            id="ccp14-map-location-trigger"
+            label="Lugar rotulado en los mapas"
+            onValueChange={onMapLocationChange}
+            options={ccp14MapLocations.map(({ id, label }) => ({ id, label }))}
+            value={mapLocationId}
+          />
+          {directValues ? (
+            <Alert data-slot="ccp14-direct-map-values">
+              <ShieldAlertIcon />
+              <AlertTitle>Región asignada por el mapa</AlertTitle>
+              <AlertDescription>
+                {location?.label}: el recuadro completo cae en la región 1 de las
+                tres figuras, sin contornos que lo crucen, así que PGA ={" "}
+                {directValues.pgaG} g, Ss = {directValues.ssG} g y S1 ={" "}
+                {directValues.s1G} g se leen directamente de las leyendas.
+              </AlertDescription>
+            </Alert>
+          ) : null}
           <NumericInput
-            description="Aceleración pico efectiva obtenida de la base oficial del proyecto."
+            description={ccp14FigureHint("PGA")}
             id="ccp14-pga"
             label="PGA (g)"
             nullable
@@ -411,7 +432,7 @@ export function Ccp14ParameterRail({
             value={pgaG}
           />
           <NumericInput
-            description="Aceleración espectral para periodo corto declarada para el proyecto."
+            description={ccp14FigureHint("Ss")}
             id="ccp14-ss"
             label="Ss (g)"
             nullable
@@ -419,7 +440,7 @@ export function Ccp14ParameterRail({
             value={ssG}
           />
           <NumericInput
-            description="Aceleración espectral para un segundo declarada para el proyecto."
+            description={ccp14FigureHint("S1")}
             id="ccp14-s1"
             label="S1 (g)"
             nullable
@@ -427,61 +448,37 @@ export function Ccp14ParameterRail({
             value={s1G}
           />
           <MunicipalSelect
-            description="Clase de sitio confirmada por la información geotécnica del proyecto."
+            description="Tabla 3.10.3.1-1, confirmado con la información geotécnica del proyecto. Fpga, Fa y Fv salen de las Tablas 3.10.3.2-1 a 3.10.3.2-3."
             id="ccp14-soil-trigger"
-            label="Clase de suelo"
+            label="Perfil de sitio"
             onValueChange={onSoilClassChange}
-            options={["A", "B", "C", "D", "E", "F"].map((id) => ({ id, label: `Suelo ${id}` }))}
+            options={["A", "B", "C", "D", "E", "F"].map((id) => ({
+              id,
+              label: `Perfil ${id}`,
+            }))}
             value={soilClass}
-          />
-          <MunicipalSelect
-            description="La publicación oficial contiene dos lecturas incompatibles; elige explícitamente cuál documentar."
-            id="ccp14-t0-trigger"
-            label="Interpretación de T₀"
-            onValueChange={onT0InterpretationChange}
-            options={[
-              { id: "figure-0.2-ts", label: "Figura: T₀ = 0,2·Ts" },
-              { id: "definition-0.2-seconds", label: "Definición: T₀ = 0,2 s" },
-            ]}
-            value={t0Interpretation}
-          />
-          <NumericInput
-            description="Distancia confirmada a la falla activa más cercana; menos de 10 km exige estudio específico."
-            id="ccp14-fault-distance"
-            label="Distancia a falla activa (km)"
-            nullable
-            onValueChange={onDistanceToActiveFaultChange}
-            value={distanceToActiveFaultKm}
-          />
-          <MunicipalSelect
-            description="Confirma si se esperan sismos de larga duración en el sitio."
-            id="ccp14-long-duration-trigger"
-            label="¿Sismos de larga duración?"
-            onValueChange={(value) => onLongDurationChange(value === "yes")}
-            options={durationOptions}
-            value={longDurationEarthquakesExpected === null ? null : longDurationEarthquakesExpected ? "yes" : "no"}
-          />
-          <MunicipalSelect
-            description="Confirma si la importancia del puente exige menor probabilidad de excedencia o mayor periodo de retorno."
-            id="ccp14-enhanced-hazard-trigger"
-            label="¿Amenaza reforzada por importancia?"
-            onValueChange={(value) => onEnhancedHazardChange(value === "yes")}
-            options={enhancedHazardOptions}
-            value={enhancedHazardRequiredByImportance === null ? null : enhancedHazardRequiredByImportance ? "yes" : "no"}
           />
           <Alert>
             <ShieldAlertIcon />
-            <AlertTitle>Entradas manuales y conflicto T₀</AlertTitle>
+            <AlertTitle>Antes de usar el Procedimiento General</AlertTitle>
             <AlertDescription>
-              Verifica PGA, Ss y S1 en los documentos oficiales del proyecto. La
-              selección de T₀ registra una interpretación; no resuelve la
-              contradicción de la publicación de INVÍAS.
+              3.10.2 obliga al Procedimiento Particular de Sitio si el puente
+              está a menos de 10 km de una falla activa, si el perfil es tipo F,
+              si se esperan sismos de larga duración en la región o si su
+              importancia exige una probabilidad de excedencia menor. La
+              calculadora no puede verificar esas cuatro condiciones por ti.
             </AlertDescription>
           </Alert>
         </FieldGroup>
       </CardContent>
       <CardFooter className="flex-col items-stretch gap-3">
         <Separator />
+        <p className="text-muted-foreground text-xs">
+          Los mapas rotulan lugares, pero los números circulados marcan bandas
+          entre contornos, no ciudades: la norma no publica una tabla de PGA, Ss
+          y S1 por municipio, así que los tres valores se leen de las figuras y
+          se declaran aquí.
+        </p>
         <a
           className="text-muted-foreground text-xs underline underline-offset-4"
           href="https://www.invias.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=29584"
@@ -489,6 +486,14 @@ export function Ccp14ParameterRail({
           target="_blank"
         >
           Descargar publicación oficial CCP-14 de INVÍAS
+        </a>
+        <a
+          className="text-muted-foreground text-xs underline underline-offset-4"
+          href="https://www.invias.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=29585"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Resolución 0000108 de 2015 que adopta la norma
         </a>
       </CardFooter>
     </Card>

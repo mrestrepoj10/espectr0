@@ -20,6 +20,36 @@ import type {
 
 type SuccessfulResult = Extract<NormalizedSpectrumResultData, { status: "ok" }>
 
+/**
+ * Wording that changes with the study family. The page structure, the lineage
+ * and the source pages are identical for every contextual memoria.
+ */
+export type ContextualMemoriaPresentation = {
+  documentScope: string
+  eyebrow: string
+  scopeNotice: string
+  subject: string
+  zonePrefix: string
+}
+
+const municipalPresentation: ContextualMemoriaPresentation = {
+  documentScope: "memoria contextual municipal",
+  eyebrow: "Memoria reproducible · estudio municipal",
+  scopeNotice:
+    "Esta memoria conserva el resultado normalizado y sus citas. No usa mapas, coordenadas, GIS ni selección automática de zona.",
+  subject: "Memoria contextual de espectro sísmico municipal",
+  zonePrefix: "Zona ",
+}
+
+export const ccp14MemoriaPresentation: ContextualMemoriaPresentation = {
+  documentScope: "memoria contextual CCP-14",
+  eyebrow: "Memoria reproducible · CCP-14 puentes",
+  scopeNotice:
+    "Esta memoria conserva el resultado normalizado y sus citas de la publicación oficial de INVÍAS. PGA, Ss y S1 son lecturas declaradas de las Figuras 3.10.2.1-1 a 3.10.2.1-3 o de los valores aprobados por la entidad contratante: la norma no publica una tabla de coeficientes por municipio y la calculadora no los asigna por ciudad.",
+  subject: "Memoria contextual de espectro sísmico de puentes CCP-14",
+  zonePrefix: "",
+}
+
 const palette = {
   ink: "#172033",
   muted: "#5E687A",
@@ -177,10 +207,16 @@ function numericText(value: string) {
   )
 }
 
-function Frame({ section }: { section: string }) {
+function Frame({
+  presentation,
+  section,
+}: {
+  presentation: ContextualMemoriaPresentation
+  section: string
+}) {
   return (
     <>
-      <Text fixed style={styles.header}>espectr0 · memoria contextual municipal · {clean(section)}</Text>
+      <Text fixed style={styles.header}>espectr0 · {clean(presentation.documentScope)} · {clean(section)}</Text>
       <Text
         fixed
         render={({ pageNumber, totalPages }) => `Página ${pageNumber} de ${totalPages}`}
@@ -218,18 +254,26 @@ function SpectrumPlot({ result }: { result: SuccessfulResult }) {
   )
 }
 
-function SummaryPage({ result, evidence }: { result: SuccessfulResult; evidence: SpectrumEvidenceView }) {
+function SummaryPage({
+  evidence,
+  presentation,
+  result,
+}: {
+  evidence: SpectrumEvidenceView
+  presentation: ContextualMemoriaPresentation
+  result: SuccessfulResult
+}) {
   return (
     <Page size="A4" style={styles.page}>
-      <Frame section="resumen" />
-      <Text style={styles.eyebrow}>Memoria reproducible · estudio municipal</Text>
+      <Frame presentation={presentation} section="resumen" />
+      <Text style={styles.eyebrow}>{clean(presentation.eyebrow)}</Text>
       <Text style={styles.title}>{clean(evidence.study.label)}</Text>
       <Text style={styles.subtitle}>
-        {clean(evidence.selection.zone ? `Zona ${evidence.selection.zone}` : "Zona no declarada")} · {clean(result.hazard.label)} · {formatMunicipalReturnPeriod(result.hazard.returnPeriodYears)} · amortiguamiento {number(result.hazard.dampingRatio * 100)} %
+        {clean(evidence.selection.zone ? `${presentation.zonePrefix}${evidence.selection.zone}` : "Selección no declarada")} · {clean(result.hazard.label)} · {formatMunicipalReturnPeriod(result.hazard.returnPeriodYears)} · amortiguamiento {number(result.hazard.dampingRatio * 100)} %
       </Text>
       <View style={styles.notice}>
         <Text style={styles.noticeTitle}>Selección manual y alcance</Text>
-        <Text>{clean("Esta memoria conserva el resultado normalizado y sus citas. No usa mapas, coordenadas, GIS ni selección automática de zona.")}</Text>
+        <Text>{clean(presentation.scopeNotice)}</Text>
       </View>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Parámetros principales</Text>
@@ -256,10 +300,16 @@ function SummaryPage({ result, evidence }: { result: SuccessfulResult; evidence:
   )
 }
 
-function LineagePage({ evidence }: { evidence: SpectrumEvidenceView }) {
+function LineagePage({
+  evidence,
+  presentation,
+}: {
+  evidence: SpectrumEvidenceView
+  presentation: ContextualMemoriaPresentation
+}) {
   return (
     <Page size="A4" style={styles.page}>
-      <Frame section="valores y linaje" />
+      <Frame presentation={presentation} section="valores y linaje" />
       <Text style={styles.sectionTitle}>Valores directos de fuente</Text>
       {evidence.directValues.map((value) => (
         <View key={value.id} style={styles.card} wrap={false}>
@@ -281,10 +331,18 @@ function LineagePage({ evidence }: { evidence: SpectrumEvidenceView }) {
   )
 }
 
-function SpectrumPage({ result, evidence }: { result: SuccessfulResult; evidence: SpectrumEvidenceView }) {
+function SpectrumPage({
+  evidence,
+  presentation,
+  result,
+}: {
+  evidence: SpectrumEvidenceView
+  presentation: ContextualMemoriaPresentation
+  result: SuccessfulResult
+}) {
   return (
     <Page size="A4" style={styles.page}>
-      <Frame section="espectro" />
+      <Frame presentation={presentation} section="espectro" />
       <Text style={styles.sectionTitle}>Espectro normalizado</Text>
       <SpectrumPlot result={result} />
       <Text style={styles.sectionTitle}>Ramas activas dentro del dominio aplicable</Text>
@@ -313,7 +371,13 @@ function CitationCards({ citations }: { citations: SpectrumEvidenceView["citatio
   ))
 }
 
-function SourcesPages({ evidence }: { evidence: SpectrumEvidenceView }) {
+function SourcesPages({
+  evidence,
+  presentation,
+}: {
+  evidence: SpectrumEvidenceView
+  presentation: ContextualMemoriaPresentation
+}) {
   const firstCitations = evidence.citations.slice(0, 4)
   const remainingCitations = evidence.citations.slice(4)
   const continuationChunks = Array.from(
@@ -323,7 +387,7 @@ function SourcesPages({ evidence }: { evidence: SpectrumEvidenceView }) {
   return (
     <>
       <Page size="A4" style={styles.page}>
-        <Frame section="fuentes y citas" />
+        <Frame presentation={presentation} section="fuentes y citas" />
         <Text style={styles.sectionTitle}>Documentos declarados</Text>
         {evidence.documents.map((document) => (
           <View key={document.sourceId} style={styles.sourceCard} wrap={false}>
@@ -339,7 +403,10 @@ function SourcesPages({ evidence }: { evidence: SpectrumEvidenceView }) {
       </Page>
       {continuationChunks.map((citations, index) => (
         <Page key={`citations-${index}`} size="A4" style={styles.page}>
-          <Frame section={`fuentes y citas · continuación ${index + 1}`} />
+          <Frame
+            presentation={presentation}
+            section={`fuentes y citas · continuación ${index + 1}`}
+          />
           <Text style={styles.sectionTitle}>Regiones citadas · continuación</Text>
           <CitationCards citations={citations} />
         </Page>
@@ -348,28 +415,39 @@ function SourcesPages({ evidence }: { evidence: SpectrumEvidenceView }) {
   )
 }
 
-export function MunicipalMemoriaDocument({ result }: { result: SuccessfulResult }) {
+export function MunicipalMemoriaDocument({
+  presentation = municipalPresentation,
+  result,
+}: {
+  presentation?: ContextualMemoriaPresentation
+  result: SuccessfulResult
+}) {
   const evidence = resolveSpectrumEvidence(result)
   return (
     <Document
       author="espectr0"
       creator="espectr0"
-      subject="Memoria contextual de espectro sísmico municipal"
+      subject={presentation.subject}
       title={`Memoria contextual · ${evidence.study.label}`}
     >
-      <SummaryPage evidence={evidence} result={result} />
-      <LineagePage evidence={evidence} />
-      <SpectrumPage evidence={evidence} result={result} />
-      <SourcesPages evidence={evidence} />
+      <SummaryPage evidence={evidence} presentation={presentation} result={result} />
+      <LineagePage evidence={evidence} presentation={presentation} />
+      <SpectrumPage evidence={evidence} presentation={presentation} result={result} />
+      <SourcesPages evidence={evidence} presentation={presentation} />
     </Document>
   )
 }
 
-export async function renderMunicipalMemoriaPdf(result: NormalizedSpectrumResultData) {
+export async function renderMunicipalMemoriaPdf(
+  result: NormalizedSpectrumResultData,
+  presentation: ContextualMemoriaPresentation = municipalPresentation,
+) {
   if (result.status !== "ok") {
     throw new Error("Municipal contextual PDF requires an applicable result")
   }
-  return pdf(<MunicipalMemoriaDocument result={result} />).toBlob()
+  return pdf(
+    <MunicipalMemoriaDocument presentation={presentation} result={result} />,
+  ).toBlob()
 }
 
 function slug(value: string) {

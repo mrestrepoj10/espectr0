@@ -1,0 +1,180 @@
+{
+  "edition": "CCP-14",
+  "note": "Clause-level citations for the CCP-14 claims and conflicts referenced by the spectrum engine. Locators come from lib/ccp14/research/claims-matrix.json and lib/ccp14/research/conflict-ledger.json; the tabulated site-factor cells are cited separately from lib/ccp14/evidence/study-data.mjs.",
+  "citations": [
+    {
+      "id": "claim-hazard",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "clause",
+      "physicalPage": 50,
+      "printedPage": "3-46",
+      "reference": "CCP-14 C3.10.2.1 — sismo de diseño",
+      "transcription": "La probabilidad de que un coeficiente no sea excedido en una ubicación específica durante un periodo de 75 años se estima en cerca del 93 por ciento, es decir, siete por ciento de probabilidad de excedencia. Puede demostrarse que un evento con dicha probabilidad de excedencia tiene un periodo de retorno promedio de cerca de 1.000 años y se llama el sismo de diseño."
+    },
+    {
+      "id": "claim-map-inputs",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "clause",
+      "physicalPage": 50,
+      "printedPage": "3-46",
+      "reference": "CCP-14 3.10.2.1 — Procedimiento General",
+      "transcription": "Debe determinarse los valores de PGA, Ss y S1 de las Figuras 3.10.2.1-1 a 3.10.2.1-3 según corresponda, o de los valores, o mapas, especiales aprobados por la entidad contratante del diseño y construcción. Debe usarse interpolación lineal para sitios ubicados entre líneas de contorno o entre una línea de contorno y un valor mínimo local o un valor máximo local."
+    },
+    {
+      "id": "claim-exact-locality-count",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "applicability",
+      "physicalPage": 50,
+      "printedPage": "3-46",
+      "reference": "CCP-14 C3.10.2.1 — cobertura del paquete oficial publicado",
+      "transcription": "Texto oficial: «Los valores para los coeficientes PGA, Ss y S1 se expresan en milésimos de g en las Figuras 3.10.2.1-1 a 3.10.2.1-3. Los valores numéricos se obtienen dividiendo los valores por 1000. Los máximos y mínimos locales se dan en el contorno más alto y el más bajo para una región en particular.» Hallazgo del inventario del paquete oficial (16 PDF, 1.503 páginas, archivo INVÍAS 29584): la amenaza se publica únicamente como mapas de contornos; no se publica un registro finito de localidades ni una tabla localidad-a-PGA/Ss/S1, por lo que estos coeficientes no pueden asignarse por ciudad."
+    },
+    {
+      "id": "claim-site-specific-triggers",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "applicability",
+      "physicalPage": 50,
+      "printedPage": "3-46",
+      "reference": "CCP-14 3.10.2 — condiciones que obligan al Procedimiento Particular de Sitio",
+      "transcription": "Debe usarse el Procedimiento Particular de Sitio si existe cualquiera de las condiciones siguientes: el sitio está ubicado más cerca de una distancia de 10 km de una falla activa; el sitio se clasifica como Perfil de Sitio Tipo F (Véase 3.10.3.1); se esperan sismos de larga duración en la región; la importancia del puente es tal que debe considerarse una probabilidad de excedencia más baja para el sismo de diseño (y por ende un periodo de retorno promedio más largo)."
+    },
+    {
+      "id": "claim-soils",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "clause",
+      "physicalPage": 55,
+      "printedPage": "3-51",
+      "reference": "CCP-14 3.10.3.1 y Tabla 3.10.3.1-1 — Definición de los tipos de perfil de suelo",
+      "transcription": "El tipo de perfil de suelo del sitio debe clasificarse como A a F de acuerdo con la definición de los tipos de perfil de suelo de la Tabla 3.10.3.1-1. La clasificación se establece con la información geotécnica del proyecto; el perfil tipo F exige una evaluación particular del sitio."
+    },
+    {
+      "id": "claim-site-factor-tables",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "clause",
+      "physicalPage": 58,
+      "printedPage": "3-54",
+      "reference": "CCP-14 Tablas 3.10.3.2-1 a 3.10.3.2-3, Notas 1 y 2",
+      "transcription": "Nota 1: se debe usar una interpolación lineal para valores intermedios de PGA, Ss y S1. Nota 2: para el perfil tipo F debe realizarse un estudio de sitio particular para el lugar específico y debe llevarse a cabo un análisis de amplificación de onda."
+    },
+    {
+      "id": "claim-as",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "equation",
+      "physicalPage": 60,
+      "printedPage": "3-56",
+      "reference": "CCP-14 Ec. 3.10.4.2-2",
+      "transcription": "As = Fpga · PGA, donde PGA es el coeficiente de aceleración pico del terreno en roca (Perfil de Suelo Tipo B)."
+    },
+    {
+      "id": "claim-sds",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "equation",
+      "physicalPage": 60,
+      "printedPage": "3-56",
+      "reference": "CCP-14 Ec. 3.10.4.2-3",
+      "transcription": "SDS = Fa · Ss, donde Ss es el coeficiente de aceleración espectral de respuesta horizontal para un período de vibración de 0.2 segundos en roca (Perfil de Suelo Tipo B)."
+    },
+    {
+      "id": "claim-sd1",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "equation",
+      "physicalPage": 61,
+      "printedPage": "3-57",
+      "reference": "CCP-14 SD1 = Fv·S1 (ecuación impresa como 3.10.4.2-3 en la página 3-57 y citada como 3.10.4.2-6 en 3.10.6)",
+      "transcription": "SD1 = Fv · S1, donde S1 es el coeficiente de aceleración espectral de respuesta horizontal para un período de vibración de 1.0 segundos en roca (Perfil de Suelo Tipo B). La publicación repite el número 3.10.4.2-3 para esta ecuación y la referencia como 3.10.4.2-6 en 3.10.6; el valor es el mismo y solo la numeración está defectuosa."
+    },
+    {
+      "id": "claim-ts",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "clause",
+      "physicalPage": 60,
+      "printedPage": "3-56",
+      "reference": "CCP-14 3.10.4.2 — definición de Ts",
+      "transcription": "TS = período de vibración que define el punto en el cual el espectro de aceleraciones cambia de la zona donde es independiente del período a ser inversamente proporcional al período = SD1/SDS, en segundos."
+    },
+    {
+      "id": "claim-spectrum-branches",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "equation",
+      "physicalPage": 60,
+      "printedPage": "3-56",
+      "reference": "CCP-14 3.10.4.2, Ecs. 3.10.4.2-1, 3.10.4.2-4 y 3.10.4.2-5 (continúan en la página 3-57)",
+      "transcription": "Para periodos iguales o menores que T0: Csm = As + (SDS − As)(Tm/T0). Para periodos mayores o iguales a T0 y menores o iguales a TS: Csm = SDS. Para periodos mayores a TS: Csm = SD1/Tm."
+    },
+    {
+      "id": "claim-zones",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "clause",
+      "physicalPage": 61,
+      "printedPage": "3-57",
+      "reference": "CCP-14 3.10.6 y Tabla 3.10.6-1 — Zonas de Desempeño Sísmico",
+      "transcription": "Todo puente debe asignarse a una de cuatro zonas de desempeño sísmico usando el valor de SD1: SD1 ≤ 0.15 zona 1; 0.15 < SD1 ≤ 0.30 zona 2; 0.30 < SD1 ≤ 0.50 zona 3; 0.50 < SD1 zona 4."
+    },
+    {
+      "id": "conflict-t0-figure",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "clause",
+      "physicalPage": 60,
+      "printedPage": "3-56",
+      "reference": "CCP-14 Figura 3.10.4.1-1 — eje de períodos",
+      "rect": {
+        "left": 0.22,
+        "top": 0.34,
+        "width": 0.24,
+        "height": 0.08
+      },
+      "transcription": "El eje de períodos de la Figura 3.10.4.1-1 rotula el primer quiebre del espectro como T0 = 0.2 Ts."
+    },
+    {
+      "id": "conflict-t0-definition",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "clause",
+      "physicalPage": 60,
+      "printedPage": "3-56",
+      "reference": "CCP-14 3.10.4.2 — definición de T0",
+      "rect": {
+        "left": 0.04,
+        "top": 0.82,
+        "width": 0.44,
+        "height": 0.1
+      },
+      "transcription": "T0 = período de vibración de referencia empleado para definir la forma espectral e igual a 0.2 segundos."
+    },
+    {
+      "id": "claim-map-figure-pga",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "clause",
+      "physicalPage": 51,
+      "printedPage": "3-47",
+      "reference": "CCP-14 Figura 3.10.2.1-1 — MAPA DE VALORES PGA",
+      "transcription": "Mapa nacional de contornos de PGA para 7 % de excedencia en 75 años. Rotula 32 lugares poblados e imprime una leyenda de 11 regiones, de 0.05 g (región 1) a 0.55 g (región 11). Los marcadores circulados rotulan bandas entre contornos, no los lugares rotulados."
+    },
+    {
+      "id": "claim-map-figure-ss",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "clause",
+      "physicalPage": 52,
+      "printedPage": "3-48",
+      "reference": "CCP-14 Figura 3.10.2.1-2 — MAPA DE VALORES Ss",
+      "transcription": "Mapa nacional de contornos de Ss (0.2 s). Rotula los mismos 32 lugares e imprime una leyenda de 13 regiones, de 0.10 g (región 1) a 1.30 g (región 13)."
+    },
+    {
+      "id": "claim-map-figure-s1",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "clause",
+      "physicalPage": 53,
+      "printedPage": "3-49",
+      "reference": "CCP-14 Figura 3.10.2.1-3 — MAPA DE VALORES S1",
+      "transcription": "Mapa nacional de contornos de S1 (1.0 s). Rotula los mismos 32 lugares e imprime una leyenda de 14 regiones, de 0.05 g (región 1) a 0.70 g (región 14)."
+    },
+    {
+      "id": "claim-map-location-labels",
+      "sourceId": "invias-ccp14-section-3",
+      "kind": "applicability",
+      "physicalPage": 51,
+      "printedPage": "3-47",
+      "reference": "CCP-14 Figuras 3.10.2.1-1 a 3.10.2.1-3 — lugares rotulados",
+      "transcription": "Las tres figuras rotulan el mismo conjunto de 32 lugares poblados, incluido el recuadro de San Andrés y Providencia. Rotular un lugar no le asigna un coeficiente: salvo en el recuadro de San Andrés y Providencia, donde una única región cubre todo el recuadro sin contornos que lo crucen, el valor del sitio debe leerse siguiendo los contornos e interpolando linealmente según 3.10.2.1."
+    }
+  ]
+}

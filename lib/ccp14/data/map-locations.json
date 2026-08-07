@@ -1,0 +1,393 @@
+{
+  "edition": "CCP-14",
+  "note": "Locations and legends transcribed from Figuras 3.10.2.1-1 a 3.10.2.1-3 of the locked INVIAS Section 3 PDF (sha256 55f53d68...). These figures label populated places and print a region legend; they do NOT publish a location-to-coefficient table. Only entries carrying directRegion have a region the figure assigns unambiguously at the location itself.",
+  "figures": [
+    {
+      "id": "figura-3.10.2.1-1",
+      "coefficient": "PGA",
+      "title": "Aceleración Pico Horizontal del Terreno (PGA)",
+      "physicalPage": 51,
+      "printedPage": "3-47",
+      "mapTitle": "MAPA DE VALORES PGA",
+      "regions": [
+        [
+          1,
+          0.05
+        ],
+        [
+          2,
+          0.1
+        ],
+        [
+          3,
+          0.15
+        ],
+        [
+          4,
+          0.2
+        ],
+        [
+          5,
+          0.25
+        ],
+        [
+          6,
+          0.3
+        ],
+        [
+          7,
+          0.35
+        ],
+        [
+          8,
+          0.4
+        ],
+        [
+          9,
+          0.45
+        ],
+        [
+          10,
+          0.5
+        ],
+        [
+          11,
+          0.55
+        ]
+      ]
+    },
+    {
+      "id": "figura-3.10.2.1-2",
+      "coefficient": "Ss",
+      "title": "Coeficiente de Aceleración Espectral Horizontal para un período de vibración de 0.2 segundos (Ss)",
+      "physicalPage": 52,
+      "printedPage": "3-48",
+      "mapTitle": "MAPA DE VALORES Ss",
+      "regions": [
+        [
+          1,
+          0.1
+        ],
+        [
+          2,
+          0.2
+        ],
+        [
+          3,
+          0.3
+        ],
+        [
+          4,
+          0.4
+        ],
+        [
+          5,
+          0.5
+        ],
+        [
+          6,
+          0.6
+        ],
+        [
+          7,
+          0.7
+        ],
+        [
+          8,
+          0.8
+        ],
+        [
+          9,
+          0.9
+        ],
+        [
+          10,
+          1.0
+        ],
+        [
+          11,
+          1.1
+        ],
+        [
+          12,
+          1.2
+        ],
+        [
+          13,
+          1.3
+        ]
+      ]
+    },
+    {
+      "id": "figura-3.10.2.1-3",
+      "coefficient": "S1",
+      "title": "Coeficiente de Aceleración Espectral Horizontal para un período de vibración de 1.0 segundos (S1)",
+      "physicalPage": 53,
+      "printedPage": "3-49",
+      "mapTitle": "MAPA DE VALORES S1",
+      "regions": [
+        [
+          1,
+          0.05
+        ],
+        [
+          2,
+          0.1
+        ],
+        [
+          3,
+          0.15
+        ],
+        [
+          4,
+          0.2
+        ],
+        [
+          5,
+          0.25
+        ],
+        [
+          6,
+          0.3
+        ],
+        [
+          7,
+          0.35
+        ],
+        [
+          8,
+          0.4
+        ],
+        [
+          9,
+          0.45
+        ],
+        [
+          10,
+          0.5
+        ],
+        [
+          11,
+          0.55
+        ],
+        [
+          12,
+          0.6
+        ],
+        [
+          13,
+          0.65
+        ],
+        [
+          14,
+          0.7
+        ]
+      ]
+    }
+  ],
+  "appendixC3RegionCountConflict": {
+    "locator": "Apéndice C3, Sección 3 physical page 140, printed 3-137",
+    "appendixText": "Para el parámetro PGA se han establecido 11 zonas entre 0.05 y 0.55 g, para el parámetro Ss se han establecido 14 zonas entre 0.10 y 1.3 g mientras que para el parámetro S1 se han establecido 16 zonas entre 0.05 y 0.75 g.",
+    "figureLegends": "The printed legends list 11 PGA regions (0.05-0.55), 13 Ss regions (0.10-1.30) and 14 S1 regions (0.05-0.70).",
+    "finding": "The appendix region counts for Ss and S1 do not match the legends printed on the figures themselves. The product uses the legends, which are the normative figures referenced by 3.10.2.1.",
+    "status": "unresolved"
+  },
+  "locations": [
+    {
+      "id": "arauca",
+      "label": "Arauca",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "armenia",
+      "label": "Armenia",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "barranquilla",
+      "label": "Barranquilla",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "bogota",
+      "label": "Bogotá",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "bucaramanga",
+      "label": "Bucaramanga",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "cali",
+      "label": "Cali",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "cartagena",
+      "label": "Cartagena",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "cucuta",
+      "label": "Cúcuta",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "florencia",
+      "label": "Florencia",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "ibague",
+      "label": "Ibagué",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "leticia",
+      "label": "Leticia",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "manizales",
+      "label": "Manizales",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "medellin",
+      "label": "Medellín",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "mitu",
+      "label": "Mitú",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "mocoa",
+      "label": "Mocoa",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "monteria",
+      "label": "Montería",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "neiva",
+      "label": "Neiva",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "pasto",
+      "label": "Pasto",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "pereira",
+      "label": "Pereira",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "popayan",
+      "label": "Popayán",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "puerto-carreno",
+      "label": "Puerto Carreño",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "puerto-inirida",
+      "label": "Puerto Inírida",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "quibdo",
+      "label": "Quibdó",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "riohacha",
+      "label": "Riohacha",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "san-andres-y-providencia",
+      "label": "San Andrés y Providencia",
+      "inset": true,
+      "directRegion": {
+        "PGA": 1,
+        "Ss": 1,
+        "S1": 1
+      }
+    },
+    {
+      "id": "san-jose-del-guaviare",
+      "label": "San José del Guaviare",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "santa-marta",
+      "label": "Santa Marta",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "sincelejo",
+      "label": "Sincelejo",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "tunja",
+      "label": "Tunja",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "valledupar",
+      "label": "Valledupar",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "villavicencio",
+      "label": "Villavicencio",
+      "inset": false,
+      "directRegion": null
+    },
+    {
+      "id": "yopal",
+      "label": "Yopal",
+      "inset": false,
+      "directRegion": null
+    }
+  ]
+}

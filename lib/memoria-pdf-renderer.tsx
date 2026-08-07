@@ -22,6 +22,7 @@ import {
   selectRepresentativeBoundaryPoints,
 } from "./memoria-pdf"
 import {
+  ccp14MemoriaPresentation,
   municipalMemoriaFilename,
   renderMunicipalMemoriaPdf,
 } from "./municipal-memoria-pdf-renderer"
@@ -31,6 +32,7 @@ import {
   spectrumResultData,
 } from "./spectra"
 import { CALI_ENGINE_ID } from "./cali"
+import { CCP14_ENGINE_ID } from "./ccp14"
 
 import type { CalculationStep, CalculationTrace } from "./nsr10"
 import type { SiteCoefficientInterpolationTrace } from "./nsr10/site-coefficients"
@@ -711,6 +713,10 @@ export const contextualPdfRendererRegistry = new ContextualPdfRendererRegistry()
 }).register({
   engineId: CALI_ENGINE_ID,
   render: renderMunicipalMemoriaPdf,
+  filename: municipalMemoriaFilename,
+}).register({
+  engineId: CCP14_ENGINE_ID,
+  render: (result) => renderMunicipalMemoriaPdf(result, ccp14MemoriaPresentation),
   filename: municipalMemoriaFilename,
 })
 

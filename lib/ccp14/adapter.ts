@@ -13,9 +13,19 @@ import {
   normalizedSpectrumResultDataSchema,
 } from "../spectra/types"
 import {
+  CCP14_ENGINE_ID,
+  CCP14_ENGINE_VERSION,
+  CCP14_HAZARD_ID,
+  CCP14_STUDY_ID,
+  CCP14_STUDY_VERSION,
+  CCP14_TRACE_SCHEMA_ID,
+  CCP14_TRACE_SCHEMA_VERSION,
+} from "./constants"
+import {
   ccp14ComputationInputSchema,
   computeCcp14Spectrum,
 } from "./engine"
+import { resolveCcp14MapLocation } from "./map-locations"
 import "./study-relations"
 
 import type { SpectrumEngine } from "../spectra/engine"
@@ -31,13 +41,15 @@ import type {
   Ccp14FactorId,
 } from "./engine"
 
-export const CCP14_STUDY_ID = "ccp14" as const
-export const CCP14_STUDY_VERSION = "CCP-14/Resolution-108-2015-v1" as const
-export const CCP14_ENGINE_ID = "ccp14-spectrum" as const
-export const CCP14_ENGINE_VERSION = "1" as const
-export const CCP14_TRACE_SCHEMA_ID = "ccp14-spectrum-trace" as const
-export const CCP14_TRACE_SCHEMA_VERSION = 1 as const
-export const CCP14_HAZARD_ID = "ccp14-2014-7pct-75y" as const
+export {
+  CCP14_ENGINE_ID,
+  CCP14_ENGINE_VERSION,
+  CCP14_HAZARD_ID,
+  CCP14_STUDY_ID,
+  CCP14_STUDY_VERSION,
+  CCP14_TRACE_SCHEMA_ID,
+  CCP14_TRACE_SCHEMA_VERSION,
+} from "./constants"
 
 const SOURCE_IDS = [
   "mintransporte-resolution-108-2015-invias-copy",
@@ -56,9 +68,7 @@ export const ccp14Capabilities = spectrumCapabilitiesSchema.parse({
   comparison: unsupportedCapability(
     "The shared comparison consumer has not yet registered the CCP-14 engine.",
   ),
-  contextualPdf: unsupportedCapability(
-    "A CCP-14 contextual PDF renderer has not yet been registered.",
-  ),
+  contextualPdf: supportedCapability(),
   csvExport: supportedCapability(),
   etabsExport: supportedCapability(),
   jsonExport: supportedCapability(),
@@ -70,14 +80,12 @@ export const ccp14Capabilities = spectrumCapabilitiesSchema.parse({
     "CCP-14 is a bridge standard and does not expose the NSR-10 FHE building workflow.",
   ),
   bridgeRFactorWorkflow: supportedCapability(),
-  traceabilityViewer: unsupportedCapability(
-    "The engine records citation lineage, but a CCP-14 evidence-view resolver has not yet been registered.",
-  ),
+  traceabilityViewer: supportedCapability(),
 })
 
 const hazard = {
   id: CCP14_HAZARD_ID,
-  label: "CCP-14 general design hazard (7% in 75 years)",
+  label: "Sismo de diseño CCP-14 (7 % de excedencia en 75 años)",
   returnPeriodYears: 1000,
   dampingRatio: 0.05,
 }
@@ -99,15 +107,22 @@ const commonWarnings: SpectrumWarning[] = [
     severity: "warning",
     code: "ccp14-manual-hazard-inputs",
     message:
-      "PGA, Ss and S1 are manual engineering inputs. They must come from the project's official maps, contracting-entity-approved values, or site-specific CCP-14 basis; this calculator does not assign them by city.",
+      "PGA, Ss y S1 se leen de las Figuras 3.10.2.1-1 a 3.10.2.1-3 o de los valores o mapas especiales aprobados por la entidad contratante, con interpolación lineal entre contornos. La publicación oficial no incluye un registro de municipios ni una tabla localidad-a-PGA/Ss/S1, así que la calculadora no asigna estos valores por ciudad.",
     citationIds: ["claim-map-inputs", "claim-exact-locality-count"],
   },
   {
     severity: "warning",
     code: "ccp14-t0-official-conflict",
     message:
-      "The official INVÍAS publication is internally inconsistent: Figure 3.10.4.1-1 states T0 = 0.2 Ts, while the definition below the equations states T0 = 0.2 s. This result uses the explicitly selected interpretation and does not present it as an official resolution of the conflict.",
+      "La publicación oficial de INVÍAS es internamente inconsistente: la Figura 3.10.4.1-1 indica T0 = 0,2·Ts mientras la definición bajo las ecuaciones indica T0 = 0,2 s. Salvo que se declare otra lectura, el resultado aplica la de la figura, que es la única compatible con la forma espectral dibujada y la única que mantiene T0 ≤ Ts para todo dato válido. Esto no resuelve oficialmente la contradicción.",
     citationIds: ["conflict-t0-figure", "conflict-t0-definition"],
+  },
+  {
+    severity: "warning",
+    code: "ccp14-site-specific-triggers",
+    message:
+      "El Procedimiento General solo aplica si el diseñador descarta las cuatro condiciones de 3.10.2: sitio a menos de 10 km de una falla activa, perfil de sitio tipo F, sismos de larga duración esperados en la región, e importancia del puente que exija menor probabilidad de excedencia. Cualquiera de ellas obliga al Procedimiento Particular de Sitio de 3.10.2.2.",
+    citationIds: ["claim-site-specific-triggers"],
   },
 ]
 
@@ -124,6 +139,7 @@ function normalizedInputs(input: unknown): NormalizedInputs {
     ssG: scalar("ssG"),
     s1G: scalar("s1G"),
     soilClass: scalar("soilClass"),
+    mapLocationId: scalar("mapLocationId"),
     t0Interpretation: scalar("t0Interpretation"),
     distanceToActiveFaultKm: scalar("distanceToActiveFaultKm"),
     longDurationEarthquakesExpected: scalar("longDurationEarthquakesExpected"),
@@ -170,7 +186,7 @@ function failedResult(
     ])],
     evidenceAvailability: parsedInput.success
       ? { status: "available" }
-      : { status: "unavailable", reason: "The invalid input did not resolve a CCP-14 scenario." },
+      : { status: "unavailable", reason: "La entrada inválida no resolvió un escenario CCP-14." },
     traceSchemaVersion: CCP14_TRACE_SCHEMA_VERSION,
     trace: null,
     capabilities: ccp14Capabilities,
@@ -198,8 +214,11 @@ function factorStep(engine: Ccp14EngineSuccess, factorId: Ccp14FactorId) {
     unit: "dimensionless",
     dependencies: [inputStep, "ccp14-input-soil-class"],
     citationIds: factor.citationIds,
-    expression: factor.mode === "interpolation" ? "linear interpolation between adjacent tabulated values" : "tabulated endpoint value",
-    substitution: `${factorId}(${inputLabel}=${factor.argument}, soil ${engine.input.soilClass}) = ${factor.value}`,
+    expression:
+      factor.mode === "interpolation"
+        ? "interpolación lineal entre los valores tabulados adyacentes"
+        : "valor tabulado de la tabla de factores de sitio",
+    substitution: `${factorId}(${inputLabel} = ${factor.argument}, perfil ${engine.input.soilClass}) = ${factor.value}`,
   }
 }
 
@@ -221,9 +240,30 @@ function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
     { id: "ccp14-input-pga", label: "PGA", value: input.pgaG, unit: "g", citationIds: ["claim-map-inputs"] },
     { id: "ccp14-input-ss", label: "Ss", value: input.ssG, unit: "g", citationIds: ["claim-map-inputs"] },
     { id: "ccp14-input-s1", label: "S1", value: input.s1G, unit: "g", citationIds: ["claim-map-inputs"] },
-    { id: "ccp14-input-soil-class", label: "Soil class", value: input.soilClass, unit: "class", citationIds: ["claim-soils"] },
-    { id: "ccp14-input-t0-interpretation", label: "T0 interpretation", value: input.t0Interpretation, unit: "choice", citationIds: ["conflict-t0-figure", "conflict-t0-definition"] },
+    { id: "ccp14-input-soil-class", label: "Perfil de sitio", value: input.soilClass, unit: "class", citationIds: ["claim-soils"] },
+    {
+      id: "ccp14-input-map-location",
+      label: "Lugar rotulado en los mapas",
+      value: input.mapLocationId === null
+        ? "no declarado"
+        : resolveCcp14MapLocation(input.mapLocationId).label,
+      unit: "choice",
+      citationIds: ["claim-map-location-labels"],
+    },
   ].map((step) => ({ ...step, classification: "user-input", dependencies: [] }))
+  const t0InterpretationStep = {
+    id: "ccp14-input-t0-interpretation",
+    classification:
+      engine.t0InterpretationSource === "declared" ? "user-input" : "engine-default",
+    label:
+      engine.t0InterpretationSource === "declared"
+        ? "Lectura de T₀ declarada"
+        : "Lectura de T₀ aplicada por defecto",
+    value: input.t0Interpretation,
+    unit: "choice",
+    dependencies: [],
+    citationIds: ["conflict-t0-figure", "conflict-t0-definition"],
+  }
   const factorSteps = (["Fpga", "Fa", "Fv"] as const).map((id) => factorStep(engine, id))
   const derivedSteps = [
     {
@@ -280,13 +320,13 @@ function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
     },
     {
       id: "ccp14-performance-zone",
-      label: "Seismic performance zone",
+      label: "Zona de desempeño sísmico",
       value: engine.performanceZone,
       unit: "dimensionless",
       dependencies: ["ccp14-sd1"],
       citationIds: ["claim-zones"],
-      expression: "Zone selected from SD1 thresholds 0.15, 0.30 and 0.50",
-      substitution: `SD1 = ${engine.sd1} → zone ${engine.performanceZone}`,
+      expression: "Zona seleccionada con los umbrales de SD1 0,15, 0,30 y 0,50",
+      substitution: `SD1 = ${engine.sd1} corresponde a la zona ${engine.performanceZone}`,
     },
   ].map((step) => ({ ...step, classification: "derived" }))
   const representativePeriods: Record<Ccp14BranchId, number> = {
@@ -305,7 +345,7 @@ function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
     return {
       id: formulaByBranch[branchId],
       classification: "derived",
-      label: `Csm ${branchId}`,
+      label: `Csm · rama ${branchId}`,
       value,
       unit: "g",
       dependencies,
@@ -316,21 +356,36 @@ function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
       substitution: `Csm(${t} s) = ${value}`,
     }
   })
-  const steps = [...directSteps, ...factorSteps, ...derivedSteps, ...branchSteps]
-  const branches = (Object.keys(formulaByBranch) as Ccp14BranchId[]).map((id) => ({
-    id,
-    formulaId: formulaByBranch[id],
-    citationIds: citationByBranch[id],
-  }))
+  const steps = [
+    ...directSteps,
+    t0InterpretationStep,
+    ...factorSteps,
+    ...derivedSteps,
+    ...branchSteps,
+  ]
   const periods = Array.from({ length: 501 }, (_, index) => Number((index * 0.01).toFixed(8)))
   const points = periods.map((period) => normalizedPoint(engine, period))
+  /**
+   * Extreme but valid coefficients can push T0 or Ts past the sampled 0-5 s
+   * window, leaving a published branch with no ordinate in this result. The
+   * curve declares only the branches it actually carries; the formulas for the
+   * others stay in the trace steps.
+   */
+  const sampledBranchIds = new Set(points.map(({ branchId }) => branchId))
+  const branches = (Object.keys(formulaByBranch) as Ccp14BranchId[])
+    .filter((id) => sampledBranchIds.has(id))
+    .map((id) => ({
+      id,
+      formulaId: formulaByBranch[id],
+      citationIds: citationByBranch[id],
+    }))
   const metricDefinitions = [
     ["as", "As", engine.as, "g", "ccp14-as"],
     ["sds", "SDS", engine.sds, "g", "ccp14-sds"],
     ["sd1", "SD1", engine.sd1, "g", "ccp14-sd1"],
     ["ts", "Ts", engine.ts, "s", "ccp14-ts"],
     ["t0", "T0", engine.t0, "s", "ccp14-t0"],
-    ["performanceZone", "Seismic performance zone", engine.performanceZone, "dimensionless", "ccp14-performance-zone"],
+    ["performanceZone", "Zona de desempeño sísmico", engine.performanceZone, "dimensionless", "ccp14-performance-zone"],
   ] as const
   const stepById = new Map(steps.map((step) => [step.id, step]))
   const metrics = metricDefinitions.map(([id, label, value, unit, formulaId]) => ({
@@ -346,6 +401,9 @@ function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
   const citationIds = [...new Set([
     "adoption-resolution-article-1",
     "claim-hazard",
+    "claim-map-figure-pga",
+    "claim-map-figure-ss",
+    "claim-map-figure-s1",
     "claim-site-factor-tables",
     ...steps.flatMap(({ citationIds }) => citationIds),
     ...branches.flatMap(({ citationIds }) => citationIds),
@@ -389,7 +447,7 @@ function successResult(engine: Ccp14EngineSuccess): NormalizedSpectrumResult {
         const applicability = {
           status: "invalid-input" as const,
           reasonCode: "ccp14-invalid-period",
-          message: "The period must be finite and nonnegative.",
+          message: "El período debe ser finito y no negativo.",
           citationIds: [],
         }
         return normalizedSpectrumOrdinateSchema.parse({ status: "invalid-input", applicability })

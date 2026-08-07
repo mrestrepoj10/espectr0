@@ -595,7 +595,7 @@ describe("unified municipal mode selector", () => {
 		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
 	});
 
-	it("activates CCP-14 only after every manual input and applicability check", async () => {
+	it("activates CCP-14 from the four general-procedure inputs only", async () => {
 		await chooseMode("CCP-14 · Puentes");
 		expect(container.textContent).toContain("Parámetros CCP-14");
 		const officialPublicationLink = container.querySelector<HTMLAnchorElement>(
@@ -607,26 +607,74 @@ describe("unified municipal mode selector", () => {
 		expect(officialPublicationLink?.href).toBe(
 			"https://www.invias.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=29584",
 		);
-		expect(container.textContent).toContain("Interpretación de T₀");
 		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
-		expect(container.textContent).toContain("Completa los datos manuales de CCP-14");
+		expect(container.textContent).toContain("Completa los datos de CCP-14");
 		expect(container.textContent).not.toContain("Datos del espectro");
 		expect(container.querySelector("#ccp14-city-trigger")).toBeNull();
+		expect(container.querySelector("#ccp14-t0-trigger")).toBeNull();
+		expect(container.querySelector("#ccp14-fault-distance")).toBeNull();
+		expect(container.querySelector("#ccp14-long-duration-trigger")).toBeNull();
+		expect(container.querySelector("#ccp14-enhanced-hazard-trigger")).toBeNull();
+		expect(container.textContent).toContain(
+			"no publica una tabla de PGA, Ss y S1 por municipio",
+		);
+		expect(container.textContent).toContain(
+			"Figura 3.10.2.1-1 (pág. impresa 3-47): 11 regiones",
+		);
+		expect(container.textContent).toContain(
+			"Figura 3.10.2.1-3 (pág. impresa 3-49): 14 regiones",
+		);
 
 		await setNumberInput("ccp14-pga", "0.25");
 		await setNumberInput("ccp14-ss", "0.5");
 		await setNumberInput("ccp14-s1", "0.2");
-		await chooseSelectOption("ccp14-soil-trigger", "Suelo D");
-		await chooseSelectOption("ccp14-t0-trigger", "Figura: T₀ = 0,2·Ts");
-		await setNumberInput("ccp14-fault-distance", "12");
-		await chooseSelectOption("ccp14-long-duration-trigger", "No se esperan");
-		await chooseSelectOption("ccp14-enhanced-hazard-trigger", "No se requiere");
+		await chooseSelectOption("ccp14-soil-trigger", "Perfil D");
 
 		await vi.waitFor(() => expect(container.textContent).toContain("Datos del espectro"));
-		expect(container.textContent).toContain("PGA, Ss and S1 are manual engineering inputs");
+		expect(container.textContent).toContain(
+			"la calculadora no asigna estos valores por ciudad",
+		);
+		expect(container.textContent).toContain(
+			"obliga al Procedimiento Particular de Sitio",
+		);
 		expect(chartAnnotationText()).toContain("T0");
 		expect(chartAnnotationText()).toContain("Ts");
 		expect(container.textContent).toContain("Exportar");
+	});
+
+	it("records a mapped location and only auto-fills the one the map assigns", async () => {
+		await chooseMode("CCP-14 · Puentes");
+		await chooseSelectOption("ccp14-map-location-trigger", "Neiva");
+		// Neiva sits between contours, so the figures assign it nothing.
+		expect(
+			document.querySelector<HTMLInputElement>("#ccp14-pga")?.value,
+		).toBe("");
+		expect(
+			document.querySelector("[data-slot='ccp14-direct-map-values']"),
+		).toBeNull();
+
+		await chooseSelectOption(
+			"ccp14-map-location-trigger",
+			"San Andrés y Providencia",
+		);
+		await vi.waitFor(() => {
+			expect(container.textContent).toContain("Región asignada por el mapa");
+		});
+		expect(
+			document.querySelector<HTMLInputElement>("#ccp14-pga")?.value,
+		).toBe("0.05");
+		expect(
+			document.querySelector<HTMLInputElement>("#ccp14-ss")?.value,
+		).toBe("0.1");
+		expect(
+			document.querySelector<HTMLInputElement>("#ccp14-s1")?.value,
+		).toBe("0.05");
+
+		await chooseSelectOption("ccp14-soil-trigger", "Perfil B");
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("Datos del espectro"),
+		);
+		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
 	});
 
 	it("keeps CCP-14 site-specific triggers localized to the entered scenario", async () => {
@@ -634,16 +682,14 @@ describe("unified municipal mode selector", () => {
 		await setNumberInput("ccp14-pga", "0.25");
 		await setNumberInput("ccp14-ss", "0.5");
 		await setNumberInput("ccp14-s1", "0.2");
-		await chooseSelectOption("ccp14-soil-trigger", "Suelo F");
-		await chooseSelectOption("ccp14-t0-trigger", "Figura: T₀ = 0,2·Ts");
-		await setNumberInput("ccp14-fault-distance", "12");
-		await chooseSelectOption("ccp14-long-duration-trigger", "No se esperan");
-		await chooseSelectOption("ccp14-enhanced-hazard-trigger", "No se requiere");
+		await chooseSelectOption("ccp14-soil-trigger", "Perfil F");
 
 		await vi.waitFor(() => {
 			expect(container.textContent).toContain("Estudio de respuesta sísmica particular requerido");
 		});
-		expect(container.textContent).toContain("soil class F");
+		expect(container.textContent).toContain(
+			"exige un estudio particular de sitio",
+		);
 		expect(container.textContent).not.toContain("Datos del espectro");
 	});
 
