@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "step": "georeference-only",
+  "source": {
+    "id": "invias-ccp14-section-3",
+    "sha256": "55f53d68dfc568a930b726b0c7dba510ea608128490353bf604f827a27ffc8ca",
+    "portalFileId": 29584
+  },
+  "method": "Render each figure at scale 5, detect the graticule as the rules covering more than 60 percent of the sheet, index them on their own median spacing, and fit pixels per degree by least squares with one robust rejection pass.",
+  "figures": [
+    {
+      "coefficient": "PGA",
+      "figure_id": "figura-3.10.2.1-1",
+      "physical_page": 51,
+      "printed_page": "3-47",
+      "render_scale": 5.0,
+      "longitude": {
+        "lines_detected": 15,
+        "lines_on_ladder": 15,
+        "lines_rejected": 0,
+        "pixels_per_degree": 166.39464285714286,
+        "residual_rms_px": 0.4564571990922858,
+        "residual_max_px": 0.9720238095233071
+      },
+      "latitude": {
+        "lines_detected": 19,
+        "lines_on_ladder": 18,
+        "lines_rejected": 1,
+        "pixels_per_degree": 166.38511864075784,
+        "residual_rms_px": 0.2782888678802164,
+        "residual_max_px": 0.6782052533949354
+      },
+      "axis_agreement_percent": 0.005723872007823164,
+      "ground_sampling_metres_per_px": 669.0119230315194
+    },
+    {
+      "coefficient": "Ss",
+      "figure_id": "figura-3.10.2.1-2",
+      "physical_page": 52,
+      "printed_page": "3-48",
+      "render_scale": 5.0,
+      "longitude": {
+        "lines_detected": 14,
+        "lines_on_ladder": 14,
+        "lines_rejected": 0,
+        "pixels_per_degree": 167.76445698166435,
+        "residual_rms_px": 0.4535662524435246,
+        "residual_max_px": 0.8385049365310806
+      },
+      "latitude": {
+        "lines_detected": 19,
+        "lines_on_ladder": 18,
+        "lines_rejected": 1,
+        "pixels_per_degree": 167.47241480324192,
+        "residual_rms_px": 0.41743330182030963,
+        "residual_max_px": 0.9752953813112981
+      },
+      "axis_agreement_percent": 0.17407869561688682,
+      "ground_sampling_metres_per_px": 663.549371558283
+    },
+    {
+      "coefficient": "S1",
+      "figure_id": "figura-3.10.2.1-3",
+      "physical_page": 53,
+      "printed_page": "3-49",
+      "render_scale": 5.0,
+      "longitude": {
+        "lines_detected": 13,
+        "lines_on_ladder": 13,
+        "lines_rejected": 0,
+        "pixels_per_degree": 166.39937210839386,
+        "residual_rms_px": 0.43418158749857355,
+        "residual_max_px": 0.939524124257332
+      },
+      "latitude": {
+        "lines_detected": 19,
+        "lines_on_ladder": 17,
+        "lines_rejected": 2,
+        "pixels_per_degree": 166.38746216189836,
+        "residual_rms_px": 1.9654030321983702,
+        "residual_max_px": 7.871643394200646
+      },
+      "axis_agreement_percent": 0.007157446776751534,
+      "ground_sampling_metres_per_px": 668.992908984568
+    }
+  ]
+}
