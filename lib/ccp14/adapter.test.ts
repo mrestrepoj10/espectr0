@@ -31,6 +31,7 @@ describe("CCP-14 normalized adapter", () => {
     expect(result.warnings.map(({ code }) => code)).toEqual([
       "ccp14-manual-hazard-inputs",
       "ccp14-t0-official-conflict",
+      "ccp14-site-specific-triggers",
     ])
     expect(result.warnings[1].citationIds).toEqual([
       "conflict-t0-figure",

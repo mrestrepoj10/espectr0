@@ -50,6 +50,26 @@ describe("CCP-14 pure spectrum engine", () => {
     expect(definition.at(0.1).csm).toBeCloseTo(0.63, 14)
   })
 
+  it("runs the general procedure from the four mapped inputs alone", () => {
+    const result = computeCcp14Spectrum({
+      pgaG: 0.3,
+      ssG: 0.75,
+      s1G: 0.3,
+      soilClass: "D",
+    })
+    expect(result.status).toBe("ok")
+    if (result.status !== "ok") return
+    expect(result.input.t0Interpretation).toBe("figure-0.2-ts")
+    expect(result.input.distanceToActiveFaultKm).toBeNull()
+    expect(result.input.longDurationEarthquakesExpected).toBe(false)
+    expect(result.input.enhancedHazardRequiredByImportance).toBe(false)
+    const explicit = computeCcp14Spectrum(ordinaryInput)
+    expect(explicit.status).toBe("ok")
+    if (explicit.status !== "ok") return
+    expect(result.t0).toBeCloseTo(explicit.t0, 14)
+    expect(result.at(0.5).csm).toBeCloseTo(explicit.at(0.5).csm, 14)
+  })
+
   it("selects every branch on both sides of its boundaries", () => {
     const result = computeCcp14Spectrum(ordinaryInput)
     expect(result.status).toBe("ok")
@@ -101,26 +121,6 @@ describe("CCP-14 pure spectrum engine", () => {
   })
 
   it("returns typed invalid and site-specific outcomes", () => {
-    const missingDistance: Partial<typeof ordinaryInput> = { ...ordinaryInput }
-    delete missingDistance.distanceToActiveFaultKm
-    expect(computeCcp14Spectrum(missingDistance)).toMatchObject({
-      status: "invalid-input",
-      reasonCode: "ccp14-invalid-input",
-    })
-    const missingLongDuration: Partial<typeof ordinaryInput> = { ...ordinaryInput }
-    delete missingLongDuration.longDurationEarthquakesExpected
-    expect(computeCcp14Spectrum(missingLongDuration)).toMatchObject({
-      status: "invalid-input",
-      reasonCode: "ccp14-invalid-input",
-    })
-    expect(computeCcp14Spectrum({
-      ...ordinaryInput,
-      distanceToActiveFaultKm: null,
-    })).toMatchObject({
-      status: "unsupported",
-      reasonCode: "ccp14-active-fault-distance-unknown",
-      citationIds: ["claim-site-specific-triggers"],
-    })
     expect(computeCcp14Spectrum({ ...ordinaryInput, pgaG: -0.1 })).toMatchObject({
       status: "invalid-input",
       reasonCode: "ccp14-invalid-input",

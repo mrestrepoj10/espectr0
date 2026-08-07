@@ -106,10 +106,7 @@ import {
 } from "@/lib/spectra";
 
 import type { CalculatorModeId } from "@/lib/municipal-mode-catalog";
-import type {
-	Ccp14SoilClass,
-	Ccp14T0Interpretation,
-} from "@/lib/ccp14";
+import type { Ccp14SoilClass } from "@/lib/ccp14";
 import type {
 	HazardLevel,
 	ImportanceGroup,
@@ -707,7 +704,7 @@ function activeChartDescription(
 	nsrHazardLevel: HazardLevel,
 ) {
 	if (mode === "ccp14") {
-		return "Curva CCP-14 emitida con los valores y comprobaciones declarados manualmente para el proyecto.";
+		return "Curva CCP-14 del Procedimiento General 3.10.2.1, emitida con los coeficientes mapeados y el perfil de sitio declarados para el proyecto.";
 	}
 	if (mode === "dosquebradas-microzonation") {
 		return "Curva municipal emitida solo en el intervalo soportado To ≤ T ≤ TL para la zona manual.";
@@ -775,14 +772,6 @@ export function CalculatorPage() {
 	const [ccp14S1G, setCcp14S1G] = useState<number | null>(null);
 	const [ccp14SoilClass, setCcp14SoilClass] =
 		useState<Ccp14SoilClass | null>(null);
-	const [ccp14T0Interpretation, setCcp14T0Interpretation] =
-		useState<Ccp14T0Interpretation | null>(null);
-	const [ccp14FaultDistance, setCcp14FaultDistance] =
-		useState<number | null>(null);
-	const [ccp14LongDuration, setCcp14LongDuration] =
-		useState<boolean | null>(null);
-	const [ccp14EnhancedHazard, setCcp14EnhancedHazard] =
-		useState<boolean | null>(null);
 	const [municipio, setMunicipio] = useState<Municipio>(defaultMunicipio);
 	const [soilProfile, setSoilProfile] = useState<SoilProfile>("D");
 	const [importanceGroup, setImportanceGroup] = useState<ImportanceGroup>("I");
@@ -845,32 +834,20 @@ export function CalculatorPage() {
 			ccp14PgaG === null ||
 			ccp14SsG === null ||
 			ccp14S1G === null ||
-			ccp14SoilClass === null ||
-			ccp14T0Interpretation === null ||
-			ccp14FaultDistance === null ||
-			ccp14LongDuration === null ||
-			ccp14EnhancedHazard === null
+			ccp14SoilClass === null
 		) return null;
 		return adaptCcp14Spectrum({
 			pgaG: ccp14PgaG,
 			ssG: ccp14SsG,
 			s1G: ccp14S1G,
 			soilClass: ccp14SoilClass,
-			t0Interpretation: ccp14T0Interpretation,
-			distanceToActiveFaultKm: ccp14FaultDistance,
-			longDurationEarthquakesExpected: ccp14LongDuration,
-			enhancedHazardRequiredByImportance: ccp14EnhancedHazard,
 		});
 	}, [
 		calculationMode,
-		ccp14EnhancedHazard,
-		ccp14FaultDistance,
-		ccp14LongDuration,
 		ccp14PgaG,
 		ccp14S1G,
 		ccp14SoilClass,
 		ccp14SsG,
-		ccp14T0Interpretation,
 	]);
 	const bogotaResult = useMemo(
 		() => {
@@ -1028,26 +1005,16 @@ export function CalculatorPage() {
 			/>
 		) : calculationMode === "ccp14" ? (
 			<Ccp14ParameterRail
-				distanceToActiveFaultKm={ccp14FaultDistance}
-				enhancedHazardRequiredByImportance={ccp14EnhancedHazard}
-				longDurationEarthquakesExpected={ccp14LongDuration}
-				onDistanceToActiveFaultChange={setCcp14FaultDistance}
-				onEnhancedHazardChange={setCcp14EnhancedHazard}
-				onLongDurationChange={setCcp14LongDuration}
 				onPgaChange={setCcp14PgaG}
 				onS1Change={setCcp14S1G}
 				onSoilClassChange={(value) =>
 					setCcp14SoilClass(value as Ccp14SoilClass)
 				}
 				onSsChange={setCcp14SsG}
-				onT0InterpretationChange={(value) =>
-					setCcp14T0Interpretation(value as Ccp14T0Interpretation)
-				}
 				pgaG={ccp14PgaG}
 				s1G={ccp14S1G}
 				soilClass={ccp14SoilClass}
 				ssG={ccp14SsG}
-				t0Interpretation={ccp14T0Interpretation}
 			/>
 		) : calculationMode === "bogota-microzonation" ? (
 			<BogotaParameterRail
@@ -1126,8 +1093,8 @@ export function CalculatorPage() {
 	const manualSelectionNotice =
 		calculationMode === "ccp14" && ccp14Result === null ? (
 			<ManualSelectionNotice
-				description="Declara PGA, Ss, S1, suelo, interpretación de T₀ y las tres comprobaciones de aplicabilidad."
-				title="Completa los datos manuales de CCP-14"
+				description="Declara PGA, Ss y S1 leídos de las Figuras 3.10.2.1-1 a 3.10.2.1-3 y el perfil de sitio del proyecto."
+				title="Completa los datos de CCP-14"
 			/>
 		) : calculationMode === "dosquebradas-microzonation" &&
 			dosquebradasZoneId === null ? (

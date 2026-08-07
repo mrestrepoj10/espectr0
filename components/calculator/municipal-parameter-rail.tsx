@@ -349,61 +349,38 @@ export function CaliParameterRail({
 }
 
 export function Ccp14ParameterRail({
-  distanceToActiveFaultKm,
-  enhancedHazardRequiredByImportance,
-  longDurationEarthquakesExpected,
-  onDistanceToActiveFaultChange,
-  onEnhancedHazardChange,
-  onLongDurationChange,
   onPgaChange,
   onS1Change,
   onSoilClassChange,
   onSsChange,
-  onT0InterpretationChange,
   pgaG,
   s1G,
   soilClass,
   ssG,
-  t0Interpretation,
 }: {
-  distanceToActiveFaultKm: number | null
-  enhancedHazardRequiredByImportance: boolean | null
-  longDurationEarthquakesExpected: boolean | null
-  onDistanceToActiveFaultChange: (value: number | null) => void
-  onEnhancedHazardChange: (value: boolean) => void
-  onLongDurationChange: (value: boolean) => void
   onPgaChange: (value: number | null) => void
   onS1Change: (value: number | null) => void
   onSoilClassChange: (value: string) => void
   onSsChange: (value: number | null) => void
-  onT0InterpretationChange: (value: string) => void
   pgaG: number | null
   s1G: number | null
   soilClass: string | null
   ssG: number | null
-  t0Interpretation: string | null
 }) {
-  const durationOptions = [
-    { id: "no", label: "No se esperan" },
-    { id: "yes", label: "Si se esperan" },
-  ]
-  const enhancedHazardOptions = [
-    { id: "no", label: "No se requiere" },
-    { id: "yes", label: "Si se requiere" },
-  ]
-
   return (
     <Card className="self-start" size="sm">
       <CardHeader>
         <CardTitle>Parámetros CCP-14</CardTitle>
         <CardDescription>
-          Valores del proyecto declarados manualmente; no se asignan por ciudad.
+          Procedimiento General de 3.10.2.1: los tres coeficientes mapeados y el
+          perfil de sitio. Todo lo demás lo deriva el motor de la publicación
+          oficial.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <FieldGroup className="gap-5">
           <NumericInput
-            description="Aceleración pico efectiva obtenida de la base oficial del proyecto."
+            description="Figura 3.10.2.1-1 o valores especiales aprobados por la entidad contratante. Los mapas están en milésimos de g: divide entre 1000."
             id="ccp14-pga"
             label="PGA (g)"
             nullable
@@ -411,7 +388,7 @@ export function Ccp14ParameterRail({
             value={pgaG}
           />
           <NumericInput
-            description="Aceleración espectral para periodo corto declarada para el proyecto."
+            description="Figura 3.10.2.1-2, coeficiente espectral para 0,2 s en roca (perfil tipo B)."
             id="ccp14-ss"
             label="Ss (g)"
             nullable
@@ -419,7 +396,7 @@ export function Ccp14ParameterRail({
             value={ssG}
           />
           <NumericInput
-            description="Aceleración espectral para un segundo declarada para el proyecto."
+            description="Figura 3.10.2.1-3, coeficiente espectral para 1,0 s en roca (perfil tipo B)."
             id="ccp14-s1"
             label="S1 (g)"
             nullable
@@ -427,61 +404,36 @@ export function Ccp14ParameterRail({
             value={s1G}
           />
           <MunicipalSelect
-            description="Clase de sitio confirmada por la información geotécnica del proyecto."
+            description="Tabla 3.10.3.1-1, confirmado con la información geotécnica del proyecto. Fpga, Fa y Fv salen de las Tablas 3.10.3.2-1 a 3.10.3.2-3."
             id="ccp14-soil-trigger"
-            label="Clase de suelo"
+            label="Perfil de sitio"
             onValueChange={onSoilClassChange}
-            options={["A", "B", "C", "D", "E", "F"].map((id) => ({ id, label: `Suelo ${id}` }))}
+            options={["A", "B", "C", "D", "E", "F"].map((id) => ({
+              id,
+              label: `Perfil ${id}`,
+            }))}
             value={soilClass}
-          />
-          <MunicipalSelect
-            description="La publicación oficial contiene dos lecturas incompatibles; elige explícitamente cuál documentar."
-            id="ccp14-t0-trigger"
-            label="Interpretación de T₀"
-            onValueChange={onT0InterpretationChange}
-            options={[
-              { id: "figure-0.2-ts", label: "Figura: T₀ = 0,2·Ts" },
-              { id: "definition-0.2-seconds", label: "Definición: T₀ = 0,2 s" },
-            ]}
-            value={t0Interpretation}
-          />
-          <NumericInput
-            description="Distancia confirmada a la falla activa más cercana; menos de 10 km exige estudio específico."
-            id="ccp14-fault-distance"
-            label="Distancia a falla activa (km)"
-            nullable
-            onValueChange={onDistanceToActiveFaultChange}
-            value={distanceToActiveFaultKm}
-          />
-          <MunicipalSelect
-            description="Confirma si se esperan sismos de larga duración en el sitio."
-            id="ccp14-long-duration-trigger"
-            label="¿Sismos de larga duración?"
-            onValueChange={(value) => onLongDurationChange(value === "yes")}
-            options={durationOptions}
-            value={longDurationEarthquakesExpected === null ? null : longDurationEarthquakesExpected ? "yes" : "no"}
-          />
-          <MunicipalSelect
-            description="Confirma si la importancia del puente exige menor probabilidad de excedencia o mayor periodo de retorno."
-            id="ccp14-enhanced-hazard-trigger"
-            label="¿Amenaza reforzada por importancia?"
-            onValueChange={(value) => onEnhancedHazardChange(value === "yes")}
-            options={enhancedHazardOptions}
-            value={enhancedHazardRequiredByImportance === null ? null : enhancedHazardRequiredByImportance ? "yes" : "no"}
           />
           <Alert>
             <ShieldAlertIcon />
-            <AlertTitle>Entradas manuales y conflicto T₀</AlertTitle>
+            <AlertTitle>Antes de usar el Procedimiento General</AlertTitle>
             <AlertDescription>
-              Verifica PGA, Ss y S1 en los documentos oficiales del proyecto. La
-              selección de T₀ registra una interpretación; no resuelve la
-              contradicción de la publicación de INVÍAS.
+              3.10.2 obliga al Procedimiento Particular de Sitio si el puente
+              está a menos de 10 km de una falla activa, si el perfil es tipo F,
+              si se esperan sismos de larga duración en la región o si su
+              importancia exige una probabilidad de excedencia menor. La
+              calculadora no puede verificar esas cuatro condiciones por ti.
             </AlertDescription>
           </Alert>
         </FieldGroup>
       </CardContent>
       <CardFooter className="flex-col items-stretch gap-3">
         <Separator />
+        <p className="text-muted-foreground text-xs">
+          CCP-14 publica la amenaza solo como mapas de contornos: no existe una
+          tabla oficial de PGA, Ss y S1 por municipio, así que estos tres valores
+          se declaran manualmente.
+        </p>
         <a
           className="text-muted-foreground text-xs underline underline-offset-4"
           href="https://www.invias.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=29584"
@@ -489,6 +441,14 @@ export function Ccp14ParameterRail({
           target="_blank"
         >
           Descargar publicación oficial CCP-14 de INVÍAS
+        </a>
+        <a
+          className="text-muted-foreground text-xs underline underline-offset-4"
+          href="https://www.invias.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=29585"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Resolución 0000108 de 2015 que adopta la norma
         </a>
       </CardFooter>
     </Card>

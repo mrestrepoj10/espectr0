@@ -1,8 +1,12 @@
+import { spectrumEvidenceResolverRegistry } from "../spectra/evidence"
 import { spectrumStudyRelationRegistry } from "../spectra/types"
 
-const STUDY_ID = "ccp14"
-const STUDY_VERSION = "CCP-14/Resolution-108-2015-v1"
-const HAZARD_ID = "ccp14-2014-7pct-75y"
+import {
+  CCP14_HAZARD_ID as HAZARD_ID,
+  CCP14_STUDY_ID as STUDY_ID,
+  CCP14_STUDY_VERSION as STUDY_VERSION,
+} from "./constants"
+import { ccp14EvidenceResolver } from "./evidence-resolver"
 
 spectrumStudyRelationRegistry.register({
   studyId: STUDY_ID,
@@ -30,3 +34,5 @@ spectrumStudyRelationRegistry.register({
     }
   },
 })
+
+spectrumEvidenceResolverRegistry.register(ccp14EvidenceResolver)

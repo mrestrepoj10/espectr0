@@ -41,7 +41,7 @@ export const calculationModes = [
     id: "ccp14",
     label: "CCP-14 · Puentes",
     description:
-      "Cálculo con PGA, Ss y S1 manuales, clase de suelo y comprobaciones de aplicabilidad declaradas para el proyecto.",
+      "Procedimiento General de puentes con PGA, Ss y S1 leídos de los mapas oficiales y el perfil de sitio del proyecto.",
   },
   {
     id: "bogota-microzonation",

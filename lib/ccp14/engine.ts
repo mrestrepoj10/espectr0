@@ -8,16 +8,27 @@ export const ccp14T0InterpretationSchema = z.enum([
   "definition-0.2-seconds",
 ])
 
+/**
+ * The general procedure of 3.10.2.1 needs only the three mapped coefficients and
+ * the site class. The remaining fields describe the 3.10.2.2 routing conditions
+ * that the designer confirms outside the calculator, so they carry the
+ * general-procedure defaults and stay optional at the boundary.
+ */
 export const ccp14ComputationInputSchema = z
   .object({
     pgaG: z.number().finite().positive(),
     ssG: z.number().finite().positive(),
     s1G: z.number().finite().positive(),
     soilClass: ccp14SoilClassSchema,
-    t0Interpretation: ccp14T0InterpretationSchema,
-    distanceToActiveFaultKm: z.number().finite().nonnegative().nullable(),
-    longDurationEarthquakesExpected: z.boolean(),
-    enhancedHazardRequiredByImportance: z.boolean(),
+    t0Interpretation: ccp14T0InterpretationSchema.default("figure-0.2-ts"),
+    distanceToActiveFaultKm: z
+      .number()
+      .finite()
+      .nonnegative()
+      .nullable()
+      .default(null),
+    longDurationEarthquakesExpected: z.boolean().default(false),
+    enhancedHazardRequiredByImportance: z.boolean().default(false),
   })
   .strict()
 
@@ -170,23 +181,18 @@ function siteSpecificReason(input: Ccp14ComputationInput): Ccp14EngineFailure | 
     return {
       status: "site-specific-study-required",
       reasonCode: "ccp14-soil-class-f",
-      message: "CCP-14 requires a site-specific study and wave-amplification analysis for soil class F.",
+      message: "CCP-14 exige un estudio particular de sitio y un análisis de amplificación de onda para el perfil de sitio tipo F.",
       citationIds: ["claim-soils", "soil-f-and-factor-notes"],
     }
   }
-  if (input.distanceToActiveFaultKm === null) {
-    return {
-      status: "unsupported",
-      reasonCode: "ccp14-active-fault-distance-unknown",
-      message: "The distance to the nearest active fault must be confirmed before the CCP-14 general procedure can be declared applicable; sites less than 10 km away require the site-specific procedure.",
-      citationIds: ["claim-site-specific-triggers"],
-    }
-  }
-  if (input.distanceToActiveFaultKm < 10) {
+  if (
+    input.distanceToActiveFaultKm !== null &&
+    input.distanceToActiveFaultKm < 10
+  ) {
     return {
       status: "site-specific-study-required",
       reasonCode: "ccp14-active-fault-distance",
-      message: "CCP-14 requires the site-specific procedure when the site is less than 10 km from an active fault.",
+      message: "CCP-14 exige el Procedimiento Particular de Sitio cuando el sitio está a menos de 10 km de una falla activa.",
       citationIds: ["claim-site-specific-triggers"],
     }
   }
@@ -194,7 +200,7 @@ function siteSpecificReason(input: Ccp14ComputationInput): Ccp14EngineFailure | 
     return {
       status: "site-specific-study-required",
       reasonCode: "ccp14-long-duration-earthquakes",
-      message: "CCP-14 requires the site-specific procedure where long-duration earthquakes are expected.",
+      message: "CCP-14 exige el Procedimiento Particular de Sitio donde se esperan sismos de larga duración en la región.",
       citationIds: ["claim-site-specific-triggers"],
     }
   }
@@ -202,7 +208,7 @@ function siteSpecificReason(input: Ccp14ComputationInput): Ccp14EngineFailure | 
     return {
       status: "site-specific-study-required",
       reasonCode: "ccp14-enhanced-hazard-by-importance",
-      message: "CCP-14 routes a bridge requiring lower exceedance probability or a longer return period to the site-specific procedure.",
+      message: "CCP-14 remite al Procedimiento Particular de Sitio los puentes cuya importancia exige una probabilidad de excedencia menor o un periodo de retorno más largo.",
       citationIds: ["claim-site-specific-triggers"],
     }
   }
@@ -236,7 +242,7 @@ export function computeCcp14Spectrum(input: unknown): Ccp14EngineResult {
     return {
       status: "unsupported",
       reasonCode: "ccp14-t0-order-conflict",
-      message: "The selected published T0 = 0.2 s reading produces T0 > Ts for these inputs, so the published initial, plateau, and long-period branch intervals overlap and do not define one unambiguous spectrum.",
+      message: "La lectura publicada T0 = 0,2 s produce T0 > Ts con estos datos, así que los intervalos de las ramas inicial, de meseta y de periodo largo se solapan y no definen un espectro inequívoco.",
       citationIds: ["conflict-t0-figure", "conflict-t0-definition", "claim-spectrum-branches"],
     }
   }

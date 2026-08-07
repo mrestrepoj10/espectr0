@@ -18,6 +18,8 @@ export {
   computeCcp14Spectrum,
   lookupCcp14SiteFactor,
 } from "./engine"
+export { CCP14_STUDY_LABEL } from "./constants"
+export { ccp14EvidenceResolver } from "./evidence-resolver"
 export {
   lookupCcp14ConnectionR,
   lookupCcp14SubstructureR,
