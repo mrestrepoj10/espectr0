@@ -262,11 +262,12 @@ function pointInRect({ x, y }, rect) {
 }
 
 async function extractNormativeCitations(pdfBytes) {
-  const pdf = await getDocument({
+  const loadingTask = getDocument({
     data: new Uint8Array(pdfBytes),
     disableWorker: true,
     verbosity: 0,
-  }).promise;
+  });
+  const pdf = await loadingTask.promise;
   const citations = [];
 
   for (const definition of NORMATIVE_CITATION_DEFINITIONS) {
@@ -311,7 +312,7 @@ async function extractNormativeCitations(pdfBytes) {
     });
   }
 
-  await pdf.destroy();
+  await loadingTask.destroy();
   return citations;
 }
 
@@ -332,11 +333,12 @@ function coefficientAtBaseline(items, baseline, minimumX, maximumX, label) {
 }
 
 async function extractSourceRows(pdfBytes) {
-  const pdf = await getDocument({
+  const loadingTask = getDocument({
     data: new Uint8Array(pdfBytes),
     disableWorker: true,
     verbosity: 0,
-  }).promise;
+  });
+  const pdf = await loadingTask.promise;
   invariant(
     pdf.numPages === EXPECTED_PDF_PAGE_COUNT,
     `Expected ${EXPECTED_PDF_PAGE_COUNT} PDF pages, found ${pdf.numPages}`,
@@ -397,7 +399,7 @@ async function extractSourceRows(pdfBytes) {
     }
   }
 
-  await pdf.destroy();
+  await loadingTask.destroy();
   return { rows, pageCount };
 }
 
