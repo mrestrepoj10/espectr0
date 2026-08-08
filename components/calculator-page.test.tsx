@@ -994,6 +994,28 @@ describe("unified municipal mode selector", () => {
 		expect(container.textContent).not.toContain("Datos del espectro");
 	});
 
+	it("labels the modes with no computable source where the mode is chosen", async () => {
+		const trigger = document.querySelector<HTMLButtonElement>(
+			"#calculation-mode-trigger",
+		);
+		await act(async () => trigger?.click());
+		await waitForElement('[role="option"]', "Pereira");
+
+		const optionText = (label: string) =>
+			[...document.querySelectorAll<HTMLElement>('[role="option"]')]
+				.find((option) => option.textContent?.includes(label))
+				?.textContent ?? "";
+		expect(optionText("Pereira")).toContain("No soportado");
+		expect(optionText("Santa Rosa de Cabal")).toContain("No soportado");
+		// A mode that computes must not wear the label.
+		expect(optionText("Manizales")).not.toContain("No soportado");
+		expect(optionText("Dosquebradas")).not.toContain("No soportado");
+
+		await act(async () => trigger?.click());
+		await chooseMode("Pereira");
+		expect(container.textContent).toContain("No soportado");
+	});
+
 	it("activates the three Manizales zones and draws the whole published curve", async () => {
 		await chooseMode("Manizales");
 		expect(container.textContent).toContain("Selecciona la zona de Manizales");

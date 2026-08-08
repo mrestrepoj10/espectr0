@@ -796,6 +796,15 @@ function transitionMetrics(mode: CalculatorModeId, hazardId: string) {
 	];
 }
 
+/**
+ * A mode with no computable source still belongs in the list — hiding it would
+ * make the gap look like an oversight — but it has to say so where it is
+ * chosen, not only after it is chosen.
+ */
+const modeOptions = calculationModes.map((mode) =>
+	isSourceBlockedMode(mode.id) ? { ...mode, badge: "No soportado" } : mode,
+);
+
 export function CalculatorPage() {
 	const [calculationMode, setCalculationMode] =
 		useState<CalculatorModeId>("nsr10-national");
@@ -1260,7 +1269,7 @@ export function CalculatorPage() {
 
 			<CalculatorShell
 				inputPanel={inputPanel}
-				modes={calculationModes}
+				modes={modeOptions}
 				onValueChange={(nextMode) => {
 					setTraceabilityOpen(false);
 					setCalculationMode(nextMode as CalculatorModeId);
