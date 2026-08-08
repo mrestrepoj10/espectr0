@@ -39,6 +39,12 @@
       "disposition": "Shipped on the product owner's decision, scoped to the two pages that carry the model, and recorded in redistribution.json. Reverting means deleting the extract and setting localPath/localPageMap back to null."
     },
     {
+      "id": "municipal-adoption-not-demonstrated",
+      "severity": "medium",
+      "issue": "No municipal act adopting the 2002 microzonification, or extending it while a newer model is harmonized, was located. The study is complementary to a superseded code corpus.",
+      "disposition": "Every result warns, citing the study's own considerations (a) and (h), and the availability block declares the missing instrument as an unavailable claim. The product owner decides whether that is enough to offer the mode; blocking it again is one edit to the catalog."
+    },
+    {
       "id": "2014-harmonization-not-installed",
       "severity": "medium",
       "issue": "A 2014 NSR-10 harmonization and a 2015 raster update exist for Manizales; neither is installed here, and the UNGRD copies were unreachable at the last check.",

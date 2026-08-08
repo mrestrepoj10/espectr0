@@ -368,6 +368,13 @@ function successResult(input: ManizalesComputationInput): NormalizedSpectrumResu
     },
     {
       severity: "warning" as const,
+      code: "study-currency-not-demonstrated",
+      message:
+        "Este es el estudio técnico municipal de 2002. Su consideración de diseño (a) lo declara complementario a la Ley 400 de 1997 y a los Decretos 33 de 1998 y 34 de 1999 — el corpus NSR-98, hoy sustituido por la NSR-10 — y no se localizó un acto municipal que lo adopte o lo prorrogue. El profesional responsable debe verificar su vigencia antes de usar estos espectros.",
+      citationIds: ["consideration-a-complementary", "consideration-h-high-hazard"],
+    },
+    {
+      severity: "warning" as const,
       code: "special-analysis-at-or-above-2s",
       message: `La consideración de diseño (e) exige análisis sísmicos especiales para estructuras con período fundamental mayor o igual a ${manizalesPresentation.specialSeismicAnalysisRequiredAtOrAboveSeconds} s; esa parte de la curva queda fuera del alcance de las recomendaciones.`,
       citationIds: ["warning-special-analysis"],
@@ -456,6 +463,11 @@ function successResult(input: ManizalesComputationInput): NormalizedSpectrumResu
         {
           id: "municipal-return-period",
           reason: "El estudio no declara período de retorno ni probabilidad para los espectros de diseño.",
+        },
+        {
+          id: "municipal-adoption-instrument",
+          reason:
+            "No se localizó un acto municipal que adopte o prorrogue el estudio de 2002; su vigencia jurídica no está demostrada en el paquete instalado.",
         },
         {
           id: "topographic-amplification",

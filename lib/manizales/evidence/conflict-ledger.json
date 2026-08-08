@@ -14,6 +14,12 @@
       "resolution": "Multiply by I under consideration (a), expose it as its own cited trace step, and record the decision in the uncertainty ledger."
     },
     {
+      "id": "technical-vs-legal",
+      "status": "unresolved-warned",
+      "issue": "The 2002 study is a municipal technical study. Its own consideration (a) anchors it to Ley 400 de 1997, Decreto 33 de 1998 and Decreto 34 de 1999 — the NSR-98 corpus, superseded by NSR-10 — and no municipal act adopting or extending it was located, including by a title search over 2523 published decrees.",
+      "resolution": "Not resolved, and not silently dropped either. The mode computes because the coefficients are attested end to end, and every result carries a currency warning citing the study's own NSR-98 anchor. This mirrors Medellín, which ships as a computable mode while its own locked sources state the adoption decree has not been issued. Demonstrating adoption, or demonstrating its absence, remains open for independent review."
+    },
+    {
       "id": "later-models-exist",
       "status": "resolved-for-product",
       "issue": "The 2014 harmonization and the 2015 update propose a point-wise Fa/Fv surface instead of three zones.",

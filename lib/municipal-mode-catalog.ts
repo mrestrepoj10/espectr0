@@ -65,7 +65,7 @@ export const calculationModes = [
     id: "manizales-microzonation",
     label: "Manizales",
     description:
-      "Cálculo manual en las tres zonas de la Figura 8.5 del estudio Uniandes 2002, con las cuatro ramas impresas en la Figura 8.1.",
+      "Cálculo manual en las tres zonas de la Figura 8.5 del estudio técnico Uniandes 2002, complementario al corpus NSR-98; su vigencia no está demostrada.",
   },
   {
     id: "pereira-microzonation",

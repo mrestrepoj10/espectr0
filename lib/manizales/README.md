@@ -58,6 +58,26 @@ asserted by the oracle's `continuity` block rather than smoothed away.
   drawer serves the 1:30000 plate so the choice can be checked by eye, and the
   study's own rule applies: when in doubt, use Zone A.
 
+## Legal currency is warned, not asserted
+
+This is a municipal *technical* study. Its own consideration (a) anchors it to
+Ley 400 de 1997 and Decretos 33 de 1998 and 34 de 1999 — the NSR-98 corpus,
+superseded by NSR-10 — and no municipal act adopting or extending it was
+located, including by a title search over 2523 published decrees.
+
+The mode still computes, on the same footing as Medellín, whose own locked
+sources state its adoption decree has not been issued and which ships today.
+What that costs is visibility, so the missing instrument is stated in four
+places: a `study-currency-not-demonstrated` warning on every result, an
+unavailable claim in the availability block, an alert in the rail, and the mode
+description in the picker. The `technical-vs-legal` conflict entry stays open at
+`unresolved-warned`, and a study invariant fails if it is deleted rather than
+resolved.
+
+If the product owner would rather not offer an unadopted study at all, that is
+one edit to `sourceBlockedModes` — the dossier already carries everything the
+blocked form needs.
+
 ## Later models
 
 A 2014 NSR-10 harmonization and a 2015 update replace the three zones with a

@@ -779,6 +779,15 @@ export function ManizalesParameterRail({
             value={importanceGroup}
           />
           <ManualZoneWarning />
+          <Alert>
+            <ShieldAlertIcon />
+            <AlertTitle>Vigencia no demostrada</AlertTitle>
+            <AlertDescription>
+              El estudio de 2002 es complementario al corpus NSR-98 y no se
+              localizó un acto municipal que lo adopte o lo prorrogue. Verifica
+              su vigencia antes de usar estos espectros.
+            </AlertDescription>
+          </Alert>
           {zoneId === "zone-c" ? (
             <Alert>
               <ShieldAlertIcon />

@@ -43,6 +43,7 @@ describe("Manizales normalized adapter", () => {
       expect(result.warnings.map(({ code }) => code)).toEqual(
         expect.arrayContaining([
           "professional-zone-validation-required",
+          "study-currency-not-demonstrated",
           "special-analysis-at-or-above-2s",
           "topographic-amplification-not-applied",
           "importance-factor-applied",
@@ -71,6 +72,22 @@ describe("Manizales normalized adapter", () => {
         expect(ordinate.point.saG).toBeCloseTo(Number(oracleCase.saG), 12)
       }
     }
+  })
+
+  it("declares the missing adoption instrument instead of implying currency", () => {
+    const result = design("zone-a")
+    if (result.status !== "ok") throw new Error("unreachable")
+    expect(result.evidenceAvailability.status).toBe("partial")
+    const claims =
+      result.evidenceAvailability.status === "partial"
+        ? result.evidenceAvailability.unavailableClaims.map(({ id }) => id)
+        : []
+    expect(claims).toContain("municipal-adoption-instrument")
+    const warning = result.warnings.find(
+      ({ code }) => code === "study-currency-not-demonstrated",
+    )
+    expect(warning?.severity).toBe("warning")
+    expect(warning?.citationIds).toContain("consideration-a-complementary")
   })
 
   it("declares all four printed branches and cites each of them", () => {

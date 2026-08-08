@@ -15,8 +15,8 @@
       "percent": 100
     },
     "warnings": {
-      "expected": 2,
-      "cited": 2,
+      "expected": 3,
+      "cited": 3,
       "percent": 100
     }
   },
@@ -95,6 +95,11 @@
       "id": "topographic-amplification",
       "statement": "Sites near slope crests must additionally apply the topographic amplification factors, which this engine does not compute.",
       "citationId": "consideration-c-topographic"
+    },
+    {
+      "id": "currency-not-demonstrated",
+      "statement": "The study complements the NSR-98 corpus and no municipal adoption or extension act was located, so its currency is warned rather than asserted.",
+      "citationId": "consideration-a-complementary"
     },
     {
       "id": "high-hazard",
