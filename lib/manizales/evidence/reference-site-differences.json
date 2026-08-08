@@ -1,18 +1,11 @@
 {
   "schemaVersion": 1,
-  "referenceWebsiteRole": "comparison-only-not-regulatory-source",
-  "inspectedForRegulatoryValues": false,
-  "differences": [
-    {
-      "id": "reference-five-vs-primary-three",
-      "status": "unreconciled-do-not-reproduce",
-      "finding": "El comparador expone cinco opciones para Manizales; el informe oficial 2002 define tres zonas de diseno A/B/C y la armonizacion 2014 usa 1275 sitios, no cinco zonas. No existe una correspondencia primaria 5-a-3 o 5-a-1275."
-    },
-    {
-      "id": "coefficients-or-formulas",
-      "status": "not-accepted",
-      "finding": "No se acepta ningun coeficiente, formula, limite, redondeo, valor por defecto o advertencia desde la web de referencia."
-    }
+  "comparison": "Manizales versus EspectroCol (UX/behaviour only)",
+  "materialDifferences": [
+    "The reference site offers five Manizales zones (Roca y Ladera Roca, Suelo Residual, Depósitos de Ladera, Planicie Aluvial, Rellenos Antrópicos); the official 2002 study defines three (A cenizas, B rellenos, C rocas).",
+    "None of the reference site's five zone parameter sets matches Figura 8.5: its Am values run 0.20–0.25 against the study's 0.30–0.44.",
+    "The reference site serves this same parameter sheet as its Manizales map, so its own displayed source does not carry the coefficients its calculator returns.",
+    "This engine exposes the three official zones only, and draws every ordinate from Figura 8.5."
   ],
-  "nonInference": "No se transfieren valores ni comportamientos de la web de referencia a la evidencia canonica."
+  "nonInference": "No coefficient, zone, formula or legal effect is imported from EspectroCol. It is used only to compare discoverability and behaviour, and the divergence above is recorded because a reader may reasonably expect the two to agree."
 }

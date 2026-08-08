@@ -1,44 +1,42 @@
 {
   "schemaVersion": 1,
-  "decision": "external-only-all-locked-sources",
+  "decision": "external-only-all-sources",
   "committedSourceBytes": false,
+  "rationale": "No express redistribution authorization was found for the official PDFs.",
+  "prohibitedArtifacts": [
+    "complete source PDFs",
+    "other rendered pages",
+    "map/GIS layers"
+  ],
   "sources": [
     {
       "sourceDocumentId": "manizales-uniandes-2002",
-      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/19861/MicrozonificacionSismicaManizales%28UAndes_2002%29.pdf?isAllowed=y&sequence=1",
+      "officialUrl": "https://idea.manizales.unal.edu.co/sitios/gestion_riesgos/descargas/microzon/informe_final.pdf",
       "decision": "external-only",
-      "rationale": "La copia oficial de UNGRD permite consulta, pero no se incorporan sus bytes al repositorio."
+      "rationale": "La copia oficial permite consulta abierta, pero no concede una licencia de redistribución; se conservan URL, huella y atestación, no los bytes completos."
     },
     {
-      "sourceDocumentId": "manizales-harmonization-2014",
-      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/36862/CMASRSL001.ArmonizacionNormasNSR10.pdf?isAllowed=y&sequence=1",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "officialUrl": "https://idea.manizales.unal.edu.co/sitios/gestion_riesgos/descargas/microzon/informe_final_figuras.pdf",
       "decision": "external-only",
-      "rationale": "La copia oficial de UNGRD permite consulta, pero no se incorporan sus bytes al repositorio."
+      "rationale": "La copia oficial permite consulta abierta, pero no concede una licencia de redistribución; se conservan URL, huella y atestación, no los bytes completos."
     },
     {
-      "sourceDocumentId": "manizales-harmonization-presentation-2014",
-      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/36863/CMASRSL003.Presentacion.Micro.pdf?isAllowed=y&sequence=1",
+      "sourceDocumentId": "nsr10-title-a-2017",
+      "officialUrl": "https://iisee.kenken.go.jp/worldlist/11_Colombia/Colombia%20Titulo%20A-NSR-10-Ver-2017.pdf",
       "decision": "external-only",
-      "rationale": "La copia oficial de UNGRD permite consulta, pero no se incorporan sus bytes al repositorio."
-    },
-    {
-      "sourceDocumentId": "manizales-update-2015",
-      "officialUrl": "https://upcommons.upc.edu/bitstreams/3355be9f-7fb3-475e-bf7a-46462cff7add/download",
-      "decision": "external-only",
-      "rationale": "El repositorio institucional permite consulta abierta, pero la ficha no concede una licencia de redistribucion suficiente para incorporar los bytes."
-    },
-    {
-      "sourceDocumentId": "manizales-management-report-2016-2019",
-      "officialUrl": "https://manizales.gov.co/wp-content/uploads/Informe-Manizales-M%C3%A1s-Oportunidades-2016-2019.pdf",
-      "decision": "external-only",
-      "rationale": "Documento oficial sin licencia expresa de redistribucion; se conservan huella, localizador y atestacion, no los bytes."
-    },
-    {
-      "sourceDocumentId": "manizales-pot-status-2025",
-      "officialUrl": "https://manizales.gov.co/wp-content/uploads/piotnetforms/files/S-CO-SP-UDOT-2025-18777-E-CO-2025-13941-ANONIMO-1-68470f0813cfc.pdf",
-      "decision": "external-only",
-      "rationale": "Comunicacion oficial sin licencia expresa de redistribucion; se conserva solo evidencia reproducible de procedencia."
+      "rationale": "La copia oficial permite consulta abierta, pero no concede una licencia de redistribución; se conservan URL, huella y atestación, no los bytes completos."
     }
   ],
-  "note": "Las capturas, recortes y PDFs usados para inspeccion fueron temporales y no forman parte del paquete versionado."
+  "tableExtractException": {
+    "sourceDocumentId": "manizales-uniandes-2002-figuras",
+    "committedArtifacts": [
+      "public/manizales/uniandes-2002-figuras-8.1-8.5.pdf"
+    ],
+    "scope": "Páginas físicas 197 y 201 del volumen de figuras — la lámina de la Figura 8.1 con el mapa de zonificación, las cuatro ecuaciones y las consideraciones de diseño, y la Figura 8.5 con los siete parámetros de las tres zonas.",
+    "extractedFrom": "El PDF oficial de la UNAL/IDEA, re-descargado y verificado byte a byte contra el lock (38939870 bytes, SHA-256 fbcfa673…) antes de extraer.",
+    "permissionStatus": "not-established",
+    "ownerDecision": "Publicar las dos páginas: sin el mapa el ingeniero no puede ver en qué zona cae el predio, y sin la Figura 8.5 no puede ver el valor que la cita afirma.",
+    "reviewerAction": "Si el volumen de figuras no puede reproducirse, borrar el extracto y devolver localPath/localPageMap a null."
+  }
 }

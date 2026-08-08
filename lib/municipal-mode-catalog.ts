@@ -18,6 +18,7 @@ export type SourceBlockedModeId = Exclude<
   | "medellin-microzonation"
   | "cali-microzonation"
   | "dosquebradas-microzonation"
+  | "manizales-microzonation"
 >
 
 export type SourceBlockedMode = {
@@ -65,7 +66,7 @@ export const calculationModes = [
     id: "manizales-microzonation",
     label: "Manizales",
     description:
-      "Microzonificación armonizada basada en 1.275 sitios; no admite un selector manual sin la matriz oficial completa.",
+      "Cálculo manual en las tres zonas de la Figura 8.5 del estudio Uniandes 2002, con las cuatro ramas impresas en la Figura 8.1.",
   },
   {
     id: "armenia-microzonation",
@@ -98,19 +99,6 @@ export const calculationModes = [
 }[]
 
 export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> = {
-  "manizales-microzonation": {
-    id: "manizales-microzonation",
-    label: "Manizales",
-    description:
-      "La actualización técnica reemplaza las antiguas zonas A/B/C por una salida espacial de 1.275 nodos.",
-    sourceTitle: "Universidad de los Andes y AIS · actualización de la microzonificación sísmica de Manizales",
-    sourceUrl: "https://upcommons.upc.edu/bitstreams/3355be9f-7fb3-475e-bf7a-46462cff7add/download",
-    status: "Modelo identificado · cálculo manual no reproducible",
-    blockers: [
-      "No están publicadas como tabla reproducible las 1.275 parejas Fa/Fv ni la ecuación operacional completa.",
-      "El producto no usa mapas, coordenadas ni GIS; no se inventarán zonas manuales equivalentes.",
-    ],
-  },
   "armenia-microzonation": {
     id: "armenia-microzonation",
     label: "Armenia",
@@ -122,6 +110,7 @@ export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> 
     blockers: [
       "La publicación oficial condiciona su uso a la aprobación de la CAP y a un decreto municipal posterior.",
       "No se encontró el anexo técnico oficial completo del Decreto 079 de 2000 para reconstruir el modelo histórico.",
+      "El único plano de Armenia que publica el sitio de referencia es el mapa de isoperiodos 1:5000: son períodos fundamentales del suelo por polígono, no zonas de diseño, y no trae Am, An, Fa, Fv ni ecuaciones.",
     ],
   },
   "pereira-microzonation": {

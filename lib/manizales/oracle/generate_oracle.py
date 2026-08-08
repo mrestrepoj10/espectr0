@@ -1,97 +1,98 @@
-#!/usr/bin/env python3
-"""Generate the independent, intentionally non-operational Manizales oracle."""
+"""Independent Manizales oracle.
 
-from __future__ import annotations
+Reimplements the four branches printed on Figura 8.1 from the transcribed
+Figura 8.5 cells, in exact decimal arithmetic, so the TypeScript engine is
+checked against something that shares no code with it.
+"""
 
 import argparse
 import hashlib
 import json
-from decimal import Decimal, getcontext
+from decimal import Decimal
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
-ROOT = HERE.parent
-getcontext().prec = 50
+ROOT = Path(__file__).resolve().parent.parent
+INPUT = ROOT / "oracle" / "oracle-input.json"
+OUTPUT = ROOT / "oracle" / "oracle.json"
 
 
-def load(path: Path):
-    with path.open("r", encoding="utf-8") as handle:
-        return json.load(handle)
+def stable(value):
+    return json.dumps(value, ensure_ascii=False, indent=2) + "\n"
 
 
-def encode(value) -> bytes:
-    return (json.dumps(value, ensure_ascii=False, indent=2, separators=(",", ": ")) + "\n").encode("utf-8")
+def decimal_text(value):
+    return format(value.normalize(), "f")
 
 
-def digest(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+data = json.loads(INPUT.read_text(encoding="utf-8"))
+importance = Decimal(data["importanceFactor"])
+epsilon = Decimal(data["boundaryEpsilon"])
+records = []
 
+for row in data["rows"]:
+    option, *tokens = row
+    v = dict(zip(data["fieldOrder"], map(Decimal, tokens)))
 
-def build(source: dict) -> dict:
-    fields = source["candidate"]["fields"]
-    aa = Decimal(fields["aa"])
-    av = Decimal(fields["av"])
-    importance = Decimal(fields["importance-factor-fit"])
-    return {
-        "schemaVersion": 1,
-        "studyId": source["studyId"],
-        "status": "partial-oracle-activation-blocked",
-        "precision": "Python Decimal, 50 significant digits",
-        "recordCount": 1,
-        "records": [{
-            "optionId": source["candidate"]["optionId"],
-            "hazardId": source["candidate"]["hazardId"],
-            "status": "direct-parameter-witness-only-no-spectrum",
-            "nodeCount": int(fields["node-count"]),
-            "returnPeriodYears": int(fields["return-period"]),
-            "spatialModel": source["candidateMetadata"]["spatialModel"],
-            "soilParameters": source["candidateMetadata"]["soilParameters"],
-            "fixedFitParameters": {"aaG": str(aa), "avG": str(av), "importanceFactor": str(importance)},
-            "arithmeticWitnessNotSpectrum": {"aaTimesFitImportance": str(aa * importance), "avTimesFitImportance": str(av * importance)},
-            "spectralSamples": [],
-            "missingInputs": source["requiredForSpectrum"],
-        }],
-        "negativeCases": [
-            {"case": "activation", "expected": "reject-missing-node-values-location-rule"},
-            {"case": "manual-zone-selector", "expected": "reject-updated-model-is-raster-not-zones"},
-            {"case": "zone-a-b-or-c-as-current", "expected": "reject-historical-model-substitution"},
-            {"case": "historical-2002-period-at-or-above-2s", "expected": "reject-special-seismic-analysis-outside-2002-recommendations"},
-            {"case": "spectrum-at-any-period", "expected": "reject-missing-node-fa-fv-and-location-rule"},
-            {"case": "unknown-node-or-location", "expected": "reject"},
-        ],
-    }
+    def ordinate(period, v=v):
+        if period <= v["to"]:
+            branch = "manizales-entrance"
+            sa = v["am"] * importance + (v["am"] * importance / v["to"]) * (
+                Decimal("2.5") * v["fa"] - Decimal(1)
+            ) * period
+        elif period <= v["tc"]:
+            branch = "manizales-plateau"
+            sa = Decimal("2.5") * v["am"] * v["fa"] * importance
+        elif period <= v["tl"]:
+            branch = "manizales-inverse"
+            sa = v["an"] * v["fv"] * importance / period
+        else:
+            branch = "manizales-floor"
+            sa = v["am"] * importance / Decimal(2)
+        return {
+            "period": decimal_text(period),
+            "status": "ok",
+            "branch": branch,
+            "saG": decimal_text(sa),
+        }
 
+    periods = [
+        v["to"] - epsilon, v["to"], v["to"] + epsilon,
+        v["tc"] - epsilon, v["tc"], v["tc"] + epsilon,
+        v["tl"] - epsilon, v["tl"], v["tl"] + epsilon,
+    ] + [Decimal(token) for token in data["extraPeriods"]]
+    records.append({
+        "optionId": option,
+        "hazardId": "design",
+        "fields": {field: float(Decimal(token)) for field, token in zip(data["fieldOrder"], tokens)},
+        "tokens": dict(zip(data["fieldOrder"], tokens)),
+        "continuity": {
+            "plateauFromEntranceAtTo": decimal_text(
+                v["am"] * importance
+                + (v["am"] * importance / v["to"]) * (Decimal("2.5") * v["fa"] - Decimal(1)) * v["to"]
+            ),
+            "plateau": decimal_text(Decimal("2.5") * v["am"] * v["fa"] * importance),
+            "inverseAtTc": decimal_text(v["an"] * v["fv"] * importance / v["tc"]),
+            "inverseAtTl": decimal_text(v["an"] * v["fv"] * importance / v["tl"]),
+            "floor": decimal_text(v["am"] * importance / Decimal(2)),
+        },
+        "boundaryCases": [ordinate(period) for period in sorted(set(periods))],
+    })
 
-def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true")
-    args = parser.parse_args()
-    input_path = HERE / "oracle-input.json"
-    output_path = HERE / "oracle.json"
-    locks_path = HERE / "locks.json"
-    canonical_path = ROOT / "data" / "canonical.json"
-    result = build(load(input_path))
-    output_bytes = encode(result)
-    if args.check:
-        if output_path.read_bytes() != output_bytes:
-            raise SystemExit("Manizales oracle differs from deterministic recomputation")
-    else:
-        output_path.write_bytes(output_bytes)
-    locks = {
-        "schemaVersion": 1,
-        "program": digest(Path(__file__)),
-        "input": digest(input_path),
-        "canonical": digest(canonical_path),
-        "output": hashlib.sha256(output_bytes).hexdigest(),
-    }
-    lock_bytes = encode(locks)
-    if args.check:
-        if locks_path.read_bytes() != lock_bytes:
-            raise SystemExit("Manizales oracle locks differ from committed bytes")
-    else:
-        locks_path.write_bytes(lock_bytes)
-    print(f"{'checked' if args.check else 'generated'} Manizales oracle records={result['recordCount']}")
-
-
-if __name__ == "__main__":
-    main()
+result = {
+    "schemaVersion": 2,
+    "status": "normalized-spectrum-supported-full-curve",
+    "importanceFactor": decimal_text(importance),
+    "records": records,
+    "unsupportedIntervals": [],
+    "inputSha256": hashlib.sha256(INPUT.read_bytes()).hexdigest(),
+}
+expected = stable(result)
+parser = argparse.ArgumentParser()
+parser.add_argument("--check", action="store_true")
+args = parser.parse_args()
+if args.check:
+    if not OUTPUT.exists() or OUTPUT.read_text(encoding="utf-8") != expected:
+        raise SystemExit("Manizales oracle differs")
+else:
+    OUTPUT.write_text(expected, encoding="utf-8", newline="\n")
+print("checked" if args.check else "generated", "Manizales oracle")

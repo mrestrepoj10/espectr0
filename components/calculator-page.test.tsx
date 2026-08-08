@@ -994,6 +994,32 @@ describe("unified municipal mode selector", () => {
 		expect(container.textContent).not.toContain("Datos del espectro");
 	});
 
+	it("activates the three Manizales zones and draws the whole published curve", async () => {
+		await chooseMode("Manizales");
+		expect(container.textContent).toContain("Selecciona la zona de Manizales");
+		expect(container.textContent).not.toContain(String.fromCodePoint(0xfffd));
+		expect(container.textContent).not.toContain("Datos del espectro");
+
+		await chooseSelectOption("manizales-zone-trigger", "Zona A");
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("Datos del espectro"),
+		);
+		// Every branch is printed on the plate, so nothing is reported as an
+		// unsupported interval the way the partially attested studies are.
+		expect(container.textContent).not.toContain("no soportada");
+		expect(container.textContent).toContain("análisis sísmicos especiales");
+		expect(
+			container.querySelector("[data-slot='manizales-evidence-trigger']"),
+		).not.toBeNull();
+
+		// Consideration (f) only binds when Zone C is the one selected.
+		expect(container.textContent).not.toContain("La Zona C exige justificación");
+		await chooseSelectOption("manizales-zone-trigger", "Zona C");
+		await vi.waitFor(() =>
+			expect(container.textContent).toContain("La Zona C exige justificación"),
+		);
+	});
+
 	it("activates one Dosquebradas scenario and localizes unsupported periods", async () => {
 		await chooseMode("Dosquebradas");
 		expect(container.textContent).toContain("Selecciona la zona de Dosquebradas");

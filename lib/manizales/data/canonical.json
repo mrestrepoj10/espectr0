@@ -1,83 +1,119 @@
 {
   "schemaVersion": 1,
   "studyId": "manizales-microzonation",
-  "status": "research-only-activation-blocked",
-  "activationAllowed": false,
-  "mergeIntoEngineAllowed": false,
-  "blockers": [
-    "El modelo actualizado es rasterizado por puntos y no ofrece zonas para un selector manual sin GIS.",
-    "La fuente tecnica bloqueada no publica los 1275 pares Fa/Fv ni una tabla discreta que permita reproducirlos.",
-    "La copia oficial 2002 omite la Figura 8.5 que contenia las ecuaciones y graficas de las tres zonas historicas A/B/C."
+  "status": "calculation-supported-full-curve",
+  "municipality": "Manizales",
+  "technicalSource": "manizales-uniandes-2002-figuras",
+  "calculationAnchor": "manizales-uniandes-2002-figuras",
+  "selectionMode": "manual-zone-only",
+  "dampingRatio": 0.05,
+  "hazards": [
+    {
+      "id": "design",
+      "label": "Diseño",
+      "returnPeriodYears": null,
+      "probability": null,
+      "dampingRatio": 0.05
+    }
   ],
-  "historicalModel": {
-    "year": 2002,
-    "status": "historical-not-activated",
-    "designZones": [
-      {
-        "id": "zone-a",
-        "label": "Zona A",
-        "description": "Depositos de caida piroclastica (ceniza), de espesor variable"
-      },
-      {
-        "id": "zone-b",
-        "label": "Zona B",
-        "description": "Depositos de relleno"
-      },
-      {
-        "id": "zone-c",
-        "label": "Zona C",
-        "description": "Formaciones rocosas o suelos de poco espesor"
-      }
-    ],
-    "evidenceBasis": "Copia oficial UNGRD del informe 2002, seccion 8.2 y 8.3. El PDF recuperado omite la Figura 8.5 que el texto dice contiene las ecuaciones y graficas.",
-    "periodApplicability": {
-      "scope": "historical-2002-only",
-      "spectraPresentedThroughSeconds": 3,
-      "specialSeismicAnalysisRequiredAtOrAboveSeconds": 2,
-      "statement": "El informe 2002 presenta espectros solo hasta 3.0 s y exige analisis sismicos especiales para periodo fundamental mayor o igual a 2.0 s.",
-      "citationIds": [
-        "source-2002-period-presentation-limit",
-        "source-2002-special-analysis-at-2s"
-      ],
-      "notAppliedTo": "updated-raster-grid"
+  "fields": {
+    "to": {
+      "unit": "s"
+    },
+    "tc": {
+      "unit": "s"
+    },
+    "tl": {
+      "unit": "s"
+    },
+    "am": {
+      "unit": "g"
+    },
+    "an": {
+      "unit": "g"
+    },
+    "fa": {
+      "unit": null
+    },
+    "fv": {
+      "unit": null
     }
   },
-  "governingTechnicalCandidate": {
-    "id": "updated-raster-grid",
-    "model": "1275-node-raster-grid",
-    "manualSelectorCompatible": false,
-    "locationResolution": "requires-spatial-model-not-in-product-scope",
-    "hazard": {
-      "id": "uniform-hazard-475y",
-      "averageReturnPeriodYears": 475,
-      "dampingRatio": 0.05
+  "zones": [
+    {
+      "id": "zone-a",
+      "label": "Zona A",
+      "material": "Cenizas — depósitos de caída piroclástica de espesor variable"
     },
-    "fixedFitParameters": {
-      "aaG": 0.25,
-      "avG": 0.25,
-      "importanceFactor": 1
+    {
+      "id": "zone-b",
+      "label": "Zona B",
+      "material": "Rellenos"
     },
-    "spatialOutputs": [
-      "Fa",
-      "Fv"
-    ],
-    "formulaStatus": "nsr10-shape-published-node-specific-fa-fv-values-missing"
-  },
+    {
+      "id": "zone-c",
+      "label": "Zona C",
+      "material": "Rocas, flujos y depósitos de poco espesor"
+    }
+  ],
   "rows": [
     {
-      "optionId": "updated-raster-grid",
-      "hazardId": "uniform-hazard-475y",
+      "optionId": "zone-a",
+      "hazardId": "design",
       "fields": {
-        "node-count": 1275,
-        "return-period": 475,
-        "aa": 0.25,
-        "av": 0.25,
-        "importance-factor-fit": 1
+        "to": 0.1,
+        "tc": 0.65,
+        "tl": 3.25,
+        "am": 0.44,
+        "an": 0.44,
+        "fa": 1,
+        "fv": 1.63
+      }
+    },
+    {
+      "optionId": "zone-b",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.1,
+        "tc": 0.5,
+        "tl": 2.5,
+        "am": 0.4,
+        "an": 0.4,
+        "fa": 1,
+        "fv": 1.25
+      }
+    },
+    {
+      "optionId": "zone-c",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.1,
+        "tc": 0.5,
+        "tl": 2.5,
+        "am": 0.3,
+        "an": 0.3,
+        "fa": 1,
+        "fv": 1.25
       }
     }
   ],
-  "buildingCompatibility": {
-    "technicalStatement": "La publicacion afirma compatibilidad tecnica con la NSR-10 para edificaciones nuevas una vez definido el espectro del sitio.",
-    "legalQualification": "La compatibilidad tecnica no equivale a adopcion municipal ni demuestra vigencia."
+  "presentation": {
+    "spectraPresentedThroughSeconds": 3,
+    "specialSeismicAnalysisRequiredAtOrAboveSeconds": 2,
+    "sampledThroughSeconds": 4
+  },
+  "localizedLimitations": [
+    "The 2002 sheet states no return period or exceedance probability for the design spectra.",
+    "Design consideration (e) requires special seismic analyses at or above a 2.0 s fundamental period.",
+    "Design consideration (f) requires the geotechnical engineer to justify Zone C explicitly.",
+    "Topographic amplification Ftop is printed on the plate but is not applied by this engine.",
+    "The zone is chosen manually; automatic GIS selection is not implemented."
+  ],
+  "capabilities": {
+    "traceabilityViewer": true,
+    "municipalSpectrumCalculation": true,
+    "supportedInterval": "0 <= T",
+    "automaticZoneSelection": false,
+    "topographicAmplification": false
   }
 }

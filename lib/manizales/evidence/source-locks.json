@@ -1,105 +1,44 @@
 {
   "schemaVersion": 1,
-  "retrievedOn": "2026-07-29",
+  "retrievedOn": "2026-08-08",
+  "policy": "External-only; re-fetch the exact URLs and verify byte length, page count and SHA-256 before trusting any transcription.",
   "locks": [
     {
       "sourceDocumentId": "manizales-uniandes-2002",
-      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/19861/MicrozonificacionSismicaManizales%28UAndes_2002%29.pdf?isAllowed=y&sequence=1",
-      "sha256": "2e8c2c752f657899bf0240292f9e390f70c41fc87af8355b65f3a12fdfb3a799",
-      "pageCount": 160,
+      "officialUrl": "https://idea.manizales.unal.edu.co/sitios/gestion_riesgos/descargas/microzon/informe_final.pdf",
+      "retrievedOn": "2026-08-08",
       "byteLength": 868103,
+      "pageCount": 160,
+      "sha256": "2e8c2c752f657899bf0240292f9e390f70c41fc87af8355b65f3a12fdfb3a799",
+      "mediaType": "application/pdf",
       "redistributionDecision": "external-only"
     },
     {
-      "sourceDocumentId": "manizales-harmonization-2014",
-      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/36862/CMASRSL001.ArmonizacionNormasNSR10.pdf?isAllowed=y&sequence=1",
-      "sha256": "35a1a22ed5a6e17f72ca4718d22e8c3a1f9ab0211afd9b175da3ce680e79aadc",
-      "pageCount": 89,
-      "byteLength": 6998062,
-      "redistributionDecision": "external-only"
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "officialUrl": "https://idea.manizales.unal.edu.co/sitios/gestion_riesgos/descargas/microzon/informe_final_figuras.pdf",
+      "retrievedOn": "2026-08-08",
+      "byteLength": 38939870,
+      "pageCount": 201,
+      "sha256": "fbcfa673a0657f9efa673dec74ebaffd80697ff659a25b89a92f6ad342708a69",
+      "mediaType": "application/pdf",
+      "redistributionDecision": "external-only-except-figures-8.1-and-8.5"
     },
     {
-      "sourceDocumentId": "manizales-harmonization-presentation-2014",
-      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/36863/CMASRSL003.Presentacion.Micro.pdf?isAllowed=y&sequence=1",
-      "sha256": "8734ec360b735d002e38535718a305038de5856d9ad4bad334beccf010758f91",
-      "pageCount": 54,
-      "byteLength": 8340619,
-      "redistributionDecision": "external-only"
-    },
-    {
-      "sourceDocumentId": "manizales-update-2015",
-      "officialUrl": "https://upcommons.upc.edu/bitstreams/3355be9f-7fb3-475e-bf7a-46462cff7add/download",
-      "sha256": "55a8458cc211c83b3e13cf5feb7670dbd120535542c779512f1d2a86bd6628e3",
-      "pageCount": 10,
-      "byteLength": 1229511,
-      "redistributionDecision": "external-only"
-    },
-    {
-      "sourceDocumentId": "manizales-management-report-2016-2019",
-      "officialUrl": "https://manizales.gov.co/wp-content/uploads/Informe-Manizales-M%C3%A1s-Oportunidades-2016-2019.pdf",
-      "sha256": "6345925e0afb5ba03d0f713a2a87e0c8ec6fa7da8128849f6095e26cefd6a373",
-      "pageCount": 151,
-      "byteLength": 3871932,
-      "redistributionDecision": "external-only"
-    },
-    {
-      "sourceDocumentId": "manizales-pot-status-2025",
-      "officialUrl": "https://manizales.gov.co/wp-content/uploads/piotnetforms/files/S-CO-SP-UDOT-2025-18777-E-CO-2025-13941-ANONIMO-1-68470f0813cfc.pdf",
-      "sha256": "13790747a041c6f7d80ae9229336174f3b18f6bcfc6cdde18b406b6ac643a2d8",
-      "pageCount": 2,
-      "byteLength": 563357,
+      "sourceDocumentId": "nsr10-title-a-2017",
+      "officialUrl": "https://iisee.kenken.go.jp/worldlist/11_Colombia/Colombia%20Titulo%20A-NSR-10-Ver-2017.pdf",
+      "retrievedOn": "2026-08-08",
+      "byteLength": 3486413,
+      "pageCount": 206,
+      "sha256": "47207abe1e832f5feb5fb8448af884b8d539fddaf89b6b21ab466765dd8524b0",
+      "mediaType": "application/pdf",
       "redistributionDecision": "external-only"
     }
   ],
-  "indexSearches": [
+  "mirrors": [
     {
-      "id": "manizales-public-decree-title-index-2026-07-28",
-      "officialLandingUrl": "https://manizales.gov.co/transparencia-y-acceso-informacion-publica/normatividad/decretos/",
-      "publicShareUrl": "https://alcaldiamanizales-my.sharepoint.com/:f:/g/personal/sjpublicaciones_manizales_gov_co/EouBlNQTwMJFshvyWZ3-lwABwKhi6lVzDo0tgaKC7NnS-A?e=Mf9ZYl",
-      "observedOn": "2026-07-28T20:05:39Z",
-      "accessMethod": "anonymous public SharePoint session plus REST folder enumeration",
-      "anonymousAccess": true,
-      "scope": "All files exposed under the public DECRETOS folder at observation time; non-empty year folders 2004 and 2013-2025.",
-      "totalFiles": 2523,
-      "folderFileCounts": {
-        "DECRETOS 2004": 6,
-        "DECRETOS 2021": 386,
-        "DECRETOS 2022": 435,
-        "DECRETOS 2023": 340,
-        "DECRETOS 2024": 68,
-        "DECRETOS 2025": 1,
-        "Decretos 2013": 74,
-        "Decretos 2014": 212,
-        "Decretos 2015": 156,
-        "Decretos 2016": 176,
-        "Decretos 2017": 165,
-        "Decretos 2018": 172,
-        "Decretos 2019": 105,
-        "Decretos 2020": 227
-      },
-      "targetTitleQuery": "accent-insensitive filename regex: microzon|sism",
-      "targetTitleMatches": [],
-      "contextTitleQuery": "accent-insensitive filename regex: armoniz|geotecn",
-      "contextTitleMatches": [
-        "PDEC_0482_28092016 AJUSTE AREA TRATAMIENTO GEOTECNICO.pdf",
-        "PDEC_0601_05122016 AJUSTE AREA TTO GEOTECNICO 404 Y PIP5-3.pdf",
-        "DEC_ 0474 14072020 POR EL CUAL SE ARMONIZA EL PRESUPUESTO CON EL PLAN DE DESARROLLO - MANIZALES + GRANDE Y SE MODIFICA EL DECRETO DE LIQUIDACION.PDF",
-        "DEC_ 0504 30072020 POR EL CUAL SE ARMONIZA EL PRESUPUESTO CON EL PLAN DE DESARROLLO MANIZALES +GRANDE Y SE MODIFICA EL DEC.PDF",
-        "DEC_ 0615 24092020 POR EL CUAL SE ARMONIZA EL PRESUPUESTO CON EL PLAN DE DESARROLLO MANIZALES+GRANDE.PDF"
-      ],
-      "snapshotSha256": "e54b068618563f954df8aa1de5234ad695a8effe5fde152191408a44d06a51fc",
-      "snapshotCanonicalization": "serverRelativeUrl<TAB>length<TAB>timeLastModified, sorted by serverRelativeUrl, LF joined",
-      "limitation": "A filename search is not a document-content search or proof of nonexistence. The public collection appears incomplete for currentness (only one file in 2025 and no 2026 folder at observation time).",
-      "verifier": "verify_decree_index.py"
-    }
-  ],
-  "unavailableSources": [
-    {
-      "id": "manizales-adoption-instrument",
-      "officialUrl": "https://manizales.gov.co/transparencia-y-acceso-informacion-publica/normatividad/decretos/",
-      "expectedTitle": "Acto de adopcion o certificacion oficial de inexistencia",
-      "status": "not-retrieved-context-warning",
-      "reason": "La coleccion publica se enumero anonimamente: 2523 archivos y cero titulos con microzon/sism al 2026-07-28. La busqueda por nombre no revisa contenido ni prueba inexistencia, y el indice no parece completo para vigencia actual; se conserva como advertencia localizada, no como sustituto de los datos tecnicos faltantes."
+      "sourceDocumentId": "manizales-uniandes-2002",
+      "mirrorUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/19861/MicrozonificacionSismicaManizales%28UAndes_2002%29.pdf?isAllowed=y&sequence=1",
+      "note": "Copia UNGRD byte a byte idéntica al lock; el host rechazó la conexión en la última verificación, por eso el localizador oficial es el de la UNAL/IDEA."
     }
   ]
 }

@@ -720,6 +720,105 @@ export function DosquebradasParameterRail({
   )
 }
 
+export function ManizalesParameterRail({
+  importanceGroup,
+  onImportanceGroupChange,
+  onTraceabilityOpen,
+  onZoneChange,
+  zoneId,
+  zoneOptions,
+}: {
+  importanceGroup: ImportanceGroup
+  onImportanceGroupChange: (value: ImportanceGroup) => void
+  onTraceabilityOpen: () => void
+  onZoneChange: (value: string) => void
+  zoneId: string | null
+  zoneOptions: readonly SelectOption[]
+}) {
+  return (
+    <Card className="self-start" size="sm">
+      <CardHeader>
+        <CardTitle>Parámetros de Manizales</CardTitle>
+        <CardDescription>
+          Una zona manual y el único escenario de diseño publicado.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <FieldGroup className="gap-5">
+          <MunicipalSelect
+            description="Tres zonas de la Figura 8.5 del estudio Uniandes 2002."
+            id="manizales-zone-trigger"
+            label="Zona de respuesta"
+            onValueChange={onZoneChange}
+            options={zoneOptions}
+            value={zoneId}
+          />
+          {zoneId ? (
+            <Button
+              className="w-full"
+              data-slot="manizales-evidence-trigger"
+              onClick={onTraceabilityOpen}
+              size="sm"
+              type="button"
+              variant="outline"
+            >
+              <LandmarkIcon data-icon="inline-start" />
+              Ver trazabilidad
+            </Button>
+          ) : null}
+          <Field>
+            <FieldLabel>Nivel de amenaza</FieldLabel>
+            <Input disabled value="Diseño" />
+            <FieldDescription>
+              Escenario único; el estudio no declara periodo de retorno.
+            </FieldDescription>
+          </Field>
+          <ImportanceGroupField
+            idPrefix="manizales"
+            onValueChange={onImportanceGroupChange}
+            value={importanceGroup}
+          />
+          <ManualZoneWarning />
+          {zoneId === "zone-c" ? (
+            <Alert>
+              <ShieldAlertIcon />
+              <AlertTitle>La Zona C exige justificación</AlertTitle>
+              <AlertDescription>
+                La consideración de diseño (f) obliga al ingeniero geotécnico a
+                justificar de forma explícita el uso de los espectros de la Zona
+                C. Ante cualquier duda deben usarse los de la Zona A o B.
+              </AlertDescription>
+            </Alert>
+          ) : null}
+          <Alert>
+            <ShieldAlertIcon />
+            <AlertTitle>Análisis especiales desde 2.0 s</AlertTitle>
+            <AlertDescription>
+              La consideración de diseño (e) deja fuera del alcance del estudio
+              las estructuras con período fundamental mayor o igual a 2.0 s. La
+              amplificación por efectos topográficos tampoco se calcula aquí.
+            </AlertDescription>
+          </Alert>
+        </FieldGroup>
+      </CardContent>
+      <CardFooter className="flex-col items-stretch gap-3">
+        <Separator />
+        <p className="text-muted-foreground text-xs">
+          Sin mapas, coordenadas ni detección automática de zona.
+        </p>
+        <a
+          className="text-muted-foreground text-xs underline underline-offset-4"
+          href="https://idea.manizales.unal.edu.co/sitios/gestion_riesgos/descargas/microzon/informe_final_figuras.pdf"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Microzonificación sísmica de Manizales · Figuras 8.1 y 8.5
+        </a>
+      </CardFooter>
+    </Card>
+  )
+}
+
 export function MedellinParameterRail({
   hazardDescription,
   hazardId,

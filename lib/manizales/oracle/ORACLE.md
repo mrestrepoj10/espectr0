@@ -1,10 +1,19 @@
-# Oraculo independiente de Manizales
+# Oráculo independiente de Manizales
 
-Este oraculo no calcula espectros. Su funcion es demostrar de forma independiente, con `Decimal` de 50 digitos, que los pocos parametros cuantitativos bloqueados se trasladaron sin deriva y que todas las rutas de calculo quedan rechazadas.
+Este oráculo reimplementa, con `Decimal` exacto, las cuatro ramas impresas en la
+Figura 8.1 a partir de las 21 celdas transcritas de la Figura 8.5. No comparte
+código con el motor de TypeScript: existe para que la aritmética del motor se
+compare contra algo que se escribió por separado.
 
-El registro conserva `Aa=0.25g`, `Av=0.25g`, `I=1`, 1.275 nodos y retorno de 475 anos. La multiplicacion por el factor de importancia es solo un testigo aritmetico, no un espectro. La forma NSR-10 y el amortiguamiento del 5% ya estan documentados en la presentacion oficial de 2014; `spectralSamples` debe permanecer vacio hasta contar con Fa/Fv por sitio y una regla oficial para resolver la ubicacion sin GIS. La vigencia se presenta como advertencia localizada y no como un bloqueo tecnico sustituto.
+Cada registro trae los tokens impresos, las ordenadas en `To`, `Tc` y `TL` con
+un épsilon a cada lado, y un bloque `continuity` con los cuatro empalmes.
 
-Regeneracion:
+Ese bloque documenta algo que el estudio publicó y el motor conserva: en la
+Zona A los límites impresos están redondeados a la centésima, de modo que la
+curva salta de 1.1 g a 1.1034 g en `Tc` y de 0.2207 g a 0.22 g en `TL`. Las
+zonas B y C empalman exactamente. No se corrige el redondeo — se transcribe.
+
+Regeneración:
 
 ```text
 python lib/manizales/oracle/generate_oracle.py

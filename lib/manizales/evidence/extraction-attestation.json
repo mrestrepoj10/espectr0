@@ -1,349 +1,198 @@
 {
   "schemaVersion": 1,
-  "profile": {
-    "schemaVersion": 1,
-    "renderer": "Poppler pdftoppm",
-    "renderDpi": 144,
-    "textExtractor": "pdfplumber word extraction",
-    "ocrUsed": false,
-    "coordinateSystem": "normalized PDF page coordinates, top-left origin",
-    "cropEncoding": "PNG RGB, Pillow compress_level=9, optimize=false"
+  "externalOnly": true,
+  "sourceHashes": {
+    "manizales-uniandes-2002": "2e8c2c752f657899bf0240292f9e390f70c41fc87af8355b65f3a12fdfb3a799",
+    "manizales-uniandes-2002-figuras": "fbcfa673a0657f9efa673dec74ebaffd80697ff659a25b89a92f6ad342708a69",
+    "nsr10-title-a-2017": "47207abe1e832f5feb5fb8448af884b8d539fddaf89b6b21ab466765dd8524b0"
   },
-  "sourceLocks": [
-    {
-      "sourceDocumentId": "manizales-uniandes-2002",
-      "sha256": "2e8c2c752f657899bf0240292f9e390f70c41fc87af8355b65f3a12fdfb3a799",
-      "pageCount": 160,
-      "byteLength": 868103
-    },
-    {
-      "sourceDocumentId": "manizales-harmonization-2014",
-      "sha256": "35a1a22ed5a6e17f72ca4718d22e8c3a1f9ab0211afd9b175da3ce680e79aadc",
-      "pageCount": 89,
-      "byteLength": 6998062
-    },
-    {
-      "sourceDocumentId": "manizales-harmonization-presentation-2014",
-      "sha256": "8734ec360b735d002e38535718a305038de5856d9ad4bad334beccf010758f91",
-      "pageCount": 54,
-      "byteLength": 8340619
-    },
-    {
-      "sourceDocumentId": "manizales-update-2015",
-      "sha256": "55a8458cc211c83b3e13cf5feb7670dbd120535542c779512f1d2a86bd6628e3",
-      "pageCount": 10,
-      "byteLength": 1229511
-    },
-    {
-      "sourceDocumentId": "manizales-management-report-2016-2019",
-      "sha256": "6345925e0afb5ba03d0f713a2a87e0c8ec6fa7da8128849f6095e26cefd6a373",
-      "pageCount": 151,
-      "byteLength": 3871932
-    },
-    {
-      "sourceDocumentId": "manizales-pot-status-2025",
-      "sha256": "13790747a041c6f7d80ae9229336174f3b18f6bcfc6cdde18b406b6ac643a2d8",
-      "pageCount": 2,
-      "byteLength": 563357
-    }
-  ],
-  "regions": [
-    {
-      "citationId": "source-2002-three-zone-selector",
-      "sourceDocumentId": "manizales-uniandes-2002",
-      "physicalPage": 152,
-      "rect": {
-        "left": 0.1,
-        "top": 0.13,
-        "width": 0.82,
-        "height": 0.48
+  "coverage": {
+    "tables": 1,
+    "optionRows": 3,
+    "directCells": 21,
+    "formulaRegions": 5,
+    "applicabilityClaims": 17,
+    "percent": 100
+  },
+  "table": {
+    "citationId": "figura-8.5",
+    "rows": [
+      {
+        "optionId": "zone-a",
+        "rowCitationId": "row-zone-a",
+        "cells": [
+          {
+            "fieldId": "to",
+            "citationId": "cell-zone-a-to",
+            "token": "0.10",
+            "value": 0.1
+          },
+          {
+            "fieldId": "tc",
+            "citationId": "cell-zone-a-tc",
+            "token": "0.65",
+            "value": 0.65
+          },
+          {
+            "fieldId": "tl",
+            "citationId": "cell-zone-a-tl",
+            "token": "3.25",
+            "value": 3.25
+          },
+          {
+            "fieldId": "am",
+            "citationId": "cell-zone-a-am",
+            "token": "0.44",
+            "value": 0.44
+          },
+          {
+            "fieldId": "an",
+            "citationId": "cell-zone-a-an",
+            "token": "0.44",
+            "value": 0.44
+          },
+          {
+            "fieldId": "fa",
+            "citationId": "cell-zone-a-fa",
+            "token": "1.00",
+            "value": 1
+          },
+          {
+            "fieldId": "fv",
+            "citationId": "cell-zone-a-fv",
+            "token": "1.63",
+            "value": 1.63
+          }
+        ]
       },
-      "tokenSha256": "9c41c3c573d164ff25e6331f2a11b1fd53198ea7a670f1cdc59be7604adbb784",
-      "pngCropSha256": "0bd8b50aca4218e8b4ccc4808623a37256ca4488efabb8894dd3c810a19e19e4"
-    },
-    {
-      "citationId": "source-2002-period-presentation-limit",
-      "sourceDocumentId": "manizales-uniandes-2002",
-      "physicalPage": 154,
-      "rect": {
-        "left": 0.1,
-        "top": 0.14,
-        "width": 0.82,
-        "height": 0.28
+      {
+        "optionId": "zone-b",
+        "rowCitationId": "row-zone-b",
+        "cells": [
+          {
+            "fieldId": "to",
+            "citationId": "cell-zone-b-to",
+            "token": "0.10",
+            "value": 0.1
+          },
+          {
+            "fieldId": "tc",
+            "citationId": "cell-zone-b-tc",
+            "token": "0.50",
+            "value": 0.5
+          },
+          {
+            "fieldId": "tl",
+            "citationId": "cell-zone-b-tl",
+            "token": "2.50",
+            "value": 2.5
+          },
+          {
+            "fieldId": "am",
+            "citationId": "cell-zone-b-am",
+            "token": "0.40",
+            "value": 0.4
+          },
+          {
+            "fieldId": "an",
+            "citationId": "cell-zone-b-an",
+            "token": "0.40",
+            "value": 0.4
+          },
+          {
+            "fieldId": "fa",
+            "citationId": "cell-zone-b-fa",
+            "token": "1.00",
+            "value": 1
+          },
+          {
+            "fieldId": "fv",
+            "citationId": "cell-zone-b-fv",
+            "token": "1.25",
+            "value": 1.25
+          }
+        ]
       },
-      "tokenSha256": "aa8f0ed1b8c442a431b9945215a592f87f82279eb69a8a8fbd9493a91944c53f",
-      "pngCropSha256": "b9f9c4a40b356420aae2683693d5d01b0976c0b00788609621869350961755e1"
-    },
-    {
-      "citationId": "source-2002-special-analysis-at-2s",
-      "sourceDocumentId": "manizales-uniandes-2002",
-      "physicalPage": 154,
-      "rect": {
-        "left": 0.1,
-        "top": 0.78,
-        "width": 0.82,
-        "height": 0.13
-      },
-      "tokenSha256": "6ce8de548f0e54196a926070965637bc408d2eb34a189b8aebb6d5d5f175f3fb",
-      "pngCropSha256": "cd17011b1d2dcf17a7962303534378065dcbad049fc23e608b33ff7ae6089e34"
-    },
-    {
-      "citationId": "source-2014-node-model",
-      "sourceDocumentId": "manizales-harmonization-2014",
-      "physicalPage": 50,
-      "rect": {
-        "left": 0,
-        "top": 0,
-        "width": 1,
-        "height": 1
-      },
-      "tokenSha256": "6b27091b6d062305a6b3be44779676a06e9d71091f9836e0db3e3fb1dc3a18ea",
-      "pngCropSha256": "2ccd14b956175cb014f193e010de0bf1e45513434e1d31fea74ff5367ed66c5a"
-    },
-    {
-      "citationId": "source-2014-spectrum-shape",
-      "sourceDocumentId": "manizales-harmonization-presentation-2014",
-      "physicalPage": 44,
-      "rect": {
-        "left": 0.1,
-        "top": 0.48,
-        "width": 0.82,
-        "height": 0.42
-      },
-      "tokenSha256": "54688ae08f4d78a75e4efbd1c99406259c57c4c2141f129a74db44c74791012d",
-      "pngCropSha256": "c8417eca8bc641306d1ced3f7670f0460d7c43e595a598f6fbd871fab1a7ac3a"
-    },
-    {
-      "citationId": "table-update-basis",
-      "sourceDocumentId": "manizales-update-2015",
-      "physicalPage": 1,
-      "rect": {
-        "left": 0.1,
-        "top": 0.43,
-        "width": 0.82,
-        "height": 0.19
-      },
-      "tokenSha256": "9645eb998def35492053d05774174acb5449d17ec26f80e3c5ce06b89f74cacb",
-      "pngCropSha256": "acb00f71896725abda004a6f45ccf72887e7cec1fe6d6aae772eb6b75a2c3cd5"
-    },
-    {
-      "citationId": "row-update-basis",
-      "sourceDocumentId": "manizales-update-2015",
-      "physicalPage": 1,
-      "rect": {
-        "left": 0.115,
-        "top": 0.445,
-        "width": 0.795,
-        "height": 0.17
-      },
-      "tokenSha256": "0c538b5855f5ec6b79349f564d11b5107346ebf334f3471972d3279048c11f38",
-      "pngCropSha256": "39600e5377f1869297d6ad4c213c255935ad9212622f388938bf825f92c17c68"
-    },
-    {
-      "citationId": "cell-node-count",
-      "sourceDocumentId": "manizales-update-2015",
-      "physicalPage": 1,
-      "rect": {
-        "left": 0.413159,
-        "top": 0.469315,
-        "width": 0.036014,
-        "height": 0.016412
-      },
-      "tokenSha256": "a1bb364ad3761439e83376289d6656aaabf8b99014a8a7ff937e37c53611d885",
-      "pngCropSha256": "668f878c9b83214666d8b6aa0d6f532976b7192d3394ff72c904db7471e98033"
-    },
-    {
-      "citationId": "cell-return-period",
-      "sourceDocumentId": "manizales-update-2015",
-      "physicalPage": 1,
-      "rect": {
-        "left": 0.165538,
-        "top": 0.545087,
-        "width": 0.028574,
-        "height": 0.016412
-      },
-      "tokenSha256": "b1585fdb272b31401eaac5dd46a936c1c09b4861e53e23f12ac72fc077b3c82c",
-      "pngCropSha256": "d61241fb81e00468e4e0964e7fd29fef74267bb4e49cf451bd92db4eaaaf9946"
-    },
-    {
-      "citationId": "cell-spatial-model",
-      "sourceDocumentId": "manizales-update-2015",
-      "physicalPage": 1,
-      "rect": {
-        "left": 0.202766,
-        "top": 0.595685,
-        "width": 0.073904,
-        "height": 0.016412
-      },
-      "tokenSha256": "97ed62b7af75059238de7187e5beaeb166ac77f4a7610813eac996f683f928cc",
-      "pngCropSha256": "afb4d66d619b50d485b123d649448286b7e0d0302b8ad7c97a65688413f345d5"
-    },
-    {
-      "citationId": "app-original-three-zones",
-      "sourceDocumentId": "manizales-update-2015",
-      "physicalPage": 2,
-      "rect": {
-        "left": 0.1,
-        "top": 0.19,
-        "width": 0.82,
-        "height": 0.13
-      },
-      "tokenSha256": "626256db0c50905fd6bccaa03e0fd04fb4d70bd8c5bb8b138f9cfc4bfc33bcb1",
-      "pngCropSha256": "0e355a3eb9be930c81cb85cfee01e1c1e48cb9847e210d31679e709823815a43"
-    },
-    {
-      "citationId": "table-update-parameters",
-      "sourceDocumentId": "manizales-update-2015",
-      "physicalPage": 8,
-      "rect": {
-        "left": 0.1,
-        "top": 0.445,
-        "width": 0.82,
-        "height": 0.105
-      },
-      "tokenSha256": "efbfa412a2c94a383f46e54d19af4c407c3c6ea3ae23671964868cd0da537d39",
-      "pngCropSha256": "8e4506bbfc87a52de57fc45a2cee2b9689bfb309c6c5ed3156bef7d01b6d7b7f"
-    },
-    {
-      "citationId": "row-update-parameters",
-      "sourceDocumentId": "manizales-update-2015",
-      "physicalPage": 8,
-      "rect": {
-        "left": 0.115,
-        "top": 0.46,
-        "width": 0.795,
-        "height": 0.08
-      },
-      "tokenSha256": "3982489b2aa8b7a35940c8b99ea902a63ed1e1bf207c5bb6c6a6e91b86345222",
-      "pngCropSha256": "eacc67c855d92d64a67e684b214828c7fe90edf3a709a01c9602b46b7f7b7814"
-    },
-    {
-      "citationId": "cell-aa",
-      "sourceDocumentId": "manizales-update-2015",
-      "physicalPage": 8,
-      "rect": {
-        "left": 0.184572,
-        "top": 0.493125,
-        "width": 0.072316,
-        "height": 0.016412
-      },
-      "tokenSha256": "a30a043314fa89294fa2c1c989a01fbb5329e5c085a5c5a8d27317656de24ae0",
-      "pngCropSha256": "f2959765948ec40534e6632cb20271c5de0e268f296a352e00d0bc4929e42a33"
-    },
-    {
-      "citationId": "cell-av",
-      "sourceDocumentId": "manizales-update-2015",
-      "physicalPage": 8,
-      "rect": {
-        "left": 0.265144,
-        "top": 0.493125,
-        "width": 0.075158,
-        "height": 0.016412
-      },
-      "tokenSha256": "a30a043314fa89294fa2c1c989a01fbb5329e5c085a5c5a8d27317656de24ae0",
-      "pngCropSha256": "f86c1a2be08d6980965140cb0142ed746e377ac6278da8fda4f7a040a2cdd973"
-    },
-    {
-      "citationId": "cell-importance-fit",
-      "sourceDocumentId": "manizales-update-2015",
-      "physicalPage": 8,
-      "rect": {
-        "left": 0.57889,
-        "top": 0.493125,
-        "width": 0.038617,
-        "height": 0.016412
-      },
-      "tokenSha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
-      "pngCropSha256": "b549f7bc5770786682317046f89fb83cbefa5ae711eae9d6d77e7b4dd01792f9"
-    },
-    {
-      "citationId": "cell-soil-parameters",
-      "sourceDocumentId": "manizales-update-2015",
-      "physicalPage": 8,
-      "rect": {
-        "left": 0.682595,
-        "top": 0.467952,
-        "width": 0.058289,
-        "height": 0.016412
-      },
-      "tokenSha256": "9c56a986a0638e15c64edacc8e933e161b1a108a1f2b68fcb7ef8882f94894f1",
-      "pngCropSha256": "95a3ffc64e0a7544eff43cdae444a6f30ee060a8f44d573046890ea1e2eb385e"
-    },
-    {
-      "citationId": "warning-raster-not-zones",
-      "sourceDocumentId": "manizales-update-2015",
-      "physicalPage": 9,
-      "rect": {
-        "left": 0.13,
-        "top": 0.55,
-        "width": 0.78,
-        "height": 0.08
-      },
-      "tokenSha256": "37363e4edf253a11f056376ffc9804f7b0b7b541a47accde2c29ccde5291c48b",
-      "pngCropSha256": "3c4e83f99f73d58ed231477e0b42f3962e603d5590c605598158d7b8444cacdb"
-    },
-    {
-      "citationId": "app-building-compatibility",
-      "sourceDocumentId": "manizales-update-2015",
-      "physicalPage": 9,
-      "rect": {
-        "left": 0.13,
-        "top": 0.69,
-        "width": 0.78,
-        "height": 0.1
-      },
-      "tokenSha256": "06341b5aad29c6a5b97957c5b30fb8af26507825d18ddf6531462c413bbebab3",
-      "pngCropSha256": "b746259dddc2f7223ebe48cbc560933676800c2ebce92800febac7b2d1bc93b1"
-    },
-    {
-      "citationId": "warning-adoption-pending-2019",
-      "sourceDocumentId": "manizales-management-report-2016-2019",
-      "physicalPage": 65,
-      "rect": {
-        "left": 0.12,
-        "top": 0.47,
-        "width": 0.78,
-        "height": 0.32
-      },
-      "tokenSha256": "e2188410ef07bd7242c04dab85c643b2443db5c26cdcf5a38037e7493b256971",
-      "pngCropSha256": "8b588e9cdc9c7214a98bfa238f805cc5eb7423263da4b0be074684625ea2814b"
-    },
-    {
-      "citationId": "app-pot-current-2025",
-      "sourceDocumentId": "manizales-pot-status-2025",
-      "physicalPage": 1,
-      "rect": {
-        "left": 0.12,
-        "top": 0.34,
-        "width": 0.7,
-        "height": 0.08
-      },
-      "tokenSha256": "c5ddef12a92216187741123d11489c7d52c658270b7dcdd4252e2a0f2bedf78d",
-      "pngCropSha256": "96e2e8fb591f5ceb639ee55b400d298a4430e33fba3ed2bf3df157dca84177fe"
-    }
-  ],
-  "manualReview": {
-    "status": "complete",
-    "ocrUsed": false,
-    "reviewedPages": [
-      "manizales-uniandes-2002:152",
-      "manizales-uniandes-2002:154",
-      "manizales-uniandes-2002:155",
-      "manizales-harmonization-2014:50",
-      "manizales-harmonization-2014:86",
-      "manizales-harmonization-2014:87",
-      "manizales-harmonization-presentation-2014:3",
-      "manizales-harmonization-presentation-2014:44",
-      "manizales-harmonization-presentation-2014:45",
-      "manizales-harmonization-presentation-2014:46",
-      "manizales-harmonization-presentation-2014:47",
-      "manizales-update-2015:1",
-      "manizales-update-2015:2",
-      "manizales-update-2015:8",
-      "manizales-update-2015:9",
-      "manizales-management-report-2016-2019:65",
-      "manizales-pot-status-2025:1"
+      {
+        "optionId": "zone-c",
+        "rowCitationId": "row-zone-c",
+        "cells": [
+          {
+            "fieldId": "to",
+            "citationId": "cell-zone-c-to",
+            "token": "0.10",
+            "value": 0.1
+          },
+          {
+            "fieldId": "tc",
+            "citationId": "cell-zone-c-tc",
+            "token": "0.50",
+            "value": 0.5
+          },
+          {
+            "fieldId": "tl",
+            "citationId": "cell-zone-c-tl",
+            "token": "2.50",
+            "value": 2.5
+          },
+          {
+            "fieldId": "am",
+            "citationId": "cell-zone-c-am",
+            "token": "0.30",
+            "value": 0.3
+          },
+          {
+            "fieldId": "an",
+            "citationId": "cell-zone-c-an",
+            "token": "0.30",
+            "value": 0.3
+          },
+          {
+            "fieldId": "fa",
+            "citationId": "cell-zone-c-fa",
+            "token": "1.00",
+            "value": 1
+          },
+          {
+            "fieldId": "fv",
+            "citationId": "cell-zone-c-fv",
+            "token": "1.25",
+            "value": 1.25
+          }
+        ]
+      }
     ]
   },
-  "payloadSha256": "e5fbc5eeba071cc5c4c083db18d04e39cc4713c152e762c7bed3e0d3d4c04a03"
+  "visualChecks": [
+    {
+      "citationId": "figura-8.5",
+      "method": "embedded text layer extracted with pdfplumber and the page rendered at 6× for visual confirmation",
+      "observed": "To/Tc/TL/Am/An/Fa/Fv for Zona A, Zona B and Zona C"
+    },
+    {
+      "citationId": "equation-plateau",
+      "method": "plate rendered at original resolution and inspected",
+      "observed": "Sa = 2.5AmFa, Sa = AnFv/T, Sa = Am/2 and the entrance branch on Figura 8.1"
+    }
+  ],
+  "internalConsistency": {
+    "method": "The printed branch limits must be the intersections of the printed branches; both identities were checked against the transcribed cells.",
+    "checks": [
+      {
+        "identity": "Tc = An·Fv / (2.5·Am·Fa)",
+        "zoneA": "0.652 ≈ 0.65",
+        "zoneB": "0.50",
+        "zoneC": "0.50"
+      },
+      {
+        "identity": "TL = 2·An·Fv / Am",
+        "zoneA": "3.26 ≈ 3.25",
+        "zoneB": "2.50",
+        "zoneC": "2.50"
+      }
+    ],
+    "disposition": "Zone A rounds by one hundredth in both limits. The printed tokens govern; the identities are only a transcription check."
+  },
+  "nonInference": "The attestation binds the 21 printed cells of Figura 8.5 and the four printed branches of Figura 8.1. No coefficient is derived, interpolated or imported from any other study or from any reference website.",
+  "payloadSha256": "bdd4dab774939052deb55b4c2f21454717005eac13a52c60543acbc4d012ece9"
 }

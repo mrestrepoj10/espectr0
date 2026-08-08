@@ -1,59 +1,336 @@
 {
-  "schemaVersion": 1,
-  "studyId": "manizales-microzonation",
-  "status": "partial-oracle-activation-blocked",
-  "precision": "Python Decimal, 50 significant digits",
-  "recordCount": 1,
+  "schemaVersion": 2,
+  "status": "normalized-spectrum-supported-full-curve",
+  "importanceFactor": "1",
   "records": [
     {
-      "optionId": "updated-raster-grid",
-      "hazardId": "uniform-hazard-475y",
-      "status": "direct-parameter-witness-only-no-spectrum",
-      "nodeCount": 1275,
-      "returnPeriodYears": 475,
-      "spatialModel": "rasterized",
-      "soilParameters": "Fa/Fv",
-      "fixedFitParameters": {
-        "aaG": "0.25",
-        "avG": "0.25",
-        "importanceFactor": "1"
+      "optionId": "zone-a",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.1,
+        "tc": 0.65,
+        "tl": 3.25,
+        "am": 0.44,
+        "an": 0.44,
+        "fa": 1.0,
+        "fv": 1.63
       },
-      "arithmeticWitnessNotSpectrum": {
-        "aaTimesFitImportance": "0.25",
-        "avTimesFitImportance": "0.25"
+      "tokens": {
+        "to": "0.10",
+        "tc": "0.65",
+        "tl": "3.25",
+        "am": "0.44",
+        "an": "0.44",
+        "fa": "1.00",
+        "fv": "1.63"
       },
-      "spectralSamples": [],
-      "missingInputs": [
-        "node-specific Fa",
-        "node-specific Fv",
-        "official manual-location rule or spatial lookup"
+      "continuity": {
+        "plateauFromEntranceAtTo": "1.1",
+        "plateau": "1.1",
+        "inverseAtTc": "1.103384615384615384615384615",
+        "inverseAtTl": "0.2206769230769230769230769231",
+        "floor": "0.22"
+      },
+      "boundaryCases": [
+        {
+          "period": "0",
+          "status": "ok",
+          "branch": "manizales-entrance",
+          "saG": "0.44"
+        },
+        {
+          "period": "0.099999",
+          "status": "ok",
+          "branch": "manizales-entrance",
+          "saG": "1.0999934"
+        },
+        {
+          "period": "0.1",
+          "status": "ok",
+          "branch": "manizales-entrance",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.100001",
+          "status": "ok",
+          "branch": "manizales-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.649999",
+          "status": "ok",
+          "branch": "manizales-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.65",
+          "status": "ok",
+          "branch": "manizales-plateau",
+          "saG": "1.1"
+        },
+        {
+          "period": "0.650001",
+          "status": "ok",
+          "branch": "manizales-inverse",
+          "saG": "1.103382917872434042409165524"
+        },
+        {
+          "period": "2",
+          "status": "ok",
+          "branch": "manizales-inverse",
+          "saG": "0.3586"
+        },
+        {
+          "period": "3",
+          "status": "ok",
+          "branch": "manizales-inverse",
+          "saG": "0.2390666666666666666666666667"
+        },
+        {
+          "period": "3.249999",
+          "status": "ok",
+          "branch": "manizales-inverse",
+          "saG": "0.2206769909775356853955955063"
+        },
+        {
+          "period": "3.25",
+          "status": "ok",
+          "branch": "manizales-inverse",
+          "saG": "0.2206769230769230769230769231"
+        },
+        {
+          "period": "3.250001",
+          "status": "ok",
+          "branch": "manizales-floor",
+          "saG": "0.22"
+        },
+        {
+          "period": "4",
+          "status": "ok",
+          "branch": "manizales-floor",
+          "saG": "0.22"
+        }
+      ]
+    },
+    {
+      "optionId": "zone-b",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.1,
+        "tc": 0.5,
+        "tl": 2.5,
+        "am": 0.4,
+        "an": 0.4,
+        "fa": 1.0,
+        "fv": 1.25
+      },
+      "tokens": {
+        "to": "0.10",
+        "tc": "0.50",
+        "tl": "2.50",
+        "am": "0.40",
+        "an": "0.40",
+        "fa": "1.00",
+        "fv": "1.25"
+      },
+      "continuity": {
+        "plateauFromEntranceAtTo": "1",
+        "plateau": "1",
+        "inverseAtTc": "1",
+        "inverseAtTl": "0.2",
+        "floor": "0.2"
+      },
+      "boundaryCases": [
+        {
+          "period": "0",
+          "status": "ok",
+          "branch": "manizales-entrance",
+          "saG": "0.4"
+        },
+        {
+          "period": "0.099999",
+          "status": "ok",
+          "branch": "manizales-entrance",
+          "saG": "0.999994"
+        },
+        {
+          "period": "0.1",
+          "status": "ok",
+          "branch": "manizales-entrance",
+          "saG": "1"
+        },
+        {
+          "period": "0.100001",
+          "status": "ok",
+          "branch": "manizales-plateau",
+          "saG": "1"
+        },
+        {
+          "period": "0.499999",
+          "status": "ok",
+          "branch": "manizales-plateau",
+          "saG": "1"
+        },
+        {
+          "period": "0.5",
+          "status": "ok",
+          "branch": "manizales-plateau",
+          "saG": "1"
+        },
+        {
+          "period": "0.500001",
+          "status": "ok",
+          "branch": "manizales-inverse",
+          "saG": "0.999998000003999992000016"
+        },
+        {
+          "period": "2",
+          "status": "ok",
+          "branch": "manizales-inverse",
+          "saG": "0.25"
+        },
+        {
+          "period": "2.499999",
+          "status": "ok",
+          "branch": "manizales-inverse",
+          "saG": "0.2000000800000320000128000051"
+        },
+        {
+          "period": "2.5",
+          "status": "ok",
+          "branch": "manizales-inverse",
+          "saG": "0.2"
+        },
+        {
+          "period": "2.500001",
+          "status": "ok",
+          "branch": "manizales-floor",
+          "saG": "0.2"
+        },
+        {
+          "period": "3",
+          "status": "ok",
+          "branch": "manizales-floor",
+          "saG": "0.2"
+        },
+        {
+          "period": "4",
+          "status": "ok",
+          "branch": "manizales-floor",
+          "saG": "0.2"
+        }
+      ]
+    },
+    {
+      "optionId": "zone-c",
+      "hazardId": "design",
+      "fields": {
+        "to": 0.1,
+        "tc": 0.5,
+        "tl": 2.5,
+        "am": 0.3,
+        "an": 0.3,
+        "fa": 1.0,
+        "fv": 1.25
+      },
+      "tokens": {
+        "to": "0.10",
+        "tc": "0.50",
+        "tl": "2.50",
+        "am": "0.30",
+        "an": "0.30",
+        "fa": "1.00",
+        "fv": "1.25"
+      },
+      "continuity": {
+        "plateauFromEntranceAtTo": "0.75",
+        "plateau": "0.75",
+        "inverseAtTc": "0.75",
+        "inverseAtTl": "0.15",
+        "floor": "0.15"
+      },
+      "boundaryCases": [
+        {
+          "period": "0",
+          "status": "ok",
+          "branch": "manizales-entrance",
+          "saG": "0.3"
+        },
+        {
+          "period": "0.099999",
+          "status": "ok",
+          "branch": "manizales-entrance",
+          "saG": "0.7499955"
+        },
+        {
+          "period": "0.1",
+          "status": "ok",
+          "branch": "manizales-entrance",
+          "saG": "0.75"
+        },
+        {
+          "period": "0.100001",
+          "status": "ok",
+          "branch": "manizales-plateau",
+          "saG": "0.75"
+        },
+        {
+          "period": "0.499999",
+          "status": "ok",
+          "branch": "manizales-plateau",
+          "saG": "0.75"
+        },
+        {
+          "period": "0.5",
+          "status": "ok",
+          "branch": "manizales-plateau",
+          "saG": "0.75"
+        },
+        {
+          "period": "0.500001",
+          "status": "ok",
+          "branch": "manizales-inverse",
+          "saG": "0.749998500002999994000012"
+        },
+        {
+          "period": "2",
+          "status": "ok",
+          "branch": "manizales-inverse",
+          "saG": "0.1875"
+        },
+        {
+          "period": "2.499999",
+          "status": "ok",
+          "branch": "manizales-inverse",
+          "saG": "0.1500000600000240000096000038"
+        },
+        {
+          "period": "2.5",
+          "status": "ok",
+          "branch": "manizales-inverse",
+          "saG": "0.15"
+        },
+        {
+          "period": "2.500001",
+          "status": "ok",
+          "branch": "manizales-floor",
+          "saG": "0.15"
+        },
+        {
+          "period": "3",
+          "status": "ok",
+          "branch": "manizales-floor",
+          "saG": "0.15"
+        },
+        {
+          "period": "4",
+          "status": "ok",
+          "branch": "manizales-floor",
+          "saG": "0.15"
+        }
       ]
     }
   ],
-  "negativeCases": [
-    {
-      "case": "activation",
-      "expected": "reject-missing-node-values-location-rule"
-    },
-    {
-      "case": "manual-zone-selector",
-      "expected": "reject-updated-model-is-raster-not-zones"
-    },
-    {
-      "case": "zone-a-b-or-c-as-current",
-      "expected": "reject-historical-model-substitution"
-    },
-    {
-      "case": "historical-2002-period-at-or-above-2s",
-      "expected": "reject-special-seismic-analysis-outside-2002-recommendations"
-    },
-    {
-      "case": "spectrum-at-any-period",
-      "expected": "reject-missing-node-fa-fv-and-location-rule"
-    },
-    {
-      "case": "unknown-node-or-location",
-      "expected": "reject"
-    }
-  ]
+  "unsupportedIntervals": [],
+  "inputSha256": "ff8cbec6be2e49af698ba77f4867f683cf5e8febe493f500ada7f49b2f8e371f"
 }

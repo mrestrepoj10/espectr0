@@ -1,31 +1,31 @@
 {
   "schemaVersion": 1,
   "studyId": "manizales-microzonation",
-  "title": "Microzonificacion sismica de Manizales - evidencia de investigacion bloqueada",
+  "title": "Microzonificación sísmica de Manizales (Uniandes 2002) — Figura 8.5 transcrita con las cuatro ramas de la Figura 8.1",
   "sources": [
     {
       "id": "manizales-uniandes-2002",
-      "issuingAuthority": "Alcaldia de Manizales y Universidad de los Andes (CIMOC)",
-      "officialTitle": "Microzonificacion Sismica de la Ciudad de Manizales",
-      "edition": "Informe final, 2002",
+      "issuingAuthority": "Oficina Municipal para la Prevención y Atención de Desastres de Manizales y Universidad de los Andes (CIMOC)",
+      "officialTitle": "Microzonificación Sísmica de la Ciudad de Manizales — informe final",
+      "edition": "Agosto de 2002",
       "revision": null,
-      "adoptionInstrument": "Fuente tecnica historica; no se usa como prueba de vigencia juridica",
+      "adoptionInstrument": "Estudio técnico municipal; complementario a la NSR-98 según su propia consideración de diseño (a)",
       "amendmentsAndErrata": [],
       "legalStatus": "historical",
-      "applicabilityStatus": "historical",
-      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/19861/MicrozonificacionSismicaManizales%28UAndes_2002%29.pdf?isAllowed=y&sequence=1",
-      "retrievedOn": "2026-07-29",
+      "applicabilityStatus": "conditional",
+      "officialUrl": "https://idea.manizales.unal.edu.co/sitios/gestion_riesgos/descargas/microzon/informe_final.pdf",
+      "retrievedOn": "2026-08-08",
       "redistribution": {
         "decision": "external-only",
-        "rationale": "La copia oficial de UNGRD permite consulta, pero no se incorporan sus bytes al repositorio."
+        "rationale": "La copia oficial permite consulta abierta, pero no concede una licencia de redistribución; se conservan URL, huella y atestación, no los bytes completos."
       },
       "mediaType": "application/pdf",
       "pageCount": 160,
       "sha256": "2e8c2c752f657899bf0240292f9e390f70c41fc87af8355b65f3a12fdfb3a799",
       "pages": [
         {
-          "physicalPage": 152,
-          "printedPage": "147",
+          "physicalPage": 153,
+          "printedPage": "148",
           "rotationDegrees": 0,
           "crop": {
             "left": 0,
@@ -35,19 +35,8 @@
           }
         },
         {
-          "physicalPage": 154,
-          "printedPage": "149",
-          "rotationDegrees": 0,
-          "crop": {
-            "left": 0,
-            "top": 0,
-            "width": 1,
-            "height": 1
-          }
-        },
-        {
-          "physicalPage": 155,
-          "printedPage": "150",
+          "physicalPage": 157,
+          "printedPage": "152",
           "rotationDegrees": 0,
           "crop": {
             "left": 0,
@@ -59,225 +48,38 @@
       ]
     },
     {
-      "id": "manizales-harmonization-2014",
-      "issuingAuthority": "Universidad Nacional de Colombia, sede Manizales, y Corpocaldas",
-      "officialTitle": "Armonizacion de la microzonificacion sismica con las normas NSR-10: respuesta dinamica de los suelos de Manizales",
-      "edition": "Informe No. 179-2012, 2014",
+      "id": "manizales-uniandes-2002-figuras",
+      "issuingAuthority": "Oficina Municipal para la Prevención y Atención de Desastres de Manizales y Universidad de los Andes (CIMOC)",
+      "officialTitle": "Microzonificación Sísmica de la Ciudad de Manizales — volumen de figuras",
+      "edition": "Agosto de 2002",
       "revision": null,
-      "adoptionInstrument": "Fuente tecnica; no se usa como prueba de vigencia juridica",
-      "amendmentsAndErrata": [],
-      "legalStatus": "unknown",
-      "applicabilityStatus": "unknown",
-      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/36862/CMASRSL001.ArmonizacionNormasNSR10.pdf?isAllowed=y&sequence=1",
-      "retrievedOn": "2026-07-29",
-      "redistribution": {
-        "decision": "external-only",
-        "rationale": "La copia oficial de UNGRD permite consulta, pero no se incorporan sus bytes al repositorio."
-      },
-      "mediaType": "application/pdf",
-      "pageCount": 89,
-      "sha256": "35a1a22ed5a6e17f72ca4718d22e8c3a1f9ab0211afd9b175da3ce680e79aadc",
-      "pages": [
-        {
-          "physicalPage": 50,
-          "printedPage": "50",
-          "rotationDegrees": 0,
-          "crop": {
-            "left": 0,
-            "top": 0,
-            "width": 1,
-            "height": 1
-          }
-        },
-        {
-          "physicalPage": 86,
-          "printedPage": "86",
-          "rotationDegrees": 0,
-          "crop": {
-            "left": 0,
-            "top": 0,
-            "width": 1,
-            "height": 1
-          }
-        },
-        {
-          "physicalPage": 87,
-          "printedPage": "87",
-          "rotationDegrees": 0,
-          "crop": {
-            "left": 0,
-            "top": 0,
-            "width": 1,
-            "height": 1
-          }
-        }
-      ]
-    },
-    {
-      "id": "manizales-harmonization-presentation-2014",
-      "issuingAuthority": "Universidad Nacional de Colombia, sede Manizales, y Corpocaldas",
-      "officialTitle": "Armonizacion de la microzonificacion sismica de Manizales con las normas NSR-10",
-      "edition": "Presentacion del 22 de mayo de 2014",
-      "revision": null,
-      "adoptionInstrument": "Fuente tecnica; no se usa como prueba de vigencia juridica",
-      "amendmentsAndErrata": [],
-      "legalStatus": "unknown",
-      "applicabilityStatus": "unknown",
-      "officialUrl": "https://repositorio.gestiondelriesgo.gov.co/bitstream/handle/20.500.11762/36863/CMASRSL003.Presentacion.Micro.pdf?isAllowed=y&sequence=1",
-      "retrievedOn": "2026-07-29",
-      "redistribution": {
-        "decision": "external-only",
-        "rationale": "La copia oficial de UNGRD permite consulta, pero no se incorporan sus bytes al repositorio."
-      },
-      "mediaType": "application/pdf",
-      "pageCount": 54,
-      "sha256": "8734ec360b735d002e38535718a305038de5856d9ad4bad334beccf010758f91",
-      "pages": [
-        {
-          "physicalPage": 3,
-          "printedPage": "3",
-          "rotationDegrees": 0,
-          "crop": {
-            "left": 0,
-            "top": 0,
-            "width": 1,
-            "height": 1
-          }
-        },
-        {
-          "physicalPage": 44,
-          "printedPage": "44",
-          "rotationDegrees": 0,
-          "crop": {
-            "left": 0,
-            "top": 0,
-            "width": 1,
-            "height": 1
-          }
-        },
-        {
-          "physicalPage": 45,
-          "printedPage": "45",
-          "rotationDegrees": 0,
-          "crop": {
-            "left": 0,
-            "top": 0,
-            "width": 1,
-            "height": 1
-          }
-        },
-        {
-          "physicalPage": 46,
-          "printedPage": "46",
-          "rotationDegrees": 0,
-          "crop": {
-            "left": 0,
-            "top": 0,
-            "width": 1,
-            "height": 1
-          }
-        },
-        {
-          "physicalPage": 47,
-          "printedPage": "47",
-          "rotationDegrees": 0,
-          "crop": {
-            "left": 0,
-            "top": 0,
-            "width": 1,
-            "height": 1
-          }
-        }
-      ]
-    },
-    {
-      "id": "manizales-update-2015",
-      "issuingAuthority": "Universidad de los Andes y Asociacion Colombiana de Ingenieria Sismica",
-      "officialTitle": "Actualizacion de la microzonificacion sismica de Manizales",
-      "edition": "Memorias del VII Congreso Nacional de Ingenieria Sismica, mayo de 2015",
-      "revision": null,
-      "adoptionInstrument": "No identificado; es una fuente tecnica y no un acto de adopcion",
-      "amendmentsAndErrata": [],
-      "legalStatus": "unknown",
-      "applicabilityStatus": "unknown",
-      "officialUrl": "https://upcommons.upc.edu/bitstreams/3355be9f-7fb3-475e-bf7a-46462cff7add/download",
-      "retrievedOn": "2026-07-29",
-      "redistribution": {
-        "decision": "external-only",
-        "rationale": "El repositorio institucional permite consulta abierta, pero la ficha no concede una licencia de redistribucion suficiente para incorporar los bytes."
-      },
-      "mediaType": "application/pdf",
-      "pageCount": 10,
-      "sha256": "55a8458cc211c83b3e13cf5feb7670dbd120535542c779512f1d2a86bd6628e3",
-      "pages": [
-        {
-          "physicalPage": 1,
-          "printedPage": null,
-          "rotationDegrees": 0,
-          "crop": {
-            "left": 0,
-            "top": 0,
-            "width": 1,
-            "height": 1
-          }
-        },
-        {
-          "physicalPage": 2,
-          "printedPage": null,
-          "rotationDegrees": 0,
-          "crop": {
-            "left": 0,
-            "top": 0,
-            "width": 1,
-            "height": 1
-          }
-        },
-        {
-          "physicalPage": 8,
-          "printedPage": null,
-          "rotationDegrees": 0,
-          "crop": {
-            "left": 0,
-            "top": 0,
-            "width": 1,
-            "height": 1
-          }
-        },
-        {
-          "physicalPage": 9,
-          "printedPage": null,
-          "rotationDegrees": 0,
-          "crop": {
-            "left": 0,
-            "top": 0,
-            "width": 1,
-            "height": 1
-          }
-        }
-      ]
-    },
-    {
-      "id": "manizales-management-report-2016-2019",
-      "issuingAuthority": "Alcaldia de Manizales",
-      "officialTitle": "Informe de gestion Manizales Mas Oportunidades 2016-2019",
-      "edition": "Cierre de gobierno 2016-2019",
-      "revision": null,
-      "adoptionInstrument": "Informe oficial de gestion; no es un acto de adopcion",
+      "adoptionInstrument": "Volumen de figuras del mismo informe final; contiene las Figuras 8.1 y 8.5",
       "amendmentsAndErrata": [],
       "legalStatus": "historical",
-      "applicabilityStatus": "historical",
-      "officialUrl": "https://manizales.gov.co/wp-content/uploads/Informe-Manizales-M%C3%A1s-Oportunidades-2016-2019.pdf",
-      "retrievedOn": "2026-07-29",
+      "applicabilityStatus": "conditional",
+      "officialUrl": "https://idea.manizales.unal.edu.co/sitios/gestion_riesgos/descargas/microzon/informe_final_figuras.pdf",
+      "retrievedOn": "2026-08-08",
       "redistribution": {
         "decision": "external-only",
-        "rationale": "Documento oficial sin licencia expresa de redistribucion; se conservan huella, localizador y atestacion, no los bytes."
+        "rationale": "La copia oficial permite consulta abierta, pero no concede una licencia de redistribución; se conservan URL, huella y atestación, no los bytes completos."
       },
       "mediaType": "application/pdf",
-      "pageCount": 151,
-      "sha256": "6345925e0afb5ba03d0f713a2a87e0c8ec6fa7da8128849f6095e26cefd6a373",
+      "pageCount": 201,
+      "sha256": "fbcfa673a0657f9efa673dec74ebaffd80697ff659a25b89a92f6ad342708a69",
       "pages": [
         {
-          "physicalPage": 65,
+          "physicalPage": 197,
+          "printedPage": null,
+          "rotationDegrees": 90,
+          "crop": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "physicalPage": 201,
           "printedPage": null,
           "rotationDegrees": 0,
           "crop": {
@@ -290,28 +92,28 @@
       ]
     },
     {
-      "id": "manizales-pot-status-2025",
-      "issuingAuthority": "Secretaria de Planeacion de Manizales",
-      "officialTitle": "Respuesta S-CO-SP-UDOT-2025-18777",
-      "edition": "5 de junio de 2025",
+      "id": "nsr10-title-a-2017",
+      "issuingAuthority": "Comisión Asesora Permanente para el Régimen de Construcciones Sismo Resistentes",
+      "officialTitle": "NSR-10 Título A — versión consolidada 2017",
+      "edition": "2017",
       "revision": null,
-      "adoptionInstrument": "Comunicacion administrativa; acredita el POT citado, no adopta la microzonificacion",
+      "adoptionInstrument": "Decreto 926 de 2010 y modificaciones",
       "amendmentsAndErrata": [],
       "legalStatus": "active",
       "applicabilityStatus": "conditional",
-      "officialUrl": "https://manizales.gov.co/wp-content/uploads/piotnetforms/files/S-CO-SP-UDOT-2025-18777-E-CO-2025-13941-ANONIMO-1-68470f0813cfc.pdf",
-      "retrievedOn": "2026-07-29",
+      "officialUrl": "https://iisee.kenken.go.jp/worldlist/11_Colombia/Colombia%20Titulo%20A-NSR-10-Ver-2017.pdf",
+      "retrievedOn": "2026-08-08",
       "redistribution": {
         "decision": "external-only",
-        "rationale": "Comunicacion oficial sin licencia expresa de redistribucion; se conserva solo evidencia reproducible de procedencia."
+        "rationale": "Se reutiliza la huella del corpus NSR-10 instalado; este dossier no duplica los bytes."
       },
       "mediaType": "application/pdf",
-      "pageCount": 2,
-      "sha256": "13790747a041c6f7d80ae9229336174f3b18f6bcfc6cdde18b406b6ac643a2d8",
+      "pageCount": 206,
+      "sha256": "47207abe1e832f5feb5fb8448af884b8d539fddaf89b6b21ab466765dd8524b0",
       "pages": [
         {
-          "physicalPage": 1,
-          "printedPage": null,
+          "physicalPage": 42,
+          "printedPage": "A-28",
           "rotationDegrees": 0,
           "crop": {
             "left": 0,
@@ -325,585 +127,1426 @@
   ],
   "citations": [
     {
-      "id": "source-2002-three-zone-selector",
-      "sourceDocumentId": "manizales-uniandes-2002",
-      "regionKind": "applicability",
-      "physicalPage": 152,
-      "printedPage": "147",
-      "reference": "Secciones 8.2 y 8.3: tres zonas de diseno A/B/C",
+      "id": "figura-8.5",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "table",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5 — Espectros de diseño sísmico, parámetros por zona",
       "rect": {
-        "left": 0.1,
-        "top": 0.13,
-        "width": 0.82,
-        "height": 0.48
+        "left": 0.613636,
+        "top": 0.594771,
+        "width": 0.292929,
+        "height": 0.19281
       },
-      "extractedToken": "ZONA A - Cenizas; ZONA B - Llenos; ZONA C - Rocas y Depositos de poco espesor",
+      "extractedToken": "Zona A Zona B Zona C To 0.10 0.10 0.10 Tc 0.65 0.50 0.50 TL 3.25 2.50 2.50 Am 0.44 0.40 0.30 An 0.44 0.40 0.30 Fa 1.00 1.00 1.00 Fv 1.63 1.25 1.25",
       "unit": null,
       "transformation": null,
       "requiredTokens": [
-        "ZONA A - Cenizas; ZONA B - Llenos; ZONA C - Rocas y Depositos de poco espesor"
+        "Zona A",
+        "To",
+        "Fv",
+        "1.63"
       ]
     },
     {
-      "id": "source-2002-period-presentation-limit",
-      "sourceDocumentId": "manizales-uniandes-2002",
+      "id": "damping-five-percent",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
       "regionKind": "applicability",
-      "physicalPage": 154,
-      "printedPage": "149",
-      "reference": "Seccion 8.3: alcance temporal de los espectros historicos",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, rótulo de amortiguamiento",
       "rect": {
-        "left": 0.1,
-        "top": 0.14,
-        "width": 0.82,
-        "height": 0.28
+        "left": 0.32197,
+        "top": 0.323529,
+        "width": 0.135101,
+        "height": 0.053922
       },
-      "extractedToken": "Los espectros de diseno se presentan unicamente hasta periodos estructurales de 3.0 seg",
+      "extractedToken": "Amortiguamiento x=5% con respecto al crítico",
       "unit": null,
       "transformation": null,
       "requiredTokens": [
-        "Los espectros de diseno se presentan unicamente hasta periodos estructurales de 3.0 seg"
+        "Amortiguamiento",
+        "5%"
       ]
     },
     {
-      "id": "source-2002-special-analysis-at-2s",
-      "sourceDocumentId": "manizales-uniandes-2002",
+      "id": "equation-entrance",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
       "regionKind": "applicability",
-      "physicalPage": 154,
-      "printedPage": "149",
-      "reference": "Seccion 8.3, literal (e): analisis especial para periodos largos",
+      "physicalPage": 197,
+      "printedPage": null,
+      "reference": "Figura 8.1, rama de entrada de la forma espectral",
       "rect": {
-        "left": 0.1,
-        "top": 0.78,
-        "width": 0.82,
-        "height": 0.13
+        "left": 0.568405,
+        "top": 0.499647,
+        "width": 0.0588,
+        "height": 0.03458
       },
-      "extractedToken": "Para estructuras con periodos de vibracion fundamental mayores o iguales a 2.0 seg deben adelantarse analisis sismicos especiales",
+      "extractedToken": "Sa = Am + (Am/To)(2.5Fa − 1) T",
+      "unit": "g",
+      "transformation": null,
+      "requiredTokens": [
+        "Sa",
+        "Am",
+        "To"
+      ]
+    },
+    {
+      "id": "equation-plateau",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "applicability",
+      "physicalPage": 197,
+      "printedPage": null,
+      "reference": "Figura 8.1, meseta de la forma espectral",
+      "rect": {
+        "left": 0.595845,
+        "top": 0.379675,
+        "width": 0.043904,
+        "height": 0.01976
+      },
+      "extractedToken": "Sa = 2.5AmFa",
+      "unit": "g",
+      "transformation": null,
+      "requiredTokens": [
+        "2.5AmFa"
+      ]
+    },
+    {
+      "id": "equation-inverse",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "applicability",
+      "physicalPage": 197,
+      "printedPage": null,
+      "reference": "Figura 8.1, rama descendente de la forma espectral",
+      "rect": {
+        "left": 0.644845,
+        "top": 0.412844,
+        "width": 0.03136,
+        "height": 0.028229
+      },
+      "extractedToken": "Sa = AnFv / T",
+      "unit": "g",
+      "transformation": null,
+      "requiredTokens": [
+        "AnFv"
+      ]
+    },
+    {
+      "id": "equation-floor",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "applicability",
+      "physicalPage": 197,
+      "printedPage": null,
+      "reference": "Figura 8.1, rama de período largo de la forma espectral",
+      "rect": {
+        "left": 0.675029,
+        "top": 0.457304,
+        "width": 0.030576,
+        "height": 0.028229
+      },
+      "extractedToken": "Sa = Am / 2",
+      "unit": "g",
+      "transformation": null,
+      "requiredTokens": [
+        "Am"
+      ]
+    },
+    {
+      "id": "branch-limits",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "applicability",
+      "physicalPage": 197,
+      "printedPage": null,
+      "reference": "Figura 8.1, abscisas To, Tc y TL de la forma espectral",
+      "rect": {
+        "left": 0.566445,
+        "top": 0.543402,
+        "width": 0.139161,
+        "height": 0.017643
+      },
+      "extractedToken": "To Tc TL",
+      "unit": "s",
+      "transformation": null,
+      "requiredTokens": [
+        "To",
+        "Tc",
+        "TL"
+      ]
+    },
+    {
+      "id": "consideration-a-complementary",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "applicability",
+      "physicalPage": 197,
+      "printedPage": null,
+      "reference": "Figura 8.1, consideración de diseño (a)",
+      "rect": {
+        "left": 0.740886,
+        "top": 0.417784,
+        "width": 0.241082,
+        "height": 0.032463
+      },
+      "extractedToken": "(a) Todas las recomendaciones de diseño aquí establecidas son complementarias a las dadas en las Normas Colombianas de Diseño y Construcción Sismo Resistentes … y en ningún caso podrá tomarse un requisito inferior al establecido por la Norma.",
       "unit": null,
       "transformation": null,
       "requiredTokens": [
-        "Para estructuras con periodos de vibracion fundamental mayores o iguales a 2.0 seg deben adelantarse analisis sismicos especiales"
+        "complementarias",
+        "requisito inferior"
       ]
     },
     {
-      "id": "source-2014-node-model",
-      "sourceDocumentId": "manizales-harmonization-2014",
+      "id": "consideration-b-damping",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
       "regionKind": "applicability",
-      "physicalPage": 50,
-      "printedPage": "50",
-      "reference": "Seccion 3: malla de calculo",
+      "physicalPage": 197,
+      "printedPage": null,
+      "reference": "Figura 8.1, consideración de diseño (b)",
+      "rect": {
+        "left": 0.740886,
+        "top": 0.450247,
+        "width": 0.241082,
+        "height": 0.026112
+      },
+      "extractedToken": "(b) Todos los espectros de diseño recomendados son a nivel de la superficie del terreno para un amortiguamiento con respecto al crítico del 5% y para zonas sin efectos topográficos de consideración.",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "superficie del terreno",
+        "5%"
+      ]
+    },
+    {
+      "id": "consideration-c-topographic",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "applicability",
+      "physicalPage": 197,
+      "printedPage": null,
+      "reference": "Figura 8.1, consideración de diseño (c)",
+      "rect": {
+        "left": 0.740886,
+        "top": 0.476359,
+        "width": 0.241082,
+        "height": 0.021877
+      },
+      "extractedToken": "(c) En las zonas con efectos topográficos de consideración … deben aplicarse … los factores de amplificación por efectos topográficos que se especifican más adelante.",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "efectos topográficos"
+      ]
+    },
+    {
+      "id": "warning-special-analysis",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "applicability",
+      "physicalPage": 197,
+      "printedPage": null,
+      "reference": "Figura 8.1, consideración de diseño (e)",
+      "rect": {
+        "left": 0.740886,
+        "top": 0.520819,
+        "width": 0.241082,
+        "height": 0.023289
+      },
+      "extractedToken": "(e) Para estructuras con períodos de vibración fundamental mayores o iguales a 2.0 seg deben adelantarse análisis sísmicos especiales que se salen del alcance de las presentes recomendaciones.",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "2.0",
+        "análisis sísmicos especiales"
+      ]
+    },
+    {
+      "id": "warning-zone-c-justification",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "applicability",
+      "physicalPage": 197,
+      "printedPage": null,
+      "reference": "Figura 8.1, consideración de diseño (f)",
+      "rect": {
+        "left": 0.740886,
+        "top": 0.544107,
+        "width": 0.241082,
+        "height": 0.052223
+      },
+      "extractedToken": "(f) La utilización de los espectros de diseño correspondientes a la Zona C, Terreno firme, deberá ser justificada en forma explícita por el ingeniero geotécnico en todos los casos …",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Zona C",
+        "justificada"
+      ]
+    },
+    {
+      "id": "consideration-h-high-hazard",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "applicability",
+      "physicalPage": 197,
+      "printedPage": null,
+      "reference": "Figura 8.1, consideración de diseño (h)",
+      "rect": {
+        "left": 0.740886,
+        "top": 0.656316,
+        "width": 0.241082,
+        "height": 0.022583
+      },
+      "extractedToken": "(h) Para efectos de aplicación de requisitos complementarios de las NSR-98, la ciudad de Manizales sigue perteneciendo a una zona de Amenaza Sísmica Alta.",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Amenaza Sísmica Alta"
+      ]
+    },
+    {
+      "id": "consideration-i-am-equivalent",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "applicability",
+      "physicalPage": 197,
+      "printedPage": null,
+      "reference": "Figura 8.1, consideración de diseño (i)",
+      "rect": {
+        "left": 0.740886,
+        "top": 0.678899,
+        "width": 0.241082,
+        "height": 0.033169
+      },
+      "extractedToken": "(i) Los coeficientes de aceleración Am establecen los valores equivalentes a Aa a nivel del terreno en las diferentes zonas …",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "Am",
+        "Aa"
+      ]
+    },
+    {
+      "id": "zone-map",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "applicability",
+      "physicalPage": 197,
+      "printedPage": null,
+      "reference": "Figura 8.1 — Mapa de zonificación sísmica, escala 1:30000",
+      "rect": {
+        "left": 0.564485,
+        "top": 0.811574,
+        "width": 0.433163,
+        "height": 0.127029
+      },
+      "extractedToken": "CONVENCIONES ZONA A - CENIZAS ZONA B - RELLENOS ZONA C - ROCAS, FLUJOS Y DEPÓSITOS DE POCO ESPESOR · MAPA DE ZONIFICACIÓN SÍSMICA · Escala 1:30000",
+      "unit": null,
+      "transformation": null,
+      "requiredTokens": [
+        "ZONA A",
+        "CENIZAS",
+        "1:30000"
+      ]
+    },
+    {
+      "id": "selection-procedure",
+      "sourceDocumentId": "manizales-uniandes-2002",
+      "regionKind": "applicability",
+      "physicalPage": 157,
+      "printedPage": "152",
+      "reference": "Numeral 8.4 — procedimiento de selección de la zona sísmica",
       "rect": {
         "left": 0,
         "top": 0,
         "width": 1,
         "height": 1
       },
-      "extractedToken": "malla de 50x50 nodos, recortada por un poligono que contiene a la ciudad de Manizales, para un total de 1275 sitios de calculo",
+      "extractedToken": "En caso de duda se deberán utilizar los espectros correspondientes a la Zona A. Una vez seleccionada la zona sísmica se tiene definido el espectro de diseño de acuerdo con las Figuras 8.5.",
       "unit": null,
       "transformation": null,
       "requiredTokens": [
-        "malla de 50x50 nodos, recortada por un poligono que contiene a la ciudad de Manizales, para un total de 1275 sitios de calculo"
+        "Zona A",
+        "Figuras 8.5"
       ]
     },
     {
-      "id": "source-2014-spectrum-shape",
-      "sourceDocumentId": "manizales-harmonization-presentation-2014",
+      "id": "three-zone-model",
+      "sourceDocumentId": "manizales-uniandes-2002",
       "regionKind": "applicability",
-      "physicalPage": 44,
-      "printedPage": "44",
-      "reference": "Armonizacion con la NSR-10: forma espectral y amortiguamiento",
+      "physicalPage": 153,
+      "printedPage": "148",
+      "reference": "Numeral 8.2 — zonas características y espectros de diseño propuestos",
       "rect": {
-        "left": 0.1,
-        "top": 0.48,
-        "width": 0.82,
-        "height": 0.42
+        "left": 0,
+        "top": 0,
+        "width": 1,
+        "height": 1
       },
-      "extractedToken": "Los espectros de diseno se calculan por medio de la definicion de 5 parametros: Aa, Av, I, Fa y Fv",
+      "extractedToken": "los espectros de respuesta obtenidos en los sondeos disponibles agrupados en cada una de las zonas características mencionadas, con los correspondientes espectros de diseño propuestos en cada una de ellas",
       "unit": null,
       "transformation": null,
       "requiredTokens": [
-        "Los espectros de diseno se calculan por medio de la definicion de 5 parametros: Aa, Av, I, Fa y Fv"
+        "zonas características",
+        "espectros de diseño"
       ]
     },
     {
-      "id": "table-update-basis",
-      "sourceDocumentId": "manizales-update-2015",
-      "regionKind": "table",
-      "physicalPage": 1,
-      "printedPage": null,
-      "reference": "Resumen: base cuantitativa de la actualizacion",
+      "id": "nsr10-a.2.5-1",
+      "sourceDocumentId": "nsr10-title-a-2017",
+      "regionKind": "applicability",
+      "physicalPage": 42,
+      "printedPage": "A-28",
+      "reference": "Tabla A.2.5-1",
       "rect": {
-        "left": 0.1,
-        "top": 0.43,
-        "width": 0.82,
-        "height": 0.19
+        "left": 0.351307,
+        "top": 0.53030303,
+        "width": 0.294118,
+        "height": 0.145202
       },
-      "extractedToken": "Una malla de cálculo compuesta por 1275 nodos",
+      "extractedToken": "Valores del coeficiente de importancia I IV 1.50 III 1.25 II 1.10 I 1.00",
       "unit": null,
       "transformation": null,
       "requiredTokens": [
-        "Una malla de cálculo compuesta por 1275 nodos"
+        "1.50",
+        "1.25",
+        "1.10",
+        "1.00"
       ]
     },
     {
-      "id": "row-update-basis",
-      "sourceDocumentId": "manizales-update-2015",
+      "id": "row-zone-a",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
       "regionKind": "row",
-      "physicalPage": 1,
+      "physicalPage": 201,
       "printedPage": null,
-      "reference": "Resumen: fila del modelo candidato",
+      "reference": "Figura 8.5, columna Zona A",
+      "parentCitationId": "figura-8.5",
       "rect": {
-        "left": 0.115,
-        "top": 0.445,
-        "width": 0.795,
-        "height": 0.17
+        "left": 0.69798,
+        "top": 0.596405,
+        "width": 0.041414,
+        "height": 0.189542
       },
-      "extractedToken": "para 475 años de periodo de retorno",
+      "extractedToken": "Zona A 0.10 0.65 3.25 0.44 0.44 1.00 1.63",
       "unit": null,
       "transformation": null,
       "requiredTokens": [
-        "para 475 años de periodo de retorno"
-      ],
-      "parentCitationId": "table-update-basis"
+        "Zona A",
+        "0.10",
+        "0.65",
+        "3.25",
+        "0.44",
+        "0.44",
+        "1.00",
+        "1.63"
+      ]
     },
     {
-      "id": "cell-node-count",
-      "sourceDocumentId": "manizales-update-2015",
+      "id": "cell-zone-a-to",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
       "regionKind": "cell",
-      "physicalPage": 1,
+      "physicalPage": 201,
       "printedPage": null,
-      "reference": "Resumen: numero de nodos",
+      "reference": "Figura 8.5, Zona A, to",
+      "parentCitationId": "row-zone-a",
       "rect": {
-        "left": 0.413159,
-        "top": 0.469315,
-        "width": 0.036014,
-        "height": 0.016412
+        "left": 0.70303,
+        "top": 0.62402,
+        "width": 0.031313,
+        "height": 0.023693
       },
-      "extractedToken": "1275",
-      "unit": "count",
+      "extractedToken": "0.10",
+      "normalizedValue": 0.1,
+      "normalizedNumericValue": 0.1,
+      "unit": "s",
       "transformation": "decimal parse",
       "requiredTokens": [
-        "1275"
-      ],
-      "parentCitationId": "row-update-basis",
-      "normalizedValue": 1275,
-      "normalizedNumericValue": 1275
+        "0.10"
+      ]
     },
     {
-      "id": "cell-return-period",
-      "sourceDocumentId": "manizales-update-2015",
+      "id": "cell-zone-a-tc",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
       "regionKind": "cell",
-      "physicalPage": 1,
+      "physicalPage": 201,
       "printedPage": null,
-      "reference": "Resumen: periodo de retorno",
+      "reference": "Figura 8.5, Zona A, tc",
+      "parentCitationId": "row-zone-a",
       "rect": {
-        "left": 0.165538,
-        "top": 0.545087,
-        "width": 0.028574,
-        "height": 0.016412
+        "left": 0.70303,
+        "top": 0.647386,
+        "width": 0.031313,
+        "height": 0.023693
       },
-      "extractedToken": "475",
-      "unit": "year",
+      "extractedToken": "0.65",
+      "normalizedValue": 0.65,
+      "normalizedNumericValue": 0.65,
+      "unit": "s",
       "transformation": "decimal parse",
       "requiredTokens": [
-        "475"
-      ],
-      "parentCitationId": "row-update-basis",
-      "normalizedValue": 475,
-      "normalizedNumericValue": 475
-    },
-    {
-      "id": "cell-spatial-model",
-      "sourceDocumentId": "manizales-update-2015",
-      "regionKind": "applicability",
-      "physicalPage": 1,
-      "printedPage": null,
-      "reference": "Resumen: representacion espacial",
-      "rect": {
-        "left": 0.202766,
-        "top": 0.595685,
-        "width": 0.073904,
-        "height": 0.016412
-      },
-      "extractedToken": "rasterizada,",
-      "unit": null,
-      "transformation": null,
-      "requiredTokens": [
-        "rasterizada,"
+        "0.65"
       ]
     },
     {
-      "id": "app-original-three-zones",
-      "sourceDocumentId": "manizales-update-2015",
-      "regionKind": "applicability",
-      "physicalPage": 2,
-      "printedPage": null,
-      "reference": "Introduccion: reconciliacion con el estudio Uniandes 2002",
-      "rect": {
-        "left": 0.1,
-        "top": 0.19,
-        "width": 0.82,
-        "height": 0.13
-      },
-      "extractedToken": "la definición de espectros de diseño en 3 zonas",
-      "unit": null,
-      "transformation": null,
-      "requiredTokens": [
-        "la definición de espectros de diseño en 3 zonas"
-      ]
-    },
-    {
-      "id": "table-update-parameters",
-      "sourceDocumentId": "manizales-update-2015",
-      "regionKind": "table",
-      "physicalPage": 8,
-      "printedPage": null,
-      "reference": "Seccion 5.1: parametros del ajuste",
-      "rect": {
-        "left": 0.1,
-        "top": 0.445,
-        "width": 0.82,
-        "height": 0.105
-      },
-      "extractedToken": "Los espectros de diseño se calculan por medio de la definición de 5 parámetros: Aa, Av, I, Fa y Fv.",
-      "unit": null,
-      "transformation": null,
-      "requiredTokens": [
-        "Los espectros de diseño se calculan por medio de la definición de 5 parámetros: Aa, Av, I, Fa y Fv."
-      ]
-    },
-    {
-      "id": "row-update-parameters",
-      "sourceDocumentId": "manizales-update-2015",
-      "regionKind": "row",
-      "physicalPage": 8,
-      "printedPage": null,
-      "reference": "Seccion 5.1: fila de parametros",
-      "rect": {
-        "left": 0.115,
-        "top": 0.46,
-        "width": 0.795,
-        "height": 0.08
-      },
-      "extractedToken": "Aa = 0.25g y Av = 0.25g",
-      "unit": null,
-      "transformation": null,
-      "requiredTokens": [
-        "Aa = 0.25g y Av = 0.25g"
-      ],
-      "parentCitationId": "table-update-parameters"
-    },
-    {
-      "id": "cell-aa",
-      "sourceDocumentId": "manizales-update-2015",
+      "id": "cell-zone-a-tl",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
       "regionKind": "cell",
-      "physicalPage": 8,
+      "physicalPage": 201,
       "printedPage": null,
-      "reference": "Seccion 5.1: Aa",
+      "reference": "Figura 8.5, Zona A, tl",
+      "parentCitationId": "row-zone-a",
       "rect": {
-        "left": 0.184572,
-        "top": 0.493125,
-        "width": 0.072316,
-        "height": 0.016412
+        "left": 0.70303,
+        "top": 0.669444,
+        "width": 0.031313,
+        "height": 0.023693
       },
-      "extractedToken": "0.25",
+      "extractedToken": "3.25",
+      "normalizedValue": 3.25,
+      "normalizedNumericValue": 3.25,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "3.25"
+      ]
+    },
+    {
+      "id": "cell-zone-a-am",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, Zona A, am",
+      "parentCitationId": "row-zone-a",
+      "rect": {
+        "left": 0.70303,
+        "top": 0.692647,
+        "width": 0.031313,
+        "height": 0.023693
+      },
+      "extractedToken": "0.44",
+      "normalizedValue": 0.44,
+      "normalizedNumericValue": 0.44,
       "unit": "g",
       "transformation": "decimal parse",
       "requiredTokens": [
-        "0.25"
-      ],
-      "parentCitationId": "row-update-parameters",
-      "normalizedValue": 0.25,
-      "normalizedNumericValue": 0.25
+        "0.44"
+      ]
     },
     {
-      "id": "cell-av",
-      "sourceDocumentId": "manizales-update-2015",
+      "id": "cell-zone-a-an",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
       "regionKind": "cell",
-      "physicalPage": 8,
+      "physicalPage": 201,
       "printedPage": null,
-      "reference": "Seccion 5.1: Av",
+      "reference": "Figura 8.5, Zona A, an",
+      "parentCitationId": "row-zone-a",
       "rect": {
-        "left": 0.265144,
-        "top": 0.493125,
-        "width": 0.075158,
-        "height": 0.016412
+        "left": 0.70303,
+        "top": 0.714706,
+        "width": 0.031313,
+        "height": 0.023693
       },
-      "extractedToken": "0.25",
+      "extractedToken": "0.44",
+      "normalizedValue": 0.44,
+      "normalizedNumericValue": 0.44,
       "unit": "g",
       "transformation": "decimal parse",
       "requiredTokens": [
-        "0.25"
-      ],
-      "parentCitationId": "row-update-parameters",
-      "normalizedValue": 0.25,
-      "normalizedNumericValue": 0.25
+        "0.44"
+      ]
     },
     {
-      "id": "cell-importance-fit",
-      "sourceDocumentId": "manizales-update-2015",
+      "id": "cell-zone-a-fa",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
       "regionKind": "cell",
-      "physicalPage": 8,
+      "physicalPage": 201,
       "printedPage": null,
-      "reference": "Seccion 5.1: factor de importancia asumido para el ajuste",
+      "reference": "Figura 8.5, Zona A, fa",
+      "parentCitationId": "row-zone-a",
       "rect": {
-        "left": 0.57889,
-        "top": 0.493125,
-        "width": 0.038617,
-        "height": 0.016412
+        "left": 0.70303,
+        "top": 0.738072,
+        "width": 0.031313,
+        "height": 0.023693
       },
-      "extractedToken": "1",
-      "unit": "dimensionless",
-      "transformation": "decimal parse",
-      "requiredTokens": [
-        "1"
-      ],
-      "parentCitationId": "row-update-parameters",
+      "extractedToken": "1.00",
       "normalizedValue": 1,
-      "normalizedNumericValue": 1
-    },
-    {
-      "id": "cell-soil-parameters",
-      "sourceDocumentId": "manizales-update-2015",
-      "regionKind": "applicability",
-      "physicalPage": 8,
-      "printedPage": null,
-      "reference": "Seccion 5.1: parametros libres de suelo",
-      "rect": {
-        "left": 0.682595,
-        "top": 0.467952,
-        "width": 0.058289,
-        "height": 0.016412
-      },
-      "extractedToken": "Fa y Fv.",
+      "normalizedNumericValue": 1,
       "unit": null,
-      "transformation": null,
+      "transformation": "decimal parse",
       "requiredTokens": [
-        "Fa y Fv."
+        "1.00"
       ]
     },
     {
-      "id": "warning-raster-not-zones",
-      "sourceDocumentId": "manizales-update-2015",
-      "regionKind": "applicability",
-      "physicalPage": 9,
+      "id": "cell-zone-a-fv",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
       "printedPage": null,
-      "reference": "Conclusiones, numeral 3",
+      "reference": "Figura 8.5, Zona A, fv",
+      "parentCitationId": "row-zone-a",
       "rect": {
-        "left": 0.13,
-        "top": 0.55,
-        "width": 0.78,
-        "height": 0.08
+        "left": 0.70303,
+        "top": 0.760131,
+        "width": 0.031313,
+        "height": 0.023693
       },
-      "extractedToken": "Los resultados no se presentan por zonas sino de manera rasterizada",
+      "extractedToken": "1.63",
+      "normalizedValue": 1.63,
+      "normalizedNumericValue": 1.63,
       "unit": null,
-      "transformation": null,
+      "transformation": "decimal parse",
       "requiredTokens": [
-        "Los resultados no se presentan por zonas sino de manera rasterizada"
+        "1.63"
       ]
     },
     {
-      "id": "app-building-compatibility",
-      "sourceDocumentId": "manizales-update-2015",
-      "regionKind": "applicability",
-      "physicalPage": 9,
+      "id": "row-zone-b",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "row",
+      "physicalPage": 201,
       "printedPage": null,
-      "reference": "Conclusiones, numeral 5",
+      "reference": "Figura 8.5, columna Zona B",
+      "parentCitationId": "figura-8.5",
       "rect": {
-        "left": 0.13,
-        "top": 0.69,
-        "width": 0.78,
-        "height": 0.1
+        "left": 0.780303,
+        "top": 0.596405,
+        "width": 0.04154,
+        "height": 0.189542
       },
-      "extractedToken": "totalmente compatible con la normativa nacional",
+      "extractedToken": "Zona B 0.10 0.50 2.50 0.40 0.40 1.00 1.25",
       "unit": null,
       "transformation": null,
       "requiredTokens": [
-        "totalmente compatible con la normativa nacional"
+        "Zona B",
+        "0.10",
+        "0.50",
+        "2.50",
+        "0.40",
+        "0.40",
+        "1.00",
+        "1.25"
       ]
     },
     {
-      "id": "warning-adoption-pending-2019",
-      "sourceDocumentId": "manizales-management-report-2016-2019",
-      "regionKind": "applicability",
-      "physicalPage": 65,
+      "id": "cell-zone-b-to",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
       "printedPage": null,
-      "reference": "Temas que se encuentran en desarrollo",
+      "reference": "Figura 8.5, Zona B, to",
+      "parentCitationId": "row-zone-b",
       "rect": {
-        "left": 0.12,
-        "top": 0.47,
-        "width": 0.78,
-        "height": 0.32
+        "left": 0.785354,
+        "top": 0.62402,
+        "width": 0.031439,
+        "height": 0.023693
       },
-      "extractedToken": "Adoptar e implementar la microzonificación Sísmica armonizada de Manizales",
-      "unit": null,
-      "transformation": null,
+      "extractedToken": "0.10",
+      "normalizedValue": 0.1,
+      "normalizedNumericValue": 0.1,
+      "unit": "s",
+      "transformation": "decimal parse",
       "requiredTokens": [
-        "Adoptar e implementar la microzonificación Sísmica armonizada de Manizales"
+        "0.10"
       ]
     },
     {
-      "id": "app-pot-current-2025",
-      "sourceDocumentId": "manizales-pot-status-2025",
-      "regionKind": "applicability",
-      "physicalPage": 1,
+      "id": "cell-zone-b-tc",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
       "printedPage": null,
-      "reference": "Primer parrafo tecnico",
+      "reference": "Figura 8.5, Zona B, tc",
+      "parentCitationId": "row-zone-b",
       "rect": {
-        "left": 0.12,
-        "top": 0.34,
-        "width": 0.7,
-        "height": 0.08
+        "left": 0.785354,
+        "top": 0.647386,
+        "width": 0.031439,
+        "height": 0.023693
       },
-      "extractedToken": "Acuerdo 0958 de 2017 Plan de Ordenamiento Territorial de Manizales, POT Vigente",
+      "extractedToken": "0.50",
+      "normalizedValue": 0.5,
+      "normalizedNumericValue": 0.5,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.50"
+      ]
+    },
+    {
+      "id": "cell-zone-b-tl",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, Zona B, tl",
+      "parentCitationId": "row-zone-b",
+      "rect": {
+        "left": 0.785354,
+        "top": 0.669444,
+        "width": 0.031439,
+        "height": 0.023693
+      },
+      "extractedToken": "2.50",
+      "normalizedValue": 2.5,
+      "normalizedNumericValue": 2.5,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "2.50"
+      ]
+    },
+    {
+      "id": "cell-zone-b-am",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, Zona B, am",
+      "parentCitationId": "row-zone-b",
+      "rect": {
+        "left": 0.785354,
+        "top": 0.692647,
+        "width": 0.031439,
+        "height": 0.023693
+      },
+      "extractedToken": "0.40",
+      "normalizedValue": 0.4,
+      "normalizedNumericValue": 0.4,
+      "unit": "g",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.40"
+      ]
+    },
+    {
+      "id": "cell-zone-b-an",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, Zona B, an",
+      "parentCitationId": "row-zone-b",
+      "rect": {
+        "left": 0.785354,
+        "top": 0.714706,
+        "width": 0.031439,
+        "height": 0.023693
+      },
+      "extractedToken": "0.40",
+      "normalizedValue": 0.4,
+      "normalizedNumericValue": 0.4,
+      "unit": "g",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.40"
+      ]
+    },
+    {
+      "id": "cell-zone-b-fa",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, Zona B, fa",
+      "parentCitationId": "row-zone-b",
+      "rect": {
+        "left": 0.785354,
+        "top": 0.738072,
+        "width": 0.031439,
+        "height": 0.023693
+      },
+      "extractedToken": "1.00",
+      "normalizedValue": 1,
+      "normalizedNumericValue": 1,
+      "unit": null,
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "1.00"
+      ]
+    },
+    {
+      "id": "cell-zone-b-fv",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, Zona B, fv",
+      "parentCitationId": "row-zone-b",
+      "rect": {
+        "left": 0.785354,
+        "top": 0.760131,
+        "width": 0.031439,
+        "height": 0.023693
+      },
+      "extractedToken": "1.25",
+      "normalizedValue": 1.25,
+      "normalizedNumericValue": 1.25,
+      "unit": null,
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "1.25"
+      ]
+    },
+    {
+      "id": "row-zone-c",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "row",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, columna Zona C",
+      "parentCitationId": "figura-8.5",
+      "rect": {
+        "left": 0.862626,
+        "top": 0.596405,
+        "width": 0.04154,
+        "height": 0.189542
+      },
+      "extractedToken": "Zona C 0.10 0.50 2.50 0.30 0.30 1.00 1.25",
       "unit": null,
       "transformation": null,
       "requiredTokens": [
-        "Acuerdo 0958 de 2017 Plan de Ordenamiento Territorial de Manizales, POT Vigente"
+        "Zona C",
+        "0.10",
+        "0.50",
+        "2.50",
+        "0.30",
+        "0.30",
+        "1.00",
+        "1.25"
+      ]
+    },
+    {
+      "id": "cell-zone-c-to",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, Zona C, to",
+      "parentCitationId": "row-zone-c",
+      "rect": {
+        "left": 0.867677,
+        "top": 0.62402,
+        "width": 0.031439,
+        "height": 0.023693
+      },
+      "extractedToken": "0.10",
+      "normalizedValue": 0.1,
+      "normalizedNumericValue": 0.1,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.10"
+      ]
+    },
+    {
+      "id": "cell-zone-c-tc",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, Zona C, tc",
+      "parentCitationId": "row-zone-c",
+      "rect": {
+        "left": 0.867677,
+        "top": 0.647386,
+        "width": 0.031439,
+        "height": 0.023693
+      },
+      "extractedToken": "0.50",
+      "normalizedValue": 0.5,
+      "normalizedNumericValue": 0.5,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.50"
+      ]
+    },
+    {
+      "id": "cell-zone-c-tl",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, Zona C, tl",
+      "parentCitationId": "row-zone-c",
+      "rect": {
+        "left": 0.867677,
+        "top": 0.669444,
+        "width": 0.031439,
+        "height": 0.023693
+      },
+      "extractedToken": "2.50",
+      "normalizedValue": 2.5,
+      "normalizedNumericValue": 2.5,
+      "unit": "s",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "2.50"
+      ]
+    },
+    {
+      "id": "cell-zone-c-am",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, Zona C, am",
+      "parentCitationId": "row-zone-c",
+      "rect": {
+        "left": 0.867677,
+        "top": 0.692647,
+        "width": 0.031439,
+        "height": 0.023693
+      },
+      "extractedToken": "0.30",
+      "normalizedValue": 0.3,
+      "normalizedNumericValue": 0.3,
+      "unit": "g",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.30"
+      ]
+    },
+    {
+      "id": "cell-zone-c-an",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, Zona C, an",
+      "parentCitationId": "row-zone-c",
+      "rect": {
+        "left": 0.867677,
+        "top": 0.714706,
+        "width": 0.031439,
+        "height": 0.023693
+      },
+      "extractedToken": "0.30",
+      "normalizedValue": 0.3,
+      "normalizedNumericValue": 0.3,
+      "unit": "g",
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "0.30"
+      ]
+    },
+    {
+      "id": "cell-zone-c-fa",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, Zona C, fa",
+      "parentCitationId": "row-zone-c",
+      "rect": {
+        "left": 0.867677,
+        "top": 0.738072,
+        "width": 0.031439,
+        "height": 0.023693
+      },
+      "extractedToken": "1.00",
+      "normalizedValue": 1,
+      "normalizedNumericValue": 1,
+      "unit": null,
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "1.00"
+      ]
+    },
+    {
+      "id": "cell-zone-c-fv",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "regionKind": "cell",
+      "physicalPage": 201,
+      "printedPage": null,
+      "reference": "Figura 8.5, Zona C, fv",
+      "parentCitationId": "row-zone-c",
+      "rect": {
+        "left": 0.867677,
+        "top": 0.760131,
+        "width": 0.031439,
+        "height": 0.023693
+      },
+      "extractedToken": "1.25",
+      "normalizedValue": 1.25,
+      "normalizedNumericValue": 1.25,
+      "unit": null,
+      "transformation": "decimal parse",
+      "requiredTokens": [
+        "1.25"
       ]
     }
   ],
   "applicabilityCitationIds": [
-    "source-2002-three-zone-selector",
-    "source-2002-period-presentation-limit",
-    "source-2002-special-analysis-at-2s",
-    "source-2014-node-model",
-    "source-2014-spectrum-shape",
-    "cell-spatial-model",
-    "app-original-three-zones",
-    "cell-soil-parameters",
-    "warning-raster-not-zones",
-    "app-building-compatibility",
-    "warning-adoption-pending-2019",
-    "app-pot-current-2025"
+    "damping-five-percent",
+    "equation-entrance",
+    "equation-plateau",
+    "equation-inverse",
+    "equation-floor",
+    "branch-limits",
+    "warning-special-analysis",
+    "warning-zone-c-justification",
+    "consideration-a-complementary",
+    "consideration-b-damping",
+    "consideration-c-topographic",
+    "consideration-h-high-hazard",
+    "consideration-i-am-equivalent",
+    "zone-map",
+    "selection-procedure",
+    "three-zone-model",
+    "nsr10-a.2.5-1"
   ],
   "coverage": {
     "optionIds": [
-      "updated-raster-grid"
+      "zone-a",
+      "zone-b",
+      "zone-c"
     ],
     "hazardIds": [
-      "uniform-hazard-475y"
+      "design"
     ],
     "fieldIds": [
-      "node-count",
-      "return-period",
-      "aa",
-      "av",
-      "importance-factor-fit"
+      "to",
+      "tc",
+      "tl",
+      "am",
+      "an",
+      "fa",
+      "fv"
     ]
   },
   "values": [
     {
-      "id": "value-node-count",
-      "optionId": "updated-raster-grid",
-      "hazardId": "uniform-hazard-475y",
-      "fieldId": "node-count",
-      "value": 1275,
-      "unit": "count",
+      "id": "value-zone-a-design-to",
+      "optionId": "zone-a",
+      "hazardId": "design",
+      "fieldId": "to",
+      "value": 0.1,
+      "unit": "s",
       "provenance": "direct-source",
       "citationIds": [
-        "cell-node-count"
+        "cell-zone-a-to"
       ],
       "transformation": "decimal parse"
     },
     {
-      "id": "value-return-period",
-      "optionId": "updated-raster-grid",
-      "hazardId": "uniform-hazard-475y",
-      "fieldId": "return-period",
-      "value": 475,
-      "unit": "year",
+      "id": "value-zone-a-design-tc",
+      "optionId": "zone-a",
+      "hazardId": "design",
+      "fieldId": "tc",
+      "value": 0.65,
+      "unit": "s",
       "provenance": "direct-source",
       "citationIds": [
-        "cell-return-period"
+        "cell-zone-a-tc"
       ],
       "transformation": "decimal parse"
     },
     {
-      "id": "value-aa",
-      "optionId": "updated-raster-grid",
-      "hazardId": "uniform-hazard-475y",
-      "fieldId": "aa",
-      "value": 0.25,
+      "id": "value-zone-a-design-tl",
+      "optionId": "zone-a",
+      "hazardId": "design",
+      "fieldId": "tl",
+      "value": 3.25,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-a-tl"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-a-design-am",
+      "optionId": "zone-a",
+      "hazardId": "design",
+      "fieldId": "am",
+      "value": 0.44,
       "unit": "g",
       "provenance": "direct-source",
       "citationIds": [
-        "cell-aa"
+        "cell-zone-a-am"
       ],
       "transformation": "decimal parse"
     },
     {
-      "id": "value-av",
-      "optionId": "updated-raster-grid",
-      "hazardId": "uniform-hazard-475y",
-      "fieldId": "av",
-      "value": 0.25,
+      "id": "value-zone-a-design-an",
+      "optionId": "zone-a",
+      "hazardId": "design",
+      "fieldId": "an",
+      "value": 0.44,
       "unit": "g",
       "provenance": "direct-source",
       "citationIds": [
-        "cell-av"
+        "cell-zone-a-an"
       ],
       "transformation": "decimal parse"
     },
     {
-      "id": "value-importance-factor-fit",
-      "optionId": "updated-raster-grid",
-      "hazardId": "uniform-hazard-475y",
-      "fieldId": "importance-factor-fit",
+      "id": "value-zone-a-design-fa",
+      "optionId": "zone-a",
+      "hazardId": "design",
+      "fieldId": "fa",
       "value": 1,
-      "unit": "dimensionless",
+      "unit": null,
       "provenance": "direct-source",
       "citationIds": [
-        "cell-importance-fit"
+        "cell-zone-a-fa"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-a-design-fv",
+      "optionId": "zone-a",
+      "hazardId": "design",
+      "fieldId": "fv",
+      "value": 1.63,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-a-fv"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-b-design-to",
+      "optionId": "zone-b",
+      "hazardId": "design",
+      "fieldId": "to",
+      "value": 0.1,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-b-to"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-b-design-tc",
+      "optionId": "zone-b",
+      "hazardId": "design",
+      "fieldId": "tc",
+      "value": 0.5,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-b-tc"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-b-design-tl",
+      "optionId": "zone-b",
+      "hazardId": "design",
+      "fieldId": "tl",
+      "value": 2.5,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-b-tl"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-b-design-am",
+      "optionId": "zone-b",
+      "hazardId": "design",
+      "fieldId": "am",
+      "value": 0.4,
+      "unit": "g",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-b-am"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-b-design-an",
+      "optionId": "zone-b",
+      "hazardId": "design",
+      "fieldId": "an",
+      "value": 0.4,
+      "unit": "g",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-b-an"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-b-design-fa",
+      "optionId": "zone-b",
+      "hazardId": "design",
+      "fieldId": "fa",
+      "value": 1,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-b-fa"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-b-design-fv",
+      "optionId": "zone-b",
+      "hazardId": "design",
+      "fieldId": "fv",
+      "value": 1.25,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-b-fv"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-c-design-to",
+      "optionId": "zone-c",
+      "hazardId": "design",
+      "fieldId": "to",
+      "value": 0.1,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-c-to"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-c-design-tc",
+      "optionId": "zone-c",
+      "hazardId": "design",
+      "fieldId": "tc",
+      "value": 0.5,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-c-tc"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-c-design-tl",
+      "optionId": "zone-c",
+      "hazardId": "design",
+      "fieldId": "tl",
+      "value": 2.5,
+      "unit": "s",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-c-tl"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-c-design-am",
+      "optionId": "zone-c",
+      "hazardId": "design",
+      "fieldId": "am",
+      "value": 0.3,
+      "unit": "g",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-c-am"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-c-design-an",
+      "optionId": "zone-c",
+      "hazardId": "design",
+      "fieldId": "an",
+      "value": 0.3,
+      "unit": "g",
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-c-an"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-c-design-fa",
+      "optionId": "zone-c",
+      "hazardId": "design",
+      "fieldId": "fa",
+      "value": 1,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-c-fa"
+      ],
+      "transformation": "decimal parse"
+    },
+    {
+      "id": "value-zone-c-design-fv",
+      "optionId": "zone-c",
+      "hazardId": "design",
+      "fieldId": "fv",
+      "value": 1.25,
+      "unit": null,
+      "provenance": "direct-source",
+      "citationIds": [
+        "cell-zone-c-fv"
       ],
       "transformation": "decimal parse"
     }
   ],
   "rawRows": [
     {
-      "id": "raw-updated-raster-grid-475y",
-      "rowKey": "updated-raster-grid/uniform-hazard-475y",
-      "sourceDocumentId": "manizales-update-2015",
-      "optionId": "updated-raster-grid",
-      "hazardId": "uniform-hazard-475y",
+      "id": "raw-zone-a-design",
+      "rowKey": "zone-a/design",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "optionId": "zone-a",
+      "hazardId": "design",
       "citationIds": [
-        "cell-node-count",
-        "cell-return-period",
-        "cell-aa",
-        "cell-av",
-        "cell-importance-fit"
+        "cell-zone-a-to",
+        "cell-zone-a-tc",
+        "cell-zone-a-tl",
+        "cell-zone-a-am",
+        "cell-zone-a-an",
+        "cell-zone-a-fa",
+        "cell-zone-a-fv"
       ],
       "fields": {
-        "node-count": 1275,
-        "return-period": 475,
-        "aa": 0.25,
-        "av": 0.25,
-        "importance-factor-fit": 1
+        "to": 0.1,
+        "tc": 0.65,
+        "tl": 3.25,
+        "am": 0.44,
+        "an": 0.44,
+        "fa": 1,
+        "fv": 1.63
+      }
+    },
+    {
+      "id": "raw-zone-b-design",
+      "rowKey": "zone-b/design",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "optionId": "zone-b",
+      "hazardId": "design",
+      "citationIds": [
+        "cell-zone-b-to",
+        "cell-zone-b-tc",
+        "cell-zone-b-tl",
+        "cell-zone-b-am",
+        "cell-zone-b-an",
+        "cell-zone-b-fa",
+        "cell-zone-b-fv"
+      ],
+      "fields": {
+        "to": 0.1,
+        "tc": 0.5,
+        "tl": 2.5,
+        "am": 0.4,
+        "an": 0.4,
+        "fa": 1,
+        "fv": 1.25
+      }
+    },
+    {
+      "id": "raw-zone-c-design",
+      "rowKey": "zone-c/design",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "optionId": "zone-c",
+      "hazardId": "design",
+      "citationIds": [
+        "cell-zone-c-to",
+        "cell-zone-c-tc",
+        "cell-zone-c-tl",
+        "cell-zone-c-am",
+        "cell-zone-c-an",
+        "cell-zone-c-fa",
+        "cell-zone-c-fv"
+      ],
+      "fields": {
+        "to": 0.1,
+        "tc": 0.5,
+        "tl": 2.5,
+        "am": 0.3,
+        "an": 0.3,
+        "fa": 1,
+        "fv": 1.25
       }
     }
   ],
   "canonicalRows": [
     {
-      "id": "canonical-updated-raster-grid-475y",
-      "rowKey": "updated-raster-grid/uniform-hazard-475y",
-      "sourceDocumentId": "manizales-update-2015",
-      "optionId": "updated-raster-grid",
-      "hazardId": "uniform-hazard-475y",
+      "id": "canonical-zone-a-design",
+      "rowKey": "zone-a/design",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "optionId": "zone-a",
+      "hazardId": "design",
       "citationIds": [
-        "cell-node-count",
-        "cell-return-period",
-        "cell-aa",
-        "cell-av",
-        "cell-importance-fit"
+        "cell-zone-a-to",
+        "cell-zone-a-tc",
+        "cell-zone-a-tl",
+        "cell-zone-a-am",
+        "cell-zone-a-an",
+        "cell-zone-a-fa",
+        "cell-zone-a-fv"
       ],
       "fields": {
-        "node-count": 1275,
-        "return-period": 475,
-        "aa": 0.25,
-        "av": 0.25,
-        "importance-factor-fit": 1
+        "to": 0.1,
+        "tc": 0.65,
+        "tl": 3.25,
+        "am": 0.44,
+        "an": 0.44,
+        "fa": 1,
+        "fv": 1.63
       },
       "sourceRowIds": [
-        "raw-updated-raster-grid-475y"
+        "raw-zone-a-design"
+      ]
+    },
+    {
+      "id": "canonical-zone-b-design",
+      "rowKey": "zone-b/design",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "optionId": "zone-b",
+      "hazardId": "design",
+      "citationIds": [
+        "cell-zone-b-to",
+        "cell-zone-b-tc",
+        "cell-zone-b-tl",
+        "cell-zone-b-am",
+        "cell-zone-b-an",
+        "cell-zone-b-fa",
+        "cell-zone-b-fv"
+      ],
+      "fields": {
+        "to": 0.1,
+        "tc": 0.5,
+        "tl": 2.5,
+        "am": 0.4,
+        "an": 0.4,
+        "fa": 1,
+        "fv": 1.25
+      },
+      "sourceRowIds": [
+        "raw-zone-b-design"
+      ]
+    },
+    {
+      "id": "canonical-zone-c-design",
+      "rowKey": "zone-c/design",
+      "sourceDocumentId": "manizales-uniandes-2002-figuras",
+      "optionId": "zone-c",
+      "hazardId": "design",
+      "citationIds": [
+        "cell-zone-c-to",
+        "cell-zone-c-tc",
+        "cell-zone-c-tl",
+        "cell-zone-c-am",
+        "cell-zone-c-an",
+        "cell-zone-c-fa",
+        "cell-zone-c-fv"
+      ],
+      "fields": {
+        "to": 0.1,
+        "tc": 0.5,
+        "tl": 2.5,
+        "am": 0.3,
+        "an": 0.3,
+        "fa": 1,
+        "fv": 1.25
+      },
+      "sourceRowIds": [
+        "raw-zone-c-design"
       ]
     }
   ],

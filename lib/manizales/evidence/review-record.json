@@ -1,15 +1,18 @@
 {
   "schemaVersion": 1,
-  "authoringStatus": "complete-research-dossier",
+  "authorRole": "engine implementation",
+  "preparedOn": "2026-08-08",
   "independentReview": {
     "status": "pending",
     "reviewer": null,
-    "reviewedOn": null
+    "reviewedOn": null,
+    "scope": [
+      "21-cell transcription of Figura 8.5",
+      "four branch equations of Figura 8.1",
+      "importance-coefficient decision under consideration (a)",
+      "branch arithmetic and continuity at To, Tc and TL"
+    ]
   },
-  "activationDecision": "blocked-no-merge-no-activation",
-  "reasons": [
-    "El modelo actualizado es rasterizado por puntos y no ofrece zonas para un selector manual sin GIS.",
-    "La fuente tecnica bloqueada no publica los 1275 pares Fa/Fv ni una tabla discreta que permita reproducirlos.",
-    "La copia oficial 2002 omite la Figura 8.5 que contenia las ecuaciones y graficas de las tres zonas historicas A/B/C."
-  ]
+  "activationDecision": "calculation-supported-full-curve-with-localized-warnings",
+  "mergeDecision": "draft-pr-pending-independent-review"
 }
