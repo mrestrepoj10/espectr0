@@ -5,7 +5,6 @@ export type CalculatorModeId =
   | "medellin-microzonation"
   | "cali-microzonation"
   | "manizales-microzonation"
-  | "armenia-microzonation"
   | "pereira-microzonation"
   | "santa-rosa-microzonation"
   | "dosquebradas-microzonation"
@@ -69,12 +68,6 @@ export const calculationModes = [
       "Cálculo manual en las tres zonas de la Figura 8.5 del estudio Uniandes 2002, con las cuatro ramas impresas en la Figura 8.1.",
   },
   {
-    id: "armenia-microzonation",
-    label: "Armenia",
-    description:
-      "Microzonificación posterior al sismo de 1999; la actualización entregada en 2025 sigue pendiente de aprobación y adopción.",
-  },
-  {
     id: "pereira-microzonation",
     label: "Pereira",
     description:
@@ -99,20 +92,6 @@ export const calculationModes = [
 }[]
 
 export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> = {
-  "armenia-microzonation": {
-    id: "armenia-microzonation",
-    label: "Armenia",
-    description:
-      "El estudio posterior a 1999 es histórico y la actualización armonizada fue entregada en diciembre de 2025.",
-    sourceTitle: "Gobernación del Quindío · entrega de la actualización de microzonificación de Armenia",
-    sourceUrl: "https://www.quindio.gov.co/gobernacion-trabaja-intensamente-para-que-quindio-sea-el-primer-departamento-de-colombia-con-estudios-de-microzonificacion-sismica",
-    status: "Actualización entregada · adopción pendiente",
-    blockers: [
-      "La publicación oficial condiciona su uso a la aprobación de la CAP y a un decreto municipal posterior.",
-      "No se encontró el anexo técnico oficial completo del Decreto 079 de 2000 para reconstruir el modelo histórico.",
-      "El único plano de Armenia que publica el sitio de referencia es el mapa de isoperiodos 1:5000: son períodos fundamentales del suelo por polígono, no zonas de diseño, y no trae Am, An, Fa, Fv ni ecuaciones.",
-    ],
-  },
   "pereira-microzonation": {
     id: "pereira-microzonation",
     label: "Pereira",

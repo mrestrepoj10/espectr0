@@ -142,7 +142,7 @@ async function verifyNavigationRoutes() {
 			"The rendered /microzonificacion response is missing its reserved-only copy.",
 		);
 		assert(
-			!/(Bogotá|Medellín|Cali|Manizales|Armenia|Pereira|Santa Rosa|Dosquebradas|CCP-14)/.test(
+			!/(Bogotá|Medellín|Cali|Manizales|Pereira|Santa Rosa|Dosquebradas|CCP-14)/.test(
 				(
 					microzonificacionHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/)?.[1] ??
 					""

@@ -15,7 +15,6 @@ describe("municipal calculator mode catalog", () => {
       "medellin-microzonation",
       "cali-microzonation",
       "manizales-microzonation",
-      "armenia-microzonation",
       "pereira-microzonation",
       "santa-rosa-microzonation",
       "dosquebradas-microzonation",
