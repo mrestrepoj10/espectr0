@@ -1,9 +1,28 @@
 {
   "schemaVersion": 1,
-  "renderer": "Poppler pdftoppm",
-  "renderDpi": 144,
-  "textExtractor": "pdfplumber word extraction",
-  "ocrUsed": false,
-  "coordinateSystem": "normalized PDF page coordinates, top-left origin",
-  "cropEncoding": "PNG RGB, Pillow compress_level=9, optimize=false"
+  "extractor": {
+    "engine": "pdfplumber",
+    "version": "0.11.10",
+    "parameters": {
+      "xTolerance": 2,
+      "yTolerance": 2,
+      "useTextFlow": false,
+      "keepBlankChars": false
+    }
+  },
+  "renderer": {
+    "engine": "pypdfium2",
+    "purpose": "visual confirmation of the plate and the parameter sheet"
+  },
+  "coordinateSystem": "normalized top-left in the rendered orientation: 792×612 for Figura 8.5, 2551×1417 for the Figura 8.1 plate",
+  "normalization": "Unicode NFC; whitespace collapse; decimal parse preserves the printed token",
+  "table": {
+    "sourceDocumentId": "manizales-uniandes-2002-figuras",
+    "physicalPage": 201,
+    "citationId": "figura-8.5",
+    "optionCount": 3,
+    "fieldCount": 7,
+    "directCellCount": 21,
+    "layout": "transposed — one printed column per zone, one printed row per parameter"
+  }
 }

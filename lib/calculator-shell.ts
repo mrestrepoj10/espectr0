@@ -6,6 +6,8 @@ export type CalculationModeOption = {
   description: string
   disabled?: boolean
   unavailableReason?: string
+  /** Short state label shown beside the mode, e.g. for a source-blocked study. */
+  badge?: string
 }
 
 export type CapabilityUiState = {

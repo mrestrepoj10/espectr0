@@ -473,7 +473,7 @@ describe("strict aggregate boundary", () => {
 		});
 		expect(aggregate.studies.find(({ studyId }: { studyId: string }) => studyId === "manizales-microzonation")).toMatchObject({
 			studyId: "manizales-microzonation",
-			coverage: { expectedRows: 1, expectedValues: 5 },
+			coverage: { expectedRows: 3, expectedValues: 21 },
 			uncoveredValues: [],
 		});
 	}, 30_000);

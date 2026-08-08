@@ -15,7 +15,6 @@ describe("municipal calculator mode catalog", () => {
       "medellin-microzonation",
       "cali-microzonation",
       "manizales-microzonation",
-      "armenia-microzonation",
       "pereira-microzonation",
       "santa-rosa-microzonation",
       "dosquebradas-microzonation",
@@ -35,6 +34,7 @@ describe("municipal calculator mode catalog", () => {
 	expect(isSourceBlockedMode("medellin-microzonation")).toBe(false)
 	expect(isSourceBlockedMode("cali-microzonation")).toBe(false)
 	expect(isSourceBlockedMode("dosquebradas-microzonation")).toBe(false)
+	expect(isSourceBlockedMode("manizales-microzonation")).toBe(false)
   })
 
   it("keeps active municipal engines out of the source-blocked record", () => {
@@ -43,11 +43,14 @@ describe("municipal calculator mode catalog", () => {
     expect(Object.keys(sourceBlockedModes)).not.toContain("cali-microzonation")
 	expect(Object.keys(sourceBlockedModes)).not.toContain("ccp14")
 	expect(Object.keys(sourceBlockedModes)).not.toContain("dosquebradas-microzonation")
+	expect(Object.keys(sourceBlockedModes)).not.toContain("manizales-microzonation")
     expect(calculationModes.find(({ id }) => id === "bogota-microzonation")?.description)
       .toContain("Cálculo manual")
     expect(calculationModes.find(({ id }) => id === "cali-microzonation")?.description)
       .toContain("Cálculo manual")
     expect(calculationModes.find(({ id }) => id === "medellin-microzonation")?.description)
       .toContain("14 zonas")
+    expect(calculationModes.find(({ id }) => id === "manizales-microzonation")?.description)
+      .toContain("Figura 8.5")
   })
 })

@@ -2,25 +2,28 @@
   "schemaVersion": 1,
   "entries": [
     {
-      "id": "zones-vs-raster",
-      "status": "resolved-research-only",
-      "original": "Tres zonas A/B/C en el estudio de 2002.",
-      "update": "Modelo rasterizado de 1275 puntos en la actualizacion de 2015.",
-      "resolution": "La actualizacion gobierna la representacion tecnica candidata; las zonas quedan solo como historia y no se ofrecen al producto."
+      "id": "rounded-branch-limits",
+      "status": "resolved-for-product",
+      "issue": "For Zone A the printed Tc and TL differ by one hundredth from the intersections implied by the printed Am, An, Fa and Fv.",
+      "resolution": "Transcribe the printed limits. The curve is drawn from the printed values, so it carries the same one-hundredth step the study published."
+    },
+    {
+      "id": "importance-coefficient",
+      "status": "resolved-for-product",
+      "issue": "The sheet prints no I, but the national code the study complements defines one.",
+      "resolution": "Multiply by I under consideration (a), expose it as its own cited trace step, and record the decision in the uncertainty ledger."
     },
     {
       "id": "technical-vs-legal",
-      "status": "unresolved-blocker",
-      "original": "La publicacion declara compatibilidad tecnica con NSR-10.",
-      "update": "No se recupero un acto municipal vigente de adopcion; en 2019 el proceso seguia en desarrollo.",
-      "resolution": "La compatibilidad tecnica no suple adopcion ni vigencia."
+      "status": "unresolved-warned",
+      "issue": "The 2002 study is a municipal technical study. Its own consideration (a) anchors it to Ley 400 de 1997, Decreto 33 de 1998 and Decreto 34 de 1999 — the NSR-98 corpus, superseded by NSR-10 — and no municipal act adopting or extending it was located, including by a title search over 2523 published decrees.",
+      "resolution": "Not resolved, and not silently dropped either. The mode computes because the coefficients are attested end to end, and every result carries a currency warning citing the study's own NSR-98 anchor. This mirrors Medellín, which ships as a computable mode while its own locked sources state the adoption decree has not been issued. Demonstrating adoption, or demonstrating its absence, remains open for independent review."
     },
     {
-      "id": "manual-selector-vs-spatial-model",
-      "status": "unresolved-blocker",
-      "original": "El producto exige selector manual sin GIS.",
-      "update": "Fa/Fv dependen de un nodo o ubicacion del modelo raster.",
-      "resolution": "No existe transformacion primaria autorizada a categorias manuales."
+      "id": "later-models-exist",
+      "status": "resolved-for-product",
+      "issue": "The 2014 harmonization and the 2015 update propose a point-wise Fa/Fv surface instead of three zones.",
+      "resolution": "Neither publishes a reproducible table; this study stays on the 2002 zones and says so in the mode description."
     }
   ]
 }

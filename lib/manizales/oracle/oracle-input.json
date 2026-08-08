@@ -1,25 +1,19 @@
 {
-  "schemaVersion": 1,
-  "studyId": "manizales-microzonation",
-  "status": "research-only-activation-blocked",
-  "candidate": {
-    "optionId": "updated-raster-grid",
-    "hazardId": "uniform-hazard-475y",
-    "fields": {
-      "node-count": "1275",
-      "return-period": "475",
-      "aa": "0.25",
-      "av": "0.25",
-      "importance-factor-fit": "1"
-    }
-  },
-  "candidateMetadata": {
-    "spatialModel": "rasterized",
-    "soilParameters": "Fa/Fv"
-  },
-  "requiredForSpectrum": [
-    "node-specific Fa",
-    "node-specific Fv",
-    "official manual-location rule or spatial lookup"
-  ]
+  "schemaVersion": 2,
+  "source": "Uniandes 2002 figures volume, Figura 8.5, physical PDF page 201",
+  "fieldOrder": ["to", "tc", "tl", "am", "an", "fa", "fv"],
+  "rows": [
+    ["zone-a", "0.10", "0.65", "3.25", "0.44", "0.44", "1.00", "1.63"],
+    ["zone-b", "0.10", "0.50", "2.50", "0.40", "0.40", "1.00", "1.25"],
+    ["zone-c", "0.10", "0.50", "2.50", "0.30", "0.30", "1.00", "1.25"]
+  ],
+  "importanceFactor": "1",
+  "boundaryEpsilon": "0.000001",
+  "extraPeriods": ["0", "2.0", "3.0", "4.0"],
+  "formulas": {
+    "entrance": "am*i + (am*i/to)*(2.5*fa - 1)*t",
+    "plateau": "2.5*am*fa*i",
+    "inverse": "an*fv*i/t",
+    "floor": "am*i/2"
+  }
 }

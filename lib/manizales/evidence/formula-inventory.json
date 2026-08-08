@@ -1,82 +1,62 @@
 {
   "schemaVersion": 1,
-  "status": "incomplete-blocks-activation",
+  "status": "supported-full-curve",
+  "supportedInterval": "0 <= T",
   "independentVariable": "period T (s)",
   "output": "spectral acceleration",
-  "inventoryCoverage": {
-    "expectedItems": 4,
-    "dispositionedItems": 4,
-    "coveragePercent": 100,
-    "operationalFormulaCoveragePercent": 50
-  },
   "formulas": [
     {
-      "id": "nsr10-design-spectrum-shape",
-      "status": "published-shape",
-      "finding": "La presentacion oficial de 2014 imprime la forma NSR-10 por tramos con Aa, Av, I, Fa y Fv y declara 5% de amortiguamiento.",
-      "citation": {
-        "sourceDocumentId": "manizales-harmonization-presentation-2014",
-        "physicalPage": 44,
-        "printedPage": 44,
-        "reference": "Armonizacion con la NSR-10",
-        "rect": {
-          "left": 0.1,
-          "top": 0.5,
-          "width": 0.82,
-          "height": 0.4
-        }
-      }
+      "id": "manizales-entrance-branch",
+      "condition": "T <= To",
+      "expression": "Sa = Am × I + (Am × I / To) × (2.5 × Fa − 1) × T",
+      "citationId": "equation-entrance",
+      "dependencies": [
+        "am",
+        "to",
+        "fa",
+        "importanceFactor",
+        "T"
+      ]
     },
     {
-      "id": "branch-limits",
-      "status": "published-symbolic-limits",
-      "finding": "La presentacion oficial identifica T0, Tc y TL en la forma espectral; sus valores se derivan de los Fa/Fv de cada sitio, que no estan tabulados.",
-      "citation": {
-        "sourceDocumentId": "manizales-harmonization-presentation-2014",
-        "physicalPage": 44,
-        "printedPage": 44,
-        "reference": "Armonizacion con la NSR-10",
-        "rect": {
-          "left": 0.1,
-          "top": 0.5,
-          "width": 0.82,
-          "height": 0.4
-        }
-      }
+      "id": "manizales-plateau-branch",
+      "condition": "To <= T <= Tc",
+      "expression": "Sa = 2.5 × Am × Fa × I",
+      "citationId": "equation-plateau",
+      "dependencies": [
+        "am",
+        "fa",
+        "importanceFactor"
+      ]
     },
     {
-      "id": "fa-fv-node-fit",
-      "status": "method-only-no-node-table",
-      "finding": "Fa y Fv se ajustan como parametros libres para cada nodo. Las fuentes oficiales muestran mapas rasterizados, pero no tabulan los 1275 pares.",
-      "citation": {
-        "sourceDocumentId": "manizales-harmonization-presentation-2014",
-        "physicalPage": 46,
-        "printedPage": 46,
-        "reference": "Mapas de factores Fa y Fv",
-        "rect": {
-          "left": 0,
-          "top": 0,
-          "width": 1,
-          "height": 1
-        }
-      }
+      "id": "manizales-inverse-branch",
+      "condition": "Tc < T <= TL",
+      "expression": "Sa = An × Fv × I / T",
+      "citationId": "equation-inverse",
+      "dependencies": [
+        "an",
+        "fv",
+        "importanceFactor",
+        "T"
+      ]
     },
     {
-      "id": "spectrum-damping",
-      "status": "published-5-percent",
-      "finding": "La forma espectral publicada esta definida para 5% del amortiguamiento critico.",
-      "citation": {
-        "sourceDocumentId": "manizales-harmonization-presentation-2014",
-        "physicalPage": 44,
-        "printedPage": 44,
-        "reference": "Nota de amortiguamiento",
-        "rect": {
-          "left": 0.1,
-          "top": 0.5,
-          "width": 0.82,
-          "height": 0.4
-        }
-      }
+      "id": "manizales-floor-branch",
+      "condition": "T > TL",
+      "expression": "Sa = Am × I / 2",
+      "citationId": "equation-floor",
+      "dependencies": [
+        "am",
+        "importanceFactor"
+      ]
     }
-  ]
+  ],
+  "unsupportedIntervals": [],
+  "coverage": {
+    "supportedBranches": 4,
+    "cited": 4,
+    "percent": 100
+  },
+  "decision": "Calculate the full municipal curve: the sheet prints all four branches and every parameter they consume. The importance coefficient multiplies the printed ordinate under design consideration (a)."
 }

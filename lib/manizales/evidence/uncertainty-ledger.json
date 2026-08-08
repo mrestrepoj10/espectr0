@@ -1,27 +1,54 @@
 {
   "schemaVersion": 1,
-  "blocking": true,
+  "blocking": false,
   "entries": [
     {
-      "id": "manual-location-model",
-      "severity": "blocker",
-      "scope": "selector",
-      "finding": "El modelo tecnico gobernante es espacial por puntos; un selector manual de zonas alteraria el modelo.",
-      "disposition": "No discretizar, interpolar ni reutilizar A/B/C como si fueran la actualizacion."
+      "id": "return-period-not-declared",
+      "severity": "localized-warning",
+      "issue": "Chapter 8 states no return period or exceedance probability for the design spectra, although the underlying uniform-hazard spectra elsewhere in the report are computed for several return periods.",
+      "disposition": "The hazard carries a null return period and the result warns about it. No national value is substituted."
     },
     {
-      "id": "missing-node-values",
-      "severity": "blocker",
-      "scope": "coefficients",
-      "finding": "No se dispone de los 1275 pares Fa/Fv en una fuente tabular bloqueada.",
-      "disposition": "Exigir tabla oficial completa o instrumento de consulta oficial reproducible."
+      "id": "importance-factor-not-on-the-sheet",
+      "severity": "medium",
+      "issue": "Figura 8.5 prints the spectrum without an importance coefficient; the product multiplies the ordinate by I.",
+      "disposition": "Justified by design consideration (a): the recommendations are complementary to the national code and no requirement may fall below it. With I = 1.00 the curve is exactly the printed one, and the trace shows I as a separate cited step."
     },
     {
-      "id": "historical-figure-omission",
-      "severity": "blocker",
-      "scope": "historical-formula",
-      "finding": "La copia oficial 2002 omite la Figura 8.5 que el texto identifica como portadora de ecuaciones y graficas de las zonas A/B/C.",
-      "disposition": "No digitalizar la grafica reducida de la presentacion 2014 ni tomar valores del sitio comparador."
+      "id": "topographic-amplification-not-applied",
+      "severity": "localized-warning",
+      "issue": "The plate prints Ftop for sites near slope crests; this engine does not know the slope height H or the distance to its edge.",
+      "disposition": "Not applied, and warned about with the citation to consideration (c)."
+    },
+    {
+      "id": "special-analysis-above-2s",
+      "severity": "localized-warning",
+      "issue": "Consideration (e) puts structures at or above 2.0 s outside the scope of these recommendations.",
+      "disposition": "The curve is still drawn — the branches are printed and attested — but the result warns from 2.0 s onward."
+    },
+    {
+      "id": "zone-selection-is-manual",
+      "severity": "intentional-product-boundary",
+      "issue": "The product does not read the 1:30000 plate geographically; the responsible professional selects the zone.",
+      "disposition": "The drawer serves the plate so the selection can be checked by eye, and the result warns that the zone must be validated."
+    },
+    {
+      "id": "figures-volume-redistribution",
+      "severity": "medium",
+      "issue": "public/manizales/uniandes-2002-figuras-8.1-8.5.pdf serves two rendered source pages of the figures volume, whose record grants no express redistribution licence.",
+      "disposition": "Shipped on the product owner's decision, scoped to the two pages that carry the model, and recorded in redistribution.json. Reverting means deleting the extract and setting localPath/localPageMap back to null."
+    },
+    {
+      "id": "municipal-adoption-not-demonstrated",
+      "severity": "medium",
+      "issue": "No municipal act adopting the 2002 microzonification, or extending it while a newer model is harmonized, was located. The study is complementary to a superseded code corpus.",
+      "disposition": "Every result warns, citing the study's own considerations (a) and (h), and the availability block declares the missing instrument as an unavailable claim. The product owner decides whether that is enough to offer the mode; blocking it again is one edit to the catalog."
+    },
+    {
+      "id": "2014-harmonization-not-installed",
+      "severity": "medium",
+      "issue": "A 2014 NSR-10 harmonization and a 2015 raster update exist for Manizales; neither is installed here, and the UNGRD copies were unreachable at the last check.",
+      "disposition": "This study ships the 2002 zone model it can attest end to end. If a later model is adopted and published as a reproducible table, it supersedes this one — it does not silently amend it."
     }
   ]
 }

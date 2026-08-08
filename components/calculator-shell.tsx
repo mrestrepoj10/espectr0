@@ -121,13 +121,23 @@ export function CalculatorShell({
                         key={mode.id}
                         value={mode.id}
                       >
-                        {mode.label}
+                        <span className="flex min-w-0 items-center gap-2">
+                          <span className="truncate">{mode.label}</span>
+                          {mode.badge ? (
+                            <Badge variant="outline">{mode.badge}</Badge>
+                          ) : null}
+                        </span>
                       </SelectItem>
                     ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
               <FieldDescription id="calculation-mode-description">
+                {selectedMode?.badge ? (
+                  <Badge className="me-2" variant="outline">
+                    {selectedMode.badge}
+                  </Badge>
+                ) : null}
                 {selectedMode?.description ?? "Modo no disponible."}
               </FieldDescription>
             </Field>

@@ -27,6 +27,7 @@ import {
 	CaliParameterRail,
 	Ccp14ParameterRail,
 	DosquebradasParameterRail,
+	ManizalesParameterRail,
 	MedellinParameterRail,
 } from "@/components/calculator/municipal-parameter-rail";
 import {
@@ -94,6 +95,8 @@ import {
 } from "@/lib/ccp14";
 import { adaptDosquebradasSpectrum } from "@/lib/dosquebradas/adapter";
 import { dosquebradasRows } from "@/lib/dosquebradas/schema";
+import { adaptManizalesSpectrum } from "@/lib/manizales/adapter";
+import manizalesCanonical from "@/lib/manizales/data/canonical.json";
 import {
 	adaptMedellinSpectrum,
 	medellinHazards,
@@ -164,6 +167,10 @@ const activatedBranchLabels: Readonly<Record<string, string>> = {
 	"inverse-period": "Descendente CCP-14",
 	"dosquebradas-plateau": "Meseta de Dosquebradas",
 	"dosquebradas-inverse": "Descendente de Dosquebradas",
+	"manizales-entrance": "Ascendente de Manizales",
+	"manizales-plateau": "Meseta de Manizales",
+	"manizales-inverse": "Descendente de Manizales",
+	"manizales-floor": "Piso de periodo largo de Manizales",
 	"medellin-plateau": "Meseta de Medellín",
 	"medellin-power-decay": "Descendente de Medellín",
 };
@@ -660,6 +667,10 @@ const dosquebradasZoneOptions = dosquebradasRows.map(({ optionId }) => ({
 	id: optionId,
 	label: `Zona ${optionId.at(-1)}`,
 }));
+const manizalesZoneOptions = manizalesCanonical.zones.map((zone) => ({
+	id: zone.id,
+	label: `${zone.label} — ${zone.material}`,
+}));
 const medellinZoneOptions = medellinOptions.map((option) => ({
 	id: option.id,
 	label: `${option.sourceLabel} — ${option.description}`,
@@ -727,6 +738,9 @@ function activeChartDescription(
 	if (mode === "dosquebradas-microzonation") {
 		return "Curva municipal emitida solo en el intervalo soportado To ≤ T ≤ TL para la zona manual.";
 	}
+	if (mode === "manizales-microzonation") {
+		return "Curva completa de la Figura 8.5 para la zona manual, con las cuatro ramas impresas en la Figura 8.1.";
+	}
 	if (mode === "medellin-microzonation") {
 		return "Curva técnica histórica emitida solo en el dominio publicado T0 ≤ T ≤ 4 s para la zona y familia seleccionadas manualmente.";
 	}
@@ -744,7 +758,7 @@ function transitionMetrics(mode: CalculatorModeId, hazardId: string) {
 			{ id: "ts", label: "Ts" },
 		];
 	}
-	if (mode === "dosquebradas-microzonation") {
+	if (mode === "dosquebradas-microzonation" || mode === "manizales-microzonation") {
 		return [
 			{ id: "to", label: "To" },
 			{ id: "tc", label: "Tc" },
@@ -781,6 +795,15 @@ function transitionMetrics(mode: CalculatorModeId, hazardId: string) {
 		{ id: "tl", label: "TL" },
 	];
 }
+
+/**
+ * A mode with no computable source still belongs in the list — hiding it would
+ * make the gap look like an oversight — but it has to say so where it is
+ * chosen, not only after it is chosen.
+ */
+const modeOptions = calculationModes.map((mode) =>
+	isSourceBlockedMode(mode.id) ? { ...mode, badge: "No soportado" } : mode,
+);
 
 export function CalculatorPage() {
 	const [calculationMode, setCalculationMode] =
@@ -819,6 +842,9 @@ export function CalculatorPage() {
 	const [dosquebradasZoneId, setDosquebradasZoneId] =
 		useState<string | null>(null);
 	const [dosquebradasImportanceGroup, setDosquebradasImportanceGroup] =
+		useState<ImportanceGroup>("I");
+	const [manizalesZoneId, setManizalesZoneId] = useState<string | null>(null);
+	const [manizalesImportanceGroup, setManizalesImportanceGroup] =
 		useState<ImportanceGroup>("I");
 	const [traceabilityOpen, setTraceabilityOpen] = useState(false);
 	const chartContainerRef = useRef<HTMLDivElement>(null);
@@ -950,6 +976,17 @@ export function CalculatorPage() {
 		dosquebradasImportanceGroup,
 		dosquebradasZoneId,
 	]);
+	const manizalesResult = useMemo(() => {
+		if (
+			calculationMode !== "manizales-microzonation" ||
+			manizalesZoneId === null
+		) return null;
+		return adaptManizalesSpectrum({
+			zoneId: manizalesZoneId,
+			hazardId: "design",
+			importanceFactor: importanceCoefficient(manizalesImportanceGroup),
+		});
+	}, [calculationMode, manizalesImportanceGroup, manizalesZoneId]);
 	const result =
 		calculationMode === "nsr10-national"
 			? nsr10Result
@@ -963,6 +1000,8 @@ export function CalculatorPage() {
 					? caliResult
 					: calculationMode === "dosquebradas-microzonation"
 						? dosquebradasResult
+					: calculationMode === "manizales-microzonation"
+						? manizalesResult
 					: null;
 	const evaluatePeriod = useCallback(
 		(periodSeconds: number) => {
@@ -1130,6 +1169,15 @@ export function CalculatorPage() {
 				zoneId={dosquebradasZoneId}
 				zoneOptions={dosquebradasZoneOptions}
 			/>
+		) : calculationMode === "manizales-microzonation" ? (
+			<ManizalesParameterRail
+				onTraceabilityOpen={() => setTraceabilityOpen(true)}
+				importanceGroup={manizalesImportanceGroup}
+				onImportanceGroupChange={setManizalesImportanceGroup}
+				onZoneChange={setManizalesZoneId}
+				zoneId={manizalesZoneId}
+				zoneOptions={manizalesZoneOptions}
+			/>
 		) : isSourceBlockedMode(calculationMode) ? (
 			<SourceBlockedRail modeId={calculationMode} />
 		) : null;
@@ -1151,6 +1199,12 @@ export function CalculatorPage() {
 			<ManualSelectionNotice
 				description="Elige manualmente una de las cinco zonas publicadas en la Tabla 27."
 				title="Selecciona la zona de Dosquebradas"
+			/>
+		) : calculationMode === "manizales-microzonation" &&
+			manizalesZoneId === null ? (
+			<ManualSelectionNotice
+				description="Elige manualmente una de las tres zonas publicadas en la Figura 8.5."
+				title="Selecciona la zona de Manizales"
 			/>
 		) : calculationMode === "bogota-microzonation" && bogotaZoneId === null ? (
 			<ManualSelectionNotice
@@ -1188,7 +1242,8 @@ export function CalculatorPage() {
 			(calculationMode === "bogota-microzonation" && bogotaZoneId) ||
 			(calculationMode === "cali-microzonation" && caliZoneId) ||
 			(calculationMode === "medellin-microzonation" && medellinZoneId) ||
-			(calculationMode === "dosquebradas-microzonation" && dosquebradasZoneId) ? (
+			(calculationMode === "dosquebradas-microzonation" && dosquebradasZoneId) ||
+			(calculationMode === "manizales-microzonation" && manizalesZoneId) ? (
 				<TraceabilitySheet
 					onOpenChange={setTraceabilityOpen}
 					open={traceabilityOpen}
@@ -1214,7 +1269,7 @@ export function CalculatorPage() {
 
 			<CalculatorShell
 				inputPanel={inputPanel}
-				modes={calculationModes}
+				modes={modeOptions}
 				onValueChange={(nextMode) => {
 					setTraceabilityOpen(false);
 					setCalculationMode(nextMode as CalculatorModeId);

@@ -5,7 +5,6 @@ export type CalculatorModeId =
   | "medellin-microzonation"
   | "cali-microzonation"
   | "manizales-microzonation"
-  | "armenia-microzonation"
   | "pereira-microzonation"
   | "santa-rosa-microzonation"
   | "dosquebradas-microzonation"
@@ -18,6 +17,7 @@ export type SourceBlockedModeId = Exclude<
   | "medellin-microzonation"
   | "cali-microzonation"
   | "dosquebradas-microzonation"
+  | "manizales-microzonation"
 >
 
 export type SourceBlockedMode = {
@@ -65,13 +65,7 @@ export const calculationModes = [
     id: "manizales-microzonation",
     label: "Manizales",
     description:
-      "Microzonificación armonizada basada en 1.275 sitios; no admite un selector manual sin la matriz oficial completa.",
-  },
-  {
-    id: "armenia-microzonation",
-    label: "Armenia",
-    description:
-      "Microzonificación posterior al sismo de 1999; la actualización entregada en 2025 sigue pendiente de aprobación y adopción.",
+      "Cálculo manual en las tres zonas de la Figura 8.5 del estudio técnico Uniandes 2002, complementario al corpus NSR-98; su vigencia no está demostrada.",
   },
   {
     id: "pereira-microzonation",
@@ -98,32 +92,6 @@ export const calculationModes = [
 }[]
 
 export const sourceBlockedModes: Record<SourceBlockedModeId, SourceBlockedMode> = {
-  "manizales-microzonation": {
-    id: "manizales-microzonation",
-    label: "Manizales",
-    description:
-      "La actualización técnica reemplaza las antiguas zonas A/B/C por una salida espacial de 1.275 nodos.",
-    sourceTitle: "Universidad de los Andes y AIS · actualización de la microzonificación sísmica de Manizales",
-    sourceUrl: "https://upcommons.upc.edu/bitstreams/3355be9f-7fb3-475e-bf7a-46462cff7add/download",
-    status: "Modelo identificado · cálculo manual no reproducible",
-    blockers: [
-      "No están publicadas como tabla reproducible las 1.275 parejas Fa/Fv ni la ecuación operacional completa.",
-      "El producto no usa mapas, coordenadas ni GIS; no se inventarán zonas manuales equivalentes.",
-    ],
-  },
-  "armenia-microzonation": {
-    id: "armenia-microzonation",
-    label: "Armenia",
-    description:
-      "El estudio posterior a 1999 es histórico y la actualización armonizada fue entregada en diciembre de 2025.",
-    sourceTitle: "Gobernación del Quindío · entrega de la actualización de microzonificación de Armenia",
-    sourceUrl: "https://www.quindio.gov.co/gobernacion-trabaja-intensamente-para-que-quindio-sea-el-primer-departamento-de-colombia-con-estudios-de-microzonificacion-sismica",
-    status: "Actualización entregada · adopción pendiente",
-    blockers: [
-      "La publicación oficial condiciona su uso a la aprobación de la CAP y a un decreto municipal posterior.",
-      "No se encontró el anexo técnico oficial completo del Decreto 079 de 2000 para reconstruir el modelo histórico.",
-    ],
-  },
   "pereira-microzonation": {
     id: "pereira-microzonation",
     label: "Pereira",
